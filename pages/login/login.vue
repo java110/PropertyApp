@@ -40,62 +40,72 @@
 			uni.hideTabBar({
 				animation: false
 			});
-			
-			
+
+
 		},
 		methods: {
-			
-			doLogin:function(){
-				if(this.username == ''){
+
+			doLogin: function() {
+				let _that = this;
+				if (this.username == '') {
 					uni.showToast({
-						icon:none,
-						title:"用户名不能为空"
+						icon: none,
+						title: "用户名不能为空"
 					});
-					return ;
+					return;
 				}
-				
-				if(this.password == ''){
+
+				if (this.password == '') {
 					uni.showToast({
-						icon:none,
-						title:"密码不能为空"
+						icon: none,
+						title: "密码不能为空"
 					});
-					return ;
+					return;
 				}
-				
+
 				let userInfo = {
-					username:this.username,
-					password:this.password
+					username: this.username,
+					password: this.password
 				}
-				
+
 				uni.request({
-				    url: this.java110Constant.url.loginUrl,
-				    header: this.java110Context.getHeaders(),
-				    data: userInfo,
-				    success: function (res) {
-				      console.log('login success');
-				      res = res.data;
-					  
-					  if(res.statusCode != 200){
-						  uni.showToast({
-						    title: res.data
-						  });
-						 return;
-					  }
-					  let _userInfo = this.java110Util.dec.desEncrypt(JSON.stringify(userInfo));
-					  uni.setStorageSync(constant.mapping.USER_INFO,_userInfo);
-					  uni.redirectTo({
-					  	url:"/page/index/index"
-					  });
-				    },
-				    fail: function (error) {
-				      // 调用服务端登录接口失败
-				      uni.showToast({
-				        title: '调用接口失败'
-				      });
-				      console.log(error);
-				    }
-				  });
-				
+					url: this.java110Constant.url.loginUrl,
+					header: this.java110Context.getHeaders(),
+					method: "POST",
+					data: userInfo,
+					success: function(res) {
+						console.log('login success',res);
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: res.data
+							});
+							return;
+						}
+						let data = res.data;
+						
+						let _tmpUserInfo = data.userInfo;
+						_tmpUserInfo['password'] = _that.password;
+						let _userInfo = _that.java110Util.des.desEncrypt(JSON.stringify(_tmpUserInfo));
+						uni.setStorageSync(_that.java110Constant.mapping.USER_INFO, _userInfo);
+						uni.setStorageSync(_that.java110Constant.mapping.TOKEN, data.token);
+						let afterOneHourDate = _that.java110Util.date.addHour(new Date(),1);
+						wx.setStorageSync(_that.java110Constant.mapping.LOGIN_FLAG, {
+						  sessionKey: _tmpUserInfo.userName,
+						  expireTime: afterOneHourDate.getTime()
+						});
+						uni.switchTab({
+							url: "/pages/index/index"
+						});
+					},
+					fail: function(error) {
+						// 调用服务端登录接口失败
+						uni.showToast({
+							title: '调用接口失败'
+						});
+						console.log(error);
+					}
+				});
+
 			}
 
 		}
@@ -103,21 +113,23 @@
 </script>
 
 <style>
-	.logo{
+	.logo {
 		margin-top: 200upx;
 		margin-bottom: 100upx;
 	}
-	.logo view{
+
+	.logo view {
 		height: 200upx;
 		width: 200upx;
 	}
-	.login-nav{
+
+	.login-nav {
 		background-color: #00AA00;
 		height: 90upx;
 	}
-	.login-nav text{
+
+	.login-nav text {
 		color: #FFFFFF;
 		font-size: 30upx;
 	}
-
 </style>

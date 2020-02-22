@@ -60,6 +60,11 @@ class LoginFactory {
 	}
 	
 	let _userInfo = JSON.parse(util.des.desDecrypt(userInfo));
+	
+	let _tmpUserInfo = {
+		userName:_userInfo.userName,
+		password:_userInfo.password
+	}
    
     uni.request({
       url: constant.url.loginUrl,
@@ -67,32 +72,15 @@ class LoginFactory {
       header: {
         APP_ID: constant.app.appId
       },
-      data: _userInfo,
+      data: _tmpUserInfo,
       success: function (res) {
         console.log('login success...:');
         res = res.data;
 
         if (res.result == 0) {
           //that.globalData.userInfo = res.userInfo;
-          wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(userInfo));
-          let date = new Date();
-          let year = date.getFullYear(); //获取当前年份
-
-          let mon = date.getMonth(); //获取当前月份
-
-          let da = date.getDate(); //获取当前日
-
-          let h = date.getHours() + 1; //获取小时
-
-          let m = date.getMinutes(); //获取分钟
-
-          let s = date.getSeconds(); //获取秒
-
-          console.log("获取过去时间", year, mon, da, h, m, s); //将时间格式转化为时间戳
-
-          let afterOneHourDate = new Date(year, mon, da, h, m, s); //30s之后的时间
-
-          console.log("afterOneHourDate", afterOneHourDate);
+          //wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(userInfo));
+          let afterOneHourDate = util.date.addHour(new Date(),1);
           wx.setStorageSync(constant.mapping.LOGIN_FLAG, {
             sessionKey: userInfo.userName,
             expireTime: afterOneHourDate.getTime()

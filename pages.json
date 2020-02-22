@@ -21,7 +21,13 @@
         ,{
             "path" : "pages/login/login",
             "style" : {
-				"navigationBarTitleText": "请登录"
+				// "navigationBarTitleText": "请登录"
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"scrollIndicator": "none"
+				},
+				"navigationStyle": "custom"
 				
 			}
         }

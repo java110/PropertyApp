@@ -8,7 +8,7 @@ const baseUrl = 'https://app.demo.winqi.cn/'; //const baseUrl = 'http://hc.demo.
 
 const hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
 
-const loginUrl = baseUrl + 'app/loginWx';
+const loginUrl = baseUrl + 'app/loginProperty';
 const areaUrl = baseUrl + "app/area.listAreas";
 const GetNoticeListUrl = baseUrl + 'app/api.queryNotices'; //报修接口
 

@@ -58,6 +58,8 @@ class LoginFactory {
 		
 		return ;
 	}
+	
+	let _userInfo = JSON.parse(util.des.desDecrypt(userInfo));
    
     uni.request({
       url: constant.url.loginUrl,
@@ -65,7 +67,7 @@ class LoginFactory {
       header: {
         APP_ID: constant.app.appId
       },
-      data: userInfo,
+      data: _userInfo,
       success: function (res) {
         console.log('login success...:');
         res = res.data;

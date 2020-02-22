@@ -5,7 +5,10 @@ const coreUtil = require("./CoreUtil.js");
 
 const dateUtil = require("./DateUtil.js");
 
+const desUtil = require("./DesUtil.js");
+
 module.exports = {
   core: coreUtil,
-  date: dateUtil
+  date: dateUtil,
+  des:desUtil
 };

@@ -4,7 +4,9 @@
 			console.log('App Launch')
 		},
 		onShow: function() {
-			console.log('App Show')
+			//判断用户是否登录
+			this.java110Context.factory.login.checkLoginStatus();
+			
 		},
 		onHide: function() {
 			console.log('App Hide')

@@ -239,7 +239,7 @@
 			},
 			_toDetail:function(_item){
 				uni.navigateTo({
-					url:'/pages/activityDetail/activityDetail?item='+JSON.stringify(_item)
+					url:'/pages/activityDetail/activityDetail?activitiesId='+_item.activitiesId+"&currentCommunityId="+this.currentCommunityId
 				});
 			}
 			

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="cu-card case no-card margin-top" v-for="(item,index) in activities" :key = "index">
-			<view class="cu-item shadow " >
+			<view class="cu-item shadow " @tap="_toDetail(item)">
 				<view class="image">
 					<image :src="item.src"
 					  class="act-cu-img" ></image>
@@ -92,6 +92,11 @@
 			      }
 			    });
 			  },
+			  _toDetail:function(_item){
+				  uni.navigateTo({
+				  	url:'/pages/activityDetail/activityDetail?activitiesId='+_item.activitiesId+"&currentCommunityId="+this.currentCommunityId
+				  });
+			  }
 			
 		}
 	}

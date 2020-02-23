@@ -1,18 +1,17 @@
 <template>
 	<view>
 		<view class="detailContainer">
-		  <image class="headImg" :src="src"></image>
+		  <image class="headImg" :src="activity.src"></image>
 		  <view class="ad_titile">
-		    <text class="company">{{title}}</text>
+		    <text class="company">{{activity.title}}</text>
 		  </view>
-		  <view>
-		    <view span="8" offset="4"><text class="ad_au_text">{{userName}}</text></view>
-		    <view span="8" offset="2"><text class="ad_au_text">{{startTime}}</text></view>
+		  <view class="flex justify-around border solid-bottom act-height">
+		    <view ><text class="ad_au_text">{{activity.userName}}</text></view>
+		    <view ><text class="ad_au_text">{{activity.startTime}}</text></view>
 		  </view>
 		  
-		  <view class="ad_context">
-		    <van-divider />
-		    <rich-text :nodes="context"/>
+		  <view class="ad_context margin-top" >
+		    <rich-text :nodes="activity.context"/>
 		  </view>
 		</view>
 	</view>
@@ -22,16 +21,72 @@
 	export default {
 		data() {
 			return {
+				activitiesId:'',
+				currentCommunityId:'',
 				activity:{
-					
+					src:'',
+					title:'',
+					userName:'',
+					startTime:'',
+					context:''
 				}
 			}
 		},
 		onLoad(options) {
-			this.activity = JSON.parse(options.item);
-			console.log('文化详情',JSON.parse(options.item));
+			this.activitiesId = options.activitiesId;
+			this.currentCommunityId = options.currentCommunityId;
+			this._loadActivites();
 		},
 		methods: {
+			
+			/**
+			   * 加载活动
+			   * 第一次加载是可能没有小区 则直接下载固定小区
+			   * 
+			   */
+			  _loadActivites: function () {
+			    let _that = this;
+			    let _objData = {
+			      page: 1,
+			      row: 1,
+				  activitiesId:this.activitiesId,
+			      communityId: this.currentCommunityId
+			    };
+			    _that.java110Context.request({
+			      url: _that.java110Constant.url.listActivitiess,
+			      header: _that.java110Context.getHeaders(),
+			      method: "GET",
+			      data: _objData, //动态数据
+			      success: function (res) {
+			        console.log("请求返回信息：", res);
+			        if (res.statusCode == 200) {
+			
+			          let _activites = res.data.activitiess;
+			          _activites.forEach(function (_item) {
+			            _item.src = _that.java110Constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId + "&time=" + new Date();
+			            let _startTime = _item.startTime.replace(/\-/g, "/")
+			            let _tmpStartTime = new Date(_startTime);
+			
+			            _item.startTime = _that.java110Util.date.formatDate(_tmpStartTime);
+			           _that.activity = _item;
+			          });
+			          return;
+			        }
+			        wx.showToast({
+			          title: "服务器异常了",
+			          icon: 'none',
+			          duration: 2000
+			        })
+			      },
+			      fail: function (e) {
+			        wx.showToast({
+			          title: "服务器异常了",
+			          icon: 'none',
+			          duration: 2000
+			        })
+			      }
+			    });
+			  },
 			
 		}
 	}
@@ -60,6 +115,9 @@
 	}
 	.detailContainer .ad_context{
 	  padding: 0rpx 40rpx 40rpx 40rpx;
+	}
+	.act-height{
+		height: 60upx;
 	}
 
 </style>

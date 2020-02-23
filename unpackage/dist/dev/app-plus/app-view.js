@@ -1842,21 +1842,21 @@ var render = function() {
         1
       ),
       _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(3, "sc"), attrs: { _i: 3 } },
+        "v-uni-scroll-view",
+        { attrs: { "scroll-y": true, _i: 3 } },
         [
-          _c("v-uni-view", {
-            staticClass: _vm._$g(4, "sc"),
-            staticStyle: { "background-image": "url('/static/logo.png')" },
-            attrs: { _i: 4 }
-          })
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
-        [
+          _c(
+            "v-uni-view",
+            { staticClass: _vm._$g(4, "sc"), attrs: { _i: 4 } },
+            [
+              _c("v-uni-view", {
+                staticClass: _vm._$g(5, "sc"),
+                style: _vm._$g(5, "s"),
+                attrs: { _i: 5 }
+              })
+            ],
+            1
+          ),
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(6, "sc"), attrs: { _i: 6 } },
@@ -1864,67 +1864,78 @@ var render = function() {
               _c(
                 "v-uni-view",
                 { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
-                [_vm._v("用户名")]
+                [
+                  _c(
+                    "v-uni-view",
+                    { staticClass: _vm._$g(8, "sc"), attrs: { _i: 8 } },
+                    [_vm._v("用户名")]
+                  ),
+                  _c("v-uni-input", {
+                    attrs: {
+                      placeholder: "请输入用户名",
+                      name: "input",
+                      _i: 9
+                    },
+                    model: {
+                      value: _vm._$g(9, "v-model"),
+                      callback: function($$v) {
+                        _vm.$handleVModelEvent(9, $$v)
+                      },
+                      expression: "username"
+                    }
+                  })
+                ],
+                1
               ),
-              _c("v-uni-input", {
-                attrs: { placeholder: "请输入用户名", name: "input", _i: 8 },
-                model: {
-                  value: _vm._$g(8, "v-model"),
-                  callback: function($$v) {
-                    _vm.$handleVModelEvent(8, $$v)
-                  },
-                  expression: "username"
-                }
-              })
+              _c(
+                "v-uni-view",
+                { staticClass: _vm._$g(10, "sc"), attrs: { _i: 10 } },
+                [
+                  _c(
+                    "v-uni-view",
+                    { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
+                    [_vm._v("密码")]
+                  ),
+                  _c("v-uni-input", {
+                    attrs: {
+                      placeholder: "请输入密码",
+                      type: "password",
+                      name: "input",
+                      _i: 12
+                    },
+                    model: {
+                      value: _vm._$g(12, "v-model"),
+                      callback: function($$v) {
+                        _vm.$handleVModelEvent(12, $$v)
+                      },
+                      expression: "password"
+                    }
+                  })
+                ],
+                1
+              )
             ],
             1
           ),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(9, "sc"), attrs: { _i: 9 } },
+            { staticClass: _vm._$g(13, "sc"), attrs: { _i: 13 } },
             [
               _c(
-                "v-uni-view",
-                { staticClass: _vm._$g(10, "sc"), attrs: { _i: 10 } },
-                [_vm._v("密码")]
-              ),
-              _c("v-uni-input", {
-                attrs: {
-                  placeholder: "请输入密码",
-                  type: "password",
-                  name: "input",
-                  _i: 11
+                "v-uni-button",
+                {
+                  staticClass: _vm._$g(14, "sc"),
+                  attrs: { _i: 14 },
+                  on: {
+                    click: function($event) {
+                      return _vm.$handleViewEvent($event)
+                    }
+                  }
                 },
-                model: {
-                  value: _vm._$g(11, "v-model"),
-                  callback: function($$v) {
-                    _vm.$handleVModelEvent(11, $$v)
-                  },
-                  expression: "password"
-                }
-              })
+                [_vm._v("登录")]
+              )
             ],
             1
-          )
-        ],
-        1
-      ),
-      _c(
-        "v-uni-view",
-        { staticClass: _vm._$g(12, "sc"), attrs: { _i: 12 } },
-        [
-          _c(
-            "v-uni-button",
-            {
-              staticClass: _vm._$g(13, "sc"),
-              attrs: { _i: 13 },
-              on: {
-                click: function($event) {
-                  return _vm.$handleViewEvent($event)
-                }
-              }
-            },
-            [_vm._v("登录")]
           )
         ],
         1
@@ -2022,7 +2033,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../../software
 
 
 // module
-exports.push([module.i, "\n.logo {\n\tmargin-top: 200upx;\n\tmargin-bottom: 100upx;\n}\n.logo uni-view {\n\theight: 200upx;\n\twidth: 200upx;\n}\n.login-nav {\n\tbackground-color: #00AA00;\n\theight: 90upx;\n}\n.login-nav uni-text {\n\tcolor: #FFFFFF;\n\tfont-size: 30upx;\n}\n", ""]);
+exports.push([module.i, "\n.logo {\n\tmargin-top: 160upx;\n\tmargin-bottom: 140upx;\n}\n.logo .logo-lage {\n\theight: 180upx;\n\twidth: 180upx;\n}\n.login-nav {\n\tbackground-color: #00AA00;\n\theight: 120upx;\n}\n.login-nav uni-text {\n\tcolor: #FFFFFF;\n\tfont-size: 30upx;\n}\n", ""]);
 
 // exports
 

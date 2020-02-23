@@ -4,8 +4,8 @@
  * add by wuxw 2019-12-28
  */
 // 服务器域名
-//const baseUrl = 'https://app.demo.winqi.cn/'; 
-const baseUrl = '/';
+const baseUrl = 'https://app.demo.winqi.cn/'; 
+//const baseUrl = '/';
 const hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
 
 const loginUrl = baseUrl + 'app/loginProperty';
@@ -50,13 +50,13 @@ const queryFeeByParkingSpace = baseUrl + "app/fee.queryFeeByParkingSpace"; //查
 
 const queryFeeByOwner = baseUrl + "app/fee.queryFee"; //预下单
 
-const preOrder = baseUrl + "/app/payment/toPay"; //查询小区
+const preOrder = baseUrl + "app/payment/toPay"; //查询小区
 
-const listCommunitys = baseUrl + "/app/community.listCommunitys"; //查询小区文化
+const listCommunitys = baseUrl + "app/community.listCommunitys"; //查询小区文化
 
-const listActivitiess = baseUrl + "/app/activities.listActivitiess"; //查询小区广告
+const listActivitiess = baseUrl + "app/activities.listActivitiess"; //查询小区广告
 
-const listAdvertPhoto = baseUrl + "/app/advert.listAdvertPhoto";
+const listAdvertPhoto = baseUrl + "app/advert.listAdvertPhoto";
 module.exports = {
   baseUrl: baseUrl,
   hcBaseUrl: hcBaseUrl,

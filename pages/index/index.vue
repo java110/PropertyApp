@@ -127,7 +127,7 @@
 						uni.setStorageSync(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(_tmpCommunityInfo));
 						_that.currentCommunityId = _tmpCommunityInfo.communityId;
 						_that.currentCommunityName = _tmpCommunityInfo.name;
-						
+						_that._loadAd();
 						return;
 					}
 					let communityId = '';
@@ -141,6 +141,7 @@
 						uni.setStorageSync(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(_tmpCommunityInfo));
 						_that.currentCommunityId = _tmpCommunityInfo.communityId;
 						_that.currentCommunityName = _tmpCommunityInfo.name;
+						_that._loadAd();
 						return;
 					}
 					
@@ -154,11 +155,11 @@
 				    let _objData = {
 				      page: 1,
 				      row: 5,
-				      communityId: this.data.communityId
+				      communityId: this.currentCommunityId
 				    };
-				    context.request({
+				    this.java110Context.request({
 				      url: _that.java110Constant.url.listAdvertPhoto,
-				      header: context.getHeaders(),
+				      header: _that.java110Context.getHeaders(),
 				      method: "GET",
 				      data: _objData, //动态数据
 				      success: function (res) {
@@ -168,12 +169,14 @@
 				          let _advertPhotos = res.data;
 				          let _aPhotos = [];
 				          _advertPhotos.forEach(function (_item) {
-							_item.type= "type";
-				            _item.url = constant.url.hcBaseUrl + _item.url + "&time=" + new Date();
+							_item.type= "image";
+				            _item.url = _that.java110Constant.url.hcBaseUrl + _item.url + "&time=" + new Date();
 				            _aPhotos.push(_item);
 				          });
 				
 				          _that.swiperList =  _aPhotos;
+						  
+						  console.log(_that.swiperList);
 				
 				          return;
 				        }

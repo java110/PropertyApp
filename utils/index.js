@@ -7,8 +7,11 @@ const dateUtil = require("./DateUtil.js");
 
 const desUtil = require("./DesUtil.js");
 
+const stringUtil = require("./StringUtil.js");
+
 module.exports = {
   core: coreUtil,
   date: dateUtil,
-  des:desUtil
+  des:desUtil,
+  string:stringUtil
 };

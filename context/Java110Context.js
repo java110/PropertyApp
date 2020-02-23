@@ -33,9 +33,10 @@ const getHeaders = function () {
 const request = function (_reqObj) {
   //检查是否登录成功
   factory.login.checkLoginStatus(function () {
+	  
     //重写token
-    _reqObj.header.cookie = '_java110_token_=' + wx.getStorageSync('token'); //console.log("_reqObj",_reqObj);
-
+    _reqObj.header.cookie = '_java110_token_=' + uni.getStorageSync('token'); //console.log("_reqObj",_reqObj);
+	console.log("_reqObj",_reqObj);
     uni.request(_reqObj);
   });
 };
@@ -46,11 +47,11 @@ const request = function (_reqObj) {
 
 
 const getLocation = function () {
-  return wx.getStorageSync('location');
+  return uni.getStorageSync('location');
 };
 
 const getCurrentLocation = function () {
-  return wx.getStorageSync('currentLocation');
+  return uni.getStorageSync('currentLocation');
 };
 /**
  * 获取用户信息
@@ -60,9 +61,9 @@ const getCurrentLocation = function () {
 
 
 const getUserInfo = function () {
-  let _userInfo = wx.getStorageSync(constant.mapping.USER_INFO);
-
-  return JSON.parse(_userInfo);
+  let userInfo = uni.getStorageSync(constant.mapping.USER_INFO);
+  let _userInfo = JSON.parse(util.des.desDecrypt(userInfo));
+  return _userInfo;
 };
 /**
  * 登录标记
@@ -71,13 +72,13 @@ const getUserInfo = function () {
 
 
 const getLoginFlag = function () {
-  let _loginFlag = wx.getStorageSync(constant.mapping.LOGIN_FLAG);
+  let _loginFlag = uni.getStorageSync(constant.mapping.LOGIN_FLAG);
 
   return _loginFlag;
 };
 
 const _loadArea = function (_level, _parentAreaCode, callBack = _areaList => {}) {
-  let areaList = wx.getStorageSync(constant.mapping.AREA_INFO);
+  let areaList = uni.getStorageSync(constant.mapping.AREA_INFO);
 
   if (areaList) {
     callBack(areaList);
@@ -127,11 +128,66 @@ const _loadArea = function (_level, _parentAreaCode, callBack = _areaList => {})
       };
       callBack(areaList); //将 地区信息存储起来
 
-      wx.setStorageSync(constant.mapping.AREA_INFO, areaList);
+      uni.setStorageSync(constant.mapping.AREA_INFO, areaList);
     },
     fail: function (error) {
       // 调用服务端登录接口失败
-      wx.showToast({
+      uni.showToast({
+        title: '调用接口失败'
+      });
+      console.log(error);
+    }
+  });
+};
+/**
+ * 获取当前小区信息
+ */
+
+
+const getCommunity = function (callBack,reload) {
+  let _communityInfo = uni.getStorageSync(constant.mapping.COMMUNITY_INFO);
+  console.log('本地小区信息',_communityInfo);
+  if(_communityInfo != null && _communityInfo != undefined && _communityInfo != "" && reload != true){
+	  _communityInfo = JSON.parse(_communityInfo);
+	  callBack(_communityInfo);
+	  return ;
+  }
+  
+  
+  //调用远程查询小区信息
+  let _userInfo = getUserInfo();
+  
+  request({
+    url: constant.url.listMyEnteredCommunitys,
+    header: getHeaders(),
+    data: {
+      userId: _userInfo.userId,
+      storeId: _userInfo.storeId
+    },
+    success: function (res) {
+      console.log('login success');
+	  if(res.statusCode != 200){
+		  uni.showToast({
+		  	icon:none,
+			title:res.data
+		  });
+		  return ;
+	  }
+      let data = res.data;
+	  if(data.total <1){
+		  uni.showToast({
+		  	icon:none,
+		  	title:'当前员工还没有隶属小区,请先去后台添加'
+		  });
+		  return ;
+	  }
+	  let _communitys = data.communitys;
+      uni.setStorageSync(constant.mapping.COMMUNITY_INFO, JSON.stringify(_communitys));
+	  callBack(_communitys);
+    },
+    fail: function (error) {
+      // 调用服务端登录接口失败
+      uni.showToast({
         title: '调用接口失败'
       });
       console.log(error);
@@ -139,111 +195,6 @@ const _loadArea = function (_level, _parentAreaCode, callBack = _areaList => {})
   });
 };
 
-const getOwner = function (callBack = _ownerInfo => {}) {
-  // 从硬盘中获取 业主信息
-  let _ownerInfo = wx.getStorageSync(constant.mapping.OWNER_INFO);
-
-  if (_ownerInfo) {
-    callBack(_ownerInfo);
-  } else {
-    request({
-      url: constant.url.queryAppUserBindingOwner,
-      header: getHeaders(),
-      data: {},
-      success: function (res) {
-        console.log('login success');
-        let data = res.data;
-        console.log(res);
-
-        if (res.statusCode == 200) {
-          _ownerInfo = data.auditAppUserBindingOwners[0];
-
-          if (_ownerInfo == null || _ownerInfo == undefined) {
-            callBack(null);
-            return;
-          }
-
-          if (_ownerInfo.state == '12000') {
-            wx.setStorageSync(constant.mapping.OWNER_INFO, _ownerInfo);
-            let _currentCommunityInfo = {
-              communityId: _ownerInfo.communityId,
-              communityName: _ownerInfo.communityName
-            };
-            wx.setStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO, _currentCommunityInfo);
-          }
-
-          callBack(data.auditAppUserBindingOwners[0]);
-        }
-      },
-      fail: function (error) {
-        // 调用服务端登录接口失败
-        wx.showToast({
-          title: '调用接口失败'
-        });
-        console.log(error);
-      }
-    });
-  }
-};
-/**
- * 获取当前小区信息
- */
-
-
-const getCurrentCommunity = function () {
-  let communityInfo = wx.getStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO);
-  return communityInfo;
-};
-/**
- * add by shil 2020-01-08
- * 获取当前用户的房屋信息
- */
-
-
-const getRooms = function () {
-  return new Promise((resolve, reject) => {
-    getOwner(function (_owner) {
-      request({
-        url: constant.url.queryRoomsByOwner,
-        header: getHeaders(),
-        method: "GET",
-        data: {
-          communityId: _owner.communityId,
-          ownerId: _owner.memberId
-        },
-        success: function (res) {
-          if (res.statusCode == 200) {
-            //将业主信息和房屋信息一起返回
-            res.data['owner'] = _owner;
-
-            if (res.data.rooms.length == 0) {
-              wx.showToast({
-                title: "未查询到房屋信息",
-                icon: 'none',
-                duration: 2000
-              });
-            }
-
-            resolve(res);
-          } else {
-            wx.showToast({
-              title: '未查询到房屋信息',
-              icon: 'none',
-              duration: 2000
-            });
-          }
-        },
-        fail: function (res) {
-          //  调用服务端登录接口失败
-          wx.showToast({
-            title: '调用接口失败'
-          });
-          reject(res);
-        }
-      });
-    });
-  });
-};
 
 module.exports = {
   constant: constant,
@@ -255,8 +206,6 @@ module.exports = {
   getLoginFlag: getLoginFlag,
   _loadArea: _loadArea,
   getCurrentLocation: getCurrentLocation,
-  getOwner: getOwner,
-  getCurrentCommunity: getCurrentCommunity,
-  request: request,
-  getRooms: getRooms
+  getCommunity: getCommunity,
+  request: request
 };

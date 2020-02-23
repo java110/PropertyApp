@@ -4,15 +4,15 @@
  * add by wuxw 2019-12-28
  */
 // 服务器域名
-const baseUrl = 'https://app.demo.winqi.cn/'; //const baseUrl = 'http://hc.demo.winqi.cn:8012/';
-
+//const baseUrl = 'https://app.demo.winqi.cn/'; 
+const baseUrl = '/';
 const hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
 
 const loginUrl = baseUrl + 'app/loginProperty';
 const areaUrl = baseUrl + "app/area.listAreas";
 const GetNoticeListUrl = baseUrl + 'app/api.queryNotices'; //报修接口
 
-const saveOwnerRepair = baseUrl + 'app/ownerRepair.saveOwnerRepair'; //查看报修
+const listMyEnteredCommunitys = baseUrl + 'app/community.listMyEnteredCommunitys'; //查看员工小区
 
 const listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //家庭成员
 
@@ -63,7 +63,7 @@ module.exports = {
   loginUrl: loginUrl,
   areaUrl: areaUrl,
   GetNoticeListUrl: GetNoticeListUrl,
-  saveOwnerRepair: saveOwnerRepair,
+  listMyEnteredCommunitys: listMyEnteredCommunitys,
   listOwnerRepairs: listOwnerRepairs,
   saveOwner: saveOwner,
   appUserBindingOwner: appUserBindingOwner,

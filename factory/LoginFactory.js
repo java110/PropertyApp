@@ -26,7 +26,7 @@ class LoginFactory {
     let nowDate = new Date();
 
     if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
-		
+		callback();
     } else {
       // 无登录态
       _that.doLogin(callback);
@@ -76,8 +76,6 @@ class LoginFactory {
       success: function (res) {
         console.log('login success...:');
         res = res.data;
-
-        if (res.result == 0) {
           //that.globalData.userInfo = res.userInfo;
           //wx.setStorageSync(constant.mapping.USER_INFO, JSON.stringify(userInfo));
           let afterOneHourDate = util.date.addHour(new Date(),1);
@@ -87,9 +85,6 @@ class LoginFactory {
           });
           wx.setStorageSync(constant.mapping.TOKEN, res.token);
           callback();
-        } else {
-          util.core.showInfo(res.errmsg);
-        }
       },
       fail: function (error) {
         // 调用服务端登录接口失败

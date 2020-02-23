@@ -1,6 +1,6 @@
 {
-    "name" : "PropertyApp",
-    "appid" : "",
+    "name" : "HC掌上物业",
+    "appid" : "__UNI__29E0560",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -72,18 +72,18 @@
     "mp-toutiao" : {
         "usingComponents" : true
     },
-	/* h5特有相关 */
-	"h5" : {
-	    "devServer" : {
-	         "port" : 8000, //端口号
-	          "disableHostCheck" : true,
-	          "proxy" : {
-	              "/api" : {
-	                  "target" : "https://app.demo.winqi.cn", //目标接口域名
-	                   "changeOrigin" : true,  //是否跨域
-	                   "secure" : true  // 设置支持https协议的代理
-	             }
-	        }
-	    }
-	}
+    /* h5特有相关 */
+    "h5" : {
+        "devServer" : {
+            "port" : 8000, //端口号
+            "disableHostCheck" : true,
+            "proxy" : {
+                "/app" : {
+                    "target" : "https://app.demo.winqi.cn", //目标接口域名
+                    "changeOrigin" : true, //是否跨域
+                    "secure" : true // 设置支持https协议的代理
+                }
+            }
+        }
+    }
 }

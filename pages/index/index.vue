@@ -30,22 +30,26 @@
 					<text class="lg text-gray cuIcon-more"></text>
 				</view>
 			</view>
-			<view class="cu-list menu-avatar">
-				<view class="cu-item">
-					<view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
-					<view class="content">
-						<view class="text-grey">凯尔</view>
-						<view class="text-gray text-sm flex">
-							<view class="text-cut">
-								<text class="cuIcon-infofill text-red  margin-right-xs"></text>
-								我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。
-							</view> </view>
-					</view>
-					<view class="action">
-						<view class="text-grey text-xs">22:20</view>
-					</view>
-				</view>
-			</view>
+			<view class="noticesList">
+			    <block v-for="(item,index) in activitys" :key="index" wx:key="index">
+			      
+			        <view class="noticesList-list" >
+			          <view class="notices-info">
+			            <view class="notices-info-name">{{item.title}}</view>
+			            
+			            <view class="notice-bottom">
+			              <view>
+			                <text class="lg text-gray cuIcon-time"></text>
+			                <text class="notice-startTime">{{item.startTime}}</text>
+			              </view>
+			            </view>
+			          </view>
+			          <view class="notices-info-image">
+			            <image :src="item.src" />
+			          </view>
+			        </view>
+			    </block>
+			  </view>
 		</scroll-view>
 	</view>
 </template>
@@ -60,55 +64,46 @@
 				cuIconList: [{
 					cuIcon: 'cardboardfill',
 					color: 'red',
-					badge: 120,
-					name: 'VR'
+					badge: 0,
+					name: '维修单'
 				}, {
 					cuIcon: 'recordfill',
 					color: 'orange',
 					badge: 1,
-					name: '录像'
+					name: '审核维修'
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
-					name: '图像'
+					name: '投诉单'
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',
 					badge: 22,
-					name: '通知'
+					name: '审核投诉'
 				}, {
 					cuIcon: 'upstagefill',
 					color: 'cyan',
 					badge: 0,
-					name: '排行榜'
+					name: '巡检打卡'
 				}, {
 					cuIcon: 'clothesfill',
 					color: 'blue',
 					badge: 0,
-					name: '皮肤'
+					name: '公告'
 				}, {
 					cuIcon: 'discoverfill',
 					color: 'purple',
 					badge: 0,
-					name: '发现'
+					name: '停车收费'
 				}, {
 					cuIcon: 'questionfill',
 					color: 'mauve',
 					badge: 0,
-					name: '帮助'
-				}, {
-					cuIcon: 'commandfill',
-					color: 'purple',
-					badge: 0,
-					name: '问答'
-				}, {
-					cuIcon: 'brandfill',
-					color: 'mauve',
-					badge: 0,
-					name: '版权'
+					name: '采购管理'
 				}],
-				swiperList: []
+				swiperList: [],
+				activitys:[]
 			}
 		},
 		onLoad() {
@@ -177,7 +172,7 @@
 				          _that.swiperList =  _aPhotos;
 						  
 						  console.log(_that.swiperList);
-				
+						 _that._loadActivitys();
 				          return;
 				        }
 				        wx.showToast({
@@ -194,7 +189,48 @@
 				        })
 				      }
 				    });
+			},
+			_loadActivitys:function(){
+				let _that = this;
+				    let _objData = {
+				      page:1,
+				      row:5,
+				      communityId:this.currentCommunityId
+				    };
+				    _that.java110Context.request({
+				      url: _that.java110Constant.url.listActivitiess,
+				      header: _that.java110Context.getHeaders(),
+				      method: "GET",
+				      data: _objData, //动态数据
+				      success: function (res) {
+				        console.log("请求返回信息：", res);
+				        if (res.statusCode == 200) {
+				          let _activites = res.data.activitiess;
+				          let _acts = [];
+				          _activites.forEach(function(_item){
+				            _item.src = _that.java110Constant.url.filePath + "?fileId=" + _item.headerImg +"&communityId="+_that.currentCommunityId+"&time="+new Date();
+				            _acts.push(_item);
+				          });
 				
+				
+				          _that.activitys = _acts;
+				          console.log('小区文化',_that.activitys);
+				          return;
+				        }
+				        wx.showToast({
+				          title: "服务器异常了",
+				          icon: 'none',
+				          duration: 2000
+				        })
+				      },
+				      fail: function (e) {
+				        wx.showToast({
+				          title: "服务器异常了",
+				          icon: 'none',
+				          duration: 2000
+				        })
+				      }
+				    });
 			}
 
 		}
@@ -205,6 +241,63 @@
 	.swiper-height-index{
 		height: 240upx;
 		min-height: 240upx;
+	}
+	.noticesList{
+		background-color: #FFFFFF;
+	}
+	.noticesList-list{
+	  font-size: 25rpx;
+	  display: flex;
+	  width: 100%;
+	  padding: 10rpx 0;   
+	  border-bottom: 1rpx solid #ECECEC;
+	  color: #6D6D6D;
+	  justify-content: space-between;
+	}
+	.notices-info-name{
+	  margin-top: 10rpx;
+	  color: black;
+	  font-size: 30rpx;
+	  display: -webkit-box;  /*设置为弹性盒子*/
+	  -webkit-line-clamp: 2;  /*最多显示5行*/
+	  overflow: hidden;  /*超出隐藏*/
+	  text-overflow: ellipsis;  /*超出显示为省略号*/
+	  -webkit-box-orient: vertical;
+	  word-break: break-all;  /*强制英文单词自动换行*/
+	}
+	.notices-info-image image{
+	  width: 200rpx;
+	  height: 150rpx;
+	  margin: 10rpx 20rpx 0rpx 20rpx;
+	  border-radius: 10rpx;
+	}
+	.notices-info{
+	  margin: 10rpx 0rpx 0rpx 20rpx;
+	  height: 150rpx;
+	  flex-direction: column;
+	  display: flex;
+	  justify-content: space-between;
+	}
+	.notice-bottom{
+	  display: flex;
+	  text-align: left;
+	}
+	.notice-bottom view{
+	  margin-right: 20rpx;
+	}
+	
+	.notice-bottom icon{
+	  color: #8a8a8a;
+	  display: inline-block;
+	  width: 40rpx;
+	  height: 40rpx;
+	}
+	.notice-bottom view text{
+	  font-size: 25rpx;
+	  line-height: 40rpx;
+	}
+	.notice-startTime{
+		margin-left: 16upx;
 	}
 
 	

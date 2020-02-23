@@ -26,14 +26,14 @@
 				<view class="action">
 					小区文化
 				</view>
-				<view class="action">
+				<view class="action" @tap="_moreActivity()">
 					<text class="lg text-gray cuIcon-more"></text>
 				</view>
 			</view>
 			<view class="noticesList">
-			    <block v-for="(item,index) in activitys" :key="index" wx:key="index">
+			    <block v-for="(item,index) in activitys" :key="index" wx:key="index" >
 			      
-			        <view class="noticesList-list" >
+			        <view class="noticesList-list" @tap="_toDetail(item)">
 			          <view class="notices-info">
 			            <view class="notices-info-name">{{item.title}}</view>
 			            
@@ -231,8 +231,18 @@
 				        })
 				      }
 				    });
+			},
+			_moreActivity:function(){
+				uni.navigateTo({
+					url:'/pages/activityes/activityes?currentCommunityId='+this.currentCommunityId
+				});
+			},
+			_toDetail:function(_item){
+				uni.navigateTo({
+					url:'/pages/activityDetail/activityDetail?item='+JSON.stringify(_item)
+				});
 			}
-
+			
 		}
 	}
 </script>

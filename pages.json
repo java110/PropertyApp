@@ -43,6 +43,12 @@
 				"navigationBarTitleText": "文化详情"
 			}
         }
+        ,{
+            "path" : "pages/notice/notice",
+            "style" : {
+            	"navigationBarTitleText": "公告"
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

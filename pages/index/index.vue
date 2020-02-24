@@ -3,7 +3,7 @@
 		<scroll-view :scroll-y="modalName==null" class="page" :class="show">
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
 				<view class="cu-item" v-for="(item,index) in cuIconList" :key="index" v-if="index<gridCol*2">
-					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]">
+					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]" @tap="_toNoticeHref(item)">
 						<view class="cu-tag badge" v-if="item.badge!=0">
 							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
 						</view>
@@ -107,8 +107,7 @@
 			}
 		},
 		onLoad() {
-			this._loadCommunity();
-			
+			this._loadCommunity();			
 		},
 		methods: {
 			_loadCommunity:function(){
@@ -240,6 +239,11 @@
 			_toDetail:function(_item){
 				uni.navigateTo({
 					url:'/pages/activityDetail/activityDetail?activitiesId='+_item.activitiesId+"&currentCommunityId="+this.currentCommunityId
+				});
+			},
+			_toNoticeHref:function(_item){
+				uni.navigateTo({
+					url:'/pages/notice/notice'
 				});
 			}
 			

@@ -3,7 +3,7 @@
 		<scroll-view :scroll-y="modalName==null" class="page" :class="show">
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
 				<view class="cu-item" v-for="(item,index) in cuIconList" :key="index" v-if="index<gridCol*2">
-					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]" @tap="_toNoticeHref(item)">
+					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]" @tap="_toHref(item)">
 						<view class="cu-tag badge" v-if="item.badge!=0">
 							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
 						</view>
@@ -65,42 +65,50 @@
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 0,
-					name: '维修单'
+					name: '维修单',
+					pathUrl:'/notice/notice'
 				}, {
 					cuIcon: 'recordfill',
 					color: 'orange',
 					badge: 1,
-					name: '审核维修'
+					name: '审核维修',
+					pathUrl:'/notice/notice'
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
-					name: '投诉单'
+					name: '投诉单',
+					pathUrl:'/notice/notice'
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',
 					badge: 22,
-					name: '审核投诉'
+					name: '审核投诉',
+					pathUrl:'/notice/notice'
 				}, {
 					cuIcon: 'upstagefill',
 					color: 'cyan',
 					badge: 0,
-					name: '巡检打卡'
+					name: '巡检打卡',
+					pathUrl:'/notice/notice'
 				}, {
 					cuIcon: 'clothesfill',
 					color: 'blue',
 					badge: 0,
-					name: '公告'
+					name: '公告',
+					pathUrl:'/notice/notice'
 				}, {
 					cuIcon: 'discoverfill',
 					color: 'purple',
 					badge: 0,
-					name: '停车收费'
+					name: '停车收费',
+					pathUrl:'/notice/notice'
 				}, {
 					cuIcon: 'questionfill',
 					color: 'mauve',
 					badge: 0,
-					name: '采购管理'
+					name: '采购管理',
+					pathUrl:'/notice/notice'
 				}],
 				swiperList: [],
 				activitys:[]
@@ -241,9 +249,9 @@
 					url:'/pages/activityDetail/activityDetail?activitiesId='+_item.activitiesId+"&currentCommunityId="+this.currentCommunityId
 				});
 			},
-			_toNoticeHref:function(_item){
+			_toHref:function(_item){
 				uni.navigateTo({
-					url:'/pages/notice/notice'
+					url:'/pages'+_item.pathUrl
 				});
 			}
 			

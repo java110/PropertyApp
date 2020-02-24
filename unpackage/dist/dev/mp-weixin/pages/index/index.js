@@ -200,42 +200,50 @@ var _default =
         cuIcon: 'cardboardfill',
         color: 'red',
         badge: 0,
-        name: '维修单' },
+        name: '维修单',
+        pathUrl: '/notice/notice' },
       {
         cuIcon: 'recordfill',
         color: 'orange',
         badge: 1,
-        name: '审核维修' },
+        name: '审核维修',
+        pathUrl: '/notice/notice' },
       {
         cuIcon: 'picfill',
         color: 'yellow',
         badge: 0,
-        name: '投诉单' },
+        name: '投诉单',
+        pathUrl: '/notice/notice' },
       {
         cuIcon: 'noticefill',
         color: 'olive',
         badge: 22,
-        name: '审核投诉' },
+        name: '审核投诉',
+        pathUrl: '/notice/notice' },
       {
         cuIcon: 'upstagefill',
         color: 'cyan',
         badge: 0,
-        name: '巡检打卡' },
+        name: '巡检打卡',
+        pathUrl: '/notice/notice' },
       {
         cuIcon: 'clothesfill',
         color: 'blue',
         badge: 0,
-        name: '公告' },
+        name: '公告',
+        pathUrl: '/notice/notice' },
       {
         cuIcon: 'discoverfill',
         color: 'purple',
         badge: 0,
-        name: '停车收费' },
+        name: '停车收费',
+        pathUrl: '/notice/notice' },
       {
         cuIcon: 'questionfill',
         color: 'mauve',
         badge: 0,
-        name: '采购管理' }],
+        name: '采购管理',
+        pathUrl: '/notice/notice' }],
 
       swiperList: [],
       activitys: [] };
@@ -376,9 +384,9 @@ var _default =
         url: '/pages/activityDetail/activityDetail?activitiesId=' + _item.activitiesId + "&currentCommunityId=" + this.currentCommunityId });
 
     },
-    _toNoticeHref: function _toNoticeHref(_item) {
+    _toHref: function _toHref(_item) {
       uni.navigateTo({
-        url: '/pages/notice/notice' });
+        url: '/pages' + _item.pathUrl });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

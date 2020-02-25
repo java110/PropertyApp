@@ -46,7 +46,7 @@
 			});
 
 			this.logoUrl = this.java110Constant.url.baseUrl + 'logo.png';
-			L
+			
 
 
 		},

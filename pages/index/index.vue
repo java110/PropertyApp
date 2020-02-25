@@ -115,7 +115,7 @@
 				let _that = this;
 				//加载小区信息
 				this.java110Context.getCommunity(function(_communitys){
-					let currentCommunity = uni.getStorageSync(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO);
+					let currentCommunity = _that.java110Context.getCurrentCommunity(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO);
 					//随机放一个小区
 					let _tmpCommunityInfo = _communitys[0];
 					if(_that.java110Util.string.isNull(currentCommunity)){

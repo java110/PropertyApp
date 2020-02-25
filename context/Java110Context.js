@@ -62,7 +62,14 @@ const getCurrentLocation = function () {
 
 const getUserInfo = function () {
   let userInfo = uni.getStorageSync(constant.mapping.USER_INFO);
+  if(util.string.isNull(userInfo)){
+	  uni.redirectTo({
+	  	url:"/pages/login/login"
+	  });
+	  return;
+  }
   let _userInfo = JSON.parse(util.des.desDecrypt(userInfo));
+  
   return _userInfo;
 };
 /**
@@ -140,10 +147,16 @@ const _loadArea = function (_level, _parentAreaCode, callBack = _areaList => {})
   });
 };
 /**
+ * 获取当前小区
+ */
+const getCurrentCommunity = function(){
+	let currentCommunity = uni.getStorageSync(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO);
+	return getCurrentCommunity;
+};
+
+/**
  * 获取当前小区信息
  */
-
-
 const getCommunity = function (callBack,reload) {
   let _communityInfo = uni.getStorageSync(constant.mapping.COMMUNITY_INFO);
   console.log('本地小区信息',_communityInfo);
@@ -207,5 +220,6 @@ module.exports = {
   _loadArea: _loadArea,
   getCurrentLocation: getCurrentLocation,
   getCommunity: getCommunity,
-  request: request
+  request: request,
+  getCurrentCommunity:getCurrentCommunity
 };

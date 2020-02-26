@@ -4,8 +4,8 @@
  * add by wuxw 2019-12-28
  */
 // 服务器域名
-const baseUrl = 'https://app.demo.winqi.cn/'; 
-//const baseUrl = '/';
+//const baseUrl = 'https://app.demo.winqi.cn/'; 
+const baseUrl = '/';
 const hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
 
 const loginUrl = baseUrl + 'app/loginProperty';

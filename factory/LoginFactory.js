@@ -26,6 +26,7 @@ class LoginFactory {
     let nowDate = new Date();
 
     if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+		console.log("现在还是有效时间内");
 		callback();
     } else {
       // 无登录态
@@ -62,7 +63,7 @@ class LoginFactory {
 	let _userInfo = JSON.parse(util.des.desDecrypt(userInfo));
 	
 	let _tmpUserInfo = {
-		userName:_userInfo.userName,
+		username:_userInfo.userName,
 		password:_userInfo.password
 	}
    
@@ -81,7 +82,8 @@ class LoginFactory {
           let afterOneHourDate = util.date.addHour(new Date(),1);
           wx.setStorageSync(constant.mapping.LOGIN_FLAG, {
             sessionKey: userInfo.userName,
-            expireTime: afterOneHourDate.getTime()
+            expireTime: afterOneHourDate.getTime(),
+			createTime: new Date().getTime()
           });
           wx.setStorageSync(constant.mapping.TOKEN, res.token);
           callback();

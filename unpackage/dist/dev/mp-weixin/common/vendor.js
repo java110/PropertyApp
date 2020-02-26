@@ -8736,7 +8736,14 @@ var getCurrentLocation = function getCurrentLocation() {
 
 var getUserInfo = function getUserInfo() {
   var userInfo = uni.getStorageSync(constant.mapping.USER_INFO);
+  if (util.string.isNull(userInfo)) {
+    uni.redirectTo({
+      url: "/pages/login/login" });
+
+    return;
+  }
   var _userInfo = JSON.parse(util.des.desDecrypt(userInfo));
+
   return _userInfo;
 };
 /**
@@ -8814,10 +8821,16 @@ var _loadArea = function _loadArea(_level, _parentAreaCode) {var callBack = argu
 
 };
 /**
+    * 获取当前小区
+    */
+var getCurrentCommunity = function getCurrentCommunity() {
+  var currentCommunity = uni.getStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO);
+  return getCurrentCommunity;
+};
+
+/**
     * 获取当前小区信息
     */
-
-
 var getCommunity = function getCommunity(callBack, reload) {
   var _communityInfo = uni.getStorageSync(constant.mapping.COMMUNITY_INFO);
   console.log('本地小区信息', _communityInfo);
@@ -8881,7 +8894,8 @@ module.exports = {
   _loadArea: _loadArea,
   getCurrentLocation: getCurrentLocation,
   getCommunity: getCommunity,
-  request: request };
+  request: request,
+  getCurrentCommunity: getCurrentCommunity };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
@@ -8951,8 +8965,8 @@ module.exports = AppConstant;
                * add by wuxw 2019-12-28
                */
 // 服务器域名
-var baseUrl = 'https://app.demo.winqi.cn/';
-//const baseUrl = '/';
+//const baseUrl = 'https://app.demo.winqi.cn/'; 
+var baseUrl = '/';
 var hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
 
 var loginUrl = baseUrl + 'app/loginProperty';
@@ -8963,7 +8977,7 @@ var listMyEnteredCommunitys = baseUrl + 'app/community.listMyEnteredCommunitys';
 
 var listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //家庭成员
 
-var saveOwner = baseUrl + 'app/owner.saveOwner'; //家庭成员列表
+var queryStaffInfos = baseUrl + 'app/query.staff.infos'; //查询员工信息
 
 var queryOwnerMembers = baseUrl + 'app/owner.queryOwnerMembers'; //投诉建议列表
 
@@ -9012,7 +9026,7 @@ module.exports = {
   GetNoticeListUrl: GetNoticeListUrl,
   listMyEnteredCommunitys: listMyEnteredCommunitys,
   listOwnerRepairs: listOwnerRepairs,
-  saveOwner: saveOwner,
+  queryStaffInfos: queryStaffInfos,
   appUserBindingOwner: appUserBindingOwner,
   queryAppUserBindingOwner: queryAppUserBindingOwner,
   queryOwnerMembers: queryOwnerMembers,
@@ -38756,6 +38770,7 @@ LoginFactory = /*#__PURE__*/function () {
       var nowDate = new Date();
 
       if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+        console.log("现在还是有效时间内");
         callback();
       } else {
         // 无登录态
@@ -38792,7 +38807,7 @@ LoginFactory = /*#__PURE__*/function () {
       var _userInfo = JSON.parse(util.des.desDecrypt(userInfo));
 
       var _tmpUserInfo = {
-        userName: _userInfo.userName,
+        username: _userInfo.userName,
         password: _userInfo.password };
 
 
@@ -38811,7 +38826,8 @@ LoginFactory = /*#__PURE__*/function () {
           var afterOneHourDate = util.date.addHour(new Date(), 1);
           wx.setStorageSync(constant.mapping.LOGIN_FLAG, {
             sessionKey: userInfo.userName,
-            expireTime: afterOneHourDate.getTime() });
+            expireTime: afterOneHourDate.getTime(),
+            createTime: new Date().getTime() });
 
           wx.setStorageSync(constant.mapping.TOKEN, res.token);
           callback();

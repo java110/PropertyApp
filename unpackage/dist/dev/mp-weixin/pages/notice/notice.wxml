@@ -1,1 +1,1 @@
-<view>test</view>
+<view class="user-container"><block wx:for="{{notices}}" wx:for-item="item" wx:for-index="index" wx:key="index"><block wx:key="index"><view class="noticesList-list"><view class="title">{{''+item.title+''}}</view><view class="content"><view><text class="ad_au_text">{{item.context}}</text></view></view><view class="footer">{{'时间: '+item.timeStr}}</view></view></block></block></view>

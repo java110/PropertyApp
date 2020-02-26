@@ -1,7 +1,7 @@
 <template>
 	<view class="user-container">
 	    <block v-for="(item,index) in notices" :key="index" wx:key="index" >	      
-	        <view class="noticesList-list">	         
+	        <view class="noticesList-list" @tap="_toDetailHref(item,index)">	         
 	            <view class="title"> {{item.title}} </view>
 	            <view  class="content">
 					<view ><text class="ad_au_text">{{item.context}}</text></view>
@@ -58,8 +58,18 @@
 				        })
 				      }
 				    });
-				}	
-			
+				},
+			_toDetailHref:function(_item,_index){
+				let that= this;
+				console.log("_index",_index);
+				let index = _index;
+				console.log("json==>",JSON.stringify(_item));
+				uni.setStorageSync('notice-'+ index, JSON.stringify(_item));
+				
+				uni.navigateTo({
+					url:'/pages/notice/detail/noticeDetail?index=' + index
+				});
+			}
 		}
 	}
 </script>

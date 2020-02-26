@@ -67,6 +67,12 @@
 				"navigationBarTitleText": "修改密码"
 			}
         }
+        ,{
+            "path" : "pages/notice/detail/noticeDetail",
+            "style" : {
+				"navigationBarTitleText": "通知页面详情"
+				}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

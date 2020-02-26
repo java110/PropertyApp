@@ -49,6 +49,12 @@
             	"navigationBarTitleText": "公告"
             }
         }
+        ,{
+            "path" : "pages/changeCommunity/changeCommunity",
+            "style" : {
+				"navigationBarTitleText": "切换小区"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

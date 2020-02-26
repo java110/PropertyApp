@@ -9,30 +9,31 @@
 
 		<view class="margin-top">
 			<view class="cu-list menu">
-				<view class="cu-item arrow">
+				<view class="cu-item arrow" @tap="_changeCommunity()">
 					<view class="content">
 						<text class="cuIcon-circlefill text-grey"></text>
-						<text class="text-grey">图标 + 标题</text>
+						<text class="text-grey">切换小区</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{currentCommunityName}}</text>
 					</view>
 				</view>
-				<view class="cu-item arrow">
+				<view class="cu-item arrow" @tap="_userInfo()">
 					<view class="content">
-						<image src="/static/logo.png" class="png" mode="aspectFit"></image>
-						<text class="text-grey">图片 + 标题</text>
+						<text class="lg text-gray cuIcon-friendaddfill"></text>
+						<text class="text-grey">个人信息</text>
 					</view>
 				</view>
-				<view class="cu-item arrow">
-					<button class="cu-btn content" open-type="contact">
-						<text class="cuIcon-btn text-olive"></text>
-						<text class="text-grey">Open-type 按钮</text>
-					</button>
+				<view class="cu-item ">
+					<view class="content">
+						<text class="lg text-gray cuIcon-warnfill"></text>
+						<text class="text-grey">系统版本</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">V0.01</text>
+					</view>
 				</view>
-				<view class="cu-item arrow">
-					<navigator class="content" hover-class="none" url="../list/list" open-type="redirect">
-						<text class="cuIcon-discoverfill text-orange"></text>
-						<text class="text-grey">Navigator 跳转</text>
-					</navigator>
-				</view>
+				
 			</view>
 		</view>
 
@@ -45,12 +46,36 @@
 			return {
 				staffInfo: {
 					img: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
-					name: '一纸荒年'
-				}
+					name: '一纸荒年',
+				},
+				currentCommunityName:''
 
 			}
 		},
+		onLoad() {
+			//加载员工名称
+			let _userInfo = this.java110Context.getUserInfo();
+			console.log("_userInfo",_userInfo);
+			this.staffInfo.name = _userInfo.userName;
+			this.staffInfo.img = this.java110Constant.url.baseUrl + 'logo.png';
+		},
+		onShow() {
+			let _communityInfo = this.java110Context.getCurrentCommunity();
+			console.log('_communityInfo',_communityInfo);
+			this.currentCommunityName = _communityInfo.name;
+		},
 		methods: {
+			
+			//切换小区
+			_changeCommunity:function(){
+				uni.navigateTo({
+					url:"/pages/changeCommunity/changeCommunity"
+				});
+			},
+			//用户信息
+			_userInfo:function(){
+				
+			}
 
 		}
 	}

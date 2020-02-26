@@ -151,13 +151,16 @@ const _loadArea = function (_level, _parentAreaCode, callBack = _areaList => {})
  */
 const getCurrentCommunity = function(){
 	let currentCommunity = uni.getStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO);
-	return getCurrentCommunity;
+	if(util.string.isNull(currentCommunity)){
+		return {};
+	}
+	return JSON.parse(currentCommunity);
 };
 
 /**
  * 获取当前小区信息
  */
-const getCommunity = function (callBack,reload) {
+const getCommunity = function (callBack,reload,_condition) {
   let _communityInfo = uni.getStorageSync(constant.mapping.COMMUNITY_INFO);
   console.log('本地小区信息',_communityInfo);
   if(_communityInfo != null && _communityInfo != undefined && _communityInfo != "" && reload != true){
@@ -170,13 +173,17 @@ const getCommunity = function (callBack,reload) {
   //调用远程查询小区信息
   let _userInfo = getUserInfo();
   
+  if(_condition == null || _condition == undefined){
+	  _condition = {};
+  }
+  
+  _condition.userId = _userInfo.userId;
+  _condition.storeId = _userInfo.storeId;
+  
   request({
     url: constant.url.listMyEnteredCommunitys,
     header: getHeaders(),
-    data: {
-      userId: _userInfo.userId,
-      storeId: _userInfo.storeId
-    },
+    data: _condition,
     success: function (res) {
       console.log('login success');
 	  if(res.statusCode != 200){
@@ -207,6 +214,8 @@ const getCommunity = function (callBack,reload) {
     }
   });
 };
+
+
 
 
 module.exports = {

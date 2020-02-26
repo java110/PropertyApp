@@ -133,7 +133,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
 //
 //
 //
@@ -180,12 +181,37 @@ var _default =
     return {
       staffInfo: {
         img: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
-        name: '一纸荒年' } };
+        name: '一纸荒年' },
 
+      currentCommunityName: '' };
 
 
   },
-  methods: {} };exports.default = _default;
+  onLoad: function onLoad() {
+    //加载员工名称
+    var _userInfo = this.java110Context.getUserInfo();
+    console.log("_userInfo", _userInfo);
+    this.staffInfo.name = _userInfo.userName;
+    this.staffInfo.img = this.java110Constant.url.baseUrl + 'logo.png';
+  },
+  onShow: function onShow() {
+    var _communityInfo = this.java110Context.getCurrentCommunity();
+    console.log('_communityInfo', _communityInfo);
+    this.currentCommunityName = _communityInfo.name;
+  },
+  methods: {
+
+    //切换小区
+    _changeCommunity: function _changeCommunity() {
+      uni.navigateTo({
+        url: "/pages/changeCommunity/changeCommunity" });
+
+    },
+    //用户信息
+    _userInfo: function _userInfo() {
+
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

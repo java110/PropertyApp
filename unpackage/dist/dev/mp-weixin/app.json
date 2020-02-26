@@ -6,7 +6,8 @@
     "pages/login/login",
     "pages/activityes/activityes",
     "pages/activityDetail/activityDetail",
-    "pages/notice/notice"
+    "pages/notice/notice",
+    "pages/changeCommunity/changeCommunity"
   ],
   "subPackages": [],
   "window": {
@@ -48,5 +49,5 @@
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"
   },
-  "sitemapLocation": "sitemap68.json"
+  "sitemapLocation": "sitemap20.json"
 }

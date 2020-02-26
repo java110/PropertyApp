@@ -8525,7 +8525,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "HC掌上物业" }, "pages/addressList/addressList": { "navigationBarTitleText": "通讯录" }, "pages/my/my": { "navigationBarTitleText": "我的" }, "pages/login/login": { "navigationStyle": "custom" }, "pages/activityes/activityes": { "navigationBarTitleText": "小区文化" }, "pages/activityDetail/activityDetail": { "navigationBarTitleText": "文化详情" }, "pages/notice/notice": { "navigationBarTitleText": "公告" } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "HC掌上物业", "navigationBarBackgroundColor": "#00AA00", "backgroundColor": "#00AA00" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "HC掌上物业" }, "pages/addressList/addressList": { "navigationBarTitleText": "通讯录" }, "pages/my/my": { "navigationBarTitleText": "我的" }, "pages/login/login": { "navigationStyle": "custom" }, "pages/activityes/activityes": { "navigationBarTitleText": "小区文化" }, "pages/activityDetail/activityDetail": { "navigationBarTitleText": "文化详情" }, "pages/notice/notice": { "navigationBarTitleText": "公告" }, "pages/changeCommunity/changeCommunity": { "navigationBarTitleText": "切换小区" } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "HC掌上物业", "navigationBarBackgroundColor": "#00AA00", "backgroundColor": "#00AA00" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
@@ -8825,13 +8825,16 @@ var _loadArea = function _loadArea(_level, _parentAreaCode) {var callBack = argu
     */
 var getCurrentCommunity = function getCurrentCommunity() {
   var currentCommunity = uni.getStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO);
-  return getCurrentCommunity;
+  if (util.string.isNull(currentCommunity)) {
+    return {};
+  }
+  return JSON.parse(currentCommunity);
 };
 
 /**
     * 获取当前小区信息
     */
-var getCommunity = function getCommunity(callBack, reload) {
+var getCommunity = function getCommunity(callBack, reload, _condition) {
   var _communityInfo = uni.getStorageSync(constant.mapping.COMMUNITY_INFO);
   console.log('本地小区信息', _communityInfo);
   if (_communityInfo != null && _communityInfo != undefined && _communityInfo != "" && reload != true) {
@@ -8844,13 +8847,17 @@ var getCommunity = function getCommunity(callBack, reload) {
   //调用远程查询小区信息
   var _userInfo = getUserInfo();
 
+  if (_condition == null || _condition == undefined) {
+    _condition = {};
+  }
+
+  _condition.userId = _userInfo.userId;
+  _condition.storeId = _userInfo.storeId;
+
   request({
     url: constant.url.listMyEnteredCommunitys,
     header: getHeaders(),
-    data: {
-      userId: _userInfo.userId,
-      storeId: _userInfo.storeId },
-
+    data: _condition,
     success: function success(res) {
       console.log('login success');
       if (res.statusCode != 200) {
@@ -8881,6 +8888,8 @@ var getCommunity = function getCommunity(callBack, reload) {
     } });
 
 };
+
+
 
 
 module.exports = {

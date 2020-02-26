@@ -55,6 +55,18 @@
 				"navigationBarTitleText": "切换小区"
 			}
         }
+        ,{
+            "path" : "pages/userInfo/userInfo",
+            "style" : {
+				"navigationBarTitleText": "个人信息"
+			}
+        }
+        ,{
+            "path" : "pages/changePwd/changePwd",
+            "style" : {
+				"navigationBarTitleText": "修改密码"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

@@ -150,7 +150,7 @@ const _loadArea = function (_level, _parentAreaCode, callBack = _areaList => {})
  * 获取当前小区
  */
 const getCurrentCommunity = function(){
-	let currentCommunity = uni.getStorageSync(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO);
+	let currentCommunity = uni.getStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO);
 	return getCurrentCommunity;
 };
 

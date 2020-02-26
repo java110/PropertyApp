@@ -24,6 +24,12 @@
 						<text class="text-grey">个人信息</text>
 					</view>
 				</view>
+				<view class="cu-item arrow" @tap="_changePwd()">
+					<view class="content">
+						<text class="lg text-gray cuIcon-lock"></text>
+						<text class="text-grey">修改密码</text>
+					</view>
+				</view>
 				<view class="cu-item ">
 					<view class="content">
 						<text class="lg text-gray cuIcon-warnfill"></text>
@@ -74,7 +80,15 @@
 			},
 			//用户信息
 			_userInfo:function(){
-				
+				uni.navigateTo({
+					url:"/pages/userInfo/userInfo"
+				});
+			},
+			//修改密码
+			_changePwd:function(){
+				uni.navigateTo({
+					url:"/pages/changePwd/changePwd"
+				});
 			}
 
 		}

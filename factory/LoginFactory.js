@@ -53,7 +53,7 @@ class LoginFactory {
 	console.log("用户信息",userInfo);
 	
 	if(userInfo == null || userInfo == undefined || userInfo == ''){
-		uni.redirectTo({
+		uni.navigateTo({
 			url:"/pages/login/login"
 		})
 		

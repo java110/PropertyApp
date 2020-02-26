@@ -18,7 +18,7 @@ const listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //家庭�
 
 const queryStaffInfos = baseUrl + 'app/query.staff.infos'; //查询员工信息
 
-const queryOwnerMembers = baseUrl + 'app/owner.queryOwnerMembers'; //投诉建议列表
+const changeStaffPwd = baseUrl + 'app/user.changeStaffPwd'; //修改密码
 
 const listComplaints = baseUrl + 'app/complaint.listComplaints'; //添加投诉建议
 
@@ -68,7 +68,7 @@ module.exports = {
   queryStaffInfos: queryStaffInfos,
   appUserBindingOwner: appUserBindingOwner,
   queryAppUserBindingOwner: queryAppUserBindingOwner,
-  queryOwnerMembers: queryOwnerMembers,
+  changeStaffPwd: changeStaffPwd,
   listComplaints: listComplaints,
   saveComplaint: saveComplaint,
   appUserUnBindingOwner: appUserUnBindingOwner,

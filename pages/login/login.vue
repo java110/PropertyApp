@@ -101,9 +101,12 @@
 							expireTime: afterOneHourDate.getTime(),
 							createTime: new Date().getTime()
 						});
-						uni.switchTab({
+						
+						uni.reLaunch({
 							url: "/pages/index/index"
 						});
+						
+					
 					},
 					fail: function(error) {
 						// 调用服务端登录接口失败

@@ -177,6 +177,8 @@ const getCommunity = function (callBack,reload,_condition) {
 	  _condition = {};
   }
   
+  console.log('_condition',_condition);
+  
   _condition.userId = _userInfo.userId;
   _condition.storeId = _userInfo.storeId;
   

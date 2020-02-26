@@ -67,6 +67,39 @@
 					return;
 				}
 				
+				let _userInfo = {
+					userId: this.java110Context.getUserInfo().userId,
+					oldPwd: this.oldPwd,
+					newPwd: this.newPwd
+				}
+				
+				uni.request({
+					url: this.java110Constant.url.changeStaffPwd,
+					header: this.java110Context.getHeaders(),
+					method: "POST",
+					data: _userInfo,
+					success: function(res) {
+						if(res.statusCode != 200){
+							uni.showToast({
+								icon:"none",
+								title: res.data
+							});
+							return ;
+						}
+						
+						uni.navigateBack({
+							delta:1
+						});
+					},
+					fail: function(error) {
+						// 调用服务端登录接口失败
+						uni.showToast({
+							title: '调用接口失败'
+						});
+						console.log(error);
+					}
+				});
+				
 				
 			}
 			

@@ -133,7 +133,17 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -175,19 +185,172 @@ var _default =
 {
   data: function data() {
     return {
-      list: [] };
-
+      list: [],
+      name: '',
+      CustomBar: this.CustomBar,
+      hidden: true,
+      listCurID: '',
+      listCur: '' };
 
   },
   onLoad: function onLoad() {
-    var list = [{}];
-    for (var i = 0; i < 5; i++) {
-      list[i] = {};
-      list[i].name = String.fromCharCode(65 + i);
-    }
-    this.list = list;
+    //let list = [{}];
+
+    // for (let i = 0; i < 5; i++) {
+    // 	list[i] = {};
+    // 	list[i].name = String.fromCharCode(65 + i);
+    // }
+    //this.list = list;
+    this._loadStaffInfo();
+
   },
-  methods: {} };exports.default = _default;
+  onReady: function onReady() {
+    var that = this;
+    uni.createSelectorQuery().select('.indexBar-box').boundingClientRect(function (res) {
+      that.boxTop = res.top;
+    }).exec();
+    uni.createSelectorQuery().select('.indexes').boundingClientRect(function (res) {
+      that.barTop = res.top;
+    }).exec();
+  },
+  methods: {
+    _loadStaffInfo: function _loadStaffInfo() {
+      //获取商户ID
+      var _that = this;
+      var _userInfo = this.java110Context.getUserInfo();
+      var storeId = _userInfo.storeId;
+      var _objData = {
+        page: 1,
+        row: 15,
+        storeId: storeId,
+        name: this.name };
+
+      this.java110Context.request({
+        url: _that.java110Constant.url.queryStaffInfos,
+        header: _that.java110Context.getHeaders(),
+        method: "GET",
+        data: _objData, //动态数据
+        success: function success(res) {
+          console.log("请求返回信息：", res);
+          if (res.statusCode == 200) {
+            var _data = res.data;
+            var _staffs = [];
+            console.log('list', _that.list);
+            _data.staffs.sort(function (a, b) {
+              return (a.initials + '').localeCompare(b.initials + '');
+            });
+            _that.list = _that._formatList(_data.staffs, 'initials');
+            _that.listCur = _that.list[0];
+            return;
+          }
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000 });
+
+        },
+        fail: function fail(e) {
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000 });
+
+        } });
+
+
+    },
+    _callPhoto: function _callPhoto(_photo) {
+      uni.makePhoneCall({
+        // 手机号
+        phoneNumber: _photo,
+
+        // 成功回调
+        success: function success(res) {
+          console.log('调用成功!');
+        },
+
+        // 失败回调
+        fail: function fail(res) {
+          console.log('调用失败!');
+        } });
+
+
+    },
+    _searchStaff: function _searchStaff() {
+      this._loadStaffInfo();
+    },
+    _formatList: function _formatList(arr, keyword) {
+      var newArr1 = [];
+      var tempArr = [];
+      var reg = /\b(\w)|\s(\w)/g;
+      var k = 0;
+      var firstWord = arr[0][keyword]; //获取第一个分类字母
+      arr.map(function (v) {
+        if (firstWord == v[keyword]) {
+          tempArr.push(v);
+          newArr1[k] = {
+            initials: firstWord,
+            staffs: tempArr };
+
+        } else {
+          //这里循环到这表示已经第二个字母了
+          firstWord = v[keyword]; //设置第二字母
+          tempArr = []; //把之前的清除掉
+          tempArr.push(v); //添加第一个
+          newArr1[++k] = { //自增
+            initials: firstWord,
+            staffs: tempArr };
+
+        }
+      });
+      return newArr1;
+    },
+    //获取文字信息
+    getCur: function getCur(e) {
+      this.hidden = false;
+      this.listCur = this.list[e.target.id].initials;
+      console.log(this.listCur);
+    },
+    setCur: function setCur(e) {
+      this.hidden = true;
+      this.listCur = this.listCur;
+    },
+    //滑动选择Item
+    tMove: function tMove(e) {
+      var y = e.touches[0].clientY,
+      offsettop = this.boxTop,
+      that = this;
+      //判断选择区域,只有在选择区才会生效
+      if (y > offsettop) {
+        var num = parseInt((y - offsettop) / 20);
+        this.listCur = that.list[num].initials;
+      };
+    },
+
+    //触发全部开始选择
+    tStart: function tStart() {
+      this.hidden = false;
+    },
+
+    //触发结束选择
+    tEnd: function tEnd() {
+      this.hidden = true;
+      this.listCurID = this.listCur;
+    },
+    indexSelect: function indexSelect(e) {
+      var that = this;
+      var barHeight = this.barHeight;
+      var list = this.list;
+      var scrollY = Math.ceil(list.length * e.detail.y / barHeight);
+      for (var i = 0; i < list.length; i++) {
+        if (scrollY < i + 1) {
+          that.listCur = list[i].initials;
+          that.movableY = i * 20;
+          return false;
+        }
+      }
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

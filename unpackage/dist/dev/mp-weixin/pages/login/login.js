@@ -181,7 +181,7 @@ var _default =
 
 
     this.logoUrl = this.java110Constant.url.baseUrl + 'logo.png';
-    L;
+
 
 
   },
@@ -233,7 +233,8 @@ var _default =
           var afterOneHourDate = _that.java110Util.date.addHour(new Date(), 1);
           wx.setStorageSync(_that.java110Constant.mapping.LOGIN_FLAG, {
             sessionKey: _tmpUserInfo.userName,
-            expireTime: afterOneHourDate.getTime() });
+            expireTime: afterOneHourDate.getTime(),
+            createTime: new Date().getTime() });
 
           uni.switchTab({
             url: "/pages/index/index" });

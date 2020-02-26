@@ -71,7 +71,7 @@
 					userId: this.java110Context.getUserInfo().userId,
 					oldPwd: this.oldPwd,
 					newPwd: this.newPwd
-				}
+				};
 				
 				uni.request({
 					url: this.java110Constant.url.changeStaffPwd,

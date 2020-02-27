@@ -42,6 +42,34 @@
 				
 			</view>
 		</view>
+		
+		<view class="margin-top">
+			<view class="cu-list menu">
+				<view class="cu-item " @tap="_logout()">
+					<view class="content text-center">
+						<text class="text-red">退 出</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+		<view class="cu-modal" :class="logoutUser==true?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">退出系统</view>
+					<view class="action" @tap="_cancleLogout()">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">
+					您确认退出系统吗？
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action margin-0 flex-sub  solid-left" @tap="_cancleLogout()">取消</view>
+					<view class="action margin-0 flex-sub text-green solid-left" @tap="_doLogoutUser()">确定</view>
+				</view>
+			</view>
+		</view>
 
 	</view>
 </template>
@@ -54,7 +82,8 @@
 					img: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg',
 					name: '一纸荒年',
 				},
-				currentCommunityName:''
+				currentCommunityName:'',
+				logoutUser:false
 
 			}
 		},
@@ -89,6 +118,16 @@
 				uni.navigateTo({
 					url:"/pages/changePwd/changePwd"
 				});
+			},
+			//退出系统
+			_logout:function(){
+				this.logoutUser = true;
+			},
+			_cancleLogout:function(){
+				this.logoutUser = false;
+			},
+			_doLogoutUser:function(){
+				
 			}
 
 		}

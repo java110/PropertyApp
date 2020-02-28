@@ -174,7 +174,10 @@ const getCommunity = function (callBack,reload,_condition) {
   let _userInfo = getUserInfo();
   
   if(_condition == null || _condition == undefined){
-	  _condition = {};
+	  _condition = {
+		  userId:'',
+		  storeId:''
+	  };
   }
   
   console.log('_condition',_condition);

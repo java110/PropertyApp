@@ -9,7 +9,47 @@
 					历史单
 				</view>
 			</view>
+
+
 		</scroll-view>
+		
+		<view class="margin-top" v-if="state=='10001'">
+			<view class="cu-list menu-avatar">
+				<view class="cu-item arrow" v-for="(item,index) in auditOrders" :key="index">
+					<view class="cu-avatar round lg" :style="'background-image:url('+orderImg+');'">
+					</view>
+					<view class="content">
+						<view class="text-grey">{{item.complaintId}}</view>
+						<view class="text-gray text-sm flex">
+							<view class="text-cut">
+								{{item.complaintName}}
+							</view> </view>
+					</view>
+					<view class="action">
+						<view class="text-grey text-xs">{{item.createTime}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+		<view class="margin-top" v-if="state=='10002'">
+			<view class="cu-list menu-avatar">
+				<view class="cu-item arrow" v-for="(item,index) in orders" :key="index">
+					<view class="cu-avatar round lg" :style="'background-image:url('+orderImg+');'">
+					</view>
+					<view class="content">
+						<view class="text-grey">{{item.complaintId}}</view>
+						<view class="text-gray text-sm flex">
+							<view class="text-cut">
+								{{item.complaintName}}
+							</view> </view>
+					</view>
+					<view class="action">
+						<view class="text-grey text-xs">{{item.createTime}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
 
 	</view>
 </template>
@@ -18,16 +58,118 @@
 	export default {
 		data() {
 			return {
-				state:'10001'
-
+				state: '10001',
+				orderImg:this.java110Constant.url.baseUrl + 'img/order.png',
+				auditOrders:[],
+				orders:[]
 			}
 		},
+		onLoad() {
+			this._loadComplaintOrder();
+		},
 		methods: {
-			
-			_tabSelect:function(_state){
-				this.state = _state;
-			}
 
+			_tabSelect: function(_state) {
+				this.state = _state;
+				
+				if(_state == '10002'){
+					this._loadOrder();
+				}else{
+					this._loadComplaintOrder();
+				}
+			},
+			
+			_loadComplaintOrder:function(){
+				//
+				let _that = this;
+				let _userInfo = this.java110Context.getUserInfo();
+				let storeId = _userInfo.storeId;
+				let _objData = {
+					page: 1,
+					row: 15,
+					storeId: storeId,
+					userId: _userInfo.userId,
+					communityId:_userInfo.communityId
+				};
+				
+				
+				this.java110Context.request({
+					url: _that.java110Constant.url.listAuditComplaints,
+					header: _that.java110Context.getHeaders(),
+					method: "GET",
+					data: _objData, //动态数据
+					success: function(res) {
+						console.log("请求返回信息：", res);
+						if (res.statusCode != 200) {
+							uni.showToast({
+								icon:'none',
+								title:res.data
+							});
+							return;
+						}
+						let _data = res.data;
+						_that.auditOrders = _data.complaints;
+						
+						_data.complaints.forEach(function(item){
+							let dateStr = item.createTime;
+							console.log(dateStr);
+							let _date=new Date(dateStr);
+							item.createTime = (_date.getMonth()+1) +'-'+_date.getDate();
+						});
+					},
+					fail: function(e) {
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
+			},
+			_loadOrder:function(){
+				//
+				let _that = this;
+				let _userInfo = this.java110Context.getUserInfo();
+				let storeId = _userInfo.storeId;
+				let _objData = {
+					page: 1,
+					row: 15,
+					storeId: storeId,
+					userId: _userInfo.userId,
+					communityId:_userInfo.communityId
+				};
+				
+				this.java110Context.request({
+					url: _that.java110Constant.url.listAuditHistoryComplaints,
+					header: _that.java110Context.getHeaders(),
+					method: "GET",
+					data: _objData, //动态数据
+					success: function(res) {
+						console.log("请求返回信息：", res);
+						if (res.statusCode != 200) {
+							uni.showToast({
+								icon:'none',
+								title:res.data
+							});
+							return;
+						}
+						let _data = res.data;
+						_data.complaints.forEach(function(item){
+							let dateStr = item.createTime;
+							let _date=new Date(dateStr);
+							item.createTime = (_date.getMonth()+1) +'-'+_date.getDate();
+						});
+						_that.orders = _data.complaints;
+					},
+					fail: function(e) {
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
+			}
 		}
 	}
 </script>

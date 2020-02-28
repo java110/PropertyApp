@@ -26,9 +26,9 @@ const saveComplaint = baseUrl + 'app/complaint'; //查询业主房间
 
 const userLogout = baseUrl + 'app/user.service.logout'; //绑定业主
 
-const appUserBindingOwner = baseUrl + 'app/owner.appUserBindingOwner'; //查询绑定业主
+const listAuditComplaints = baseUrl + 'app/auditUser.listAuditComplaints'; //查询绑定业主
 
-const queryAppUserBindingOwner = baseUrl + 'app/owner.listAppUserBindingOwners'; //解绑业主
+const listAuditHistoryComplaints = baseUrl + 'app/auditUser.listAuditHistoryComplaints'; //解绑业主
 
 const appUserUnBindingOwner = baseUrl + 'app/owner.deleteAppUserBindingOwner'; //查询业主门禁
 
@@ -66,8 +66,8 @@ module.exports = {
   listMyEnteredCommunitys: listMyEnteredCommunitys,
   listOwnerRepairs: listOwnerRepairs,
   queryStaffInfos: queryStaffInfos,
-  appUserBindingOwner: appUserBindingOwner,
-  queryAppUserBindingOwner: queryAppUserBindingOwner,
+  listAuditComplaints: listAuditComplaints,
+  listAuditHistoryComplaints: listAuditHistoryComplaints,
   changeStaffPwd: changeStaffPwd,
   listComplaints: listComplaints,
   saveComplaint: saveComplaint,

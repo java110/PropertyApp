@@ -65,26 +65,26 @@
 					cuIcon: 'cardboardfill',
 					color: 'red',
 					badge: 0,
-					name: '维修单',
+					name: '维修录单',
 					pathUrl:'/notice/notice'
 				}, {
 					cuIcon: 'recordfill',
 					color: 'orange',
 					badge: 1,
-					name: '审核维修',
+					name: '我的维修',
 					pathUrl:'/notice/notice'
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',
 					badge: 0,
-					name: '投诉单',
-					pathUrl:'/notice/notice'
+					name: '投诉录单',
+					pathUrl:'/complaintList/complaintList'
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',
 					badge: 22,
-					name: '审核投诉',
-					pathUrl:'/notice/notice'
+					name: '我的投诉',
+					pathUrl:'/complaintList/complaintList'
 				}, {
 					cuIcon: 'upstagefill',
 					color: 'cyan',

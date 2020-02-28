@@ -73,6 +73,12 @@
 				"navigationBarTitleText": "通知页面详情"
 				}
         }
+        ,{
+            "path" : "pages/complaintList/complaintList",
+            "style" : {
+				"navigationBarTitleText": "投诉单"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

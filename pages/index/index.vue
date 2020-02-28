@@ -70,7 +70,7 @@
 				}, {
 					cuIcon: 'recordfill',
 					color: 'orange',
-					badge: 1,
+					badge: 0,
 					name: '我的维修',
 					pathUrl:'/notice/notice'
 				}, {
@@ -82,7 +82,7 @@
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',
-					badge: 22,
+					badge: 0,
 					name: '我的投诉',
 					pathUrl:'/complaintList/complaintList'
 				}, {

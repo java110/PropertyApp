@@ -79,6 +79,18 @@
 				"navigationBarTitleText": "投诉单"
 			}
         }
+        ,{
+            "path" : "pages/auditComplaintOrder/auditComplaintOrder",
+            "style" : {
+				"navigationBarTitleText": "处理投诉单"
+			}
+        }
+        ,{
+            "path" : "pages/auditComplaintHistoryOrder/auditComplaintHistoryOrder",
+            "style" : {
+				"navigationBarTitleText": "投诉审核历史单"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

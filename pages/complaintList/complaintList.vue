@@ -15,7 +15,7 @@
 		
 		<view class="margin-top" v-if="state=='10001'">
 			<view class="cu-list menu-avatar">
-				<view class="cu-item arrow" v-for="(item,index) in auditOrders" :key="index">
+				<view class="cu-item arrow" v-for="(item,index) in auditOrders" :key="index" @tap="_toAuditComplaintOrder(item)">
 					<view class="cu-avatar round lg" :style="'background-image:url('+orderImg+');'">
 					</view>
 					<view class="content">
@@ -34,7 +34,7 @@
 		
 		<view class="margin-top" v-if="state=='10002'">
 			<view class="cu-list menu-avatar">
-				<view class="cu-item arrow" v-for="(item,index) in orders" :key="index">
+				<view class="cu-item arrow" v-for="(item,index) in orders" :key="index" @tap="_toAuditComplaintHistoryOrder(item)">
 					<view class="cu-avatar round lg" :style="'background-image:url('+orderImg+');'">
 					</view>
 					<view class="content">
@@ -89,7 +89,7 @@
 					row: 15,
 					storeId: storeId,
 					userId: _userInfo.userId,
-					communityId:_userInfo.communityId
+					communityId:_that.java110Context.getCurrentCommunity().communityId
 				};
 				
 				
@@ -136,7 +136,7 @@
 					row: 15,
 					storeId: storeId,
 					userId: _userInfo.userId,
-					communityId:_userInfo.communityId
+					communityId:_that.java110Context.getCurrentCommunity().communityId
 				};
 				
 				this.java110Context.request({
@@ -169,6 +169,20 @@
 						});
 					}
 				});
+			},
+			_toAuditComplaintOrder:function(_item){
+				console.log('_item',_item);
+				wx.setStorageSync("_auditComplaint_"+_item.complaintId, _item);
+				uni.navigateTo({
+					url:"/pages/auditComplaintOrder/auditComplaintOrder?complaintId="+_item.complaintId
+				});	
+			},
+			_toAuditComplaintHistoryOrder:function(_item){
+				console.log('_item',_item);
+				wx.setStorageSync("_auditComplaintHistory_"+_item.complaintId, _item);
+				uni.navigateTo({
+					url:"/pages/auditComplaintHistoryOrder/auditComplaintHistoryOrder?complaintId="+_item.complaintId
+				});	
 			}
 		}
 	}

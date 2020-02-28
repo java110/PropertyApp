@@ -127,7 +127,35 @@
 				this.logoutUser = false;
 			},
 			_doLogoutUser:function(){
-				
+				let _data = {
+					token:wx.getStorageSync('token')
+				}
+				this.java110Context.request({
+					url: this.java110Constant.url.userLogout,
+					header: this.java110Context.getHeaders(),
+					method: "POST",
+					data: _data,
+					success: function(res) {
+						if(res.statusCode != 200){
+							uni.showToast({
+								icon:"none",
+								title: res.data
+							});
+							return ;
+						}
+						uni.clearStorageSync();
+						uni.navigateTo({
+							url:"/pages/login/login"
+						});
+					},
+					fail: function(error) {
+						// 调用服务端登录接口失败
+						uni.showToast({
+							title: '调用接口失败'
+						});
+						console.log(error);
+					}
+				});
 			}
 
 		}

@@ -24,7 +24,7 @@ const listComplaints = baseUrl + 'app/complaint.listComplaints'; //添加投诉�
 
 const saveComplaint = baseUrl + 'app/complaint'; //查询业主房间
 
-const queryRoomsByOwner = baseUrl + 'app/room.queryRoomsByOwner'; //绑定业主
+const userLogout = baseUrl + 'app/user.service.logout'; //绑定业主
 
 const appUserBindingOwner = baseUrl + 'app/owner.appUserBindingOwner'; //查询绑定业主
 
@@ -78,7 +78,7 @@ module.exports = {
   applyVisitorApplicationKey: applyVisitorApplicationKey,
   uploadOwnerPhoto: uploadOwnerPhoto,
   getOwnerPhotoPath: getOwnerPhotoPath,
-  queryRoomsByOwner: queryRoomsByOwner,
+  userLogout: userLogout,
   queryParkingSpacesByOwner: queryParkingSpacesByOwner,
   queryFeeByParkingSpace: queryFeeByParkingSpace,
   queryFeeByOwner: queryFeeByOwner,

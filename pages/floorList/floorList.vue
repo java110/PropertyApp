@@ -1,0 +1,108 @@
+<template>
+	<view>
+		<view class="cu-bar bg-white search ">
+			<view class="search-form round">
+				<text class="cuIcon-search"></text>
+				<input type="text" placeholder="请输入楼栋编号" v-model="floorNum" confirm-type="search"></input>
+			</view>
+			<view class="action">
+				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="_searchFloor()">搜索</button>
+			</view>
+		</view>
+		<view>
+			<view class="padding">楼栋信息</view>
+			<view class="cu-list menu ">
+				<view class="cu-item" v-for="(item,sub) in floors" :key="sub" @tap="_doChangeFloor(item)">
+					<view class="content padding-tb-sm">
+						<view>
+							<text class="lg  cuIcon-homefill text-blue margin-right-xs"></text> {{item.floorNum}}号楼</view>
+						<view class="text-gray text-sm">
+							<text class="lg text-gray cuIcon-location margin-right-xs"></text> {{item.floorId}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				floorNum:'',
+				communityId:'',
+				floors:[]
+			}
+		},
+		
+		onLoad(options) {
+			this.communityId = options.communityId;
+			this._loadFloors();
+		},
+		methods: {
+			
+			//加载楼栋信息
+			_loadFloors:function(){
+				let _communityId = this.communityId;
+				
+				let _that = this;
+				let _userInfo = this.java110Context.getUserInfo();
+				let storeId = _userInfo.storeId;
+				let _objData = {
+					page: 1,
+					row: 15,
+					storeId: storeId,
+					userId: _userInfo.userId,
+					floorNum:this.floorNum,
+					communityId:_that.java110Context.getCurrentCommunity().communityId
+				};
+				
+				
+				this.java110Context.request({
+					url: _that.java110Constant.url.queryFloors,
+					header: _that.java110Context.getHeaders(),
+					method: "GET",
+					data: _objData, //动态数据
+					success: function(res) {
+						console.log("请求返回信息：", res);
+						if (res.statusCode != 200) {
+							uni.showToast({
+								icon:'none',
+								title:res.data
+							});
+							return;
+						}
+						let _data = res.data;
+						_that.floors = _data.apiFloorDataVoList;
+					},
+					fail: function(e) {
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
+				
+			},
+			_searchFloor:function(){
+				this._loadFloors();
+			},
+			_doChangeFloor:function(_floor){
+				let pages = getCurrentPages();
+				var prevPage = pages[pages.length - 2];
+				prevPage.floorId = _floor.floorId;
+				prevPage.floorNum = _floor.floorNum;
+				uni.navigateBack({
+					delta:1
+				});
+			}
+			
+		}
+	}
+</script>
+
+<style>
+
+</style>

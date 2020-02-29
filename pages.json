@@ -97,6 +97,24 @@
 				"navigationBarTitleText": "投诉录单"
 			}
         }
+        ,{
+            "path" : "pages/floorList/floorList",
+            "style" : {
+				"navigationBarTitleText": "选择楼栋"
+			}
+        }
+        ,{
+            "path" : "pages/unitList/unitList",
+            "style" : {
+				"navigationBarTitleText": "选择单元"
+			}
+        }
+        ,{
+            "path" : "pages/roomList/roomList",
+            "style" : {
+				"navigationBarTitleText": "选择房屋"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

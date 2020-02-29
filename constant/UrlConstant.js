@@ -4,8 +4,8 @@
  * add by wuxw 2019-12-28
  */
 // 服务器域名
-const baseUrl = 'https://app.demo.winqi.cn/'; 
-//const baseUrl = '/';
+//const baseUrl = 'https://app.demo.winqi.cn/'; 
+const baseUrl = '/';
 const hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
 
 const loginUrl = baseUrl + 'app/loginProperty';
@@ -30,11 +30,11 @@ const listAuditComplaints = baseUrl + 'app/auditUser.listAuditComplaints'; //查
 
 const auditComplaint = baseUrl + 'app/complaint.auditComplaint'; //查询业主门禁
 
-const listOwnerMachines = baseUrl + 'app/owner.listOwnerMachines'; // 申请钥匙
+const queryFloors = baseUrl + 'app/floor.queryFloors'; // 申请钥匙
 
-const applyApplicationKey = baseUrl + "app/applicationKey.applyApplicationKey"; //查询钥匙
+const queryUnits = baseUrl + "app/unit.queryUnits"; //查询钥匙
 
-const listApplicationKeys = baseUrl + "app/applicationKey.listApplicationKeys"; //申请访客钥匙
+const queryRooms = baseUrl + "app/room.queryRooms"; //申请访客钥匙
 
 const applyVisitorApplicationKey = baseUrl + "app/applicationKey.applyVisitorApplicationKey"; //上传业主照片
 
@@ -69,9 +69,9 @@ module.exports = {
   listAuditHistoryComplaints: listAuditHistoryComplaints,
   saveComplaint: saveComplaint,
   auditComplaint: auditComplaint,
-  listOwnerMachines: listOwnerMachines,
-  applyApplicationKey: applyApplicationKey,
-  listApplicationKeys: listApplicationKeys,
+  queryFloors: queryFloors,
+  queryUnits: queryUnits,
+  queryRooms: queryRooms,
   applyVisitorApplicationKey: applyVisitorApplicationKey,
   uploadOwnerPhoto: uploadOwnerPhoto,
   getOwnerPhotoPath: getOwnerPhotoPath,

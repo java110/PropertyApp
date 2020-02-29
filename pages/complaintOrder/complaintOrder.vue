@@ -35,25 +35,25 @@
 			<view class="padding ">
 				<text>房屋信息</text>
 			</view>
-			<view class="cu-list menu " >
-				<view class="cu-item arrow">
-					<view class="content">			
+			<view class="cu-list menu ">
+				<view class="cu-item arrow" @tap="_selectFloor()">
+					<view class="content">
 						<text class="text-grey">楼栋</text>
 					</view>
 					<view class="action">
 						<text class="text-grey text-sm">{{floorNum != ''?floorNum+'号楼':'请选择'}}</text>
 					</view>
 				</view>
-				<view class="cu-item arrow">
-					<view class="content">			
+				<view class="cu-item arrow" @tap="_selectUnit()">
+					<view class="content">
 						<text class="text-grey">单元</text>
 					</view>
 					<view class="action">
 						<text class="text-grey text-sm">{{unitNum != ''?unitNum+'单元':'请选择'}}</text>
 					</view>
 				</view>
-				<view class="cu-item arrow">
-					<view class="content">			
+				<view class="cu-item arrow" @tap="_selectRoom()">
+					<view class="content">
 						<text class="text-grey">房屋</text>
 					</view>
 					<view class="action">
@@ -61,11 +61,11 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="padding margin-top">
 				<text>投诉信息</text>
 			</view>
-			
+
 			<form>
 				<view class="cu-form-group">
 					<view class="title">投诉类型</view>
@@ -105,8 +105,8 @@
 				<view class="cu-form-group">
 					<view class="grid col-4 grid-square flex-sub">
 						<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
-						 <image :src="imgList[index]" mode="aspectFill"></image>
-							<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
+							<image :src="imgList[index]" mode="aspectFill"></image>
+							<view class="cu-tag bg-red" @tap.stop="_delImg" :data-index="index">
 								<text class='cuIcon-close'></text>
 							</view>
 						</view>
@@ -132,19 +132,20 @@
 				state: '10001',
 				orderImg: this.java110Constant.url.baseUrl + 'img/order.png',
 				myOrders: [],
-				imgList:[],
-				floorId:'',
-				floorNum:'',
-				unitId:'',
-				unitNum:'',
-				roomId:'',
-				roomNum:'',
-				typeCd:'',
-				typeCds:['投诉','建议'],
-				typeCdIndex:-1,
-				complaintName:'',
-				tel:'',
-				context:''
+				imgList: [],
+				photos:[],
+				floorId: '',
+				floorNum: '',
+				unitId: '',
+				unitNum: '',
+				roomId: '',
+				roomNum: '',
+				typeCd: '',
+				typeCds: ['投诉', '建议'],
+				typeCdIndex: -1,
+				complaintName: '',
+				tel: '',
+				context: ''
 			}
 		},
 		onLoad() {
@@ -216,23 +217,151 @@
 					url: "/pages/complaintOrderDetail/complaintOrderDetail?complaintId=" + _item.complaintId
 				});
 			},
-			_submitOrder:function(){
-				
+			_submitOrder: function() {
+				let _that = this;
+				let _userInfo = this.java110Context.getUserInfo();
+				let _storeId = _userInfo.storeId;
+				if(this.typeCdIndex == 0){
+					this.typeCd = '809001';
+				}else{
+					this.typeCd = '809002';
+				}
+				let obj = {
+					"typeCd": this.typeCd,
+					"complaintName": this.complaintName,
+					"tel": this.tel,
+					"roomId": this.roomId,
+					"photos": [],
+					"context": this.context,
+					userId: _userInfo.userId,
+					storeId: _storeId,
+					communityId: _that.java110Context.getCurrentCommunity().communityId
+				}
+
+				let _photos = this.photos;
+				_photos.forEach(function(_item) {
+					obj.photos.push({
+						"photo": _item
+					});
+				});
+				let msg = "";
+
+				if (obj.typeCd == "") {
+					msg = "请选择投诉类型";
+				} else if (obj.complaintName == "") {
+					msg = "请填写投诉人";
+				} else if (obj.tel == "") {
+					msg = "请填写手机号";
+				} else if (obj.context == "") {
+					msg = "请填写投诉内容";
+				} else if (obj.roomId == "") {
+					msg = "请选择房屋信息"
+				}
+				if (msg != "") {
+					uni.showToast({
+						title: msg,
+						icon: 'none',
+						duration: 2000
+					})
+				} else {
+					this.java110Context.request({
+						url: _that.java110Constant.url.saveComplaint,
+						header: _that.java110Context.getHeaders(),
+						method: "POST",
+						data: obj, //动态数据
+						success: function(res) {
+							console.log(res);
+							if (res.statusCode != 200) {
+								uni.showToast({
+									icon: 'none',
+									title: res.data
+								});
+								return;
+							}
+							_that.state = '10001';
+							_that._loadMyOrders();
+						},
+						fail: function(e) {
+							console.log(e);
+							wx.showToast({
+								title: "服务器异常了",
+								icon: 'none',
+								duration: 2000
+							})
+						}
+					});
+				}
 			},
-			_chooseImage() {
+			_chooseImage: function() {
+				let _that = this;
 				uni.chooseImage({
 					count: 4, //默认9
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album'], //从相册选择
 					success: (res) => {
+						 // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
 						if (this.imgList.length != 0) {
-							this.imgList = this.imgList.concat(res.tempFilePaths)
+							this.imgList = this.imgList.concat(res.tempFilePaths);
+							_that.java110Factory.base64.urlTobase64(res.tempFilePaths).then(function(_baseInfo) {
+							  _that.photos.push(_baseInfo);
+							});
 						} else {
-							this.imgList = res.tempFilePaths
+							this.imgList = res.tempFilePaths;
+							_that.photos = [];
 						}
 					}
 				});
 			},
+			_delImg:function(e) {
+				this.imgList.splice(e.currentTarget.dataset.index, 1);
+				this.photos.splice(e.currentTarget.dataset.index, 1);
+			},
+			_selectFloor: function() {
+				uni.navigateTo({
+					url: '/pages/floorList/floorList?communityId=' + this.java110Context.getCurrentCommunity().communityId
+				});
+			},
+			_selectUnit: function() {
+				if (this.floorId == '') {
+					uni.showToast({
+						icon: 'none',
+						title: '请先选择楼栋'
+					});
+					return;
+				}
+
+				uni.navigateTo({
+					url: '/pages/unitList/unitList?communityId=' + this.java110Context.getCurrentCommunity().communityId +
+						"&floorId=" + this.floorId + "&floorNum=" + this.floorNum
+				});
+			},
+			_selectRoom: function() {
+				if (this.floorId == '') {
+					uni.showToast({
+						icon: 'none',
+						title: '请先选择楼栋'
+					});
+					return;
+				}
+
+				if (this.unitId == '') {
+					uni.showToast({
+						icon: 'none',
+						title: '请先选择单元'
+					});
+					return;
+				}
+
+				uni.navigateTo({
+					url: '/pages/roomList/roomList?communityId=' + this.java110Context.getCurrentCommunity().communityId +
+						"&floorId=" + this.floorId + "&floorNum=" + this.floorNum + "&unitId=" + this.unitId + "&unitNum=" + this.unitNum
+				});
+			},
+			_changeResult: function(e) {
+				this.typeCdIndex = e.detail.value;
+				console.log(e, this.typeCdIndex);
+			}
+
 
 		}
 	}

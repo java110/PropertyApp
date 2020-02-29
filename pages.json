@@ -91,6 +91,12 @@
 				"navigationBarTitleText": "投诉审核历史单"
 			}
         }
+        ,{
+            "path" : "pages/complaintOrder/complaintOrder",
+            "style" : {
+				"navigationBarTitleText": "投诉录单"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

@@ -78,7 +78,7 @@
 					color: 'yellow',
 					badge: 0,
 					name: '投诉录单',
-					pathUrl:'/complaintList/complaintList'
+					pathUrl:'/complaintOrder/complaintOrder'
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',

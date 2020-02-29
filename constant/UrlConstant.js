@@ -30,7 +30,7 @@ const listAuditComplaints = baseUrl + 'app/auditUser.listAuditComplaints'; //查
 
 const listAuditHistoryComplaints = baseUrl + 'app/auditUser.listAuditHistoryComplaints'; //解绑业主
 
-const appUserUnBindingOwner = baseUrl + 'app/owner.deleteAppUserBindingOwner'; //查询业主门禁
+const auditComplaint = baseUrl + 'app/complaint.auditComplaint'; //查询业主门禁
 
 const listOwnerMachines = baseUrl + 'app/owner.listOwnerMachines'; // 申请钥匙
 
@@ -71,7 +71,7 @@ module.exports = {
   changeStaffPwd: changeStaffPwd,
   listComplaints: listComplaints,
   saveComplaint: saveComplaint,
-  appUserUnBindingOwner: appUserUnBindingOwner,
+  auditComplaint: auditComplaint,
   listOwnerMachines: listOwnerMachines,
   applyApplicationKey: applyApplicationKey,
   listApplicationKeys: listApplicationKeys,

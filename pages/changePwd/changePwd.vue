@@ -73,7 +73,7 @@
 					newPwd: this.newPwd
 				};
 				
-				uni.request({
+				this.java110Context.request({
 					url: this.java110Constant.url.changeStaffPwd,
 					header: this.java110Context.getHeaders(),
 					method: "POST",

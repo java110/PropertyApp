@@ -65,6 +65,9 @@
 			}
 		},
 		onLoad() {
+			//this._loadComplaintOrder();
+		},
+		onShow() {
 			this._loadComplaintOrder();
 		},
 		methods: {

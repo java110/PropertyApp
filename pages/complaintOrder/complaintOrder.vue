@@ -35,32 +35,32 @@
 			<view class="padding ">
 				<text>房屋信息</text>
 			</view>
-			<form>
-				<view class="cu-form-group">
-					<view class="title">楼栋</view>
-					<picker @change="_changeResult" :value="stateIndex" :range="states">
-						<view class="picker">
-							{{stateIndex>-1?states[stateIndex]:'请选择'}}
-						</view>
-					</picker>
+			<view class="cu-list menu " >
+				<view class="cu-item arrow">
+					<view class="content">			
+						<text class="text-grey">楼栋</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{floorNum != ''?floorNum+'号楼':'请选择'}}</text>
+					</view>
 				</view>
-				<view class="cu-form-group">
-					<view class="title">单元</view>
-					<picker @change="_changeResult" :value="stateIndex" :range="states">
-						<view class="picker">
-							{{stateIndex>-1?states[stateIndex]:'请选择'}}
-						</view>
-					</picker>
+				<view class="cu-item arrow">
+					<view class="content">			
+						<text class="text-grey">单元</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{unitNum != ''?unitNum+'单元':'请选择'}}</text>
+					</view>
 				</view>
-				<view class="cu-form-group">
-					<view class="title">房屋</view>
-					<picker @change="_changeResult" :value="stateIndex" :range="states">
-						<view class="picker">
-							{{stateIndex>-1?states[stateIndex]:'请选择'}}
-						</view>
-					</picker>
+				<view class="cu-item arrow">
+					<view class="content">			
+						<text class="text-grey">房屋</text>
+					</view>
+					<view class="action">
+						<text class="text-grey text-sm">{{roomNum != ''?roomNum+'室':'请选择'}}</text>
+					</view>
 				</view>
-			</form>
+			</view>
 			
 			<view class="padding margin-top">
 				<text>投诉信息</text>
@@ -69,19 +69,19 @@
 			<form>
 				<view class="cu-form-group">
 					<view class="title">投诉类型</view>
-					<picker @change="_changeResult" :value="stateIndex" :range="states">
+					<picker @change="_changeResult" :value="typeCdIndex" :range="typeCds">
 						<view class="picker">
-							{{stateIndex>-1?states[stateIndex]:'请选择'}}
+							{{typeCdIndex>-1?typeCds[typeCdIndex]:'请选择'}}
 						</view>
 					</picker>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">投诉人</view>
-					<input placeholder="请输入投诉人" name="input"></input>
+					<input placeholder="请输入投诉人" v-model="complaintName" name="input"></input>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">手机号码</view>
-					<input placeholder="输入框带标签" name="input"></input>
+					<input placeholder="输入手机号码" v-model="tel" name="input"></input>
 					<view class="cu-capsule radius">
 						<view class='cu-tag bg-blue '>
 							+86
@@ -132,7 +132,19 @@
 				state: '10001',
 				orderImg: this.java110Constant.url.baseUrl + 'img/order.png',
 				myOrders: [],
-				imgList:[]
+				imgList:[],
+				floorId:'',
+				floorNum:'',
+				unitId:'',
+				unitNum:'',
+				roomId:'',
+				roomNum:'',
+				typeCd:'',
+				typeCds:['投诉','建议'],
+				typeCdIndex:-1,
+				complaintName:'',
+				tel:'',
+				context:''
 			}
 		},
 		onLoad() {

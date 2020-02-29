@@ -86,9 +86,9 @@
 			}
         }
         ,{
-            "path" : "pages/auditComplaintHistoryOrder/auditComplaintHistoryOrder",
+            "path" : "pages/complaintOrderDetail/complaintOrderDetail",
             "style" : {
-				"navigationBarTitleText": "投诉审核历史单"
+				"navigationBarTitleText": "投诉单详情"
 			}
         }
         ,{

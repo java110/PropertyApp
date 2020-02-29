@@ -102,7 +102,7 @@
 		methods: {
 			_loadComplaintHistoryOrder:function(){
 				//
-				this.auditHistoryOrder = wx.getStorageSync("_auditComplaintHistory_"+this.complaintId);
+				this.auditHistoryOrder = wx.getStorageSync("_complaintOrderDetail_"+this.complaintId);
 				
 			},
 		}

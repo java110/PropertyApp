@@ -139,6 +139,7 @@
 					row: 15,
 					storeId: storeId,
 					userId: _userInfo.userId,
+					process:'AUDIT',
 					communityId:_that.java110Context.getCurrentCommunity().communityId
 				};
 				
@@ -182,9 +183,9 @@
 			},
 			_toAuditComplaintHistoryOrder:function(_item){
 				console.log('_item',_item);
-				wx.setStorageSync("_auditComplaintHistory_"+_item.complaintId, _item);
+				uni.setStorageSync("_complaintOrderDetail_"+_item.complaintId, _item);
 				uni.navigateTo({
-					url:"/pages/auditComplaintHistoryOrder/auditComplaintHistoryOrder?complaintId="+_item.complaintId
+					url:"/pages/complaintOrderDetail/complaintOrderDetail?complaintId="+_item.complaintId
 				});	
 			}
 		}

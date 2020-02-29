@@ -20,15 +20,13 @@ const queryStaffInfos = baseUrl + 'app/query.staff.infos'; //查询员工信息
 
 const changeStaffPwd = baseUrl + 'app/user.changeStaffPwd'; //修改密码
 
-const listComplaints = baseUrl + 'app/complaint.listComplaints'; //添加投诉建议
+const listAuditHistoryComplaints = baseUrl + 'app/auditUser.listAuditHistoryComplaints'; //查询历史单
 
 const saveComplaint = baseUrl + 'app/complaint'; //查询业主房间
 
 const userLogout = baseUrl + 'app/user.service.logout'; //绑定业主
 
 const listAuditComplaints = baseUrl + 'app/auditUser.listAuditComplaints'; //查询绑定业主
-
-const listAuditHistoryComplaints = baseUrl + 'app/auditUser.listAuditHistoryComplaints'; //解绑业主
 
 const auditComplaint = baseUrl + 'app/complaint.auditComplaint'; //查询业主门禁
 
@@ -67,9 +65,8 @@ module.exports = {
   listOwnerRepairs: listOwnerRepairs,
   queryStaffInfos: queryStaffInfos,
   listAuditComplaints: listAuditComplaints,
-  listAuditHistoryComplaints: listAuditHistoryComplaints,
   changeStaffPwd: changeStaffPwd,
-  listComplaints: listComplaints,
+  listAuditHistoryComplaints: listAuditHistoryComplaints,
   saveComplaint: saveComplaint,
   auditComplaint: auditComplaint,
   listOwnerMachines: listOwnerMachines,

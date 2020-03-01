@@ -90,10 +90,11 @@
 				this._loadUnits();
 			},
 			_doChangeUnit:function(_unit){
-				let pages = getCurrentPages();
-				var prevPage = pages[pages.length - 2];
-				prevPage.unitId = _unit.unitId;
-				prevPage.unitNum = _unit.unitNum;
+				// let pages = getCurrentPages();
+				// var prevPage = pages[pages.length - 2];
+				// prevPage.unitId = _unit.unitId;
+				// prevPage.unitNum = _unit.unitNum;
+				this.java110Context.setParam("unitInfo",_unit);
 				uni.navigateBack({
 					delta:1
 				});

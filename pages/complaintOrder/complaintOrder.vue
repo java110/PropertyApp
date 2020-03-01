@@ -153,10 +153,29 @@
 		},
 		onShow() {
 			this._loadMyOrders();
+			
+			let _floorInfo = this.java110Context.getParam("floorInfo");
+			if(_floorInfo){
+				this.floorId = _floorInfo.floorId;
+				this.floorNum = _floorInfo.floorNum;
+			}
+			
+			let _unitInfo = this.java110Context.getParam("unitInfo");
+			if(_unitInfo){
+				this.unitId = _unitInfo.unitId;
+				this.unitNum = _unitInfo.unitNum;
+			}
+			
+			let _roomInfo = this.java110Context.getParam("roomInfo");
+			if(_roomInfo){
+				this.roomId = _roomInfo.roomId;
+				this.roomNum = _roomInfo.roomNum;
+			}
 		},
 		methods: {
 			_tabSelect: function(_state) {
 				this.state = _state;
+				console.log('_tabSelect_this.state',this.state)
 				if (_state == '10002') {
 					//this._loadOrder();
 				} else {
@@ -195,8 +214,8 @@
 						_that.myOrders = _data.complaints;
 
 						_data.complaints.forEach(function(item) {
-							let dateStr = item.createTime;
-							console.log(dateStr);
+							let dateStr = item.createTime.replace(/-/g,"/");
+							console.log('_data.complaints_dateStr',dateStr);
 							let _date = new Date(dateStr);
 							item.createTime = (_date.getMonth() + 1) + '-' + _date.getDate();
 						});

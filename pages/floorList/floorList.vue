@@ -90,10 +90,12 @@
 				this._loadFloors();
 			},
 			_doChangeFloor:function(_floor){
-				let pages = getCurrentPages();
-				var prevPage = pages[pages.length - 2];
-				prevPage.floorId = _floor.floorId;
-				prevPage.floorNum = _floor.floorNum;
+				// let pages = getCurrentPages();
+				// var prevPage = pages[pages.length - 2];
+				// prevPage.floorId = _floor.floorId;
+				// prevPage.floorNum = _floor.floorNum;
+				this.java110Context.setParam("floorInfo",_floor);
+			
 				uni.navigateBack({
 					delta:1
 				});

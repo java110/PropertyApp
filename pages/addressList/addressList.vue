@@ -235,7 +235,7 @@
 	.indexBar {
 		position: fixed;
 		right: 0px;
-		top: 300upx;
+		bottom: 300upx;
 		padding: 20upx 20upx 20upx 60upx;
 		display: flex;
 		align-items: center;

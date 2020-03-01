@@ -93,10 +93,11 @@
 				this._loadRooms();
 			},
 			_doChangeRoom:function(_room){
-				let pages = getCurrentPages();
-				var prevPage = pages[pages.length - 2];
-				prevPage.roomId = _room.roomId;
-				prevPage.roomNum = _room.roomNum;
+				// let pages = getCurrentPages();
+				// var prevPage = pages[pages.length - 2];
+				// prevPage.roomId = _room.roomId;
+				// prevPage.roomNum = _room.roomNum;
+				this.java110Context.setParam("roomInfo",_room);
 				uni.navigateBack({
 					delta:1
 				});

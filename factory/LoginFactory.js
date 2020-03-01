@@ -22,7 +22,7 @@ class LoginFactory {
     let _that = this;
 
     let loginFlag = uni.getStorageSync(constant.mapping.LOGIN_FLAG);
-    console.log("afterOneHourDate", loginFlag);
+    //console.log("afterOneHourDate", loginFlag);
     let nowDate = new Date();
 
     if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
@@ -53,9 +53,13 @@ class LoginFactory {
 	console.log("用户信息",userInfo);
 	
 	if(userInfo == null || userInfo == undefined || userInfo == ''){
-		uni.navigateTo({
-			url:"/pages/login/login"
-		})
+		// uni.navigateTo({
+		// 	url:"/pages/login/login"
+		// })
+		
+		uni.reLaunch({
+			url:'/pages/login/login'
+		});
 		
 		return ;
 	}

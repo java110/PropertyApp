@@ -115,8 +115,8 @@
 						
 						_data.complaints.forEach(function(item){
 							let dateStr = item.createTime;
-							console.log(dateStr);
-							let _date=new Date(dateStr);
+							let _startTime = dateStr.replace(/\-/g, "/")
+							let _date=new Date(_startTime);
 							item.createTime = (_date.getMonth()+1) +'-'+_date.getDate();
 						});
 					},
@@ -160,7 +160,8 @@
 						let _data = res.data;
 						_data.complaints.forEach(function(item){
 							let dateStr = item.createTime;
-							let _date=new Date(dateStr);
+							let _startTime = dateStr.replace(/\-/g, "/")
+							let _date=new Date(_startTime);
 							item.createTime = (_date.getMonth()+1) +'-'+_date.getDate();
 						});
 						_that.orders = _data.complaints;

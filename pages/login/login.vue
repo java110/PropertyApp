@@ -46,9 +46,14 @@
 			});
 
 			this.logoUrl = this.java110Constant.url.baseUrl + 'logo.png';
-			
-
-
+		
+		},
+		onBackPress(options) {
+			if (options.from === 'navigateBack') {
+			  return false;
+			}
+			plus.runtime.quit();
+			return true;
 		},
 		methods: {
 

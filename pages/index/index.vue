@@ -66,13 +66,13 @@
 					color: 'red',
 					badge: 0,
 					name: '维修录单',
-					pathUrl:'/notice/notice'
+					pathUrl:'/modifyOrder/modifyOrder'
 				}, {
 					cuIcon: 'recordfill',
 					color: 'orange',
 					badge: 0,
 					name: '我的维修',
-					pathUrl:'/notice/notice'
+					pathUrl:'/myModify/myModify'
 				}, {
 					cuIcon: 'picfill',
 					color: 'yellow',

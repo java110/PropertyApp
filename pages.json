@@ -114,7 +114,19 @@
             "style" : {
 				"navigationBarTitleText": "选择房屋"
 			}
-        }
+        },
+		{
+		    "path" : "pages/modifyOrder/modifyOrder",
+		    "style" : {
+				"navigationBarTitleText": "维修录单"
+			}
+		},
+		{
+		    "path" : "pages/myModify/myModify",
+		    "style" : {
+				"navigationBarTitleText": "我的维修"
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

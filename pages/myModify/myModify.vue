@@ -46,12 +46,12 @@
 			_tabSelect: function(_state) {
 				this.state = _state;
 				if(_state == '10002'){
-					this._loadOrder();
+					this._loadHisModify();
 				}else{
-					this._loadMyOrders();
+					this._loadMyModify();
 				}
 			},
-			_loadMyOrders:function(){
+			__loadMyModify:function(){
 				let _that = this;
 				let _userInfo = this.java110Context.getUserInfo();
 				let storeId = _userInfo.storeId;
@@ -94,8 +94,68 @@
 						});
 					}
 				});
+			},
+			_loadHisModify:function(){
+				//
+				let _that = this;
+				let _userInfo = this.java110Context.getUserInfo();
+				let storeId = _userInfo.storeId;
+				let _objData = {
+					page: 1,
+					row: 15,
+					// storeId: storeId,
+					// userId: _userInfo.userId,
+					// process:'AUDIT',
+					communityId:_that.java110Context.getCurrentCommunity().communityId
+				};
+				
+				this.java110Context.request({
+					url: _that.java110Constant.url.listOwnerRepairs,
+					header: _that.java110Context.getHeaders(),
+					method: "GET",
+					data: _objData, //动态数据
+					success: function(res) {
+						console.log("请求返回信息：", res);
+						if (res.statusCode != 200) {
+							uni.showToast({
+								icon:'none',
+								title:res.data
+							});
+							return;
+						}
+						console.debug("res.data=",res.data);
+						let _data = res.data;
+						_data.complaints.forEach(function(item){
+							let dateStr = item.createTime;
+							let _startTime = dateStr.replace(/\-/g, "/")
+							let _date=new Date(_startTime);
+							item.createTime = (_date.getMonth()+1) +'-'+_date.getDate();
+						});
+						_that.orders = _data.complaints;
+					},
+					fail: function(e) {
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
+			},
+			_toAuditComplaintOrder:function(_item){
+				console.log('_item',_item);
+				wx.setStorageSync("_auditComplaint_"+_item.complaintId, _item);
+				uni.navigateTo({
+					url:"/pages/auditComplaintOrder/auditComplaintOrder?complaintId="+_item.complaintId
+				});	
+			},
+			_toAuditComplaintHistoryOrder:function(_item){
+				console.log('_item',_item);
+				uni.setStorageSync("_complaintOrderDetail_"+_item.complaintId, _item);
+				uni.navigateTo({
+					url:"/pages/complaintOrderDetail/complaintOrderDetail?complaintId="+_item.complaintId
+				});	
 			}
-			
 		}
 	}
 </script>

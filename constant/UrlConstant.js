@@ -4,8 +4,8 @@
  * add by wuxw 2019-12-28
  */
 // 服务器域名
-const baseUrl = 'https://app.demo.winqi.cn/'; 
-//const baseUrl = '/';
+// const baseUrl = 'https://app.demo.winqi.cn/'; 
+const baseUrl = '/';
 const hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
 
 const loginUrl = baseUrl + 'app/loginProperty';
@@ -14,7 +14,7 @@ const GetNoticeListUrl = baseUrl + 'app/api.queryNotices'; //报修接口
 
 const listMyEnteredCommunitys = baseUrl + 'app/community.listMyEnteredCommunitys'; //查看员工小区
 
-const listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //家庭成员
+const listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //维修
 
 const queryStaffInfos = baseUrl + 'app/query.staff.infos'; //查询员工信息
 

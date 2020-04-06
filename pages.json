@@ -126,6 +126,12 @@
 		    "style" : {
 				"navigationBarTitleText": "我的维修"
 			}
+		},
+		{
+		    "path" : "pages/myModify/myModifyDetail",
+		    "style" : {
+				"navigationBarTitleText": "我的维修详情"
+			}
 		}
     ],
 	"globalStyle": {

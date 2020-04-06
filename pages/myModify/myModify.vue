@@ -13,7 +13,7 @@
 		
 		<view class="margin-top" v-if="state=='10001'">
 			<view class="cu-list menu-avatar">
-				<view class="cu-item arrow" v-for="(item,index) in myOrders" :key="index" @tap="_toModifyMyOrder(item)">
+				<view class="cu-item arrow" v-for="(item,index) in myOrders" :key="index" @tap="_toModifyMyOrder(item,communityId)">
 					<view class="cu-avatar round lg" :style="'background-image:url('+orderImg+');'">
 					</view>
 					<view class="content">
@@ -174,16 +174,17 @@
 			},
 			_toModifyMyOrder:function(_item){
 				console.log('_item',_item);
-				wx.setStorageSync("_auditComplaint_"+_item.complaintId, _item);
+				wx.setStorageSync("_toModifyComplaint_"+_item.complaintId, _item);
 				uni.navigateTo({
-					url:"/pages/auditComplaintOrder/auditComplaintOrder?complaintId="+_item.complaintId
+					url:"/pages/myModify/myModifyDetail?complaintId=" + _item.complaintId
+					
 				});	
 			},
 			_toModifyHistoryOrder:function(_item){
 				console.log('_item',_item);
 				uni.setStorageSync("_complaintOrderDetail_"+_item.complaintId, _item);
 				uni.navigateTo({
-					url:"/pages/complaintOrderDetail/complaintOrderDetail?complaintId="+_item.complaintId
+					url:"/pages/myModify/myModifyDetail?complaintId="+_item.complaintId
 				});	
 			}
 		}

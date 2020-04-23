@@ -16,6 +16,8 @@ const listMyEnteredCommunitys = baseUrl + 'app/community.listMyEnteredCommunitys
 
 const listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //维修
 
+const saveOwnerRepair = baseUrl + 'app/ownerRepair.saveOwnerRepair'; //查看报修
+
 const queryStaffInfos = baseUrl + 'app/query.staff.infos'; //查询员工信息
 
 const changeStaffPwd = baseUrl + 'app/user.changeStaffPwd'; //修改密码
@@ -83,5 +85,6 @@ module.exports = {
   listCommunitys: listCommunitys,
   listActivitiess: listActivitiess,
   filePath: filePath,
-  listAdvertPhoto: listAdvertPhoto
+  listAdvertPhoto: listAdvertPhoto,
+  saveOwnerRepair:saveOwnerRepair
 };

@@ -116,7 +116,7 @@
 			}
         },
 		{
-		    "path" : "pages/modifyOrder/modifyOrder",
+		    "path" : "pages/repairOrder/repairOrder",
 		    "style" : {
 				"navigationBarTitleText": "维修录单"
 			}

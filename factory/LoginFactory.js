@@ -64,6 +64,8 @@ class LoginFactory {
 		return ;
 	}
 	
+	console.log('userInfo',userInfo);
+	
 	let _userInfo = JSON.parse(util.des.desDecrypt(userInfo));
 	
 	let _tmpUserInfo = {

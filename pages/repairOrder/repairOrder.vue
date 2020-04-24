@@ -14,7 +14,7 @@
 		
 		<view class="margin-top" v-if="state=='10001'">
 			<view class="cu-list menu-avatar">
-				<view class="cu-item arrow" v-for="(item,index) in myOrders" :key="index" @tap="_toAuditComplaintOrder(item)">
+				<view class="cu-item arrow" v-for="(item,index) in myRepairOrders" :key="index" @tap="_toAuditComplaintOrder(item)">
 					<view class="cu-avatar round lg" :style="'background-image:url('+orderImg+');'">
 					</view>
 					<view class="content">
@@ -147,7 +147,7 @@
 			return {
 				state:'10002',
 				orderImg:this.java110Constant.url.baseUrl + 'img/order.png',
-				myOrders:[],
+				myRepairOrders:[],
 				imgList: [],
 				photos:[],
 				floorId: '',
@@ -194,10 +194,10 @@
 				if(_state == '10002'){
 					//this._loadOrder();
 				}else{
-					this._loadMyOrders();
+					this._queryMyRepairOrders();
 				}
 			},
-			_loadMyOrders:function(){
+			_queryMyRepairOrders:function(){
 				let _that = this;
 				let _userInfo = this.java110Context.getUserInfo();
 				let storeId = _userInfo.storeId;

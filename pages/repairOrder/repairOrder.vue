@@ -18,14 +18,14 @@
 					<view class="cu-avatar round lg" :style="'background-image:url('+orderImg+');'">
 					</view>
 					<view class="content">
-						<view class="text-grey">{{item.complaintId}}</view>
+						<view class="text-grey">{{item.repairId}}</view>
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
-								{{item.complaintName}}
+								{{item.repairName}}
 							</view> </view>
 					</view>
 					<view class="action">
-						<view class="text-grey text-xs">{{item.createTime}}</view>
+						<view class="text-grey text-xs">{{item.appointmentTime}}</view>
 					</view>
 				</view>
 			</view>
@@ -68,9 +68,9 @@
 			<form>
 				<view class="cu-form-group">
 					<view class="title">报修类型</view>
-					<picker @change="_changeResult" :value="typeCdIndex" :range="typeCds">
+					<picker @change="repairChange" :value="typeCdIndex" :range="typeCds">
 						<view class="picker">
-							{{typeCdIndex>-1?typeCds[typeCdIndex]:'请选择'}}
+							{{typeName?typeName:'请选择'}}
 						</view>
 					</picker>
 				</view>
@@ -157,7 +157,9 @@
 				roomId: '',
 				roomNum: '',
 				typeCd: '',
-				typeCds: ['卧室报修', '管道报修','客厅报修'],
+				typeCds: ['卧室报修', '管道报修', '客厅报修'],
+				repairIdAttr:['10001','10002','10003'],
+				typeName:'请选择',
 				typeCdIndex: -1,
 				context:'',
 				repairName:'',
@@ -209,7 +211,7 @@
 					communityId:_that.java110Context.getCurrentCommunity().communityId
 				};
 				this.java110Context.request({
-					url: _that.java110Constant.url.listComplaints,
+					url: _that.java110Constant.url.listOwnerRepairs,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据
@@ -223,13 +225,13 @@
 							return;
 						}
 						let _data = res.data;
-						_that.myOrders = _data.complaints;
+						_that.myRepairOrders = _data.ownerRepairs;
 						
-						_data.complaints.forEach(function(item){
-							let dateStr = item.createTime;
+						_data.ownerRepairs.forEach(function(item){
+							let dateStr = item.appointmentTime;
 							console.log(dateStr);
 							let _date=new Date(dateStr);
-							item.createTime = (_date.getMonth()+1) +'-'+_date.getDate();
+							item.appointmentTime = (_date.getMonth()+1) +'-'+_date.getDate();
 						});
 					},
 					fail: function(e) {
@@ -303,13 +305,10 @@
 						"&floorId=" + this.floorId + "&floorNum=" + this.floorNum + "&unitId=" + this.unitId + "&unitNum=" + this.unitNum
 				});
 			},
-			_changeResult: function(e) {
-				this.typeCdIndex = e.detail.value;
-				console.log(e, this.typeCdIndex);
-			},
+			
 			repairChange: function(e) {
-				this.typeName = this.columns[e.detail.value];
-				this.typeId = this.repairIdAttr[e.detail.value];
+				this.typeName = this.typeCds[e.detail.value];
+				this.typeCd = this.repairIdAttr[e.detail.value];
 			},
 			dateChange:function(e){
 				this.bindDate = e.detail.value;
@@ -331,7 +330,7 @@
 					"photos": [],
 					"context": this.context,
 					"userId": _userInfo.userId,
-					"communityId": this.communityId,
+					"communityId": _that.java110Context.getCurrentCommunity().communityId,
 					"bindDate": this.bindDate,
 					"bindTime": this.bindTime
 				}
@@ -357,7 +356,7 @@
 				} else if (obj.bindTime == "") {
 					msg = "请选择预约时间";
 				} else if (obj.context == "") {
-					msg = "请填写投诉内容";
+					msg = "请填写报修内容";
 				}
 				console.log(obj.roomId);
 			
@@ -368,9 +367,9 @@
 						duration: 2000
 					});
 				} else {
-					context.request({
-						url: constant.url.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
-						header: context.getHeaders(),
+					this.java110Context.request({
+						url: this.java110Constant.url.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
+						header: this.java110Context.getHeaders(),
 						method: "POST",
 						data: obj, //动态数据
 						success: function(res) {

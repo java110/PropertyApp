@@ -14,9 +14,9 @@ const GetNoticeListUrl = baseUrl + 'app/api.queryNotices'; //报修接口
 
 const listMyEnteredCommunitys = baseUrl + 'app/community.listMyEnteredCommunitys'; //查看员工小区
 
-const listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //维修
+const listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //查看报修
 
-const saveOwnerRepair = baseUrl + 'app/ownerRepair.saveOwnerRepair'; //查看报修
+const saveOwnerRepair = baseUrl + 'app/ownerRepair.saveOwnerRepair'; //维修
 
 const queryStaffInfos = baseUrl + 'app/query.staff.infos'; //查询员工信息
 
@@ -57,6 +57,8 @@ const listCommunitys = baseUrl + "app/community.listCommunitys"; //查询小区�
 const listActivitiess = baseUrl + "app/activities.listActivitiess"; //查询小区广告
 
 const listAdvertPhoto = baseUrl + "app/advert.listAdvertPhoto";
+
+
 module.exports = {
   baseUrl: baseUrl,
   hcBaseUrl: hcBaseUrl,

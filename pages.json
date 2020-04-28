@@ -128,9 +128,9 @@
 			}
 		},
 		{
-		    "path" : "pages/myModify/myModifyDetail",
+		    "path" : "pages/repairDetail/repairDetail",
 		    "style" : {
-				"navigationBarTitleText": "我的维修详情"
+				"navigationBarTitleText": "维修详情"
 			}
 		}
     ],

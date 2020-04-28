@@ -17,11 +17,11 @@ const factory = require("../factory/index.js");
 
 const getHeaders = function() {
 	return {
-		app_id: constant.app.appId,
-		transaction_id: util.core.wxuuid(),
-		req_time: util.date.getDateYYYYMMDDHHMISS(),
-		sign: '1234567',
-		user_id: '-1',
+		'app-id': constant.app.appId,
+		'transaction-id': util.core.wxuuid(),
+		'req-time': util.date.getDateYYYYMMDDHHMISS(),
+		'sign': '1234567',
+		'user-id': '-1',
 		cookie: '_java110_token_=' + wx.getStorageSync('token')
 	};
 };

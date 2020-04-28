@@ -14,7 +14,7 @@
 		
 		<view class="margin-top" v-if="state=='10001'">
 			<view class="cu-list menu-avatar">
-				<view class="cu-item arrow" v-for="(item,index) in myRepairOrders" :key="index" @tap="_toAuditComplaintOrder(item)">
+				<view class="cu-item arrow" v-for="(item,index) in myRepairOrders" :key="index" @tap="_toRepairOrderDetail(item)">
 					<view class="cu-avatar round lg" :style="'background-image:url('+orderImg+');'">
 					</view>
 					<view class="content">
@@ -22,7 +22,8 @@
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
 								{{item.repairName}}
-							</view> </view>
+							</view> 
+						</view>
 					</view>
 					<view class="action">
 						<view class="text-grey text-xs">{{item.appointmentTime}}</view>
@@ -167,7 +168,16 @@
 				minDate: new Date().getTime(),
 				bindDate: '请选择',
 				bindTime: '请选择',
+				storeId:''
 			}
+		},
+		onLoad(){
+			
+			let _userInfo = this.java110Context.getUserInfo();
+			
+			let _storeId = _userInfo.storeId;
+			
+			this.storeId = _storeId;
 		},
 		onShow() {
 			//this._loadMyOrders();
@@ -316,9 +326,16 @@
 			timeChange:function(e){
 				this.bindTime = e.detail.value;
 			},
+			_toRepairOrderDetail:function(_item){
+				let repairId = _item.repairId;
+				uni.navigateTo({
+					url:'/pages/repairDetail/repairDetail?repairId='+repairId + '&storeId='+this.storeId
+				});
+			},
 			_submitRepair: function(e) {
 				let _that = this;
 			let _userInfo = this.java110Context.getUserInfo();
+			
 			let storeId = _userInfo.storeId;
 			
 				let obj = {

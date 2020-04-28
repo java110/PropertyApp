@@ -76,7 +76,7 @@
         ,{
             "path" : "pages/complaintList/complaintList",
             "style" : {
-				"navigationBarTitleText": "投诉单"
+				"navigationBarTitleText": "投诉受理单"
 			}
         }
         ,{
@@ -124,7 +124,7 @@
 		{
 		    "path" : "pages/myModify/myModify",
 		    "style" : {
-				"navigationBarTitleText": "我的维修"
+				"navigationBarTitleText": "维修受理单"
 			}
 		},
 		{

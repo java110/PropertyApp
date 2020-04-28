@@ -71,7 +71,7 @@
 					cuIcon: 'recordfill',
 					color: 'orange',
 					badge: 0,
-					name: '我的维修',
+					name: '维修受理',
 					pathUrl: '/myModify/myModify'
 				}, {
 					cuIcon: 'picfill',
@@ -83,7 +83,7 @@
 					cuIcon: 'noticefill',
 					color: 'olive',
 					badge: 0,
-					name: '我的投诉',
+					name: '投诉受理',
 					pathUrl: '/complaintList/complaintList'
 				}, {
 					cuIcon: 'upstagefill',

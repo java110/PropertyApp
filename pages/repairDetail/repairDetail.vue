@@ -105,8 +105,7 @@
 			this.repairId = options.repairId;
 			
 			console.log('options',options);
-			this.complaintId = _complaintId;
-			this._loadModfiyHistoryOrder();
+			this._queryRepairDetail();
 		},
 		methods: {
 			_loadModfiyHistoryOrder:function(){

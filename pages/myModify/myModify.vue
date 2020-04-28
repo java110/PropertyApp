@@ -58,8 +58,18 @@
 				state:'10001',
 				orderImg:this.java110Constant.url.baseUrl + 'img/order.png',
 				myOrders:[],
-				orders:[]
+				orders:[],
+				storeId:''
 			}
+		},
+		onLoad(){
+			
+			let _userInfo = this.java110Context.getUserInfo();
+			let _storeId = _userInfo.storeId;
+			this.storeId = _storeId;
+			
+			this._tabSelect('10001');
+			
 		},
 		methods: {
 			_tabSelect: function(_state) {
@@ -81,6 +91,8 @@
 					// storeId: storeId,
 					// userId: _userInfo.userId,
 					// process:'AUDIT',
+					staffId:_userInfo.userId,
+					state:'10001',
 					communityId:_that.java110Context.getCurrentCommunity().communityId
 				};
 				
@@ -132,6 +144,7 @@
 					// storeId: storeId,
 					// userId: _userInfo.userId,
 					// process:'AUDIT',
+					staffId:_userInfo.userId,
 					communityId:_that.java110Context.getCurrentCommunity().communityId
 				};
 				
@@ -174,9 +187,9 @@
 			},
 			_toModifyMyOrder:function(_item){
 				console.log('_item',_item);
-				wx.setStorageSync("_toModifyComplaint_"+_item.complaintId, _item);
+				//wx.setStorageSync("_toModifyComplaint_"+_item.complaintId, _item);
 				uni.navigateTo({
-					url:"/pages/myModify/myModifyDetail?complaintId=" + _item.complaintId
+					url:"/pages/repairDetail/repairDetail?repairId=" + _item.repairId+'&storeId='+this.storeId
 					
 				});	
 			},
@@ -184,7 +197,7 @@
 				console.log('_item',_item);
 				uni.setStorageSync("_complaintOrderDetail_"+_item.complaintId, _item);
 				uni.navigateTo({
-					url:"/pages/myModify/myModifyDetail?complaintId="+_item.complaintId
+					url:"/pages/repairDetail/repairDetail?repairId=" + _item.repairId+'&storeId='+this.storeId
 				});	
 			}
 		}

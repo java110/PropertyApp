@@ -133,6 +133,19 @@
 				"navigationBarTitleText": "维修详情"
 			}
 		}
+        ,{
+            "path" : "pages/inspection/inspection",
+            "style" : {
+				"navigationBarTitleText": "巡检打卡"
+				
+			}
+        }
+        ,{
+            "path" : "pages/purchase/purchase",
+            "style" : {
+				"navigationBarTitleText": "采购管理"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

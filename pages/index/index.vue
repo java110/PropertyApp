@@ -1,5 +1,8 @@
 <template>
 	<view class="content">
+		<view class="margin-bottom-xs">
+			<uni-notice-bar showIcon="true" scrollable="true" single="true" speed="30" text="HC掌上物业是免费开源的HC小区管理系统的分支项目，欢迎访问官网http://homecommunity.cn了解"></uni-notice-bar>
+		</view>
 		<scroll-view :scroll-y="modalName==null" class="page" :class="show">
 			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
 				<view class="cu-item" v-for="(item,index) in cuIconList" :key="index" v-if="index<gridCol*2">
@@ -55,6 +58,17 @@
 </template>
 
 <script>
+	/**
+	 * {
+					cuIcon: 'discoverfill',
+					color: 'purple',
+					badge: 0,
+					name: '停车收费',
+					pathUrl: '/notice/notice'
+				},
+	 */
+	
+	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
 	export default {
 		data() {
 			return {
@@ -90,29 +104,26 @@
 					color: 'cyan',
 					badge: 0,
 					name: '巡检打卡',
-					pathUrl: '/notice/notice'
+					pathUrl: '/inspection/inspection'
+				},{
+					cuIcon: 'questionfill',
+					color: 'mauve',
+					badge: 0,
+					name: '采购管理',
+					pathUrl: '/purchase/purchase'
 				}, {
 					cuIcon: 'clothesfill',
 					color: 'blue',
 					badge: 0,
 					name: '公告',
 					pathUrl: '/notice/notice'
-				}, {
-					cuIcon: 'discoverfill',
-					color: 'purple',
-					badge: 0,
-					name: '停车收费',
-					pathUrl: '/notice/notice'
-				}, {
-					cuIcon: 'questionfill',
-					color: 'mauve',
-					badge: 0,
-					name: '采购管理',
-					pathUrl: '/notice/notice'
 				}],
 				swiperList: [],
 				activitys: []
 			}
+		},
+		components: {
+			uniNoticeBar
 		},
 		onLoad() {
 			this._loadCommunity();

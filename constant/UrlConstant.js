@@ -10,7 +10,7 @@ const hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
 
 const loginUrl = baseUrl + 'app/loginProperty';
 const areaUrl = baseUrl + "app/area.listAreas";
-const GetNoticeListUrl = baseUrl + 'app/api.queryNotices'; //报修接口
+const GetNoticeListUrl = baseUrl + 'app/notice.listNotices'; //公告接口
 
 const listMyEnteredCommunitys = baseUrl + 'app/community.listMyEnteredCommunitys'; //查看员工小区
 

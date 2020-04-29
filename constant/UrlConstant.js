@@ -61,6 +61,9 @@ const listAdvertPhoto = baseUrl + "app/advert.listAdvertPhoto";
 //查询巡检任务
 const listInspectionTasks = baseUrl + "app/inspectionTask.listInspectionTasks";
 
+//巡检任务详情
+const listInspectionTaskDetails = baseUrl + 'app/inspectionTaskDetail.listInspectionTaskDetails';
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -92,5 +95,6 @@ module.exports = {
   filePath: filePath,
   listAdvertPhoto: listAdvertPhoto,
   saveOwnerRepair:saveOwnerRepair,
-  listInspectionTasks:listInspectionTasks
+  listInspectionTasks:listInspectionTasks,
+  listInspectionTaskDetails:listInspectionTaskDetails
 };

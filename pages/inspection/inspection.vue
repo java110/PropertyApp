@@ -54,6 +54,9 @@
 		methods: {
 			_startInspection:function(_item){
 				console.log('开始巡检',_item);
+				uni.navigateTo({
+					url:'/pages/excuteInspection/excuteInspection?taskId='+_item.taskId+'&inspectionPlanName='+_item.inspectionPlanName
+				});
 			},
 			_queryInstpectionTasks: function() {
 				let _that = this;

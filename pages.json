@@ -146,6 +146,12 @@
 				"navigationBarTitleText": "采购管理"
 			}
         }
+        ,{
+            "path" : "pages/excuteInspection/excuteInspection",
+            "style" : {
+				"navigationBarTitleText": "执行巡检"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

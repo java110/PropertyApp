@@ -58,6 +58,9 @@ const listActivitiess = baseUrl + "app/activities.listActivitiess"; //查询小�
 
 const listAdvertPhoto = baseUrl + "app/advert.listAdvertPhoto";
 
+//查询巡检任务
+const listInspectionTasks = baseUrl + "app/inspectionTask.listInspectionTasks";
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -88,5 +91,6 @@ module.exports = {
   listActivitiess: listActivitiess,
   filePath: filePath,
   listAdvertPhoto: listAdvertPhoto,
-  saveOwnerRepair:saveOwnerRepair
+  saveOwnerRepair:saveOwnerRepair,
+  listInspectionTasks:listInspectionTasks
 };

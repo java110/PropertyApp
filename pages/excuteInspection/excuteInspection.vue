@@ -8,7 +8,7 @@
 					{{item.inspectionName}}
 				</view>
 				<view class="text-right" v-if="item.state != '20200407'">
-					<button class="cu-btn  line-green block margin-tb-sm lg ">
+					<button class="cu-btn  line-green block margin-tb-sm lg " @click="_excuteInspection(item)">
 						<text class="cuIcon-upload"></text>巡检</button>
 				</view>
 			</view>
@@ -67,6 +67,12 @@
 			
 			ScrollSteps() {
 				this.scroll= this.scroll == 9 ? 0 : this.scroll + 1				
+			},
+			_excuteInspection:function(_item){
+				console.log('巡检点',_item);
+				uni.navigateTo({
+					url:'/pages/excuteOneInspection/excuteOneInspection?taskDetailId='+_item.taskDetailId+"&taskId="+_item.taskId+"&inspectionId="+_item.inspectionId+"&inspectionName="+_item.inspectionName
+				});
 			}
 		}
 	}

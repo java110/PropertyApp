@@ -38,7 +38,7 @@
 		</form>
 				
 		<view class="padding flex flex-direction">
-			<button class="cu-btn bg-green margin-tb-sm lg" @tap="_submitRepair()">提交</button>
+			<button class="cu-btn bg-green margin-tb-sm lg" @tap="_submitExcuteInspection()">提交</button>
 		</view>
 		
 	</view>
@@ -121,7 +121,7 @@
 				let imageArr = this.$data.photoList;
 				imageArr.splice(e, 1);
 			},
-			submitExcuteInspection: function() {
+			_submitExcuteInspection: function() {
 				/**
 				 * taskId:'',
 				taskDetailId:'',
@@ -173,9 +173,9 @@
 						duration: 2000
 					});
 				} else {
-					context.request({
-						url: constant.url.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
-						header: context.getHeaders(),
+					this.java110Context.request({
+						url: this.java110Constant.url.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
+						header: this.java110Context.getHeaders(),
 						method: "POST",
 						data: obj, //动态数据
 						success: function(res) {

@@ -19,19 +19,19 @@
 					巡检图片
 				</view>
 				<view class="action">
-					{{imgList.length}}/4
+					{{photoList.length}}/4
 				</view>
 			</view>
 			<view class="cu-form-group">
 				<view class="grid col-4 grid-square flex-sub">
-					<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
-						<image :src="imgList[index]" mode="aspectFill"></image>
-						<view class="cu-tag bg-red" @tap.stop="_delImg" :data-index="index">
-							<text class='cuIcon-close'></text>
+					<view class="bg-img" v-for="(img,index) in photoList" :key= "index" bindtap="ViewImage" :data-url="photoList[index]">
+						<image :src='photoList[index]' mode='aspectFill'></image>
+						<view class="cu-tag bg-red" @tap="removePhoto(index)" :data-index="index">
+							<text class="cuIcon-close"></text>
 						</view>
 					</view>
-					<view class="solids" @tap="_chooseImage" v-if="imgList.length<4">
-						<text class='cuIcon-cameraadd'></text>
+					<view class="solids" @tap="ChooseImage" v-if="photoList.length<4">
+						<text class="cuIcon-cameraadd"></text>
 					</view>
 				</view>
 			</view>
@@ -59,7 +59,11 @@
 				description:'',
 				photos:[],
 				imgList:[],
-				patrolIndex:0
+				photoList:[],
+				patrolIndex:0,
+				communityId:'',
+				userId:'',
+				userName:''
 			}
 		},
 		onLoad(option) {
@@ -67,11 +71,34 @@
 			this.taskId = option.taskId;
 			this.inspectionId = option.inspectionId;
 			this.inspectionName = option.inspectionName;
+			
+			this.communityId = this.java110Context.getCurrentCommunity().communityId;
+			let _userInfo = this.java110Context.getUserInfo();
+			this.userName = _userInfo.userName;
+			this.userId = _userInfo.userId;
 		},
 		methods: {
 			patrolChange:function(e){
 				this.patrolTypeName = this.patrols[e.detail.value];
 				this.patrolType = this.patrolTypes[e.detail.value];
+			},
+			afterRead: function(event) {
+				const {
+					file
+				} = event.detail;
+			
+				let _that = this;
+			
+				const {
+					photoList = []
+				} = this;
+				photoList.push(file);
+				this.photoList = photoList;
+			
+				factory.base64.urlTobase64(file.path).then(function(_baseInfo) {
+					_that.photos.push(_baseInfo);
+				});
+				console.log("data信息：", this);
 			},
 			ChooseImage: function(e) {
 				let that = this;
@@ -93,6 +120,87 @@
 				console.log(e);
 				let imageArr = this.$data.photoList;
 				imageArr.splice(e, 1);
+			},
+			submitExcuteInspection: function() {
+				/**
+				 * taskId:'',
+				taskDetailId:'',
+				inspectionId:'',
+				inspectionName:'',
+				 */
+				let obj = {
+					"taskId": this.taskId,
+					"taskDetailId": this.taskDetailId,
+					"inspectionId": this.inspectionId,
+					"inspectionName": this.inspectionName,
+					"communityId": this.communityId,
+					"patrolType":this.patrolType,
+					"description":this.description,
+					"photos": [],
+					"userId": this.userId,
+					"userName": this.userName
+				}
+			
+				let _photos = this.photos;
+				_photos.forEach(function(_item) {
+					obj.photos.push({
+						"photo": _item
+					});
+				});
+			
+				let msg = "";
+				if (obj.taskId == "") {
+					msg = "数据异常，巡检任务为空";
+				} else if (obj.taskDetailId == "") {
+					msg = "数据异常，巡检任务详情为空";
+				} else if (obj.inspectionId == "") {
+					msg = "巡检点不能为空";
+				} else if (obj.inspectionName == "") {
+					msg = "巡检点名称不能为空";
+				} else if (obj.patrolType == "") {
+					msg = "巡检情况不能为空";
+				} else if (obj.description == "") {
+					msg = "巡检说明不能为空";
+				} else if (obj.userId == "") {
+					msg = "数据异常，巡检人为空";
+				}
+				console.log(obj);
+			
+				if (msg != "") {
+					wx.showToast({
+						title: msg,
+						icon: 'none',
+						duration: 2000
+					});
+				} else {
+					context.request({
+						url: constant.url.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
+						header: context.getHeaders(),
+						method: "POST",
+						data: obj, //动态数据
+						success: function(res) {
+							if (res.statusCode == 200) {
+								uni.navigateBack({
+									delta:1
+								})
+								return;
+							}
+							wx.showToast({
+								title: "服务器异常了",
+								icon: 'none',
+								duration: 2000
+							})
+						},
+						fail: function(e) {
+							wx.showToast({
+								title: "服务器异常了",
+								icon: 'none',
+								duration: 2000
+							})
+						}
+					});
+			
+				}
 			},
 			
 		}

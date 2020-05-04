@@ -11,8 +11,25 @@
 					<button class="cu-btn  line-green block margin-tb-sm lg " @click="_excuteInspection(item)">
 						<text class="cuIcon-upload"></text>巡检</button>
 				</view>
+				<view v-else class="margin-top-sm margin-right grid text-center col-3 grid-square">
+					<view class="" v-for="(_item,index) in item.photos" :key="index">
+						<image mode="scaleToFill" :src="_item.url" @tap="preview(_item.url)"></image>
+					</view>
+				</view>
 			</view>
 			
+		</view>
+		
+		<view class="cu-modal" :class="viewImage?'show':''">
+			<view class="cu-dialog">
+				<view class="bg-img" :style="'background-image: url('+ viewImageSrc +');height:800rpx;'">
+					<view class="cu-bar justify-end text-white">
+						<view class="action" @tap="closeViewImage()">
+							<text class="cuIcon-close "></text>
+						</view>
+					</view>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -27,7 +44,9 @@
 				communityId:'',
 				userId:'',
 				userName:'',
-				taskDetails:[]
+				taskDetails:[],
+				viewImage:false,
+				viewImageSrc:''
 				
 			}
 		},
@@ -38,6 +57,9 @@
 			let _userInfo = this.java110Context.getUserInfo();
 			this.userName = _userInfo.userName;
 			this.userId = _userInfo.userId;
+			
+		},
+		onShow() {
 			this._queryTaskDetail();
 		},
 		methods: {
@@ -60,7 +82,16 @@
 						// res.data.inspectionTaskDetails.forEach(function(item, index) {
 						// 	item.timeStr = item.planInsTime.replace(/:\d{1,2}$/, ' ');
 						// });
-						_that.taskDetails = res.data.inspectionTaskDetails;
+						let _inspectionTaskDetails = res.data.inspectionTaskDetails;
+						_inspectionTaskDetails.forEach(function(_item){
+							if(_item.state == '20200407'){
+								_item.photos.forEach(function(_photoTmp) {
+									_photoTmp.url = _that.java110Constant.url.hcBaseUrl + _photoTmp.url;
+								});
+							}
+							
+						})
+						_that.taskDetails = _inspectionTaskDetails;
 					}
 				});
 			},
@@ -73,6 +104,13 @@
 				uni.navigateTo({
 					url:'/pages/excuteOneInspection/excuteOneInspection?taskDetailId='+_item.taskDetailId+"&taskId="+_item.taskId+"&inspectionId="+_item.inspectionId+"&inspectionName="+_item.inspectionName
 				});
+			},
+			preview: function(_src) {
+				this.viewImage = true;
+				this.viewImageSrc = _src;
+			},
+			closeViewImage: function() {
+				this.viewImage = false;
 			}
 		}
 	}

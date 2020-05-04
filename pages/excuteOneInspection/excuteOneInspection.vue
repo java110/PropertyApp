@@ -19,18 +19,18 @@
 					巡检图片
 				</view>
 				<view class="action">
-					{{photoList.length}}/4
+					{{imgList.length}}/4
 				</view>
 			</view>
 			<view class="cu-form-group">
 				<view class="grid col-4 grid-square flex-sub">
-					<view class="bg-img" v-for="(img,index) in photoList" :key= "index" bindtap="ViewImage" :data-url="photoList[index]">
-						<image :src='photoList[index]' mode='aspectFill'></image>
+					<view class="bg-img" v-for="(img,index) in imgList" :key= "index" bindtap="ViewImage" :data-url="imgList[index]">
+						<image :src='imgList[index]' mode='aspectFill'></image>
 						<view class="cu-tag bg-red" @tap="removePhoto(index)" :data-index="index">
 							<text class="cuIcon-close"></text>
 						</view>
 					</view>
-					<view class="solids" @tap="ChooseImage" v-if="photoList.length<4">
+					<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
 						<text class="cuIcon-cameraadd"></text>
 					</view>
 				</view>
@@ -59,7 +59,6 @@
 				description:'',
 				photos:[],
 				imgList:[],
-				photoList:[],
 				patrolIndex:0,
 				communityId:'',
 				userId:'',
@@ -82,23 +81,27 @@
 				this.patrolTypeName = this.patrols[e.detail.value];
 				this.patrolType = this.patrolTypes[e.detail.value];
 			},
-			afterRead: function(event) {
-				const {
-					file
-				} = event.detail;
-			
-				let _that = this;
-			
-				const {
-					photoList = []
-				} = this;
-				photoList.push(file);
-				this.photoList = photoList;
-			
-				factory.base64.urlTobase64(file.path).then(function(_baseInfo) {
-					_that.photos.push(_baseInfo);
+			removePhoto: function(e) {
+				console.log(e.detail.index);
+				let _imgList = [];
+				this.imgList.forEach(function(item, index) {
+					if (index != e.detail.index) {
+						_imgList.push(item);
+					}
 				});
-				console.log("data信息：", this);
+				let _photos = [];
+				this.photos.forEach(function(item, index) {
+					if (index != e.detail.index) {
+						_photos.push(item);
+					}
+				});
+				this.photos = _photos;
+				this.imgList = _imgList;
+			},
+			deleteImage: function(e) {
+				console.log(e);
+				let imageArr = this.$data.imgList;
+				imageArr.splice(e, 1);
 			},
 			ChooseImage: function(e) {
 				let that = this;
@@ -108,18 +111,15 @@
 					sourceType: ['album'], //从相册选择
 					success: (res) => {
 						console.log(res);
-						if (that.$data.photoList.length) {
-							that.$data.photoList.push(res.tempFilePaths[0]);
-						} else {
-							that.$data.photoList = res.tempFilePaths;
-						}
+						that.$data.imgList.push(res.tempFilePaths[0]);
+						let _base64Photo = '';
+						that.java110Factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
+							_base64Photo = _res;
+							console.log('base64', _base64Photo);
+							that.photos.push(_base64Photo);
+						});
 					}
 				});
-			},
-			removePhoto: function(e) {
-				console.log(e);
-				let imageArr = this.$data.photoList;
-				imageArr.splice(e, 1);
 			},
 			_submitExcuteInspection: function() {
 				/**
@@ -174,7 +174,7 @@
 					});
 				} else {
 					this.java110Context.request({
-						url: this.java110Constant.url.saveOwnerRepair, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
+						url: this.java110Constant.url.updateInspectionTaskDetail, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
 						header: this.java110Context.getHeaders(),
 						method: "POST",
 						data: obj, //动态数据

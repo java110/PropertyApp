@@ -70,7 +70,7 @@
 						page: 1,
 						row: 10,
 						planUserId: _that.userId,
-						state: '20200405'
+						
 					},
 					success: function(res) {
 						// TODO 判断

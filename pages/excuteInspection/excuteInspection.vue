@@ -73,8 +73,7 @@
 					data: {
 						communityId: _that.communityId,
 						page: 1,
-						row: 100,
-						taskId: _that.taskId
+						row: 100
 					},
 					success: function(res) {
 						// TODO 判断

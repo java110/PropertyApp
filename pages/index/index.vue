@@ -27,7 +27,8 @@
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action">
-					小区文化
+					<view class="bock-icon "></view>
+					<text class="margin-left-xs">小区文化</text>
 				</view>
 				<view class="action" @tap="_moreActivity()">
 					<text class="lg text-gray cuIcon-more"></text>
@@ -54,6 +55,9 @@
 				</block>
 			</view>
 		</scroll-view>
+		<view class="flex justify-center tec-height align-center">
+			<text class="text-gray">java110团队提供技术支持,交流群827669685</text>
+		</view>
 	</view>
 </template>
 
@@ -346,5 +350,16 @@
 
 	.notice-startTime {
 		margin-left: 16upx;
+	}
+	
+	.bock-icon{
+		height: 34upx;
+		width: 14upx;
+		line-height: 100upx;
+		background-color: #00AA00;
+	}
+	
+	.tec-height{
+		height: 120upx;
 	}
 </style>

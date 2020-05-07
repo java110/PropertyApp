@@ -150,6 +150,12 @@
         ,{
             "path" : "pages/excuteInspection/excuteInspection",
             "style" : {
+				"navigationBarTitleText": "巡检过程"
+			}
+        }
+        ,{
+            "path" : "pages/excuteOneInspection/excuteOneInspection",
+            "style" : {
 				"navigationBarTitleText": "执行巡检"
 			}
         },{

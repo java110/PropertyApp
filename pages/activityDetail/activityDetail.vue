@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="detailContainer">
-		  <image class="headImg" :src="activity.src"></image>
+		  <image class="headImg" v-if="showHeadImage" :src="activity.src" @error="hideHeadImage()"></image>
 		  <view class="ad_titile">
 		    <text class="company">{{activity.title}}</text>
 		  </view>
@@ -23,6 +23,7 @@
 			return {
 				activitiesId:'',
 				currentCommunityId:'',
+				showHeadImage:true,
 				activity:{
 					src:'',
 					title:'',
@@ -38,6 +39,10 @@
 			this._loadActivites();
 		},
 		methods: {
+			hideHeadImage:function(){
+				console.log('加载图片失败')
+				this.showHeadImage = false;
+			},
 			
 			/**
 			   * 加载活动
@@ -60,7 +65,6 @@
 			      success: function (res) {
 			        console.log("请求返回信息：", res);
 			        if (res.statusCode == 200) {
-			
 			          let _activites = res.data.activitiess;
 			          _activites.forEach(function (_item) {
 			            _item.src = _that.java110Constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId + "&time=" + new Date();
@@ -104,7 +108,7 @@
 	
 	.detailContainer .ad_titile{
 	  text-align: center;
-	  margin-top: 30rpx;
+	  padding-top: 30rpx;
 	  margin-bottom: 30rpx;
 	  font-size: 44rpx;
 	}

@@ -1,5 +1,7 @@
 import CryptoJS from '../lib/crypto-js.js'
 
+const StringUtil = require("./StringUtil")
+
 var keyvi = 'java110_hc_wuxw';
 function des_encrypt(message) {
     var key            = CryptoJS.MD5(keyvi).toString();
@@ -17,6 +19,10 @@ function des_encrypt(message) {
 //des解密 DES-EDE3-CBC
 function des_decrypt(message)
 {
+	console.log("message",message);
+	if(StringUtil.isNull(message)){
+		return message;
+	}
     var key            = CryptoJS.MD5(keyvi).toString();
     var iv            = CryptoJS.MD5(keyvi).toString();
     var crypto_key     = CryptoJS.enc.Utf8.parse(key);

@@ -8,7 +8,7 @@ class MappingConstant {
 
   static TOKEN = "token"; // token 标识
 
-  static USER_INFO = "userInfo"; // 用户信息
+  static USER_INFO = "STAFF_USER_INFO"; // 用户信息
 
   static AREA_INFO = "areaInfo"; // 地区信息
 

@@ -151,8 +151,12 @@ const _loadArea = function(_level, _parentAreaCode, callBack = _areaList => {}) 
  */
 const getCurrentCommunity = function() {
 	let currentCommunity = uni.getStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO);
+	console.log('当前小区获取',currentCommunity);
 	if (util.string.isNull(currentCommunity)) {
 		return {};
+	}
+	if(currentCommunity instanceof Object){
+		return currentCommunity;
 	}
 	return JSON.parse(currentCommunity);
 };

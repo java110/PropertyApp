@@ -143,7 +143,8 @@
         ,{
             "path" : "pages/purchase/purchase",
             "style" : {
-				"navigationBarTitleText": "采购管理"
+				"navigationBarTitleText": "采购管理",
+				"navigationBarBackgroundColor":"#57fef6"
 			}
         }
         ,{
@@ -156,6 +157,35 @@
             "path" : "pages/excuteOneInspection/excuteOneInspection",
             "style" : {
 				"navigationBarTitleText": "执行巡检"
+			}
+        },{
+            "path" : "pages/purchaseRequest/purchaseRequest",
+            "style" : {
+				"navigationBarTitleText": "采购申请"
+			}
+        }
+        ,{
+            "path" : "pages/pOutOfStorageRequest/pOutOfStorageRequest",
+            "style" : {
+				"navigationBarTitleText": "出库申请"
+			}
+        }
+        ,{
+            "path" : "pages/purchasingSchedule/purchasingSchedule",
+            "style" : {
+				"navigationBarTitleText": "申请进度"
+			}
+        }
+        ,{
+            "path" : "pages/purchaseReview/purchaseReview",
+            "style" : {
+				"navigationBarTitleText": "采购审核"
+			}
+        }
+        ,{
+            "path" : "pages/purchaseList/purchaseList",
+            "style" : {
+				"navigationBarTitleText": "选择类型"
 			}
         }
     ],

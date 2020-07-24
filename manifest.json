@@ -86,6 +86,7 @@
                     "secure" : true // 设置支持https协议的代理
                 }
             }
-        }
+        },
+        "domain" : "https://property.demo.winqi.cn"
     }
 }

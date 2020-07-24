@@ -62,16 +62,6 @@
 </template>
 
 <script>
-	/**
-	 * {
-					cuIcon: 'discoverfill',
-					color: 'purple',
-					badge: 0,
-					name: '停车收费',
-					pathUrl: '/notice/notice'
-				},
-	 */
-	
 	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
 	export default {
 		data() {
@@ -79,29 +69,17 @@
 				gridCol: 4,
 				currentCommunityId: '',
 				currentCommunityName: '',
-				cuIconList: [{
-					cuIcon: 'cardboardfill',
-					color: 'red',
-					badge: 0,
-					name: '维修录单',
-					pathUrl: '/repairOrder/repairOrder'
-				}, {
+				cuIconList: [ {
 					cuIcon: 'recordfill',
 					color: 'orange',
 					badge: 0,
-					name: '维修受理',
+					name: '维修管理',
 					pathUrl: '/myModify/myModify'
-				}, {
-					cuIcon: 'picfill',
-					color: 'yellow',
-					badge: 0,
-					name: '投诉录单',
-					pathUrl: '/complaintOrder/complaintOrder'
 				}, {
 					cuIcon: 'noticefill',
 					color: 'olive',
 					badge: 0,
-					name: '投诉受理',
+					name: '投诉管理',
 					pathUrl: '/complaintList/complaintList'
 				}, {
 					cuIcon: 'upstagefill',
@@ -120,6 +98,12 @@
 					color: 'blue',
 					badge: 0,
 					name: '公告',
+					pathUrl: '/notice/notice'
+				}, {
+					cuIcon: 'clothesfill',
+					color: 'blue',
+					badge: 0,
+					name: '远程开门',
 					pathUrl: '/notice/notice'
 				}],
 				swiperList: [],

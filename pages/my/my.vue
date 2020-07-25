@@ -24,6 +24,12 @@
 						<text class="text-grey">个人信息</text>
 					</view>
 				</view>
+				<view class="cu-item arrow" @tap="_repairFinish()">
+					<view class="content">
+						<text class="lg text-gray cuIcon-order"></text>
+						<text class="text-grey">维修已办</text>
+					</view>
+				</view>
 				<view class="cu-item arrow" @tap="_changePwd()">
 					<view class="content">
 						<text class="lg text-gray cuIcon-lock"></text>
@@ -112,6 +118,11 @@
 				uni.navigateTo({
 					url:"/pages/userInfo/userInfo"
 				});
+			},
+			_repairFinish:function(){
+				uni.navigateTo({
+					url:"/pages/repairDispatchFinish/repairDispatchFinish"
+				})
 			},
 			//修改密码
 			_changePwd:function(){

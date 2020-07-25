@@ -188,6 +188,19 @@
 				"navigationBarTitleText": "选择类型"
 			}
         }
+        ,{
+            "path" : "pages/repairHandle/repairHandle",
+            "style" : {
+				"navigationBarTitleText": "订单处理"
+			}
+        }
+        ,{
+            "path" : "pages/repairDispatchFinish/repairDispatchFinish",
+            "style" : {
+				"navigationBarTitleText": "维修已办"
+				
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

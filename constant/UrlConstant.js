@@ -73,6 +73,10 @@ const listRepairStaffs = baseUrl + "app/ownerRepair.listRepairStaffs";
 //查询员工报修单
 const listStaffRepairs = baseUrl + "app/ownerRepair.listStaffRepairs";
 
+//查询完成报修单
+const listStaffFinishRepairs = baseUrl +"app/ownerRepair.listStaffFinishRepairs";
+
+
 
 module.exports = {
   baseUrl: baseUrl,
@@ -108,5 +112,6 @@ module.exports = {
   listInspectionTaskDetails:listInspectionTaskDetails,
   updateInspectionTaskDetail:updateInspectionTaskDetail,
   listRepairStaffs:listRepairStaffs,
-  listStaffRepairs:listStaffRepairs
+  listStaffRepairs:listStaffRepairs,
+  listStaffFinishRepairs:listStaffFinishRepairs
 };

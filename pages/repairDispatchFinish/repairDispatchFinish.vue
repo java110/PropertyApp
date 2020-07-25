@@ -32,10 +32,6 @@
 			</view>
 			<view class="solid-top flex justify-end margin-top padding-top-sm ">
 				<button class="cu-btn sm line-gray" @click="repairDetail(item)">详情</button>
-				<button class="cu-btn sm bg-orange margin-left" @click="dealRepair(item,'transfer')">转单</button>
-				<button class="cu-btn sm bg-red margin-left" @click="dealRepair(item,'back')">退单</button>
-				<button class="cu-btn sm bg-green margin-left" @click="dealRepair(item,'finish')">办结</button>
-				
 			</view>
 		</view>
 	</view>
@@ -72,7 +68,7 @@
 				};
 				
 				this.java110Context.request({
-					url: _that.java110Constant.url.listStaffRepairs,
+					url: _that.java110Constant.url.listStaffFinishRepairs,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据
@@ -113,13 +109,6 @@
 					url:"/pages/repairDetail/repairDetail?repairId=" + _item.repairId+'&storeId='+this.storeId
 					
 				});	
-			},
-			dealRepair:function(item,action){
-				uni.navigateTo({
-					url:'/pages/repairHandle/repairHandle?action='
-					+action+"&repairId="+item.repairId
-					+"&repairType="+item.repairType
-				});
 			}
 		}
 	}

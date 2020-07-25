@@ -1,9 +1,6 @@
 <template>
 	<view>
-		<view class="padding margin-top">
-			<text>报修单详情</text>
-		</view>
-		<view class="cu-list menu" >
+		<view class="cu-list menu margin-top">
 			<view class="cu-item">
 				<view class="content">
 					<text class="cuIcon-edit text-green"></text>
@@ -24,16 +21,16 @@
 			</view>
 			<view class="cu-item">
 				<view class="content">
-					<text class="cuIcon-footprint text-green"></text>
+					<text class="cuIcon-profile text-green"></text>
 					<text class="text-grey">报修人</text>
 				</view>
 				<view class="action">
-					<text class="text-grey text-sm">{{repairDetailInfo.userName}}</text>
+					<text class="text-grey text-sm">{{repairDetailInfo.repairName}}</text>
 				</view>
 			</view>
 			<view class="cu-item">
 				<view class="content">
-					<text class="cuIcon-profile text-green"></text>
+					<text class="cuIcon-phone text-green"></text>
 					<text class="text-grey">联系方式</text>
 				</view>
 				<view class="action">
@@ -42,11 +39,11 @@
 			</view>
 			<view class="cu-item">
 				<view class="content">
-					<text class="cuIcon-phone text-green"></text>
-					<text class="text-grey">房屋编号</text>
+					<text class="cuIcon-footprint text-green"></text>
+					<text class="text-grey">报修位置</text>
 				</view>
 				<view class="action">
-					<text class="text-grey text-sm">{{repairDetailInfo.roomId}}</text>
+					<text class="text-grey text-sm">{{repairDetailInfo.repairObjName}}</text>
 				</view>
 			</view>
 			<view class="cu-item">
@@ -56,15 +53,6 @@
 				</view>
 				<view class="action">
 					<text class="text-grey text-sm">{{repairDetailInfo.appointmentTime}}</text>
-				</view>
-			</view>
-			<view class="cu-item">
-				<view class="content">
-					<text class="cuIcon-time text-green"></text>
-					<text class="text-grey">维修师傅</text>
-				</view>
-				<view class="action">
-					<text class="text-grey text-sm">{{repairDetailInfo.repairName}}</text>
 				</view>
 			</view>
 			<view class="cu-item">
@@ -85,8 +73,46 @@
 					<text class="text-grey text-sm">{{repairDetailInfo.context}}</text>
 				</view>
 			</view>
+			<view class="cu-item" v-if="repairDetailInfo.photos.length > 0">
+				<view class="margin-top grid text-center col-3 grid-square" >
+					<view class="" v-for="(_item,index) in repairDetailInfo.photos" :key="index">
+						<image mode="scaleToFill" :data-url="srcPath+_item.url" :src="srcPath+_item.url" @tap="preview"></image>
+					</view>
+				</view>
+			</view>
 		</view>
 		
+
+
+
+		<view class="cu-timeline margin-top">
+			<view class="cu-time">工单</view>
+			<view class="cu-item " v-for="(item,index) in staffs" :key="index">
+				<view class="bg-cyan content">
+					<text>{{item.startTime}} </text> 到达 {{item.staffName}} 工位
+				</view>
+				<view class="bg-cyan content" v-if="item.endTime != undefined">
+					<text>{{item.endTime}} </text> 处理完成
+				</view>
+				<view class="bg-cyan content" v-if="item.endTime != undefined">
+					<text>处理意见：</text> {{item.context}}
+				</view>
+			</view>
+		</view>
+
+
+		<view class="cu-modal" :class="viewImage?'show':''">
+			<view class="cu-dialog">
+				<view class="bg-img" :style="'background-image: url('+ viewImageSrc +');height:800rpx;'">
+					<view class="cu-bar justify-end text-white">
+						<view class="action" @tap="closeViewImage()">
+							<text class="cuIcon-close "></text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
 	</view>
 </template>
 
@@ -94,57 +120,50 @@
 	export default {
 		data() {
 			return {
-				repairDetailInfo:{},
-				storeId:'',
-				repairId:''
+				viewImage: false,
+				viewImageSrc: '',
+				repairDetailInfo: {},
+				storeId: '',
+				repairId: '',
+				staffs: [],
+				srcPath: ''
 			}
 		},
 		onLoad(options) {
-			let _complaintId = options.complaintId;
 			this.storeId = options.storeId;
 			this.repairId = options.repairId;
-			
-			console.log('options',options);
+			console.log('options', options);
+			this.srcPath = this.java110Constant.url.hcBaseUrl;
 			this._queryRepairDetail();
+			//加载报修类型
+			this._loadRepairStaffs();
 		},
 		methods: {
-			_loadModfiyHistoryOrder:function(){
+			_loadModfiyHistoryOrder: function() {
 				//
-				this.modifyComplaint = wx.getStorageSync("_toModifyComplaint_"+this.complaintId);
-				
+				this.modifyComplaint = wx.getStorageSync("_toModifyComplaint_" + this.complaintId);
+
 			},
-			_queryRepairDetail:function(){
+			_loadRepairStaffs: function() {
+				let _communityInfo = this.java110Context.getCurrentCommunity();
 				let _that = this;
-				let _objData = {
+				let dataObj = {
 					page: 1,
-					row: 1,
-					storeId: _that.storeId,
-					communityId:_that.java110Context.getCurrentCommunity().communityId,
-					repairId:_that.repairId
+					row: 50,
+					communityId: _communityInfo.communityId,
+					repairId: this.repairId
 				};
-				this.java110Context.request({
-					url: _that.java110Constant.url.listOwnerRepairs,
-					header: _that.java110Context.getHeaders(),
+				uni.request({
+					url: _that.java110Constant.url.listRepairStaffs,
+					header: this.java110Context.getHeaders(),
 					method: "GET",
-					data: _objData, //动态数据
+					data: dataObj,
+					//动态数据
 					success: function(res) {
-						console.log("请求返回信息：", res);
-						if (res.statusCode != 200) {
-							uni.showToast({
-								icon:'none',
-								title:res.data
-							});
-							return;
+						let _json = res.data;
+						if (_json.code == 0) {
+							_that.staffs = _json.data;
 						}
-						let _data = res.data;
-						_that.repairDetailInfo = _data.ownerRepairs[0];
-						
-						_data.ownerRepairs.forEach(function(item){
-							let dateStr = item.appointmentTime;
-							console.log(dateStr);
-							let _date=new Date(dateStr);
-							item.appointmentTime = (_date.getMonth()+1) +'-'+_date.getDate();
-						});
 					},
 					fail: function(e) {
 						wx.showToast({
@@ -154,7 +173,55 @@
 						});
 					}
 				});
-			}
+			},
+			_queryRepairDetail: function() {
+				let _that = this;
+				let _objData = {
+					page: 1,
+					row: 1,
+					storeId: _that.storeId,
+					communityId: _that.java110Context.getCurrentCommunity().communityId,
+					repairId: _that.repairId
+				};
+				this.java110Context.request({
+					url: _that.java110Constant.url.listOwnerRepairs,
+					header: _that.java110Context.getHeaders(),
+					method: "GET",
+					data: _objData, //动态数据
+					success: function(res) {
+						let _json = res.data;
+						if (_json.code != 0) {
+							uni.showToast({
+								icon: 'none',
+								title: _json.msg
+							});
+							return;
+						}
+						let _data = _json.data;
+						_that.repairDetailInfo = _data[0];
+
+						let dateStr = _that.repairDetailInfo.appointmentTime;
+						let _date = new Date(dateStr);
+						_that.repairDetailInfo.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
+					},
+					fail: function(e) {
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
+			},
+			preview: function(e) {
+				console.log('图片地址', e);
+				let _url = e.target.dataset.url;
+				this.viewImageSrc = _url;
+				this.viewImage = true;
+			},
+			closeViewImage: function() {
+				this.viewImage = false;
+			},
 		}
 	}
 </script>

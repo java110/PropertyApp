@@ -3,19 +3,24 @@
 		<view class="margin-bottom-xs">
 			<uni-notice-bar showIcon="true" scrollable="true" single="true" speed="30" text="HC掌上物业是免费开源的HC小区管理系统的分支项目，欢迎访问官网http://homecommunity.cn了解"></uni-notice-bar>
 		</view>
-		<scroll-view :scroll-y="modalName==null" class="page" :class="show">
-			<view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
-				<view class="cu-item" v-for="(item,index) in cuIconList" :key="index" v-if="index<gridCol*2">
-					<view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]" @tap="_toHref(item)">
-						<view class="cu-tag badge" v-if="item.badge!=0">
-							<block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
-						</view>
-					</view>
-					<text>{{item.name}}</text>
-				</view>
-			</view>
+		<scroll-view @scrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">	
+			<swiper class="categoryList padding-top-xs bg-white" indicator-dots="true" indicator-color="rgba(228,228,228,1)"
+			 indicator-active-color="#FECA49">
+				<block v-for="(item, index) in categoryList" :key="index">
+					<swiper-item>
+						<block v-for="(item2, index2) in item" :key="index2">
+							<view class="category-info">
+								<navigator @tap="_toHref(item2)">
+									<image :src="item2.src" class="category-image"></image>
+									<view class="category-text">{{item2.name}}</view>
+								</navigator>
+							</view>
+						</block>
+					</swiper-item>
+				</block>
+			</swiper>
 			<!-- 轮播图 -->
-			<view class="margin-top">
+			<view class="margin-top-xs">
 				<swiper class="screen-swiper swiper-height-index" :class="round-dot" :indicator-dots="true" :circular="true"
 				 :autoplay="true" interval="5000" duration="500">
 					<swiper-item v-for="(item,index) in swiperList" :key="index">
@@ -62,6 +67,7 @@
 </template>
 
 <script>
+	// 后期开启 远程开门 和抄表
 	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
 	export default {
 		data() {
@@ -69,43 +75,37 @@
 				gridCol: 4,
 				currentCommunityId: '',
 				currentCommunityName: '',
-				cuIconList: [ {
-					cuIcon: 'recordfill',
-					color: 'orange',
-					badge: 0,
-					name: '维修管理',
-					pathUrl: '/myModify/myModify'
-				}, {
-					cuIcon: 'noticefill',
-					color: 'olive',
-					badge: 0,
-					name: '投诉管理',
-					pathUrl: '/complaintList/complaintList'
-				}, {
-					cuIcon: 'upstagefill',
-					color: 'cyan',
-					badge: 0,
-					name: '巡检打卡',
-					pathUrl: '/inspection/inspection'
-				},{
-					cuIcon: 'questionfill',
-					color: 'mauve',
-					badge: 0,
-					name: '采购管理',
-					pathUrl: '/purchase/purchase'
-				}, {
-					cuIcon: 'clothesfill',
-					color: 'blue',
-					badge: 0,
-					name: '公告',
-					pathUrl: '/notice/notice'
-				}, {
-					cuIcon: 'clothesfill',
-					color: 'blue',
-					badge: 0,
-					name: '远程开门',
-					pathUrl: '/notice/notice'
-				}],
+				categoryList: {
+					pageone: [{
+						name: "维修工单",
+						src: "/static/image/index_repair.png",
+						href: "/pages/repairOrder/repairOrder"
+					}, {
+						name: "维修待办",
+						src: "/static/image/index_dealRepair.png",
+						href: "/pages/repairDispatch/repairDispatch"
+					}, {
+						name: "巡检打卡",
+						src: "/static/image/index_inspection.png",
+						href: "/pages/inspection/inspection"
+					}, {
+						name: "采购",
+						src: "/static/image/index_purchase.png",
+						href: "/pages/purchase/purchase"
+					}, {
+						name: "投诉待办",
+						src: "/static/image/index_complaint.png",
+						href: "/pages/complaintList/complaintList"
+					}, {
+						name: "公告",
+						src: "/static/image/index_notice.png",
+						href: "/pages/notice/notice"
+					}, {
+						name: "费用账单",
+						src: "/static/image/index_bill.png",
+						href: "/pages/notice/notice"
+					}]
+				},
 				swiperList: [],
 				activitys: []
 			}
@@ -251,7 +251,7 @@
 			},
 			_toHref: function(_item) {
 				uni.navigateTo({
-					url: '/pages' + _item.pathUrl
+					url:  _item.href
 				});
 			}
 
@@ -260,6 +260,7 @@
 </script>
 
 <style>
+	@import "./index.css";
 	.swiper-height-index {
 		height: 240upx;
 		min-height: 240upx;

@@ -118,13 +118,13 @@
 		{
 		    "path" : "pages/repairOrder/repairOrder",
 		    "style" : {
-				"navigationBarTitleText": "维修录单"
+				"navigationBarTitleText": "维修工单池"
 			}
 		},
 		{
-		    "path" : "pages/myModify/myModify",
+		    "path" : "pages/repairDispatch/repairDispatch",
 		    "style" : {
-				"navigationBarTitleText": "维修受理单"
+				"navigationBarTitleText": "维修待办单"
 			}
 		},
 		{

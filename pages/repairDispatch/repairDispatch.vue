@@ -1,6 +1,5 @@
 <template>
 	<view>
-		
 		<view class="margin-top" >
 			<view class="cu-list menu-avatar">
 				<view class="cu-item arrow" v-for="(item,index) in myOrders" :key="index" @tap="_toModifyMyOrder(item,communityId)">
@@ -11,12 +10,48 @@
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
 								{{item.repairTypeName}}
-							</view> </view>
+							</view>
+						</view>
 					</view>
 					<view class="action">
 						<view class="text-grey text-xs">{{item.createTime}}</view>
 					</view>
 				</view>
+			</view>
+		</view>
+		
+		<view v-for="(item,index) in myOrders" :key="index" class="bg-white margin-top margin-right-xs radius margin-left-xs padding">
+			<view class="flex padding-bottom-xs solid-bottom justify-between">
+				<view>{{item.repairId}}</view>
+				<view class="text-gray">{{item.tel}}</view>
+			</view>
+			<view class="flex margin-top justify-between">
+				<view class="text-gray">报修类型</view>
+				<view class="text-gray">{{item.repairTypeName}}</view>
+			</view>
+			<view class="flex margin-top-xs justify-between">
+				<view class="text-gray">报修人</view>
+				<view class="text-gray">{{item.repairName}}</view>
+			</view>
+			<view class="flex margin-top-xs justify-between">
+				<view class="text-gray">位置</view>
+				<view class="text-gray">{{item.repairObjName}}</view>
+			</view>
+			<view class="flex margin-top-xs justify-between">
+				<view class="text-gray">预约时间</view>
+				<view class="text-gray">{{item.appointmentTime }}</view>
+			</view>
+			<view class="flex margin-top-xs justify-between">
+				<view class="text-gray">状态</view>
+				<view class="text-gray">{{item.stateName}}</view>
+			</view>
+			<view class="flex margin-top-xs justify-between">
+				<view class="text-gray">报修内容</view>
+				<view class="text-gray">{{item.context}}</view>
+			</view>
+			<view class="solid-top flex justify-end margin-top padding-top-sm ">
+				<button class="cu-btn sm line-gray" @click="repairDetail(item)">详情</button>
+				<button class="cu-btn sm bg-red margin-left" @click="deleteRepair(item)">处理</button>
 			</view>
 		</view>
 	</view>
@@ -37,19 +72,9 @@
 			let _userInfo = this.java110Context.getUserInfo();
 			let _storeId = _userInfo.storeId;
 			this.storeId = _storeId;
-			
-			this._tabSelect('10001');
-			
+			this._loadMyModify();
 		},
 		methods: {
-			_tabSelect: function(_state) {
-				this.state = _state;
-				if(_state == '10002'){
-					this._loadHisModify();
-				}else{
-					this._loadMyModify();
-				}
-			},
 			_loadMyModify:function(){
 				//
 				let _that = this;
@@ -58,9 +83,6 @@
 				let _objData = {
 					page: 1,
 					row: 15,
-					// storeId: storeId,
-					// userId: _userInfo.userId,
-					// process:'AUDIT',
 					userId:_userInfo.userId,
 					communityId:_that.java110Context.getCurrentCommunity().communityId
 				};

@@ -32,9 +32,9 @@
 			</view>
 			<view class="solid-top flex justify-end margin-top padding-top-sm ">
 				<button class="cu-btn sm line-gray" @click="repairDetail(item)">详情</button>
-				<button class="cu-btn sm bg-orange margin-left" @click="dealRepair(item,'transfer')">转单</button>
-				<button class="cu-btn sm bg-red margin-left" @click="dealRepair(item,'back')">退单</button>
-				<button class="cu-btn sm bg-green margin-left" @click="dealRepair(item,'finish')">办结</button>
+				<button class="cu-btn sm bg-orange margin-left" @click="dealRepair(item,'TRANSFER')">转单</button>
+				<button class="cu-btn sm bg-red margin-left" @click="dealRepair(item,'BACK')">退单</button>
+				<button class="cu-btn sm bg-green margin-left" @click="dealRepair(item,'FINISH')">办结</button>
 				
 			</view>
 		</view>
@@ -110,7 +110,8 @@
 				console.log('_item',_item);
 				//wx.setStorageSync("_toModifyComplaint_"+_item.complaintId, _item);
 				uni.navigateTo({
-					url:"/pages/repairDetail/repairDetail?repairId=" + _item.repairId+'&storeId='+this.storeId
+					url:"/pages/repairDetail/repairDetail?repairId=" 
+					+ _item.repairId+'&storeId='+this.storeId
 					
 				});	
 			},
@@ -119,6 +120,8 @@
 					url:'/pages/repairHandle/repairHandle?action='
 					+action+"&repairId="+item.repairId
 					+"&repairType="+item.repairType
+					+"&preStaffId="+item.preStaffId
+					+"&preStaffName="+item.preStaffName
 				});
 			}
 		}

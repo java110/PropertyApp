@@ -14,7 +14,7 @@
 		</view>
 
 		<view class="cu-form-group margin-top">
-			<textarea v-model="context" placeholder="请输入处理意见"></textarea>
+			<textarea v-model="content" placeholder="请输入处理意见"></textarea>
 		</view>
 
 		<view class="cu-bar bg-white margin-top">
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+	import {loadRepairStaff,dispatchRepair} from '../../api/repair/repair.js'
 	export default {
 		data() {
 			return {
@@ -61,7 +62,7 @@
 				repairStaffIndex: 0,
 				staffId: '',
 				staffName: '',
-				context: '',
+				content: '',
 				userId:'',
 				userName:''
 			}
@@ -85,40 +86,26 @@
 				let _that = this;
 				let _data = {
 					repairType: this.repairType,
-					communtiyId: this.java110Context.getCurrentCommunity().communityId,
+					communtiyId: this.factory.getCurrentCommunity().communityId,
 					page: 1,
 					row: 50,
 					state: '9999'
-				}
-				this.java110Context.request({
-					url: _that.java110Constant.url.listRepairTypeUsers,
-					header: _that.java110Context.getHeaders(),
-					method: "GET",
-					data: _data, //动态数据
-					success: function(res) {
-						console.log("请求返回信息：", res);
-						let _json = res.data;
-						if (_json.code != 0) {
-							uni.showToast({
-								icon: 'none',
-								title: _json.msg
-							});
-							return;
-						}
-						let _data = _json.data;
-						_that.staffCloums = _that.staffCloums.concat(_data);
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
+				};
+				loadRepairStaff(this,_data)
+				.then(function(res){
+					let _json = res.data;
+					if (_json.code != 0) {
+						uni.showToast({
 							icon: 'none',
-							duration: 2000
+							title: _json.msg
 						});
+						return;
 					}
+					let _data = _json.data;
+					_that.staffCloums = _that.staffCloums.concat(_data);
 				});
 			},
 			staffChange: function(e) {
-
 				this.repairStaffIndex = e.target.value //取其下标
 				if (this.repairStaffIndex == 0) {
 					this.staffId = '' //选中的id
@@ -147,7 +134,6 @@
 						let _base64Photo = '';
 						this.java110Factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
 							_base64Photo = _res;
-							console.log('base64', _base64Photo);
 							that.photos.push(_base64Photo);
 						});
 					}
@@ -155,50 +141,9 @@
 			},
 
 			_dispatchRepair: function(e) {
-				let obj = {
-					"staffId": this.staffId,
-					"staffName": this.staffName,
-					"context": this.context,
-					"repairId": this.repairId,
-					"repairType": this.repairType,
-					"action": this.action,
-					"communityId":this.java110Context.getCurrentCommunity().communityId,
-					"photos":[],
-					"userId":this.userId,
-					"userName":this.userName
-				}
-				let _photos = this.photos;
-				_photos.forEach(function(_item) {
-					obj.photos.push({
-						"photo": _item
-					});
-				});
-
-				let msg = "";
-				if (obj.context == "") {
-					msg = "请填写处理意见";
-				} else if (obj.staffId == "") {
-					msg = "请填写师傅";
-				} else if (obj.staffName == "") {
-					msg = "请填写师傅";
-				} else if (obj.repairId == "") {
-					msg = "数据错误";
-				}
-
-				if (msg != "") {
-					wx.showToast({
-						title: msg,
-						icon: 'none',
-						duration: 2000
-					});
-					return;
-				}
-				this.java110Context.request({
-					url: this.java110Constant.url.repairDispatch, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
-					header: this.java110Context.getHeaders(),
-					method: "POST",
-					data: obj, //动态数据
-					success: function(res) {
+				
+				dispatchRepair(this)
+				.then(function(res) {
 						let _json = res.data;
 						if (_json.code == 0) {
 							uni.navigateBack({
@@ -210,18 +155,8 @@
 							title: _json.msg,
 							icon: 'none',
 							duration: 2000
-						})
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
-					}
+						})	
 				});
-
-
 			},
 
 		}

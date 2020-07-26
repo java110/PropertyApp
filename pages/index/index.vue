@@ -69,43 +69,14 @@
 <script>
 	// 后期开启 远程开门 和抄表
 	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
+	import {loadAdvert,loadCategory,loadActivitys} from '../../api/index/index.js'
 	export default {
 		data() {
 			return {
 				gridCol: 4,
 				currentCommunityId: '',
 				currentCommunityName: '',
-				categoryList: {
-					pageone: [{
-						name: "维修工单",
-						src: "/static/image/index_repair.png",
-						href: "/pages/repairOrder/repairOrder"
-					}, {
-						name: "维修待办",
-						src: "/static/image/index_dealRepair.png",
-						href: "/pages/repairDispatch/repairDispatch"
-					}, {
-						name: "巡检打卡",
-						src: "/static/image/index_inspection.png",
-						href: "/pages/inspection/inspection"
-					}, {
-						name: "采购",
-						src: "/static/image/index_purchase.png",
-						href: "/pages/purchase/purchase"
-					}, {
-						name: "投诉待办",
-						src: "/static/image/index_complaint.png",
-						href: "/pages/complaintList/complaintList"
-					}, {
-						name: "公告",
-						src: "/static/image/index_notice.png",
-						href: "/pages/notice/notice"
-					}, {
-						name: "费用账单",
-						src: "/static/image/index_bill.png",
-						href: "/pages/notice/notice"
-					}]
-				},
+				categoryList:loadCategory(),
 				swiperList: [],
 				activitys: []
 			}
@@ -114,42 +85,15 @@
 			uniNoticeBar
 		},
 		onLoad() {
-			this._loadCommunity();
+			this._loadCommunity();	
 		},
 		methods: {
 			_loadCommunity: function() {
 				let _that = this;
-				//加载小区信息
-				this.java110Context.getCommunity(function(_communitys) {
-					let currentCommunity = _that.java110Context.getCurrentCommunity(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO);
-					//随机放一个小区
-					let _tmpCommunityInfo = _communitys[0];
-					if (_that.java110Util.string.isNull(currentCommunity)) {
-						uni.setStorageSync(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(_tmpCommunityInfo));
-						_that.currentCommunityId = _tmpCommunityInfo.communityId;
-						_that.currentCommunityName = _tmpCommunityInfo.name;
-						_that._loadAd();
-						return;
-					}
-					let communityId = '';
-					_communitys.forEach(function(_item) {
-						if (_item.communityId == currentCommunity.communityId) {
-							communityId = _item.communityId;
-						}
-					});
-					//说明当前小区 已经没有权限管理了
-					if (_that.java110Util.string.isNull(communityId)) {
-						uni.setStorageSync(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(_tmpCommunityInfo));
-						_that.currentCommunityId = _tmpCommunityInfo.communityId;
-						_that.currentCommunityName = _tmpCommunityInfo.name;
-						_that._loadAd();
-						return;
-					}
-
-					_that.currentCommunityId = currentCommunity.communityId;
-					_that.currentCommunityName = currentCommunity.name;
-					_that._loadAd();
-				}, true);
+				this.factory.getCommunity(true)
+				.then(function(_communitys){
+					_that._loadCurrentCommunity(_communitys);
+				})
 			},
 			_loadAd: function() {
 				let _that = this;
@@ -158,43 +102,27 @@
 					row: 5,
 					communityId: this.currentCommunityId
 				};
-				this.java110Context.request({
-					url: _that.java110Constant.url.listAdvertPhoto,
-					header: _that.java110Context.getHeaders(),
-					method: "GET",
-					data: _objData, //动态数据
-					success: function(res) {
-						console.log("请求返回信息：", res);
-						if (res.statusCode == 200) {
-
-							let _advertPhotos = res.data;
-							let _aPhotos = [];
-							_advertPhotos.forEach(function(_item) {
-								_item.type = "image";
-								_item.url = _that.java110Constant.url.hcBaseUrl + _item.url + "&time=" + new Date();
-								_aPhotos.push(_item);
-							});
-
-							_that.swiperList = _aPhotos;
-
-							console.log(_that.swiperList);
-							_that._loadActivitys();
-							return;
-						}
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
+				loadAdvert(this,_objData)
+				.then(function(res){
+					if (res.statusCode == 200) {
+						let _advertPhotos = res.data;
+						let _aPhotos = [];
+						_advertPhotos.forEach(function(_item) {
+							_item.type = "image";
+							_item.url = _that.java110Constant.url.hcBaseUrl + _item.url + "&time=" + new Date();
+							_aPhotos.push(_item);
+						});
+						_that.swiperList = _aPhotos;
+						console.log(_that.swiperList);
+						_that._loadActivitys();
+						return;
 					}
-				});
+					wx.showToast({
+						title: "服务器异常了",
+						icon: 'none',
+						duration: 2000
+					})
+				})
 			},
 			_loadActivitys: function() {
 				let _that = this;
@@ -203,56 +131,71 @@
 					row: 5,
 					communityId: this.currentCommunityId
 				};
-				_that.java110Context.request({
-					url: _that.java110Constant.url.listActivitiess,
-					header: _that.java110Context.getHeaders(),
-					method: "GET",
-					data: _objData, //动态数据
-					success: function(res) {
-						console.log("请求返回信息：", res);
-						if (res.statusCode == 200) {
-							let _activites = res.data.activitiess;
-							let _acts = [];
-							_activites.forEach(function(_item) {
-								_item.src = _that.java110Constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId +
-									"&time=" + new Date();
-								_acts.push(_item);
-							});
-
-
-							_that.activitys = _acts;
-							console.log('小区文化', _that.activitys);
-							return;
-						}
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						})
+				loadActivitys(this,_objData)
+				.then(function(res){
+					if (res.statusCode == 200) {
+						let _activites = res.data.activitiess;
+						let _acts = [];
+						_activites.forEach(function(_item) {
+							_item.src = _that.java110Constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId +
+								"&time=" + new Date();
+							_acts.push(_item);
+						});
+						_that.activitys = _acts;
+						return;
 					}
-				});
+					wx.showToast({
+						title: "服务器异常了",
+						icon: 'none',
+						duration: 2000
+					})
+				})
 			},
 			_moreActivity: function() {
-				uni.navigateTo({
+				this.context.navigateTo({
 					url: '/pages/activityes/activityes?currentCommunityId=' + this.currentCommunityId
 				});
 			},
 			_toDetail: function(_item) {
-				uni.navigateTo({
+				this.context.navigateTo({
 					url: '/pages/activityDetail/activityDetail?activitiesId=' + _item.activitiesId + "&currentCommunityId=" + this.currentCommunityId
 				});
 			},
 			_toHref: function(_item) {
-				uni.navigateTo({
+				this.context.navigateTo({
 					url:  _item.href
 				});
+			},
+			_loadCurrentCommunity:function(_communitys){
+				let _that =this;
+				let currentCommunity = _that.java110Context.getCurrentCommunity(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO);
+				//随机放一个小区
+				let _tmpCommunityInfo = _communitys[0];
+				if (_that.java110Util.string.isNull(currentCommunity)) {
+					uni.setStorageSync(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(_tmpCommunityInfo));
+					_that.currentCommunityId = _tmpCommunityInfo.communityId;
+					_that.currentCommunityName = _tmpCommunityInfo.name;
+					_that._loadAd();
+					return;
+				}
+				let communityId = '';
+				_communitys.forEach(function(_item) {
+					if (_item.communityId == currentCommunity.communityId) {
+						communityId = _item.communityId;
+					}
+				});
+				//说明当前小区 已经没有权限管理了
+				if (_that.util.isNull(communityId)) {
+					uni.setStorageSync(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(_tmpCommunityInfo));
+					_that.currentCommunityId = _tmpCommunityInfo.communityId;
+					_that.currentCommunityName = _tmpCommunityInfo.name;
+					_that._loadAd();
+					return;
+				}
+				
+				_that.currentCommunityId = currentCommunity.communityId;
+				_that.currentCommunityName = currentCommunity.name;
+				_that._loadAd();
 			}
 
 		}

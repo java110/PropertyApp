@@ -33,10 +33,8 @@ const getHeaders = function() {
 const request = function(_reqObj) {
 	//检查是否登录成功
 	factory.login.checkLoginStatus(function() {
-
 		//重写token
 		_reqObj.header.cookie = '_java110_token_=' + uni.getStorageSync('token'); //console.log("_reqObj",_reqObj);
-		console.log("_reqObj", _reqObj);
 		uni.request(_reqObj);
 	});
 };
@@ -194,7 +192,6 @@ const getCommunity = function(callBack, reload, _condition) {
 		header: getHeaders(),
 		data: _condition,
 		success: function(res) {
-			console.log('login success');
 			if (res.statusCode != 200) {
 				uni.showToast({
 					icon: none,
@@ -219,7 +216,6 @@ const getCommunity = function(callBack, reload, _condition) {
 			uni.showToast({
 				title: '调用接口失败'
 			});
-			console.log(error);
 		}
 	});
 };

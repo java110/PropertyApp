@@ -208,9 +208,9 @@
 			}
         }
         ,{
-            "path" : "pages/complaintDispatch/complaintDispatch",
+            "path" : "pages/complaintFinish/complaintFinish",
             "style" : {
-				"navigationBarTitleText": "投诉待办单"
+				"navigationBarTitleText": "投诉已办单"
 			}
         }
         ,{

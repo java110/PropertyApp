@@ -16,9 +16,9 @@ export default {
 	userLogout: baseUrl + 'app/user.service.logout', //绑定业主
 	listAuditComplaints: baseUrl + 'app/auditUser.listAuditComplaints', //查询绑定业主
 	auditComplaint: baseUrl + 'app/complaint.auditComplaint', //查询业主门禁
-	queryFloors: baseUrl + 'app/floor.queryFloors', // 申请钥匙
-	queryUnits: baseUrl + "app/unit.queryUnits", //查询钥匙
-	queryRooms: baseUrl + "app/room.queryRooms", //申请访客钥匙
+	queryFloors: baseUrl + 'app/floor.queryFloors', // 查询楼栋
+	queryUnits: baseUrl + "app/unit.queryUnits", //查询单元
+	queryRooms: baseUrl + "app/room.queryRooms", //查询房屋
 	applyVisitorApplicationKey: baseUrl + "app/applicationKey.applyVisitorApplicationKey", //上传业主照片
 	uploadOwnerPhoto: baseUrl + "app/owner.uploadOwnerPhoto",
 	getOwnerPhotoPath: hcBaseUrl + "/callComponent/download/getFile/fileByObjId",
@@ -48,5 +48,11 @@ export default {
 	//报修办结
 	repairFinish: baseUrl + "app/ownerRepair.repairFinish",
 	//报修评价
-	 appraiseRepair : baseUrl + 'app/repair/appraiseRepair'
+	 appraiseRepair : baseUrl + 'app/repair/appraiseRepair',
+	 //查询房屋和业主接口
+	 listRoomAndOwner: baseUrl + 'app/fee.listRoomsWhereFeeSet',
+	 //查询费用信息
+	 listFee:baseUrl +'app/fee.listFee',
+	 //查询缴费历史
+	 queryFeeDetail: baseUrl + "app/fee.queryFeeDetail"
 }

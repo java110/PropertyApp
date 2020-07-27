@@ -52,9 +52,9 @@ export function loadCategory(){
 			src: "/static/image/index_notice.png",
 			href: "/pages/notice/notice"
 		}, {
-			name: "费用账单",
+			name: "房产查询",
 			src: "/static/image/index_bill.png",
-			href: "/pages/notice/notice"
+			href: "/pages/roomDetail/roomDetail"
 		}]
 	};
 }

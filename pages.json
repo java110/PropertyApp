@@ -219,6 +219,38 @@
 				"navigationBarTitleText": "投诉处理"	
 			}
         }
+        ,{
+            "path" : "pages/roomDetail/roomDetail",
+            "style" : {
+				"navigationBarTitleText": "房产信息"
+			}
+        }
+        ,{
+            "path" : "pages/selectFloor/selectFloor",
+            "style" : {
+				"navigationBarTitleText": "选择楼栋"
+				
+			}
+        }
+        ,{
+            "path" : "pages/selectUnit/selectUnit",
+            "style" : {
+				"navigationBarTitleText": "选择单元"
+				
+			}
+        }
+        ,{
+            "path" : "pages/selectRoom/selectRoom",
+            "style" : {
+				"navigationBarTitleText": "选择房屋"
+			}
+        }
+        ,{
+            "path" : "pages/feeDetail/feeDetail",
+            "style" : {
+				"navigationBarTitleText": "费用详情"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

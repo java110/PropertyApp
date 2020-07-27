@@ -9,15 +9,15 @@
 			</view>
 			<view class="cu-item" @click="clickHerf('purchasingSchedule/purchasingSchedule');">
 				<view :class="['cuIcon-search']"></view>
-				<text>申请进度</text>
+				<text>采购待办</text>
 			</view>
 			<view class="cu-item" @click="clickHerf('pOutOfStorageRequest/pOutOfStorageRequest');">
 				<view :class="['cuIcon-light','text-red']"></view>
-				<text>出库申请</text>
+				<text>物品领用</text>
 			</view>
 			<view class="cu-item" @click="clickHerf('purchaseReview/purchaseReview');">
 				<view :class="['cuIcon-command']"></view>
-				<text>采购审核</text>
+				<text>领用待办</text>
 			</view>
 		</view>
 	</view>

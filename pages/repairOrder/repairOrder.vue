@@ -9,7 +9,7 @@
 				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="_searchRepair()">搜索</button>
 			</view>
 		</view>
-		<view class="margin-top">
+		<view class="margin-top" v-if="noData==false">
 			<view class="cu-list menu-avatar " v-for="(item,index) in repairOrders" :key="index" @tap="_toRepairDetail(item)">
 				<view class="cu-item arrow">
 					<view class="content content-left">
@@ -32,18 +32,26 @@
 				</view>
 			</view>
 		</view>
+		<view v-else>
+			<no-data-page></no-data-page>
+		</view>
 
 	</view>
 </template>
 
 <script>
+	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	export default {
 		data() {
 			return {
 				orderImg: this.java110Constant.url.baseUrl + 'img/order.png',
 				repairOrders: [],
-				repairName: ''
+				repairName: '',
+				noData:false,
 			}
+		},
+		components: {
+			noDataPage
 		},
 		onLoad() {
 
@@ -87,6 +95,10 @@
 						}
 						let _data = _json.data;
 						_that.repairOrders = _data;
+						if(_that.repairOrders.length < 1){
+							_that.noData = true;
+							return ;
+						}
 
 						_that.repairOrders.forEach(function(item) {
 							let dateStr = item.appointmentTime;

@@ -1,6 +1,7 @@
 <template>
 	<view>
 		<view class="block__title">巡检任务</view>
+		<view v-if="noData==false">
 		<view v-for="(item,index) in tasks" :key="index" class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding-top padding-left padding-right">
 			<view class="flex padding-bottom-xs solid-bottom justify-between">
 				<view>{{item.taskId}}</view>
@@ -30,18 +31,27 @@
 				<button class="cu-btn sm bg-green margin-left" @click="_startInspection(item)">我要巡检</button>
 			</view>
 		</view>
+		</view>
+		<view v-else>
+			<no-data-page></no-data-page>
+		</view>
 	</view>
 </template>
 
 <script>
+	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	export default {
 		data() {
 			return {
 				tasks: [],
 				communityId: '',
 				userId: '',
-				userName: ''
+				userName: '',
+				noData:false
 			}
+		},
+		components: {
+			noDataPage
 		},
 		onLoad: function() {
 			this.communityId = this.java110Context.getCurrentCommunity().communityId;
@@ -80,6 +90,9 @@
 							item.timeStr = item.planInsTime.replace(/:\d{1,2}$/, ' ');
 						});
 						_that.tasks = res.data.inspectionTasks;
+						if(_that.tasks.length < 1){
+							_that.noData = true;
+						}
 					}
 				});
 			}

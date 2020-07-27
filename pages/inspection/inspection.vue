@@ -70,6 +70,7 @@
 						page: 1,
 						row: 10,
 						planUserId: _that.userId,
+						moreState:'20200405,20200406'
 						
 					},
 					success: function(res) {

@@ -82,7 +82,7 @@
 				this.patrolType = this.patrolTypes[e.detail.value];
 			},
 			removePhoto: function(e) {
-				console.log(e.detail.index);
+				console.log(e);
 				let _imgList = [];
 				this.imgList.forEach(function(item, index) {
 					if (index != e.detail.index) {

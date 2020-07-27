@@ -207,6 +207,18 @@
 				"navigationBarTitleText": "工单评价"
 			}
         }
+        ,{
+            "path" : "pages/complaintDispatch/complaintDispatch",
+            "style" : {
+				"navigationBarTitleText": "投诉待办单"
+			}
+        }
+        ,{
+            "path" : "pages/complaintHandle/complaintHandle",
+            "style" : {
+				"navigationBarTitleText": "投诉处理"	
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

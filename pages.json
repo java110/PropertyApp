@@ -201,6 +201,12 @@
 				
 			}
         }
+        ,{
+            "path" : "pages/appraiseRepair/appraiseRepair",
+            "style" : {
+				"navigationBarTitleText": "工单评价"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

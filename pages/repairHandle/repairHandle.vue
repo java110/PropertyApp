@@ -1,16 +1,35 @@
 <template>
 	<view>
-		<view class="cu-form-group margin-top" v-if="action == 'BACK'">
-			<view class="title">维修师傅</view>
-			<input v-model="staffName" disabled="disabled" placeholder="请输入报修人"></input>
+		<view v-if="action != 'FINISH'">
+			<view class="cu-form-group margin-top" v-if="action == 'BACK'">
+				<view class="title">维修师傅</view>
+				<input v-model="staffName" disabled="disabled" placeholder="请输入报修人"></input>
+			</view>
+			<view class="cu-form-group margin-top" v-else>
+				<view class="title">维修师傅</view>
+				<picker bindchange="PickerChange" :value="repairStaffIndex" :range="staffCloums" :range-key="'staffName'" @change="staffChange">
+					<view class="picker">
+						{{staffCloums[repairStaffIndex].staffName}}
+					</view>
+				</picker>
+			</view>
 		</view>
-		<view class="cu-form-group margin-top" v-else>
-			<view class="title">维修师傅</view>
-			<picker bindchange="PickerChange" :value="repairStaffIndex" :range="staffCloums" :range-key="'staffName'" @change="staffChange">
-				<view class="picker">
-					{{staffCloums[repairStaffIndex].staffName}}
-				</view>
-			</picker>
+		<view v-else>
+			<view v-if="repairObjType=='004'">
+			<view class="cu-form-group margin-top">
+				<view class="title">是否收费</view>
+				<picker bindchange="PickerChange" :value="repairStaffIndex" :range="feeCloums" :range-key="'name'" @change="feeChange">
+					<view class="picker">
+						{{feeCloums[feeIndex].name}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group margin-top" v-if="feeFlag=='100'">
+				<view class="title">收费金额</view>
+				<input v-model="amount"  placeholder="请输入收费金额"></input>
+			</view>
+			</view>
+			
 		</view>
 
 		<view class="cu-form-group margin-top">
@@ -40,14 +59,19 @@
 		</view>
 
 		<view class="flex flex-direction margin-top">
-			<button class="cu-btn bg-green margin-tb-sm lg" @click="_dispatchRepair()">提交</button>
+			<button v-if="action='FINISH'" class="cu-btn bg-green margin-tb-sm lg" @click="_finishRepair()">办结</button>
+			<button v-else class="cu-btn bg-green margin-tb-sm lg" @click="_dispatchRepair()">提交</button>
 		</view>
 
 	</view>
 </template>
 
 <script>
-	import {loadRepairStaff,dispatchRepair} from '../../api/repair/repair.js'
+	import {
+		loadRepairStaff,
+		dispatchRepair,
+		finishRepair
+	} from '../../api/repair/repair.js'
 	export default {
 		data() {
 			return {
@@ -63,25 +87,38 @@
 				staffId: '',
 				staffName: '',
 				content: '',
-				userId:'',
-				userName:''
+				userId: '',
+				userName: '',
+				feeFlag: '200',
+				amount: 0.0,
+				feeCloums:[{
+					id:200,
+					name:'否'
+				},
+				{
+					id:100,
+					name:'是'
+				}
+				],
+				feeIndex:0,
+				repairObjType:''
 			}
 		},
 		onLoad(options) {
 			this.action = options.action;
 			this.repairId = options.repairId;
 			this.repairType = options.repairType;
+			this.repairObjType = options.repairObjType;
 			let _userInfo = this.java110Context.getUserInfo();
 			this.userId = _userInfo.userId;
 			this.userName = _userInfo.userName;
-			if(this.action == 'BACK'){
+			if (this.action == 'BACK') {
 				this.staffId = options.preStaffId
 				this.staffName = options.preStaffName
 			}
 			this._loadRepairStaff();
 		},
 		methods: {
-
 			_loadRepairStaff: function() {
 				let _that = this;
 				let _data = {
@@ -91,19 +128,19 @@
 					row: 50,
 					state: '9999'
 				};
-				loadRepairStaff(this,_data)
-				.then(function(res){
-					let _json = res.data;
-					if (_json.code != 0) {
-						uni.showToast({
-							icon: 'none',
-							title: _json.msg
-						});
-						return;
-					}
-					let _data = _json.data;
-					_that.staffCloums = _that.staffCloums.concat(_data);
-				});
+				loadRepairStaff(this, _data)
+					.then(function(res) {
+						let _json = res.data;
+						if (_json.code != 0) {
+							uni.showToast({
+								icon: 'none',
+								title: _json.msg
+							});
+							return;
+						}
+						let _data = _json.data;
+						_that.staffCloums = _that.staffCloums.concat(_data);
+					});
 			},
 			staffChange: function(e) {
 				this.repairStaffIndex = e.target.value //取其下标
@@ -116,6 +153,15 @@
 
 				this.staffId = selected.staffId //选中的id
 				this.staffName = selected.staffName
+			},
+			feeChange:function(e){
+				this.feeIndex = e.target.value //取其下标
+				if (this.feeIndex == 0) {
+					this.feeFlag = '200' //选中的id
+					return;
+				}
+				let selected = this.feeCloums[this.feeIndex] //获取选中的数组
+				this.feeFlag = selected.id //选中的id
 			},
 			_deleteImage: function(e) {
 				let imageArr = this.imgList;
@@ -141,9 +187,9 @@
 			},
 
 			_dispatchRepair: function(e) {
-				
+
 				dispatchRepair(this)
-				.then(function(res) {
+					.then(function(res) {
 						let _json = res.data;
 						if (_json.code == 0) {
 							uni.navigateBack({
@@ -155,9 +201,26 @@
 							title: _json.msg,
 							icon: 'none',
 							duration: 2000
-						})	
-				});
+						})
+					});
 			},
+			_finishRepair:function(){
+				finishRepair(this)
+				.then(function(res) {
+					let _json = res.data;
+					if (_json.code == 0) {
+						uni.navigateBack({
+							delta: 1
+						})
+						return;
+					}
+					wx.showToast({
+						title: _json.msg,
+						icon: 'none',
+						duration: 2000
+					})
+				});
+			}
 
 		}
 	}

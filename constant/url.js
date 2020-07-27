@@ -44,5 +44,9 @@ export default {
 	listRepairTypeUsers: baseUrl + "app/repair.listRepairTypeUsers",
 	//查询完成报修单
 	listStaffFinishRepairs: baseUrl + "app/ownerRepair.listStaffFinishRepairs",
-	repairDispatch: baseUrl + "app/ownerRepair.repairDispatch"
+	repairDispatch: baseUrl + "app/ownerRepair.repairDispatch",
+	//报修办结
+	repairFinish: baseUrl + "app/ownerRepair.repairFinish",
+	//报修评价
+	 appraiseRepair : baseUrl + 'app/repair/appraiseRepair'
 }

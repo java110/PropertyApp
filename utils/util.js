@@ -55,12 +55,12 @@ export default {
 	getHeaders: function() {
 		let _that = this;
 		return {
-			app_id: AppConstant.appId,
-			transaction_id: _that.wxuuid(),
-			req_time: date.getDateYYYYMMDDHHMISS(),
-			sign: '1234567',
-			user_id: '-1',
-			cookie: '_java110_token_=' + wx.getStorageSync('token')
+			'app-id': AppConstant.appId,
+			'transaction-id': _that.wxuuid(),
+			'req-time': date.getDateYYYYMMDDHHMISS(),
+			'sign': '1234567',
+			'user-id': '-1',
+			'cookie': '_java110_token_=' + wx.getStorageSync('token')
 		};
 	},
 	/**

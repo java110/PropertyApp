@@ -16,7 +16,7 @@
 ## 运行截图
 
 ![image](/readme/img/login.png)
-<img src="/readme/img/index.jpg" width="100px"/>
+<img src="/readme/img/index.jpg" width="200px"/>
 ![image](/readme/img/repair.png)
 ![image](/readme/img/compaint.png)
 ![image](/readme/img/inspection.png)

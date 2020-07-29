@@ -60,10 +60,8 @@
 
 		<view v-if="action=='FINISH'" class="flex flex-direction margin-top">
 			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_finishRepair()">办结</button>
-			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_dispatchRepair()">提交</button>
 		</view>
 		<view v-else class="flex flex-direction margin-top">
-			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_finishRepair()">办结</button>
 			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_dispatchRepair()">提交</button>
 		</view>
 

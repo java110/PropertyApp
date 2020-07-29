@@ -16,20 +16,20 @@
 		</view>
 		<view v-else>
 			<view v-if="repairObjType=='004'">
-			<view class="cu-form-group margin-top">
-				<view class="title">是否收费</view>
-				<picker bindchange="PickerChange" :value="repairStaffIndex" :range="feeCloums" :range-key="'name'" @change="feeChange">
-					<view class="picker">
-						{{feeCloums[feeIndex].name}}
-					</view>
-				</picker>
+				<view class="cu-form-group margin-top">
+					<view class="title">是否收费</view>
+					<picker bindchange="PickerChange" :value="repairStaffIndex" :range="feeCloums" :range-key="'name'" @change="feeChange">
+						<view class="picker">
+							{{feeCloums[feeIndex].name}}
+						</view>
+					</picker>
+				</view>
+				<view class="cu-form-group margin-top" v-if="feeFlag=='100'">
+					<view class="title">收费金额</view>
+					<input v-model="amount" placeholder="请输入收费金额"></input>
+				</view>
 			</view>
-			<view class="cu-form-group margin-top" v-if="feeFlag=='100'">
-				<view class="title">收费金额</view>
-				<input v-model="amount"  placeholder="请输入收费金额"></input>
-			</view>
-			</view>
-			
+
 		</view>
 
 		<view class="cu-form-group margin-top">
@@ -58,9 +58,13 @@
 			</view>
 		</view>
 
-		<view class="flex flex-direction margin-top">
-			<button v-if="action='FINISH'" class="cu-btn bg-green margin-tb-sm lg" @click="_finishRepair()">办结</button>
-			<button v-else class="cu-btn bg-green margin-tb-sm lg" @click="_dispatchRepair()">提交</button>
+		<view v-if="action=='FINISH'" class="flex flex-direction margin-top">
+			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_finishRepair()">办结</button>
+			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_dispatchRepair()">提交</button>
+		</view>
+		<view v-else class="flex flex-direction margin-top">
+			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_finishRepair()">办结</button>
+			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_dispatchRepair()">提交</button>
 		</view>
 
 	</view>
@@ -91,17 +95,17 @@
 				userName: '',
 				feeFlag: '200',
 				amount: 0.0,
-				feeCloums:[{
-					id:200,
-					name:'否'
-				},
-				{
-					id:100,
-					name:'是'
-				}
+				feeCloums: [{
+						id: 200,
+						name: '否'
+					},
+					{
+						id: 100,
+						name: '是'
+					}
 				],
-				feeIndex:0,
-				repairObjType:''
+				feeIndex: 0,
+				repairObjType: ''
 			}
 		},
 		onLoad(options) {
@@ -154,7 +158,7 @@
 				this.staffId = selected.staffId //选中的id
 				this.staffName = selected.staffName
 			},
-			feeChange:function(e){
+			feeChange: function(e) {
 				this.feeIndex = e.target.value //取其下标
 				if (this.feeIndex == 0) {
 					this.feeFlag = '200' //选中的id
@@ -204,22 +208,22 @@
 						})
 					});
 			},
-			_finishRepair:function(){
+			_finishRepair: function() {
 				finishRepair(this)
-				.then(function(res) {
-					let _json = res.data;
-					if (_json.code == 0) {
-						uni.navigateBack({
-							delta: 1
+					.then(function(res) {
+						let _json = res.data;
+						if (_json.code == 0) {
+							uni.navigateBack({
+								delta: 1
+							})
+							return;
+						}
+						wx.showToast({
+							title: _json.msg,
+							icon: 'none',
+							duration: 2000
 						})
-						return;
-					}
-					wx.showToast({
-						title: _json.msg,
-						icon: 'none',
-						duration: 2000
-					})
-				});
+					});
 			}
 
 		}

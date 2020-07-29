@@ -93,7 +93,7 @@ image.loading::before {
 	z-index: -2;
 }
 image.loading::after {
-	content: "\E7F1";
+	content: "\e7f1";
 	font-family: "cuIcon";
 	position: absolute;
 	top: 0;
@@ -125,7 +125,7 @@ radio {
 switch::after,
 switch::before {
 	font-family: "cuIcon";
-	content: "\E645";
+	content: "\e645";
 	position: absolute;
 	color: #ffffff !important;
 	top: 0%;
@@ -145,7 +145,7 @@ switch::before {
 	margin: auto;
 }
 switch::before {
-	content: "\E646";
+	content: "\e646";
 	right: 0;
 	-webkit-transform: scale(1, 1);
 	        transform: scale(1, 1);
@@ -161,11 +161,10 @@ switch.checked::before {
 	-webkit-transform: scale(0, 0);
 	        transform: scale(0, 0);
 }
-
 radio::before,
 checkbox::before {
 	font-family: "cuIcon";
-	content: "\E645";
+	content: "\e645";
 	position: absolute;
 	color: #ffffff !important;
 	top: 50%;
@@ -192,7 +191,6 @@ checkbox.round .wx-checkbox-input,
 checkbox.round .uni-checkbox-input {
 	border-radius: 100rpx;
 }
-
 switch[checked]::before {
 	-webkit-transform: scale(0, 0);
 	        transform: scale(0, 0);
@@ -269,17 +267,18 @@ radio.radio .uni-radio-input-checked::after {
 	bottom: 0;
 	margin: auto;
 	border-radius: 200rpx;
-	
 
-	
+
+
+
+
 	border: 8px solid #ffffff !important;
-	
 }
 .switch-sex::after {
-	content: "\E71C";
+	content: "\e71c";
 }
 .switch-sex::before {
-	content: "\E71A";
+	content: "\e71a";
 }
 .switch-sex .wx-switch-input,
 .switch-sex .uni-switch-input {
@@ -986,24 +985,24 @@ to {
 	margin-right: 6rpx;
 }
 .cu-load.loading::before {
-	content: "\E67A";
+	content: "\e67a";
 	-webkit-animation: cuIcon-spin 2s infinite linear;
 	        animation: cuIcon-spin 2s infinite linear;
 }
 .cu-load.loading::after {
-	content: "\52A0\8F7D\4E2D...";
+	content: "加载中...";
 }
 .cu-load.over::before {
-	content: "\E64A";
+	content: "\e64a";
 }
 .cu-load.over::after {
-	content: "\6CA1\6709\66F4\591A\4E86";
+	content: "没有更多了";
 }
 .cu-load.erro::before {
-	content: "\E658";
+	content: "\e658";
 }
 .cu-load.erro::after {
-	content: "\52A0\8F7D\5931\8D25";
+	content: "加载失败";
 }
 .cu-load.load-cuIcon::before {
 	font-size: 32rpx;
@@ -1297,7 +1296,7 @@ to {
 	width: 30rpx;
 	height: 30rpx;
 	color: #8799a3;
-	content: "\E6A3";
+	content: "\e6a3";
 	text-align: center;
 	font-size: 34rpx;
 	font-family: cuIcon;
@@ -1819,17 +1818,18 @@ to {
 .cu-custom .cu-bar .content {
 	width: calc(100% - 440rpx);
 }
-
 .cu-custom .cu-bar .content image {
 	height: 60rpx;
 	width: 240rpx;
 }
 .cu-custom .cu-bar {
 	min-height: 0px;
-	
+
 	padding-right: 220rpx;
-	
-	
+
+
+
+
 	box-shadow: 0rpx 0rpx 0rpx;
 	z-index: 9999;
 }
@@ -1952,7 +1952,7 @@ to {
 	left: 36rpx;
 }
 .cu-timeline>.cu-item:not([class*="cuIcon-"])::before {
-	content: "\E763";
+	content: "\e763";
 }
 .cu-timeline>.cu-item[class*="cuIcon-"]::before {
 	background-color: #ffffff;
@@ -2312,7 +2312,7 @@ to {
 .cu-form-group picker::after {
 	font-family: cuIcon;
 	display: block;
-	content: "\E6A3";
+	content: "\e6a3";
 	position: absolute;
 	font-size: 34rpx;
 	color: #8799a3;
@@ -2610,7 +2610,7 @@ scroll-view.cu-steps .cu-item {
 }
 .cu-steps.steps-arrow .cu-item::before,
 .cu-steps.steps-arrow .cu-item::after {
-	content: "\E6A3";
+	content: "\e6a3";
 	font-family: 'cuIcon';
 	height: 30rpx;
 	border-bottom-width: 0px;
@@ -2680,14 +2680,14 @@ scroll-view.cu-steps .cu-item {
 	transition: all 0.3s ease-in-out 0s;
 }
 .cu-steps .cu-item[class*="text-"] .num::after {
-	content: "\E645";
+	content: "\e645";
 	font-family: 'cuIcon';
 	color: #ffffff;
 	-webkit-transform: translateY(0rpx);
 	        transform: translateY(0rpx);
 }
 .cu-steps .cu-item[class*="text-"] .num.err::after {
-	content: "\E646";
+	content: "\e646";
 }
 /* ==================
           布局
@@ -3536,7 +3536,7 @@ scroll-view.cu-steps .cu-item {
 	text-transform: Lowercase;
 }
 .text-price::before {
-	content: "\A5";
+	content: "¥";
 	font-size: 80%;
 	margin-right: 4rpx;
 }
@@ -3683,892 +3683,892 @@ scroll-view.cu-steps .cu-item {
 	/* iOS 4.1- */
 }
 .cuIcon-appreciate:before {
-	content: "\E644";
+	content: "\e644";
 }
 .cuIcon-check:before {
-	content: "\E645";
+	content: "\e645";
 }
 .cuIcon-close:before {
-	content: "\E646";
+	content: "\e646";
 }
 .cuIcon-edit:before {
-	content: "\E649";
+	content: "\e649";
 }
 .cuIcon-emoji:before {
-	content: "\E64A";
+	content: "\e64a";
 }
 .cuIcon-favorfill:before {
-	content: "\E64B";
+	content: "\e64b";
 }
 .cuIcon-favor:before {
-	content: "\E64C";
+	content: "\e64c";
 }
 .cuIcon-loading:before {
-	content: "\E64F";
+	content: "\e64f";
 }
 .cuIcon-locationfill:before {
-	content: "\E650";
+	content: "\e650";
 }
 .cuIcon-location:before {
-	content: "\E651";
+	content: "\e651";
 }
 .cuIcon-phone:before {
-	content: "\E652";
+	content: "\e652";
 }
 .cuIcon-roundcheckfill:before {
-	content: "\E656";
+	content: "\e656";
 }
 .cuIcon-roundcheck:before {
-	content: "\E657";
+	content: "\e657";
 }
 .cuIcon-roundclosefill:before {
-	content: "\E658";
+	content: "\e658";
 }
 .cuIcon-roundclose:before {
-	content: "\E659";
+	content: "\e659";
 }
 .cuIcon-roundrightfill:before {
-	content: "\E65A";
+	content: "\e65a";
 }
 .cuIcon-roundright:before {
-	content: "\E65B";
+	content: "\e65b";
 }
 .cuIcon-search:before {
-	content: "\E65C";
+	content: "\e65c";
 }
 .cuIcon-taxi:before {
-	content: "\E65D";
+	content: "\e65d";
 }
 .cuIcon-timefill:before {
-	content: "\E65E";
+	content: "\e65e";
 }
 .cuIcon-time:before {
-	content: "\E65F";
+	content: "\e65f";
 }
 .cuIcon-unfold:before {
-	content: "\E661";
+	content: "\e661";
 }
 .cuIcon-warnfill:before {
-	content: "\E662";
+	content: "\e662";
 }
 .cuIcon-warn:before {
-	content: "\E663";
+	content: "\e663";
 }
 .cuIcon-camerafill:before {
-	content: "\E664";
+	content: "\e664";
 }
 .cuIcon-camera:before {
-	content: "\E665";
+	content: "\e665";
 }
 .cuIcon-commentfill:before {
-	content: "\E666";
+	content: "\e666";
 }
 .cuIcon-comment:before {
-	content: "\E667";
+	content: "\e667";
 }
 .cuIcon-likefill:before {
-	content: "\E668";
+	content: "\e668";
 }
 .cuIcon-like:before {
-	content: "\E669";
+	content: "\e669";
 }
 .cuIcon-notificationfill:before {
-	content: "\E66A";
+	content: "\e66a";
 }
 .cuIcon-notification:before {
-	content: "\E66B";
+	content: "\e66b";
 }
 .cuIcon-order:before {
-	content: "\E66C";
+	content: "\e66c";
 }
 .cuIcon-samefill:before {
-	content: "\E66D";
+	content: "\e66d";
 }
 .cuIcon-same:before {
-	content: "\E66E";
+	content: "\e66e";
 }
 .cuIcon-deliver:before {
-	content: "\E671";
+	content: "\e671";
 }
 .cuIcon-evaluate:before {
-	content: "\E672";
+	content: "\e672";
 }
 .cuIcon-pay:before {
-	content: "\E673";
+	content: "\e673";
 }
 .cuIcon-send:before {
-	content: "\E675";
+	content: "\e675";
 }
 .cuIcon-shop:before {
-	content: "\E676";
+	content: "\e676";
 }
 .cuIcon-ticket:before {
-	content: "\E677";
+	content: "\e677";
 }
 .cuIcon-back:before {
-	content: "\E679";
+	content: "\e679";
 }
 .cuIcon-cascades:before {
-	content: "\E67C";
+	content: "\e67c";
 }
 .cuIcon-discover:before {
-	content: "\E67E";
+	content: "\e67e";
 }
 .cuIcon-list:before {
-	content: "\E682";
+	content: "\e682";
 }
 .cuIcon-more:before {
-	content: "\E684";
+	content: "\e684";
 }
 .cuIcon-scan:before {
-	content: "\E689";
+	content: "\e689";
 }
 .cuIcon-settings:before {
-	content: "\E68A";
+	content: "\e68a";
 }
 .cuIcon-questionfill:before {
-	content: "\E690";
+	content: "\e690";
 }
 .cuIcon-question:before {
-	content: "\E691";
+	content: "\e691";
 }
 .cuIcon-shopfill:before {
-	content: "\E697";
+	content: "\e697";
 }
 .cuIcon-form:before {
-	content: "\E699";
+	content: "\e699";
 }
 .cuIcon-pic:before {
-	content: "\E69B";
+	content: "\e69b";
 }
 .cuIcon-filter:before {
-	content: "\E69C";
+	content: "\e69c";
 }
 .cuIcon-footprint:before {
-	content: "\E69D";
+	content: "\e69d";
 }
 .cuIcon-top:before {
-	content: "\E69E";
+	content: "\e69e";
 }
 .cuIcon-pulldown:before {
-	content: "\E69F";
+	content: "\e69f";
 }
 .cuIcon-pullup:before {
-	content: "\E6A0";
+	content: "\e6a0";
 }
 .cuIcon-right:before {
-	content: "\E6A3";
+	content: "\e6a3";
 }
 .cuIcon-refresh:before {
-	content: "\E6A4";
+	content: "\e6a4";
 }
 .cuIcon-moreandroid:before {
-	content: "\E6A5";
+	content: "\e6a5";
 }
 .cuIcon-deletefill:before {
-	content: "\E6A6";
+	content: "\e6a6";
 }
 .cuIcon-refund:before {
-	content: "\E6AC";
+	content: "\e6ac";
 }
 .cuIcon-cart:before {
-	content: "\E6AF";
+	content: "\e6af";
 }
 .cuIcon-qrcode:before {
-	content: "\E6B0";
+	content: "\e6b0";
 }
 .cuIcon-remind:before {
-	content: "\E6B2";
+	content: "\e6b2";
 }
 .cuIcon-delete:before {
-	content: "\E6B4";
+	content: "\e6b4";
 }
 .cuIcon-profile:before {
-	content: "\E6B7";
+	content: "\e6b7";
 }
 .cuIcon-home:before {
-	content: "\E6B8";
+	content: "\e6b8";
 }
 .cuIcon-cartfill:before {
-	content: "\E6B9";
+	content: "\e6b9";
 }
 .cuIcon-discoverfill:before {
-	content: "\E6BA";
+	content: "\e6ba";
 }
 .cuIcon-homefill:before {
-	content: "\E6BB";
+	content: "\e6bb";
 }
 .cuIcon-message:before {
-	content: "\E6BC";
+	content: "\e6bc";
 }
 .cuIcon-addressbook:before {
-	content: "\E6BD";
+	content: "\e6bd";
 }
 .cuIcon-link:before {
-	content: "\E6BF";
+	content: "\e6bf";
 }
 .cuIcon-lock:before {
-	content: "\E6C0";
+	content: "\e6c0";
 }
 .cuIcon-unlock:before {
-	content: "\E6C2";
+	content: "\e6c2";
 }
 .cuIcon-vip:before {
-	content: "\E6C3";
+	content: "\e6c3";
 }
 .cuIcon-weibo:before {
-	content: "\E6C4";
+	content: "\e6c4";
 }
 .cuIcon-activity:before {
-	content: "\E6C5";
+	content: "\e6c5";
 }
 .cuIcon-friendaddfill:before {
-	content: "\E6C9";
+	content: "\e6c9";
 }
 .cuIcon-friendadd:before {
-	content: "\E6CA";
+	content: "\e6ca";
 }
 .cuIcon-friendfamous:before {
-	content: "\E6CB";
+	content: "\e6cb";
 }
 .cuIcon-friend:before {
-	content: "\E6CC";
+	content: "\e6cc";
 }
 .cuIcon-goods:before {
-	content: "\E6CD";
+	content: "\e6cd";
 }
 .cuIcon-selection:before {
-	content: "\E6CE";
+	content: "\e6ce";
 }
 .cuIcon-explore:before {
-	content: "\E6D2";
+	content: "\e6d2";
 }
 .cuIcon-present:before {
-	content: "\E6D3";
+	content: "\e6d3";
 }
 .cuIcon-squarecheckfill:before {
-	content: "\E6D4";
+	content: "\e6d4";
 }
 .cuIcon-square:before {
-	content: "\E6D5";
+	content: "\e6d5";
 }
 .cuIcon-squarecheck:before {
-	content: "\E6D6";
+	content: "\e6d6";
 }
 .cuIcon-round:before {
-	content: "\E6D7";
+	content: "\e6d7";
 }
 .cuIcon-roundaddfill:before {
-	content: "\E6D8";
+	content: "\e6d8";
 }
 .cuIcon-roundadd:before {
-	content: "\E6D9";
+	content: "\e6d9";
 }
 .cuIcon-add:before {
-	content: "\E6DA";
+	content: "\e6da";
 }
 .cuIcon-notificationforbidfill:before {
-	content: "\E6DB";
+	content: "\e6db";
 }
 .cuIcon-explorefill:before {
-	content: "\E6DD";
+	content: "\e6dd";
 }
 .cuIcon-fold:before {
-	content: "\E6DE";
+	content: "\e6de";
 }
 .cuIcon-game:before {
-	content: "\E6DF";
+	content: "\e6df";
 }
 .cuIcon-redpacket:before {
-	content: "\E6E0";
+	content: "\e6e0";
 }
 .cuIcon-selectionfill:before {
-	content: "\E6E1";
+	content: "\e6e1";
 }
 .cuIcon-similar:before {
-	content: "\E6E2";
+	content: "\e6e2";
 }
 .cuIcon-appreciatefill:before {
-	content: "\E6E3";
+	content: "\e6e3";
 }
 .cuIcon-infofill:before {
-	content: "\E6E4";
+	content: "\e6e4";
 }
 .cuIcon-info:before {
-	content: "\E6E5";
+	content: "\e6e5";
 }
 .cuIcon-forwardfill:before {
-	content: "\E6EA";
+	content: "\e6ea";
 }
 .cuIcon-forward:before {
-	content: "\E6EB";
+	content: "\e6eb";
 }
 .cuIcon-rechargefill:before {
-	content: "\E6EC";
+	content: "\e6ec";
 }
 .cuIcon-recharge:before {
-	content: "\E6ED";
+	content: "\e6ed";
 }
 .cuIcon-vipcard:before {
-	content: "\E6EE";
+	content: "\e6ee";
 }
 .cuIcon-voice:before {
-	content: "\E6EF";
+	content: "\e6ef";
 }
 .cuIcon-voicefill:before {
-	content: "\E6F0";
+	content: "\e6f0";
 }
 .cuIcon-friendfavor:before {
-	content: "\E6F1";
+	content: "\e6f1";
 }
 .cuIcon-wifi:before {
-	content: "\E6F2";
+	content: "\e6f2";
 }
 .cuIcon-share:before {
-	content: "\E6F3";
+	content: "\e6f3";
 }
 .cuIcon-wefill:before {
-	content: "\E6F4";
+	content: "\e6f4";
 }
 .cuIcon-we:before {
-	content: "\E6F5";
+	content: "\e6f5";
 }
 .cuIcon-lightauto:before {
-	content: "\E6F6";
+	content: "\e6f6";
 }
 .cuIcon-lightforbid:before {
-	content: "\E6F7";
+	content: "\e6f7";
 }
 .cuIcon-lightfill:before {
-	content: "\E6F8";
+	content: "\e6f8";
 }
 .cuIcon-camerarotate:before {
-	content: "\E6F9";
+	content: "\e6f9";
 }
 .cuIcon-light:before {
-	content: "\E6FA";
+	content: "\e6fa";
 }
 .cuIcon-barcode:before {
-	content: "\E6FB";
+	content: "\e6fb";
 }
 .cuIcon-flashlightclose:before {
-	content: "\E6FC";
+	content: "\e6fc";
 }
 .cuIcon-flashlightopen:before {
-	content: "\E6FD";
+	content: "\e6fd";
 }
 .cuIcon-searchlist:before {
-	content: "\E6FE";
+	content: "\e6fe";
 }
 .cuIcon-service:before {
-	content: "\E6FF";
+	content: "\e6ff";
 }
 .cuIcon-sort:before {
-	content: "\E700";
+	content: "\e700";
 }
 .cuIcon-down:before {
-	content: "\E703";
+	content: "\e703";
 }
 .cuIcon-mobile:before {
-	content: "\E704";
+	content: "\e704";
 }
 .cuIcon-mobilefill:before {
-	content: "\E705";
+	content: "\e705";
 }
 .cuIcon-copy:before {
-	content: "\E706";
+	content: "\e706";
 }
 .cuIcon-countdownfill:before {
-	content: "\E707";
+	content: "\e707";
 }
 .cuIcon-countdown:before {
-	content: "\E708";
+	content: "\e708";
 }
 .cuIcon-noticefill:before {
-	content: "\E709";
+	content: "\e709";
 }
 .cuIcon-notice:before {
-	content: "\E70A";
+	content: "\e70a";
 }
 .cuIcon-upstagefill:before {
-	content: "\E70E";
+	content: "\e70e";
 }
 .cuIcon-upstage:before {
-	content: "\E70F";
+	content: "\e70f";
 }
 .cuIcon-babyfill:before {
-	content: "\E710";
+	content: "\e710";
 }
 .cuIcon-baby:before {
-	content: "\E711";
+	content: "\e711";
 }
 .cuIcon-brandfill:before {
-	content: "\E712";
+	content: "\e712";
 }
 .cuIcon-brand:before {
-	content: "\E713";
+	content: "\e713";
 }
 .cuIcon-choicenessfill:before {
-	content: "\E714";
+	content: "\e714";
 }
 .cuIcon-choiceness:before {
-	content: "\E715";
+	content: "\e715";
 }
 .cuIcon-clothesfill:before {
-	content: "\E716";
+	content: "\e716";
 }
 .cuIcon-clothes:before {
-	content: "\E717";
+	content: "\e717";
 }
 .cuIcon-creativefill:before {
-	content: "\E718";
+	content: "\e718";
 }
 .cuIcon-creative:before {
-	content: "\E719";
+	content: "\e719";
 }
 .cuIcon-female:before {
-	content: "\E71A";
+	content: "\e71a";
 }
 .cuIcon-keyboard:before {
-	content: "\E71B";
+	content: "\e71b";
 }
 .cuIcon-male:before {
-	content: "\E71C";
+	content: "\e71c";
 }
 .cuIcon-newfill:before {
-	content: "\E71D";
+	content: "\e71d";
 }
 .cuIcon-new:before {
-	content: "\E71E";
+	content: "\e71e";
 }
 .cuIcon-pullleft:before {
-	content: "\E71F";
+	content: "\e71f";
 }
 .cuIcon-pullright:before {
-	content: "\E720";
+	content: "\e720";
 }
 .cuIcon-rankfill:before {
-	content: "\E721";
+	content: "\e721";
 }
 .cuIcon-rank:before {
-	content: "\E722";
+	content: "\e722";
 }
 .cuIcon-bad:before {
-	content: "\E723";
+	content: "\e723";
 }
 .cuIcon-cameraadd:before {
-	content: "\E724";
+	content: "\e724";
 }
 .cuIcon-focus:before {
-	content: "\E725";
+	content: "\e725";
 }
 .cuIcon-friendfill:before {
-	content: "\E726";
+	content: "\e726";
 }
 .cuIcon-cameraaddfill:before {
-	content: "\E727";
+	content: "\e727";
 }
 .cuIcon-apps:before {
-	content: "\E729";
+	content: "\e729";
 }
 .cuIcon-paintfill:before {
-	content: "\E72A";
+	content: "\e72a";
 }
 .cuIcon-paint:before {
-	content: "\E72B";
+	content: "\e72b";
 }
 .cuIcon-picfill:before {
-	content: "\E72C";
+	content: "\e72c";
 }
 .cuIcon-refresharrow:before {
-	content: "\E72D";
+	content: "\e72d";
 }
 .cuIcon-colorlens:before {
-	content: "\E6E6";
+	content: "\e6e6";
 }
 .cuIcon-markfill:before {
-	content: "\E730";
+	content: "\e730";
 }
 .cuIcon-mark:before {
-	content: "\E731";
+	content: "\e731";
 }
 .cuIcon-presentfill:before {
-	content: "\E732";
+	content: "\e732";
 }
 .cuIcon-repeal:before {
-	content: "\E733";
+	content: "\e733";
 }
 .cuIcon-album:before {
-	content: "\E734";
+	content: "\e734";
 }
 .cuIcon-peoplefill:before {
-	content: "\E735";
+	content: "\e735";
 }
 .cuIcon-people:before {
-	content: "\E736";
+	content: "\e736";
 }
 .cuIcon-servicefill:before {
-	content: "\E737";
+	content: "\e737";
 }
 .cuIcon-repair:before {
-	content: "\E738";
+	content: "\e738";
 }
 .cuIcon-file:before {
-	content: "\E739";
+	content: "\e739";
 }
 .cuIcon-repairfill:before {
-	content: "\E73A";
+	content: "\e73a";
 }
 .cuIcon-taoxiaopu:before {
-	content: "\E73B";
+	content: "\e73b";
 }
 .cuIcon-weixin:before {
-	content: "\E612";
+	content: "\e612";
 }
 .cuIcon-attentionfill:before {
-	content: "\E73C";
+	content: "\e73c";
 }
 .cuIcon-attention:before {
-	content: "\E73D";
+	content: "\e73d";
 }
 .cuIcon-commandfill:before {
-	content: "\E73E";
+	content: "\e73e";
 }
 .cuIcon-command:before {
-	content: "\E73F";
+	content: "\e73f";
 }
 .cuIcon-communityfill:before {
-	content: "\E740";
+	content: "\e740";
 }
 .cuIcon-community:before {
-	content: "\E741";
+	content: "\e741";
 }
 .cuIcon-read:before {
-	content: "\E742";
+	content: "\e742";
 }
 .cuIcon-calendar:before {
-	content: "\E74A";
+	content: "\e74a";
 }
 .cuIcon-cut:before {
-	content: "\E74B";
+	content: "\e74b";
 }
 .cuIcon-magic:before {
-	content: "\E74C";
+	content: "\e74c";
 }
 .cuIcon-backwardfill:before {
-	content: "\E74D";
+	content: "\e74d";
 }
 .cuIcon-playfill:before {
-	content: "\E74F";
+	content: "\e74f";
 }
 .cuIcon-stop:before {
-	content: "\E750";
+	content: "\e750";
 }
 .cuIcon-tagfill:before {
-	content: "\E751";
+	content: "\e751";
 }
 .cuIcon-tag:before {
-	content: "\E752";
+	content: "\e752";
 }
 .cuIcon-group:before {
-	content: "\E753";
+	content: "\e753";
 }
 .cuIcon-all:before {
-	content: "\E755";
+	content: "\e755";
 }
 .cuIcon-backdelete:before {
-	content: "\E756";
+	content: "\e756";
 }
 .cuIcon-hotfill:before {
-	content: "\E757";
+	content: "\e757";
 }
 .cuIcon-hot:before {
-	content: "\E758";
+	content: "\e758";
 }
 .cuIcon-post:before {
-	content: "\E759";
+	content: "\e759";
 }
 .cuIcon-radiobox:before {
-	content: "\E75B";
+	content: "\e75b";
 }
 .cuIcon-rounddown:before {
-	content: "\E75C";
+	content: "\e75c";
 }
 .cuIcon-upload:before {
-	content: "\E75D";
+	content: "\e75d";
 }
 .cuIcon-writefill:before {
-	content: "\E760";
+	content: "\e760";
 }
 .cuIcon-write:before {
-	content: "\E761";
+	content: "\e761";
 }
 .cuIcon-radioboxfill:before {
-	content: "\E763";
+	content: "\e763";
 }
 .cuIcon-punch:before {
-	content: "\E764";
+	content: "\e764";
 }
 .cuIcon-shake:before {
-	content: "\E765";
+	content: "\e765";
 }
 .cuIcon-move:before {
-	content: "\E768";
+	content: "\e768";
 }
 .cuIcon-safe:before {
-	content: "\E769";
+	content: "\e769";
 }
 .cuIcon-activityfill:before {
-	content: "\E775";
+	content: "\e775";
 }
 .cuIcon-crownfill:before {
-	content: "\E776";
+	content: "\e776";
 }
 .cuIcon-crown:before {
-	content: "\E777";
+	content: "\e777";
 }
 .cuIcon-goodsfill:before {
-	content: "\E778";
+	content: "\e778";
 }
 .cuIcon-messagefill:before {
-	content: "\E779";
+	content: "\e779";
 }
 .cuIcon-profilefill:before {
-	content: "\E77A";
+	content: "\e77a";
 }
 .cuIcon-sound:before {
-	content: "\E77B";
+	content: "\e77b";
 }
 .cuIcon-sponsorfill:before {
-	content: "\E77C";
+	content: "\e77c";
 }
 .cuIcon-sponsor:before {
-	content: "\E77D";
+	content: "\e77d";
 }
 .cuIcon-upblock:before {
-	content: "\E77E";
+	content: "\e77e";
 }
 .cuIcon-weblock:before {
-	content: "\E77F";
+	content: "\e77f";
 }
 .cuIcon-weunblock:before {
-	content: "\E780";
+	content: "\e780";
 }
 .cuIcon-my:before {
-	content: "\E78B";
+	content: "\e78b";
 }
 .cuIcon-myfill:before {
-	content: "\E78C";
+	content: "\e78c";
 }
 .cuIcon-emojifill:before {
-	content: "\E78D";
+	content: "\e78d";
 }
 .cuIcon-emojiflashfill:before {
-	content: "\E78E";
+	content: "\e78e";
 }
 .cuIcon-flashbuyfill:before {
-	content: "\E78F";
+	content: "\e78f";
 }
 .cuIcon-text:before {
-	content: "\E791";
+	content: "\e791";
 }
 .cuIcon-goodsfavor:before {
-	content: "\E794";
+	content: "\e794";
 }
 .cuIcon-musicfill:before {
-	content: "\E795";
+	content: "\e795";
 }
 .cuIcon-musicforbidfill:before {
-	content: "\E796";
+	content: "\e796";
 }
 .cuIcon-card:before {
-	content: "\E624";
+	content: "\e624";
 }
 .cuIcon-triangledownfill:before {
-	content: "\E79B";
+	content: "\e79b";
 }
 .cuIcon-triangleupfill:before {
-	content: "\E79C";
+	content: "\e79c";
 }
 .cuIcon-roundleftfill-copy:before {
-	content: "\E79E";
+	content: "\e79e";
 }
 .cuIcon-font:before {
-	content: "\E76A";
+	content: "\e76a";
 }
 .cuIcon-title:before {
-	content: "\E82F";
+	content: "\e82f";
 }
 .cuIcon-recordfill:before {
-	content: "\E7A4";
+	content: "\e7a4";
 }
 .cuIcon-record:before {
-	content: "\E7A6";
+	content: "\e7a6";
 }
 .cuIcon-cardboardfill:before {
-	content: "\E7A9";
+	content: "\e7a9";
 }
 .cuIcon-cardboard:before {
-	content: "\E7AA";
+	content: "\e7aa";
 }
 .cuIcon-formfill:before {
-	content: "\E7AB";
+	content: "\e7ab";
 }
 .cuIcon-coin:before {
-	content: "\E7AC";
+	content: "\e7ac";
 }
 .cuIcon-cardboardforbid:before {
-	content: "\E7AF";
+	content: "\e7af";
 }
 .cuIcon-circlefill:before {
-	content: "\E7B0";
+	content: "\e7b0";
 }
 .cuIcon-circle:before {
-	content: "\E7B1";
+	content: "\e7b1";
 }
 .cuIcon-attentionforbid:before {
-	content: "\E7B2";
+	content: "\e7b2";
 }
 .cuIcon-attentionforbidfill:before {
-	content: "\E7B3";
+	content: "\e7b3";
 }
 .cuIcon-attentionfavorfill:before {
-	content: "\E7B4";
+	content: "\e7b4";
 }
 .cuIcon-attentionfavor:before {
-	content: "\E7B5";
+	content: "\e7b5";
 }
 .cuIcon-titles:before {
-	content: "\E701";
+	content: "\e701";
 }
 .cuIcon-icloading:before {
-	content: "\E67A";
+	content: "\e67a";
 }
 .cuIcon-full:before {
-	content: "\E7BC";
+	content: "\e7bc";
 }
 .cuIcon-mail:before {
-	content: "\E7BD";
+	content: "\e7bd";
 }
 .cuIcon-peoplelist:before {
-	content: "\E7BE";
+	content: "\e7be";
 }
 .cuIcon-goodsnewfill:before {
-	content: "\E7BF";
+	content: "\e7bf";
 }
 .cuIcon-goodsnew:before {
-	content: "\E7C0";
+	content: "\e7c0";
 }
 .cuIcon-medalfill:before {
-	content: "\E7C1";
+	content: "\e7c1";
 }
 .cuIcon-medal:before {
-	content: "\E7C2";
+	content: "\e7c2";
 }
 .cuIcon-newsfill:before {
-	content: "\E7C3";
+	content: "\e7c3";
 }
 .cuIcon-newshotfill:before {
-	content: "\E7C4";
+	content: "\e7c4";
 }
 .cuIcon-newshot:before {
-	content: "\E7C5";
+	content: "\e7c5";
 }
 .cuIcon-news:before {
-	content: "\E7C6";
+	content: "\e7c6";
 }
 .cuIcon-videofill:before {
-	content: "\E7C7";
+	content: "\e7c7";
 }
 .cuIcon-video:before {
-	content: "\E7C8";
+	content: "\e7c8";
 }
 .cuIcon-exit:before {
-	content: "\E7CB";
+	content: "\e7cb";
 }
 .cuIcon-skinfill:before {
-	content: "\E7CC";
+	content: "\e7cc";
 }
 .cuIcon-skin:before {
-	content: "\E7CD";
+	content: "\e7cd";
 }
 .cuIcon-moneybagfill:before {
-	content: "\E7CE";
+	content: "\e7ce";
 }
 .cuIcon-usefullfill:before {
-	content: "\E7CF";
+	content: "\e7cf";
 }
 .cuIcon-usefull:before {
-	content: "\E7D0";
+	content: "\e7d0";
 }
 .cuIcon-moneybag:before {
-	content: "\E7D1";
+	content: "\e7d1";
 }
 .cuIcon-redpacket_fill:before {
-	content: "\E7D3";
+	content: "\e7d3";
 }
 .cuIcon-subscription:before {
-	content: "\E7D4";
+	content: "\e7d4";
 }
 .cuIcon-loading1:before {
-	content: "\E633";
+	content: "\e633";
 }
 .cuIcon-github:before {
-	content: "\E692";
+	content: "\e692";
 }
 .cuIcon-global:before {
-	content: "\E7EB";
+	content: "\e7eb";
 }
 .cuIcon-settingsfill:before {
-	content: "\E6AB";
+	content: "\e6ab";
 }
 .cuIcon-back_android:before {
-	content: "\E7ED";
+	content: "\e7ed";
 }
 .cuIcon-expressman:before {
-	content: "\E7EF";
+	content: "\e7ef";
 }
 .cuIcon-evaluate_fill:before {
-	content: "\E7F0";
+	content: "\e7f0";
 }
 .cuIcon-group_fill:before {
-	content: "\E7F5";
+	content: "\e7f5";
 }
 .cuIcon-play_forward_fill:before {
-	content: "\E7F6";
+	content: "\e7f6";
 }
 .cuIcon-deliver_fill:before {
-	content: "\E7F7";
+	content: "\e7f7";
 }
 .cuIcon-notice_forbid_fill:before {
-	content: "\E7F8";
+	content: "\e7f8";
 }
 .cuIcon-fork:before {
-	content: "\E60C";
+	content: "\e60c";
 }
 .cuIcon-pick:before {
-	content: "\E7FA";
+	content: "\e7fa";
 }
 .cuIcon-wenzi:before {
-	content: "\E6A7";
+	content: "\e6a7";
 }
 .cuIcon-ellipse:before {
-	content: "\E600";
+	content: "\e600";
 }
 .cuIcon-qr_code:before {
-	content: "\E61B";
+	content: "\e61b";
 }
 .cuIcon-dianhua:before {
-	content: "\E64D";
+	content: "\e64d";
 }
 .cuIcon-cuIcon:before {
-	content: "\E602";
+	content: "\e602";
 }
 .cuIcon-loading2:before {
-	content: "\E7F1";
+	content: "\e7f1";
 }
 .cuIcon-btn:before {
-	content: "\E601";
+	content: "\e601";
 }
 
 

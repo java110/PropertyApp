@@ -8,7 +8,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance");}function _iterableToArrayLimit(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}
+Object.defineProperty(exports, "__esModule", { value: true });exports.createApp = createApp;exports.createComponent = createComponent;exports.createPage = createPage;exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _slicedToArray(arr, i) {return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();}function _nonIterableRest() {throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _iterableToArrayLimit(arr, i) {if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"] != null) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}function _arrayWithHoles(arr) {if (Array.isArray(arr)) return arr;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(n);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
 
 var _toString = Object.prototype.toString;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -241,17 +241,23 @@ var promiseInterceptor = {
 
 
 var SYNC_API_RE =
-/^\$|restoreGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64/;
+/^\$|sendNativeEvent|restoreGlobal|getCurrentSubNVue|getMenuButtonBoundingClientRect|^report|interceptors|Interceptor$|getSubNVueById|requireNativePlugin|upx2px|hideKeyboard|canIUse|^create|Sync$|Manager$|base64ToArrayBuffer|arrayBufferToBase64/;
 
 var CONTEXT_API_RE = /^create|Manager$/;
 
-var CALLBACK_API_RE = /^on/;
+// Context例外情况
+var CONTEXT_API_RE_EXC = ['createBLEConnection'];
+
+// 同步例外情况
+var ASYNC_API = ['createBLEConnection'];
+
+var CALLBACK_API_RE = /^on|^off/;
 
 function isContextApi(name) {
-  return CONTEXT_API_RE.test(name);
+  return CONTEXT_API_RE.test(name) && CONTEXT_API_RE_EXC.indexOf(name) === -1;
 }
 function isSyncApi(name) {
-  return SYNC_API_RE.test(name);
+  return SYNC_API_RE.test(name) && ASYNC_API.indexOf(name) === -1;
 }
 
 function isCallbackApi(name) {
@@ -276,6 +282,19 @@ function shouldPromise(name) {
   return true;
 }
 
+/* eslint-disable no-extend-native */
+if (!Promise.prototype.finally) {
+  Promise.prototype.finally = function (callback) {
+    var promise = this.constructor;
+    return this.then(
+    function (value) {return promise.resolve(callback()).then(function () {return value;});},
+    function (reason) {return promise.resolve(callback()).then(function () {
+        throw reason;
+      });});
+
+  };
+}
+
 function promisify(name, api) {
   if (!shouldPromise(name)) {
     return api;
@@ -289,18 +308,6 @@ function promisify(name, api) {
         success: resolve,
         fail: reject })].concat(
       params));
-      /* eslint-disable no-extend-native */
-      if (!Promise.prototype.finally) {
-        Promise.prototype.finally = function (callback) {
-          var promise = this.constructor;
-          return this.then(
-          function (value) {return promise.resolve(callback()).then(function () {return value;});},
-          function (reason) {return promise.resolve(callback()).then(function () {
-              throw reason;
-            });});
-
-        };
-      }
     })));
   };
 }
@@ -339,9 +346,9 @@ function upx2px(number, newDeviceWidth) {
   result = Math.floor(result + EPS);
   if (result === 0) {
     if (deviceDPR === 1 || !isIOS) {
-      return 1;
+      result = 1;
     } else {
-      return 0.5;
+      result = 0.5;
     }
   }
   return number < 0 ? -result : result;
@@ -351,14 +358,12 @@ var interceptors = {
   promiseInterceptor: promiseInterceptor };
 
 
-
-
 var baseApi = /*#__PURE__*/Object.freeze({
   __proto__: null,
   upx2px: upx2px,
-  interceptors: interceptors,
   addInterceptor: addInterceptor,
-  removeInterceptor: removeInterceptor });
+  removeInterceptor: removeInterceptor,
+  interceptors: interceptors });
 
 
 var previewImage = {
@@ -416,7 +421,10 @@ var protocols = {
 
 
 var todos = [
-'vibrate'];
+'vibrate',
+'preloadPage',
+'unPreloadPage',
+'loadSubPackage'];
 
 var canIUses = [];
 
@@ -601,8 +609,6 @@ var eventApi = /*#__PURE__*/Object.freeze({
   $emit: $emit });
 
 
-
-
 var api = /*#__PURE__*/Object.freeze({
   __proto__: null });
 
@@ -717,10 +723,10 @@ function initVueComponent(Vue, vueOptions) {
   var VueComponent;
   if (isFn(vueOptions)) {
     VueComponent = vueOptions;
-    vueOptions = VueComponent.extendOptions;
   } else {
     VueComponent = Vue.extend(vueOptions);
   }
+  vueOptions = VueComponent.options;
   return [VueComponent, vueOptions];
 }
 
@@ -789,14 +795,14 @@ function createObserver(name) {
 }
 
 function initBehaviors(vueOptions, initBehavior) {
-  var vueBehaviors = vueOptions['behaviors'];
-  var vueExtends = vueOptions['extends'];
-  var vueMixins = vueOptions['mixins'];
+  var vueBehaviors = vueOptions.behaviors;
+  var vueExtends = vueOptions.extends;
+  var vueMixins = vueOptions.mixins;
 
-  var vueProps = vueOptions['props'];
+  var vueProps = vueOptions.props;
 
   if (!vueProps) {
-    vueOptions['props'] = vueProps = [];
+    vueOptions.props = vueProps = [];
   }
 
   var behaviors = [];
@@ -808,11 +814,11 @@ function initBehaviors(vueOptions, initBehavior) {
           vueProps.push('name');
           vueProps.push('value');
         } else {
-          vueProps['name'] = {
+          vueProps.name = {
             type: String,
             default: '' };
 
-          vueProps['value'] = {
+          vueProps.value = {
             type: [String, Number, Boolean, Array, Object, Date],
             default: '' };
 
@@ -881,7 +887,7 @@ function initProperties(props) {var isBehavior = arguments.length > 1 && argumen
     Object.keys(props).forEach(function (key) {
       var opts = props[key];
       if (isPlainObject(opts)) {// title:{type:String,default:''}
-        var value = opts['default'];
+        var value = opts.default;
         if (isFn(value)) {
           value = value();
         }
@@ -918,6 +924,11 @@ function wrapper$1(event) {
 
   if (!hasOwn(event, 'detail')) {
     event.detail = {};
+  }
+
+  if (hasOwn(event, 'markerId')) {
+    event.detail = typeof event.detail === 'object' ? event.detail : {};
+    event.detail.markerId = event.markerId;
   }
 
   if (isPlainObject(event.detail)) {
@@ -1072,11 +1083,11 @@ function handleEvent(event) {var _this = this;
   // [['tap',[['handle',[1,2,a]],['handle1',[1,2,a]]]]]
   var dataset = (event.currentTarget || event.target).dataset;
   if (!dataset) {
-    return console.warn("\u4E8B\u4EF6\u4FE1\u606F\u4E0D\u5B58\u5728");
+    return console.warn('事件信息不存在');
   }
   var eventOpts = dataset.eventOpts || dataset['event-opts']; // 支付宝 web-view 组件 dataset 非驼峰
   if (!eventOpts) {
-    return console.warn("\u4E8B\u4EF6\u4FE1\u606F\u4E0D\u5B58\u5728");
+    return console.warn('事件信息不存在');
   }
 
   // [['handle',[1,2,a]],['handle1',[1,2,a]]]
@@ -1327,15 +1338,16 @@ function parseBaseComponent(vueComponentOptions)
 {var _ref5 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},isPage = _ref5.isPage,initRelation = _ref5.initRelation;var _initVueComponent =
   initVueComponent(_vue.default, vueComponentOptions),_initVueComponent2 = _slicedToArray(_initVueComponent, 2),VueComponent = _initVueComponent2[0],vueOptions = _initVueComponent2[1];
 
-  var options = {
+  var options = _objectSpread({
     multipleSlots: true,
-    addGlobalClass: true };
+    addGlobalClass: true },
+  vueOptions.options || {});
 
 
   {
     // 微信 multipleSlots 部分情况有 bug，导致内容顺序错乱 如 u-list，提供覆盖选项
-    if (vueOptions['mp-weixin'] && vueOptions['mp-weixin']['options']) {
-      Object.assign(options, vueOptions['mp-weixin']['options']);
+    if (vueOptions['mp-weixin'] && vueOptions['mp-weixin'].options) {
+      Object.assign(options, vueOptions['mp-weixin'].options);
     }
   }
 
@@ -1400,6 +1412,10 @@ function parseBaseComponent(vueComponentOptions)
       __e: handleEvent } };
 
 
+  // externalClasses
+  if (vueOptions.externalClasses) {
+    componentOptions.externalClasses = vueOptions.externalClasses;
+  }
 
   if (Array.isArray(vueOptions.wxsCallMethods)) {
     vueOptions.wxsCallMethods.forEach(function (callMethod) {
@@ -1561,7 +1577,7 @@ uni$1;exports.default = _default;
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * Vue.js v2.6.11
- * (c) 2014-2019 Evan You
+ * (c) 2014-2020 Evan You
  * Released under the MIT License.
  */
 /*  */
@@ -2184,12 +2200,10 @@ if (true) {
   };
 
   formatComponentName = function (vm, includeFile) {
-    {
-      if(vm.$scope && vm.$scope.is){
-        return vm.$scope.is
-      }
-    }
     if (vm.$root === vm) {
+      if (vm.$options && vm.$options.__file) { // fixed by xxxxxx
+        return ('') + vm.$options.__file
+      }
       return '<Root>'
     }
     var options = typeof vm === 'function' && vm.cid != null
@@ -2224,7 +2238,7 @@ if (true) {
     if (vm._isVue && vm.$parent) {
       var tree = [];
       var currentRecursiveSequence = 0;
-      while (vm) {
+      while (vm && vm.$options.name !== 'PageBody') {
         if (tree.length > 0) {
           var last = tree[tree.length - 1];
           if (last.constructor === vm.constructor) {
@@ -2236,7 +2250,7 @@ if (true) {
             currentRecursiveSequence = 0;
           }
         }
-        tree.push(vm);
+        !vm.$options.isReserved && tree.push(vm);
         vm = vm.$parent;
       }
       return '\n\nfound in\n\n' + tree
@@ -6521,10 +6535,10 @@ function initMixin (Vue) {
     initEvents(vm);
     initRender(vm);
     callHook(vm, 'beforeCreate');
-    vm.mpHost !== 'mp-toutiao' && initInjections(vm); // resolve injections before data/props  
+    !vm._$fallback && initInjections(vm); // resolve injections before data/props  
     initState(vm);
-    vm.mpHost !== 'mp-toutiao' && initProvide(vm); // resolve provide after data/props
-    vm.mpHost !== 'mp-toutiao' && callHook(vm, 'created');      
+    !vm._$fallback && initProvide(vm); // resolve provide after data/props
+    !vm._$fallback && callHook(vm, 'created');      
 
     /* istanbul ignore if */
     if ( true && config.performance && mark) {
@@ -7184,7 +7198,7 @@ var patch = function(oldVnode, vnode) {
     Object.keys(data).forEach(function (key) { //仅同步 data 中有的数据
       mpData[key] = mpInstance.data[key];
     });
-    var diffData = diff(data, mpData);
+    var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
       if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
@@ -7240,7 +7254,7 @@ function mountComponent$1(
     }
   }
   
-  vm.mpHost !== 'mp-toutiao' && callHook(vm, 'beforeMount');
+  !vm._$fallback && callHook(vm, 'beforeMount');
 
   var updateComponent = function () {
     vm._update(vm._render(), hydrating);
@@ -7356,15 +7370,15 @@ function getTarget(obj, path) {
   return getTarget(obj[key], parts.slice(1).join('.'))
 }
 
-function internalMixin(Vue) {
+function internalMixin(Vue ) {
 
-  Vue.config.errorHandler = function(err) {
+  Vue.config.errorHandler = function(err, vm, info) {
+    Vue.util.warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
+    console.error(err);
     /* eslint-disable no-undef */
     var app = getApp();
     if (app && app.onError) {
       app.onError(err);
-    } else {
-      console.error(err);
     }
   };
 
@@ -7611,940 +7625,21 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!*******************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/pages.json ***!
-  \*******************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/pages.json ***!
+  \**************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
 
 
 /***/ }),
-/* 5 */
-/*!*******************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-stat/dist/index.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {var _package = __webpack_require__(/*! ../package.json */ 6);function _possibleConstructorReturn(self, call) {if (call && (typeof call === "object" || typeof call === "function")) {return call;}return _assertThisInitialized(self);}function _assertThisInitialized(self) {if (self === void 0) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return self;}function _getPrototypeOf(o) {_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {return o.__proto__ || Object.getPrototypeOf(o);};return _getPrototypeOf(o);}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function");}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });if (superClass) _setPrototypeOf(subClass, superClass);}function _setPrototypeOf(o, p) {_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {o.__proto__ = p;return o;};return _setPrototypeOf(o, p);}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}
-
-var STAT_VERSION = _package.version;
-var STAT_URL = 'https://tongji.dcloud.io/uni/stat';
-var STAT_H5_URL = 'https://tongji.dcloud.io/uni/stat.gif';
-var PAGE_PVER_TIME = 1800;
-var APP_PVER_TIME = 300;
-var OPERATING_TIME = 10;
-
-var UUID_KEY = '__DC_STAT_UUID';
-var UUID_VALUE = '__DC_UUID_VALUE';
-
-function getUuid() {
-  var uuid = '';
-  if (getPlatformName() === 'n') {
-    try {
-      uuid = plus.runtime.getDCloudId();
-    } catch (e) {
-      uuid = '';
-    }
-    return uuid;
-  }
-
-  try {
-    uuid = uni.getStorageSync(UUID_KEY);
-  } catch (e) {
-    uuid = UUID_VALUE;
-  }
-
-  if (!uuid) {
-    uuid = Date.now() + '' + Math.floor(Math.random() * 1e7);
-    try {
-      uni.setStorageSync(UUID_KEY, uuid);
-    } catch (e) {
-      uni.setStorageSync(UUID_KEY, UUID_VALUE);
-    }
-  }
-  return uuid;
-}
-
-var getSgin = function getSgin(statData) {
-  var arr = Object.keys(statData);
-  var sortArr = arr.sort();
-  var sgin = {};
-  var sginStr = '';
-  for (var i in sortArr) {
-    sgin[sortArr[i]] = statData[sortArr[i]];
-    sginStr += sortArr[i] + '=' + statData[sortArr[i]] + '&';
-  }
-  // const options = sginStr.substr(0, sginStr.length - 1)
-  // sginStr = sginStr.substr(0, sginStr.length - 1) + '&key=' + STAT_KEY;
-  // const si = crypto.createHash('md5').update(sginStr).digest('hex');
-  return {
-    sign: '',
-    options: sginStr.substr(0, sginStr.length - 1) };
-
-};
-
-var getSplicing = function getSplicing(data) {
-  var str = '';
-  for (var i in data) {
-    str += i + '=' + data[i] + '&';
-  }
-  return str.substr(0, str.length - 1);
-};
-
-var getTime = function getTime() {
-  return parseInt(new Date().getTime() / 1000);
-};
-
-var getPlatformName = function getPlatformName() {
-  var platformList = {
-    'app-plus': 'n',
-    'h5': 'h5',
-    'mp-weixin': 'wx',
-    'mp-alipay': 'ali',
-    'mp-baidu': 'bd',
-    'mp-toutiao': 'tt',
-    'mp-qq': 'qq' };
-
-  return platformList["mp-weixin"];
-};
-
-var getPackName = function getPackName() {
-  var packName = '';
-  if (getPlatformName() === 'wx' || getPlatformName() === 'qq') {
-    // 兼容微信小程序低版本基础库
-    if (uni.canIUse('getAccountInfoSync')) {
-      packName = uni.getAccountInfoSync().miniProgram.appId || '';
-    }
-  }
-  return packName;
-};
-
-var getVersion = function getVersion() {
-  return getPlatformName() === 'n' ? plus.runtime.version : '';
-};
-
-var getChannel = function getChannel() {
-  var platformName = getPlatformName();
-  var channel = '';
-  if (platformName === 'n') {
-    channel = plus.runtime.channel;
-  }
-  return channel;
-};
-
-var getScene = function getScene(options) {
-  var platformName = getPlatformName();
-  var scene = '';
-  if (options) {
-    return options;
-  }
-  if (platformName === 'wx') {
-    scene = uni.getLaunchOptionsSync().scene;
-  }
-  return scene;
-};
-var First__Visit__Time__KEY = 'First__Visit__Time';
-var Last__Visit__Time__KEY = 'Last__Visit__Time';
-
-var getFirstVisitTime = function getFirstVisitTime() {
-  var timeStorge = uni.getStorageSync(First__Visit__Time__KEY);
-  var time = 0;
-  if (timeStorge) {
-    time = timeStorge;
-  } else {
-    time = getTime();
-    uni.setStorageSync(First__Visit__Time__KEY, time);
-    uni.removeStorageSync(Last__Visit__Time__KEY);
-  }
-  return time;
-};
-
-var getLastVisitTime = function getLastVisitTime() {
-  var timeStorge = uni.getStorageSync(Last__Visit__Time__KEY);
-  var time = 0;
-  if (timeStorge) {
-    time = timeStorge;
-  } else {
-    time = '';
-  }
-  uni.setStorageSync(Last__Visit__Time__KEY, getTime());
-  return time;
-};
-
-
-var PAGE_RESIDENCE_TIME = '__page__residence__time';
-var First_Page_residence_time = 0;
-var Last_Page_residence_time = 0;
-
-
-var setPageResidenceTime = function setPageResidenceTime() {
-  First_Page_residence_time = getTime();
-  if (getPlatformName() === 'n') {
-    uni.setStorageSync(PAGE_RESIDENCE_TIME, getTime());
-  }
-  return First_Page_residence_time;
-};
-
-var getPageResidenceTime = function getPageResidenceTime() {
-  Last_Page_residence_time = getTime();
-  if (getPlatformName() === 'n') {
-    First_Page_residence_time = uni.getStorageSync(PAGE_RESIDENCE_TIME);
-  }
-  return Last_Page_residence_time - First_Page_residence_time;
-};
-var TOTAL__VISIT__COUNT = 'Total__Visit__Count';
-var getTotalVisitCount = function getTotalVisitCount() {
-  var timeStorge = uni.getStorageSync(TOTAL__VISIT__COUNT);
-  var count = 1;
-  if (timeStorge) {
-    count = timeStorge;
-    count++;
-  }
-  uni.setStorageSync(TOTAL__VISIT__COUNT, count);
-  return count;
-};
-
-var GetEncodeURIComponentOptions = function GetEncodeURIComponentOptions(statData) {
-  var data = {};
-  for (var prop in statData) {
-    data[prop] = encodeURIComponent(statData[prop]);
-  }
-  return data;
-};
-
-var Set__First__Time = 0;
-var Set__Last__Time = 0;
-
-var getFirstTime = function getFirstTime() {
-  var time = new Date().getTime();
-  Set__First__Time = time;
-  Set__Last__Time = 0;
-  return time;
-};
-
-
-var getLastTime = function getLastTime() {
-  var time = new Date().getTime();
-  Set__Last__Time = time;
-  return time;
-};
-
-
-var getResidenceTime = function getResidenceTime(type) {
-  var residenceTime = 0;
-  if (Set__First__Time !== 0) {
-    residenceTime = Set__Last__Time - Set__First__Time;
-  }
-
-  residenceTime = parseInt(residenceTime / 1000);
-  residenceTime = residenceTime < 1 ? 1 : residenceTime;
-  if (type === 'app') {
-    var overtime = residenceTime > APP_PVER_TIME ? true : false;
-    return {
-      residenceTime: residenceTime,
-      overtime: overtime };
-
-  }
-  if (type === 'page') {
-    var _overtime = residenceTime > PAGE_PVER_TIME ? true : false;
-    return {
-      residenceTime: residenceTime,
-      overtime: _overtime };
-
-  }
-
-  return {
-    residenceTime: residenceTime };
-
-
-};
-
-var getRoute = function getRoute() {
-  var pages = getCurrentPages();
-  var page = pages[pages.length - 1];
-  var _self = page.$vm;
-
-  if (getPlatformName() === 'bd') {
-    return _self.$mp && _self.$mp.page.is;
-  } else {
-    return _self.$scope && _self.$scope.route || _self.$mp && _self.$mp.page.route;
-  }
-};
-
-var getPageRoute = function getPageRoute(self) {
-  var pages = getCurrentPages();
-  var page = pages[pages.length - 1];
-  var _self = page.$vm;
-  var query = self._query;
-  var str = query && JSON.stringify(query) !== '{}' ? '?' + JSON.stringify(query) : '';
-  // clear
-  self._query = '';
-  if (getPlatformName() === 'bd') {
-    return _self.$mp && _self.$mp.page.is + str;
-  } else {
-    return _self.$scope && _self.$scope.route + str || _self.$mp && _self.$mp.page.route + str;
-  }
-};
-
-var getPageTypes = function getPageTypes(self) {
-  if (self.mpType === 'page' || self.$mp && self.$mp.mpType === 'page' || self.$options.mpType === 'page') {
-    return true;
-  }
-  return false;
-};
-
-var calibration = function calibration(eventName, options) {
-  //  login 、 share 、pay_success 、pay_fail 、register 、title
-  if (!eventName) {
-    console.error("uni.report \u7F3A\u5C11 [eventName] \u53C2\u6570");
-    return true;
-  }
-  if (typeof eventName !== 'string') {
-    console.error("uni.report [eventName] \u53C2\u6570\u7C7B\u578B\u9519\u8BEF,\u53EA\u80FD\u4E3A String \u7C7B\u578B");
-    return true;
-  }
-  if (eventName.length > 255) {
-    console.error("uni.report [eventName] \u53C2\u6570\u957F\u5EA6\u4E0D\u80FD\u5927\u4E8E 255");
-    return true;
-  }
-
-  if (typeof options !== 'string' && typeof options !== 'object') {
-    console.error("uni.report [options] \u53C2\u6570\u7C7B\u578B\u9519\u8BEF,\u53EA\u80FD\u4E3A String \u6216 Object \u7C7B\u578B");
-    return true;
-  }
-
-  if (typeof options === 'string' && options.length > 255) {
-    console.error("uni.report [options] \u53C2\u6570\u957F\u5EA6\u4E0D\u80FD\u5927\u4E8E 255");
-    return true;
-  }
-
-  if (eventName === 'title' && typeof options !== 'string') {
-    console.error('uni.report [eventName] 参数为 title 时，[options] 参数只能为 String 类型');
-    return true;
-  }
-};
-
-var PagesJson = __webpack_require__(/*! uni-pages?{"type":"style"} */ 7).default;
-var statConfig = __webpack_require__(/*! uni-stat-config */ 8).default || __webpack_require__(/*! uni-stat-config */ 8);
-
-var resultOptions = uni.getSystemInfoSync();var
-
-Util = /*#__PURE__*/function () {
-  function Util() {_classCallCheck(this, Util);
-    this.self = '';
-    this._retry = 0;
-    this._platform = '';
-    this._query = {};
-    this._navigationBarTitle = {
-      config: '',
-      page: '',
-      report: '',
-      lt: '' };
-
-    this._operatingTime = 0;
-    this._reportingRequestData = {
-      '1': [],
-      '11': [] };
-
-    this.__prevent_triggering = false;
-
-    this.__licationHide = false;
-    this.__licationShow = false;
-    this._lastPageRoute = '';
-    this.statData = {
-      uuid: getUuid(),
-      ut: getPlatformName(),
-      mpn: getPackName(),
-      ak: statConfig.appid,
-      usv: STAT_VERSION,
-      v: getVersion(),
-      ch: getChannel(),
-      cn: '',
-      pn: '',
-      ct: '',
-      t: getTime(),
-      tt: '',
-      p: resultOptions.platform === 'android' ? 'a' : 'i',
-      brand: resultOptions.brand || '',
-      md: resultOptions.model,
-      sv: resultOptions.system.replace(/(Android|iOS)\s/, ''),
-      mpsdk: resultOptions.SDKVersion || '',
-      mpv: resultOptions.version || '',
-      lang: resultOptions.language,
-      pr: resultOptions.pixelRatio,
-      ww: resultOptions.windowWidth,
-      wh: resultOptions.windowHeight,
-      sw: resultOptions.screenWidth,
-      sh: resultOptions.screenHeight };
-
-
-  }_createClass(Util, [{ key: "_applicationShow", value: function _applicationShow()
-
-    {
-      if (this.__licationHide) {
-        getLastTime();
-        var time = getResidenceTime('app');
-        if (time.overtime) {
-          var options = {
-            path: this._lastPageRoute,
-            scene: this.statData.sc };
-
-          this._sendReportRequest(options);
-        }
-        this.__licationHide = false;
-      }
-    } }, { key: "_applicationHide", value: function _applicationHide(
-
-    self, type) {
-
-      this.__licationHide = true;
-      getLastTime();
-      var time = getResidenceTime();
-      getFirstTime();
-      var route = getPageRoute(this);
-      this._sendHideRequest({
-        urlref: route,
-        urlref_ts: time.residenceTime },
-      type);
-    } }, { key: "_pageShow", value: function _pageShow()
-
-    {
-      var route = getPageRoute(this);
-      var routepath = getRoute();
-      this._navigationBarTitle.config = PagesJson &&
-      PagesJson.pages[routepath] &&
-      PagesJson.pages[routepath].titleNView &&
-      PagesJson.pages[routepath].titleNView.titleText ||
-      PagesJson &&
-      PagesJson.pages[routepath] &&
-      PagesJson.pages[routepath].navigationBarTitleText || '';
-
-      if (this.__licationShow) {
-        getFirstTime();
-        this.__licationShow = false;
-        // console.log('这是 onLauch 之后执行的第一次 pageShow ，为下次记录时间做准备');
-        this._lastPageRoute = route;
-        return;
-      }
-
-      getLastTime();
-      this._lastPageRoute = route;
-      var time = getResidenceTime('page');
-      if (time.overtime) {
-        var options = {
-          path: this._lastPageRoute,
-          scene: this.statData.sc };
-
-        this._sendReportRequest(options);
-      }
-      getFirstTime();
-    } }, { key: "_pageHide", value: function _pageHide()
-
-    {
-      if (!this.__licationHide) {
-        getLastTime();
-        var time = getResidenceTime('page');
-        this._sendPageRequest({
-          url: this._lastPageRoute,
-          urlref: this._lastPageRoute,
-          urlref_ts: time.residenceTime });
-
-        this._navigationBarTitle = {
-          config: '',
-          page: '',
-          report: '',
-          lt: '' };
-
-        return;
-      }
-    } }, { key: "_login", value: function _login()
-
-    {
-      this._sendEventRequest({
-        key: 'login' },
-      0);
-    } }, { key: "_share", value: function _share()
-
-    {
-      this._sendEventRequest({
-        key: 'share' },
-      0);
-    } }, { key: "_payment", value: function _payment(
-    key) {
-      this._sendEventRequest({
-        key: key },
-      0);
-    } }, { key: "_sendReportRequest", value: function _sendReportRequest(
-    options) {
-
-      this._navigationBarTitle.lt = '1';
-      var query = options.query && JSON.stringify(options.query) !== '{}' ? '?' + JSON.stringify(options.query) : '';
-      this.statData.lt = '1';
-      this.statData.url = options.path + query || '';
-      this.statData.t = getTime();
-      this.statData.sc = getScene(options.scene);
-      this.statData.fvts = getFirstVisitTime();
-      this.statData.lvts = getLastVisitTime();
-      this.statData.tvc = getTotalVisitCount();
-      if (getPlatformName() === 'n') {
-        this.getProperty();
-      } else {
-        this.getNetworkInfo();
-      }
-    } }, { key: "_sendPageRequest", value: function _sendPageRequest(
-
-    opt) {var
-
-      url =
-
-
-      opt.url,urlref = opt.urlref,urlref_ts = opt.urlref_ts;
-      this._navigationBarTitle.lt = '11';
-      var options = {
-        ak: this.statData.ak,
-        uuid: this.statData.uuid,
-        lt: '11',
-        ut: this.statData.ut,
-        url: url,
-        tt: this.statData.tt,
-        urlref: urlref,
-        urlref_ts: urlref_ts,
-        ch: this.statData.ch,
-        usv: this.statData.usv,
-        t: getTime(),
-        p: this.statData.p };
-
-      this.request(options);
-    } }, { key: "_sendHideRequest", value: function _sendHideRequest(
-
-    opt, type) {var
-
-      urlref =
-
-      opt.urlref,urlref_ts = opt.urlref_ts;
-      var options = {
-        ak: this.statData.ak,
-        uuid: this.statData.uuid,
-        lt: '3',
-        ut: this.statData.ut,
-        urlref: urlref,
-        urlref_ts: urlref_ts,
-        ch: this.statData.ch,
-        usv: this.statData.usv,
-        t: getTime(),
-        p: this.statData.p };
-
-      this.request(options, type);
-    } }, { key: "_sendEventRequest", value: function _sendEventRequest()
-
-
-
-    {var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},_ref$key = _ref.key,key = _ref$key === void 0 ? '' : _ref$key,_ref$value = _ref.value,value = _ref$value === void 0 ? "" : _ref$value;
-      var route = this._lastPageRoute;
-      var options = {
-        ak: this.statData.ak,
-        uuid: this.statData.uuid,
-        lt: '21',
-        ut: this.statData.ut,
-        url: route,
-        ch: this.statData.ch,
-        e_n: key,
-        e_v: typeof value === 'object' ? JSON.stringify(value) : value.toString(),
-        usv: this.statData.usv,
-        t: getTime(),
-        p: this.statData.p };
-
-      this.request(options);
-    } }, { key: "getNetworkInfo", value: function getNetworkInfo()
-
-    {var _this = this;
-      uni.getNetworkType({
-        success: function success(result) {
-          _this.statData.net = result.networkType;
-          _this.getLocation();
-        } });
-
-    } }, { key: "getProperty", value: function getProperty()
-
-    {var _this2 = this;
-      plus.runtime.getProperty(plus.runtime.appid, function (wgtinfo) {
-        _this2.statData.v = wgtinfo.version || '';
-        _this2.getNetworkInfo();
-      });
-    } }, { key: "getLocation", value: function getLocation()
-
-    {var _this3 = this;
-      if (statConfig.getLocation) {
-        uni.getLocation({
-          type: 'wgs84',
-          geocode: true,
-          success: function success(result) {
-            if (result.address) {
-              _this3.statData.cn = result.address.country;
-              _this3.statData.pn = result.address.province;
-              _this3.statData.ct = result.address.city;
-            }
-
-            _this3.statData.lat = result.latitude;
-            _this3.statData.lng = result.longitude;
-            _this3.request(_this3.statData);
-          } });
-
-      } else {
-        this.statData.lat = 0;
-        this.statData.lng = 0;
-        this.request(this.statData);
-      }
-    } }, { key: "request", value: function request(
-
-    data, type) {var _this4 = this;
-      var time = getTime();
-      var title = this._navigationBarTitle;
-      data.ttn = title.page;
-      data.ttpj = title.config;
-      data.ttc = title.report;
-
-      var requestData = this._reportingRequestData;
-      if (getPlatformName() === 'n') {
-        requestData = uni.getStorageSync('__UNI__STAT__DATA') || {};
-      }
-      if (!requestData[data.lt]) {
-        requestData[data.lt] = [];
-      }
-      requestData[data.lt].push(data);
-
-      if (getPlatformName() === 'n') {
-        uni.setStorageSync('__UNI__STAT__DATA', requestData);
-      }
-      if (getPageResidenceTime() < OPERATING_TIME && !type) {
-        return;
-      }
-      var uniStatData = this._reportingRequestData;
-      if (getPlatformName() === 'n') {
-        uniStatData = uni.getStorageSync('__UNI__STAT__DATA');
-      }
-      // 时间超过，重新获取时间戳
-      setPageResidenceTime();
-      var firstArr = [];
-      var contentArr = [];
-      var lastArr = [];var _loop = function _loop(
-
-      i) {
-        var rd = uniStatData[i];
-        rd.forEach(function (elm) {
-          var newData = getSplicing(elm);
-          if (i === 0) {
-            firstArr.push(newData);
-          } else if (i === 3) {
-            lastArr.push(newData);
-          } else {
-            contentArr.push(newData);
-          }
-        });};for (var i in uniStatData) {_loop(i);
-      }
-
-      firstArr.push.apply(firstArr, contentArr.concat(lastArr));
-      var optionsData = {
-        usv: STAT_VERSION, //统计 SDK 版本号
-        t: time, //发送请求时的时间戮
-        requests: JSON.stringify(firstArr) };
-
-
-      this._reportingRequestData = {};
-      if (getPlatformName() === 'n') {
-        uni.removeStorageSync('__UNI__STAT__DATA');
-      }
-
-      if (data.ut === 'h5') {
-        this.imageRequest(optionsData);
-        return;
-      }
-
-      if (getPlatformName() === 'n' && this.statData.p === 'a') {
-        setTimeout(function () {
-          _this4._sendRequest(optionsData);
-        }, 200);
-        return;
-      }
-      this._sendRequest(optionsData);
-    } }, { key: "_sendRequest", value: function _sendRequest(
-    optionsData) {var _this5 = this;
-      uni.request({
-        url: STAT_URL,
-        method: 'POST',
-        // header: {
-        //   'content-type': 'application/json' // 默认值
-        // },
-        data: optionsData,
-        success: function success() {
-          // if (process.env.NODE_ENV === 'development') {
-          //   console.log('stat request success');
-          // }
-        },
-        fail: function fail(e) {
-          if (++_this5._retry < 3) {
-            setTimeout(function () {
-              _this5._sendRequest(optionsData);
-            }, 1000);
-          }
-        } });
-
-    }
-    /**
-       * h5 请求
-       */ }, { key: "imageRequest", value: function imageRequest(
-    data) {
-      var image = new Image();
-      var options = getSgin(GetEncodeURIComponentOptions(data)).options;
-      image.src = STAT_H5_URL + '?' + options;
-    } }, { key: "sendEvent", value: function sendEvent(
-
-    key, value) {
-      // 校验 type 参数
-      if (calibration(key, value)) return;
-
-      if (key === 'title') {
-        this._navigationBarTitle.report = value;
-        return;
-      }
-      this._sendEventRequest({
-        key: key,
-        value: typeof value === 'object' ? JSON.stringify(value) : value },
-      1);
-    } }]);return Util;}();var
-
-
-
-Stat = /*#__PURE__*/function (_Util) {_inherits(Stat, _Util);_createClass(Stat, null, [{ key: "getInstance", value: function getInstance()
-    {
-      if (!this.instance) {
-        this.instance = new Stat();
-      }
-      return this.instance;
-    } }]);
-  function Stat() {var _this6;_classCallCheck(this, Stat);
-    _this6 = _possibleConstructorReturn(this, _getPrototypeOf(Stat).call(this));
-    _this6.instance = null;
-    // 注册拦截器
-    if (typeof uni.addInterceptor === 'function' && "development" !== 'development') {
-      _this6.addInterceptorInit();
-      _this6.interceptLogin();
-      _this6.interceptShare(true);
-      _this6.interceptRequestPayment();
-    }return _this6;
-  }_createClass(Stat, [{ key: "addInterceptorInit", value: function addInterceptorInit()
-
-    {
-      var self = this;
-      uni.addInterceptor('setNavigationBarTitle', {
-        invoke: function invoke(args) {
-          self._navigationBarTitle.page = args.title;
-        } });
-
-    } }, { key: "interceptLogin", value: function interceptLogin()
-
-    {
-      var self = this;
-      uni.addInterceptor('login', {
-        complete: function complete() {
-          self._login();
-        } });
-
-    } }, { key: "interceptShare", value: function interceptShare(
-
-    type) {
-      var self = this;
-      if (!type) {
-        self._share();
-        return;
-      }
-      uni.addInterceptor('share', {
-        success: function success() {
-          self._share();
-        },
-        fail: function fail() {
-          self._share();
-        } });
-
-    } }, { key: "interceptRequestPayment", value: function interceptRequestPayment()
-
-    {
-      var self = this;
-      uni.addInterceptor('requestPayment', {
-        success: function success() {
-          self._payment('pay_success');
-        },
-        fail: function fail() {
-          self._payment('pay_fail');
-        } });
-
-    } }, { key: "report", value: function report(
-
-    options, self) {
-      this.self = self;
-      // if (process.env.NODE_ENV === 'development') {
-      //   console.log('report init');
-      // }
-      setPageResidenceTime();
-      this.__licationShow = true;
-      this._sendReportRequest(options, true);
-    } }, { key: "load", value: function load(
-
-    options, self) {
-      if (!self.$scope && !self.$mp) {
-        var page = getCurrentPages();
-        self.$scope = page[page.length - 1];
-      }
-      this.self = self;
-      this._query = options;
-    } }, { key: "show", value: function show(
-
-    self) {
-      this.self = self;
-      if (getPageTypes(self)) {
-        this._pageShow(self);
-      } else {
-        this._applicationShow(self);
-      }
-    } }, { key: "ready", value: function ready(
-
-    self) {
-      // this.self = self;
-      // if (getPageTypes(self)) {
-      //   this._pageShow(self);
-      // }
-    } }, { key: "hide", value: function hide(
-    self) {
-      this.self = self;
-      if (getPageTypes(self)) {
-        this._pageHide(self);
-      } else {
-        this._applicationHide(self, true);
-      }
-    } }, { key: "error", value: function error(
-    em) {
-      if (this._platform === 'devtools') {
-        if (true) {
-          console.info('当前运行环境为开发者工具，不上报数据。');
-        }
-        // return;
-      }
-      var emVal = '';
-      if (!em.message) {
-        emVal = JSON.stringify(em);
-      } else {
-        emVal = em.stack;
-      }
-      var options = {
-        ak: this.statData.ak,
-        uuid: this.statData.uuid,
-        lt: '31',
-        ut: this.statData.ut,
-        ch: this.statData.ch,
-        mpsdk: this.statData.mpsdk,
-        mpv: this.statData.mpv,
-        v: this.statData.v,
-        em: emVal,
-        usv: this.statData.usv,
-        t: getTime(),
-        p: this.statData.p };
-
-      this.request(options);
-    } }]);return Stat;}(Util);
-
-
-var stat = Stat.getInstance();
-var isHide = false;
-var lifecycle = {
-  onLaunch: function onLaunch(options) {
-    stat.report(options, this);
-  },
-  onReady: function onReady() {
-    stat.ready(this);
-  },
-  onLoad: function onLoad(options) {
-    stat.load(options, this);
-    // 重写分享，获取分享上报事件
-    if (this.$scope && this.$scope.onShareAppMessage) {
-      var oldShareAppMessage = this.$scope.onShareAppMessage;
-      this.$scope.onShareAppMessage = function (options) {
-        stat.interceptShare(false);
-        return oldShareAppMessage.call(this, options);
-      };
-    }
-  },
-  onShow: function onShow() {
-    isHide = false;
-    stat.show(this);
-  },
-  onHide: function onHide() {
-    isHide = true;
-    stat.hide(this);
-  },
-  onUnload: function onUnload() {
-    if (isHide) {
-      isHide = false;
-      return;
-    }
-    stat.hide(this);
-  },
-  onError: function onError(e) {
-    stat.error(e);
-  } };
-
-
-function main() {
-  if (true) {
-    uni.report = function (type, options) {};
-  } else { var Vue; }
-}
-
-main();
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-/* 6 */
-/*!******************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-stat/package.json ***!
-  \******************************************************/
-/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
-/***/ (function(module) {
-
-module.exports = {"_from":"@dcloudio/uni-stat@alpha","_id":"@dcloudio/uni-stat@2.0.0-alpha-25720200116005","_inBundle":false,"_integrity":"sha512-RZFw3WAaS/CZTzzv9JPaWvmoNitojD/06vPdHSzlqZi8GbuE222lFuyochEjrGkG8rPPrWHAnwfoPBuQVtkfdg==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@alpha","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"alpha","saveSpec":null,"fetchSpec":"alpha"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-alpha-25720200116005.tgz","_shasum":"08bb17aba91c84a981f33d74153aa3dd07b578ad","_spec":"@dcloudio/uni-stat@alpha","_where":"/Users/guoshengqiang/Documents/dcloud-plugins/alpha/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"a129bde60de35f7ef497f43d5a45b4556231995c","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-alpha-25720200116005"};
-
-/***/ }),
-/* 7 */
-/*!************************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/pages.json?{"type":"style"} ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "HC掌上物业" }, "pages/addressList/addressList": { "navigationBarTitleText": "通讯录" }, "pages/my/my": { "navigationBarTitleText": "我的" }, "pages/login/login": { "navigationStyle": "custom" }, "pages/activityes/activityes": { "navigationBarTitleText": "小区文化" }, "pages/activityDetail/activityDetail": { "navigationBarTitleText": "文化详情" }, "pages/notice/notice": { "navigationBarTitleText": "公告" }, "pages/changeCommunity/changeCommunity": { "navigationBarTitleText": "切换小区" } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "HC掌上物业", "navigationBarBackgroundColor": "#00AA00", "backgroundColor": "#00AA00" } };exports.default = _default;
-
-/***/ }),
-/* 8 */
-/*!***********************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/pages.json?{"type":"stat"} ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "appid": "__UNI__29E0560" };exports.default = _default;
-
-/***/ }),
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
 /* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */
+/* 10 */
 /*!**********************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
   \**********************************************************************************************************/
@@ -8579,7 +7674,15 @@ function normalizeComponent (
 
   // fixed by xxxxxx auto components
   if (components) {
-    options.components = Object.assign(components, options.components || {})
+    if (!options.components) {
+      options.components = {}
+    }
+    var hasOwn = Object.prototype.hasOwnProperty
+    for (var name in components) {
+      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
+        options.components[name] = components[name]
+      }
+    }
   }
   // fixed by xxxxxx renderjs
   if (renderjs) {
@@ -8664,26 +7767,25 @@ function normalizeComponent (
 
 
 /***/ }),
-/* 15 */
-/*!**********************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/context/Java110Context.js ***!
-  \**********************************************************************/
+/* 11 */
+/*!*****************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/context/Java110Context.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) { /**
-               * 上下文对象,再其他文件调用常量 方法 时间工具类时 只引入上下文文件
-               * 
-               * add by wuxw 2019-12-27
-               * 
-               * the source opened https://gitee.com/java110/WechatOwnerService
-               */
-var constant = __webpack_require__(/*! ../constant/index.js */ 16);
+/* WEBPACK VAR INJECTION */(function(uni) {/**
+ * 上下文对象,再其他文件调用常量 方法 时间工具类时 只引入上下文文件
+ * 
+ * add by wuxw 2019-12-27
+ * 
+ * the source opened https://gitee.com/java110/WechatOwnerService
+ */
+var constant = __webpack_require__(/*! ../constant/index.js */ 12);
 
-var util = __webpack_require__(/*! ../utils/index.js */ 20);
+var util = __webpack_require__(/*! ../utils/index.js */ 16);
 
-var factory = __webpack_require__(/*! ../factory/index.js */ 183);
+var factory = __webpack_require__(/*! ../factory/index.js */ 178);
 /**
                                                * 获取请后台服务时的头信息
                                                */
@@ -8691,11 +7793,11 @@ var factory = __webpack_require__(/*! ../factory/index.js */ 183);
 
 var getHeaders = function getHeaders() {
   return {
-    app_id: constant.app.appId,
-    transaction_id: util.core.wxuuid(),
-    req_time: util.date.getDateYYYYMMDDHHMISS(),
-    sign: '1234567',
-    user_id: '-1',
+    'app-id': constant.app.appId,
+    'transaction-id': util.core.wxuuid(),
+    'req-time': util.date.getDateYYYYMMDDHHMISS(),
+    'sign': '1234567',
+    'user-id': '-1',
     cookie: '_java110_token_=' + wx.getStorageSync('token') };
 
 };
@@ -8707,10 +7809,8 @@ var getHeaders = function getHeaders() {
 var request = function request(_reqObj) {
   //检查是否登录成功
   factory.login.checkLoginStatus(function () {
-
     //重写token
     _reqObj.header.cookie = '_java110_token_=' + uni.getStorageSync('token'); //console.log("_reqObj",_reqObj);
-    console.log("_reqObj", _reqObj);
     uni.request(_reqObj);
   });
 };
@@ -8825,8 +7925,12 @@ var _loadArea = function _loadArea(_level, _parentAreaCode) {var callBack = argu
     */
 var getCurrentCommunity = function getCurrentCommunity() {
   var currentCommunity = uni.getStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO);
+  console.log('当前小区获取', currentCommunity);
   if (util.string.isNull(currentCommunity)) {
     return {};
+  }
+  if (currentCommunity instanceof Object) {
+    return currentCommunity;
   }
   return JSON.parse(currentCommunity);
 };
@@ -8848,8 +7952,13 @@ var getCommunity = function getCommunity(callBack, reload, _condition) {
   var _userInfo = getUserInfo();
 
   if (_condition == null || _condition == undefined) {
-    _condition = {};
+    _condition = {
+      userId: '',
+      storeId: '' };
+
   }
+
+  console.log('_condition', _condition);
 
   _condition.userId = _userInfo.userId;
   _condition.storeId = _userInfo.storeId;
@@ -8859,7 +7968,6 @@ var getCommunity = function getCommunity(callBack, reload, _condition) {
     header: getHeaders(),
     data: _condition,
     success: function success(res) {
-      console.log('login success');
       if (res.statusCode != 200) {
         uni.showToast({
           icon: none,
@@ -8884,9 +7992,73 @@ var getCommunity = function getCommunity(callBack, reload, _condition) {
       uni.showToast({
         title: '调用接口失败' });
 
-      console.log(error);
     } });
 
+};
+
+var setJson = function setJson(key, value) {
+  var jsonString = JSON.stringify(value);
+  try {
+    uni.setStorageSync(key, jsonString);
+  } catch (e) {
+    // error
+  }
+};
+var setData = function setData(key, value) {
+  try {
+    uni.setStorageSync(key, value);
+  } catch (e) {
+    // error
+  }
+};
+var getData = function getData(key) {
+  try {
+    var value = uni.getStorageSync(key);
+    if (value) {
+      return value;
+    }
+  } catch (e) {
+    // error
+  }
+
+};
+var getJson = function getJson(key) {
+  try {
+    var value = uni.getStorageSync(key);
+    if (value) {
+      return JSON.parse(value);
+    }
+  } catch (e) {
+    // error
+  }
+
+};
+
+var clear = function clear() {
+  uni.clearStorage();
+};
+var get = function get(key) {//获取队列里面全部的数据
+  var data = this.getJson(key);
+  if (data instanceof Array) {
+    return data;
+  }
+  return [];
+};
+
+var setParam = function setParam(key, value) {
+  setJson(key, value);
+};
+
+var getParam = function getParam(key) {
+  try {
+    var value = uni.getStorageSync(key);
+    if (value) {
+      uni.removeStorageSync(key);
+      return JSON.parse(value);
+    }
+  } catch (e) {
+    // error
+  }
 };
 
 
@@ -8904,31 +8076,38 @@ module.exports = {
   getCurrentLocation: getCurrentLocation,
   getCommunity: getCommunity,
   request: request,
-  getCurrentCommunity: getCurrentCommunity };
+  getCurrentCommunity: getCurrentCommunity,
+  setJson: setJson,
+  setData: setData,
+  getData: getData,
+  getJson: getJson,
+  clear: clear,
+  get: get,
+  setParam: setParam,
+  getParam: getParam };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 16 */
-/*!**************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/constant/index.js ***!
-  \**************************************************************/
+/* 12 */
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/constant/index.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
- /**
-               * 常量入口类
-               * 
-               * add by wuxw 2019-12-28
-               */
+/**
+ * 常量入口类
+ * 
+ * add by wuxw 2019-12-28
+ */
 //应用常量类
-var appConstant = __webpack_require__(/*! ./AppConstant.js */ 17); // url 常量类
+var appConstant = __webpack_require__(/*! ./AppConstant.js */ 13); // url 常量类
 
 
-var urlConstant = __webpack_require__(/*! ./UrlConstant.js */ 18); // 映射 常量类
+var urlConstant = __webpack_require__(/*! ./UrlConstant.js */ 14); // 映射 常量类
 
 
-var mappingConstant = __webpack_require__(/*! ./MappingConstant.js */ 19);
+var mappingConstant = __webpack_require__(/*! ./MappingConstant.js */ 15);
 
 module.exports = {
   app: appConstant,
@@ -8936,20 +8115,19 @@ module.exports = {
   mapping: mappingConstant };
 
 /***/ }),
-/* 17 */
-/*!********************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/constant/AppConstant.js ***!
-  \********************************************************************/
+/* 13 */
+/*!***************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/constant/AppConstant.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
 function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} /**
-                                                                                                                                                                                                                                                                                                                                                                              * 应用相关常量
-                                                                                                                                                                                                                                                                                                                                                                              * 
-                                                                                                                                                                                                                                                                                                                                                                              * add by wuxw 2019-12-28
-                                                                                                                                                                                                                                                                                                                                                                              */var
-AppConstant = function AppConstant() {_classCallCheck(this, AppConstant);};_defineProperty(AppConstant, "appId",
+                                                                                                                                                                                                                                                                                                                                                                 * 应用相关常量
+                                                                                                                                                                                                                                                                                                                                                                 * 
+                                                                                                                                                                                                                                                                                                                                                                 * add by wuxw 2019-12-28
+                                                                                                                                                                                                                                                                                                                                                                 */var
+AppConstant = function AppConstant() {"use strict";_classCallCheck(this, AppConstant);};_defineProperty(AppConstant, "appId",
 
 
 
@@ -8960,53 +8138,52 @@ AppConstant = function AppConstant() {_classCallCheck(this, AppConstant);};_defi
 module.exports = AppConstant;
 
 /***/ }),
-/* 18 */
-/*!********************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/constant/UrlConstant.js ***!
-  \********************************************************************/
+/* 14 */
+/*!***************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/constant/UrlConstant.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
- /**
-               * url 常量类
-               * 
-               * add by wuxw 2019-12-28
-               */
+/**
+ * url 常量类
+ * 
+ * add by wuxw 2019-12-28
+ */
 // 服务器域名
-//const baseUrl = 'https://app.demo.winqi.cn/'; 
+// const baseUrl = 'https://app.demo.winqi.cn/'; 
 var baseUrl = '/';
 var hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
 
 var loginUrl = baseUrl + 'app/loginProperty';
 var areaUrl = baseUrl + "app/area.listAreas";
-var GetNoticeListUrl = baseUrl + 'app/api.queryNotices'; //报修接口
+var GetNoticeListUrl = baseUrl + 'app/notice.listNotices'; //公告接口
 
 var listMyEnteredCommunitys = baseUrl + 'app/community.listMyEnteredCommunitys'; //查看员工小区
 
-var listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //家庭成员
+var listOwnerRepairs = baseUrl + 'app/ownerRepair.listOwnerRepairs'; //查看报修
+
+var saveOwnerRepair = baseUrl + 'app/ownerRepair.saveOwnerRepair'; //维修
 
 var queryStaffInfos = baseUrl + 'app/query.staff.infos'; //查询员工信息
 
-var queryOwnerMembers = baseUrl + 'app/owner.queryOwnerMembers'; //投诉建议列表
+var changeStaffPwd = baseUrl + 'app/user.changeStaffPwd'; //修改密码
 
-var listComplaints = baseUrl + 'app/complaint.listComplaints'; //添加投诉建议
+var listAuditHistoryComplaints = baseUrl + 'app/auditUser.listAuditHistoryComplaints'; //查询历史单
 
 var saveComplaint = baseUrl + 'app/complaint'; //查询业主房间
 
-var queryRoomsByOwner = baseUrl + 'app/room.queryRoomsByOwner'; //绑定业主
+var userLogout = baseUrl + 'app/user.service.logout'; //绑定业主
 
-var appUserBindingOwner = baseUrl + 'app/owner.appUserBindingOwner'; //查询绑定业主
+var listAuditComplaints = baseUrl + 'app/auditUser.listAuditComplaints'; //查询绑定业主
 
-var queryAppUserBindingOwner = baseUrl + 'app/owner.listAppUserBindingOwners'; //解绑业主
+var auditComplaint = baseUrl + 'app/complaint.auditComplaint'; //查询业主门禁
 
-var appUserUnBindingOwner = baseUrl + 'app/owner.deleteAppUserBindingOwner'; //查询业主门禁
+var queryFloors = baseUrl + 'app/floor.queryFloors'; // 申请钥匙
 
-var listOwnerMachines = baseUrl + 'app/owner.listOwnerMachines'; // 申请钥匙
+var queryUnits = baseUrl + "app/unit.queryUnits"; //查询钥匙
 
-var applyApplicationKey = baseUrl + "app/applicationKey.applyApplicationKey"; //查询钥匙
-
-var listApplicationKeys = baseUrl + "app/applicationKey.listApplicationKeys"; //申请访客钥匙
+var queryRooms = baseUrl + "app/room.queryRooms"; //申请访客钥匙
 
 var applyVisitorApplicationKey = baseUrl + "app/applicationKey.applyVisitorApplicationKey"; //上传业主照片
 
@@ -9027,6 +8204,34 @@ var listCommunitys = baseUrl + "app/community.listCommunitys"; //查询小区文
 var listActivitiess = baseUrl + "app/activities.listActivitiess"; //查询小区广告
 
 var listAdvertPhoto = baseUrl + "app/advert.listAdvertPhoto";
+
+//查询巡检任务
+var listInspectionTasks = baseUrl + "app/inspectionTask.listInspectionTasks";
+
+//巡检任务详情
+var listInspectionTaskDetails = baseUrl + 'app/inspectionTaskDetail.listInspectionTaskDetails';
+
+//巡检
+var updateInspectionTaskDetail = baseUrl + 'app/inspectionTaskDetail.updateInspectionTaskDetail';
+
+// 查询报修单处理师傅
+var listRepairStaffs = baseUrl + "app/ownerRepair.listRepairStaffs";
+
+//查询员工报修单
+var listStaffRepairs = baseUrl + "app/ownerRepair.listStaffRepairs";
+
+//查询报修师傅查询
+var listRepairTypeUsers = baseUrl + "app/repair.listRepairTypeUsers";
+
+
+
+//查询完成报修单
+var listStaffFinishRepairs = baseUrl + "app/ownerRepair.listStaffFinishRepairs";
+
+var repairDispatch = baseUrl + "app/ownerRepair.repairDispatch";
+
+
+
 module.exports = {
   baseUrl: baseUrl,
   hcBaseUrl: hcBaseUrl,
@@ -9036,19 +8241,18 @@ module.exports = {
   listMyEnteredCommunitys: listMyEnteredCommunitys,
   listOwnerRepairs: listOwnerRepairs,
   queryStaffInfos: queryStaffInfos,
-  appUserBindingOwner: appUserBindingOwner,
-  queryAppUserBindingOwner: queryAppUserBindingOwner,
-  queryOwnerMembers: queryOwnerMembers,
-  listComplaints: listComplaints,
+  listAuditComplaints: listAuditComplaints,
+  changeStaffPwd: changeStaffPwd,
+  listAuditHistoryComplaints: listAuditHistoryComplaints,
   saveComplaint: saveComplaint,
-  appUserUnBindingOwner: appUserUnBindingOwner,
-  listOwnerMachines: listOwnerMachines,
-  applyApplicationKey: applyApplicationKey,
-  listApplicationKeys: listApplicationKeys,
+  auditComplaint: auditComplaint,
+  queryFloors: queryFloors,
+  queryUnits: queryUnits,
+  queryRooms: queryRooms,
   applyVisitorApplicationKey: applyVisitorApplicationKey,
   uploadOwnerPhoto: uploadOwnerPhoto,
   getOwnerPhotoPath: getOwnerPhotoPath,
-  queryRoomsByOwner: queryRoomsByOwner,
+  userLogout: userLogout,
   queryParkingSpacesByOwner: queryParkingSpacesByOwner,
   queryFeeByParkingSpace: queryFeeByParkingSpace,
   queryFeeByOwner: queryFeeByOwner,
@@ -9056,28 +8260,36 @@ module.exports = {
   listCommunitys: listCommunitys,
   listActivitiess: listActivitiess,
   filePath: filePath,
-  listAdvertPhoto: listAdvertPhoto };
+  listAdvertPhoto: listAdvertPhoto,
+  saveOwnerRepair: saveOwnerRepair,
+  listInspectionTasks: listInspectionTasks,
+  listInspectionTaskDetails: listInspectionTaskDetails,
+  updateInspectionTaskDetail: updateInspectionTaskDetail,
+  listRepairStaffs: listRepairStaffs,
+  listStaffRepairs: listStaffRepairs,
+  listStaffFinishRepairs: listStaffFinishRepairs,
+  listRepairTypeUsers: listRepairTypeUsers,
+  repairDispatch: repairDispatch };
 
 /***/ }),
-/* 19 */
-/*!************************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/constant/MappingConstant.js ***!
-  \************************************************************************/
+/* 15 */
+/*!*******************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/constant/MappingConstant.js ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
 function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} /**
-                                                                                                                                                                                                                                                                                                                                                                              * 编码映射常量类
-                                                                                                                                                                                                                                                                                                                                                                              * 
-                                                                                                                                                                                                                                                                                                                                                                              * add by wuxw 2019-12-28
-                                                                                                                                                                                                                                                                                                                                                                              */var
-MappingConstant = function MappingConstant() {_classCallCheck(this, MappingConstant);};_defineProperty(MappingConstant, "LOGIN_FLAG",
+                                                                                                                                                                                                                                                                                                                                                                 * 编码映射常量类
+                                                                                                                                                                                                                                                                                                                                                                 * 
+                                                                                                                                                                                                                                                                                                                                                                 * add by wuxw 2019-12-28
+                                                                                                                                                                                                                                                                                                                                                                 */var
+MappingConstant = function MappingConstant() {"use strict";_classCallCheck(this, MappingConstant);};_defineProperty(MappingConstant, "LOGIN_FLAG",
 'loginFlag');_defineProperty(MappingConstant, "TOKEN",
 
 "token");_defineProperty(MappingConstant, "USER_INFO",
 
-"userInfo");_defineProperty(MappingConstant, "AREA_INFO",
+"STAFF_USER_INFO");_defineProperty(MappingConstant, "AREA_INFO",
 
 "areaInfo");_defineProperty(MappingConstant, "COMMUNITY_INFO",
 
@@ -9085,31 +8297,32 @@ MappingConstant = function MappingConstant() {_classCallCheck(this, MappingConst
 
 "ownerInfo");_defineProperty(MappingConstant, "CURRENT_COMMUNITY_INFO",
 
-"currentCommunityInfo");
+"currentCommunityInfo");_defineProperty(MappingConstant, "INDEX_LISTENER",
+
+"index_listener");
 
 
 
 module.exports = MappingConstant;
 
 /***/ }),
-/* 20 */
-/*!***********************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/utils/index.js ***!
-  \***********************************************************/
+/* 16 */
+/*!******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/utils/index.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
- /**
-               * 工具类整合类
-               */
-var coreUtil = __webpack_require__(/*! ./CoreUtil.js */ 21);
+/**
+ * 工具类整合类
+ */
+var coreUtil = __webpack_require__(/*! ./CoreUtil.js */ 17);
 
-var dateUtil = __webpack_require__(/*! ./DateUtil.js */ 22);
+var dateUtil = __webpack_require__(/*! ./DateUtil.js */ 18);
 
-var desUtil = __webpack_require__(/*! ./DesUtil.js */ 23);
+var desUtil = __webpack_require__(/*! ./DesUtil.js */ 19);
 
-var stringUtil = __webpack_require__(/*! ./StringUtil.js */ 182);
+var stringUtil = __webpack_require__(/*! ./StringUtil.js */ 177);
 
 module.exports = {
   core: coreUtil,
@@ -9118,22 +8331,21 @@ module.exports = {
   string: stringUtil };
 
 /***/ }),
-/* 21 */
-/*!**************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/utils/CoreUtil.js ***!
-  \**************************************************************/
+/* 17 */
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/utils/CoreUtil.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
 function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 核心工具类
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * add by wuxw 2019-12-28
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */var
-CoreUtil = /*#__PURE__*/function () {function CoreUtil() {_classCallCheck(this, CoreUtil);}_createClass(CoreUtil, null, [{ key: "showInfo",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 核心工具类
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * add by wuxw 2019-12-28
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */var
+CoreUtil = /*#__PURE__*/function () {"use strict";function CoreUtil() {_classCallCheck(this, CoreUtil);}_createClass(CoreUtil, null, [{ key: "showInfo",
     // 封装 wx.showToast 方法
     value: function showInfo() {var info = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'error';var icon = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'none';
       wx.showToast({
@@ -9170,26 +8382,25 @@ CoreUtil = /*#__PURE__*/function () {function CoreUtil() {_classCallCheck(this, 
 module.exports = CoreUtil;
 
 /***/ }),
-/* 22 */
-/*!**************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/utils/DateUtil.js ***!
-  \**************************************************************/
+/* 18 */
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/utils/DateUtil.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
- /**
-               * 时间工具类，访问通过Java110Context 去访问，请不要直接引入该文件
-               * 规范编程
-               * 
-               * add by wuxw 2019-12-27
-               */
+/***/ (function(module, exports) {
 
 /**
-                   * @desc: 格式化时间
-                   * @return: eg: '2018/04/09 21:31:00'
-                   * @param {Date对象} date 
-                   */
+ * 时间工具类，访问通过Java110Context 去访问，请不要直接引入该文件
+ * 规范编程
+ * 
+ * add by wuxw 2019-12-27
+ */
+
+/**
+     * @desc: 格式化时间
+     * @return: eg: '2018/04/09 21:31:00'
+     * @param {Date对象} date 
+     */
 var formatTime = function formatTime(date) {
   var year = date.getFullYear();
   var month = date.getMonth() + 1;
@@ -9418,15 +8629,17 @@ module.exports = {
   formatDate: formatDate };
 
 /***/ }),
-/* 23 */
-/*!*************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/utils/DesUtil.js ***!
-  \*************************************************************/
+/* 19 */
+/*!********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/utils/DesUtil.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-var _cryptoJs = _interopRequireDefault(__webpack_require__(/*! ../lib/crypto-js.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _cryptoJs = _interopRequireDefault(__webpack_require__(/*! ../lib/crypto-js.js */ 20));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var StringUtil = __webpack_require__(/*! ./StringUtil */ 177);
 
 var keyvi = 'java110_hc_wuxw';
 function des_encrypt(message) {
@@ -9445,6 +8658,10 @@ function des_encrypt(message) {
 //des解密 DES-EDE3-CBC
 function des_decrypt(message)
 {
+  console.log("message", message);
+  if (StringUtil.isNull(message)) {
+    return message;
+  }
   var key = _cryptoJs.default.MD5(keyvi).toString();
   var iv = _cryptoJs.default.MD5(keyvi).toString();
   var crypto_key = _cryptoJs.default.enc.Utf8.parse(key);
@@ -9461,21 +8678,20 @@ module.exports = {
   desDecrypt: des_decrypt };
 
 /***/ }),
-/* 24 */
-/*!*************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/lib/crypto-js.js ***!
-  \*************************************************************/
+/* 20 */
+/*!********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/lib/crypto-js.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
 /* WEBPACK VAR INJECTION */(function(global) {;(function (root, factory) {
   if (true) {
     // CommonJS
     module.exports = exports = factory();
   } else
   {}
-})(void 0, function () {
+})(this, function () {
 
   /*globals window, global, require*/
 
@@ -9504,7 +8720,7 @@ module.exports = {
     // Native crypto import via require (NodeJS)
     if (!crypto && "function" === 'function') {
       try {
-        crypto = __webpack_require__(/*! crypto */ 25);
+        crypto = __webpack_require__(/*! crypto */ 21);
       } catch (err) {}
     }
 
@@ -9535,7 +8751,7 @@ module.exports = {
 
     /*
         * Local polyfill of Object.create
-          */
+         */
 
     var create = Object.create || function () {
       function F() {}
@@ -11128,14 +10344,14 @@ module.exports = {
 
   /** @preserve
         (c) 2012 by Cédric Mesnil. All rights reserved.
-        
-        Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-        
-            - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        	Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        	    - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
             - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-        
-        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         */
+
+
+
 
   (function (Math) {
     // Shortcuts
@@ -15521,10 +14737,10 @@ module.exports = {
   return CryptoJS;
 
 });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../work/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../software/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 25 */
+/* 21 */
 /*!*************************************************!*\
   !*** ./node_modules/crypto-browserify/index.js ***!
   \*************************************************/
@@ -15534,22 +14750,22 @@ module.exports = {
 "use strict";
 
 
-exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = __webpack_require__(/*! randombytes */ 26)
-exports.createHash = exports.Hash = __webpack_require__(/*! create-hash */ 34)
-exports.createHmac = exports.Hmac = __webpack_require__(/*! create-hmac */ 69)
+exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = __webpack_require__(/*! randombytes */ 22)
+exports.createHash = exports.Hash = __webpack_require__(/*! create-hash */ 30)
+exports.createHmac = exports.Hmac = __webpack_require__(/*! create-hmac */ 65)
 
-var algos = __webpack_require__(/*! browserify-sign/algos */ 72)
+var algos = __webpack_require__(/*! browserify-sign/algos */ 68)
 var algoKeys = Object.keys(algos)
 var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(algoKeys)
 exports.getHashes = function () {
   return hashes
 }
 
-var p = __webpack_require__(/*! pbkdf2 */ 74)
+var p = __webpack_require__(/*! pbkdf2 */ 70)
 exports.pbkdf2 = p.pbkdf2
 exports.pbkdf2Sync = p.pbkdf2Sync
 
-var aes = __webpack_require__(/*! browserify-cipher */ 79)
+var aes = __webpack_require__(/*! browserify-cipher */ 75)
 
 exports.Cipher = aes.Cipher
 exports.createCipher = aes.createCipher
@@ -15562,7 +14778,7 @@ exports.createDecipheriv = aes.createDecipheriv
 exports.getCiphers = aes.getCiphers
 exports.listCiphers = aes.listCiphers
 
-var dh = __webpack_require__(/*! diffie-hellman */ 108)
+var dh = __webpack_require__(/*! diffie-hellman */ 104)
 
 exports.DiffieHellmanGroup = dh.DiffieHellmanGroup
 exports.createDiffieHellmanGroup = dh.createDiffieHellmanGroup
@@ -15570,16 +14786,16 @@ exports.getDiffieHellman = dh.getDiffieHellman
 exports.createDiffieHellman = dh.createDiffieHellman
 exports.DiffieHellman = dh.DiffieHellman
 
-var sign = __webpack_require__(/*! browserify-sign */ 118)
+var sign = __webpack_require__(/*! browserify-sign */ 114)
 
 exports.createSign = sign.createSign
 exports.Sign = sign.Sign
 exports.createVerify = sign.createVerify
 exports.Verify = sign.Verify
 
-exports.createECDH = __webpack_require__(/*! create-ecdh */ 174)
+exports.createECDH = __webpack_require__(/*! create-ecdh */ 169)
 
-var publicEncrypt = __webpack_require__(/*! public-encrypt */ 175)
+var publicEncrypt = __webpack_require__(/*! public-encrypt */ 170)
 
 exports.publicEncrypt = publicEncrypt.publicEncrypt
 exports.privateEncrypt = publicEncrypt.privateEncrypt
@@ -15599,7 +14815,7 @@ exports.privateDecrypt = publicEncrypt.privateDecrypt
 //   }
 // })
 
-var rf = __webpack_require__(/*! randomfill */ 181)
+var rf = __webpack_require__(/*! randomfill */ 176)
 
 exports.randomFill = rf.randomFill
 exports.randomFillSync = rf.randomFillSync
@@ -15632,7 +14848,7 @@ exports.constants = {
 
 
 /***/ }),
-/* 26 */
+/* 22 */
 /*!*********************************************!*\
   !*** ./node_modules/randombytes/browser.js ***!
   \*********************************************/
@@ -15642,11 +14858,19 @@ exports.constants = {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, process) {
 
+// limit of Crypto.getRandomValues()
+// https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues
+var MAX_BYTES = 65536
+
+// Node supports requesting up to this number of bytes
+// https://github.com/nodejs/node/blob/master/lib/internal/crypto/random.js#L48
+var MAX_UINT32 = 4294967295
+
 function oldBrowser () {
   throw new Error('Secure random number generation is not supported by this browser.\nUse Chrome, Firefox or Internet Explorer 11')
 }
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 var crypto = global.crypto || global.msCrypto
 
 if (crypto && crypto.getRandomValues) {
@@ -15657,18 +14881,22 @@ if (crypto && crypto.getRandomValues) {
 
 function randomBytes (size, cb) {
   // phantomjs needs to throw
-  if (size > 65536) throw new Error('requested too many random bytes')
-  // in case browserify  isn't using the Uint8Array version
-  var rawBytes = new global.Uint8Array(size)
+  if (size > MAX_UINT32) throw new RangeError('requested too many random bytes')
 
-  // This will not work in older browsers.
-  // See https://developer.mozilla.org/en-US/docs/Web/API/window.crypto.getRandomValues
+  var bytes = Buffer.allocUnsafe(size)
+
   if (size > 0) {  // getRandomValues fails on IE if size == 0
-    crypto.getRandomValues(rawBytes)
+    if (size > MAX_BYTES) { // this is the max bytes crypto.getRandomValues
+      // can do at once see https://developer.mozilla.org/en-US/docs/Web/API/window.crypto.getRandomValues
+      for (var generated = 0; generated < size; generated += MAX_BYTES) {
+        // buffer.slice automatically checks if the end is past the end of
+        // the buffer so we don't have to here
+        crypto.getRandomValues(bytes.slice(generated, generated + MAX_BYTES))
+      }
+    } else {
+      crypto.getRandomValues(bytes)
+    }
   }
-
-  // XXX: phantomjs doesn't like a buffer being passed here
-  var bytes = Buffer.from(rawBytes.buffer)
 
   if (typeof cb === 'function') {
     return process.nextTick(function () {
@@ -15679,10 +14907,10 @@ function randomBytes (size, cb) {
   return bytes
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 27)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 23)))
 
 /***/ }),
-/* 27 */
+/* 23 */
 /*!********************************************************!*\
   !*** ./node_modules/node-libs-browser/mock/process.js ***!
   \********************************************************/
@@ -15690,7 +14918,11 @@ function randomBytes (size, cb) {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports.nextTick = function nextTick(fn) {
-	setTimeout(fn, 0);
+    var args = Array.prototype.slice.call(arguments);
+    args.shift();
+    setTimeout(function () {
+        fn.apply(null, args);
+    }, 0);
 };
 
 exports.platform = exports.arch = 
@@ -15709,7 +14941,7 @@ exports.binding = function (name) {
     var path;
     exports.cwd = function () { return cwd };
     exports.chdir = function (dir) {
-        if (!path) path = __webpack_require__(/*! path */ 28);
+        if (!path) path = __webpack_require__(/*! path */ 24);
         cwd = path.resolve(dir, cwd);
     };
 })();
@@ -15722,14 +14954,17 @@ exports.features = {};
 
 
 /***/ }),
-/* 28 */
+/* 24 */
 /*!***********************************************!*\
   !*** ./node_modules/path-browserify/index.js ***!
   \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+/* WEBPACK VAR INJECTION */(function(process) {// .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
+// backported and transplited with Babel, with backwards-compat fixes
+
+// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -15779,14 +15014,6 @@ function normalizeArray(parts, allowAboveRoot) {
 
   return parts;
 }
-
-// Split a filename into [root, dir, basename, ext], unix version
-// 'root' is just a slash, or nothing.
-var splitPathRe =
-    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
-var splitPath = function(filename) {
-  return splitPathRe.exec(filename).slice(1);
-};
 
 // path.resolve([from ...], to)
 // posix version
@@ -15903,37 +15130,120 @@ exports.relative = function(from, to) {
 exports.sep = '/';
 exports.delimiter = ':';
 
-exports.dirname = function(path) {
-  var result = splitPath(path),
-      root = result[0],
-      dir = result[1];
-
-  if (!root && !dir) {
-    // No dirname whatsoever
-    return '.';
+exports.dirname = function (path) {
+  if (typeof path !== 'string') path = path + '';
+  if (path.length === 0) return '.';
+  var code = path.charCodeAt(0);
+  var hasRoot = code === 47 /*/*/;
+  var end = -1;
+  var matchedSlash = true;
+  for (var i = path.length - 1; i >= 1; --i) {
+    code = path.charCodeAt(i);
+    if (code === 47 /*/*/) {
+        if (!matchedSlash) {
+          end = i;
+          break;
+        }
+      } else {
+      // We saw the first non-path separator
+      matchedSlash = false;
+    }
   }
 
-  if (dir) {
-    // It has a dirname, strip trailing slash
-    dir = dir.substr(0, dir.length - 1);
+  if (end === -1) return hasRoot ? '/' : '.';
+  if (hasRoot && end === 1) {
+    // return '//';
+    // Backwards-compat fix:
+    return '/';
   }
-
-  return root + dir;
+  return path.slice(0, end);
 };
 
+function basename(path) {
+  if (typeof path !== 'string') path = path + '';
 
-exports.basename = function(path, ext) {
-  var f = splitPath(path)[2];
-  // TODO: make this comparison case-insensitive on windows?
+  var start = 0;
+  var end = -1;
+  var matchedSlash = true;
+  var i;
+
+  for (i = path.length - 1; i >= 0; --i) {
+    if (path.charCodeAt(i) === 47 /*/*/) {
+        // If we reached a path separator that was not part of a set of path
+        // separators at the end of the string, stop now
+        if (!matchedSlash) {
+          start = i + 1;
+          break;
+        }
+      } else if (end === -1) {
+      // We saw the first non-path separator, mark this as the end of our
+      // path component
+      matchedSlash = false;
+      end = i + 1;
+    }
+  }
+
+  if (end === -1) return '';
+  return path.slice(start, end);
+}
+
+// Uses a mixed approach for backwards-compatibility, as ext behavior changed
+// in new Node.js versions, so only basename() above is backported here
+exports.basename = function (path, ext) {
+  var f = basename(path);
   if (ext && f.substr(-1 * ext.length) === ext) {
     f = f.substr(0, f.length - ext.length);
   }
   return f;
 };
 
+exports.extname = function (path) {
+  if (typeof path !== 'string') path = path + '';
+  var startDot = -1;
+  var startPart = 0;
+  var end = -1;
+  var matchedSlash = true;
+  // Track the state of characters (if any) we see before our first dot and
+  // after any path separator we find
+  var preDotState = 0;
+  for (var i = path.length - 1; i >= 0; --i) {
+    var code = path.charCodeAt(i);
+    if (code === 47 /*/*/) {
+        // If we reached a path separator that was not part of a set of path
+        // separators at the end of the string, stop now
+        if (!matchedSlash) {
+          startPart = i + 1;
+          break;
+        }
+        continue;
+      }
+    if (end === -1) {
+      // We saw the first non-path separator, mark this as the end of our
+      // extension
+      matchedSlash = false;
+      end = i + 1;
+    }
+    if (code === 46 /*.*/) {
+        // If this is our first dot, mark it as the start of our extension
+        if (startDot === -1)
+          startDot = i;
+        else if (preDotState !== 1)
+          preDotState = 1;
+    } else if (startDot !== -1) {
+      // We saw a non-dot and non-path separator before our dot, so we should
+      // have a good chance at having a non-empty extension
+      preDotState = -1;
+    }
+  }
 
-exports.extname = function(path) {
-  return splitPath(path)[3];
+  if (startDot === -1 || end === -1 ||
+      // We saw a non-dot character immediately before the dot
+      preDotState === 0 ||
+      // The (right-most) trimmed path component is exactly '..'
+      preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
+    return '';
+  }
+  return path.slice(startDot, end);
 };
 
 function filter (xs, f) {
@@ -15954,10 +15264,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 27)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 23)))
 
 /***/ }),
-/* 29 */
+/* 25 */
 /*!*******************************************!*\
   !*** ./node_modules/safe-buffer/index.js ***!
   \*******************************************/
@@ -15965,7 +15275,7 @@ var substr = 'ab'.substr(-1) === 'b'
 /***/ (function(module, exports, __webpack_require__) {
 
 /* eslint-disable node/no-deprecated-api */
-var buffer = __webpack_require__(/*! buffer */ 30)
+var buffer = __webpack_require__(/*! buffer */ 26)
 var Buffer = buffer.Buffer
 
 // alternative to using Object.keys for old browsers
@@ -16029,7 +15339,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 
 /***/ }),
-/* 30 */
+/* 26 */
 /*!**************************************!*\
   !*** ./node_modules/buffer/index.js ***!
   \**************************************/
@@ -16040,16 +15350,16 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * The buffer module from node.js, for the browser.
  *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @author   Feross Aboukhadijeh <http://feross.org>
  * @license  MIT
  */
 /* eslint-disable no-proto */
 
 
 
-var base64 = __webpack_require__(/*! base64-js */ 31)
-var ieee754 = __webpack_require__(/*! ieee754 */ 32)
-var isArray = __webpack_require__(/*! isarray */ 33)
+var base64 = __webpack_require__(/*! base64-js */ 27)
+var ieee754 = __webpack_require__(/*! ieee754 */ 28)
+var isArray = __webpack_require__(/*! isarray */ 29)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -17830,7 +17140,7 @@ function isnan (val) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 31 */
+/* 27 */
 /*!*****************************************!*\
   !*** ./node_modules/base64-js/index.js ***!
   \*****************************************/
@@ -17905,7 +17215,8 @@ function toByteArray (b64) {
     ? validLen - 4
     : validLen
 
-  for (var i = 0; i < len; i += 4) {
+  var i
+  for (i = 0; i < len; i += 4) {
     tmp =
       (revLookup[b64.charCodeAt(i)] << 18) |
       (revLookup[b64.charCodeAt(i + 1)] << 12) |
@@ -17992,7 +17303,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 32 */
+/* 28 */
 /*!***************************************!*\
   !*** ./node_modules/ieee754/index.js ***!
   \***************************************/
@@ -18086,7 +17397,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 33 */
+/* 29 */
 /*!***************************************!*\
   !*** ./node_modules/isarray/index.js ***!
   \***************************************/
@@ -18101,7 +17412,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 34 */
+/* 30 */
 /*!*********************************************!*\
   !*** ./node_modules/create-hash/browser.js ***!
   \*********************************************/
@@ -18110,11 +17421,11 @@ module.exports = Array.isArray || function (arr) {
 
 "use strict";
 
-var inherits = __webpack_require__(/*! inherits */ 35)
-var MD5 = __webpack_require__(/*! md5.js */ 36)
-var RIPEMD160 = __webpack_require__(/*! ripemd160 */ 59)
-var sha = __webpack_require__(/*! sha.js */ 60)
-var Base = __webpack_require__(/*! cipher-base */ 68)
+var inherits = __webpack_require__(/*! inherits */ 31)
+var MD5 = __webpack_require__(/*! md5.js */ 32)
+var RIPEMD160 = __webpack_require__(/*! ripemd160 */ 55)
+var sha = __webpack_require__(/*! sha.js */ 56)
+var Base = __webpack_require__(/*! cipher-base */ 64)
 
 function Hash (hash) {
   Base.call(this, 'digest')
@@ -18142,7 +17453,7 @@ module.exports = function createHash (alg) {
 
 
 /***/ }),
-/* 35 */
+/* 31 */
 /*!***************************************************!*\
   !*** ./node_modules/inherits/inherits_browser.js ***!
   \***************************************************/
@@ -18152,30 +17463,34 @@ module.exports = function createHash (alg) {
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
+    if (superCtor) {
+      ctor.super_ = superCtor
+      ctor.prototype = Object.create(superCtor.prototype, {
+        constructor: {
+          value: ctor,
+          enumerable: false,
+          writable: true,
+          configurable: true
+        }
+      })
+    }
   };
 } else {
   // old school shim for old browsers
   module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
+    if (superCtor) {
+      ctor.super_ = superCtor
+      var TempCtor = function () {}
+      TempCtor.prototype = superCtor.prototype
+      ctor.prototype = new TempCtor()
+      ctor.prototype.constructor = ctor
+    }
   }
 }
 
 
 /***/ }),
-/* 36 */
+/* 32 */
 /*!**************************************!*\
   !*** ./node_modules/md5.js/index.js ***!
   \**************************************/
@@ -18184,9 +17499,9 @@ if (typeof Object.create === 'function') {
 
 "use strict";
 
-var inherits = __webpack_require__(/*! inherits */ 35)
-var HashBase = __webpack_require__(/*! hash-base */ 37)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var inherits = __webpack_require__(/*! inherits */ 31)
+var HashBase = __webpack_require__(/*! hash-base */ 33)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 var ARRAY16 = new Array(16)
 
@@ -18332,7 +17647,7 @@ module.exports = MD5
 
 
 /***/ }),
-/* 37 */
+/* 33 */
 /*!*****************************************!*\
   !*** ./node_modules/hash-base/index.js ***!
   \*****************************************/
@@ -18341,9 +17656,9 @@ module.exports = MD5
 
 "use strict";
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
-var Transform = __webpack_require__(/*! stream */ 38).Transform
-var inherits = __webpack_require__(/*! inherits */ 35)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
+var Transform = __webpack_require__(/*! stream */ 34).Transform
+var inherits = __webpack_require__(/*! inherits */ 31)
 
 function throwIfNotStringOrBuffer (val, prefix) {
   if (!Buffer.isBuffer(val) && typeof val !== 'string') {
@@ -18438,7 +17753,7 @@ module.exports = HashBase
 
 
 /***/ }),
-/* 38 */
+/* 34 */
 /*!*************************************************!*\
   !*** ./node_modules/stream-browserify/index.js ***!
   \*************************************************/
@@ -18468,15 +17783,15 @@ module.exports = HashBase
 
 module.exports = Stream;
 
-var EE = __webpack_require__(/*! events */ 39).EventEmitter;
-var inherits = __webpack_require__(/*! inherits */ 35);
+var EE = __webpack_require__(/*! events */ 35).EventEmitter;
+var inherits = __webpack_require__(/*! inherits */ 31);
 
 inherits(Stream, EE);
-Stream.Readable = __webpack_require__(/*! readable-stream/readable.js */ 40);
-Stream.Writable = __webpack_require__(/*! readable-stream/writable.js */ 55);
-Stream.Duplex = __webpack_require__(/*! readable-stream/duplex.js */ 56);
-Stream.Transform = __webpack_require__(/*! readable-stream/transform.js */ 57);
-Stream.PassThrough = __webpack_require__(/*! readable-stream/passthrough.js */ 58);
+Stream.Readable = __webpack_require__(/*! readable-stream/readable.js */ 36);
+Stream.Writable = __webpack_require__(/*! readable-stream/writable.js */ 51);
+Stream.Duplex = __webpack_require__(/*! readable-stream/duplex.js */ 52);
+Stream.Transform = __webpack_require__(/*! readable-stream/transform.js */ 53);
+Stream.PassThrough = __webpack_require__(/*! readable-stream/passthrough.js */ 54);
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -18575,7 +17890,7 @@ Stream.prototype.pipe = function(dest, options) {
 
 
 /***/ }),
-/* 39 */
+/* 35 */
 /*!***************************************!*\
   !*** ./node_modules/events/events.js ***!
   \***************************************/
@@ -18651,6 +17966,12 @@ EventEmitter.prototype._maxListeners = undefined;
 // added to it. This is a useful default which helps finding memory leaks.
 var defaultMaxListeners = 10;
 
+function checkListener(listener) {
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+  }
+}
+
 Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
   enumerable: true,
   get: function() {
@@ -18685,14 +18006,14 @@ EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
   return this;
 };
 
-function $getMaxListeners(that) {
+function _getMaxListeners(that) {
   if (that._maxListeners === undefined)
     return EventEmitter.defaultMaxListeners;
   return that._maxListeners;
 }
 
 EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
-  return $getMaxListeners(this);
+  return _getMaxListeners(this);
 };
 
 EventEmitter.prototype.emit = function emit(type) {
@@ -18744,9 +18065,7 @@ function _addListener(target, type, listener, prepend) {
   var events;
   var existing;
 
-  if (typeof listener !== 'function') {
-    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
-  }
+  checkListener(listener);
 
   events = target._events;
   if (events === undefined) {
@@ -18783,7 +18102,7 @@ function _addListener(target, type, listener, prepend) {
     }
 
     // Check for listener leak
-    m = $getMaxListeners(target);
+    m = _getMaxListeners(target);
     if (m > 0 && existing.length > m && !existing.warned) {
       existing.warned = true;
       // No error code for this since it is a Warning
@@ -18815,12 +18134,12 @@ EventEmitter.prototype.prependListener =
     };
 
 function onceWrapper() {
-  var args = [];
-  for (var i = 0; i < arguments.length; i++) args.push(arguments[i]);
   if (!this.fired) {
     this.target.removeListener(this.type, this.wrapFn);
     this.fired = true;
-    ReflectApply(this.listener, this.target, args);
+    if (arguments.length === 0)
+      return this.listener.call(this.target);
+    return this.listener.apply(this.target, arguments);
   }
 }
 
@@ -18833,18 +18152,14 @@ function _onceWrap(target, type, listener) {
 }
 
 EventEmitter.prototype.once = function once(type, listener) {
-  if (typeof listener !== 'function') {
-    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
-  }
+  checkListener(listener);
   this.on(type, _onceWrap(this, type, listener));
   return this;
 };
 
 EventEmitter.prototype.prependOnceListener =
     function prependOnceListener(type, listener) {
-      if (typeof listener !== 'function') {
-        throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
-      }
+      checkListener(listener);
       this.prependListener(type, _onceWrap(this, type, listener));
       return this;
     };
@@ -18854,9 +18169,7 @@ EventEmitter.prototype.removeListener =
     function removeListener(type, listener) {
       var list, events, position, i, originalListener;
 
-      if (typeof listener !== 'function') {
-        throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
-      }
+      checkListener(listener);
 
       events = this._events;
       if (events === undefined)
@@ -19034,24 +18347,24 @@ function unwrapListeners(arr) {
 
 
 /***/ }),
-/* 40 */
+/* 36 */
 /*!**********************************************************!*\
   !*** ./node_modules/readable-stream/readable-browser.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ./lib/_stream_readable.js */ 41);
+exports = module.exports = __webpack_require__(/*! ./lib/_stream_readable.js */ 37);
 exports.Stream = exports;
 exports.Readable = exports;
-exports.Writable = __webpack_require__(/*! ./lib/_stream_writable.js */ 50);
-exports.Duplex = __webpack_require__(/*! ./lib/_stream_duplex.js */ 49);
-exports.Transform = __webpack_require__(/*! ./lib/_stream_transform.js */ 53);
-exports.PassThrough = __webpack_require__(/*! ./lib/_stream_passthrough.js */ 54);
+exports.Writable = __webpack_require__(/*! ./lib/_stream_writable.js */ 46);
+exports.Duplex = __webpack_require__(/*! ./lib/_stream_duplex.js */ 45);
+exports.Transform = __webpack_require__(/*! ./lib/_stream_transform.js */ 49);
+exports.PassThrough = __webpack_require__(/*! ./lib/_stream_passthrough.js */ 50);
 
 
 /***/ }),
-/* 41 */
+/* 37 */
 /*!**************************************************************!*\
   !*** ./node_modules/readable-stream/lib/_stream_readable.js ***!
   \**************************************************************/
@@ -19084,13 +18397,13 @@ exports.PassThrough = __webpack_require__(/*! ./lib/_stream_passthrough.js */ 54
 
 /*<replacement>*/
 
-var pna = __webpack_require__(/*! process-nextick-args */ 42);
+var pna = __webpack_require__(/*! process-nextick-args */ 38);
 /*</replacement>*/
 
 module.exports = Readable;
 
 /*<replacement>*/
-var isArray = __webpack_require__(/*! isarray */ 33);
+var isArray = __webpack_require__(/*! isarray */ 29);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -19100,7 +18413,7 @@ var Duplex;
 Readable.ReadableState = ReadableState;
 
 /*<replacement>*/
-var EE = __webpack_require__(/*! events */ 39).EventEmitter;
+var EE = __webpack_require__(/*! events */ 35).EventEmitter;
 
 var EElistenerCount = function (emitter, type) {
   return emitter.listeners(type).length;
@@ -19108,12 +18421,12 @@ var EElistenerCount = function (emitter, type) {
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(/*! ./internal/streams/stream */ 43);
+var Stream = __webpack_require__(/*! ./internal/streams/stream */ 39);
 /*</replacement>*/
 
 /*<replacement>*/
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer;
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer;
 var OurUint8Array = global.Uint8Array || function () {};
 function _uint8ArrayToBuffer(chunk) {
   return Buffer.from(chunk);
@@ -19125,12 +18438,12 @@ function _isUint8Array(obj) {
 /*</replacement>*/
 
 /*<replacement>*/
-var util = __webpack_require__(/*! core-util-is */ 44);
-util.inherits = __webpack_require__(/*! inherits */ 35);
+var util = Object.create(__webpack_require__(/*! core-util-is */ 40));
+util.inherits = __webpack_require__(/*! inherits */ 31);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(/*! util */ 45);
+var debugUtil = __webpack_require__(/*! util */ 41);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -19139,8 +18452,8 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(/*! ./internal/streams/BufferList */ 46);
-var destroyImpl = __webpack_require__(/*! ./internal/streams/destroy */ 48);
+var BufferList = __webpack_require__(/*! ./internal/streams/BufferList */ 42);
+var destroyImpl = __webpack_require__(/*! ./internal/streams/destroy */ 44);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -19160,7 +18473,7 @@ function prependListener(emitter, event, fn) {
 }
 
 function ReadableState(options, stream) {
-  Duplex = Duplex || __webpack_require__(/*! ./_stream_duplex */ 49);
+  Duplex = Duplex || __webpack_require__(/*! ./_stream_duplex */ 45);
 
   options = options || {};
 
@@ -19230,14 +18543,14 @@ function ReadableState(options, stream) {
   this.decoder = null;
   this.encoding = null;
   if (options.encoding) {
-    if (!StringDecoder) StringDecoder = __webpack_require__(/*! string_decoder/ */ 52).StringDecoder;
+    if (!StringDecoder) StringDecoder = __webpack_require__(/*! string_decoder/ */ 48).StringDecoder;
     this.decoder = new StringDecoder(options.encoding);
     this.encoding = options.encoding;
   }
 }
 
 function Readable(options) {
-  Duplex = Duplex || __webpack_require__(/*! ./_stream_duplex */ 49);
+  Duplex = Duplex || __webpack_require__(/*! ./_stream_duplex */ 45);
 
   if (!(this instanceof Readable)) return new Readable(options);
 
@@ -19386,7 +18699,7 @@ Readable.prototype.isPaused = function () {
 
 // backwards compatibility.
 Readable.prototype.setEncoding = function (enc) {
-  if (!StringDecoder) StringDecoder = __webpack_require__(/*! string_decoder/ */ 52).StringDecoder;
+  if (!StringDecoder) StringDecoder = __webpack_require__(/*! string_decoder/ */ 48).StringDecoder;
   this._readableState.decoder = new StringDecoder(enc);
   this._readableState.encoding = enc;
   return this;
@@ -20078,10 +19391,10 @@ function indexOf(xs, x) {
   }
   return -1;
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./../../node-libs-browser/mock/process.js */ 27)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./../../node-libs-browser/mock/process.js */ 23)))
 
 /***/ }),
-/* 42 */
+/* 38 */
 /*!****************************************************!*\
   !*** ./node_modules/process-nextick-args/index.js ***!
   \****************************************************/
@@ -20091,7 +19404,8 @@ function indexOf(xs, x) {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-if (!process.version ||
+if (typeof process === 'undefined' ||
+    !process.version ||
     process.version.indexOf('v0.') === 0 ||
     process.version.indexOf('v1.') === 0 && process.version.indexOf('v1.8.') !== 0) {
   module.exports = { nextTick: nextTick };
@@ -20134,21 +19448,21 @@ function nextTick(fn, arg1, arg2, arg3) {
 }
 
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 27)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 23)))
 
 /***/ }),
-/* 43 */
+/* 39 */
 /*!*****************************************************************************!*\
   !*** ./node_modules/readable-stream/lib/internal/streams/stream-browser.js ***!
   \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! events */ 39).EventEmitter;
+module.exports = __webpack_require__(/*! events */ 35).EventEmitter;
 
 
 /***/ }),
-/* 44 */
+/* 40 */
 /*!***********************************************!*\
   !*** ./node_modules/core-util-is/lib/util.js ***!
   \***********************************************/
@@ -20263,10 +19577,10 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 26).Buffer))
 
 /***/ }),
-/* 45 */
+/* 41 */
 /*!**********************!*\
   !*** util (ignored) ***!
   \**********************/
@@ -20276,7 +19590,7 @@ function objectToString(o) {
 /* (ignored) */
 
 /***/ }),
-/* 46 */
+/* 42 */
 /*!*************************************************************************!*\
   !*** ./node_modules/readable-stream/lib/internal/streams/BufferList.js ***!
   \*************************************************************************/
@@ -20288,8 +19602,8 @@ function objectToString(o) {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer;
-var util = __webpack_require__(/*! util */ 47);
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer;
+var util = __webpack_require__(/*! util */ 43);
 
 function copyBuffer(src, target, offset) {
   src.copy(target, offset);
@@ -20365,7 +19679,7 @@ if (util && util.inspect && util.inspect.custom) {
 }
 
 /***/ }),
-/* 47 */
+/* 43 */
 /*!**********************!*\
   !*** util (ignored) ***!
   \**********************/
@@ -20375,7 +19689,7 @@ if (util && util.inspect && util.inspect.custom) {
 /* (ignored) */
 
 /***/ }),
-/* 48 */
+/* 44 */
 /*!**********************************************************************!*\
   !*** ./node_modules/readable-stream/lib/internal/streams/destroy.js ***!
   \**********************************************************************/
@@ -20387,7 +19701,7 @@ if (util && util.inspect && util.inspect.custom) {
 
 /*<replacement>*/
 
-var pna = __webpack_require__(/*! process-nextick-args */ 42);
+var pna = __webpack_require__(/*! process-nextick-args */ 38);
 /*</replacement>*/
 
 // undocumented cb() API, needed for core, not for public API
@@ -20459,7 +19773,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 49 */
+/* 45 */
 /*!************************************************************!*\
   !*** ./node_modules/readable-stream/lib/_stream_duplex.js ***!
   \************************************************************/
@@ -20497,7 +19811,7 @@ module.exports = {
 
 /*<replacement>*/
 
-var pna = __webpack_require__(/*! process-nextick-args */ 42);
+var pna = __webpack_require__(/*! process-nextick-args */ 38);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -20512,12 +19826,12 @@ var objectKeys = Object.keys || function (obj) {
 module.exports = Duplex;
 
 /*<replacement>*/
-var util = __webpack_require__(/*! core-util-is */ 44);
-util.inherits = __webpack_require__(/*! inherits */ 35);
+var util = Object.create(__webpack_require__(/*! core-util-is */ 40));
+util.inherits = __webpack_require__(/*! inherits */ 31);
 /*</replacement>*/
 
-var Readable = __webpack_require__(/*! ./_stream_readable */ 41);
-var Writable = __webpack_require__(/*! ./_stream_writable */ 50);
+var Readable = __webpack_require__(/*! ./_stream_readable */ 37);
+var Writable = __webpack_require__(/*! ./_stream_writable */ 46);
 
 util.inherits(Duplex, Readable);
 
@@ -20600,7 +19914,7 @@ Duplex.prototype._destroy = function (err, cb) {
 };
 
 /***/ }),
-/* 50 */
+/* 46 */
 /*!**************************************************************!*\
   !*** ./node_modules/readable-stream/lib/_stream_writable.js ***!
   \**************************************************************/
@@ -20637,7 +19951,7 @@ Duplex.prototype._destroy = function (err, cb) {
 
 /*<replacement>*/
 
-var pna = __webpack_require__(/*! process-nextick-args */ 42);
+var pna = __webpack_require__(/*! process-nextick-args */ 38);
 /*</replacement>*/
 
 module.exports = Writable;
@@ -20674,23 +19988,23 @@ var Duplex;
 Writable.WritableState = WritableState;
 
 /*<replacement>*/
-var util = __webpack_require__(/*! core-util-is */ 44);
-util.inherits = __webpack_require__(/*! inherits */ 35);
+var util = Object.create(__webpack_require__(/*! core-util-is */ 40));
+util.inherits = __webpack_require__(/*! inherits */ 31);
 /*</replacement>*/
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(/*! util-deprecate */ 51)
+  deprecate: __webpack_require__(/*! util-deprecate */ 47)
 };
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(/*! ./internal/streams/stream */ 43);
+var Stream = __webpack_require__(/*! ./internal/streams/stream */ 39);
 /*</replacement>*/
 
 /*<replacement>*/
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer;
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer;
 var OurUint8Array = global.Uint8Array || function () {};
 function _uint8ArrayToBuffer(chunk) {
   return Buffer.from(chunk);
@@ -20701,14 +20015,14 @@ function _isUint8Array(obj) {
 
 /*</replacement>*/
 
-var destroyImpl = __webpack_require__(/*! ./internal/streams/destroy */ 48);
+var destroyImpl = __webpack_require__(/*! ./internal/streams/destroy */ 44);
 
 util.inherits(Writable, Stream);
 
 function nop() {}
 
 function WritableState(options, stream) {
-  Duplex = Duplex || __webpack_require__(/*! ./_stream_duplex */ 49);
+  Duplex = Duplex || __webpack_require__(/*! ./_stream_duplex */ 45);
 
   options = options || {};
 
@@ -20858,7 +20172,7 @@ if (typeof Symbol === 'function' && Symbol.hasInstance && typeof Function.protot
 }
 
 function Writable(options) {
-  Duplex = Duplex || __webpack_require__(/*! ./_stream_duplex */ 49);
+  Duplex = Duplex || __webpack_require__(/*! ./_stream_duplex */ 45);
 
   // Writable ctor is applied to Duplexes, too.
   // `realHasInstance` is necessary because using plain `instanceof`
@@ -21295,10 +20609,10 @@ Writable.prototype._destroy = function (err, cb) {
   this.end();
   cb(err);
 };
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node-libs-browser/mock/process.js */ 27), __webpack_require__(/*! ./../../webpack/buildin/global.js */ 3)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node-libs-browser/mock/process.js */ 23), __webpack_require__(/*! ./../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 51 */
+/* 47 */
 /*!************************************************!*\
   !*** ./node_modules/util-deprecate/browser.js ***!
   \************************************************/
@@ -21376,7 +20690,7 @@ function config (name) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-/* 52 */
+/* 48 */
 /*!***********************************************************!*\
   !*** ./node_modules/string_decoder/lib/string_decoder.js ***!
   \***********************************************************/
@@ -21409,7 +20723,7 @@ function config (name) {
 
 /*<replacement>*/
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer;
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer;
 /*</replacement>*/
 
 var isEncoding = Buffer.isEncoding || function (encoding) {
@@ -21682,7 +20996,7 @@ function simpleEnd(buf) {
 }
 
 /***/ }),
-/* 53 */
+/* 49 */
 /*!***************************************************************!*\
   !*** ./node_modules/readable-stream/lib/_stream_transform.js ***!
   \***************************************************************/
@@ -21757,11 +21071,11 @@ function simpleEnd(buf) {
 
 module.exports = Transform;
 
-var Duplex = __webpack_require__(/*! ./_stream_duplex */ 49);
+var Duplex = __webpack_require__(/*! ./_stream_duplex */ 45);
 
 /*<replacement>*/
-var util = __webpack_require__(/*! core-util-is */ 44);
-util.inherits = __webpack_require__(/*! inherits */ 35);
+var util = Object.create(__webpack_require__(/*! core-util-is */ 40));
+util.inherits = __webpack_require__(/*! inherits */ 31);
 /*</replacement>*/
 
 util.inherits(Transform, Duplex);
@@ -21906,7 +21220,7 @@ function done(stream, er, data) {
 }
 
 /***/ }),
-/* 54 */
+/* 50 */
 /*!*****************************************************************!*\
   !*** ./node_modules/readable-stream/lib/_stream_passthrough.js ***!
   \*****************************************************************/
@@ -21943,11 +21257,11 @@ function done(stream, er, data) {
 
 module.exports = PassThrough;
 
-var Transform = __webpack_require__(/*! ./_stream_transform */ 53);
+var Transform = __webpack_require__(/*! ./_stream_transform */ 49);
 
 /*<replacement>*/
-var util = __webpack_require__(/*! core-util-is */ 44);
-util.inherits = __webpack_require__(/*! inherits */ 35);
+var util = Object.create(__webpack_require__(/*! core-util-is */ 40));
+util.inherits = __webpack_require__(/*! inherits */ 31);
 /*</replacement>*/
 
 util.inherits(PassThrough, Transform);
@@ -21963,51 +21277,51 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
-/* 55 */
+/* 51 */
 /*!**********************************************************!*\
   !*** ./node_modules/readable-stream/writable-browser.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./lib/_stream_writable.js */ 50);
+module.exports = __webpack_require__(/*! ./lib/_stream_writable.js */ 46);
 
 
 /***/ }),
-/* 56 */
+/* 52 */
 /*!********************************************************!*\
   !*** ./node_modules/readable-stream/duplex-browser.js ***!
   \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./lib/_stream_duplex.js */ 49);
+module.exports = __webpack_require__(/*! ./lib/_stream_duplex.js */ 45);
 
 
 /***/ }),
-/* 57 */
+/* 53 */
 /*!***************************************************!*\
   !*** ./node_modules/readable-stream/transform.js ***!
   \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./readable */ 40).Transform
+module.exports = __webpack_require__(/*! ./readable */ 36).Transform
 
 
 /***/ }),
-/* 58 */
+/* 54 */
 /*!*****************************************************!*\
   !*** ./node_modules/readable-stream/passthrough.js ***!
   \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./readable */ 40).PassThrough
+module.exports = __webpack_require__(/*! ./readable */ 36).PassThrough
 
 
 /***/ }),
-/* 59 */
+/* 55 */
 /*!*****************************************!*\
   !*** ./node_modules/ripemd160/index.js ***!
   \*****************************************/
@@ -22016,9 +21330,9 @@ module.exports = __webpack_require__(/*! ./readable */ 40).PassThrough
 
 "use strict";
 
-var Buffer = __webpack_require__(/*! buffer */ 30).Buffer
-var inherits = __webpack_require__(/*! inherits */ 35)
-var HashBase = __webpack_require__(/*! hash-base */ 37)
+var Buffer = __webpack_require__(/*! buffer */ 26).Buffer
+var inherits = __webpack_require__(/*! inherits */ 31)
+var HashBase = __webpack_require__(/*! hash-base */ 33)
 
 var ARRAY16 = new Array(16)
 
@@ -22181,7 +21495,7 @@ module.exports = RIPEMD160
 
 
 /***/ }),
-/* 60 */
+/* 56 */
 /*!**************************************!*\
   !*** ./node_modules/sha.js/index.js ***!
   \**************************************/
@@ -22197,16 +21511,16 @@ var exports = module.exports = function SHA (algorithm) {
   return new Algorithm()
 }
 
-exports.sha = __webpack_require__(/*! ./sha */ 61)
-exports.sha1 = __webpack_require__(/*! ./sha1 */ 63)
-exports.sha224 = __webpack_require__(/*! ./sha224 */ 64)
-exports.sha256 = __webpack_require__(/*! ./sha256 */ 65)
-exports.sha384 = __webpack_require__(/*! ./sha384 */ 66)
-exports.sha512 = __webpack_require__(/*! ./sha512 */ 67)
+exports.sha = __webpack_require__(/*! ./sha */ 57)
+exports.sha1 = __webpack_require__(/*! ./sha1 */ 59)
+exports.sha224 = __webpack_require__(/*! ./sha224 */ 60)
+exports.sha256 = __webpack_require__(/*! ./sha256 */ 61)
+exports.sha384 = __webpack_require__(/*! ./sha384 */ 62)
+exports.sha512 = __webpack_require__(/*! ./sha512 */ 63)
 
 
 /***/ }),
-/* 61 */
+/* 57 */
 /*!************************************!*\
   !*** ./node_modules/sha.js/sha.js ***!
   \************************************/
@@ -22221,9 +21535,9 @@ exports.sha512 = __webpack_require__(/*! ./sha512 */ 67)
  * operation was added.
  */
 
-var inherits = __webpack_require__(/*! inherits */ 35)
-var Hash = __webpack_require__(/*! ./hash */ 62)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var inherits = __webpack_require__(/*! inherits */ 31)
+var Hash = __webpack_require__(/*! ./hash */ 58)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 var K = [
   0x5a827999, 0x6ed9eba1, 0x8f1bbcdc | 0, 0xca62c1d6 | 0
@@ -22310,14 +21624,14 @@ module.exports = Sha
 
 
 /***/ }),
-/* 62 */
+/* 58 */
 /*!*************************************!*\
   !*** ./node_modules/sha.js/hash.js ***!
   \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 // prototype class for hash functions
 function Hash (blockSize, finalSize) {
@@ -22401,7 +21715,7 @@ module.exports = Hash
 
 
 /***/ }),
-/* 63 */
+/* 59 */
 /*!*************************************!*\
   !*** ./node_modules/sha.js/sha1.js ***!
   \*************************************/
@@ -22417,9 +21731,9 @@ module.exports = Hash
  * See http://pajhome.org.uk/crypt/md5 for details.
  */
 
-var inherits = __webpack_require__(/*! inherits */ 35)
-var Hash = __webpack_require__(/*! ./hash */ 62)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var inherits = __webpack_require__(/*! inherits */ 31)
+var Hash = __webpack_require__(/*! ./hash */ 58)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 var K = [
   0x5a827999, 0x6ed9eba1, 0x8f1bbcdc | 0, 0xca62c1d6 | 0
@@ -22510,7 +21824,7 @@ module.exports = Sha1
 
 
 /***/ }),
-/* 64 */
+/* 60 */
 /*!***************************************!*\
   !*** ./node_modules/sha.js/sha224.js ***!
   \***************************************/
@@ -22525,10 +21839,10 @@ module.exports = Sha1
  *
  */
 
-var inherits = __webpack_require__(/*! inherits */ 35)
-var Sha256 = __webpack_require__(/*! ./sha256 */ 65)
-var Hash = __webpack_require__(/*! ./hash */ 62)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var inherits = __webpack_require__(/*! inherits */ 31)
+var Sha256 = __webpack_require__(/*! ./sha256 */ 61)
+var Hash = __webpack_require__(/*! ./hash */ 58)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 var W = new Array(64)
 
@@ -22573,7 +21887,7 @@ module.exports = Sha224
 
 
 /***/ }),
-/* 65 */
+/* 61 */
 /*!***************************************!*\
   !*** ./node_modules/sha.js/sha256.js ***!
   \***************************************/
@@ -22588,9 +21902,9 @@ module.exports = Sha224
  *
  */
 
-var inherits = __webpack_require__(/*! inherits */ 35)
-var Hash = __webpack_require__(/*! ./hash */ 62)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var inherits = __webpack_require__(/*! inherits */ 31)
+var Hash = __webpack_require__(/*! ./hash */ 58)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 var K = [
   0x428A2F98, 0x71374491, 0xB5C0FBCF, 0xE9B5DBA5,
@@ -22718,17 +22032,17 @@ module.exports = Sha256
 
 
 /***/ }),
-/* 66 */
+/* 62 */
 /*!***************************************!*\
   !*** ./node_modules/sha.js/sha384.js ***!
   \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var inherits = __webpack_require__(/*! inherits */ 35)
-var SHA512 = __webpack_require__(/*! ./sha512 */ 67)
-var Hash = __webpack_require__(/*! ./hash */ 62)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var inherits = __webpack_require__(/*! inherits */ 31)
+var SHA512 = __webpack_require__(/*! ./sha512 */ 63)
+var Hash = __webpack_require__(/*! ./hash */ 58)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 var W = new Array(160)
 
@@ -22785,16 +22099,16 @@ module.exports = Sha384
 
 
 /***/ }),
-/* 67 */
+/* 63 */
 /*!***************************************!*\
   !*** ./node_modules/sha.js/sha512.js ***!
   \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var inherits = __webpack_require__(/*! inherits */ 35)
-var Hash = __webpack_require__(/*! ./hash */ 62)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var inherits = __webpack_require__(/*! inherits */ 31)
+var Hash = __webpack_require__(/*! ./hash */ 58)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 var K = [
   0x428a2f98, 0xd728ae22, 0x71374491, 0x23ef65cd,
@@ -23055,17 +22369,17 @@ module.exports = Sha512
 
 
 /***/ }),
-/* 68 */
+/* 64 */
 /*!*******************************************!*\
   !*** ./node_modules/cipher-base/index.js ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
-var Transform = __webpack_require__(/*! stream */ 38).Transform
-var StringDecoder = __webpack_require__(/*! string_decoder */ 52).StringDecoder
-var inherits = __webpack_require__(/*! inherits */ 35)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
+var Transform = __webpack_require__(/*! stream */ 34).Transform
+var StringDecoder = __webpack_require__(/*! string_decoder */ 48).StringDecoder
+var inherits = __webpack_require__(/*! inherits */ 31)
 
 function CipherBase (hashMode) {
   Transform.call(this)
@@ -23164,7 +22478,7 @@ module.exports = CipherBase
 
 
 /***/ }),
-/* 69 */
+/* 65 */
 /*!*********************************************!*\
   !*** ./node_modules/create-hmac/browser.js ***!
   \*********************************************/
@@ -23173,14 +22487,14 @@ module.exports = CipherBase
 
 "use strict";
 
-var inherits = __webpack_require__(/*! inherits */ 35)
-var Legacy = __webpack_require__(/*! ./legacy */ 70)
-var Base = __webpack_require__(/*! cipher-base */ 68)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
-var md5 = __webpack_require__(/*! create-hash/md5 */ 71)
-var RIPEMD160 = __webpack_require__(/*! ripemd160 */ 59)
+var inherits = __webpack_require__(/*! inherits */ 31)
+var Legacy = __webpack_require__(/*! ./legacy */ 66)
+var Base = __webpack_require__(/*! cipher-base */ 64)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
+var md5 = __webpack_require__(/*! create-hash/md5 */ 67)
+var RIPEMD160 = __webpack_require__(/*! ripemd160 */ 55)
 
-var sha = __webpack_require__(/*! sha.js */ 60)
+var sha = __webpack_require__(/*! sha.js */ 56)
 
 var ZEROS = Buffer.alloc(128)
 
@@ -23237,7 +22551,7 @@ module.exports = function createHmac (alg, key) {
 
 
 /***/ }),
-/* 70 */
+/* 66 */
 /*!********************************************!*\
   !*** ./node_modules/create-hmac/legacy.js ***!
   \********************************************/
@@ -23246,10 +22560,10 @@ module.exports = function createHmac (alg, key) {
 
 "use strict";
 
-var inherits = __webpack_require__(/*! inherits */ 35)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var inherits = __webpack_require__(/*! inherits */ 31)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
-var Base = __webpack_require__(/*! cipher-base */ 68)
+var Base = __webpack_require__(/*! cipher-base */ 64)
 
 var ZEROS = Buffer.alloc(128)
 var blocksize = 64
@@ -23294,14 +22608,14 @@ module.exports = Hmac
 
 
 /***/ }),
-/* 71 */
+/* 67 */
 /*!*****************************************!*\
   !*** ./node_modules/create-hash/md5.js ***!
   \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MD5 = __webpack_require__(/*! md5.js */ 36)
+var MD5 = __webpack_require__(/*! md5.js */ 32)
 
 module.exports = function (buffer) {
   return new MD5().update(buffer).digest()
@@ -23309,18 +22623,18 @@ module.exports = function (buffer) {
 
 
 /***/ }),
-/* 72 */
+/* 68 */
 /*!***********************************************!*\
   !*** ./node_modules/browserify-sign/algos.js ***!
   \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./browser/algorithms.json */ 73)
+module.exports = __webpack_require__(/*! ./browser/algorithms.json */ 69)
 
 
 /***/ }),
-/* 73 */
+/* 69 */
 /*!**************************************************************!*\
   !*** ./node_modules/browserify-sign/browser/algorithms.json ***!
   \**************************************************************/
@@ -23330,29 +22644,29 @@ module.exports = __webpack_require__(/*! ./browser/algorithms.json */ 73)
 module.exports = {"sha224WithRSAEncryption":{"sign":"rsa","hash":"sha224","id":"302d300d06096086480165030402040500041c"},"RSA-SHA224":{"sign":"ecdsa/rsa","hash":"sha224","id":"302d300d06096086480165030402040500041c"},"sha256WithRSAEncryption":{"sign":"rsa","hash":"sha256","id":"3031300d060960864801650304020105000420"},"RSA-SHA256":{"sign":"ecdsa/rsa","hash":"sha256","id":"3031300d060960864801650304020105000420"},"sha384WithRSAEncryption":{"sign":"rsa","hash":"sha384","id":"3041300d060960864801650304020205000430"},"RSA-SHA384":{"sign":"ecdsa/rsa","hash":"sha384","id":"3041300d060960864801650304020205000430"},"sha512WithRSAEncryption":{"sign":"rsa","hash":"sha512","id":"3051300d060960864801650304020305000440"},"RSA-SHA512":{"sign":"ecdsa/rsa","hash":"sha512","id":"3051300d060960864801650304020305000440"},"RSA-SHA1":{"sign":"rsa","hash":"sha1","id":"3021300906052b0e03021a05000414"},"ecdsa-with-SHA1":{"sign":"ecdsa","hash":"sha1","id":""},"sha256":{"sign":"ecdsa","hash":"sha256","id":""},"sha224":{"sign":"ecdsa","hash":"sha224","id":""},"sha384":{"sign":"ecdsa","hash":"sha384","id":""},"sha512":{"sign":"ecdsa","hash":"sha512","id":""},"DSA-SHA":{"sign":"dsa","hash":"sha1","id":""},"DSA-SHA1":{"sign":"dsa","hash":"sha1","id":""},"DSA":{"sign":"dsa","hash":"sha1","id":""},"DSA-WITH-SHA224":{"sign":"dsa","hash":"sha224","id":""},"DSA-SHA224":{"sign":"dsa","hash":"sha224","id":""},"DSA-WITH-SHA256":{"sign":"dsa","hash":"sha256","id":""},"DSA-SHA256":{"sign":"dsa","hash":"sha256","id":""},"DSA-WITH-SHA384":{"sign":"dsa","hash":"sha384","id":""},"DSA-SHA384":{"sign":"dsa","hash":"sha384","id":""},"DSA-WITH-SHA512":{"sign":"dsa","hash":"sha512","id":""},"DSA-SHA512":{"sign":"dsa","hash":"sha512","id":""},"DSA-RIPEMD160":{"sign":"dsa","hash":"rmd160","id":""},"ripemd160WithRSA":{"sign":"rsa","hash":"rmd160","id":"3021300906052b2403020105000414"},"RSA-RIPEMD160":{"sign":"rsa","hash":"rmd160","id":"3021300906052b2403020105000414"},"md5WithRSAEncryption":{"sign":"rsa","hash":"md5","id":"3020300c06082a864886f70d020505000410"},"RSA-MD5":{"sign":"rsa","hash":"md5","id":"3020300c06082a864886f70d020505000410"}};
 
 /***/ }),
-/* 74 */
+/* 70 */
 /*!****************************************!*\
   !*** ./node_modules/pbkdf2/browser.js ***!
   \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.pbkdf2 = __webpack_require__(/*! ./lib/async */ 75)
-exports.pbkdf2Sync = __webpack_require__(/*! ./lib/sync */ 78)
+exports.pbkdf2 = __webpack_require__(/*! ./lib/async */ 71)
+exports.pbkdf2Sync = __webpack_require__(/*! ./lib/sync */ 74)
 
 
 /***/ }),
-/* 75 */
+/* 71 */
 /*!******************************************!*\
   !*** ./node_modules/pbkdf2/lib/async.js ***!
   \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global, process) {var checkParameters = __webpack_require__(/*! ./precondition */ 76)
-var defaultEncoding = __webpack_require__(/*! ./default-encoding */ 77)
-var sync = __webpack_require__(/*! ./sync */ 78)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+/* WEBPACK VAR INJECTION */(function(global, process) {var checkParameters = __webpack_require__(/*! ./precondition */ 72)
+var defaultEncoding = __webpack_require__(/*! ./default-encoding */ 73)
+var sync = __webpack_require__(/*! ./sync */ 74)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 var ZERO_BUF
 var subtle = global.crypto && global.crypto.subtle
@@ -23450,10 +22764,10 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
   }), callback)
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./../../node-libs-browser/mock/process.js */ 27)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./../../node-libs-browser/mock/process.js */ 23)))
 
 /***/ }),
-/* 76 */
+/* 72 */
 /*!*************************************************!*\
   !*** ./node_modules/pbkdf2/lib/precondition.js ***!
   \*************************************************/
@@ -23489,10 +22803,10 @@ module.exports = function (password, salt, iterations, keylen) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 26).Buffer))
 
 /***/ }),
-/* 77 */
+/* 73 */
 /*!*****************************************************!*\
   !*** ./node_modules/pbkdf2/lib/default-encoding.js ***!
   \*****************************************************/
@@ -23510,23 +22824,23 @@ if (process.browser) {
 }
 module.exports = defaultEncoding
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node-libs-browser/mock/process.js */ 27)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node-libs-browser/mock/process.js */ 23)))
 
 /***/ }),
-/* 78 */
+/* 74 */
 /*!*************************************************!*\
   !*** ./node_modules/pbkdf2/lib/sync-browser.js ***!
   \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var md5 = __webpack_require__(/*! create-hash/md5 */ 71)
-var RIPEMD160 = __webpack_require__(/*! ripemd160 */ 59)
-var sha = __webpack_require__(/*! sha.js */ 60)
+var md5 = __webpack_require__(/*! create-hash/md5 */ 67)
+var RIPEMD160 = __webpack_require__(/*! ripemd160 */ 55)
+var sha = __webpack_require__(/*! sha.js */ 56)
 
-var checkParameters = __webpack_require__(/*! ./precondition */ 76)
-var defaultEncoding = __webpack_require__(/*! ./default-encoding */ 77)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var checkParameters = __webpack_require__(/*! ./precondition */ 72)
+var defaultEncoding = __webpack_require__(/*! ./default-encoding */ 73)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 var ZEROS = Buffer.alloc(128)
 var sizes = {
   md5: 16,
@@ -23627,18 +22941,18 @@ module.exports = pbkdf2
 
 
 /***/ }),
-/* 79 */
+/* 75 */
 /*!***************************************************!*\
   !*** ./node_modules/browserify-cipher/browser.js ***!
   \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var DES = __webpack_require__(/*! browserify-des */ 80)
-var aes = __webpack_require__(/*! browserify-aes/browser */ 88)
-var aesModes = __webpack_require__(/*! browserify-aes/modes */ 90)
-var desModes = __webpack_require__(/*! browserify-des/modes */ 107)
-var ebtk = __webpack_require__(/*! evp_bytestokey */ 105)
+var DES = __webpack_require__(/*! browserify-des */ 76)
+var aes = __webpack_require__(/*! browserify-aes/browser */ 84)
+var aesModes = __webpack_require__(/*! browserify-aes/modes */ 86)
+var desModes = __webpack_require__(/*! browserify-des/modes */ 103)
+var ebtk = __webpack_require__(/*! evp_bytestokey */ 101)
 
 function createCipher (suite, password) {
   suite = suite.toLowerCase()
@@ -23704,17 +23018,17 @@ exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 80 */
+/* 76 */
 /*!**********************************************!*\
   !*** ./node_modules/browserify-des/index.js ***!
   \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var CipherBase = __webpack_require__(/*! cipher-base */ 68)
-var des = __webpack_require__(/*! des.js */ 81)
-var inherits = __webpack_require__(/*! inherits */ 35)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var CipherBase = __webpack_require__(/*! cipher-base */ 64)
+var des = __webpack_require__(/*! des.js */ 77)
+var inherits = __webpack_require__(/*! inherits */ 31)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 var modes = {
   'des-ede3-cbc': des.CBC.instantiate(des.EDE),
@@ -23764,7 +23078,7 @@ DES.prototype._final = function () {
 
 
 /***/ }),
-/* 81 */
+/* 77 */
 /*!****************************************!*\
   !*** ./node_modules/des.js/lib/des.js ***!
   \****************************************/
@@ -23774,15 +23088,15 @@ DES.prototype._final = function () {
 "use strict";
 
 
-exports.utils = __webpack_require__(/*! ./des/utils */ 82);
-exports.Cipher = __webpack_require__(/*! ./des/cipher */ 83);
-exports.DES = __webpack_require__(/*! ./des/des */ 85);
-exports.CBC = __webpack_require__(/*! ./des/cbc */ 86);
-exports.EDE = __webpack_require__(/*! ./des/ede */ 87);
+exports.utils = __webpack_require__(/*! ./des/utils */ 78);
+exports.Cipher = __webpack_require__(/*! ./des/cipher */ 79);
+exports.DES = __webpack_require__(/*! ./des/des */ 81);
+exports.CBC = __webpack_require__(/*! ./des/cbc */ 82);
+exports.EDE = __webpack_require__(/*! ./des/ede */ 83);
 
 
 /***/ }),
-/* 82 */
+/* 78 */
 /*!**********************************************!*\
   !*** ./node_modules/des.js/lib/des/utils.js ***!
   \**********************************************/
@@ -24049,7 +23363,7 @@ exports.padSplit = function padSplit(num, size, group) {
 
 
 /***/ }),
-/* 83 */
+/* 79 */
 /*!***********************************************!*\
   !*** ./node_modules/des.js/lib/des/cipher.js ***!
   \***********************************************/
@@ -24059,7 +23373,7 @@ exports.padSplit = function padSplit(num, size, group) {
 "use strict";
 
 
-var assert = __webpack_require__(/*! minimalistic-assert */ 84);
+var assert = __webpack_require__(/*! minimalistic-assert */ 80);
 
 function Cipher(options) {
   this.options = options;
@@ -24201,7 +23515,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 
 
 /***/ }),
-/* 84 */
+/* 80 */
 /*!***************************************************!*\
   !*** ./node_modules/minimalistic-assert/index.js ***!
   \***************************************************/
@@ -24222,7 +23536,7 @@ assert.equal = function assertEqual(l, r, msg) {
 
 
 /***/ }),
-/* 85 */
+/* 81 */
 /*!********************************************!*\
   !*** ./node_modules/des.js/lib/des/des.js ***!
   \********************************************/
@@ -24232,12 +23546,11 @@ assert.equal = function assertEqual(l, r, msg) {
 "use strict";
 
 
-var assert = __webpack_require__(/*! minimalistic-assert */ 84);
-var inherits = __webpack_require__(/*! inherits */ 35);
+var assert = __webpack_require__(/*! minimalistic-assert */ 80);
+var inherits = __webpack_require__(/*! inherits */ 31);
 
-var des = __webpack_require__(/*! ../des */ 81);
-var utils = des.utils;
-var Cipher = des.Cipher;
+var utils = __webpack_require__(/*! ./utils */ 78);
+var Cipher = __webpack_require__(/*! ./cipher */ 79);
 
 function DESState() {
   this.tmp = new Array(2);
@@ -24376,7 +23689,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 
 
 /***/ }),
-/* 86 */
+/* 82 */
 /*!********************************************!*\
   !*** ./node_modules/des.js/lib/des/cbc.js ***!
   \********************************************/
@@ -24386,8 +23699,8 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 "use strict";
 
 
-var assert = __webpack_require__(/*! minimalistic-assert */ 84);
-var inherits = __webpack_require__(/*! inherits */ 35);
+var assert = __webpack_require__(/*! minimalistic-assert */ 80);
+var inherits = __webpack_require__(/*! inherits */ 31);
 
 var proto = {};
 
@@ -24452,7 +23765,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
 
 
 /***/ }),
-/* 87 */
+/* 83 */
 /*!********************************************!*\
   !*** ./node_modules/des.js/lib/des/ede.js ***!
   \********************************************/
@@ -24462,12 +23775,11 @@ proto._update = function _update(inp, inOff, out, outOff) {
 "use strict";
 
 
-var assert = __webpack_require__(/*! minimalistic-assert */ 84);
-var inherits = __webpack_require__(/*! inherits */ 35);
+var assert = __webpack_require__(/*! minimalistic-assert */ 80);
+var inherits = __webpack_require__(/*! inherits */ 31);
 
-var des = __webpack_require__(/*! ../des */ 81);
-var Cipher = des.Cipher;
-var DES = des.DES;
+var Cipher = __webpack_require__(/*! ./cipher */ 79);
+var DES = __webpack_require__(/*! ./des */ 81);
 
 function EDEState(type, key) {
   assert.equal(key.length, 24, 'Invalid key length');
@@ -24518,16 +23830,16 @@ EDE.prototype._unpad = DES.prototype._unpad;
 
 
 /***/ }),
-/* 88 */
+/* 84 */
 /*!************************************************!*\
   !*** ./node_modules/browserify-aes/browser.js ***!
   \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ciphers = __webpack_require__(/*! ./encrypter */ 89)
-var deciphers = __webpack_require__(/*! ./decrypter */ 106)
-var modes = __webpack_require__(/*! ./modes/list.json */ 100)
+var ciphers = __webpack_require__(/*! ./encrypter */ 85)
+var deciphers = __webpack_require__(/*! ./decrypter */ 102)
+var modes = __webpack_require__(/*! ./modes/list.json */ 96)
 
 function getCiphers () {
   return Object.keys(modes)
@@ -24541,21 +23853,21 @@ exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 89 */
+/* 85 */
 /*!**************************************************!*\
   !*** ./node_modules/browserify-aes/encrypter.js ***!
   \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MODES = __webpack_require__(/*! ./modes */ 90)
-var AuthCipher = __webpack_require__(/*! ./authCipher */ 101)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
-var StreamCipher = __webpack_require__(/*! ./streamCipher */ 104)
-var Transform = __webpack_require__(/*! cipher-base */ 68)
-var aes = __webpack_require__(/*! ./aes */ 102)
-var ebtk = __webpack_require__(/*! evp_bytestokey */ 105)
-var inherits = __webpack_require__(/*! inherits */ 35)
+var MODES = __webpack_require__(/*! ./modes */ 86)
+var AuthCipher = __webpack_require__(/*! ./authCipher */ 97)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
+var StreamCipher = __webpack_require__(/*! ./streamCipher */ 100)
+var Transform = __webpack_require__(/*! cipher-base */ 64)
+var aes = __webpack_require__(/*! ./aes */ 98)
+var ebtk = __webpack_require__(/*! evp_bytestokey */ 101)
+var inherits = __webpack_require__(/*! inherits */ 31)
 
 function Cipher (mode, key, iv) {
   Transform.call(this)
@@ -24665,7 +23977,7 @@ exports.createCipher = createCipher
 
 
 /***/ }),
-/* 90 */
+/* 86 */
 /*!****************************************************!*\
   !*** ./node_modules/browserify-aes/modes/index.js ***!
   \****************************************************/
@@ -24673,17 +23985,17 @@ exports.createCipher = createCipher
 /***/ (function(module, exports, __webpack_require__) {
 
 var modeModules = {
-  ECB: __webpack_require__(/*! ./ecb */ 91),
-  CBC: __webpack_require__(/*! ./cbc */ 92),
-  CFB: __webpack_require__(/*! ./cfb */ 94),
-  CFB8: __webpack_require__(/*! ./cfb8 */ 95),
-  CFB1: __webpack_require__(/*! ./cfb1 */ 96),
-  OFB: __webpack_require__(/*! ./ofb */ 97),
-  CTR: __webpack_require__(/*! ./ctr */ 98),
-  GCM: __webpack_require__(/*! ./ctr */ 98)
+  ECB: __webpack_require__(/*! ./ecb */ 87),
+  CBC: __webpack_require__(/*! ./cbc */ 88),
+  CFB: __webpack_require__(/*! ./cfb */ 90),
+  CFB8: __webpack_require__(/*! ./cfb8 */ 91),
+  CFB1: __webpack_require__(/*! ./cfb1 */ 92),
+  OFB: __webpack_require__(/*! ./ofb */ 93),
+  CTR: __webpack_require__(/*! ./ctr */ 94),
+  GCM: __webpack_require__(/*! ./ctr */ 94)
 }
 
-var modes = __webpack_require__(/*! ./list.json */ 100)
+var modes = __webpack_require__(/*! ./list.json */ 96)
 
 for (var key in modes) {
   modes[key].module = modeModules[modes[key].mode]
@@ -24693,7 +24005,7 @@ module.exports = modes
 
 
 /***/ }),
-/* 91 */
+/* 87 */
 /*!**************************************************!*\
   !*** ./node_modules/browserify-aes/modes/ecb.js ***!
   \**************************************************/
@@ -24710,14 +24022,14 @@ exports.decrypt = function (self, block) {
 
 
 /***/ }),
-/* 92 */
+/* 88 */
 /*!**************************************************!*\
   !*** ./node_modules/browserify-aes/modes/cbc.js ***!
   \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var xor = __webpack_require__(/*! buffer-xor */ 93)
+var xor = __webpack_require__(/*! buffer-xor */ 89)
 
 exports.encrypt = function (self, block) {
   var data = xor(block, self._prev)
@@ -24737,7 +24049,7 @@ exports.decrypt = function (self, block) {
 
 
 /***/ }),
-/* 93 */
+/* 89 */
 /*!******************************************!*\
   !*** ./node_modules/buffer-xor/index.js ***!
   \******************************************/
@@ -24755,18 +24067,18 @@ exports.decrypt = function (self, block) {
   return buffer
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../buffer/index.js */ 26).Buffer))
 
 /***/ }),
-/* 94 */
+/* 90 */
 /*!**************************************************!*\
   !*** ./node_modules/browserify-aes/modes/cfb.js ***!
   \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
-var xor = __webpack_require__(/*! buffer-xor */ 93)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
+var xor = __webpack_require__(/*! buffer-xor */ 89)
 
 function encryptStart (self, data, decrypt) {
   var len = data.length
@@ -24801,14 +24113,14 @@ exports.encrypt = function (self, data, decrypt) {
 
 
 /***/ }),
-/* 95 */
+/* 91 */
 /*!***************************************************!*\
   !*** ./node_modules/browserify-aes/modes/cfb8.js ***!
   \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 function encryptByte (self, byteParam, decrypt) {
   var pad = self._cipher.encryptBlock(self._prev)
@@ -24836,14 +24148,14 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 
 /***/ }),
-/* 96 */
+/* 92 */
 /*!***************************************************!*\
   !*** ./node_modules/browserify-aes/modes/cfb1.js ***!
   \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 function encryptByte (self, byteParam, decrypt) {
   var pad
@@ -24888,14 +24200,14 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 
 /***/ }),
-/* 97 */
+/* 93 */
 /*!**************************************************!*\
   !*** ./node_modules/browserify-aes/modes/ofb.js ***!
   \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(/*! buffer-xor */ 93)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(/*! buffer-xor */ 89)
 
 function getBlock (self) {
   self._prev = self._cipher.encryptBlock(self._prev)
@@ -24912,19 +24224,19 @@ exports.encrypt = function (self, chunk) {
   return xor(chunk, pad)
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 26).Buffer))
 
 /***/ }),
-/* 98 */
+/* 94 */
 /*!**************************************************!*\
   !*** ./node_modules/browserify-aes/modes/ctr.js ***!
   \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var xor = __webpack_require__(/*! buffer-xor */ 93)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
-var incr32 = __webpack_require__(/*! ../incr32 */ 99)
+var xor = __webpack_require__(/*! buffer-xor */ 89)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
+var incr32 = __webpack_require__(/*! ../incr32 */ 95)
 
 function getBlock (self) {
   var out = self._cipher.encryptBlockRaw(self._prev)
@@ -24955,7 +24267,7 @@ exports.encrypt = function (self, chunk) {
 
 
 /***/ }),
-/* 99 */
+/* 95 */
 /*!***********************************************!*\
   !*** ./node_modules/browserify-aes/incr32.js ***!
   \***********************************************/
@@ -24980,7 +24292,7 @@ module.exports = incr32
 
 
 /***/ }),
-/* 100 */
+/* 96 */
 /*!*****************************************************!*\
   !*** ./node_modules/browserify-aes/modes/list.json ***!
   \*****************************************************/
@@ -24990,20 +24302,20 @@ module.exports = incr32
 module.exports = {"aes-128-ecb":{"cipher":"AES","key":128,"iv":0,"mode":"ECB","type":"block"},"aes-192-ecb":{"cipher":"AES","key":192,"iv":0,"mode":"ECB","type":"block"},"aes-256-ecb":{"cipher":"AES","key":256,"iv":0,"mode":"ECB","type":"block"},"aes-128-cbc":{"cipher":"AES","key":128,"iv":16,"mode":"CBC","type":"block"},"aes-192-cbc":{"cipher":"AES","key":192,"iv":16,"mode":"CBC","type":"block"},"aes-256-cbc":{"cipher":"AES","key":256,"iv":16,"mode":"CBC","type":"block"},"aes128":{"cipher":"AES","key":128,"iv":16,"mode":"CBC","type":"block"},"aes192":{"cipher":"AES","key":192,"iv":16,"mode":"CBC","type":"block"},"aes256":{"cipher":"AES","key":256,"iv":16,"mode":"CBC","type":"block"},"aes-128-cfb":{"cipher":"AES","key":128,"iv":16,"mode":"CFB","type":"stream"},"aes-192-cfb":{"cipher":"AES","key":192,"iv":16,"mode":"CFB","type":"stream"},"aes-256-cfb":{"cipher":"AES","key":256,"iv":16,"mode":"CFB","type":"stream"},"aes-128-cfb8":{"cipher":"AES","key":128,"iv":16,"mode":"CFB8","type":"stream"},"aes-192-cfb8":{"cipher":"AES","key":192,"iv":16,"mode":"CFB8","type":"stream"},"aes-256-cfb8":{"cipher":"AES","key":256,"iv":16,"mode":"CFB8","type":"stream"},"aes-128-cfb1":{"cipher":"AES","key":128,"iv":16,"mode":"CFB1","type":"stream"},"aes-192-cfb1":{"cipher":"AES","key":192,"iv":16,"mode":"CFB1","type":"stream"},"aes-256-cfb1":{"cipher":"AES","key":256,"iv":16,"mode":"CFB1","type":"stream"},"aes-128-ofb":{"cipher":"AES","key":128,"iv":16,"mode":"OFB","type":"stream"},"aes-192-ofb":{"cipher":"AES","key":192,"iv":16,"mode":"OFB","type":"stream"},"aes-256-ofb":{"cipher":"AES","key":256,"iv":16,"mode":"OFB","type":"stream"},"aes-128-ctr":{"cipher":"AES","key":128,"iv":16,"mode":"CTR","type":"stream"},"aes-192-ctr":{"cipher":"AES","key":192,"iv":16,"mode":"CTR","type":"stream"},"aes-256-ctr":{"cipher":"AES","key":256,"iv":16,"mode":"CTR","type":"stream"},"aes-128-gcm":{"cipher":"AES","key":128,"iv":12,"mode":"GCM","type":"auth"},"aes-192-gcm":{"cipher":"AES","key":192,"iv":12,"mode":"GCM","type":"auth"},"aes-256-gcm":{"cipher":"AES","key":256,"iv":12,"mode":"GCM","type":"auth"}};
 
 /***/ }),
-/* 101 */
+/* 97 */
 /*!***************************************************!*\
   !*** ./node_modules/browserify-aes/authCipher.js ***!
   \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aes = __webpack_require__(/*! ./aes */ 102)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
-var Transform = __webpack_require__(/*! cipher-base */ 68)
-var inherits = __webpack_require__(/*! inherits */ 35)
-var GHASH = __webpack_require__(/*! ./ghash */ 103)
-var xor = __webpack_require__(/*! buffer-xor */ 93)
-var incr32 = __webpack_require__(/*! ./incr32 */ 99)
+var aes = __webpack_require__(/*! ./aes */ 98)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
+var Transform = __webpack_require__(/*! cipher-base */ 64)
+var inherits = __webpack_require__(/*! inherits */ 31)
+var GHASH = __webpack_require__(/*! ./ghash */ 99)
+var xor = __webpack_require__(/*! buffer-xor */ 89)
+var incr32 = __webpack_require__(/*! ./incr32 */ 95)
 
 function xorTest (a, b) {
   var out = 0
@@ -25117,7 +24429,7 @@ module.exports = StreamCipher
 
 
 /***/ }),
-/* 102 */
+/* 98 */
 /*!********************************************!*\
   !*** ./node_modules/browserify-aes/aes.js ***!
   \********************************************/
@@ -25129,7 +24441,7 @@ module.exports = StreamCipher
 // which is in turn based on the one from crypto-js
 // https://code.google.com/p/crypto-js/
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 function asUInt32Array (buf) {
   if (!Buffer.isBuffer(buf)) buf = Buffer.from(buf)
@@ -25355,14 +24667,14 @@ module.exports.AES = AES
 
 
 /***/ }),
-/* 103 */
+/* 99 */
 /*!**********************************************!*\
   !*** ./node_modules/browserify-aes/ghash.js ***!
   \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 var ZEROES = Buffer.alloc(16, 0)
 
 function toArray (buf) {
@@ -25454,17 +24766,17 @@ module.exports = GHASH
 
 
 /***/ }),
-/* 104 */
+/* 100 */
 /*!*****************************************************!*\
   !*** ./node_modules/browserify-aes/streamCipher.js ***!
   \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aes = __webpack_require__(/*! ./aes */ 102)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
-var Transform = __webpack_require__(/*! cipher-base */ 68)
-var inherits = __webpack_require__(/*! inherits */ 35)
+var aes = __webpack_require__(/*! ./aes */ 98)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
+var Transform = __webpack_require__(/*! cipher-base */ 64)
+var inherits = __webpack_require__(/*! inherits */ 31)
 
 function StreamCipher (mode, key, iv, decrypt) {
   Transform.call(this)
@@ -25491,15 +24803,15 @@ module.exports = StreamCipher
 
 
 /***/ }),
-/* 105 */
+/* 101 */
 /*!**********************************************!*\
   !*** ./node_modules/evp_bytestokey/index.js ***!
   \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
-var MD5 = __webpack_require__(/*! md5.js */ 36)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
+var MD5 = __webpack_require__(/*! md5.js */ 32)
 
 /* eslint-disable camelcase */
 function EVP_BytesToKey (password, salt, keyBits, ivLen) {
@@ -25546,21 +24858,21 @@ module.exports = EVP_BytesToKey
 
 
 /***/ }),
-/* 106 */
+/* 102 */
 /*!**************************************************!*\
   !*** ./node_modules/browserify-aes/decrypter.js ***!
   \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var AuthCipher = __webpack_require__(/*! ./authCipher */ 101)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
-var MODES = __webpack_require__(/*! ./modes */ 90)
-var StreamCipher = __webpack_require__(/*! ./streamCipher */ 104)
-var Transform = __webpack_require__(/*! cipher-base */ 68)
-var aes = __webpack_require__(/*! ./aes */ 102)
-var ebtk = __webpack_require__(/*! evp_bytestokey */ 105)
-var inherits = __webpack_require__(/*! inherits */ 35)
+var AuthCipher = __webpack_require__(/*! ./authCipher */ 97)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
+var MODES = __webpack_require__(/*! ./modes */ 86)
+var StreamCipher = __webpack_require__(/*! ./streamCipher */ 100)
+var Transform = __webpack_require__(/*! cipher-base */ 64)
+var aes = __webpack_require__(/*! ./aes */ 98)
+var ebtk = __webpack_require__(/*! evp_bytestokey */ 101)
+var inherits = __webpack_require__(/*! inherits */ 31)
 
 function Decipher (mode, key, iv) {
   Transform.call(this)
@@ -25680,7 +24992,7 @@ exports.createDecipheriv = createDecipheriv
 
 
 /***/ }),
-/* 107 */
+/* 103 */
 /*!**********************************************!*\
   !*** ./node_modules/browserify-des/modes.js ***!
   \**********************************************/
@@ -25714,17 +25026,17 @@ exports['des-ede'] = {
 
 
 /***/ }),
-/* 108 */
+/* 104 */
 /*!************************************************!*\
   !*** ./node_modules/diffie-hellman/browser.js ***!
   \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(/*! ./lib/generatePrime */ 109)
-var primes = __webpack_require__(/*! ./lib/primes.json */ 116)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(/*! ./lib/generatePrime */ 105)
+var primes = __webpack_require__(/*! ./lib/primes.json */ 112)
 
-var DH = __webpack_require__(/*! ./lib/dh */ 117)
+var DH = __webpack_require__(/*! ./lib/dh */ 113)
 
 function getDiffieHellman (mod) {
   var prime = new Buffer(primes[mod].prime, 'hex')
@@ -25764,23 +25076,23 @@ function createDiffieHellman (prime, enc, generator, genc) {
 exports.DiffieHellmanGroup = exports.createDiffieHellmanGroup = exports.getDiffieHellman = getDiffieHellman
 exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../buffer/index.js */ 26).Buffer))
 
 /***/ }),
-/* 109 */
+/* 105 */
 /*!**********************************************************!*\
   !*** ./node_modules/diffie-hellman/lib/generatePrime.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var randomBytes = __webpack_require__(/*! randombytes */ 26);
+var randomBytes = __webpack_require__(/*! randombytes */ 22);
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
 findPrime.fermatTest = fermatTest;
-var BN = __webpack_require__(/*! bn.js */ 110);
+var BN = __webpack_require__(/*! bn.js */ 106);
 var TWENTYFOUR = new BN(24);
-var MillerRabin = __webpack_require__(/*! miller-rabin */ 113);
+var MillerRabin = __webpack_require__(/*! miller-rabin */ 109);
 var millerRabin = new MillerRabin();
 var ONE = new BN(1);
 var TWO = new BN(2);
@@ -25882,7 +25194,7 @@ function findPrime(bits, gen) {
 
 
 /***/ }),
-/* 110 */
+/* 106 */
 /*!**************************************!*\
   !*** ./node_modules/bn.js/lib/bn.js ***!
   \**************************************/
@@ -25941,7 +25253,7 @@ function findPrime(bits, gen) {
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(/*! buffer */ 112).Buffer;
+    Buffer = __webpack_require__(/*! buffer */ 108).Buffer;
   } catch (e) {
   }
 
@@ -29317,10 +28629,10 @@ function findPrime(bits, gen) {
   };
 })( false || module, this);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/module.js */ 111)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/module.js */ 107)(module)))
 
 /***/ }),
-/* 111 */
+/* 107 */
 /*!***********************************!*\
   !*** (webpack)/buildin/module.js ***!
   \***********************************/
@@ -29352,7 +28664,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 112 */
+/* 108 */
 /*!************************!*\
   !*** buffer (ignored) ***!
   \************************/
@@ -29362,15 +28674,15 @@ module.exports = function(module) {
 /* (ignored) */
 
 /***/ }),
-/* 113 */
+/* 109 */
 /*!*********************************************!*\
   !*** ./node_modules/miller-rabin/lib/mr.js ***!
   \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var bn = __webpack_require__(/*! bn.js */ 110);
-var brorand = __webpack_require__(/*! brorand */ 114);
+var bn = __webpack_require__(/*! bn.js */ 106);
+var brorand = __webpack_require__(/*! brorand */ 110);
 
 function MillerRabin(rand) {
   this.rand = rand || new brorand.Rand();
@@ -29487,7 +28799,7 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
 
 
 /***/ }),
-/* 114 */
+/* 110 */
 /*!***************************************!*\
   !*** ./node_modules/brorand/index.js ***!
   \***************************************/
@@ -29549,7 +28861,7 @@ if (typeof self === 'object') {
 } else {
   // Node.js or Web worker with no crypto support
   try {
-    var crypto = __webpack_require__(/*! crypto */ 115);
+    var crypto = __webpack_require__(/*! crypto */ 111);
     if (typeof crypto.randomBytes !== 'function')
       throw new Error('Not supported');
 
@@ -29562,7 +28874,7 @@ if (typeof self === 'object') {
 
 
 /***/ }),
-/* 115 */
+/* 111 */
 /*!************************!*\
   !*** crypto (ignored) ***!
   \************************/
@@ -29572,7 +28884,7 @@ if (typeof self === 'object') {
 /* (ignored) */
 
 /***/ }),
-/* 116 */
+/* 112 */
 /*!*****************************************************!*\
   !*** ./node_modules/diffie-hellman/lib/primes.json ***!
   \*****************************************************/
@@ -29582,23 +28894,23 @@ if (typeof self === 'object') {
 module.exports = {"modp1":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a63a3620ffffffffffffffff"},"modp2":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece65381ffffffffffffffff"},"modp5":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca237327ffffffffffffffff"},"modp14":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aacaa68ffffffffffffffff"},"modp15":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a93ad2caffffffffffffffff"},"modp16":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c934063199ffffffffffffffff"},"modp17":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dcc4024ffffffffffffffff"},"modp18":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"}};
 
 /***/ }),
-/* 117 */
+/* 113 */
 /*!***********************************************!*\
   !*** ./node_modules/diffie-hellman/lib/dh.js ***!
   \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(/*! bn.js */ 110);
-var MillerRabin = __webpack_require__(/*! miller-rabin */ 113);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(/*! bn.js */ 106);
+var MillerRabin = __webpack_require__(/*! miller-rabin */ 109);
 var millerRabin = new MillerRabin();
 var TWENTYFOUR = new BN(24);
 var ELEVEN = new BN(11);
 var TEN = new BN(10);
 var THREE = new BN(3);
 var SEVEN = new BN(7);
-var primes = __webpack_require__(/*! ./generatePrime */ 109);
-var randomBytes = __webpack_require__(/*! randombytes */ 26);
+var primes = __webpack_require__(/*! ./generatePrime */ 105);
+var randomBytes = __webpack_require__(/*! randombytes */ 22);
 module.exports = DH;
 
 function setPublicKey(pub, enc) {
@@ -29754,23 +29066,23 @@ function formatReturnValue(bn, enc) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 26).Buffer))
 
 /***/ }),
-/* 118 */
+/* 114 */
 /*!*******************************************************!*\
   !*** ./node_modules/browserify-sign/browser/index.js ***!
   \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(/*! create-hash */ 34)
-var stream = __webpack_require__(/*! stream */ 38)
-var inherits = __webpack_require__(/*! inherits */ 35)
-var sign = __webpack_require__(/*! ./sign */ 119)
-var verify = __webpack_require__(/*! ./verify */ 173)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(/*! create-hash */ 30)
+var stream = __webpack_require__(/*! stream */ 34)
+var inherits = __webpack_require__(/*! inherits */ 31)
+var sign = __webpack_require__(/*! ./sign */ 115)
+var verify = __webpack_require__(/*! ./verify */ 168)
 
-var algorithms = __webpack_require__(/*! ./algorithms.json */ 73)
+var algorithms = __webpack_require__(/*! ./algorithms.json */ 69)
 Object.keys(algorithms).forEach(function (key) {
   algorithms[key].id = new Buffer(algorithms[key].id, 'hex')
   algorithms[key.toLowerCase()] = algorithms[key]
@@ -29856,10 +29168,10 @@ module.exports = {
   createVerify: createVerify
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 26).Buffer))
 
 /***/ }),
-/* 119 */
+/* 115 */
 /*!******************************************************!*\
   !*** ./node_modules/browserify-sign/browser/sign.js ***!
   \******************************************************/
@@ -29867,12 +29179,12 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
-var createHmac = __webpack_require__(/*! create-hmac */ 69)
-var crt = __webpack_require__(/*! browserify-rsa */ 120)
-var EC = __webpack_require__(/*! elliptic */ 121).ec
-var BN = __webpack_require__(/*! bn.js */ 110)
-var parseKeys = __webpack_require__(/*! parse-asn1 */ 151)
-var curves = __webpack_require__(/*! ./curves.json */ 172)
+var createHmac = __webpack_require__(/*! create-hmac */ 65)
+var crt = __webpack_require__(/*! browserify-rsa */ 116)
+var EC = __webpack_require__(/*! elliptic */ 117).ec
+var BN = __webpack_require__(/*! bn.js */ 106)
+var parseKeys = __webpack_require__(/*! parse-asn1 */ 147)
+var curves = __webpack_require__(/*! ./curves.json */ 167)
 
 function sign (hash, key, hashType, signType, tag) {
   var priv = parseKeys(key)
@@ -30012,18 +29324,18 @@ module.exports = sign
 module.exports.getKey = getKey
 module.exports.makeKey = makeKey
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 26).Buffer))
 
 /***/ }),
-/* 120 */
+/* 116 */
 /*!**********************************************!*\
   !*** ./node_modules/browserify-rsa/index.js ***!
   \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(/*! bn.js */ 110);
-var randomBytes = __webpack_require__(/*! randombytes */ 26);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(/*! bn.js */ 106);
+var randomBytes = __webpack_require__(/*! randombytes */ 22);
 module.exports = crt;
 function blind(priv) {
   var r = getr(priv);
@@ -30063,10 +29375,10 @@ function getr(priv) {
   return r;
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../buffer/index.js */ 26).Buffer))
 
 /***/ }),
-/* 121 */
+/* 117 */
 /*!***********************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic.js ***!
   \***********************************************/
@@ -30078,29 +29390,29 @@ function getr(priv) {
 
 var elliptic = exports;
 
-elliptic.version = __webpack_require__(/*! ../package.json */ 122).version;
-elliptic.utils = __webpack_require__(/*! ./elliptic/utils */ 123);
-elliptic.rand = __webpack_require__(/*! brorand */ 114);
-elliptic.curve = __webpack_require__(/*! ./elliptic/curve */ 125);
-elliptic.curves = __webpack_require__(/*! ./elliptic/curves */ 130);
+elliptic.version = __webpack_require__(/*! ../package.json */ 118).version;
+elliptic.utils = __webpack_require__(/*! ./elliptic/utils */ 119);
+elliptic.rand = __webpack_require__(/*! brorand */ 110);
+elliptic.curve = __webpack_require__(/*! ./elliptic/curve */ 121);
+elliptic.curves = __webpack_require__(/*! ./elliptic/curves */ 126);
 
 // Protocols
-elliptic.ec = __webpack_require__(/*! ./elliptic/ec */ 144);
-elliptic.eddsa = __webpack_require__(/*! ./elliptic/eddsa */ 148);
+elliptic.ec = __webpack_require__(/*! ./elliptic/ec */ 140);
+elliptic.eddsa = __webpack_require__(/*! ./elliptic/eddsa */ 144);
 
 
 /***/ }),
-/* 122 */
+/* 118 */
 /*!********************************************!*\
   !*** ./node_modules/elliptic/package.json ***!
   \********************************************/
-/*! exports provided: _args, _development, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, dependencies, description, devDependencies, files, homepage, keywords, license, main, name, repository, scripts, version, default */
+/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, dependencies, deprecated, description, devDependencies, files, homepage, keywords, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_args":[["elliptic@6.4.1","/Users/fxy/Documents/DCloud/HBuilderX/uniapp-cli"]],"_development":true,"_from":"elliptic@6.4.1","_id":"elliptic@6.4.1","_inBundle":false,"_integrity":"sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.1","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.1","saveSpec":null,"fetchSpec":"6.4.1"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz","_spec":"6.4.1","_where":"/Users/fxy/Documents/DCloud/HBuilderX/uniapp-cli","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.1"};
+module.exports = {"_from":"elliptic@^6.0.0","_id":"elliptic@6.5.2","_inBundle":false,"_integrity":"sha512-f4x70okzZbIQl/NSRLkI/+tteV/9WqL98zx+SQ69KbXxmVrmjwsNUPn/gYJJ0sHvEak24cZgHIPegRePAtA/xw==","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"elliptic@^6.0.0","name":"elliptic","escapedName":"elliptic","rawSpec":"^6.0.0","saveSpec":null,"fetchSpec":"^6.0.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.5.2.tgz","_shasum":"05c5678d7173c049d8ca433552224a495d0e3762","_spec":"elliptic@^6.0.0","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/alpha/uniapp-cli/node_modules/browserify-sign","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"bundleDependencies":false,"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"deprecated":false,"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^3.0.8","grunt":"^1.0.4","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^9.0.1","istanbul":"^0.4.2","jscs":"^3.0.7","jshint":"^2.10.3","mocha":"^6.2.2"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.5.2"};
 
 /***/ }),
-/* 123 */
+/* 119 */
 /*!*****************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/utils.js ***!
   \*****************************************************/
@@ -30111,9 +29423,9 @@ module.exports = {"_args":[["elliptic@6.4.1","/Users/fxy/Documents/DCloud/HBuild
 
 
 var utils = exports;
-var BN = __webpack_require__(/*! bn.js */ 110);
-var minAssert = __webpack_require__(/*! minimalistic-assert */ 84);
-var minUtils = __webpack_require__(/*! minimalistic-crypto-utils */ 124);
+var BN = __webpack_require__(/*! bn.js */ 106);
+var minAssert = __webpack_require__(/*! minimalistic-assert */ 80);
+var minUtils = __webpack_require__(/*! minimalistic-crypto-utils */ 120);
 
 utils.assert = minAssert;
 utils.toArray = minUtils.toArray;
@@ -30122,14 +29434,17 @@ utils.toHex = minUtils.toHex;
 utils.encode = minUtils.encode;
 
 // Represent num in a w-NAF form
-function getNAF(num, w) {
-  var naf = [];
+function getNAF(num, w, bits) {
+  var naf = new Array(Math.max(num.bitLength(), bits) + 1);
+  naf.fill(0);
+
   var ws = 1 << (w + 1);
   var k = num.clone();
-  while (k.cmpn(1) >= 0) {
+
+  for (var i = 0; i < naf.length; i++) {
     var z;
+    var mod = k.andln(ws - 1);
     if (k.isOdd()) {
-      var mod = k.andln(ws - 1);
       if (mod > (ws >> 1) - 1)
         z = (ws >> 1) - mod;
       else
@@ -30138,13 +29453,9 @@ function getNAF(num, w) {
     } else {
       z = 0;
     }
-    naf.push(z);
 
-    // Optimization, shift by word if possible
-    var shift = (k.cmpn(0) !== 0 && k.andln(ws - 1) === 0) ? (w + 1) : 1;
-    for (var i = 1; i < shift; i++)
-      naf.push(0);
-    k.iushrn(shift);
+    naf[i] = z;
+    k.iushrn(1);
   }
 
   return naf;
@@ -30231,7 +29542,7 @@ utils.intFromLE = intFromLE;
 
 
 /***/ }),
-/* 124 */
+/* 120 */
 /*!*************************************************************!*\
   !*** ./node_modules/minimalistic-crypto-utils/lib/utils.js ***!
   \*************************************************************/
@@ -30300,7 +29611,7 @@ utils.encode = function encode(arr, enc) {
 
 
 /***/ }),
-/* 125 */
+/* 121 */
 /*!***********************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/curve/index.js ***!
   \***********************************************************/
@@ -30312,14 +29623,14 @@ utils.encode = function encode(arr, enc) {
 
 var curve = exports;
 
-curve.base = __webpack_require__(/*! ./base */ 126);
-curve.short = __webpack_require__(/*! ./short */ 127);
-curve.mont = __webpack_require__(/*! ./mont */ 128);
-curve.edwards = __webpack_require__(/*! ./edwards */ 129);
+curve.base = __webpack_require__(/*! ./base */ 122);
+curve.short = __webpack_require__(/*! ./short */ 123);
+curve.mont = __webpack_require__(/*! ./mont */ 124);
+curve.edwards = __webpack_require__(/*! ./edwards */ 125);
 
 
 /***/ }),
-/* 126 */
+/* 122 */
 /*!**********************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/curve/base.js ***!
   \**********************************************************/
@@ -30329,9 +29640,8 @@ curve.edwards = __webpack_require__(/*! ./edwards */ 129);
 "use strict";
 
 
-var BN = __webpack_require__(/*! bn.js */ 110);
-var elliptic = __webpack_require__(/*! ../../elliptic */ 121);
-var utils = elliptic.utils;
+var BN = __webpack_require__(/*! bn.js */ 106);
+var utils = __webpack_require__(/*! ../utils */ 119);
 var getNAF = utils.getNAF;
 var getJSF = utils.getJSF;
 var assert = utils.assert;
@@ -30358,6 +29668,8 @@ function BaseCurve(type, conf) {
   this._wnafT3 = new Array(4);
   this._wnafT4 = new Array(4);
 
+  this._bitLength = this.n ? this.n.bitLength() : 0;
+
   // Generalized Greg Maxwell's trick
   var adjustCount = this.n && this.p.div(this.n);
   if (!adjustCount || adjustCount.cmpn(100) > 0) {
@@ -30381,7 +29693,7 @@ BaseCurve.prototype._fixedNafMul = function _fixedNafMul(p, k) {
   assert(p.precomputed);
   var doubles = p._getDoubles();
 
-  var naf = getNAF(k, 1);
+  var naf = getNAF(k, 1, this._bitLength);
   var I = (1 << (doubles.step + 1)) - (doubles.step % 2 === 0 ? 2 : 1);
   I /= 3;
 
@@ -30418,7 +29730,7 @@ BaseCurve.prototype._wnafMul = function _wnafMul(p, k) {
   var wnd = nafPoints.points;
 
   // Get NAF form
-  var naf = getNAF(k, w);
+  var naf = getNAF(k, w, this._bitLength);
 
   // Add `this`*(N+1) for every w-NAF index
   var acc = this.jpoint(null, null, null);
@@ -30474,8 +29786,8 @@ BaseCurve.prototype._wnafMulAdd = function _wnafMulAdd(defW,
     var a = i - 1;
     var b = i;
     if (wndWidth[a] !== 1 || wndWidth[b] !== 1) {
-      naf[a] = getNAF(coeffs[a], wndWidth[a]);
-      naf[b] = getNAF(coeffs[b], wndWidth[b]);
+      naf[a] = getNAF(coeffs[a], wndWidth[a], this._bitLength);
+      naf[b] = getNAF(coeffs[b], wndWidth[b], this._bitLength);
       max = Math.max(naf[a].length, max);
       max = Math.max(naf[b].length, max);
       continue;
@@ -30705,7 +30017,7 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 
 /***/ }),
-/* 127 */
+/* 123 */
 /*!***********************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/curve/short.js ***!
   \***********************************************************/
@@ -30715,13 +30027,12 @@ BasePoint.prototype.dblp = function dblp(k) {
 "use strict";
 
 
-var curve = __webpack_require__(/*! ../curve */ 125);
-var elliptic = __webpack_require__(/*! ../../elliptic */ 121);
-var BN = __webpack_require__(/*! bn.js */ 110);
-var inherits = __webpack_require__(/*! inherits */ 35);
-var Base = curve.base;
+var utils = __webpack_require__(/*! ../utils */ 119);
+var BN = __webpack_require__(/*! bn.js */ 106);
+var inherits = __webpack_require__(/*! inherits */ 31);
+var Base = __webpack_require__(/*! ./base */ 122);
 
-var assert = elliptic.utils.assert;
+var assert = utils.assert;
 
 function ShortCurve(conf) {
   Base.call(this, 'short', conf);
@@ -31137,8 +30448,9 @@ Point.prototype.getY = function getY() {
 
 Point.prototype.mul = function mul(k) {
   k = new BN(k, 16);
-
-  if (this._hasDoubles(k))
+  if (this.isInfinity())
+    return this;
+  else if (this._hasDoubles(k))
     return this.curve._fixedNafMul(this, k);
   else if (this.curve.endo)
     return this.curve._endoWnafMulAdd([ this ], [ k ]);
@@ -31653,7 +30965,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
 
 
 /***/ }),
-/* 128 */
+/* 124 */
 /*!**********************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/curve/mont.js ***!
   \**********************************************************/
@@ -31663,13 +30975,11 @@ JPoint.prototype.isInfinity = function isInfinity() {
 "use strict";
 
 
-var curve = __webpack_require__(/*! ../curve */ 125);
-var BN = __webpack_require__(/*! bn.js */ 110);
-var inherits = __webpack_require__(/*! inherits */ 35);
-var Base = curve.base;
+var BN = __webpack_require__(/*! bn.js */ 106);
+var inherits = __webpack_require__(/*! inherits */ 31);
+var Base = __webpack_require__(/*! ./base */ 122);
 
-var elliptic = __webpack_require__(/*! ../../elliptic */ 121);
-var utils = elliptic.utils;
+var utils = __webpack_require__(/*! ../utils */ 119);
 
 function MontCurve(conf) {
   Base.call(this, 'mont', conf);
@@ -31844,7 +31154,7 @@ Point.prototype.getX = function getX() {
 
 
 /***/ }),
-/* 129 */
+/* 125 */
 /*!*************************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/curve/edwards.js ***!
   \*************************************************************/
@@ -31854,13 +31164,12 @@ Point.prototype.getX = function getX() {
 "use strict";
 
 
-var curve = __webpack_require__(/*! ../curve */ 125);
-var elliptic = __webpack_require__(/*! ../../elliptic */ 121);
-var BN = __webpack_require__(/*! bn.js */ 110);
-var inherits = __webpack_require__(/*! inherits */ 35);
-var Base = curve.base;
+var utils = __webpack_require__(/*! ../utils */ 119);
+var BN = __webpack_require__(/*! bn.js */ 106);
+var inherits = __webpack_require__(/*! inherits */ 31);
+var Base = __webpack_require__(/*! ./base */ 122);
 
-var assert = elliptic.utils.assert;
+var assert = utils.assert;
 
 function EdwardsCurve(conf) {
   // NOTE: Important as we are creating point in Base.call()
@@ -32288,7 +31597,7 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 
 /***/ }),
-/* 130 */
+/* 126 */
 /*!******************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/curves.js ***!
   \******************************************************/
@@ -32300,18 +31609,19 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 var curves = exports;
 
-var hash = __webpack_require__(/*! hash.js */ 131);
-var elliptic = __webpack_require__(/*! ../elliptic */ 121);
+var hash = __webpack_require__(/*! hash.js */ 127);
+var curve = __webpack_require__(/*! ./curve */ 121);
+var utils = __webpack_require__(/*! ./utils */ 119);
 
-var assert = elliptic.utils.assert;
+var assert = utils.assert;
 
 function PresetCurve(options) {
   if (options.type === 'short')
-    this.curve = new elliptic.curve.short(options);
+    this.curve = new curve.short(options);
   else if (options.type === 'edwards')
-    this.curve = new elliptic.curve.edwards(options);
+    this.curve = new curve.edwards(options);
   else
-    this.curve = new elliptic.curve.mont(options);
+    this.curve = new curve.mont(options);
   this.g = this.curve.g;
   this.n = this.curve.n;
   this.hash = options.hash;
@@ -32465,7 +31775,7 @@ defineCurve('ed25519', {
 
 var pre;
 try {
-  pre = __webpack_require__(/*! ./precomputed/secp256k1 */ 143);
+  pre = __webpack_require__(/*! ./precomputed/secp256k1 */ 139);
 } catch (e) {
   pre = undefined;
 }
@@ -32504,7 +31814,7 @@ defineCurve('secp256k1', {
 
 
 /***/ }),
-/* 131 */
+/* 127 */
 /*!******************************************!*\
   !*** ./node_modules/hash.js/lib/hash.js ***!
   \******************************************/
@@ -32513,11 +31823,11 @@ defineCurve('secp256k1', {
 
 var hash = exports;
 
-hash.utils = __webpack_require__(/*! ./hash/utils */ 132);
-hash.common = __webpack_require__(/*! ./hash/common */ 133);
-hash.sha = __webpack_require__(/*! ./hash/sha */ 134);
-hash.ripemd = __webpack_require__(/*! ./hash/ripemd */ 141);
-hash.hmac = __webpack_require__(/*! ./hash/hmac */ 142);
+hash.utils = __webpack_require__(/*! ./hash/utils */ 128);
+hash.common = __webpack_require__(/*! ./hash/common */ 129);
+hash.sha = __webpack_require__(/*! ./hash/sha */ 130);
+hash.ripemd = __webpack_require__(/*! ./hash/ripemd */ 137);
+hash.hmac = __webpack_require__(/*! ./hash/hmac */ 138);
 
 // Proxy hash functions to the main object
 hash.sha1 = hash.sha.sha1;
@@ -32529,7 +31839,7 @@ hash.ripemd160 = hash.ripemd.ripemd160;
 
 
 /***/ }),
-/* 132 */
+/* 128 */
 /*!************************************************!*\
   !*** ./node_modules/hash.js/lib/hash/utils.js ***!
   \************************************************/
@@ -32539,8 +31849,8 @@ hash.ripemd160 = hash.ripemd.ripemd160;
 "use strict";
 
 
-var assert = __webpack_require__(/*! minimalistic-assert */ 84);
-var inherits = __webpack_require__(/*! inherits */ 35);
+var assert = __webpack_require__(/*! minimalistic-assert */ 80);
+var inherits = __webpack_require__(/*! inherits */ 31);
 
 exports.inherits = inherits;
 
@@ -32818,7 +32128,7 @@ exports.shr64_lo = shr64_lo;
 
 
 /***/ }),
-/* 133 */
+/* 129 */
 /*!*************************************************!*\
   !*** ./node_modules/hash.js/lib/hash/common.js ***!
   \*************************************************/
@@ -32828,8 +32138,8 @@ exports.shr64_lo = shr64_lo;
 "use strict";
 
 
-var utils = __webpack_require__(/*! ./utils */ 132);
-var assert = __webpack_require__(/*! minimalistic-assert */ 84);
+var utils = __webpack_require__(/*! ./utils */ 128);
+var assert = __webpack_require__(/*! minimalistic-assert */ 80);
 
 function BlockHash() {
   this.pending = null;
@@ -32921,7 +32231,7 @@ BlockHash.prototype._pad = function pad() {
 
 
 /***/ }),
-/* 134 */
+/* 130 */
 /*!**********************************************!*\
   !*** ./node_modules/hash.js/lib/hash/sha.js ***!
   \**********************************************/
@@ -32931,15 +32241,15 @@ BlockHash.prototype._pad = function pad() {
 "use strict";
 
 
-exports.sha1 = __webpack_require__(/*! ./sha/1 */ 135);
-exports.sha224 = __webpack_require__(/*! ./sha/224 */ 137);
-exports.sha256 = __webpack_require__(/*! ./sha/256 */ 138);
-exports.sha384 = __webpack_require__(/*! ./sha/384 */ 139);
-exports.sha512 = __webpack_require__(/*! ./sha/512 */ 140);
+exports.sha1 = __webpack_require__(/*! ./sha/1 */ 131);
+exports.sha224 = __webpack_require__(/*! ./sha/224 */ 133);
+exports.sha256 = __webpack_require__(/*! ./sha/256 */ 134);
+exports.sha384 = __webpack_require__(/*! ./sha/384 */ 135);
+exports.sha512 = __webpack_require__(/*! ./sha/512 */ 136);
 
 
 /***/ }),
-/* 135 */
+/* 131 */
 /*!************************************************!*\
   !*** ./node_modules/hash.js/lib/hash/sha/1.js ***!
   \************************************************/
@@ -32949,9 +32259,9 @@ exports.sha512 = __webpack_require__(/*! ./sha/512 */ 140);
 "use strict";
 
 
-var utils = __webpack_require__(/*! ../utils */ 132);
-var common = __webpack_require__(/*! ../common */ 133);
-var shaCommon = __webpack_require__(/*! ./common */ 136);
+var utils = __webpack_require__(/*! ../utils */ 128);
+var common = __webpack_require__(/*! ../common */ 129);
+var shaCommon = __webpack_require__(/*! ./common */ 132);
 
 var rotl32 = utils.rotl32;
 var sum32 = utils.sum32;
@@ -33024,7 +32334,7 @@ SHA1.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 136 */
+/* 132 */
 /*!*****************************************************!*\
   !*** ./node_modules/hash.js/lib/hash/sha/common.js ***!
   \*****************************************************/
@@ -33034,7 +32344,7 @@ SHA1.prototype._digest = function digest(enc) {
 "use strict";
 
 
-var utils = __webpack_require__(/*! ../utils */ 132);
+var utils = __webpack_require__(/*! ../utils */ 128);
 var rotr32 = utils.rotr32;
 
 function ft_1(s, x, y, z) {
@@ -33084,7 +32394,7 @@ exports.g1_256 = g1_256;
 
 
 /***/ }),
-/* 137 */
+/* 133 */
 /*!**************************************************!*\
   !*** ./node_modules/hash.js/lib/hash/sha/224.js ***!
   \**************************************************/
@@ -33094,8 +32404,8 @@ exports.g1_256 = g1_256;
 "use strict";
 
 
-var utils = __webpack_require__(/*! ../utils */ 132);
-var SHA256 = __webpack_require__(/*! ./256 */ 138);
+var utils = __webpack_require__(/*! ../utils */ 128);
+var SHA256 = __webpack_require__(/*! ./256 */ 134);
 
 function SHA224() {
   if (!(this instanceof SHA224))
@@ -33125,7 +32435,7 @@ SHA224.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 138 */
+/* 134 */
 /*!**************************************************!*\
   !*** ./node_modules/hash.js/lib/hash/sha/256.js ***!
   \**************************************************/
@@ -33135,10 +32445,10 @@ SHA224.prototype._digest = function digest(enc) {
 "use strict";
 
 
-var utils = __webpack_require__(/*! ../utils */ 132);
-var common = __webpack_require__(/*! ../common */ 133);
-var shaCommon = __webpack_require__(/*! ./common */ 136);
-var assert = __webpack_require__(/*! minimalistic-assert */ 84);
+var utils = __webpack_require__(/*! ../utils */ 128);
+var common = __webpack_require__(/*! ../common */ 129);
+var shaCommon = __webpack_require__(/*! ./common */ 132);
+var assert = __webpack_require__(/*! minimalistic-assert */ 80);
 
 var sum32 = utils.sum32;
 var sum32_4 = utils.sum32_4;
@@ -33241,7 +32551,7 @@ SHA256.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 139 */
+/* 135 */
 /*!**************************************************!*\
   !*** ./node_modules/hash.js/lib/hash/sha/384.js ***!
   \**************************************************/
@@ -33251,9 +32561,9 @@ SHA256.prototype._digest = function digest(enc) {
 "use strict";
 
 
-var utils = __webpack_require__(/*! ../utils */ 132);
+var utils = __webpack_require__(/*! ../utils */ 128);
 
-var SHA512 = __webpack_require__(/*! ./512 */ 140);
+var SHA512 = __webpack_require__(/*! ./512 */ 136);
 
 function SHA384() {
   if (!(this instanceof SHA384))
@@ -33287,7 +32597,7 @@ SHA384.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 140 */
+/* 136 */
 /*!**************************************************!*\
   !*** ./node_modules/hash.js/lib/hash/sha/512.js ***!
   \**************************************************/
@@ -33297,9 +32607,9 @@ SHA384.prototype._digest = function digest(enc) {
 "use strict";
 
 
-var utils = __webpack_require__(/*! ../utils */ 132);
-var common = __webpack_require__(/*! ../common */ 133);
-var assert = __webpack_require__(/*! minimalistic-assert */ 84);
+var utils = __webpack_require__(/*! ../utils */ 128);
+var common = __webpack_require__(/*! ../common */ 129);
+var assert = __webpack_require__(/*! minimalistic-assert */ 80);
 
 var rotr64_hi = utils.rotr64_hi;
 var rotr64_lo = utils.rotr64_lo;
@@ -33628,7 +32938,7 @@ function g1_512_lo(xh, xl) {
 
 
 /***/ }),
-/* 141 */
+/* 137 */
 /*!*************************************************!*\
   !*** ./node_modules/hash.js/lib/hash/ripemd.js ***!
   \*************************************************/
@@ -33638,8 +32948,8 @@ function g1_512_lo(xh, xl) {
 "use strict";
 
 
-var utils = __webpack_require__(/*! ./utils */ 132);
-var common = __webpack_require__(/*! ./common */ 133);
+var utils = __webpack_require__(/*! ./utils */ 128);
+var common = __webpack_require__(/*! ./common */ 129);
 
 var rotl32 = utils.rotl32;
 var sum32 = utils.sum32;
@@ -33785,7 +33095,7 @@ var sh = [
 
 
 /***/ }),
-/* 142 */
+/* 138 */
 /*!***********************************************!*\
   !*** ./node_modules/hash.js/lib/hash/hmac.js ***!
   \***********************************************/
@@ -33795,8 +33105,8 @@ var sh = [
 "use strict";
 
 
-var utils = __webpack_require__(/*! ./utils */ 132);
-var assert = __webpack_require__(/*! minimalistic-assert */ 84);
+var utils = __webpack_require__(/*! ./utils */ 128);
+var assert = __webpack_require__(/*! minimalistic-assert */ 80);
 
 function Hmac(hash, key, enc) {
   if (!(this instanceof Hmac))
@@ -33843,7 +33153,7 @@ Hmac.prototype.digest = function digest(enc) {
 
 
 /***/ }),
-/* 143 */
+/* 139 */
 /*!*********************************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/precomputed/secp256k1.js ***!
   \*********************************************************************/
@@ -34633,7 +33943,7 @@ module.exports = {
 
 
 /***/ }),
-/* 144 */
+/* 140 */
 /*!********************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/ec/index.js ***!
   \********************************************************/
@@ -34643,14 +33953,15 @@ module.exports = {
 "use strict";
 
 
-var BN = __webpack_require__(/*! bn.js */ 110);
-var HmacDRBG = __webpack_require__(/*! hmac-drbg */ 145);
-var elliptic = __webpack_require__(/*! ../../elliptic */ 121);
-var utils = elliptic.utils;
+var BN = __webpack_require__(/*! bn.js */ 106);
+var HmacDRBG = __webpack_require__(/*! hmac-drbg */ 141);
+var utils = __webpack_require__(/*! ../utils */ 119);
+var curves = __webpack_require__(/*! ../curves */ 126);
+var rand = __webpack_require__(/*! brorand */ 110);
 var assert = utils.assert;
 
-var KeyPair = __webpack_require__(/*! ./key */ 146);
-var Signature = __webpack_require__(/*! ./signature */ 147);
+var KeyPair = __webpack_require__(/*! ./key */ 142);
+var Signature = __webpack_require__(/*! ./signature */ 143);
 
 function EC(options) {
   if (!(this instanceof EC))
@@ -34658,13 +33969,13 @@ function EC(options) {
 
   // Shortcut `elliptic.ec(curve-name)`
   if (typeof options === 'string') {
-    assert(elliptic.curves.hasOwnProperty(options), 'Unknown curve ' + options);
+    assert(curves.hasOwnProperty(options), 'Unknown curve ' + options);
 
-    options = elliptic.curves[options];
+    options = curves[options];
   }
 
   // Shortcut for `elliptic.ec(elliptic.curves.curveName)`
-  if (options instanceof elliptic.curves.PresetCurve)
+  if (options instanceof curves.PresetCurve)
     options = { curve: options };
 
   this.curve = options.curve.curve;
@@ -34702,7 +34013,7 @@ EC.prototype.genKeyPair = function genKeyPair(options) {
     hash: this.hash,
     pers: options.pers,
     persEnc: options.persEnc || 'utf8',
-    entropy: options.entropy || elliptic.rand(this.hash.hmacStrength),
+    entropy: options.entropy || rand(this.hash.hmacStrength),
     entropyEnc: options.entropy && options.entropyEnc || 'utf8',
     nonce: this.n.toArray()
   });
@@ -34884,7 +34195,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 
 
 /***/ }),
-/* 145 */
+/* 141 */
 /*!*************************************************!*\
   !*** ./node_modules/hmac-drbg/lib/hmac-drbg.js ***!
   \*************************************************/
@@ -34894,9 +34205,9 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 "use strict";
 
 
-var hash = __webpack_require__(/*! hash.js */ 131);
-var utils = __webpack_require__(/*! minimalistic-crypto-utils */ 124);
-var assert = __webpack_require__(/*! minimalistic-assert */ 84);
+var hash = __webpack_require__(/*! hash.js */ 127);
+var utils = __webpack_require__(/*! minimalistic-crypto-utils */ 120);
+var assert = __webpack_require__(/*! minimalistic-assert */ 80);
 
 function HmacDRBG(options) {
   if (!(this instanceof HmacDRBG))
@@ -35008,7 +34319,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 
 
 /***/ }),
-/* 146 */
+/* 142 */
 /*!******************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/ec/key.js ***!
   \******************************************************/
@@ -35018,9 +34329,8 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 "use strict";
 
 
-var BN = __webpack_require__(/*! bn.js */ 110);
-var elliptic = __webpack_require__(/*! ../../elliptic */ 121);
-var utils = elliptic.utils;
+var BN = __webpack_require__(/*! bn.js */ 106);
+var utils = __webpack_require__(/*! ../utils */ 119);
 var assert = utils.assert;
 
 function KeyPair(ec, options) {
@@ -35138,7 +34448,7 @@ KeyPair.prototype.inspect = function inspect() {
 
 
 /***/ }),
-/* 147 */
+/* 143 */
 /*!************************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/ec/signature.js ***!
   \************************************************************/
@@ -35148,10 +34458,9 @@ KeyPair.prototype.inspect = function inspect() {
 "use strict";
 
 
-var BN = __webpack_require__(/*! bn.js */ 110);
+var BN = __webpack_require__(/*! bn.js */ 106);
 
-var elliptic = __webpack_require__(/*! ../../elliptic */ 121);
-var utils = elliptic.utils;
+var utils = __webpack_require__(/*! ../utils */ 119);
 var assert = utils.assert;
 
 function Signature(options, enc) {
@@ -35284,7 +34593,7 @@ Signature.prototype.toDER = function toDER(enc) {
 
 
 /***/ }),
-/* 148 */
+/* 144 */
 /*!***********************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/eddsa/index.js ***!
   \***********************************************************/
@@ -35294,13 +34603,13 @@ Signature.prototype.toDER = function toDER(enc) {
 "use strict";
 
 
-var hash = __webpack_require__(/*! hash.js */ 131);
-var elliptic = __webpack_require__(/*! ../../elliptic */ 121);
-var utils = elliptic.utils;
+var hash = __webpack_require__(/*! hash.js */ 127);
+var curves = __webpack_require__(/*! ../curves */ 126);
+var utils = __webpack_require__(/*! ../utils */ 119);
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
-var KeyPair = __webpack_require__(/*! ./key */ 149);
-var Signature = __webpack_require__(/*! ./signature */ 150);
+var KeyPair = __webpack_require__(/*! ./key */ 145);
+var Signature = __webpack_require__(/*! ./signature */ 146);
 
 function EDDSA(curve) {
   assert(curve === 'ed25519', 'only tested with ed25519 so far');
@@ -35308,7 +34617,7 @@ function EDDSA(curve) {
   if (!(this instanceof EDDSA))
     return new EDDSA(curve);
 
-  var curve = elliptic.curves[curve].curve;
+  var curve = curves[curve].curve;
   this.curve = curve;
   this.g = curve.g;
   this.g.precompute(curve.n.bitLength() + 1);
@@ -35413,7 +34722,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
 
 
 /***/ }),
-/* 149 */
+/* 145 */
 /*!*********************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/eddsa/key.js ***!
   \*********************************************************/
@@ -35423,8 +34732,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
 "use strict";
 
 
-var elliptic = __webpack_require__(/*! ../../elliptic */ 121);
-var utils = elliptic.utils;
+var utils = __webpack_require__(/*! ../utils */ 119);
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
 var cachedProperty = utils.cachedProperty;
@@ -35520,7 +34828,7 @@ module.exports = KeyPair;
 
 
 /***/ }),
-/* 150 */
+/* 146 */
 /*!***************************************************************!*\
   !*** ./node_modules/elliptic/lib/elliptic/eddsa/signature.js ***!
   \***************************************************************/
@@ -35530,9 +34838,8 @@ module.exports = KeyPair;
 "use strict";
 
 
-var BN = __webpack_require__(/*! bn.js */ 110);
-var elliptic = __webpack_require__(/*! ../../elliptic */ 121);
-var utils = elliptic.utils;
+var BN = __webpack_require__(/*! bn.js */ 106);
+var utils = __webpack_require__(/*! ../utils */ 119);
 var assert = utils.assert;
 var cachedProperty = utils.cachedProperty;
 var parseBytes = utils.parseBytes;
@@ -35597,19 +34904,19 @@ module.exports = Signature;
 
 
 /***/ }),
-/* 151 */
+/* 147 */
 /*!******************************************!*\
   !*** ./node_modules/parse-asn1/index.js ***!
   \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var asn1 = __webpack_require__(/*! ./asn1 */ 152)
-var aesid = __webpack_require__(/*! ./aesid.json */ 170)
-var fixProc = __webpack_require__(/*! ./fixProc */ 171)
-var ciphers = __webpack_require__(/*! browserify-aes */ 88)
-var compat = __webpack_require__(/*! pbkdf2 */ 74)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var asn1 = __webpack_require__(/*! ./asn1 */ 148)
+var aesid = __webpack_require__(/*! ./aesid.json */ 165)
+var fixProc = __webpack_require__(/*! ./fixProc */ 166)
+var ciphers = __webpack_require__(/*! browserify-aes */ 84)
+var compat = __webpack_require__(/*! pbkdf2 */ 70)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 module.exports = parseKeys
 
 function parseKeys (buffer) {
@@ -35714,7 +35021,7 @@ function decrypt (data, password) {
 
 
 /***/ }),
-/* 152 */
+/* 148 */
 /*!*****************************************!*\
   !*** ./node_modules/parse-asn1/asn1.js ***!
   \*****************************************/
@@ -35726,9 +35033,9 @@ function decrypt (data, password) {
 // Fedor, you are amazing.
 
 
-var asn1 = __webpack_require__(/*! asn1.js */ 153)
+var asn1 = __webpack_require__(/*! asn1.js */ 149)
 
-exports.certificate = __webpack_require__(/*! ./certificate */ 169)
+exports.certificate = __webpack_require__(/*! ./certificate */ 164)
 
 var RSAPrivateKey = asn1.define('RSAPrivateKey', function () {
   this.seq().obj(
@@ -35847,7 +35154,7 @@ exports.signature = asn1.define('signature', function () {
 
 
 /***/ }),
-/* 153 */
+/* 149 */
 /*!******************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1.js ***!
   \******************************************/
@@ -35856,25 +35163,25 @@ exports.signature = asn1.define('signature', function () {
 
 var asn1 = exports;
 
-asn1.bignum = __webpack_require__(/*! bn.js */ 110);
+asn1.bignum = __webpack_require__(/*! bn.js */ 106);
 
-asn1.define = __webpack_require__(/*! ./asn1/api */ 154).define;
-asn1.base = __webpack_require__(/*! ./asn1/base */ 157);
-asn1.constants = __webpack_require__(/*! ./asn1/constants */ 161);
-asn1.decoders = __webpack_require__(/*! ./asn1/decoders */ 163);
-asn1.encoders = __webpack_require__(/*! ./asn1/encoders */ 166);
+asn1.define = __webpack_require__(/*! ./asn1/api */ 150).define;
+asn1.base = __webpack_require__(/*! ./asn1/base */ 152);
+asn1.constants = __webpack_require__(/*! ./asn1/constants */ 156);
+asn1.decoders = __webpack_require__(/*! ./asn1/decoders */ 158);
+asn1.encoders = __webpack_require__(/*! ./asn1/encoders */ 161);
 
 
 /***/ }),
-/* 154 */
+/* 150 */
 /*!**********************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/api.js ***!
   \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var asn1 = __webpack_require__(/*! ../asn1 */ 153);
-var inherits = __webpack_require__(/*! inherits */ 35);
+var asn1 = __webpack_require__(/*! ../asn1 */ 149);
+var inherits = __webpack_require__(/*! inherits */ 31);
 
 var api = exports;
 
@@ -35893,7 +35200,7 @@ function Entity(name, body) {
 Entity.prototype._createNamed = function createNamed(base) {
   var named;
   try {
-    named = __webpack_require__(/*! vm */ 155).runInThisContext(
+    named = __webpack_require__(/*! vm */ 151).runInThisContext(
       '(function ' + this.name + '(entity) {\n' +
       '  this._initNamed(entity);\n' +
       '})'
@@ -35937,15 +35244,20 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
 
 
 /***/ }),
-/* 155 */
+/* 151 */
 /*!*********************************************!*\
   !*** ./node_modules/vm-browserify/index.js ***!
   \*********************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var indexOf = __webpack_require__(/*! indexof */ 156);
-
+var indexOf = function (xs, item) {
+    if (xs.indexOf) return xs.indexOf(item);
+    else for (var i = 0; i < xs.length; i++) {
+        if (xs[i] === item) return i;
+    }
+    return -1;
+};
 var Object_keys = function (obj) {
     if (Object.keys) return Object.keys(obj)
     else {
@@ -36055,9 +35367,11 @@ Script.prototype.runInNewContext = function (context) {
     var ctx = Script.createContext(context);
     var res = this.runInContext(ctx);
 
-    forEach(Object_keys(ctx), function (key) {
-        context[key] = ctx[key];
-    });
+    if (context) {
+        forEach(Object_keys(ctx), function (key) {
+            context[key] = ctx[key];
+        });
+    }
 
     return res;
 };
@@ -36068,6 +35382,10 @@ forEach(Object_keys(Script.prototype), function (name) {
         return s[name].apply(s, [].slice.call(arguments, 1));
     };
 });
+
+exports.isContext = function (context) {
+    return context instanceof Context;
+};
 
 exports.createScript = function (code) {
     return exports.Script(code);
@@ -36085,26 +35403,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 156 */
-/*!***************************************!*\
-  !*** ./node_modules/indexof/index.js ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-var indexOf = [].indexOf;
-
-module.exports = function(arr, obj){
-  if (indexOf) return arr.indexOf(obj);
-  for (var i = 0; i < arr.length; ++i) {
-    if (arr[i] === obj) return i;
-  }
-  return -1;
-};
-
-/***/ }),
-/* 157 */
+/* 152 */
 /*!*****************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/base/index.js ***!
   \*****************************************************/
@@ -36113,21 +35412,21 @@ module.exports = function(arr, obj){
 
 var base = exports;
 
-base.Reporter = __webpack_require__(/*! ./reporter */ 158).Reporter;
-base.DecoderBuffer = __webpack_require__(/*! ./buffer */ 159).DecoderBuffer;
-base.EncoderBuffer = __webpack_require__(/*! ./buffer */ 159).EncoderBuffer;
-base.Node = __webpack_require__(/*! ./node */ 160);
+base.Reporter = __webpack_require__(/*! ./reporter */ 153).Reporter;
+base.DecoderBuffer = __webpack_require__(/*! ./buffer */ 154).DecoderBuffer;
+base.EncoderBuffer = __webpack_require__(/*! ./buffer */ 154).EncoderBuffer;
+base.Node = __webpack_require__(/*! ./node */ 155);
 
 
 /***/ }),
-/* 158 */
+/* 153 */
 /*!********************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/base/reporter.js ***!
   \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var inherits = __webpack_require__(/*! inherits */ 35);
+var inherits = __webpack_require__(/*! inherits */ 31);
 
 function Reporter(options) {
   this._reporterState = {
@@ -36251,16 +35550,16 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
 
 
 /***/ }),
-/* 159 */
+/* 154 */
 /*!******************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/base/buffer.js ***!
   \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var inherits = __webpack_require__(/*! inherits */ 35);
-var Reporter = __webpack_require__(/*! ../base */ 157).Reporter;
-var Buffer = __webpack_require__(/*! buffer */ 30).Buffer;
+var inherits = __webpack_require__(/*! inherits */ 31);
+var Reporter = __webpack_require__(/*! ../base */ 152).Reporter;
+var Buffer = __webpack_require__(/*! buffer */ 26).Buffer;
 
 function DecoderBuffer(base, options) {
   Reporter.call(this, options);
@@ -36377,17 +35676,17 @@ EncoderBuffer.prototype.join = function join(out, offset) {
 
 
 /***/ }),
-/* 160 */
+/* 155 */
 /*!****************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/base/node.js ***!
   \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Reporter = __webpack_require__(/*! ../base */ 157).Reporter;
-var EncoderBuffer = __webpack_require__(/*! ../base */ 157).EncoderBuffer;
-var DecoderBuffer = __webpack_require__(/*! ../base */ 157).DecoderBuffer;
-var assert = __webpack_require__(/*! minimalistic-assert */ 84);
+var Reporter = __webpack_require__(/*! ../base */ 152).Reporter;
+var EncoderBuffer = __webpack_require__(/*! ../base */ 152).EncoderBuffer;
+var DecoderBuffer = __webpack_require__(/*! ../base */ 152).DecoderBuffer;
+var assert = __webpack_require__(/*! minimalistic-assert */ 80);
 
 // Supported tags
 var tags = [
@@ -37021,7 +36320,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
 
 
 /***/ }),
-/* 161 */
+/* 156 */
 /*!**********************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/constants/index.js ***!
   \**********************************************************/
@@ -37046,18 +36345,18 @@ constants._reverse = function reverse(map) {
   return res;
 };
 
-constants.der = __webpack_require__(/*! ./der */ 162);
+constants.der = __webpack_require__(/*! ./der */ 157);
 
 
 /***/ }),
-/* 162 */
+/* 157 */
 /*!********************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/constants/der.js ***!
   \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var constants = __webpack_require__(/*! ../constants */ 161);
+var constants = __webpack_require__(/*! ../constants */ 156);
 
 exports.tagClass = {
   0: 'universal',
@@ -37102,7 +36401,7 @@ exports.tagByName = constants._reverse(exports.tag);
 
 
 /***/ }),
-/* 163 */
+/* 158 */
 /*!*********************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/decoders/index.js ***!
   \*********************************************************/
@@ -37111,21 +36410,21 @@ exports.tagByName = constants._reverse(exports.tag);
 
 var decoders = exports;
 
-decoders.der = __webpack_require__(/*! ./der */ 164);
-decoders.pem = __webpack_require__(/*! ./pem */ 165);
+decoders.der = __webpack_require__(/*! ./der */ 159);
+decoders.pem = __webpack_require__(/*! ./pem */ 160);
 
 
 /***/ }),
-/* 164 */
+/* 159 */
 /*!*******************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/decoders/der.js ***!
   \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var inherits = __webpack_require__(/*! inherits */ 35);
+var inherits = __webpack_require__(/*! inherits */ 31);
 
-var asn1 = __webpack_require__(/*! ../../asn1 */ 153);
+var asn1 = __webpack_require__(/*! ../../asn1 */ 149);
 var base = asn1.base;
 var bignum = asn1.bignum;
 
@@ -37450,17 +36749,17 @@ function derDecodeLen(buf, primitive, fail) {
 
 
 /***/ }),
-/* 165 */
+/* 160 */
 /*!*******************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/decoders/pem.js ***!
   \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var inherits = __webpack_require__(/*! inherits */ 35);
-var Buffer = __webpack_require__(/*! buffer */ 30).Buffer;
+var inherits = __webpack_require__(/*! inherits */ 31);
+var Buffer = __webpack_require__(/*! buffer */ 26).Buffer;
 
-var DERDecoder = __webpack_require__(/*! ./der */ 164);
+var DERDecoder = __webpack_require__(/*! ./der */ 159);
 
 function PEMDecoder(entity) {
   DERDecoder.call(this, entity);
@@ -37509,7 +36808,7 @@ PEMDecoder.prototype.decode = function decode(data, options) {
 
 
 /***/ }),
-/* 166 */
+/* 161 */
 /*!*********************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/encoders/index.js ***!
   \*********************************************************/
@@ -37518,22 +36817,22 @@ PEMDecoder.prototype.decode = function decode(data, options) {
 
 var encoders = exports;
 
-encoders.der = __webpack_require__(/*! ./der */ 167);
-encoders.pem = __webpack_require__(/*! ./pem */ 168);
+encoders.der = __webpack_require__(/*! ./der */ 162);
+encoders.pem = __webpack_require__(/*! ./pem */ 163);
 
 
 /***/ }),
-/* 167 */
+/* 162 */
 /*!*******************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/encoders/der.js ***!
   \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var inherits = __webpack_require__(/*! inherits */ 35);
-var Buffer = __webpack_require__(/*! buffer */ 30).Buffer;
+var inherits = __webpack_require__(/*! inherits */ 31);
+var Buffer = __webpack_require__(/*! buffer */ 26).Buffer;
 
-var asn1 = __webpack_require__(/*! ../../asn1 */ 153);
+var asn1 = __webpack_require__(/*! ../../asn1 */ 149);
 var base = asn1.base;
 
 // Import DER constants
@@ -37828,16 +37127,16 @@ function encodeTag(tag, primitive, cls, reporter) {
 
 
 /***/ }),
-/* 168 */
+/* 163 */
 /*!*******************************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1/encoders/pem.js ***!
   \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var inherits = __webpack_require__(/*! inherits */ 35);
+var inherits = __webpack_require__(/*! inherits */ 31);
 
-var DEREncoder = __webpack_require__(/*! ./der */ 167);
+var DEREncoder = __webpack_require__(/*! ./der */ 162);
 
 function PEMEncoder(entity) {
   DEREncoder.call(this, entity);
@@ -37859,7 +37158,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 
 
 /***/ }),
-/* 169 */
+/* 164 */
 /*!************************************************!*\
   !*** ./node_modules/parse-asn1/certificate.js ***!
   \************************************************/
@@ -37872,7 +37171,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 
 
 
-var asn = __webpack_require__(/*! asn1.js */ 153)
+var asn = __webpack_require__(/*! asn1.js */ 149)
 
 var Time = asn.define('Time', function () {
   this.choice({
@@ -37959,7 +37258,7 @@ module.exports = X509Certificate
 
 
 /***/ }),
-/* 170 */
+/* 165 */
 /*!********************************************!*\
   !*** ./node_modules/parse-asn1/aesid.json ***!
   \********************************************/
@@ -37969,19 +37268,20 @@ module.exports = X509Certificate
 module.exports = {"2.16.840.1.101.3.4.1.1":"aes-128-ecb","2.16.840.1.101.3.4.1.2":"aes-128-cbc","2.16.840.1.101.3.4.1.3":"aes-128-ofb","2.16.840.1.101.3.4.1.4":"aes-128-cfb","2.16.840.1.101.3.4.1.21":"aes-192-ecb","2.16.840.1.101.3.4.1.22":"aes-192-cbc","2.16.840.1.101.3.4.1.23":"aes-192-ofb","2.16.840.1.101.3.4.1.24":"aes-192-cfb","2.16.840.1.101.3.4.1.41":"aes-256-ecb","2.16.840.1.101.3.4.1.42":"aes-256-cbc","2.16.840.1.101.3.4.1.43":"aes-256-ofb","2.16.840.1.101.3.4.1.44":"aes-256-cfb"};
 
 /***/ }),
-/* 171 */
+/* 166 */
 /*!********************************************!*\
   !*** ./node_modules/parse-asn1/fixProc.js ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {// adapted from https://github.com/apatil/pemstrip
+// adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED[\n\r]+DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)[\n\r]+([0-9A-z\n\r\+\/\=]+)[\n\r]+/m
-var startRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----/m
-var fullRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----([0-9A-z\n\r\+\/\=]+)-----END \1-----$/m
-var evp = __webpack_require__(/*! evp_bytestokey */ 105)
-var ciphers = __webpack_require__(/*! browserify-aes */ 88)
+var startRegex = /^-----BEGIN ((?:.*? KEY)|CERTIFICATE)-----/m
+var fullRegex = /^-----BEGIN ((?:.*? KEY)|CERTIFICATE)-----([0-9A-z\n\r\+\/\=]+)-----END \1-----$/m
+var evp = __webpack_require__(/*! evp_bytestokey */ 101)
+var ciphers = __webpack_require__(/*! browserify-aes */ 84)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 module.exports = function (okey, password) {
   var key = okey.toString()
   var match = key.match(findProc)
@@ -37991,8 +37291,8 @@ module.exports = function (okey, password) {
     decrypted = new Buffer(match2[2].replace(/[\r\n]/g, ''), 'base64')
   } else {
     var suite = 'aes' + match[1]
-    var iv = new Buffer(match[2], 'hex')
-    var cipherText = new Buffer(match[3].replace(/[\r\n]/g, ''), 'base64')
+    var iv = Buffer.from(match[2], 'hex')
+    var cipherText = Buffer.from(match[3].replace(/[\r\n]/g, ''), 'base64')
     var cipherKey = evp(password, iv.slice(0, 8), parseInt(match[1], 10)).key
     var out = []
     var cipher = ciphers.createDecipheriv(suite, cipherKey, iv)
@@ -38007,10 +37307,9 @@ module.exports = function (okey, password) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../buffer/index.js */ 30).Buffer))
 
 /***/ }),
-/* 172 */
+/* 167 */
 /*!**********************************************************!*\
   !*** ./node_modules/browserify-sign/browser/curves.json ***!
   \**********************************************************/
@@ -38020,7 +37319,7 @@ module.exports = function (okey, password) {
 module.exports = {"1.3.132.0.10":"secp256k1","1.3.132.0.33":"p224","1.2.840.10045.3.1.1":"p192","1.2.840.10045.3.1.7":"p256","1.3.132.0.34":"p384","1.3.132.0.35":"p521"};
 
 /***/ }),
-/* 173 */
+/* 168 */
 /*!********************************************************!*\
   !*** ./node_modules/browserify-sign/browser/verify.js ***!
   \********************************************************/
@@ -38028,10 +37327,10 @@ module.exports = {"1.3.132.0.10":"secp256k1","1.3.132.0.33":"p224","1.2.840.1004
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
-var BN = __webpack_require__(/*! bn.js */ 110)
-var EC = __webpack_require__(/*! elliptic */ 121).ec
-var parseKeys = __webpack_require__(/*! parse-asn1 */ 151)
-var curves = __webpack_require__(/*! ./curves.json */ 172)
+var BN = __webpack_require__(/*! bn.js */ 106)
+var EC = __webpack_require__(/*! elliptic */ 117).ec
+var parseKeys = __webpack_require__(/*! parse-asn1 */ 147)
+var curves = __webpack_require__(/*! ./curves.json */ 167)
 
 function verify (sig, hash, key, signType, tag) {
   var pub = parseKeys(key)
@@ -38111,18 +37410,18 @@ function checkValue (b, q) {
 
 module.exports = verify
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 26).Buffer))
 
 /***/ }),
-/* 174 */
+/* 169 */
 /*!*********************************************!*\
   !*** ./node_modules/create-ecdh/browser.js ***!
   \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(/*! elliptic */ 121)
-var BN = __webpack_require__(/*! bn.js */ 110)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(/*! elliptic */ 117)
+var BN = __webpack_require__(/*! bn.js */ 106)
 
 module.exports = function createECDH (curve) {
   return new ECDH(curve)
@@ -38246,18 +37545,18 @@ function formatReturnValue (bn, enc, len) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../buffer/index.js */ 26).Buffer))
 
 /***/ }),
-/* 175 */
+/* 170 */
 /*!************************************************!*\
   !*** ./node_modules/public-encrypt/browser.js ***!
   \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.publicEncrypt = __webpack_require__(/*! ./publicEncrypt */ 176)
-exports.privateDecrypt = __webpack_require__(/*! ./privateDecrypt */ 180)
+exports.publicEncrypt = __webpack_require__(/*! ./publicEncrypt */ 171)
+exports.privateDecrypt = __webpack_require__(/*! ./privateDecrypt */ 175)
 
 exports.privateEncrypt = function privateEncrypt (key, buf) {
   return exports.publicEncrypt(key, buf, true)
@@ -38269,22 +37568,22 @@ exports.publicDecrypt = function publicDecrypt (key, buf) {
 
 
 /***/ }),
-/* 176 */
+/* 171 */
 /*!******************************************************!*\
   !*** ./node_modules/public-encrypt/publicEncrypt.js ***!
   \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var parseKeys = __webpack_require__(/*! parse-asn1 */ 151)
-var randomBytes = __webpack_require__(/*! randombytes */ 26)
-var createHash = __webpack_require__(/*! create-hash */ 34)
-var mgf = __webpack_require__(/*! ./mgf */ 177)
-var xor = __webpack_require__(/*! ./xor */ 178)
-var BN = __webpack_require__(/*! bn.js */ 110)
-var withPublic = __webpack_require__(/*! ./withPublic */ 179)
-var crt = __webpack_require__(/*! browserify-rsa */ 120)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var parseKeys = __webpack_require__(/*! parse-asn1 */ 147)
+var randomBytes = __webpack_require__(/*! randombytes */ 22)
+var createHash = __webpack_require__(/*! create-hash */ 30)
+var mgf = __webpack_require__(/*! ./mgf */ 172)
+var xor = __webpack_require__(/*! ./xor */ 173)
+var BN = __webpack_require__(/*! bn.js */ 106)
+var withPublic = __webpack_require__(/*! ./withPublic */ 174)
+var crt = __webpack_require__(/*! browserify-rsa */ 116)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 module.exports = function publicEncrypt (publicKey, msg, reverse) {
   var padding
@@ -38367,15 +37666,15 @@ function nonZero (len) {
 
 
 /***/ }),
-/* 177 */
+/* 172 */
 /*!********************************************!*\
   !*** ./node_modules/public-encrypt/mgf.js ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var createHash = __webpack_require__(/*! create-hash */ 34)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var createHash = __webpack_require__(/*! create-hash */ 30)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 module.exports = function (seed, len) {
   var t = Buffer.alloc(0)
@@ -38396,7 +37695,7 @@ function i2ops (c) {
 
 
 /***/ }),
-/* 178 */
+/* 173 */
 /*!********************************************!*\
   !*** ./node_modules/public-encrypt/xor.js ***!
   \********************************************/
@@ -38414,15 +37713,15 @@ module.exports = function xor (a, b) {
 
 
 /***/ }),
-/* 179 */
+/* 174 */
 /*!***************************************************!*\
   !*** ./node_modules/public-encrypt/withPublic.js ***!
   \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var BN = __webpack_require__(/*! bn.js */ 110)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var BN = __webpack_require__(/*! bn.js */ 106)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 function withPublic (paddedMsg, key) {
   return Buffer.from(paddedMsg
@@ -38436,21 +37735,21 @@ module.exports = withPublic
 
 
 /***/ }),
-/* 180 */
+/* 175 */
 /*!*******************************************************!*\
   !*** ./node_modules/public-encrypt/privateDecrypt.js ***!
   \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var parseKeys = __webpack_require__(/*! parse-asn1 */ 151)
-var mgf = __webpack_require__(/*! ./mgf */ 177)
-var xor = __webpack_require__(/*! ./xor */ 178)
-var BN = __webpack_require__(/*! bn.js */ 110)
-var crt = __webpack_require__(/*! browserify-rsa */ 120)
-var createHash = __webpack_require__(/*! create-hash */ 34)
-var withPublic = __webpack_require__(/*! ./withPublic */ 179)
-var Buffer = __webpack_require__(/*! safe-buffer */ 29).Buffer
+var parseKeys = __webpack_require__(/*! parse-asn1 */ 147)
+var mgf = __webpack_require__(/*! ./mgf */ 172)
+var xor = __webpack_require__(/*! ./xor */ 173)
+var BN = __webpack_require__(/*! bn.js */ 106)
+var crt = __webpack_require__(/*! browserify-rsa */ 116)
+var createHash = __webpack_require__(/*! create-hash */ 30)
+var withPublic = __webpack_require__(/*! ./withPublic */ 174)
+var Buffer = __webpack_require__(/*! safe-buffer */ 25).Buffer
 
 module.exports = function privateDecrypt (privateKey, enc, reverse) {
   var padding
@@ -38551,7 +37850,7 @@ function compare (a, b) {
 
 
 /***/ }),
-/* 181 */
+/* 176 */
 /*!********************************************!*\
   !*** ./node_modules/randomfill/browser.js ***!
   \********************************************/
@@ -38564,8 +37863,8 @@ function compare (a, b) {
 function oldBrowser () {
   throw new Error('secure random number generation not supported by this browser\nuse chrome, FireFox or Internet Explorer 11')
 }
-var safeBuffer = __webpack_require__(/*! safe-buffer */ 29)
-var randombytes = __webpack_require__(/*! randombytes */ 26)
+var safeBuffer = __webpack_require__(/*! safe-buffer */ 25)
+var randombytes = __webpack_require__(/*! randombytes */ 22)
 var Buffer = safeBuffer.Buffer
 var kBufferMaxLength = safeBuffer.kMaxLength
 var crypto = global.crypto || global.msCrypto
@@ -38668,21 +37967,20 @@ function randomFillSync (buf, offset, size) {
   return actualFill(buf, offset, size)
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 27)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./../node-libs-browser/mock/process.js */ 23)))
 
 /***/ }),
-/* 182 */
-/*!****************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/utils/StringUtil.js ***!
-  \****************************************************************/
+/* 177 */
+/*!***********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/utils/StringUtil.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
- /**
-               * 空值判断
-               * @param {Object} _obj 判断对象
-               */
+/**
+ * 空值判断
+ * @param {Object} _obj 判断对象
+ */
 var isNull = function isNull(_obj) {
   if (_obj == null || _obj == undefined || _obj == '') {
     return true;
@@ -38707,32 +38005,31 @@ module.exports = {
   isNotNull: isNotNull };
 
 /***/ }),
-/* 183 */
-/*!*************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/factory/index.js ***!
-  \*************************************************************/
+/* 178 */
+/*!********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/factory/index.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
- /**
-               * 工厂类入口类
-               * 
-               * add by wuxw 2019-12-28
-               * 
-               */
+/**
+ * 工厂类入口类
+ * 
+ * add by wuxw 2019-12-28
+ * 
+ */
 //登录工厂类
-var loginFactory = __webpack_require__(/*! ./LoginFactory.js */ 184);
+var loginFactory = __webpack_require__(/*! ./LoginFactory.js */ 179);
 
-var userFactory = __webpack_require__(/*! ./UserFactory.js */ 185);
+var userFactory = __webpack_require__(/*! ./UserFactory.js */ 180);
 
-var fileFactory = __webpack_require__(/*! ./FileFactory.js */ 187);
+var fileFactory = __webpack_require__(/*! ./FileFactory.js */ 182);
 
-var coreFactory = __webpack_require__(/*! ./CoreFactory.js */ 188);
+var coreFactory = __webpack_require__(/*! ./CoreFactory.js */ 183);
 
-var httpFactory = __webpack_require__(/*! ./HttpFactory.js */ 189);
+var httpFactory = __webpack_require__(/*! ./HttpFactory.js */ 184);
 
-var base64Factory = __webpack_require__(/*! ./Base64Factory.js */ 190);
+var base64Factory = __webpack_require__(/*! ./Base64Factory.js */ 185);
 
 module.exports = {
   login: loginFactory,
@@ -38743,29 +38040,28 @@ module.exports = {
   base64: base64Factory };
 
 /***/ }),
-/* 184 */
-/*!********************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/factory/LoginFactory.js ***!
-  \********************************************************************/
+/* 179 */
+/*!***************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/factory/LoginFactory.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 登录相关 代码封装
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * add by wuxw 2019-12-28
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 登录相关 代码封装
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * add by wuxw 2019-12-28
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
 
 /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 登录工厂类
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-var util = __webpack_require__(/*! ../utils/index.js */ 20);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   * 登录工厂类
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   */
+var util = __webpack_require__(/*! ../utils/index.js */ 16);
 
-var constant = __webpack_require__(/*! ../constant/index.js */ 16);var
+var constant = __webpack_require__(/*! ../constant/index.js */ 12);var
 
-LoginFactory = /*#__PURE__*/function () {
+LoginFactory = /*#__PURE__*/function () {"use strict";
   function LoginFactory() {_classCallCheck(this, LoginFactory);
     this.coreUtil = util.core;
   } // 检查本地 storage 中是否有登录态标识
@@ -38775,7 +38071,7 @@ LoginFactory = /*#__PURE__*/function () {
       var _that = this;
 
       var loginFlag = uni.getStorageSync(constant.mapping.LOGIN_FLAG);
-      console.log("afterOneHourDate", loginFlag);
+
       var nowDate = new Date();
 
       if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
@@ -38792,8 +38088,6 @@ LoginFactory = /*#__PURE__*/function () {
     /**
        * 请求 HC服务 登录
        */ }, { key: "requsetHcServerToLogin", value: function requsetHcServerToLogin()
-
-
     {var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
       console.log('常量', constant.mapping.USER_INFO);
       var userInfo = null;
@@ -38806,12 +38100,14 @@ LoginFactory = /*#__PURE__*/function () {
       console.log("用户信息", userInfo);
 
       if (userInfo == null || userInfo == undefined || userInfo == '') {
-        uni.redirectTo({
-          url: "/pages/login/login" });
+        uni.reLaunch({
+          url: '/pages/login/login' });
 
 
         return;
       }
+
+      console.log('userInfo', userInfo);
 
       var _userInfo = JSON.parse(util.des.desDecrypt(userInfo));
 
@@ -38824,7 +38120,7 @@ LoginFactory = /*#__PURE__*/function () {
         url: constant.url.loginUrl,
         method: 'post',
         header: {
-          APP_ID: constant.app.appId },
+          'APP-ID': constant.app.appId },
 
         data: _tmpUserInfo,
         success: function success(res) {
@@ -38861,24 +38157,23 @@ module.exports = new LoginFactory();
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 185 */
-/*!*******************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/factory/UserFactory.js ***!
-  \*******************************************************************/
+/* 180 */
+/*!**************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/factory/UserFactory.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
 function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 用户工厂类
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * add by wuxw 2019-12-28
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */
-var QQMapWX = __webpack_require__(/*! ../lib/qqmap-wx-jssdk.min.js */ 186);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 用户工厂类
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * add by wuxw 2019-12-28
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+var QQMapWX = __webpack_require__(/*! ../lib/qqmap-wx-jssdk.min.js */ 181);
 
 var qqmapsdk;var
 
-UserFactory = /*#__PURE__*/function () {
+UserFactory = /*#__PURE__*/function () {"use strict";
   function UserFactory() {_classCallCheck(this, UserFactory);
     // 实例化API核心类
     qqmapsdk = new QQMapWX({
@@ -38916,33 +38211,31 @@ UserFactory = /*#__PURE__*/function () {
 module.exports = new UserFactory();
 
 /***/ }),
-/* 186 */
-/*!**********************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/lib/qqmap-wx-jssdk.min.js ***!
-  \**********************************************************************/
+/* 181 */
+/*!*****************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/lib/qqmap-wx-jssdk.min.js ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var ERROR_CONF = { KEY_ERR: 311, KEY_ERR_MSG: 'key格式错误', PARAM_ERR: 310, PARAM_ERR_MSG: '请求参数信息有误', SYSTEM_ERR: 600, SYSTEM_ERR_MSG: '系统错误', WX_ERR_CODE: 1000, WX_OK_CODE: 200 };var BASE_URL = 'https://apis.map.qq.com/ws/';var URL_SEARCH = BASE_URL + 'place/v1/search';var URL_SUGGESTION = BASE_URL + 'place/v1/suggestion';var URL_GET_GEOCODER = BASE_URL + 'geocoder/v1/';var URL_CITY_LIST = BASE_URL + 'district/v1/list';var URL_AREA_LIST = BASE_URL + 'district/v1/getchildren';var URL_DISTANCE = BASE_URL + 'distance/v1/';var URL_DIRECTION = BASE_URL + 'direction/v1/';var MODE = { driving: 'driving', transit: 'transit' };var EARTH_RADIUS = 6378136.49;var Utils = { safeAdd: function safeAdd(x, y) {var lsw = (x & 0xffff) + (y & 0xffff);var msw = (x >> 16) + (y >> 16) + (lsw >> 16);return msw << 16 | lsw & 0xffff;}, bitRotateLeft: function bitRotateLeft(num, cnt) {return num << cnt | num >>> 32 - cnt;}, md5cmn: function md5cmn(q, a, b, x, s, t) {return this.safeAdd(this.bitRotateLeft(this.safeAdd(this.safeAdd(a, q), this.safeAdd(x, t)), s), b);}, md5ff: function md5ff(a, b, c, d, x, s, t) {return this.md5cmn(b & c | ~b & d, a, b, x, s, t);}, md5gg: function md5gg(a, b, c, d, x, s, t) {return this.md5cmn(b & d | c & ~d, a, b, x, s, t);}, md5hh: function md5hh(a, b, c, d, x, s, t) {return this.md5cmn(b ^ c ^ d, a, b, x, s, t);}, md5ii: function md5ii(a, b, c, d, x, s, t) {return this.md5cmn(c ^ (b | ~d), a, b, x, s, t);}, binlMD5: function binlMD5(x, len) {x[len >> 5] |= 0x80 << len % 32;x[(len + 64 >>> 9 << 4) + 14] = len;var i;var olda;var oldb;var oldc;var oldd;var a = 1732584193;var b = -271733879;var c = -1732584194;var d = 271733878;for (i = 0; i < x.length; i += 16) {olda = a;oldb = b;oldc = c;oldd = d;a = this.md5ff(a, b, c, d, x[i], 7, -680876936);d = this.md5ff(d, a, b, c, x[i + 1], 12, -389564586);c = this.md5ff(c, d, a, b, x[i + 2], 17, 606105819);b = this.md5ff(b, c, d, a, x[i + 3], 22, -1044525330);a = this.md5ff(a, b, c, d, x[i + 4], 7, -176418897);d = this.md5ff(d, a, b, c, x[i + 5], 12, 1200080426);c = this.md5ff(c, d, a, b, x[i + 6], 17, -1473231341);b = this.md5ff(b, c, d, a, x[i + 7], 22, -45705983);a = this.md5ff(a, b, c, d, x[i + 8], 7, 1770035416);d = this.md5ff(d, a, b, c, x[i + 9], 12, -1958414417);c = this.md5ff(c, d, a, b, x[i + 10], 17, -42063);b = this.md5ff(b, c, d, a, x[i + 11], 22, -1990404162);a = this.md5ff(a, b, c, d, x[i + 12], 7, 1804603682);d = this.md5ff(d, a, b, c, x[i + 13], 12, -40341101);c = this.md5ff(c, d, a, b, x[i + 14], 17, -1502002290);b = this.md5ff(b, c, d, a, x[i + 15], 22, 1236535329);a = this.md5gg(a, b, c, d, x[i + 1], 5, -165796510);d = this.md5gg(d, a, b, c, x[i + 6], 9, -1069501632);c = this.md5gg(c, d, a, b, x[i + 11], 14, 643717713);b = this.md5gg(b, c, d, a, x[i], 20, -373897302);a = this.md5gg(a, b, c, d, x[i + 5], 5, -701558691);d = this.md5gg(d, a, b, c, x[i + 10], 9, 38016083);c = this.md5gg(c, d, a, b, x[i + 15], 14, -660478335);b = this.md5gg(b, c, d, a, x[i + 4], 20, -405537848);a = this.md5gg(a, b, c, d, x[i + 9], 5, 568446438);d = this.md5gg(d, a, b, c, x[i + 14], 9, -1019803690);c = this.md5gg(c, d, a, b, x[i + 3], 14, -187363961);b = this.md5gg(b, c, d, a, x[i + 8], 20, 1163531501);a = this.md5gg(a, b, c, d, x[i + 13], 5, -1444681467);d = this.md5gg(d, a, b, c, x[i + 2], 9, -51403784);c = this.md5gg(c, d, a, b, x[i + 7], 14, 1735328473);b = this.md5gg(b, c, d, a, x[i + 12], 20, -1926607734);a = this.md5hh(a, b, c, d, x[i + 5], 4, -378558);d = this.md5hh(d, a, b, c, x[i + 8], 11, -2022574463);c = this.md5hh(c, d, a, b, x[i + 11], 16, 1839030562);b = this.md5hh(b, c, d, a, x[i + 14], 23, -35309556);a = this.md5hh(a, b, c, d, x[i + 1], 4, -1530992060);d = this.md5hh(d, a, b, c, x[i + 4], 11, 1272893353);c = this.md5hh(c, d, a, b, x[i + 7], 16, -155497632);b = this.md5hh(b, c, d, a, x[i + 10], 23, -1094730640);a = this.md5hh(a, b, c, d, x[i + 13], 4, 681279174);d = this.md5hh(d, a, b, c, x[i], 11, -358537222);c = this.md5hh(c, d, a, b, x[i + 3], 16, -722521979);b = this.md5hh(b, c, d, a, x[i + 6], 23, 76029189);a = this.md5hh(a, b, c, d, x[i + 9], 4, -640364487);d = this.md5hh(d, a, b, c, x[i + 12], 11, -421815835);c = this.md5hh(c, d, a, b, x[i + 15], 16, 530742520);b = this.md5hh(b, c, d, a, x[i + 2], 23, -995338651);a = this.md5ii(a, b, c, d, x[i], 6, -198630844);d = this.md5ii(d, a, b, c, x[i + 7], 10, 1126891415);c = this.md5ii(c, d, a, b, x[i + 14], 15, -1416354905);b = this.md5ii(b, c, d, a, x[i + 5], 21, -57434055);a = this.md5ii(a, b, c, d, x[i + 12], 6, 1700485571);d = this.md5ii(d, a, b, c, x[i + 3], 10, -1894986606);c = this.md5ii(c, d, a, b, x[i + 10], 15, -1051523);b = this.md5ii(b, c, d, a, x[i + 1], 21, -2054922799);a = this.md5ii(a, b, c, d, x[i + 8], 6, 1873313359);d = this.md5ii(d, a, b, c, x[i + 15], 10, -30611744);c = this.md5ii(c, d, a, b, x[i + 6], 15, -1560198380);b = this.md5ii(b, c, d, a, x[i + 13], 21, 1309151649);a = this.md5ii(a, b, c, d, x[i + 4], 6, -145523070);d = this.md5ii(d, a, b, c, x[i + 11], 10, -1120210379);c = this.md5ii(c, d, a, b, x[i + 2], 15, 718787259);b = this.md5ii(b, c, d, a, x[i + 9], 21, -343485551);a = this.safeAdd(a, olda);b = this.safeAdd(b, oldb);c = this.safeAdd(c, oldc);d = this.safeAdd(d, oldd);}return [a, b, c, d];}, binl2rstr: function binl2rstr(input) {var i;var output = '';var length32 = input.length * 32;for (i = 0; i < length32; i += 8) {output += String.fromCharCode(input[i >> 5] >>> i % 32 & 0xff);}return output;}, rstr2binl: function rstr2binl(input) {var i;var output = [];output[(input.length >> 2) - 1] = undefined;for (i = 0; i < output.length; i += 1) {output[i] = 0;}var length8 = input.length * 8;for (i = 0; i < length8; i += 8) {output[i >> 5] |= (input.charCodeAt(i / 8) & 0xff) << i % 32;}return output;}, rstrMD5: function rstrMD5(s) {return this.binl2rstr(this.binlMD5(this.rstr2binl(s), s.length * 8));}, rstrHMACMD5: function rstrHMACMD5(key, data) {var i;var bkey = this.rstr2binl(key);var ipad = [];var opad = [];var hash;ipad[15] = opad[15] = undefined;if (bkey.length > 16) {bkey = this.binlMD5(bkey, key.length * 8);}for (i = 0; i < 16; i += 1) {ipad[i] = bkey[i] ^ 0x36363636;opad[i] = bkey[i] ^ 0x5c5c5c5c;}hash = this.binlMD5(ipad.concat(this.rstr2binl(data)), 512 + data.length * 8);return this.binl2rstr(this.binlMD5(opad.concat(hash), 512 + 128));}, rstr2hex: function rstr2hex(input) {var hexTab = '0123456789abcdef';var output = '';var x;var i;for (i = 0; i < input.length; i += 1) {x = input.charCodeAt(i);output += hexTab.charAt(x >>> 4 & 0x0f) + hexTab.charAt(x & 0x0f);}return output;}, str2rstrUTF8: function str2rstrUTF8(input) {return unescape(encodeURIComponent(input));}, rawMD5: function rawMD5(s) {return this.rstrMD5(this.str2rstrUTF8(s));}, hexMD5: function hexMD5(s) {return this.rstr2hex(this.rawMD5(s));}, rawHMACMD5: function rawHMACMD5(k, d) {return this.rstrHMACMD5(this.str2rstrUTF8(k), str2rstrUTF8(d));}, hexHMACMD5: function hexHMACMD5(k, d) {return this.rstr2hex(this.rawHMACMD5(k, d));}, md5: function md5(string, key, raw) {if (!key) {if (!raw) {return this.hexMD5(string);}return this.rawMD5(string);}if (!raw) {return this.hexHMACMD5(key, string);}return this.rawHMACMD5(key, string);}, getSig: function getSig(requestParam, sk, feature, mode) {var sig = null;var requestArr = [];Object.keys(requestParam).sort().forEach(function (key) {requestArr.push(key + '=' + requestParam[key]);});if (feature == 'search') {sig = '/ws/place/v1/search?' + requestArr.join('&') + sk;}if (feature == 'suggest') {sig = '/ws/place/v1/suggestion?' + requestArr.join('&') + sk;}if (feature == 'reverseGeocoder') {sig = '/ws/geocoder/v1/?' + requestArr.join('&') + sk;}if (feature == 'geocoder') {sig = '/ws/geocoder/v1/?' + requestArr.join('&') + sk;}if (feature == 'getCityList') {sig = '/ws/district/v1/list?' + requestArr.join('&') + sk;}if (feature == 'getDistrictByCityId') {sig = '/ws/district/v1/getchildren?' + requestArr.join('&') + sk;}if (feature == 'calculateDistance') {sig = '/ws/distance/v1/?' + requestArr.join('&') + sk;}if (feature == 'direction') {sig = '/ws/direction/v1/' + mode + '?' + requestArr.join('&') + sk;}sig = this.md5(sig);return sig;}, location2query: function location2query(data) {if (typeof data == 'string') {return data;}var query = '';for (var i = 0; i < data.length; i++) {var d = data[i];if (!!query) {query += ';';}if (d.location) {query = query + d.location.lat + ',' + d.location.lng;}if (d.latitude && d.longitude) {query = query + d.latitude + ',' + d.longitude;}}return query;}, rad: function rad(d) {return d * Math.PI / 180.0;}, getEndLocation: function getEndLocation(location) {var to = location.split(';');var endLocation = [];for (var i = 0; i < to.length; i++) {endLocation.push({ lat: parseFloat(to[i].split(',')[0]), lng: parseFloat(to[i].split(',')[1]) });}return endLocation;}, getDistance: function getDistance(latFrom, lngFrom, latTo, lngTo) {var radLatFrom = this.rad(latFrom);var radLatTo = this.rad(latTo);var a = radLatFrom - radLatTo;var b = this.rad(lngFrom) - this.rad(lngTo);var distance = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLatFrom) * Math.cos(radLatTo) * Math.pow(Math.sin(b / 2), 2)));distance = distance * EARTH_RADIUS;distance = Math.round(distance * 10000) / 10000;return parseFloat(distance.toFixed(0));}, getWXLocation: function getWXLocation(success, fail, complete) {wx.getLocation({ type: 'gcj02', success: success, fail: fail, complete: complete });}, getLocationParam: function getLocationParam(location) {if (typeof location == 'string') {var locationArr = location.split(',');if (locationArr.length === 2) {location = { latitude: location.split(',')[0], longitude: location.split(',')[1] };} else {location = {};}}return location;}, polyfillParam: function polyfillParam(param) {param.success = param.success || function () {};param.fail = param.fail || function () {};param.complete = param.complete || function () {};}, checkParamKeyEmpty: function checkParamKeyEmpty(param, key) {if (!param[key]) {var errconf = this.buildErrorConfig(ERROR_CONF.PARAM_ERR, ERROR_CONF.PARAM_ERR_MSG + key + '参数格式有误');param.fail(errconf);param.complete(errconf);return true;}return false;}, checkKeyword: function checkKeyword(param) {return !this.checkParamKeyEmpty(param, 'keyword');}, checkLocation: function checkLocation(param) {var location = this.getLocationParam(param.location);if (!location || !location.latitude || !location.longitude) {var errconf = this.buildErrorConfig(ERROR_CONF.PARAM_ERR, ERROR_CONF.PARAM_ERR_MSG + ' location参数格式有误');param.fail(errconf);param.complete(errconf);return false;}return true;}, buildErrorConfig: function buildErrorConfig(errCode, errMsg) {return { status: errCode, message: errMsg };}, handleData: function handleData(param, data, feature) {if (feature == 'search') {var searchResult = data.data;var searchSimplify = [];for (var i = 0; i < searchResult.length; i++) {searchSimplify.push({ id: searchResult[i].id || null, title: searchResult[i].title || null, latitude: searchResult[i].location && searchResult[i].location.lat || null, longitude: searchResult[i].location && searchResult[i].location.lng || null, address: searchResult[i].address || null, category: searchResult[i].category || null, tel: searchResult[i].tel || null, adcode: searchResult[i].ad_info && searchResult[i].ad_info.adcode || null, city: searchResult[i].ad_info && searchResult[i].ad_info.city || null, district: searchResult[i].ad_info && searchResult[i].ad_info.district || null, province: searchResult[i].ad_info && searchResult[i].ad_info.province || null });}param.success(data, { searchResult: searchResult, searchSimplify: searchSimplify });} else if (feature == 'suggest') {var suggestResult = data.data;var suggestSimplify = [];for (var i = 0; i < suggestResult.length; i++) {suggestSimplify.push({ adcode: suggestResult[i].adcode || null, address: suggestResult[i].address || null, category: suggestResult[i].category || null, city: suggestResult[i].city || null, district: suggestResult[i].district || null, id: suggestResult[i].id || null, latitude: suggestResult[i].location && suggestResult[i].location.lat || null, longitude: suggestResult[i].location && suggestResult[i].location.lng || null, province: suggestResult[i].province || null, title: suggestResult[i].title || null, type: suggestResult[i].type || null });}param.success(data, { suggestResult: suggestResult, suggestSimplify: suggestSimplify });} else if (feature == 'reverseGeocoder') {var reverseGeocoderResult = data.result;var reverseGeocoderSimplify = { address: reverseGeocoderResult.address || null, latitude: reverseGeocoderResult.location && reverseGeocoderResult.location.lat || null, longitude: reverseGeocoderResult.location && reverseGeocoderResult.location.lng || null, adcode: reverseGeocoderResult.ad_info && reverseGeocoderResult.ad_info.adcode || null, city: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.city || null, district: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.district || null, nation: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.nation || null, province: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.province || null, street: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.street || null, street_number: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.street_number || null, recommend: reverseGeocoderResult.formatted_addresses && reverseGeocoderResult.formatted_addresses.recommend || null, rough: reverseGeocoderResult.formatted_addresses && reverseGeocoderResult.formatted_addresses.rough || null };if (reverseGeocoderResult.pois) {var pois = reverseGeocoderResult.pois;var poisSimplify = [];for (var i = 0; i < pois.length; i++) {poisSimplify.push({ id: pois[i].id || null, title: pois[i].title || null, latitude: pois[i].location && pois[i].location.lat || null, longitude: pois[i].location && pois[i].location.lng || null, address: pois[i].address || null, category: pois[i].category || null, adcode: pois[i].ad_info && pois[i].ad_info.adcode || null, city: pois[i].ad_info && pois[i].ad_info.city || null, district: pois[i].ad_info && pois[i].ad_info.district || null, province: pois[i].ad_info && pois[i].ad_info.province || null });}param.success(data, { reverseGeocoderResult: reverseGeocoderResult, reverseGeocoderSimplify: reverseGeocoderSimplify, pois: pois, poisSimplify: poisSimplify });} else {param.success(data, { reverseGeocoderResult: reverseGeocoderResult, reverseGeocoderSimplify: reverseGeocoderSimplify });}} else if (feature == 'geocoder') {var geocoderResult = data.result;var geocoderSimplify = { title: geocoderResult.title || null, latitude: geocoderResult.location && geocoderResult.location.lat || null, longitude: geocoderResult.location && geocoderResult.location.lng || null, adcode: geocoderResult.ad_info && geocoderResult.ad_info.adcode || null, province: geocoderResult.address_components && geocoderResult.address_components.province || null, city: geocoderResult.address_components && geocoderResult.address_components.city || null, district: geocoderResult.address_components && geocoderResult.address_components.district || null, street: geocoderResult.address_components && geocoderResult.address_components.street || null, street_number: geocoderResult.address_components && geocoderResult.address_components.street_number || null, level: geocoderResult.level || null };param.success(data, { geocoderResult: geocoderResult, geocoderSimplify: geocoderSimplify });} else if (feature == 'getCityList') {var provinceResult = data.result[0];var cityResult = data.result[1];var districtResult = data.result[2];param.success(data, { provinceResult: provinceResult, cityResult: cityResult, districtResult: districtResult });} else if (feature == 'getDistrictByCityId') {var districtByCity = data.result[0];param.success(data, districtByCity);} else if (feature == 'calculateDistance') {var calculateDistanceResult = data.result.elements;var distance = [];for (var i = 0; i < calculateDistanceResult.length; i++) {distance.push(calculateDistanceResult[i].distance);}param.success(data, { calculateDistanceResult: calculateDistanceResult, distance: distance });} else if (feature == 'direction') {var direction = data.result.routes;param.success(data, direction);} else {param.success(data);}}, buildWxRequestConfig: function buildWxRequestConfig(param, options, feature) {var that = this;options.header = { "content-type": "application/json" };options.method = 'GET';options.success = function (res) {var data = res.data;if (data.status === 0) {that.handleData(param, data, feature);} else {param.fail(data);}};options.fail = function (res) {res.statusCode = ERROR_CONF.WX_ERR_CODE;param.fail(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));};options.complete = function (res) {var statusCode = +res.statusCode;switch (statusCode) {case ERROR_CONF.WX_ERR_CODE:{param.complete(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));break;}case ERROR_CONF.WX_OK_CODE:{var data = res.data;if (data.status === 0) {param.complete(data);} else {param.complete(that.buildErrorConfig(data.status, data.message));}break;}default:{param.complete(that.buildErrorConfig(ERROR_CONF.SYSTEM_ERR, ERROR_CONF.SYSTEM_ERR_MSG));}}};return options;}, locationProcess: function locationProcess(param, locationsuccess, locationfail, locationcomplete) {var that = this;locationfail = locationfail || function (res) {res.statusCode = ERROR_CONF.WX_ERR_CODE;param.fail(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));};locationcomplete = locationcomplete || function (res) {if (res.statusCode == ERROR_CONF.WX_ERR_CODE) {param.complete(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));}};if (!param.location) {that.getWXLocation(locationsuccess, locationfail, locationcomplete);} else if (that.checkLocation(param)) {var location = Utils.getLocationParam(param.location);locationsuccess(location);}} };var QQMapWX = /*#__PURE__*/function () {function QQMapWX(options) {_classCallCheck(this, QQMapWX);if (!options.key) {throw Error('key值不能为空');}this.key = options.key;}_createClass(QQMapWX, [{ key: "search", value: function search(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (!Utils.checkKeyword(options)) {return;}var requestParam = { keyword: options.keyword, orderby: options.orderby || '_distance', page_size: options.page_size || 10, page_index: options.page_index || 1, output: 'json', key: that.key };if (options.address_format) {requestParam.address_format = options.address_format;}if (options.filter) {requestParam.filter = options.filter;}var distance = options.distance || "1000";var auto_extend = options.auto_extend || 1;var region = null;var rectangle = null;if (options.region) {region = options.region;}if (options.rectangle) {rectangle = options.rectangle;}var locationsuccess = function locationsuccess(result) {if (region && !rectangle) {requestParam.boundary = "region(" + region + "," + auto_extend + "," + result.latitude + "," + result.longitude + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}} else if (rectangle && !region) {requestParam.boundary = "rectangle(" + rectangle + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}} else {requestParam.boundary = "nearby(" + result.latitude + "," + result.longitude + "," + distance + "," + auto_extend + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SEARCH, data: requestParam }, 'search'));};Utils.locationProcess(options, locationsuccess);} }, { key: "getSuggestion", value: function getSuggestion(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (!Utils.checkKeyword(options)) {return;}var requestParam = { keyword: options.keyword, region: options.region || '全国', region_fix: options.region_fix || 0, policy: options.policy || 0, page_size: options.page_size || 10, page_index: options.page_index || 1, get_subpois: options.get_subpois || 0, output: 'json', key: that.key };if (options.address_format) {requestParam.address_format = options.address_format;}if (options.filter) {requestParam.filter = options.filter;}if (options.location) {var locationsuccess = function locationsuccess(result) {requestParam.location = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'suggest');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SUGGESTION, data: requestParam }, "suggest"));};Utils.locationProcess(options, locationsuccess);} else {if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'suggest');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SUGGESTION, data: requestParam }, "suggest"));}} }, { key: "reverseGeocoder", value: function reverseGeocoder(options) {var that = this;options = options || {};Utils.polyfillParam(options);var requestParam = { coord_type: options.coord_type || 5, get_poi: options.get_poi || 0, output: 'json', key: that.key };if (options.poi_options) {requestParam.poi_options = options.poi_options;}var locationsuccess = function locationsuccess(result) {requestParam.location = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'reverseGeocoder');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_GET_GEOCODER, data: requestParam }, 'reverseGeocoder'));};Utils.locationProcess(options, locationsuccess);} }, { key: "geocoder", value: function geocoder(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'address')) {return;}var requestParam = { address: options.address, output: 'json', key: that.key };if (options.region) {requestParam.region = options.region;}if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'geocoder');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_GET_GEOCODER, data: requestParam }, 'geocoder'));} }, { key: "getCityList", value: function getCityList(options) {var that = this;options = options || {};Utils.polyfillParam(options);var requestParam = { output: 'json', key: that.key };if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'getCityList');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_CITY_LIST, data: requestParam }, 'getCityList'));} }, { key: "getDistrictByCityId", value: function getDistrictByCityId(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'id')) {return;}var requestParam = { id: options.id || '', output: 'json', key: that.key };if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'getDistrictByCityId');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_AREA_LIST, data: requestParam }, 'getDistrictByCityId'));} }, { key: "calculateDistance", value: function calculateDistance(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'to')) {return;}var requestParam = { mode: options.mode || 'walking', to: Utils.location2query(options.to), output: 'json', key: that.key };if (options.from) {options.location = options.from;}if (requestParam.mode == 'straight') {var locationsuccess = function locationsuccess(result) {var locationTo = Utils.getEndLocation(requestParam.to);var data = { message: "query ok", result: { elements: [] }, status: 0 };for (var i = 0; i < locationTo.length; i++) {data.result.elements.push({ distance: Utils.getDistance(result.latitude, result.longitude, locationTo[i].lat, locationTo[i].lng), duration: 0, from: { lat: result.latitude, lng: result.longitude }, to: { lat: locationTo[i].lat, lng: locationTo[i].lng } });}var calculateResult = data.result.elements;var distanceResult = [];for (var i = 0; i < calculateResult.length; i++) {distanceResult.push(calculateResult[i].distance);}return options.success(data, { calculateResult: calculateResult, distanceResult: distanceResult });};Utils.locationProcess(options, locationsuccess);} else {var locationsuccess = function locationsuccess(result) {requestParam.from = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'calculateDistance');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_DISTANCE, data: requestParam }, 'calculateDistance'));};Utils.locationProcess(options, locationsuccess);}} }, { key: "direction", value: function direction(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'to')) {return;}var requestParam = { output: 'json', key: that.key };if (typeof options.to == 'string') {requestParam.to = options.to;} else {requestParam.to = options.to.latitude + ',' + options.to.longitude;}var SET_URL_DIRECTION = null;options.mode = options.mode || MODE.driving;SET_URL_DIRECTION = URL_DIRECTION + options.mode;if (options.from) {options.location = options.from;}if (options.mode == MODE.driving) {if (options.from_poi) {requestParam.from_poi = options.from_poi;}if (options.heading) {requestParam.heading = options.heading;}if (options.speed) {requestParam.speed = options.speed;}if (options.accuracy) {requestParam.accuracy = options.accuracy;}if (options.road_type) {requestParam.road_type = options.road_type;}if (options.to_poi) {requestParam.to_poi = options.to_poi;}if (options.from_track) {requestParam.from_track = options.from_track;}if (options.waypoints) {requestParam.waypoints = options.waypoints;}if (options.policy) {requestParam.policy = options.policy;}if (options.plate_number) {requestParam.plate_number = options.plate_number;}}if (options.mode == MODE.transit) {if (options.departure_time) {requestParam.departure_time = options.departure_time;}if (options.policy) {requestParam.policy = options.policy;}}var locationsuccess = function locationsuccess(result) {requestParam.from = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'direction', options.mode);}wx.request(Utils.buildWxRequestConfig(options, { url: SET_URL_DIRECTION, data: requestParam }, 'direction'));};Utils.locationProcess(options, locationsuccess);} }]);return QQMapWX;}();;module.exports = QQMapWX;
+function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var ERROR_CONF = { KEY_ERR: 311, KEY_ERR_MSG: 'key格式错误', PARAM_ERR: 310, PARAM_ERR_MSG: '请求参数信息有误', SYSTEM_ERR: 600, SYSTEM_ERR_MSG: '系统错误', WX_ERR_CODE: 1000, WX_OK_CODE: 200 };var BASE_URL = 'https://apis.map.qq.com/ws/';var URL_SEARCH = BASE_URL + 'place/v1/search';var URL_SUGGESTION = BASE_URL + 'place/v1/suggestion';var URL_GET_GEOCODER = BASE_URL + 'geocoder/v1/';var URL_CITY_LIST = BASE_URL + 'district/v1/list';var URL_AREA_LIST = BASE_URL + 'district/v1/getchildren';var URL_DISTANCE = BASE_URL + 'distance/v1/';var URL_DIRECTION = BASE_URL + 'direction/v1/';var MODE = { driving: 'driving', transit: 'transit' };var EARTH_RADIUS = 6378136.49;var Utils = { safeAdd: function safeAdd(x, y) {var lsw = (x & 0xffff) + (y & 0xffff);var msw = (x >> 16) + (y >> 16) + (lsw >> 16);return msw << 16 | lsw & 0xffff;}, bitRotateLeft: function bitRotateLeft(num, cnt) {return num << cnt | num >>> 32 - cnt;}, md5cmn: function md5cmn(q, a, b, x, s, t) {return this.safeAdd(this.bitRotateLeft(this.safeAdd(this.safeAdd(a, q), this.safeAdd(x, t)), s), b);}, md5ff: function md5ff(a, b, c, d, x, s, t) {return this.md5cmn(b & c | ~b & d, a, b, x, s, t);}, md5gg: function md5gg(a, b, c, d, x, s, t) {return this.md5cmn(b & d | c & ~d, a, b, x, s, t);}, md5hh: function md5hh(a, b, c, d, x, s, t) {return this.md5cmn(b ^ c ^ d, a, b, x, s, t);}, md5ii: function md5ii(a, b, c, d, x, s, t) {return this.md5cmn(c ^ (b | ~d), a, b, x, s, t);}, binlMD5: function binlMD5(x, len) {x[len >> 5] |= 0x80 << len % 32;x[(len + 64 >>> 9 << 4) + 14] = len;var i;var olda;var oldb;var oldc;var oldd;var a = 1732584193;var b = -271733879;var c = -1732584194;var d = 271733878;for (i = 0; i < x.length; i += 16) {olda = a;oldb = b;oldc = c;oldd = d;a = this.md5ff(a, b, c, d, x[i], 7, -680876936);d = this.md5ff(d, a, b, c, x[i + 1], 12, -389564586);c = this.md5ff(c, d, a, b, x[i + 2], 17, 606105819);b = this.md5ff(b, c, d, a, x[i + 3], 22, -1044525330);a = this.md5ff(a, b, c, d, x[i + 4], 7, -176418897);d = this.md5ff(d, a, b, c, x[i + 5], 12, 1200080426);c = this.md5ff(c, d, a, b, x[i + 6], 17, -1473231341);b = this.md5ff(b, c, d, a, x[i + 7], 22, -45705983);a = this.md5ff(a, b, c, d, x[i + 8], 7, 1770035416);d = this.md5ff(d, a, b, c, x[i + 9], 12, -1958414417);c = this.md5ff(c, d, a, b, x[i + 10], 17, -42063);b = this.md5ff(b, c, d, a, x[i + 11], 22, -1990404162);a = this.md5ff(a, b, c, d, x[i + 12], 7, 1804603682);d = this.md5ff(d, a, b, c, x[i + 13], 12, -40341101);c = this.md5ff(c, d, a, b, x[i + 14], 17, -1502002290);b = this.md5ff(b, c, d, a, x[i + 15], 22, 1236535329);a = this.md5gg(a, b, c, d, x[i + 1], 5, -165796510);d = this.md5gg(d, a, b, c, x[i + 6], 9, -1069501632);c = this.md5gg(c, d, a, b, x[i + 11], 14, 643717713);b = this.md5gg(b, c, d, a, x[i], 20, -373897302);a = this.md5gg(a, b, c, d, x[i + 5], 5, -701558691);d = this.md5gg(d, a, b, c, x[i + 10], 9, 38016083);c = this.md5gg(c, d, a, b, x[i + 15], 14, -660478335);b = this.md5gg(b, c, d, a, x[i + 4], 20, -405537848);a = this.md5gg(a, b, c, d, x[i + 9], 5, 568446438);d = this.md5gg(d, a, b, c, x[i + 14], 9, -1019803690);c = this.md5gg(c, d, a, b, x[i + 3], 14, -187363961);b = this.md5gg(b, c, d, a, x[i + 8], 20, 1163531501);a = this.md5gg(a, b, c, d, x[i + 13], 5, -1444681467);d = this.md5gg(d, a, b, c, x[i + 2], 9, -51403784);c = this.md5gg(c, d, a, b, x[i + 7], 14, 1735328473);b = this.md5gg(b, c, d, a, x[i + 12], 20, -1926607734);a = this.md5hh(a, b, c, d, x[i + 5], 4, -378558);d = this.md5hh(d, a, b, c, x[i + 8], 11, -2022574463);c = this.md5hh(c, d, a, b, x[i + 11], 16, 1839030562);b = this.md5hh(b, c, d, a, x[i + 14], 23, -35309556);a = this.md5hh(a, b, c, d, x[i + 1], 4, -1530992060);d = this.md5hh(d, a, b, c, x[i + 4], 11, 1272893353);c = this.md5hh(c, d, a, b, x[i + 7], 16, -155497632);b = this.md5hh(b, c, d, a, x[i + 10], 23, -1094730640);a = this.md5hh(a, b, c, d, x[i + 13], 4, 681279174);d = this.md5hh(d, a, b, c, x[i], 11, -358537222);c = this.md5hh(c, d, a, b, x[i + 3], 16, -722521979);b = this.md5hh(b, c, d, a, x[i + 6], 23, 76029189);a = this.md5hh(a, b, c, d, x[i + 9], 4, -640364487);d = this.md5hh(d, a, b, c, x[i + 12], 11, -421815835);c = this.md5hh(c, d, a, b, x[i + 15], 16, 530742520);b = this.md5hh(b, c, d, a, x[i + 2], 23, -995338651);a = this.md5ii(a, b, c, d, x[i], 6, -198630844);d = this.md5ii(d, a, b, c, x[i + 7], 10, 1126891415);c = this.md5ii(c, d, a, b, x[i + 14], 15, -1416354905);b = this.md5ii(b, c, d, a, x[i + 5], 21, -57434055);a = this.md5ii(a, b, c, d, x[i + 12], 6, 1700485571);d = this.md5ii(d, a, b, c, x[i + 3], 10, -1894986606);c = this.md5ii(c, d, a, b, x[i + 10], 15, -1051523);b = this.md5ii(b, c, d, a, x[i + 1], 21, -2054922799);a = this.md5ii(a, b, c, d, x[i + 8], 6, 1873313359);d = this.md5ii(d, a, b, c, x[i + 15], 10, -30611744);c = this.md5ii(c, d, a, b, x[i + 6], 15, -1560198380);b = this.md5ii(b, c, d, a, x[i + 13], 21, 1309151649);a = this.md5ii(a, b, c, d, x[i + 4], 6, -145523070);d = this.md5ii(d, a, b, c, x[i + 11], 10, -1120210379);c = this.md5ii(c, d, a, b, x[i + 2], 15, 718787259);b = this.md5ii(b, c, d, a, x[i + 9], 21, -343485551);a = this.safeAdd(a, olda);b = this.safeAdd(b, oldb);c = this.safeAdd(c, oldc);d = this.safeAdd(d, oldd);}return [a, b, c, d];}, binl2rstr: function binl2rstr(input) {var i;var output = '';var length32 = input.length * 32;for (i = 0; i < length32; i += 8) {output += String.fromCharCode(input[i >> 5] >>> i % 32 & 0xff);}return output;}, rstr2binl: function rstr2binl(input) {var i;var output = [];output[(input.length >> 2) - 1] = undefined;for (i = 0; i < output.length; i += 1) {output[i] = 0;}var length8 = input.length * 8;for (i = 0; i < length8; i += 8) {output[i >> 5] |= (input.charCodeAt(i / 8) & 0xff) << i % 32;}return output;}, rstrMD5: function rstrMD5(s) {return this.binl2rstr(this.binlMD5(this.rstr2binl(s), s.length * 8));}, rstrHMACMD5: function rstrHMACMD5(key, data) {var i;var bkey = this.rstr2binl(key);var ipad = [];var opad = [];var hash;ipad[15] = opad[15] = undefined;if (bkey.length > 16) {bkey = this.binlMD5(bkey, key.length * 8);}for (i = 0; i < 16; i += 1) {ipad[i] = bkey[i] ^ 0x36363636;opad[i] = bkey[i] ^ 0x5c5c5c5c;}hash = this.binlMD5(ipad.concat(this.rstr2binl(data)), 512 + data.length * 8);return this.binl2rstr(this.binlMD5(opad.concat(hash), 512 + 128));}, rstr2hex: function rstr2hex(input) {var hexTab = '0123456789abcdef';var output = '';var x;var i;for (i = 0; i < input.length; i += 1) {x = input.charCodeAt(i);output += hexTab.charAt(x >>> 4 & 0x0f) + hexTab.charAt(x & 0x0f);}return output;}, str2rstrUTF8: function str2rstrUTF8(input) {return unescape(encodeURIComponent(input));}, rawMD5: function rawMD5(s) {return this.rstrMD5(this.str2rstrUTF8(s));}, hexMD5: function hexMD5(s) {return this.rstr2hex(this.rawMD5(s));}, rawHMACMD5: function rawHMACMD5(k, d) {return this.rstrHMACMD5(this.str2rstrUTF8(k), str2rstrUTF8(d));}, hexHMACMD5: function hexHMACMD5(k, d) {return this.rstr2hex(this.rawHMACMD5(k, d));}, md5: function md5(string, key, raw) {if (!key) {if (!raw) {return this.hexMD5(string);}return this.rawMD5(string);}if (!raw) {return this.hexHMACMD5(key, string);}return this.rawHMACMD5(key, string);}, getSig: function getSig(requestParam, sk, feature, mode) {var sig = null;var requestArr = [];Object.keys(requestParam).sort().forEach(function (key) {requestArr.push(key + '=' + requestParam[key]);});if (feature == 'search') {sig = '/ws/place/v1/search?' + requestArr.join('&') + sk;}if (feature == 'suggest') {sig = '/ws/place/v1/suggestion?' + requestArr.join('&') + sk;}if (feature == 'reverseGeocoder') {sig = '/ws/geocoder/v1/?' + requestArr.join('&') + sk;}if (feature == 'geocoder') {sig = '/ws/geocoder/v1/?' + requestArr.join('&') + sk;}if (feature == 'getCityList') {sig = '/ws/district/v1/list?' + requestArr.join('&') + sk;}if (feature == 'getDistrictByCityId') {sig = '/ws/district/v1/getchildren?' + requestArr.join('&') + sk;}if (feature == 'calculateDistance') {sig = '/ws/distance/v1/?' + requestArr.join('&') + sk;}if (feature == 'direction') {sig = '/ws/direction/v1/' + mode + '?' + requestArr.join('&') + sk;}sig = this.md5(sig);return sig;}, location2query: function location2query(data) {if (typeof data == 'string') {return data;}var query = '';for (var i = 0; i < data.length; i++) {var d = data[i];if (!!query) {query += ';';}if (d.location) {query = query + d.location.lat + ',' + d.location.lng;}if (d.latitude && d.longitude) {query = query + d.latitude + ',' + d.longitude;}}return query;}, rad: function rad(d) {return d * Math.PI / 180.0;}, getEndLocation: function getEndLocation(location) {var to = location.split(';');var endLocation = [];for (var i = 0; i < to.length; i++) {endLocation.push({ lat: parseFloat(to[i].split(',')[0]), lng: parseFloat(to[i].split(',')[1]) });}return endLocation;}, getDistance: function getDistance(latFrom, lngFrom, latTo, lngTo) {var radLatFrom = this.rad(latFrom);var radLatTo = this.rad(latTo);var a = radLatFrom - radLatTo;var b = this.rad(lngFrom) - this.rad(lngTo);var distance = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLatFrom) * Math.cos(radLatTo) * Math.pow(Math.sin(b / 2), 2)));distance = distance * EARTH_RADIUS;distance = Math.round(distance * 10000) / 10000;return parseFloat(distance.toFixed(0));}, getWXLocation: function getWXLocation(success, fail, complete) {wx.getLocation({ type: 'gcj02', success: success, fail: fail, complete: complete });}, getLocationParam: function getLocationParam(location) {if (typeof location == 'string') {var locationArr = location.split(',');if (locationArr.length === 2) {location = { latitude: location.split(',')[0], longitude: location.split(',')[1] };} else {location = {};}}return location;}, polyfillParam: function polyfillParam(param) {param.success = param.success || function () {};param.fail = param.fail || function () {};param.complete = param.complete || function () {};}, checkParamKeyEmpty: function checkParamKeyEmpty(param, key) {if (!param[key]) {var errconf = this.buildErrorConfig(ERROR_CONF.PARAM_ERR, ERROR_CONF.PARAM_ERR_MSG + key + '参数格式有误');param.fail(errconf);param.complete(errconf);return true;}return false;}, checkKeyword: function checkKeyword(param) {return !this.checkParamKeyEmpty(param, 'keyword');}, checkLocation: function checkLocation(param) {var location = this.getLocationParam(param.location);if (!location || !location.latitude || !location.longitude) {var errconf = this.buildErrorConfig(ERROR_CONF.PARAM_ERR, ERROR_CONF.PARAM_ERR_MSG + ' location参数格式有误');param.fail(errconf);param.complete(errconf);return false;}return true;}, buildErrorConfig: function buildErrorConfig(errCode, errMsg) {return { status: errCode, message: errMsg };}, handleData: function handleData(param, data, feature) {if (feature == 'search') {var searchResult = data.data;var searchSimplify = [];for (var i = 0; i < searchResult.length; i++) {searchSimplify.push({ id: searchResult[i].id || null, title: searchResult[i].title || null, latitude: searchResult[i].location && searchResult[i].location.lat || null, longitude: searchResult[i].location && searchResult[i].location.lng || null, address: searchResult[i].address || null, category: searchResult[i].category || null, tel: searchResult[i].tel || null, adcode: searchResult[i].ad_info && searchResult[i].ad_info.adcode || null, city: searchResult[i].ad_info && searchResult[i].ad_info.city || null, district: searchResult[i].ad_info && searchResult[i].ad_info.district || null, province: searchResult[i].ad_info && searchResult[i].ad_info.province || null });}param.success(data, { searchResult: searchResult, searchSimplify: searchSimplify });} else if (feature == 'suggest') {var suggestResult = data.data;var suggestSimplify = [];for (var i = 0; i < suggestResult.length; i++) {suggestSimplify.push({ adcode: suggestResult[i].adcode || null, address: suggestResult[i].address || null, category: suggestResult[i].category || null, city: suggestResult[i].city || null, district: suggestResult[i].district || null, id: suggestResult[i].id || null, latitude: suggestResult[i].location && suggestResult[i].location.lat || null, longitude: suggestResult[i].location && suggestResult[i].location.lng || null, province: suggestResult[i].province || null, title: suggestResult[i].title || null, type: suggestResult[i].type || null });}param.success(data, { suggestResult: suggestResult, suggestSimplify: suggestSimplify });} else if (feature == 'reverseGeocoder') {var reverseGeocoderResult = data.result;var reverseGeocoderSimplify = { address: reverseGeocoderResult.address || null, latitude: reverseGeocoderResult.location && reverseGeocoderResult.location.lat || null, longitude: reverseGeocoderResult.location && reverseGeocoderResult.location.lng || null, adcode: reverseGeocoderResult.ad_info && reverseGeocoderResult.ad_info.adcode || null, city: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.city || null, district: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.district || null, nation: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.nation || null, province: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.province || null, street: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.street || null, street_number: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.street_number || null, recommend: reverseGeocoderResult.formatted_addresses && reverseGeocoderResult.formatted_addresses.recommend || null, rough: reverseGeocoderResult.formatted_addresses && reverseGeocoderResult.formatted_addresses.rough || null };if (reverseGeocoderResult.pois) {var pois = reverseGeocoderResult.pois;var poisSimplify = [];for (var i = 0; i < pois.length; i++) {poisSimplify.push({ id: pois[i].id || null, title: pois[i].title || null, latitude: pois[i].location && pois[i].location.lat || null, longitude: pois[i].location && pois[i].location.lng || null, address: pois[i].address || null, category: pois[i].category || null, adcode: pois[i].ad_info && pois[i].ad_info.adcode || null, city: pois[i].ad_info && pois[i].ad_info.city || null, district: pois[i].ad_info && pois[i].ad_info.district || null, province: pois[i].ad_info && pois[i].ad_info.province || null });}param.success(data, { reverseGeocoderResult: reverseGeocoderResult, reverseGeocoderSimplify: reverseGeocoderSimplify, pois: pois, poisSimplify: poisSimplify });} else {param.success(data, { reverseGeocoderResult: reverseGeocoderResult, reverseGeocoderSimplify: reverseGeocoderSimplify });}} else if (feature == 'geocoder') {var geocoderResult = data.result;var geocoderSimplify = { title: geocoderResult.title || null, latitude: geocoderResult.location && geocoderResult.location.lat || null, longitude: geocoderResult.location && geocoderResult.location.lng || null, adcode: geocoderResult.ad_info && geocoderResult.ad_info.adcode || null, province: geocoderResult.address_components && geocoderResult.address_components.province || null, city: geocoderResult.address_components && geocoderResult.address_components.city || null, district: geocoderResult.address_components && geocoderResult.address_components.district || null, street: geocoderResult.address_components && geocoderResult.address_components.street || null, street_number: geocoderResult.address_components && geocoderResult.address_components.street_number || null, level: geocoderResult.level || null };param.success(data, { geocoderResult: geocoderResult, geocoderSimplify: geocoderSimplify });} else if (feature == 'getCityList') {var provinceResult = data.result[0];var cityResult = data.result[1];var districtResult = data.result[2];param.success(data, { provinceResult: provinceResult, cityResult: cityResult, districtResult: districtResult });} else if (feature == 'getDistrictByCityId') {var districtByCity = data.result[0];param.success(data, districtByCity);} else if (feature == 'calculateDistance') {var calculateDistanceResult = data.result.elements;var distance = [];for (var i = 0; i < calculateDistanceResult.length; i++) {distance.push(calculateDistanceResult[i].distance);}param.success(data, { calculateDistanceResult: calculateDistanceResult, distance: distance });} else if (feature == 'direction') {var direction = data.result.routes;param.success(data, direction);} else {param.success(data);}}, buildWxRequestConfig: function buildWxRequestConfig(param, options, feature) {var that = this;options.header = { "content-type": "application/json" };options.method = 'GET';options.success = function (res) {var data = res.data;if (data.status === 0) {that.handleData(param, data, feature);} else {param.fail(data);}};options.fail = function (res) {res.statusCode = ERROR_CONF.WX_ERR_CODE;param.fail(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));};options.complete = function (res) {var statusCode = +res.statusCode;switch (statusCode) {case ERROR_CONF.WX_ERR_CODE:{param.complete(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));break;}case ERROR_CONF.WX_OK_CODE:{var data = res.data;if (data.status === 0) {param.complete(data);} else {param.complete(that.buildErrorConfig(data.status, data.message));}break;}default:{param.complete(that.buildErrorConfig(ERROR_CONF.SYSTEM_ERR, ERROR_CONF.SYSTEM_ERR_MSG));}}};return options;}, locationProcess: function locationProcess(param, locationsuccess, locationfail, locationcomplete) {var that = this;locationfail = locationfail || function (res) {res.statusCode = ERROR_CONF.WX_ERR_CODE;param.fail(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));};locationcomplete = locationcomplete || function (res) {if (res.statusCode == ERROR_CONF.WX_ERR_CODE) {param.complete(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));}};if (!param.location) {that.getWXLocation(locationsuccess, locationfail, locationcomplete);} else if (that.checkLocation(param)) {var location = Utils.getLocationParam(param.location);locationsuccess(location);}} };var QQMapWX = /*#__PURE__*/function () {"use strict";function QQMapWX(options) {_classCallCheck(this, QQMapWX);if (!options.key) {throw Error('key值不能为空');}this.key = options.key;}_createClass(QQMapWX, [{ key: "search", value: function search(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (!Utils.checkKeyword(options)) {return;}var requestParam = { keyword: options.keyword, orderby: options.orderby || '_distance', page_size: options.page_size || 10, page_index: options.page_index || 1, output: 'json', key: that.key };if (options.address_format) {requestParam.address_format = options.address_format;}if (options.filter) {requestParam.filter = options.filter;}var distance = options.distance || "1000";var auto_extend = options.auto_extend || 1;var region = null;var rectangle = null;if (options.region) {region = options.region;}if (options.rectangle) {rectangle = options.rectangle;}var locationsuccess = function locationsuccess(result) {if (region && !rectangle) {requestParam.boundary = "region(" + region + "," + auto_extend + "," + result.latitude + "," + result.longitude + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}} else if (rectangle && !region) {requestParam.boundary = "rectangle(" + rectangle + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}} else {requestParam.boundary = "nearby(" + result.latitude + "," + result.longitude + "," + distance + "," + auto_extend + ")";if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');}}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SEARCH, data: requestParam }, 'search'));};Utils.locationProcess(options, locationsuccess);} }, { key: "getSuggestion", value: function getSuggestion(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (!Utils.checkKeyword(options)) {return;}var requestParam = { keyword: options.keyword, region: options.region || '全国', region_fix: options.region_fix || 0, policy: options.policy || 0, page_size: options.page_size || 10, page_index: options.page_index || 1, get_subpois: options.get_subpois || 0, output: 'json', key: that.key };if (options.address_format) {requestParam.address_format = options.address_format;}if (options.filter) {requestParam.filter = options.filter;}if (options.location) {var locationsuccess = function locationsuccess(result) {requestParam.location = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'suggest');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SUGGESTION, data: requestParam }, "suggest"));};Utils.locationProcess(options, locationsuccess);} else {if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'suggest');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_SUGGESTION, data: requestParam }, "suggest"));}} }, { key: "reverseGeocoder", value: function reverseGeocoder(options) {var that = this;options = options || {};Utils.polyfillParam(options);var requestParam = { coord_type: options.coord_type || 5, get_poi: options.get_poi || 0, output: 'json', key: that.key };if (options.poi_options) {requestParam.poi_options = options.poi_options;}var locationsuccess = function locationsuccess(result) {requestParam.location = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'reverseGeocoder');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_GET_GEOCODER, data: requestParam }, 'reverseGeocoder'));};Utils.locationProcess(options, locationsuccess);} }, { key: "geocoder", value: function geocoder(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'address')) {return;}var requestParam = { address: options.address, output: 'json', key: that.key };if (options.region) {requestParam.region = options.region;}if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'geocoder');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_GET_GEOCODER, data: requestParam }, 'geocoder'));} }, { key: "getCityList", value: function getCityList(options) {var that = this;options = options || {};Utils.polyfillParam(options);var requestParam = { output: 'json', key: that.key };if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'getCityList');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_CITY_LIST, data: requestParam }, 'getCityList'));} }, { key: "getDistrictByCityId", value: function getDistrictByCityId(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'id')) {return;}var requestParam = { id: options.id || '', output: 'json', key: that.key };if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'getDistrictByCityId');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_AREA_LIST, data: requestParam }, 'getDistrictByCityId'));} }, { key: "calculateDistance", value: function calculateDistance(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'to')) {return;}var requestParam = { mode: options.mode || 'walking', to: Utils.location2query(options.to), output: 'json', key: that.key };if (options.from) {options.location = options.from;}if (requestParam.mode == 'straight') {var locationsuccess = function locationsuccess(result) {var locationTo = Utils.getEndLocation(requestParam.to);var data = { message: "query ok", result: { elements: [] }, status: 0 };for (var i = 0; i < locationTo.length; i++) {data.result.elements.push({ distance: Utils.getDistance(result.latitude, result.longitude, locationTo[i].lat, locationTo[i].lng), duration: 0, from: { lat: result.latitude, lng: result.longitude }, to: { lat: locationTo[i].lat, lng: locationTo[i].lng } });}var calculateResult = data.result.elements;var distanceResult = [];for (var i = 0; i < calculateResult.length; i++) {distanceResult.push(calculateResult[i].distance);}return options.success(data, { calculateResult: calculateResult, distanceResult: distanceResult });};Utils.locationProcess(options, locationsuccess);} else {var locationsuccess = function locationsuccess(result) {requestParam.from = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'calculateDistance');}wx.request(Utils.buildWxRequestConfig(options, { url: URL_DISTANCE, data: requestParam }, 'calculateDistance'));};Utils.locationProcess(options, locationsuccess);}} }, { key: "direction", value: function direction(options) {var that = this;options = options || {};Utils.polyfillParam(options);if (Utils.checkParamKeyEmpty(options, 'to')) {return;}var requestParam = { output: 'json', key: that.key };if (typeof options.to == 'string') {requestParam.to = options.to;} else {requestParam.to = options.to.latitude + ',' + options.to.longitude;}var SET_URL_DIRECTION = null;options.mode = options.mode || MODE.driving;SET_URL_DIRECTION = URL_DIRECTION + options.mode;if (options.from) {options.location = options.from;}if (options.mode == MODE.driving) {if (options.from_poi) {requestParam.from_poi = options.from_poi;}if (options.heading) {requestParam.heading = options.heading;}if (options.speed) {requestParam.speed = options.speed;}if (options.accuracy) {requestParam.accuracy = options.accuracy;}if (options.road_type) {requestParam.road_type = options.road_type;}if (options.to_poi) {requestParam.to_poi = options.to_poi;}if (options.from_track) {requestParam.from_track = options.from_track;}if (options.waypoints) {requestParam.waypoints = options.waypoints;}if (options.policy) {requestParam.policy = options.policy;}if (options.plate_number) {requestParam.plate_number = options.plate_number;}}if (options.mode == MODE.transit) {if (options.departure_time) {requestParam.departure_time = options.departure_time;}if (options.policy) {requestParam.policy = options.policy;}}var locationsuccess = function locationsuccess(result) {requestParam.from = result.latitude + ',' + result.longitude;if (options.sig) {requestParam.sig = Utils.getSig(requestParam, options.sig, 'direction', options.mode);}wx.request(Utils.buildWxRequestConfig(options, { url: SET_URL_DIRECTION, data: requestParam }, 'direction'));};Utils.locationProcess(options, locationsuccess);} }]);return QQMapWX;}();;module.exports = QQMapWX;
 
 /***/ }),
-/* 187 */
-/*!*******************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/factory/FileFactory.js ***!
-  \*******************************************************************/
+/* 182 */
+/*!**************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/factory/FileFactory.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
 function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 文件工厂类
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * add by wuxw 2019-12-28
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */var
-FileFactory = /*#__PURE__*/function () {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 文件工厂类
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * add by wuxw 2019-12-28
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */var
+FileFactory = /*#__PURE__*/function () {"use strict";
   function FileFactory() {_classCallCheck(this, FileFactory);} // 获取书籍已下载路径
   _createClass(FileFactory, [{ key: "getDownloadPath", value: function getDownloadPath(
 
@@ -38973,21 +38266,20 @@ FileFactory = /*#__PURE__*/function () {
 module.exports = FileFactory;
 
 /***/ }),
-/* 188 */
-/*!*******************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/factory/CoreFactory.js ***!
-  \*******************************************************************/
+/* 183 */
+/*!**************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/factory/CoreFactory.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
 function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 核心工厂类，写一些 核心业务处理 如果 权限验证
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * add by wuxw 2019-12-28
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */var
-CoreFactory = /*#__PURE__*/function () {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 核心工厂类，写一些 核心业务处理 如果 权限验证
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * add by wuxw 2019-12-28
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */var
+CoreFactory = /*#__PURE__*/function () {"use strict";
   function CoreFactory() {_classCallCheck(this, CoreFactory);} // 检查用户信息授权设置
   _createClass(CoreFactory, [{ key: "checkUserInfoPermission", value: function checkUserInfoPermission()
 
@@ -39013,21 +38305,20 @@ CoreFactory = /*#__PURE__*/function () {
 module.exports = new CoreFactory();
 
 /***/ }),
-/* 189 */
-/*!*******************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/factory/HttpFactory.js ***!
-  \*******************************************************************/
+/* 184 */
+/*!**************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/factory/HttpFactory.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
 function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 重新封装 http 请求
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * add by wuxw 2020-01-01
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * java110团队
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */var
-HttpFactory = /*#__PURE__*/function () {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 重新封装 http 请求
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * add by wuxw 2020-01-01
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * java110团队
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */var
+HttpFactory = /*#__PURE__*/function () {"use strict";
   function HttpFactory() {_classCallCheck(this, HttpFactory);}_createClass(HttpFactory, [{ key: "getSync", value: function getSync(
 
     _httpHead, _url, _data) {
@@ -39075,47 +38366,92 @@ HttpFactory = /*#__PURE__*/function () {
 module.exports = new HttpFactory();
 
 /***/ }),
-/* 190 */
-/*!*********************************************************************!*\
-  !*** D:/workCodeSpace/java110/PropertyApp/factory/Base64Factory.js ***!
-  \*********************************************************************/
+/* 185 */
+/*!****************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/factory/Base64Factory.js ***!
+  \****************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
 function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * base64 处理 工厂类
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            * add by wuxw 2020-01-01 美丽的夏都西宁
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */var
-Base64Factory = /*#__PURE__*/function () {
-  function Base64Factory() {_classCallCheck(this, Base64Factory);}_createClass(Base64Factory, null, [{ key: "urlTobase64", value: function urlTobase64(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * base64 处理 工厂类
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * add by wuxw 2020-01-01 美丽的夏都西宁
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */var
+Base64Factory = /*#__PURE__*/function () {"use strict";
+  function Base64Factory() {_classCallCheck(this, Base64Factory);}_createClass(Base64Factory, null, [{ key: "getLocalFilePath", value: function getLocalFilePath(
+
+    path) {
+      if (path.indexOf('_www') === 0 || path.indexOf('_doc') === 0 || path.indexOf('_documents') === 0 || path.indexOf(
+      '_downloads') === 0) {
+        return path;
+      }
+      if (path.indexOf('file://') === 0) {
+        return path;
+      }
+      if (path.indexOf('/storage/emulated/0/') === 0) {
+        return path;
+      }
+      if (path.indexOf('/') === 0) {
+        var localFilePath = plus.io.convertAbsoluteFileSystem(path);
+        if (localFilePath !== path) {
+          return localFilePath;
+        } else {
+          path = path.substr(1);
+        }
+      }
+      return '_www/' + path;
+    } }, { key: "urlTobase64", value: function urlTobase64(
 
     url) {
+      //url = Base64Factory.getLocalFilePath(url);
+
       return new Promise(function (resolve, reject) {
-        // wx.request({
-        //   url: url,
-        //   responseType: 'arraybuffer', //最关键的参数，设置返回的数据格式为arraybuffer
-        //   success: res => {
-        //     //把arraybuffer转成base64
-        //     let base64 = wx.arrayBufferToBase64(res.data);
-        //     //不加上这串字符，在页面无法显示的哦
-        //     base64 　= 'data:image/jpeg;base64,' + base64
-        //     //打印出base64字符串，可复制到网页校验一下是否是你选择的原图片呢
-        //     resolve(base64)
-        //   },
-        //   fail:function(e){
-        //     console.log(e);
-        //     reject(e);
-        //   }
-        // })
+        console.log('url', url);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         wx.getFileSystemManager().readFile({
-          filePath: url,
-          //选择图片返回的相对路径
-          encoding: 'base64',
-          //编码格式
-          success: function success(res) {
-            //成功的回调
+          filePath: url, //选择图片返回的相对路径
+          encoding: 'base64', //编码格式
+          success: function success(res) {//成功的回调
             //console.log('data:image/png;base64,' + res.data);
             var base64 = 'data:image/png;base64,' + res.data;
             resolve(base64);
@@ -39125,12 +38461,3608 @@ Base64Factory = /*#__PURE__*/function () {
             reject(e);
           } });
 
+
       });
+
     } }]);return Base64Factory;}();
 
 
 
 module.exports = Base64Factory;
+
+/***/ }),
+/* 186 */
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/context/context.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _request2 = _interopRequireDefault(__webpack_require__(/*! ./request.js */ 187));
+var _login = _interopRequireDefault(__webpack_require__(/*! ../factory/login.js */ 188));
+var _AppConstant = _interopRequireDefault(__webpack_require__(/*! ../constant/AppConstant.js */ 13));
+var _util = _interopRequireDefault(__webpack_require__(/*! ../utils/util.js */ 190));
+var _date = _interopRequireDefault(__webpack_require__(/*! ../utils/date.js */ 191));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+
+{
+  getHeaders: function getHeaders() {
+    return {
+      'app-id': _AppConstant.default.appId,
+      'transaction-id': _util.default.wxuuid(),
+      'req-time': _date.default.getDateYYYYMMDDHHMISS(),
+      'sign': '1234567',
+      'user-id': '-1',
+      cookie: '_java110_token_=' + wx.getStorageSync('token') };
+
+  },
+  //检查是否登录
+  checkLogin: function checkLogin() {
+    _login.default.checkLoginStatus(function () {
+
+    });
+  },
+  /**
+      * 清理所有缓存
+      */
+  clearAll: function clearAll() {
+    uni.clearStorage();
+  },
+  /**
+      * 从磁盘中获取json 
+      * @param {Object} _key 键值
+      */
+  getJson: function getJson(_key) {
+    try {
+      var value = uni.getStorageSync(key);
+      if (value) {
+        return JSON.parse(value);
+      }
+    } catch (e) {
+      // error
+      return null;
+    }
+  },
+  /**
+      * 磁盘中存储
+      * @param {Object} key 键
+      * @param {Object} value 值
+      */
+  setData: function setData(key, value) {
+    try {
+      uni.setStorageSync(key, value);
+    } catch (e) {
+      // error
+    }
+  },
+  /**
+      * 存磁盘中获取数据
+      * @param {Object} key 键
+      */
+  getData: function getData(key) {
+    try {
+      var value = uni.getStorageSync(key);
+      if (value) {
+        return value;
+      }
+    } catch (e) {
+      // error
+      return null;
+    }
+  },
+  /**
+      * 设置json 数据
+      * @param {Object} key 键
+      * @param {Object} value json 对象
+      */
+  setJson: function setJson(key, value) {
+    var jsonString = JSON.stringify(value);
+    try {
+      uni.setStorageSync(key, jsonString);
+    } catch (e) {
+      // error
+    }
+  },
+
+  /**
+      * 发起请求
+      * @param {Object} _reqObj 请求内容
+      */
+  request: function request(_reqObj) {
+    if (!_reqObj.hasOwnProperty("header")) {
+      _reqObj.header = this.getHeaders();
+    }
+    //检查是否登录成功
+    _request2.default.request(_reqObj);
+  },
+  /**
+      * get 请求
+      * @param {Object} _reqObj 请求内容
+      */
+  get: function get(_reqObj) {
+    _reqObj.method = 'GET';
+    this.request(_reqObj);
+  },
+  /**
+      * post 请求
+      * @param {Object} _reqObj 请求内容
+      */
+  post: function post(_reqObj) {
+    _reqObj.method = 'POST';
+    this.request(_reqObj);
+  },
+  /**
+      * 页面跳转
+      * @param {Object} _urlInfo 页面信息
+      */
+  navigateTo: function navigateTo(_urlInfo) {
+    uni.navigateTo(_urlInfo);
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 187 */
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/context/request.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _login = _interopRequireDefault(__webpack_require__(/*! ../factory/login.js */ 188));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+
+
+{
+  /**
+   * 请求
+   * @param {Object} _reqObj 请求内容
+   */
+  request: function request(_reqObj) {
+    //检查是否登录成功
+    _login.default.checkLoginStatus(function () {
+      //重写token
+      _reqObj.header.cookie = '_java110_token_=' + uni.getStorageSync('token'); //console.log("_reqObj",_reqObj);
+      uni.request(_reqObj);
+    });
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 188 */
+/*!********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/factory/login.js ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _mapping = _interopRequireDefault(__webpack_require__(/*! ../constant/mapping.js */ 189));
+var _util = _interopRequireDefault(__webpack_require__(/*! ../utils/util.js */ 190));
+
+var _AppConstant = _interopRequireDefault(__webpack_require__(/*! ../constant/AppConstant.js */ 13));
+var _date = _interopRequireDefault(__webpack_require__(/*! ../utils/date.js */ 191));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+
+{
+  /**
+   * 校验登录
+   * @param {callback} 登录成功 回调函数 
+   */
+  checkLoginStatus: function checkLoginStatus() {var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
+    var _that = this;
+
+    var loginFlag = uni.getStorageSync(_mapping.default.LOGIN_FLAG);
+    var nowDate = new Date();
+    if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
+      console.log("现在还是有效时间内");
+      callback();
+    } else {
+      // 无登录态
+      _that.doLogin(callback);
+    }
+  },
+  doLogin: function doLogin() {var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
+    this.requsetHcServerToLogin(callback);
+  },
+  /**
+      * 请求 HC服务 登录
+      */
+  requsetHcServerToLogin: function requsetHcServerToLogin() {var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {};
+    console.log('常量', _mapping.default.USER_INFO);
+    var userInfo = null;
+    try {
+      userInfo = uni.getStorageSync(_mapping.default.USER_INFO);
+    } catch (e) {
+      console.log('读取数据失败', e);
+    }
+    console.log("用户信息", userInfo);
+    if (_util.default.isNull(userInfo)) {
+      uni.reLaunch({
+        url: '/pages/login/login' });
+
+      return;
+    }
+
+    var _userInfo = JSON.parse(_util.default.desDecrypt(userInfo));
+    var _tmpUserInfo = {
+      username: _userInfo.userName,
+      password: _userInfo.password };
+
+    uni.request({
+      url: _util.default.loginUrl,
+      method: 'post',
+      header: {
+        'APP-ID': _AppConstant.default.appId },
+
+      data: _tmpUserInfo,
+      success: function success(res) {
+        console.log('login success...:');
+        res = res.data;
+        var afterOneHourDate = _date.default.addHour(new Date(), 1);
+        wx.setStorageSync(_mapping.default.LOGIN_FLAG, {
+          sessionKey: userInfo.userName,
+          expireTime: afterOneHourDate.getTime(),
+          createTime: new Date().getTime() });
+
+        uni.setStorageSync(_mapping.default.TOKEN, res.token);
+        callback();
+      },
+      fail: function fail(error) {
+        // 调用服务端登录接口失败
+        console.log(error);
+      } });
+
+  }, // 获取用户登录标示 供全局调用
+  getLoginFlag: function getLoginFlag() {
+    return uni.getStorageSync(_mapping.default.LOGIN_FLAG);
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 189 */
+/*!***********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/constant/mapping.js ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  LOGIN_FLAG: 'loginFlag', //登录标识
+
+  TOKEN: "token", // token 标识
+
+  USER_INFO: "STAFF_USER_INFO", // 用户信息
+
+  AREA_INFO: "areaInfo", // 地区信息
+
+  COMMUNITY_INFO: "communityInfo", // 小区信息
+
+  OWNER_INFO: "ownerInfo", // 当前业主信息
+
+  CURRENT_COMMUNITY_INFO: "currentCommunityInfo", //业主当前小区信息
+
+  INDEX_LISTENER: "index_listener" // 首页监听
+};exports.default = _default;
+
+/***/ }),
+/* 190 */
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/utils/util.js ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _cryptoJs = _interopRequireDefault(__webpack_require__(/*! ../lib/crypto-js.js */ 20));
+
+var _AppConstant = _interopRequireDefault(__webpack_require__(/*! ../constant/AppConstant.js */ 13));
+var _date = _interopRequireDefault(__webpack_require__(/*! ../utils/date.js */ 191));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var StringUtil = __webpack_require__(/*! ./StringUtil */ 177);
+
+var keyvi = 'java110_hc_wuxw';var _default =
+{
+
+  /**
+   * @desc: 格式化时间
+   * @return: eg: '2018/04/09 21:31:00'
+   * @param {Date对象} date 
+   */
+  formatTime: function formatTime(date) {
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+  },
+  /**
+      * @desc: 格式化数字
+      * @return: n > 10 [eg: 12] => 12 | n < 10 [eg: 3] => '03'
+      * @param {*} n 
+      */
+  formatNumber: function formatNumber(n) {
+    n = n.toString();
+    return n[1] ? n : '0' + n;
+  },
+  /**
+      * 获取uuid
+      */
+  wxuuid: function wxuuid() {
+    var s = [];
+    var hexDigits = "0123456789abcdef";
+
+    for (var i = 0; i < 36; i++) {
+      s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+    }
+
+    s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+
+    s[19] = hexDigits.substr(s[19] & 0x3 | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+
+    s[8] = s[13] = s[18] = s[23] = "-";
+    var uuid = s.join("");
+    return uuid;
+  },
+  /**
+      * 获取 http 头信息
+      */
+  getHeaders: function getHeaders() {
+    var _that = this;
+    return {
+      'app-id': _AppConstant.default.appId,
+      'transaction-id': _that.wxuuid(),
+      'req-time': _date.default.getDateYYYYMMDDHHMISS(),
+      'sign': '1234567',
+      'user-id': '-1',
+      'cookie': '_java110_token_=' + wx.getStorageSync('token') };
+
+  },
+  /**
+      * 判断字符串是否为空
+      * @param {Object} _param 字符串
+      * @return true 如果为空时 
+      * 		   false 不为空
+      */
+  isNull: function isNull(_param) {
+    if (_param == null || _param == undefined || _param == '') {
+      return true;
+    }
+    return false;
+  },
+  /**
+      * 判断字符串是否为空
+      * @param {Object} _param 字符串
+      * @return true 如果不为空时 
+      * 		   false 为空
+      */
+  isNotNull: function isNotNull(_param) {
+    if (this.isNull(_param)) {
+      return false;
+    }
+
+    return true;
+  },
+  desEncrypt: function desEncrypt(message) {
+    var key = _cryptoJs.default.MD5(keyvi).toString();
+    var iv = _cryptoJs.default.MD5(keyvi).toString();
+    var crypto_key = _cryptoJs.default.enc.Utf8.parse(key);
+    var crypto_iv = _cryptoJs.default.enc.Utf8.parse(iv.substr(0, 8));
+
+    var encode_str = _cryptoJs.default.TripleDES.encrypt(message, crypto_key, {
+      iv: crypto_iv,
+      mode: _cryptoJs.default.mode.CBC,
+      padding: _cryptoJs.default.pad.Pkcs7 });
+    return encode_str.toString();
+
+  },
+  //des解密 DES-EDE3-CBC
+  desDecrypt: function desDecrypt(message)
+  {
+    console.log("message", message);
+    if (StringUtil.isNull(message)) {
+      return message;
+    }
+    var key = _cryptoJs.default.MD5(keyvi).toString();
+    var iv = _cryptoJs.default.MD5(keyvi).toString();
+    var crypto_key = _cryptoJs.default.enc.Utf8.parse(key);
+    var crypto_iv = _cryptoJs.default.enc.Utf8.parse(iv.substr(0, 8));
+    var decrypt_str = _cryptoJs.default.TripleDES.decrypt(message, crypto_key, {
+      iv: crypto_iv,
+      mode: _cryptoJs.default.mode.CBC,
+      padding: _cryptoJs.default.pad.Pkcs7 });
+    return decrypt_str.toString(_cryptoJs.default.enc.Utf8);
+  } };exports.default = _default;
+
+/***/ }),
+/* 191 */
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/utils/date.js ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+
+  /**
+                                                                                                                      * @desc: 格式化时间
+                                                                                                                      * @return: eg: '2018/04/09 21:31:00'
+                                                                                                                      * @param {Date对象} date 
+                                                                                                                      */
+  formatTime: function formatTime(date) {
+    year = date.getFullYear();
+    month = date.getMonth() + 1;
+    day = date.getDate();
+    hour = date.getHours();
+    minute = date.getMinutes();
+    second = date.getSeconds();
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+  },
+  /**
+      * @desc: 格式化日期
+      * @return: eg: '2018/04/09 21:31:00'
+      * @param {Date对象} date 
+      */
+  formatDate: function formatDate(date) {
+    year = date.getFullYear();
+    month = date.getMonth() + 1;
+    day = date.getDate();
+    return [year, month, day].map(formatNumber).join('-');
+  }, //字符串转日期格式，strDate要转为日期格式的字符串 
+
+  getDate: function getDate(strDate) {
+    var st = strDate;
+    var a = st.split(" "); //这个根据你的字符串决定，如果中间为T则改T
+
+    var b = a[0].split("-");
+    var c = a[1].split(":");
+    var date = new Date(b[0], b[1], b[2], c[0], c[1], c[2]);
+    return date;
+  },
+  /**
+      * @desc: 格式化数字
+      * @return: n > 10 [eg: 12] => 12 | n < 10 [eg: 3] => '03'
+      * @param {*} n 
+      */
+  formatNumber: function formatNumber(n) {
+    n = n.toString();
+    return n[1] ? n : '0' + n;
+  },
+
+  /**
+      * 获取 类似 20200726161500 日期地址
+      */
+  getDateYYYYMMDDHHMISS: function getDateYYYYMMDDHHMISS() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    if (month < 10) {
+      month = '0' + month;
+    }
+    if (day < 10) {
+      day = '0' + day;
+    }
+    if (hour < 10) {
+      hour = '0' + hour;
+    }
+    if (minute < 10) {
+      minute = '0' + minute;
+    }
+    if (second < 10) {
+      second = '0' + second;
+    }
+    return year + "" + month + "" + day + "" + hour + "" + minute + "" + second;
+  },
+
+  addYear: function addYear(_date, _year) {
+    var year = _date.getFullYear() + _year; //获取当前年份
+    var mon = _date.getMonth(); //获取当前月份
+    var da = _date.getDate(); //获取当前日
+    var h = _date.getHours(); //获取小时
+    var m = _date.getMinutes(); //获取分钟
+    var s = _date.getSeconds(); //获取秒
+    var newDate = new Date(year, mon, da, h, m, s);
+    return newDate;
+  },
+
+  addMonth: function addMonth(_date, _month) {
+    var year = _date.getFullYear(); //获取当前年份
+    var mon = _date.getMonth() + _month; //获取当前月份
+    var da = _date.getDate(); //获取当前日
+    var h = _date.getHours(); //获取小时
+    var m = _date.getMinutes(); //获取分钟
+    var s = _date.getSeconds(); //获取秒
+    var newDate = new Date(year, mon, da, h, m, s);
+    return newDate;
+  },
+
+  addDay: function addDay(_date, _day) {
+    var year = _date.getFullYear(); //获取当前年份
+    var mon = _date.getMonth(); //获取当前月份
+    var da = _date.getDate() + _day; //获取当前日
+    var h = _date.getHours(); //获取小时
+    var m = _date.getMinutes(); //获取分钟
+    var s = _date.getSeconds(); //获取秒
+    var newDate = new Date(year, mon, da, h, m, s);
+    return newDate;
+  },
+
+  addHour: function addHour(_date, _hour) {
+    var year = _date.getFullYear(); //获取当前年份
+    var mon = _date.getMonth(); //获取当前月份
+    var da = _date.getDate(); //获取当前日
+    var h = _date.getHours() + _hour; //获取小时
+    var m = _date.getMinutes(); //获取分钟
+    var s = _date.getSeconds(); //获取秒
+    var newDate = new Date(year, mon, da, h, m, s);
+    return newDate;
+  },
+
+  addMinutes: function addMinutes(_date, _minute) {
+    var year = _date.getFullYear(); //获取当前年份
+    var mon = _date.getMonth(); //获取当前月份
+    var da = _date.getDate(); //获取当前日
+    var h = _date.getHours(); //获取小时
+    var m = _date.getMinutes() + _minute; //获取分钟
+    var s = _date.getSeconds(); //获取秒
+    var newDate = new Date(year, mon, da, h, m, s);
+    return newDate;
+  },
+
+  addSeconds: function addSeconds(_date, _second) {
+    var year = _date.getFullYear(); //获取当前年份
+    var mon = _date.getMonth(); //获取当前月
+    var da = _date.getDate(); //获取当前日
+    var h = _date.getHours(); //获取小时
+    var m = _date.getMinutes(); //获取分钟
+    var s = _date.getSeconds() + _second; //获取秒
+    var newDate = new Date(year, mon, da, h, m, s);
+    return newDate;
+  } };exports.default = _default;
+
+/***/ }),
+/* 192 */
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/constant/url.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var baseUrl = '/';
+var hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
+var _default = {
+  baseUrl: baseUrl,
+  hcBaseUrl: hcBaseUrl, // 登录接口
+  loginUrl: baseUrl + 'app/loginProperty',
+  areaUrl: baseUrl + "app/area.listAreas",
+  GetNoticeListUrl: baseUrl + 'app/notice.listNotices', //公告接口
+  listMyEnteredCommunitys: baseUrl + 'app/community.listMyEnteredCommunitys', //查看员工小区
+  listOwnerRepairs: baseUrl + 'app/ownerRepair.listOwnerRepairs', //查看报修
+  saveOwnerRepair: baseUrl + 'app/ownerRepair.saveOwnerRepair', //维修
+  queryStaffInfos: baseUrl + 'app/query.staff.infos', //查询员工信息
+  changeStaffPwd: baseUrl + 'app/user.changeStaffPwd', //修改密码
+  listAuditHistoryComplaints: baseUrl + 'app/auditUser.listAuditHistoryComplaints', //查询历史单
+  saveComplaint: baseUrl + 'app/complaint', //查询业主房间
+  userLogout: baseUrl + 'app/user.service.logout', //绑定业主
+  listAuditComplaints: baseUrl + 'app/auditUser.listAuditComplaints', //查询绑定业主
+  auditComplaint: baseUrl + 'app/complaint.auditComplaint', //查询业主门禁
+  queryFloors: baseUrl + 'app/floor.queryFloors', // 查询楼栋
+  queryUnits: baseUrl + "app/unit.queryUnits", //查询单元
+  queryRooms: baseUrl + "app/room.queryRooms", //查询房屋
+  applyVisitorApplicationKey: baseUrl + "app/applicationKey.applyVisitorApplicationKey", //上传业主照片
+  uploadOwnerPhoto: baseUrl + "app/owner.uploadOwnerPhoto",
+  getOwnerPhotoPath: hcBaseUrl + "/callComponent/download/getFile/fileByObjId",
+  filePath: hcBaseUrl + "/callComponent/download/getFile/file", //查询业主车位信息
+  queryParkingSpacesByOwner: baseUrl + "app/parkingSpace.queryParkingSpacesByOwner", //查询停车位费用
+  queryFeeByParkingSpace: baseUrl + "app/fee.queryFeeByParkingSpace", //查询物业费用
+  queryFeeByOwner: baseUrl + "app/fee.queryFee", //预下单
+  preOrder: baseUrl + "app/payment/toPay", //查询小区
+  listCommunitys: baseUrl + "app/community.listCommunitys", //查询小区文化
+  listActivitiess: baseUrl + "app/activities.listActivitiess", //查询小区广告
+  listAdvertPhoto: baseUrl + "app/advert.listAdvertPhoto",
+  //查询巡检任务
+  listInspectionTasks: baseUrl + "app/inspectionTask.listInspectionTasks",
+  //巡检任务详情
+  listInspectionTaskDetails: baseUrl + 'app/inspectionTaskDetail.listInspectionTaskDetails',
+  //巡检
+  updateInspectionTaskDetail: baseUrl + 'app/inspectionTaskDetail.updateInspectionTaskDetail',
+  // 查询报修单处理师傅
+  listRepairStaffs: baseUrl + "app/ownerRepair.listRepairStaffs",
+  //查询员工报修单
+  listStaffRepairs: baseUrl + "app/ownerRepair.listStaffRepairs",
+  //查询报修师傅查询
+  listRepairTypeUsers: baseUrl + "app/repair.listRepairTypeUsers",
+  //查询完成报修单
+  listStaffFinishRepairs: baseUrl + "app/ownerRepair.listStaffFinishRepairs",
+  repairDispatch: baseUrl + "app/ownerRepair.repairDispatch",
+  //报修办结
+  repairFinish: baseUrl + "app/ownerRepair.repairFinish",
+  //报修评价
+  appraiseRepair: baseUrl + 'app/repair/appraiseRepair',
+  //查询房屋和业主接口
+  listRoomAndOwner: baseUrl + 'app/fee.listRoomsWhereFeeSet',
+  //查询费用信息
+  listFee: baseUrl + 'app/fee.listFee',
+  //查询缴费历史
+  queryFeeDetail: baseUrl + "app/fee.queryFeeDetail" };exports.default = _default;
+
+/***/ }),
+/* 193 */
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/factory/factory.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _util = _interopRequireDefault(__webpack_require__(/*! ../utils/util.js */ 190));
+var _request = _interopRequireDefault(__webpack_require__(/*! ../context/request.js */ 187));
+var _url = _interopRequireDefault(__webpack_require__(/*! ../constant/url.js */ 192));
+var _mapping = _interopRequireDefault(__webpack_require__(/*! ../constant/mapping.js */ 189));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+
+{
+  /**
+   * 获取用户信息
+   */
+  getUserInfo: function getUserInfo() {
+    var userInfo = uni.getStorageSync(_mapping.default.USER_INFO);
+    if (_util.default.isNull(userInfo)) {
+      uni.redirectTo({
+        url: "/pages/login/login" });
+
+      return;
+    }
+    var _userInfo = JSON.parse(_util.default.desDecrypt(userInfo));
+
+    return _userInfo;
+  },
+  /**
+      * 获取小区信息
+      * @param {Object} reload 是否重新加载 小区信息
+      * @param {Object} _condition 查询小区条件
+      */
+  getCommunity: function getCommunity(reload, _condition) {
+    var _communityInfo = uni.getStorageSync(_mapping.default.COMMUNITY_INFO);
+    var _that = this;
+    return new Promise(function (reslove, reject) {
+      if (_util.default.isNotNull(_communityInfo) && reload != true) {
+        _communityInfo = JSON.parse(_communityInfo);
+        reslove(_communityInfo);
+        return;
+      }
+      //调用远程查询小区信息
+
+      var _userInfo = _that.getUserInfo();
+      if (_util.default.isNull(_condition)) {
+        _condition = {
+          userId: '',
+          storeId: '' };
+
+      }
+      _condition.userId = _userInfo.userId;
+      _condition.storeId = _userInfo.storeId;
+      _request.default.request({
+        url: _url.default.listMyEnteredCommunitys,
+        header: _util.default.getHeaders(),
+        data: _condition,
+        success: function success(res) {
+          if (res.statusCode != 200) {
+            uni.showToast({
+              icon: none,
+              title: res.data });
+
+            return;
+          }
+          var data = res.data;
+          if (data.total < 1) {
+            uni.showToast({
+              icon: none,
+              title: '当前员工还没有隶属小区,请先去后台添加' });
+
+            return;
+          }
+          var _communitys = data.communitys;
+          uni.setStorageSync(_mapping.default.COMMUNITY_INFO, JSON.stringify(_communitys));
+          reslove(_communitys);
+        },
+        fail: function fail(error) {
+          // 调用服务端登录接口失败
+          uni.showToast({
+            title: '调用接口失败' });
+
+        } });
+
+    });
+  },
+  getCurrentCommunity: function getCurrentCommunity() {
+    var currentCommunity = uni.getStorageSync(_mapping.default.CURRENT_COMMUNITY_INFO);
+    if (_util.default.isNull(currentCommunity)) {
+      return {};
+    }
+    if (currentCommunity instanceof Object) {
+      return currentCommunity;
+    }
+    return JSON.parse(currentCommunity);
+  },
+  getLocalFilePath: function getLocalFilePath(path) {
+    if (path.indexOf('_www') === 0 || path.indexOf('_doc') === 0 || path.indexOf('_documents') === 0 || path.indexOf(
+    '_downloads') === 0) {
+      return path;
+    }
+    if (path.indexOf('file://') === 0) {
+      return path;
+    }
+    if (path.indexOf('/storage/emulated/0/') === 0) {
+      return path;
+    }
+    if (path.indexOf('/') === 0) {
+      var localFilePath = plus.io.convertAbsoluteFileSystem(path);
+      if (localFilePath !== path) {
+        return localFilePath;
+      } else {
+        path = path.substr(1);
+      }
+    }
+    return '_www/' + path;
+  },
+  urlTobase64: function urlTobase64(url) {
+    return new Promise(function (resolve, reject) {
+      console.log('url', url);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      wx.getFileSystemManager().readFile({
+        filePath: url, //选择图片返回的相对路径
+        encoding: 'base64', //编码格式
+        success: function success(res) {//成功的回调
+          //console.log('data:image/png;base64,' + res.data);
+          var base64 = 'data:image/png;base64,' + res.data;
+          resolve(base64);
+        },
+        fail: function fail(e) {
+          console.log(e);
+          reject(e);
+        } });
+
+
+    });
+
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 194 */
+/*!******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/store/index.js ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 195));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+_vue.default.use(_vuex.default);
+var store = new _vuex.default.Store({
+  state: {},
+  mutations: {},
+  actions: {} });var _default =
+
+store;exports.default = _default;
+
+/***/ }),
+/* 195 */
+/*!********************************************!*\
+  !*** ./node_modules/vuex/dist/vuex.esm.js ***!
+  \********************************************/
+/*! exports provided: Store, install, mapState, mapMutations, mapGetters, mapActions, createNamespacedHelpers, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapState", function() { return mapState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapMutations", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapGetters", function() { return mapGetters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapActions", function() { return mapActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNamespacedHelpers", function() { return createNamespacedHelpers; });
+/**
+ * vuex v3.0.1
+ * (c) 2017 Evan You
+ * @license MIT
+ */
+var applyMixin = function (Vue) {
+  var version = Number(Vue.version.split('.')[0]);
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit });
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    var _init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      if ( options === void 0 ) options = {};
+
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit;
+      _init.call(this, options);
+    };
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    var options = this.$options;
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store;
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store;
+    }
+  }
+};
+
+var devtoolHook =
+  typeof window !== 'undefined' &&
+  window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+function devtoolPlugin (store) {
+  if (!devtoolHook) { return }
+
+  store._devtoolHook = devtoolHook;
+
+  devtoolHook.emit('vuex:init', store);
+
+  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+    store.replaceState(targetState);
+  });
+
+  store.subscribe(function (mutation, state) {
+    devtoolHook.emit('vuex:mutation', mutation, state);
+  });
+}
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+/**
+ * Deep copy the given object considering circular structure.
+ * This function caches all nested objects and its copies.
+ * If it detects circular structure, use cached copy to avoid infinite loop.
+ *
+ * @param {*} obj
+ * @param {Array<Object>} cache
+ * @return {*}
+ */
+
+
+/**
+ * forEach for object
+ */
+function forEachValue (obj, fn) {
+  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+function isPromise (val) {
+  return val && typeof val.then === 'function'
+}
+
+function assert (condition, msg) {
+  if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+var Module = function Module (rawModule, runtime) {
+  this.runtime = runtime;
+  this._children = Object.create(null);
+  this._rawModule = rawModule;
+  var rawState = rawModule.state;
+  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
+};
+
+var prototypeAccessors$1 = { namespaced: { configurable: true } };
+
+prototypeAccessors$1.namespaced.get = function () {
+  return !!this._rawModule.namespaced
+};
+
+Module.prototype.addChild = function addChild (key, module) {
+  this._children[key] = module;
+};
+
+Module.prototype.removeChild = function removeChild (key) {
+  delete this._children[key];
+};
+
+Module.prototype.getChild = function getChild (key) {
+  return this._children[key]
+};
+
+Module.prototype.update = function update (rawModule) {
+  this._rawModule.namespaced = rawModule.namespaced;
+  if (rawModule.actions) {
+    this._rawModule.actions = rawModule.actions;
+  }
+  if (rawModule.mutations) {
+    this._rawModule.mutations = rawModule.mutations;
+  }
+  if (rawModule.getters) {
+    this._rawModule.getters = rawModule.getters;
+  }
+};
+
+Module.prototype.forEachChild = function forEachChild (fn) {
+  forEachValue(this._children, fn);
+};
+
+Module.prototype.forEachGetter = function forEachGetter (fn) {
+  if (this._rawModule.getters) {
+    forEachValue(this._rawModule.getters, fn);
+  }
+};
+
+Module.prototype.forEachAction = function forEachAction (fn) {
+  if (this._rawModule.actions) {
+    forEachValue(this._rawModule.actions, fn);
+  }
+};
+
+Module.prototype.forEachMutation = function forEachMutation (fn) {
+  if (this._rawModule.mutations) {
+    forEachValue(this._rawModule.mutations, fn);
+  }
+};
+
+Object.defineProperties( Module.prototype, prototypeAccessors$1 );
+
+var ModuleCollection = function ModuleCollection (rawRootModule) {
+  // register root module (Vuex.Store options)
+  this.register([], rawRootModule, false);
+};
+
+ModuleCollection.prototype.get = function get (path) {
+  return path.reduce(function (module, key) {
+    return module.getChild(key)
+  }, this.root)
+};
+
+ModuleCollection.prototype.getNamespace = function getNamespace (path) {
+  var module = this.root;
+  return path.reduce(function (namespace, key) {
+    module = module.getChild(key);
+    return namespace + (module.namespaced ? key + '/' : '')
+  }, '')
+};
+
+ModuleCollection.prototype.update = function update$1 (rawRootModule) {
+  update([], this.root, rawRootModule);
+};
+
+ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
+    var this$1 = this;
+    if ( runtime === void 0 ) runtime = true;
+
+  if (true) {
+    assertRawModule(path, rawModule);
+  }
+
+  var newModule = new Module(rawModule, runtime);
+  if (path.length === 0) {
+    this.root = newModule;
+  } else {
+    var parent = this.get(path.slice(0, -1));
+    parent.addChild(path[path.length - 1], newModule);
+  }
+
+  // register nested modules
+  if (rawModule.modules) {
+    forEachValue(rawModule.modules, function (rawChildModule, key) {
+      this$1.register(path.concat(key), rawChildModule, runtime);
+    });
+  }
+};
+
+ModuleCollection.prototype.unregister = function unregister (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+  if (!parent.getChild(key).runtime) { return }
+
+  parent.removeChild(key);
+};
+
+function update (path, targetModule, newModule) {
+  if (true) {
+    assertRawModule(path, newModule);
+  }
+
+  // update target module
+  targetModule.update(newModule);
+
+  // update nested modules
+  if (newModule.modules) {
+    for (var key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if (true) {
+          console.warn(
+            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
+            'manual reload is needed'
+          );
+        }
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      );
+    }
+  }
+}
+
+var functionAssert = {
+  assert: function (value) { return typeof value === 'function'; },
+  expected: 'function'
+};
+
+var objectAssert = {
+  assert: function (value) { return typeof value === 'function' ||
+    (typeof value === 'object' && typeof value.handler === 'function'); },
+  expected: 'function or object with "handler" function'
+};
+
+var assertTypes = {
+  getters: functionAssert,
+  mutations: functionAssert,
+  actions: objectAssert
+};
+
+function assertRawModule (path, rawModule) {
+  Object.keys(assertTypes).forEach(function (key) {
+    if (!rawModule[key]) { return }
+
+    var assertOptions = assertTypes[key];
+
+    forEachValue(rawModule[key], function (value, type) {
+      assert(
+        assertOptions.assert(value),
+        makeAssertionMessage(path, key, type, value, assertOptions.expected)
+      );
+    });
+  });
+}
+
+function makeAssertionMessage (path, key, type, value, expected) {
+  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
+  if (path.length > 0) {
+    buf += " in module \"" + (path.join('.')) + "\"";
+  }
+  buf += " is " + (JSON.stringify(value)) + ".";
+  return buf
+}
+
+var Vue; // bind on install
+
+var Store = function Store (options) {
+  var this$1 = this;
+  if ( options === void 0 ) options = {};
+
+  // Auto install if it is not done yet and `window` has `Vue`.
+  // To allow users to avoid auto-installation in some cases,
+  // this code should be placed here. See #731
+  if (!Vue && typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+  if (true) {
+    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
+    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
+    assert(this instanceof Store, "Store must be called with the new operator.");
+  }
+
+  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+  var state = options.state; if ( state === void 0 ) state = {};
+  if (typeof state === 'function') {
+    state = state() || {};
+  }
+
+  // store internal state
+  this._committing = false;
+  this._actions = Object.create(null);
+  this._actionSubscribers = [];
+  this._mutations = Object.create(null);
+  this._wrappedGetters = Object.create(null);
+  this._modules = new ModuleCollection(options);
+  this._modulesNamespaceMap = Object.create(null);
+  this._subscribers = [];
+  this._watcherVM = new Vue();
+
+  // bind commit and dispatch to self
+  var store = this;
+  var ref = this;
+  var dispatch = ref.dispatch;
+  var commit = ref.commit;
+  this.dispatch = function boundDispatch (type, payload) {
+    return dispatch.call(store, type, payload)
+  };
+  this.commit = function boundCommit (type, payload, options) {
+    return commit.call(store, type, payload, options)
+  };
+
+  // strict mode
+  this.strict = strict;
+
+  // init root module.
+  // this also recursively registers all sub-modules
+  // and collects all module getters inside this._wrappedGetters
+  installModule(this, state, [], this._modules.root);
+
+  // initialize the store vm, which is responsible for the reactivity
+  // (also registers _wrappedGetters as computed properties)
+  resetStoreVM(this, state);
+
+  // apply plugins
+  plugins.forEach(function (plugin) { return plugin(this$1); });
+
+  if (Vue.config.devtools) {
+    devtoolPlugin(this);
+  }
+};
+
+var prototypeAccessors = { state: { configurable: true } };
+
+prototypeAccessors.state.get = function () {
+  return this._vm._data.$$state
+};
+
+prototypeAccessors.state.set = function (v) {
+  if (true) {
+    assert(false, "Use store.replaceState() to explicit replace store state.");
+  }
+};
+
+Store.prototype.commit = function commit (_type, _payload, _options) {
+    var this$1 = this;
+
+  // check object-style commit
+  var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+
+  var mutation = { type: type, payload: payload };
+  var entry = this._mutations[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown mutation type: " + type));
+    }
+    return
+  }
+  this._withCommit(function () {
+    entry.forEach(function commitIterator (handler) {
+      handler(payload);
+    });
+  });
+  this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  if (
+     true &&
+    options && options.silent
+  ) {
+    console.warn(
+      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
+      'Use the filter functionality in the vue-devtools'
+    );
+  }
+};
+
+Store.prototype.dispatch = function dispatch (_type, _payload) {
+    var this$1 = this;
+
+  // check object-style dispatch
+  var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+
+  var action = { type: type, payload: payload };
+  var entry = this._actions[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown action type: " + type));
+    }
+    return
+  }
+
+  this._actionSubscribers.forEach(function (sub) { return sub(action, this$1.state); });
+
+  return entry.length > 1
+    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+    : entry[0](payload)
+};
+
+Store.prototype.subscribe = function subscribe (fn) {
+  return genericSubscribe(fn, this._subscribers)
+};
+
+Store.prototype.subscribeAction = function subscribeAction (fn) {
+  return genericSubscribe(fn, this._actionSubscribers)
+};
+
+Store.prototype.watch = function watch (getter, cb, options) {
+    var this$1 = this;
+
+  if (true) {
+    assert(typeof getter === 'function', "store.watch only accepts a function.");
+  }
+  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
+};
+
+Store.prototype.replaceState = function replaceState (state) {
+    var this$1 = this;
+
+  this._withCommit(function () {
+    this$1._vm._data.$$state = state;
+  });
+};
+
+Store.prototype.registerModule = function registerModule (path, rawModule, options) {
+    if ( options === void 0 ) options = {};
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+    assert(path.length > 0, 'cannot register the root module by using registerModule.');
+  }
+
+  this._modules.register(path, rawModule);
+  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+  // reset store to update getters...
+  resetStoreVM(this, this.state);
+};
+
+Store.prototype.unregisterModule = function unregisterModule (path) {
+    var this$1 = this;
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  this._modules.unregister(path);
+  this._withCommit(function () {
+    var parentState = getNestedState(this$1.state, path.slice(0, -1));
+    Vue.delete(parentState, path[path.length - 1]);
+  });
+  resetStore(this);
+};
+
+Store.prototype.hotUpdate = function hotUpdate (newOptions) {
+  this._modules.update(newOptions);
+  resetStore(this, true);
+};
+
+Store.prototype._withCommit = function _withCommit (fn) {
+  var committing = this._committing;
+  this._committing = true;
+  fn();
+  this._committing = committing;
+};
+
+Object.defineProperties( Store.prototype, prototypeAccessors );
+
+function genericSubscribe (fn, subs) {
+  if (subs.indexOf(fn) < 0) {
+    subs.push(fn);
+  }
+  return function () {
+    var i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  }
+}
+
+function resetStore (store, hot) {
+  store._actions = Object.create(null);
+  store._mutations = Object.create(null);
+  store._wrappedGetters = Object.create(null);
+  store._modulesNamespaceMap = Object.create(null);
+  var state = store.state;
+  // init all modules
+  installModule(store, state, [], store._modules.root, true);
+  // reset vm
+  resetStoreVM(store, state, hot);
+}
+
+function resetStoreVM (store, state, hot) {
+  var oldVm = store._vm;
+
+  // bind store public getters
+  store.getters = {};
+  var wrappedGetters = store._wrappedGetters;
+  var computed = {};
+  forEachValue(wrappedGetters, function (fn, key) {
+    // use computed to leverage its lazy-caching mechanism
+    computed[key] = function () { return fn(store); };
+    Object.defineProperty(store.getters, key, {
+      get: function () { return store._vm[key]; },
+      enumerable: true // for local getters
+    });
+  });
+
+  // use a Vue instance to store the state tree
+  // suppress warnings just in case the user has added
+  // some funky global mixins
+  var silent = Vue.config.silent;
+  Vue.config.silent = true;
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed: computed
+  });
+  Vue.config.silent = silent;
+
+  // enable strict mode for new vm
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      // dispatch changes in all subscribed watchers
+      // to force getter re-evaluation for hot reloading.
+      store._withCommit(function () {
+        oldVm._data.$$state = null;
+      });
+    }
+    Vue.nextTick(function () { return oldVm.$destroy(); });
+  }
+}
+
+function installModule (store, rootState, path, module, hot) {
+  var isRoot = !path.length;
+  var namespace = store._modules.getNamespace(path);
+
+  // register in namespace map
+  if (module.namespaced) {
+    store._modulesNamespaceMap[namespace] = module;
+  }
+
+  // set state
+  if (!isRoot && !hot) {
+    var parentState = getNestedState(rootState, path.slice(0, -1));
+    var moduleName = path[path.length - 1];
+    store._withCommit(function () {
+      Vue.set(parentState, moduleName, module.state);
+    });
+  }
+
+  var local = module.context = makeLocalContext(store, namespace, path);
+
+  module.forEachMutation(function (mutation, key) {
+    var namespacedType = namespace + key;
+    registerMutation(store, namespacedType, mutation, local);
+  });
+
+  module.forEachAction(function (action, key) {
+    var type = action.root ? key : namespace + key;
+    var handler = action.handler || action;
+    registerAction(store, type, handler, local);
+  });
+
+  module.forEachGetter(function (getter, key) {
+    var namespacedType = namespace + key;
+    registerGetter(store, namespacedType, getter, local);
+  });
+
+  module.forEachChild(function (child, key) {
+    installModule(store, rootState, path.concat(key), child, hot);
+  });
+}
+
+/**
+ * make localized dispatch, commit, getters and state
+ * if there is no namespace, just use root ones
+ */
+function makeLocalContext (store, namespace, path) {
+  var noNamespace = namespace === '';
+
+  var local = {
+    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ( true && !store._actions[type]) {
+          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      return store.dispatch(type, payload)
+    },
+
+    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ( true && !store._mutations[type]) {
+          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      store.commit(type, payload, options);
+    }
+  };
+
+  // getters and state object must be gotten lazily
+  // because they will be changed by vm update
+  Object.defineProperties(local, {
+    getters: {
+      get: noNamespace
+        ? function () { return store.getters; }
+        : function () { return makeLocalGetters(store, namespace); }
+    },
+    state: {
+      get: function () { return getNestedState(store.state, path); }
+    }
+  });
+
+  return local
+}
+
+function makeLocalGetters (store, namespace) {
+  var gettersProxy = {};
+
+  var splitPos = namespace.length;
+  Object.keys(store.getters).forEach(function (type) {
+    // skip if the target getter is not match this namespace
+    if (type.slice(0, splitPos) !== namespace) { return }
+
+    // extract local getter type
+    var localType = type.slice(splitPos);
+
+    // Add a port to the getters proxy.
+    // Define as getter property because
+    // we do not want to evaluate the getters in this time.
+    Object.defineProperty(gettersProxy, localType, {
+      get: function () { return store.getters[type]; },
+      enumerable: true
+    });
+  });
+
+  return gettersProxy
+}
+
+function registerMutation (store, type, handler, local) {
+  var entry = store._mutations[type] || (store._mutations[type] = []);
+  entry.push(function wrappedMutationHandler (payload) {
+    handler.call(store, local.state, payload);
+  });
+}
+
+function registerAction (store, type, handler, local) {
+  var entry = store._actions[type] || (store._actions[type] = []);
+  entry.push(function wrappedActionHandler (payload, cb) {
+    var res = handler.call(store, {
+      dispatch: local.dispatch,
+      commit: local.commit,
+      getters: local.getters,
+      state: local.state,
+      rootGetters: store.getters,
+      rootState: store.state
+    }, payload, cb);
+    if (!isPromise(res)) {
+      res = Promise.resolve(res);
+    }
+    if (store._devtoolHook) {
+      return res.catch(function (err) {
+        store._devtoolHook.emit('vuex:error', err);
+        throw err
+      })
+    } else {
+      return res
+    }
+  });
+}
+
+function registerGetter (store, type, rawGetter, local) {
+  if (store._wrappedGetters[type]) {
+    if (true) {
+      console.error(("[vuex] duplicate getter key: " + type));
+    }
+    return
+  }
+  store._wrappedGetters[type] = function wrappedGetter (store) {
+    return rawGetter(
+      local.state, // local state
+      local.getters, // local getters
+      store.state, // root state
+      store.getters // root getters
+    )
+  };
+}
+
+function enableStrictMode (store) {
+  store._vm.$watch(function () { return this._data.$$state }, function () {
+    if (true) {
+      assert(store._committing, "Do not mutate vuex store state outside mutation handlers.");
+    }
+  }, { deep: true, sync: true });
+}
+
+function getNestedState (state, path) {
+  return path.length
+    ? path.reduce(function (state, key) { return state[key]; }, state)
+    : state
+}
+
+function unifyObjectStyle (type, payload, options) {
+  if (isObject(type) && type.type) {
+    options = payload;
+    payload = type;
+    type = type.type;
+  }
+
+  if (true) {
+    assert(typeof type === 'string', ("Expects string as the type, but found " + (typeof type) + "."));
+  }
+
+  return { type: type, payload: payload, options: options }
+}
+
+function install (_Vue) {
+  if (Vue && _Vue === Vue) {
+    if (true) {
+      console.error(
+        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+      );
+    }
+    return
+  }
+  Vue = _Vue;
+  applyMixin(Vue);
+}
+
+var mapState = normalizeNamespace(function (namespace, states) {
+  var res = {};
+  normalizeMap(states).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedState () {
+      var state = this.$store.state;
+      var getters = this.$store.getters;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
+        if (!module) {
+          return
+        }
+        state = module.context.state;
+        getters = module.context.getters;
+      }
+      return typeof val === 'function'
+        ? val.call(this, state, getters)
+        : state[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+var mapMutations = normalizeNamespace(function (namespace, mutations) {
+  var res = {};
+  normalizeMap(mutations).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedMutation () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      var commit = this.$store.commit;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
+        if (!module) {
+          return
+        }
+        commit = module.context.commit;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [commit].concat(args))
+        : commit.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+var mapGetters = normalizeNamespace(function (namespace, getters) {
+  var res = {};
+  normalizeMap(getters).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    val = namespace + val;
+    res[key] = function mappedGetter () {
+      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
+        return
+      }
+      if ( true && !(val in this.$store.getters)) {
+        console.error(("[vuex] unknown getter: " + val));
+        return
+      }
+      return this.$store.getters[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+var mapActions = normalizeNamespace(function (namespace, actions) {
+  var res = {};
+  normalizeMap(actions).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedAction () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      var dispatch = this.$store.dispatch;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
+        if (!module) {
+          return
+        }
+        dispatch = module.context.dispatch;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [dispatch].concat(args))
+        : dispatch.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+var createNamespacedHelpers = function (namespace) { return ({
+  mapState: mapState.bind(null, namespace),
+  mapGetters: mapGetters.bind(null, namespace),
+  mapMutations: mapMutations.bind(null, namespace),
+  mapActions: mapActions.bind(null, namespace)
+}); };
+
+function normalizeMap (map) {
+  return Array.isArray(map)
+    ? map.map(function (key) { return ({ key: key, val: key }); })
+    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+}
+
+function normalizeNamespace (fn) {
+  return function (namespace, map) {
+    if (typeof namespace !== 'string') {
+      map = namespace;
+      namespace = '';
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/';
+    }
+    return fn(namespace, map)
+  }
+}
+
+function getModuleByNamespace (store, helper, namespace) {
+  var module = store._modulesNamespaceMap[namespace];
+  if ( true && !module) {
+    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
+  }
+  return module
+}
+
+var index_esm = {
+  Store: Store,
+  install: install,
+  version: '3.0.1',
+  mapState: mapState,
+  mapMutations: mapMutations,
+  mapGetters: mapGetters,
+  mapActions: mapActions,
+  createNamespacedHelpers: createNamespacedHelpers
+};
+
+
+/* harmony default export */ __webpack_exports__["default"] = (index_esm);
+
+
+/***/ }),
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/api/index/index.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.loadAdvert = loadAdvert;exports.loadCategory = loadCategory;exports.loadActivitys = loadActivitys; /**
+                                                                                                                                                                                       * 查询 广告信息
+                                                                                                                                                                                       * @param {Object} _that 上下文对象
+                                                                                                                                                                                       * @param {Object} _data 请求内容
+                                                                                                                                                                                       */
+function loadAdvert(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _that.url.listAdvertPhoto,
+      data: _data, //动态数据
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/**
+   * 查询首页 目录
+   */
+function loadCategory() {
+  return {
+    pageone: [{
+      name: "维修工单",
+      src: "/static/image/index_repair.png",
+      href: "/pages/repairOrder/repairOrder" },
+    {
+      name: "维修待办",
+      src: "/static/image/index_dealRepair.png",
+      href: "/pages/repairDispatch/repairDispatch" },
+    {
+      name: "巡检打卡",
+      src: "/static/image/index_inspection.png",
+      href: "/pages/inspection/inspection" },
+    {
+      name: "采购",
+      src: "/static/image/index_purchase.png",
+      href: "/pages/purchase/purchase" },
+    {
+      name: "投诉待办",
+      src: "/static/image/index_complaint.png",
+      href: "/pages/complaintList/complaintList" },
+    {
+      name: "公告",
+      src: "/static/image/index_notice.png",
+      href: "/pages/notice/notice" },
+    {
+      name: "房产查询",
+      src: "/static/image/index_bill.png",
+      href: "/pages/roomDetail/roomDetail" }] };
+
+
+}
+
+/**
+   * 查询文化
+   * @param {Object} _that 上下文 对象
+   * @param {Object} _data 查询内容
+   */
+function loadActivitys(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _that.url.listActivitiess,
+      data: _data, //动态数据
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/***/ }),
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */
+/*!******************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/api/complaint/complaint.js ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.loadTodoCompaint = loadTodoCompaint;exports.auditComplaint = auditComplaint;exports.loadCompaintFinish = loadCompaintFinish;var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 192));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+/**
+                                                                                                                                                                                                                                                                                                                                                                                  * 查询投诉待办
+                                                                                                                                                                                                                                                                                                                                                                                  * @param {Object} _that 上下文对象
+                                                                                                                                                                                                                                                                                                                                                                                  * @param {Object} _data 请求报文
+                                                                                                                                                                                                                                                                                                                                                                                  */
+function loadTodoCompaint(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.listAuditComplaints,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/**
+   * 投诉处理
+   * @param {Object} _that 上下文对象
+   * @param {Object} _data 请求报文
+   */
+function auditComplaint(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.post({
+      url: _url.default.auditComplaint,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+
+/**
+   * 查询投诉待办
+   * @param {Object} _that 上下文对象
+   * @param {Object} _data 请求报文
+   */
+function loadCompaintFinish(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.listAuditHistoryComplaints,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/***/ }),
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */,
+/* 387 */,
+/* 388 */,
+/* 389 */,
+/* 390 */,
+/* 391 */,
+/* 392 */,
+/* 393 */,
+/* 394 */,
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */
+/*!************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/api/repair/repair.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.loadRepairStaff = loadRepairStaff;exports.dispatchRepair = dispatchRepair;exports.finishRepair = finishRepair;exports.appraiseRepair = appraiseRepair;
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 192));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/**
+                                                                                                                                                                   * 查询报修师傅
+                                                                                                                                                                   * @param {Object} _that 上下文对象
+                                                                                                                                                                   * @param {Object} _data 请求报文
+                                                                                                                                                                   */
+function loadRepairStaff(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.listRepairTypeUsers,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/**
+   * 转单和退单
+   * @param {Object} _that 上下文对象
+   * @param {Object} _data 数据处理
+   */
+function dispatchRepair(_that) {
+  return new Promise(function (reslove, reject) {
+    var _data = {
+      "staffId": _that.staffId,
+      "staffName": _that.staffName,
+      "context": _that.content,
+      "repairId": _that.repairId,
+      "repairType": _that.repairType,
+      "action": _that.action,
+      "communityId": _that.java110Context.getCurrentCommunity().communityId,
+      "photos": [],
+      "userId": _that.userId,
+      "userName": _that.userName };
+
+    var _photos = _that.photos;
+    _photos.forEach(function (_item) {
+      _data.photos.push({
+        "photo": _item });
+
+    });
+    var msg = "";
+    if (_data.context == "") {
+      msg = "请填写处理意见";
+    } else if (_data.staffId == "") {
+      msg = "请填写师傅";
+    } else if (_data.staffName == "") {
+      msg = "请填写师傅";
+    } else if (_data.repairId == "") {
+      msg = "数据错误";
+    }
+    if (msg != "") {
+      wx.showToast({
+        title: msg,
+        icon: 'none',
+        duration: 2000 });
+
+      return;
+    }
+    _that.context.post({
+      url: _url.default.repairDispatch,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/**
+   * 办结
+   * @param {Object} _that 上下文对象
+   * @param {Object} _data 数据处理
+   */
+function finishRepair(_that) {
+
+
+  return new Promise(function (reslove, reject) {
+    var _data = {
+      "amount": _that.amount,
+      "feeFlag": _that.feeFlag,
+      "context": _that.content,
+      "repairId": _that.repairId,
+      "repairType": _that.repairType,
+      "action": _that.action,
+      "communityId": _that.java110Context.getCurrentCommunity().communityId,
+      "photos": [],
+      "repairObjType": _that.repairObjType,
+      "userId": _that.userId,
+      "userName": _that.userName };
+
+    var _photos = _that.photos;
+    _photos.forEach(function (_item) {
+      _data.photos.push({
+        "photo": _item });
+
+    });
+    var msg = "";
+    if (_data.context == "") {
+      msg = "请填写处理意见";
+    } else if (_data.repairId == "") {
+      msg = "数据错误";
+    }
+    if (msg != "") {
+      wx.showToast({
+        title: msg,
+        icon: 'none',
+        duration: 2000 });
+
+      return;
+    }
+    _that.context.post({
+      url: _url.default.repairFinish,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/**
+   * 办结
+   * @param {Object} _that 上下文对象
+   * @param {Object} _data 数据处理
+   */
+function appraiseRepair(_that) {
+  return new Promise(function (reslove, reject) {
+    if (_that.context == '') {
+      uni.showToast({
+        title: '请填写评价内容',
+        icon: 'none' });
+
+      return;
+    }
+    if (_that.repairId == '') {
+      uni.showToast({
+        title: '未包含报修信息',
+        icon: 'none' });
+
+      return;
+    }
+
+    var _data = {
+      "appraiseScore": _that.curAppraise,
+      "appraiseType": "10001",
+      "context": _that.context,
+      "appraiseUserId": _that.userId,
+      "appraiseUserName": _that.userName,
+      "objType": "10001",
+      "objId": _that.repairId };
+
+
+    _that.context.post({
+      url: _url.default.appraiseRepair,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */
+/*!********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/api/room/room.js ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.loadRooms = loadRooms;exports.loadRoomAndOwner = loadRoomAndOwner;var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 192));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/**
+                                                                                                                                                                                                                                                                                                                        * 查询楼栋信息
+                                                                                                                                                                                                                                                                                                                        * @param {Object} _that 上下文对象
+                                                                                                                                                                                                                                                                                                                        * @param {Object} _data 请求报文
+                                                                                                                                                                                                                                                                                                                        */
+function loadRooms(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.queryRooms,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+function loadRoomAndOwner(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.listRoomAndOwner,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/***/ }),
+/* 452 */
+/*!******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/api/fee/fee.js ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.loadFees = loadFees;exports.queryFeeDetail = queryFeeDetail;var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 192));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/**
+                                                                                                                                                                                                                                                                                                                  * 查询费用信息
+                                                                                                                                                                                                                                                                                                                  * @param {Object} _that 上下文对象
+                                                                                                                                                                                                                                                                                                                  * @param {Object} _data 请求报文
+                                                                                                                                                                                                                                                                                                                  */
+function loadFees(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.listFee,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/**
+   * 查询缴费历史
+   * @param {Object} _that 上下文对象
+   * @param {Object} _data 请求报文
+   */
+function queryFeeDetail(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.queryFeeDetail,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/***/ }),
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */,
+/* 457 */,
+/* 458 */,
+/* 459 */,
+/* 460 */,
+/* 461 */
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/api/floor/floor.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.loadFloors = loadFloors;
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 192));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/**
+                                                                                                                                                                   * 查询楼栋信息
+                                                                                                                                                                   * @param {Object} _that 上下文对象
+                                                                                                                                                                   * @param {Object} _data 请求报文
+                                                                                                                                                                   */
+function loadFloors(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.queryFloors,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/***/ }),
+/* 462 */,
+/* 463 */,
+/* 464 */,
+/* 465 */,
+/* 466 */,
+/* 467 */,
+/* 468 */
+/*!********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/api/unit/unit.js ***!
+  \********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.loadUnits = loadUnits;var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 192));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/**
+                                                                                                                                                                                                                                                                            * 查询楼栋信息
+                                                                                                                                                                                                                                                                            * @param {Object} _that 上下文对象
+                                                                                                                                                                                                                                                                            * @param {Object} _data 请求报文
+                                                                                                                                                                                                                                                                            */
+function loadUnits(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.queryUnits,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/***/ }),
+/* 469 */,
+/* 470 */,
+/* 471 */,
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 508);
+
+/***/ }),
+/* 508 */
+/*!************************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// This method of obtaining a reference to the global object needs to be
+// kept identical to the way it is obtained in runtime.js
+var g = (function() {
+  return this || (typeof self === "object" && self);
+})() || Function("return this")();
+
+// Use `getOwnPropertyNames` because not all browsers support calling
+// `hasOwnProperty` on the global `self` object in a worker. See #183.
+var hadRuntime = g.regeneratorRuntime &&
+  Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
+
+// Save the old regeneratorRuntime in case it needs to be restored later.
+var oldRuntime = hadRuntime && g.regeneratorRuntime;
+
+// Force reevalutation of runtime.js.
+g.regeneratorRuntime = undefined;
+
+module.exports = __webpack_require__(/*! ./runtime */ 509);
+
+if (hadRuntime) {
+  // Restore the original runtime.
+  g.regeneratorRuntime = oldRuntime;
+} else {
+  // Remove the global property added by runtime.js.
+  try {
+    delete g.regeneratorRuntime;
+  } catch(e) {
+    g.regeneratorRuntime = undefined;
+  }
+}
+
+
+/***/ }),
+/* 509 */
+/*!*****************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+!(function(global) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  var inModule = typeof module === "object";
+  var runtime = global.regeneratorRuntime;
+  if (runtime) {
+    if (inModule) {
+      // If regeneratorRuntime is defined globally and we're in a module,
+      // make the exports object identical to regeneratorRuntime.
+      module.exports = runtime;
+    }
+    // Don't bother evaluating the rest of this file if the runtime was
+    // already defined globally.
+    return;
+  }
+
+  // Define the runtime globally (as expected by generated code) as either
+  // module.exports (if we're in a module) or a new, empty object.
+  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  runtime.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunctionPrototype[toStringTagSymbol] =
+    GeneratorFunction.displayName = "GeneratorFunction";
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      prototype[method] = function(arg) {
+        return this._invoke(method, arg);
+      };
+    });
+  }
+
+  runtime.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  runtime.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      if (!(toStringTagSymbol in genFun)) {
+        genFun[toStringTagSymbol] = "GeneratorFunction";
+      }
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  runtime.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return Promise.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return Promise.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new Promise(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  runtime.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  runtime.async = function(innerFn, outerFn, self, tryLocsList) {
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList)
+    );
+
+    return runtime.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        if (delegate.iterator.return) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  Gp[toStringTagSymbol] = "Generator";
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  runtime.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  runtime.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+})(
+  // In sloppy mode, unbound `this` refers to the global object, fallback to
+  // Function constructor if we're in global strict mode. That is sadly a form
+  // of indirect eval which violates Content Security Policy.
+  (function() {
+    return this || (typeof self === "object" && self);
+  })() || Function("return this")()
+);
+
+
+/***/ }),
+/* 510 */
+/*!********************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/components/sx-rate/common.js ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.getClientRect = getClientRect;function getClientRect(selector, component) {
+  return new Promise(function (resolve, reject) {
+    var query = component ? uni.createSelectorQuery().in(component) : uni.createSelectorQuery();
+    return query.select(selector).boundingClientRect(resolve).exec();
+  });
+
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */
+/*!*********************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/PropertyApp/PropertyApp/components/uni-icons/icons.js ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  "pulldown": "\uE588",
+  "refreshempty": "\uE461",
+  "back": "\uE471",
+  "forward": "\uE470",
+  "more": "\uE507",
+  "more-filled": "\uE537",
+  "scan": "\uE612",
+  "qq": "\uE264",
+  "weibo": "\uE260",
+  "weixin": "\uE261",
+  "pengyouquan": "\uE262",
+  "loop": "\uE565",
+  "refresh": "\uE407",
+  "refresh-filled": "\uE437",
+  "arrowthindown": "\uE585",
+  "arrowthinleft": "\uE586",
+  "arrowthinright": "\uE587",
+  "arrowthinup": "\uE584",
+  "undo-filled": "\uE7D6",
+  "undo": "\uE406",
+  "redo": "\uE405",
+  "redo-filled": "\uE7D9",
+  "bars": "\uE563",
+  "chatboxes": "\uE203",
+  "camera": "\uE301",
+  "chatboxes-filled": "\uE233",
+  "camera-filled": "\uE7EF",
+  "cart-filled": "\uE7F4",
+  "cart": "\uE7F5",
+  "checkbox-filled": "\uE442",
+  "checkbox": "\uE7FA",
+  "arrowleft": "\uE582",
+  "arrowdown": "\uE581",
+  "arrowright": "\uE583",
+  "smallcircle-filled": "\uE801",
+  "arrowup": "\uE580",
+  "circle": "\uE411",
+  "eye-filled": "\uE568",
+  "eye-slash-filled": "\uE822",
+  "eye-slash": "\uE823",
+  "eye": "\uE824",
+  "flag-filled": "\uE825",
+  "flag": "\uE508",
+  "gear-filled": "\uE532",
+  "reload": "\uE462",
+  "gear": "\uE502",
+  "hand-thumbsdown-filled": "\uE83B",
+  "hand-thumbsdown": "\uE83C",
+  "hand-thumbsup-filled": "\uE83D",
+  "heart-filled": "\uE83E",
+  "hand-thumbsup": "\uE83F",
+  "heart": "\uE840",
+  "home": "\uE500",
+  "info": "\uE504",
+  "home-filled": "\uE530",
+  "info-filled": "\uE534",
+  "circle-filled": "\uE441",
+  "chat-filled": "\uE847",
+  "chat": "\uE263",
+  "mail-open-filled": "\uE84D",
+  "email-filled": "\uE231",
+  "mail-open": "\uE84E",
+  "email": "\uE201",
+  "checkmarkempty": "\uE472",
+  "list": "\uE562",
+  "locked-filled": "\uE856",
+  "locked": "\uE506",
+  "map-filled": "\uE85C",
+  "map-pin": "\uE85E",
+  "map-pin-ellipse": "\uE864",
+  "map": "\uE364",
+  "minus-filled": "\uE440",
+  "mic-filled": "\uE332",
+  "minus": "\uE410",
+  "micoff": "\uE360",
+  "mic": "\uE302",
+  "clear": "\uE434",
+  "smallcircle": "\uE868",
+  "close": "\uE404",
+  "closeempty": "\uE460",
+  "paperclip": "\uE567",
+  "paperplane": "\uE503",
+  "paperplane-filled": "\uE86E",
+  "person-filled": "\uE131",
+  "contact-filled": "\uE130",
+  "person": "\uE101",
+  "contact": "\uE100",
+  "images-filled": "\uE87A",
+  "phone": "\uE200",
+  "images": "\uE87B",
+  "image": "\uE363",
+  "image-filled": "\uE877",
+  "location-filled": "\uE333",
+  "location": "\uE303",
+  "plus-filled": "\uE439",
+  "plus": "\uE409",
+  "plusempty": "\uE468",
+  "help-filled": "\uE535",
+  "help": "\uE505",
+  "navigate-filled": "\uE884",
+  "navigate": "\uE501",
+  "mic-slash-filled": "\uE892",
+  "search": "\uE466",
+  "settings": "\uE560",
+  "sound": "\uE590",
+  "sound-filled": "\uE8A1",
+  "spinner-cycle": "\uE465",
+  "download-filled": "\uE8A4",
+  "personadd-filled": "\uE132",
+  "videocam-filled": "\uE8AF",
+  "personadd": "\uE102",
+  "upload": "\uE402",
+  "upload-filled": "\uE8B1",
+  "starhalf": "\uE463",
+  "star-filled": "\uE438",
+  "star": "\uE408",
+  "trash": "\uE401",
+  "phone-filled": "\uE230",
+  "compose": "\uE400",
+  "videocam": "\uE300",
+  "trash-filled": "\uE8DC",
+  "download": "\uE403",
+  "chatbubble-filled": "\uE232",
+  "chatbubble": "\uE202",
+  "cloud-download": "\uE8E4",
+  "cloud-upload-filled": "\uE8E5",
+  "cloud-upload": "\uE8E6",
+  "cloud-download-filled": "\uE8E9",
+  "headphones": "\uE8BF",
+  "shop": "\uE609" };exports.default = _default;
 
 /***/ })
 ]]);

@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "HC掌上物业",
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar"
+  }
 }

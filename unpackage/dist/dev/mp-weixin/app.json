@@ -7,7 +7,39 @@
     "pages/activityes/activityes",
     "pages/activityDetail/activityDetail",
     "pages/notice/notice",
-    "pages/changeCommunity/changeCommunity"
+    "pages/changeCommunity/changeCommunity",
+    "pages/userInfo/userInfo",
+    "pages/changePwd/changePwd",
+    "pages/notice/detail/noticeDetail",
+    "pages/complaintList/complaintList",
+    "pages/auditComplaintOrder/auditComplaintOrder",
+    "pages/complaintOrderDetail/complaintOrderDetail",
+    "pages/complaintOrder/complaintOrder",
+    "pages/floorList/floorList",
+    "pages/unitList/unitList",
+    "pages/roomList/roomList",
+    "pages/repairOrder/repairOrder",
+    "pages/repairDispatch/repairDispatch",
+    "pages/repairDetail/repairDetail",
+    "pages/inspection/inspection",
+    "pages/purchase/purchase",
+    "pages/excuteInspection/excuteInspection",
+    "pages/excuteOneInspection/excuteOneInspection",
+    "pages/purchaseRequest/purchaseRequest",
+    "pages/pOutOfStorageRequest/pOutOfStorageRequest",
+    "pages/purchasingSchedule/purchasingSchedule",
+    "pages/purchaseReview/purchaseReview",
+    "pages/purchaseList/purchaseList",
+    "pages/repairHandle/repairHandle",
+    "pages/repairDispatchFinish/repairDispatchFinish",
+    "pages/appraiseRepair/appraiseRepair",
+    "pages/complaintFinish/complaintFinish",
+    "pages/complaintHandle/complaintHandle",
+    "pages/roomDetail/roomDetail",
+    "pages/selectFloor/selectFloor",
+    "pages/selectUnit/selectUnit",
+    "pages/selectRoom/selectRoom",
+    "pages/feeDetail/feeDetail"
   ],
   "subPackages": [],
   "window": {
@@ -48,6 +80,5 @@
   },
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"
-  },
-  "sitemapLocation": "sitemap20.json"
+  }
 }

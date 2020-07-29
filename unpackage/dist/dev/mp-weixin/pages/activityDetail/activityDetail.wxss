@@ -8,7 +8,7 @@
 }
 .detailContainer .ad_titile{
   text-align: center;
-  margin-top: 30rpx;
+  padding-top: 30rpx;
   margin-bottom: 30rpx;
   font-size: 44rpx;
 }

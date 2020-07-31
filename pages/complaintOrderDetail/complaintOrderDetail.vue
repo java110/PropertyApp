@@ -66,13 +66,13 @@
 						<text class="cuIcon-infofill margin-right-xs"></text>{{auditHistoryOrder.context}}</view>
 				</view>
 			</view>
-			<view class="cu-item" v-if="auditHistoryOrder.photos.length > 0">
+			<!-- <view class="cu-item" v-if="auditHistoryOrder.photos.length > 0">
 				<view class="margin-top grid text-center col-3 grid-square" >
 					<view class="" v-for="(_item,index) in auditHistoryOrder.photos" :key="index">
 						<image mode="scaleToFill" :data-url="srcPath+_item.url" :src="srcPath+_item.url" @tap="preview"></image>
 					</view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 		<view class="cu-timeline margin-top">
 			<view class="cu-time">工单</view>

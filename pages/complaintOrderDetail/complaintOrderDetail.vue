@@ -66,18 +66,38 @@
 						<text class="cuIcon-infofill margin-right-xs"></text>{{auditHistoryOrder.context}}</view>
 				</view>
 			</view>
-		</view>
-		<view class="padding margin-top">
-			<text>审核信息</text>
-		</view>
-		<view class="cu-list menu" >
-			<view class="cu-item">
-				<view class="content">
-					<text class="cuIcon-info text-green"></text>
-					<text class="text-grey">审核结果</text>
+			<view class="cu-item" v-if="auditHistoryOrder.photos.length > 0">
+				<view class="margin-top grid text-center col-3 grid-square" >
+					<view class="" v-for="(_item,index) in auditHistoryOrder.photos" :key="index">
+						<image mode="scaleToFill" :data-url="srcPath+_item.url" :src="srcPath+_item.url" @tap="preview"></image>
+					</view>
 				</view>
-				<view class="action">
-					<text class="text-grey text-sm">{{auditHistoryOrder.stateName}}</text>
+			</view>
+		</view>
+		<view class="cu-timeline margin-top">
+			<view class="cu-time">工单</view>
+			<view class="cu-item " v-for="(item,index) in audits" :key="index">
+				<view class="bg-cyan content"  v-if="item.state == '1001'">
+					<text>{{item.auditName}} 于</text> {{item.auditTime}} 处理完成
+				</view>
+				<view class="bg-cyan content" v-if="item.state == '2002'">
+					<text>{{item.auditName}} </text> 正在处理
+				</view>
+				<view class="bg-cyan content" v-if="item.state == '1001'">
+					<text>处理意见：</text> {{item.message}}
+				</view>
+			</view>
+			
+		</view>
+		
+		<view class="cu-modal" :class="viewImage?'show':''">
+			<view class="cu-dialog">
+				<view class="bg-img" :style="'background-image: url('+ viewImageSrc +');height:800rpx;'">
+					<view class="cu-bar justify-end text-white">
+						<view class="action" @tap="closeViewImage()">
+							<text class="cuIcon-close "></text>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -89,7 +109,11 @@
 		data() {
 			return {
 				complaintId:'',
-				auditHistoryOrder:{}
+				auditHistoryOrder:{},
+				audits:[],
+				srcPath:'',
+				viewImage: false,
+				viewImageSrc: '',
 			}
 		},
 		onLoad(options) {
@@ -97,13 +121,64 @@
 			
 			console.log('options',options);
 			this.complaintId = _complaintId;
+			this.srcPath=this.url.hcBaseUrl;
+			
 			this._loadComplaintHistoryOrder();
+			
+			
+			this._listWorkflowAuditInfo();
 		},
 		methods: {
 			_loadComplaintHistoryOrder:function(){
 				//
 				this.auditHistoryOrder = wx.getStorageSync("_complaintOrderDetail_"+this.complaintId);
 				
+			},
+			_listWorkflowAuditInfo: function(_active) {
+				let that = this;
+				let _paramIn = {
+					businessKey: that.complaintId,
+					communityId: that.auditHistoryOrder.communityId
+				};
+				this.context.request({
+					url: this.url.listWorkflowAuditInfo,
+					header: this.context.getHeaders(),
+					method: "GET",
+					data: _paramIn,
+					success: function(res) {
+						let _json = res.data;
+						
+						if (_json.code == 0) {
+							let _audits = _json.data;
+											
+							that.audits = _audits;
+				
+							return;
+						}
+			
+						wx.showToast({
+							title: _json.msg,
+							icon: 'none',
+							duration: 2000
+						});
+					},
+					fail: function(e) {
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						})
+					}
+				})
+			},
+			preview: function(e) {
+				console.log('图片地址', e);
+				let _url = e.target.dataset.url;
+				this.viewImageSrc = _url;
+				this.viewImage = true;
+			},
+			closeViewImage: function() {
+				this.viewImage = false;
 			},
 		}
 	}

@@ -54,5 +54,7 @@ export default {
 	 //查询费用信息
 	 listFee:baseUrl +'app/fee.listFee',
 	 //查询缴费历史
-	 queryFeeDetail: baseUrl + "app/fee.queryFeeDetail"
+	 queryFeeDetail: baseUrl + "app/fee.queryFeeDetail",
+	 // 投诉 处理意见
+	 listWorkflowAuditInfo: baseUrl + 'app/workflow.listWorkflowAuditInfo'
 }

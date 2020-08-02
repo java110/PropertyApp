@@ -104,7 +104,8 @@ export function finishRepair(_that){
 			"photos":[],
 			"repairObjType":_that.repairObjType,
 			"userId":_that.userId,
-			"userName":_that.userName
+			"userName":_that.userName,
+			"storeId":_that.storeId
 		}
 		let _photos = _that.photos;
 		_photos.forEach(function(_item) {

@@ -103,7 +103,8 @@
 					}
 				],
 				feeIndex: 0,
-				repairObjType: ''
+				repairObjType: '',
+				storeId:''
 			}
 		},
 		onLoad(options) {
@@ -113,6 +114,7 @@
 			this.repairObjType = options.repairObjType;
 			let _userInfo = this.java110Context.getUserInfo();
 			this.userId = _userInfo.userId;
+			this.storeId = _userInfo.storeId
 			this.userName = _userInfo.userName;
 			if (this.action == 'BACK') {
 				this.staffId = options.preStaffId

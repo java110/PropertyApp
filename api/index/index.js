@@ -39,11 +39,11 @@ export function loadCategory(){
 			name: "巡检打卡",
 			src: "/static/image/index_inspection.png",
 			href: "/pages/inspection/inspection"
-		}, {
-			name: "采购",
-			src: "/static/image/index_purchase.png",
-			href: "/pages/purchase/purchase"
-		}, {
+		 }, {
+		// 	name: "采购",
+		// 	src: "/static/image/index_purchase.png",
+		// 	href: "/pages/purchase/purchase"
+		// }, {
 			name: "投诉待办",
 			src: "/static/image/index_complaint.png",
 			href: "/pages/complaintList/complaintList"

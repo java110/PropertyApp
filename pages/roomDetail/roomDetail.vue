@@ -215,7 +215,7 @@
 						_that.fees.forEach(function(item) {
 							let dateStr = item.endTime;
 							let _date = new Date(dateStr);
-							item.newEndTime = (_date.getMonth() + 1) + '-' + _date.getDate();
+							item.newEndTime = (_date.getMonth() + 1) + '/' + _date.getDate();
 						});
 
 					})

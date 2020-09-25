@@ -149,11 +149,11 @@ const _loadArea = function(_level, _parentAreaCode, callBack = _areaList => {}) 
  */
 const getCurrentCommunity = function() {
 	let currentCommunity = uni.getStorageSync(constant.mapping.CURRENT_COMMUNITY_INFO);
-	console.log('当前小区获取',currentCommunity);
+	console.log('当前小区获取', currentCommunity);
 	if (util.string.isNull(currentCommunity)) {
 		return {};
 	}
-	if(currentCommunity instanceof Object){
+	if (currentCommunity instanceof Object) {
 		return currentCommunity;
 	}
 	return JSON.parse(currentCommunity);
@@ -182,6 +182,10 @@ const getCommunity = function(callBack, reload, _condition) {
 		};
 	}
 
+	if (!_condition.hasOwnProperty("page")) {
+		_condition.page = 1;
+		_condition.row = 50;
+	}
 	console.log('_condition', _condition);
 
 	_condition.userId = _userInfo.userId;
@@ -301,12 +305,12 @@ module.exports = {
 	getCommunity: getCommunity,
 	request: request,
 	getCurrentCommunity: getCurrentCommunity,
-	setJson:setJson,
-	setData:setData,
-	getData:getData,
-	getJson:getJson,
-	clear:clear,
-	get:get,
-	setParam:setParam,
-	getParam:getParam
+	setJson: setJson,
+	setData: setData,
+	getData: getData,
+	getJson: getJson,
+	clear: clear,
+	get: get,
+	setParam: setParam,
+	getParam: getParam
 };

@@ -39,8 +39,15 @@ export default {
 			if (util.isNull(_condition)) {
 				_condition = {
 					userId: '',
-					storeId: ''
+					storeId: '',
+					page:1,
+					row:50
 				};
+			}
+			
+			if(!_condition.hasOwnProperty("page")){
+				_condition.page = 1;
+				_condition.row = 50;
 			}
 			_condition.userId = _userInfo.userId;
 			_condition.storeId = _userInfo.storeId;
@@ -51,7 +58,7 @@ export default {
 				success: function(res) {
 					if (res.statusCode != 200) {
 						uni.showToast({
-							icon: none,
+							icon: 'none',
 							title: res.data
 						});
 						return;

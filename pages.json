@@ -251,6 +251,13 @@
 				"navigationBarTitleText": "费用详情"
 			}
         }
+        ,{
+            "path" : "pages/roomPayFee/roomPayFee",
+            "style" : {
+				"navigationBarTitleText": "收银台"
+			}
+        }
+    
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

@@ -20,10 +20,10 @@ export default {
 	 * @param {Date对象} date 
 	 */
 	formatDate: function(date) {
-		year = date.getFullYear();
-		month = date.getMonth() + 1;
-		day = date.getDate();
-		return [year, month, day].map(formatNumber).join('-');
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let day = date.getDate();
+		return [year, month, day].map(this.formatNumber).join('-');
 	}, //字符串转日期格式，strDate要转为日期格式的字符串 
 
 	getDate: function(strDate) {
@@ -138,5 +138,15 @@ export default {
 		let s = _date.getSeconds() + _second; //获取秒
 		let newDate = new Date(year, mon, da, h, m, s);
 		return newDate;
+	},
+	/**
+	 * @description 将时间字符串 转为日期字符串 
+	 * @param {String} _dateTimeString 时间字符串 YYYY-MM-DD hh:mi:ss
+	 * @return {String} _value 日期字符串 YYYY/MM/DD
+	 */
+	dateTimeStringToDateString:function(_dateTimeString){
+		let _value = _dateTimeString.replace(/\-/g, "/");
+		let _tmpValue = new Date(_value);
+		return this.formatDate(_tmpValue);
 	}
 }

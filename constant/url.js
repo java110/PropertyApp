@@ -1,7 +1,7 @@
-const baseUrl= '/';
-const hcBaseUrl= 'https://hc.demo.winqi.cn'; // 登录接口
+const baseUrl = '/';
+const hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
 export default {
-	baseUrl:baseUrl,
+	baseUrl: baseUrl,
 	hcBaseUrl: hcBaseUrl, // 登录接口
 	loginUrl: baseUrl + 'app/loginProperty',
 	areaUrl: baseUrl + "app/area.listAreas",
@@ -48,13 +48,15 @@ export default {
 	//报修办结
 	repairFinish: baseUrl + "app/ownerRepair.repairFinish",
 	//报修评价
-	 appraiseRepair : baseUrl + 'app/repair/appraiseRepair',
-	 //查询房屋和业主接口
-	 listRoomAndOwner: baseUrl + 'app/fee.listRoomsWhereFeeSet',
-	 //查询费用信息
-	 listFee:baseUrl +'app/fee.listFee',
-	 //查询缴费历史
-	 queryFeeDetail: baseUrl + "app/fee.queryFeeDetail",
-	 // 投诉 处理意见
-	 listWorkflowAuditInfo: baseUrl + 'app/workflow.listWorkflowAuditInfo'
+	appraiseRepair: baseUrl + 'app/repair/appraiseRepair',
+	//查询房屋和业主接口
+	listRoomAndOwner: baseUrl + 'app/fee.listRoomsWhereFeeSet',
+	//查询费用信息
+	listFee: baseUrl + 'app/fee.listFee',
+	//查询缴费历史
+	queryFeeDetail: baseUrl + "app/fee.queryFeeDetail",
+	// 投诉 处理意见
+	listWorkflowAuditInfo: baseUrl + 'app/workflow.listWorkflowAuditInfo',
+	listOweFees: baseUrl + 'app/feeApi/listOweFees',
+	toQrOweFeePay: baseUrl + 'app/payment/toQrOweFeePay'
 }

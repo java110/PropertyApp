@@ -55,6 +55,10 @@ export function loadCategory(){
 			name: "房产查询",
 			src: "/static/image/index_bill.png",
 			href: "/pages/roomDetail/roomDetail"
+		}, {
+			name: "收银台",
+			src: "/static/image/index_bill.png",
+			href: "/pages/roomPayFee/roomPayFee"
 		}]
 	};
 }

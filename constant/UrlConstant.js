@@ -83,6 +83,11 @@ const listStaffFinishRepairs = baseUrl +"app/ownerRepair.listStaffFinishRepairs"
 
 const repairDispatch = baseUrl+"app/ownerRepair.repairDispatch";
 
+//查询水电抄表记录
+const listMeterWaters = baseUrl+"app/meterWater.listMeterWaters";
+
+	
+
 
 
 module.exports = {
@@ -122,5 +127,6 @@ module.exports = {
   listStaffRepairs:listStaffRepairs,
   listStaffFinishRepairs:listStaffFinishRepairs,
   listRepairTypeUsers:listRepairTypeUsers,
-  repairDispatch:repairDispatch
+  repairDispatch:repairDispatch,
+  listMeterWaters:listMeterWaters
 };

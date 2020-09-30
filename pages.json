@@ -256,7 +256,19 @@
             "style" : {
 				"navigationBarTitleText": "收银台"
 			}
-        }
+        },
+		{
+		    "path" : "pages/meterReading/meterReading",
+		    "style" : {
+				"navigationBarTitleText": "水电抄表"
+			}
+		},
+		{
+		    "path" : "pages/addmeter/addmeter",
+		    "style" : {
+				"navigationBarTitleText": "抄表"
+			}
+		}
     
     ],
 	"globalStyle": {

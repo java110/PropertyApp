@@ -193,7 +193,8 @@
   height: 70rpx;
   width: 200rpx;
   margin: 0 20rpx;
-  border-radius: 70rpx;
+  -webkit-border-radius: 70rpx;
+          border-radius: 70rpx;
   border: 2rpx solid #ECECEC;
   line-height: 70rpx;
 }
@@ -245,7 +246,8 @@
   font-size: 25rpx;
   margin-left: 15rpx;
   color: #FFD161;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
   background: black;
 }
 .characteristic-selected{
@@ -289,7 +291,8 @@
   height: 40rpx;
   background: #008800;
   color: white;
-  border-radius: 20rpx;
+  -webkit-border-radius: 20rpx;
+          border-radius: 20rpx;
 }
 .heard-location:after{
   content: '';
@@ -311,7 +314,8 @@
   height: 40rpx;
   width: 400rpx;
   background: white;
-  border-radius:20rpx;
+  -webkit-border-radius:20rpx;
+          border-radius:20rpx;
   line-height: 40rpx;
 }
 .heard-search-icon{
@@ -418,7 +422,8 @@
   width: 200rpx;
   height: 150rpx;
   margin: 10rpx 20rpx 0rpx 20rpx;
-  border-radius: 10rpx;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
 }
 .notices-info{
   margin: 10rpx 0rpx 0rpx 20rpx;
@@ -509,7 +514,8 @@
 	width: 200rpx;
 	height: 150rpx;
 	margin: 10rpx 20rpx 0rpx 20rpx;
-	border-radius: 10rpx;
+	-webkit-border-radius: 10rpx;
+	        border-radius: 10rpx;
 }
 .notices-info {
 	margin: 10rpx 0rpx 0rpx 20rpx;

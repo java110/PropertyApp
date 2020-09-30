@@ -39,7 +39,8 @@
     "pages/selectFloor/selectFloor",
     "pages/selectUnit/selectUnit",
     "pages/selectRoom/selectRoom",
-    "pages/feeDetail/feeDetail"
+    "pages/feeDetail/feeDetail",
+    "pages/roomPayFee/roomPayFee"
   ],
   "subPackages": [],
   "window": {

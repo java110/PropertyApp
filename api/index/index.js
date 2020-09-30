@@ -59,6 +59,11 @@ export function loadCategory(){
 			name: "收银台",
 			src: "/static/image/index_bill.png",
 			href: "/pages/roomPayFee/roomPayFee"
+		},
+		{
+			name: "水电抄表",
+			src: "/static/image/index_meter.png",
+			href: "/pages/meterReading/meterReading"
 		}]
 	};
 }

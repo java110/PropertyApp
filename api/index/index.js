@@ -57,7 +57,7 @@ export function loadCategory(){
 			href: "/pages/roomDetail/roomDetail"
 		}, {
 			name: "收银台",
-			src: "/static/image/index_bill.png",
+			src: "/static/image/payOweFee.png",
 			href: "/pages/roomPayFee/roomPayFee"
 		},
 		{

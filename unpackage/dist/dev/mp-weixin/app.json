@@ -40,7 +40,9 @@
     "pages/selectUnit/selectUnit",
     "pages/selectRoom/selectRoom",
     "pages/feeDetail/feeDetail",
-    "pages/roomPayFee/roomPayFee"
+    "pages/roomPayFee/roomPayFee",
+    "pages/meterReading/meterReading",
+    "pages/addmeter/addmeter"
   ],
   "subPackages": [],
   "window": {

@@ -3,9 +3,9 @@
 		<form>
 			<view class="cu-form-group">
 				<view class="title">费用类型</view>
-				<picker @change="PickerChange" :value="index" :range="picker">
+				<picker @change="feeTypesChange" :value="feeType_index" :range="feeTypes">
 					<view class="picker">
-						{{index>-1?picker[index]:'请选择'}}
+						{{feeType_index>-1?feeTypes[index]:'请选择'}}
 					</view>
 				</picker>
 			</view>
@@ -93,15 +93,20 @@
 	export default {
 		data() {
 			return {
-				index: -1,
+				feeType_index: -1,
 				picker: ['111', '222', '333'],
 				date: '2018-12-25',
+				feeTypes:['水费','电费']
 			};
 		},
 		methods: {
 			PickerChange(e) {
 				this.index = e.detail.value
 			},
+			feeTypesChange(e) {
+				this.index = e.detail.value
+			},
+			
 			MultiChange(e) {
 				this.multiIndex = e.detail.value
 			},

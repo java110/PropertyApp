@@ -8488,6 +8488,11 @@ var listStaffFinishRepairs = baseUrl + "app/ownerRepair.listStaffFinishRepairs";
 
 var repairDispatch = baseUrl + "app/ownerRepair.repairDispatch";
 
+//查询水电抄表记录
+var listMeterWaters = baseUrl + "app/meterWater.listMeterWaters";
+
+
+
 
 
 module.exports = {
@@ -8527,7 +8532,8 @@ module.exports = {
   listStaffRepairs: listStaffRepairs,
   listStaffFinishRepairs: listStaffFinishRepairs,
   listRepairTypeUsers: listRepairTypeUsers,
-  repairDispatch: repairDispatch };
+  repairDispatch: repairDispatch,
+  listMeterWaters: listMeterWaters };
 
 /***/ }),
 /* 15 */
@@ -40883,8 +40889,13 @@ function loadCategory() {
       href: "/pages/roomDetail/roomDetail" },
     {
       name: "收银台",
-      src: "/static/image/index_bill.png",
-      href: "/pages/roomPayFee/roomPayFee" }] };
+      src: "/static/image/payOweFee.png",
+      href: "/pages/roomPayFee/roomPayFee" },
+
+    {
+      name: "水电抄表",
+      src: "/static/image/index_meter.png",
+      href: "/pages/meterReading/meterReading" }] };
 
 
 }
@@ -42176,17 +42187,33 @@ module.exports = QRCode;
 /* 514 */,
 /* 515 */,
 /* 516 */,
-/* 517 */
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */,
+/* 525 */,
+/* 526 */,
+/* 527 */,
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */,
+/* 532 */,
+/* 533 */
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 518);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 534);
 
 /***/ }),
-/* 518 */
+/* 534 */
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -42217,7 +42244,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 519);
+module.exports = __webpack_require__(/*! ./runtime */ 535);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -42233,7 +42260,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 519 */
+/* 535 */
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -42964,7 +42991,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 520 */
+/* 536 */
 /*!***********************************************************************!*\
   !*** D:/HbuliderX_workplace/PropertyApp/components/sx-rate/common.js ***!
   \***********************************************************************/
@@ -42982,16 +43009,16 @@ if (hadRuntime) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 521 */,
-/* 522 */,
-/* 523 */,
-/* 524 */,
-/* 525 */,
-/* 526 */,
-/* 527 */,
-/* 528 */,
-/* 529 */,
-/* 530 */
+/* 537 */,
+/* 538 */,
+/* 539 */,
+/* 540 */,
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */,
+/* 545 */,
+/* 546 */
 /*!************************************************************************!*\
   !*** D:/HbuliderX_workplace/PropertyApp/components/uni-icons/icons.js ***!
   \************************************************************************/

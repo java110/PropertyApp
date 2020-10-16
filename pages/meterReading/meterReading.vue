@@ -3,14 +3,14 @@
 		<view class="cu-bar bg-white search myfixed">
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
-				<input type="text" placeholder="房间搜索" v-model="repairName" confirm-type="search"></input>
+				<input type="text" placeholder="请填写房屋编号,如1-1-1123" v-model="roomNum" confirm-type="search"></input>
 			</view>
 			<view class="action">
-				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="_searchRepair()">搜索</button>
+				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="_searchMeter()">搜索</button>
 				<button class="cu-btn bg-gradual-orange shadow-blur round" @tap="_addMeter()">开始抄表</button>
 			</view>
 		</view>
-		<view class="margin-top mytop" v-if="noData==false">
+		<view class="margin-top mytop">
 			<view class="cu-list menu sm-border" v-for="(item,index) in meterReads" :key="index">
 				<view class="cu-item">
 					<view class="content">
@@ -28,11 +28,6 @@
 				</view>
 			</view>
 		</view>
-		
-		<view v-else>
-			<no-data-page></no-data-page>
-		</view>
-
 	</view>
 </template>
 
@@ -43,8 +38,7 @@
 			return {
 				orderImg: this.java110Constant.url.baseUrl + 'img/order.png',
 				meterReads: [],
-				repairName: '',
-				noData:false,
+				roomNum: '',
 			}
 		},
 		components: {
@@ -73,7 +67,7 @@
 					storeId: storeId,
 					userId: _userInfo.userId,
 					communityId: _that.java110Context.getCurrentCommunity().communityId,
-					repairName: _that.repairName
+					roomNum: _that.roomNum
 				};
 				this.java110Context.request({
 					url: _that.java110Constant.url.listMeterWaters,
@@ -92,11 +86,6 @@
 						}
 						let _data = _json.data;
 						_that.meterReads = _data;
-						if(_that.meterReads.length < 1){
-							_that.noData = true;
-							return ;
-						}
-
 						_that.meterReads.forEach(function(item) {
 							let dateStr = item.appointmentTime;
 							console.log(dateStr);
@@ -113,8 +102,8 @@
 					}
 				});
 			},
-			_searchRepair: function() {
-				this._loadmeterReads();
+			_searchMeter: function() {
+				this._loadMeterWaters();
 			},
 			_addMeter:function(){
 				uni.navigateTo({

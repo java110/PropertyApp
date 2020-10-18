@@ -6,7 +6,7 @@
 // 服务器域名
 // const baseUrl = 'https://app.demo.winqi.cn/'; 
 const baseUrl = '/';
-const hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
+const hcBaseUrl = '/'; // 登录接口
 
 const loginUrl = baseUrl + 'app/loginProperty';
 const areaUrl = baseUrl + "app/area.listAreas";

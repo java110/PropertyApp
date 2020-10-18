@@ -1,5 +1,5 @@
 const baseUrl = '/';
-const hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
+const hcBaseUrl = '/'; // 登录接口
 export default {
 	baseUrl: baseUrl,
 	hcBaseUrl: hcBaseUrl, // 登录接口

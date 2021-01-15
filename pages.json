@@ -268,8 +268,19 @@
 		    "style" : {
 				"navigationBarTitleText": "抄表"
 			}
+		},
+		{
+		    "path" : "pages/applyRoom/applyRoom",
+		    "style" : {
+				"navigationBarTitleText": "空置房"
+			}
+		},
+		{
+		    "path" : "pages/applyRoomDetail/applyRoomDetail",
+		    "style" : {
+				"navigationBarTitleText": "空置房详情"
+			}
 		}
-    
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

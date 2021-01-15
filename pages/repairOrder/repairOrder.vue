@@ -23,11 +23,13 @@
 							</view>
 						</view>
 					</view>
-					<view class="action">
+					<view v-if="item.repairWay == 100 && item.state == 1000" class="rob-order text-df text-white bg-green text-center" @tap.stop="_robOrder(item)">
+						抢单
+					</view>
+					<view v-else class="action">
 						<view class="text-grey text-xs">{{item.appointmentTime}}
-						<text class="lg text-gray cuIcon-right margin-left-xs"></text>
+							<text class="lg text-gray cuIcon-right margin-left-xs"></text>
 						</view>
-						
 					</view>
 				</view>
 			</view>
@@ -123,6 +125,38 @@
 				uni.navigateTo({
 					url: "/pages/repairDetail/repairDetail?repairId=" + _item.repairId + '&storeId=' + this.storeId
 				});
+			},
+			
+			/**
+			 * 抢单
+			 * @param {Object} _item
+			 */
+			_robOrder: function(_item){
+				let _that = this;
+				let _objData = {
+					communityId: _that.java110Context.getCurrentCommunity().communityId,
+					repairId: _item.repairId
+				};
+				this.java110Context.request({
+					url: _that.java110Constant.url.robRepairOrder,
+					header: _that.java110Context.getHeaders(),
+					method: "POST",
+					data: _objData, //动态数据
+					success: function(res) {
+						wx.showToast({
+							title: res.data.msg,
+							duration: 2000
+						});
+						_that._loadRepairOrders();
+					},
+					fail: function(e) {
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
 			}
 
 		}
@@ -136,5 +170,12 @@
 
 	.cu-list+.cu-list {
 		margin-top: 20upx;
+	}
+	/* 抢单按钮 */
+	.rob-order{
+		width: 80upx;
+		height: 80upx;
+		line-height: 80upx;
+		border-radius: 50%;
 	}
 </style>

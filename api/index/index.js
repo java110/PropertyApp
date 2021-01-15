@@ -64,7 +64,14 @@ export function loadCategory(){
 			name: "水电抄表",
 			src: "/static/image/index_meter.png",
 			href: "/pages/meterReading/meterReading"
-		}]
+		}],
+		pagetwo:[
+			{
+				name: "空置房",
+				src: "/static/image/index_complaint.png",
+				href: "/pages/applyRoom/applyRoom"
+			}
+		]
 	};
 }
 

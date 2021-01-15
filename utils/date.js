@@ -148,5 +148,50 @@ export default {
 		let _value = _dateTimeString.replace(/\-/g, "/");
 		let _tmpValue = new Date(_value);
 		return this.formatDate(_tmpValue);
+	},
+	/**
+	 * 日期转化为字符串‘Y-m-d H:i:s’
+	 * @param {Object} _date
+	 */
+	date2String: function(_date){
+		let date = new Date(_date);
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let day = date.getDate();
+		let hour = date.getHours();
+		let minute = date.getMinutes();
+		let second = date.getSeconds();
+		if (month < 10) {
+			month = '0' + month;
+		}
+		if (day < 10) {
+			day = '0' + day;
+		}
+		if (hour < 10) {
+			hour = '0' + hour;
+		}
+		if (minute < 10) {
+			minute = '0' + minute;
+		}
+		if (second < 10) {
+			second = '0' + second;
+		}
+		return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+	},
+	
+	
+	/**
+	 * 对比时间
+	 * @param {Object} date1
+	 * @param {Object} date2
+	 */
+	compareDate:function(date1,date2){
+		var oDate1 = new Date(date1);
+		var oDate2 = new Date(date2);
+		if(oDate1.getTime() > oDate2.getTime()){
+			return true; //第一个大
+		} else {
+			return false; //第二个大
+		}
 	}
 }

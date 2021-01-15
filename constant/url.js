@@ -58,5 +58,12 @@ export default {
 	// 投诉 处理意见
 	listWorkflowAuditInfo: baseUrl + 'app/workflow.listWorkflowAuditInfo',
 	listOweFees: baseUrl + 'app/feeApi/listOweFees',
-	toQrOweFeePay: baseUrl + 'app/payment/toQrOweFeePay'
+	toQrOweFeePay: baseUrl + 'app/payment/toQrOweFeePay',
+	// 报修抢单
+	robRepairOrder: baseUrl + 'callComponent/ownerRepair.grabbingRepair',
+	// 获取空置房申请列表
+	listApplyRoom: baseUrl + 'app/applyRoomDiscount/queryApplyRoomDiscount',
+	queryFeeDiscount: baseUrl + "app/feeDiscount/queryFeeDiscount",
+	updateApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/updateApplyRoomDiscount",
+	updateReviewApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/updateReviewApplyRoomDiscount",
 }

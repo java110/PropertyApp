@@ -85,6 +85,8 @@ const repairDispatch = baseUrl+"app/ownerRepair.repairDispatch";
 
 //查询水电抄表记录
 const listMeterWaters = baseUrl+"app/meterWater.listMeterWaters";
+// 报修抢单
+const robRepairOrder = baseUrl + "callComponent/ownerRepair.grabbingRepair";
 
 	
 
@@ -128,5 +130,6 @@ module.exports = {
   listStaffFinishRepairs:listStaffFinishRepairs,
   listRepairTypeUsers:listRepairTypeUsers,
   repairDispatch:repairDispatch,
-  listMeterWaters:listMeterWaters
+  listMeterWaters:listMeterWaters,
+  robRepairOrder: robRepairOrder
 };

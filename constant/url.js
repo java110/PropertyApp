@@ -66,4 +66,6 @@ export default {
 	queryFeeDiscount: baseUrl + "app/feeDiscount/queryFeeDiscount",
 	updateApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/updateApplyRoomDiscount",
 	updateReviewApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/updateReviewApplyRoomDiscount",
+	queryMenus: baseUrl + "app/query.menu.info",
+	listStaffPrivileges: baseUrl + "callComponent/staffPrivilege/listStaffPrivileges",
 }

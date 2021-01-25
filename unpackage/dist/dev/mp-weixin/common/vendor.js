@@ -904,7 +904,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"HC掌上物业","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2556,11 +2556,13 @@ Dep.SharedObject.targetStack = [];
 function pushTarget (target) {
   Dep.SharedObject.targetStack.push(target);
   Dep.SharedObject.target = target;
+  Dep.target = target;
 }
 
 function popTarget () {
   Dep.SharedObject.targetStack.pop();
   Dep.SharedObject.target = Dep.SharedObject.targetStack[Dep.SharedObject.targetStack.length - 1];
+  Dep.target = Dep.SharedObject.target;
 }
 
 /*  */
@@ -7329,7 +7331,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"HC掌上物业","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7350,14 +7352,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"HC掌上物业","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"HC掌上物业","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7401,13 +7403,14 @@ function cloneWithData(vm) {
   }, ret);
 
   // vue-composition-api
-  var rawBindings = vm.__secret_vfa_state__ && vm.__secret_vfa_state__.rawBindings;
+  var compositionApiState = vm.__composition_api_state__ || vm.__secret_vfa_state__;
+  var rawBindings = compositionApiState && compositionApiState.rawBindings;
   if (rawBindings) {
     Object.keys(rawBindings).forEach(function (key) {
       ret[key] = vm[key];
     });
   }
-  
+
   //TODO 需要把无用数据处理掉，比如 list=>l0 则 list 需要移除，否则多传输一份数据
   Object.assign(ret, vm.$mp.data || {});
   if (
@@ -7442,7 +7445,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"HC掌上物业","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7879,9 +7882,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!*****************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/pages.json ***!
-  \*****************************************************/
+/*!******************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/pages.json ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8022,9 +8025,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 11 */
-/*!********************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/context/Java110Context.js ***!
-  \********************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/context/Java110Context.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8347,9 +8350,9 @@ module.exports = {
 
 /***/ }),
 /* 12 */
-/*!************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/constant/index.js ***!
-  \************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/constant/index.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8374,9 +8377,9 @@ module.exports = {
 
 /***/ }),
 /* 13 */
-/*!******************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/constant/AppConstant.js ***!
-  \******************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/constant/AppConstant.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8397,9 +8400,9 @@ module.exports = AppConstant;
 
 /***/ }),
 /* 14 */
-/*!******************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/constant/UrlConstant.js ***!
-  \******************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/constant/UrlConstant.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8411,7 +8414,7 @@ module.exports = AppConstant;
 // 服务器域名
 // const baseUrl = 'https://app.demo.winqi.cn/'; 
 var baseUrl = '/';
-var hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
+var hcBaseUrl = '/'; // 登录接口
 
 var loginUrl = baseUrl + 'app/loginProperty';
 var areaUrl = baseUrl + "app/area.listAreas";
@@ -8490,6 +8493,8 @@ var repairDispatch = baseUrl + "app/ownerRepair.repairDispatch";
 
 //查询水电抄表记录
 var listMeterWaters = baseUrl + "app/meterWater.listMeterWaters";
+// 报修抢单
+var robRepairOrder = baseUrl + "callComponent/ownerRepair.grabbingRepair";
 
 
 
@@ -8533,13 +8538,14 @@ module.exports = {
   listStaffFinishRepairs: listStaffFinishRepairs,
   listRepairTypeUsers: listRepairTypeUsers,
   repairDispatch: repairDispatch,
-  listMeterWaters: listMeterWaters };
+  listMeterWaters: listMeterWaters,
+  robRepairOrder: robRepairOrder };
 
 /***/ }),
 /* 15 */
-/*!**********************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/constant/MappingConstant.js ***!
-  \**********************************************************************/
+/*!***********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/constant/MappingConstant.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8571,9 +8577,9 @@ module.exports = MappingConstant;
 
 /***/ }),
 /* 16 */
-/*!*********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/utils/index.js ***!
-  \*********************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/utils/index.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8596,9 +8602,9 @@ module.exports = {
 
 /***/ }),
 /* 17 */
-/*!************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/utils/CoreUtil.js ***!
-  \************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/utils/CoreUtil.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8647,9 +8653,9 @@ module.exports = CoreUtil;
 
 /***/ }),
 /* 18 */
-/*!************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/utils/DateUtil.js ***!
-  \************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/utils/DateUtil.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8896,9 +8902,9 @@ module.exports = {
 
 /***/ }),
 /* 19 */
-/*!***********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/utils/DesUtil.js ***!
-  \***********************************************************/
+/*!************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/utils/DesUtil.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8945,9 +8951,9 @@ module.exports = {
 
 /***/ }),
 /* 20 */
-/*!***********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/lib/crypto-js.js ***!
-  \***********************************************************/
+/*!************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/lib/crypto-js.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15003,7 +15009,7 @@ module.exports = {
   return CryptoJS;
 
 });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../HBuilderX.2.6.11.20200409.full/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../software/HBuilderX/plugins/uniapp-cli/node_modules/webpack/buildin/global.js */ 3)))
 
 /***/ }),
 /* 21 */
@@ -38361,9 +38367,9 @@ function randomFillSync (buf, offset, size) {
 
 /***/ }),
 /* 178 */
-/*!**************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/utils/StringUtil.js ***!
-  \**************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/utils/StringUtil.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -38390,15 +38396,57 @@ var isNotNull = function isNotNull(_obj) {
   return true;
 };
 
+/**
+    * 字符串工具类
+    * 
+    * add by 吴学文 2020-09-25
+    */
+
+/**
+        * 判断是否为空
+        * @param {Object} _value 字符串
+        */
+var isEmpty = function isEmpty(_value) {
+  var type = typeof _value;
+
+  switch (type) {
+    case 'number':
+      if (isFinite(_value)) {
+        if (_value == 0) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    case 'object':
+      for (var i in _value) {
+        return false;
+      }
+      return true;
+    case 'string':
+      if (_value.length == 0) {
+        return true;
+      } else {
+        return false;
+      }
+    default:
+      return true;}
+
+};
+
+
 module.exports = {
   isNull: isNull,
-  isNotNull: isNotNull };
+  isNotNull: isNotNull,
+  isEmpty: isEmpty };
 
 /***/ }),
 /* 179 */
-/*!***********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/factory/index.js ***!
-  \***********************************************************/
+/*!************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/factory/index.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38431,9 +38479,9 @@ module.exports = {
 
 /***/ }),
 /* 180 */
-/*!******************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/factory/LoginFactory.js ***!
-  \******************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/factory/LoginFactory.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38548,9 +38596,9 @@ module.exports = new LoginFactory();
 
 /***/ }),
 /* 181 */
-/*!*****************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/factory/UserFactory.js ***!
-  \*****************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/factory/UserFactory.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38602,9 +38650,9 @@ module.exports = new UserFactory();
 
 /***/ }),
 /* 182 */
-/*!********************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/lib/qqmap-wx-jssdk.min.js ***!
-  \********************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/lib/qqmap-wx-jssdk.min.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -38612,9 +38660,9 @@ function _classCallCheck(instance, Constructor) {if (!(instance instanceof Const
 
 /***/ }),
 /* 183 */
-/*!*****************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/factory/FileFactory.js ***!
-  \*****************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/factory/FileFactory.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -38657,9 +38705,9 @@ module.exports = FileFactory;
 
 /***/ }),
 /* 184 */
-/*!*****************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/factory/CoreFactory.js ***!
-  \*****************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/factory/CoreFactory.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -38696,9 +38744,9 @@ module.exports = new CoreFactory();
 
 /***/ }),
 /* 185 */
-/*!*****************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/factory/HttpFactory.js ***!
-  \*****************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/factory/HttpFactory.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -38757,9 +38805,9 @@ module.exports = new HttpFactory();
 
 /***/ }),
 /* 186 */
-/*!*******************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/factory/Base64Factory.js ***!
-  \*******************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/factory/Base64Factory.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -38862,9 +38910,9 @@ module.exports = Base64Factory;
 
 /***/ }),
 /* 187 */
-/*!*************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/context/context.js ***!
-  \*************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/context/context.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38992,9 +39040,9 @@ var _date = _interopRequireDefault(__webpack_require__(/*! ../utils/date.js */ 1
 
 /***/ }),
 /* 188 */
-/*!*************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/context/request.js ***!
-  \*************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/context/request.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39019,9 +39067,9 @@ var _date = _interopRequireDefault(__webpack_require__(/*! ../utils/date.js */ 1
 
 /***/ }),
 /* 189 */
-/*!***********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/factory/login.js ***!
-  \***********************************************************/
+/*!************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/factory/login.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39109,9 +39157,9 @@ var _date = _interopRequireDefault(__webpack_require__(/*! ../utils/date.js */ 1
 
 /***/ }),
 /* 190 */
-/*!**************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/constant/mapping.js ***!
-  \**************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/constant/mapping.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39136,9 +39184,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 /***/ }),
 /* 191 */
-/*!********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/utils/util.js ***!
-  \********************************************************/
+/*!*********************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/utils/util.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39266,9 +39314,9 @@ var keyvi = 'java110_hc_wuxw';var _default =
 
 /***/ }),
 /* 192 */
-/*!********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/utils/date.js ***!
-  \********************************************************/
+/*!*********************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/utils/date.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39423,19 +39471,64 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     var _value = _dateTimeString.replace(/\-/g, "/");
     var _tmpValue = new Date(_value);
     return this.formatDate(_tmpValue);
+  },
+  /**
+      * 日期转化为字符串‘Y-m-d H:i:s’
+      * @param {Object} _date
+      */
+  date2String: function date2String(_date) {
+    var date = new Date(_date);
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    if (month < 10) {
+      month = '0' + month;
+    }
+    if (day < 10) {
+      day = '0' + day;
+    }
+    if (hour < 10) {
+      hour = '0' + hour;
+    }
+    if (minute < 10) {
+      minute = '0' + minute;
+    }
+    if (second < 10) {
+      second = '0' + second;
+    }
+    return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+  },
+
+
+  /**
+      * 对比时间
+      * @param {Object} date1
+      * @param {Object} date2
+      */
+  compareDate: function compareDate(date1, date2) {
+    var oDate1 = new Date(date1);
+    var oDate2 = new Date(date2);
+    if (oDate1.getTime() > oDate2.getTime()) {
+      return true; //第一个大
+    } else {
+      return false; //第二个大
+    }
   } };exports.default = _default;
 
 /***/ }),
 /* 193 */
-/*!**********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/constant/url.js ***!
-  \**********************************************************/
+/*!***********************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/constant/url.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var baseUrl = '/';
-var hcBaseUrl = 'https://hc.demo.winqi.cn'; // 登录接口
+var hcBaseUrl = '/'; // 登录接口
 var _default = {
   baseUrl: baseUrl,
   hcBaseUrl: hcBaseUrl, // 登录接口
@@ -39494,13 +39587,21 @@ var _default = {
   // 投诉 处理意见
   listWorkflowAuditInfo: baseUrl + 'app/workflow.listWorkflowAuditInfo',
   listOweFees: baseUrl + 'app/feeApi/listOweFees',
-  toQrOweFeePay: baseUrl + 'app/payment/toQrOweFeePay' };exports.default = _default;
+  toQrOweFeePay: baseUrl + 'app/payment/toQrOweFeePay',
+  // 报修抢单
+  robRepairOrder: baseUrl + 'callComponent/ownerRepair.grabbingRepair',
+  // 获取空置房申请列表
+  listApplyRoom: baseUrl + 'app/applyRoomDiscount/queryApplyRoomDiscount',
+  queryFeeDiscount: baseUrl + "app/feeDiscount/queryFeeDiscount",
+  updateApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/updateApplyRoomDiscount",
+  updateReviewApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/updateReviewApplyRoomDiscount",
+  queryMenus: baseUrl + "app/query.menu.info" };exports.default = _default;
 
 /***/ }),
 /* 194 */
-/*!*************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/factory/factory.js ***!
-  \*************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/factory/factory.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -39686,9 +39787,9 @@ var _mapping = _interopRequireDefault(__webpack_require__(/*! ../constant/mappin
 
 /***/ }),
 /* 195 */
-/*!*********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/store/index.js ***!
-  \*********************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/store/index.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40823,22 +40924,44 @@ var index = {
 /* 201 */,
 /* 202 */,
 /* 203 */
-/*!*************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/api/index/index.js ***!
-  \*************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/api/index/index.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.loadAdvert = loadAdvert;exports.loadCategory = loadCategory;exports.loadActivitys = loadActivitys; /**
-                                                                                                                                                                                       * 查询 广告信息
-                                                                                                                                                                                       * @param {Object} _that 上下文对象
-                                                                                                                                                                                       * @param {Object} _data 请求内容
-                                                                                                                                                                                       */
+Object.defineProperty(exports, "__esModule", { value: true });exports.loadAdvert = loadAdvert;exports.loadCategoryMenus = loadCategoryMenus;exports.loadCategory = loadCategory;exports.loadActivitys = loadActivitys; /**
+                                                                                                                                                                                                                                     * 查询 广告信息
+                                                                                                                                                                                                                                     * @param {Object} _that 上下文对象
+                                                                                                                                                                                                                                     * @param {Object} _data 请求内容
+                                                                                                                                                                                                                                     */
 function loadAdvert(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.get({
       url: _that.url.listAdvertPhoto,
+      data: _data, //动态数据
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/**
+   * 查询首页 目录
+   */
+function loadCategoryMenus() {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _that.url.queryMenus,
       data: _data, //动态数据
       success: function success(res) {
         reslove(res);
@@ -40895,7 +41018,14 @@ function loadCategory() {
     {
       name: "水电抄表",
       src: "/static/image/index_meter.png",
-      href: "/pages/meterReading/meterReading" }] };
+      href: "/pages/meterReading/meterReading" }],
+
+    pagetwo: [
+    {
+      name: "空置房",
+      src: "/static/image/index_complaint.png",
+      href: "/pages/applyRoom/applyRoom" }] };
+
 
 
 }
@@ -40999,7 +41129,70 @@ function loadActivitys(_that, _data) {
 /* 275 */,
 /* 276 */,
 /* 277 */,
-/* 278 */,
+/* 278 */
+/*!**************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/utils/ImageUtil.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.formatRichText = formatRichText;exports.replaceImgSrc = replaceImgSrc;var _StringUtil = __webpack_require__(/*! ./StringUtil */ 178);
+
+
+/**
+                                                                                                                                                                                                     * 处理富文本里的图片宽度自适应
+                                                                                                                                                                                                     * 1.去掉img标签里的style、width、height属性
+                                                                                                                                                                                                     * 2.img标签添加style属性：max-width:100%;height:auto
+                                                                                                                                                                                                     * 3.修改所有style里的width属性为max-width:100%
+                                                                                                                                                                                                     * 4.去掉<br/>标签
+                                                                                                                                                                                                     * @param html
+                                                                                                                                                                                                     * @returns {void|string|*}
+                                                                                                                                                                                                     */
+function formatRichText(html) {
+  var newContent = html.replace(/<img[^>]*>/gi, function (match, capture) {
+    match = match.replace(/style="[^"]+"/gi, '').replace(/style='[^']+'/gi, '');
+    match = match.replace(/width="[^"]+"/gi, '').replace(/width='[^']+'/gi, '');
+    match = match.replace(/height="[^"]+"/gi, '').replace(/height='[^']+'/gi, '');
+    return match;
+  });
+  newContent = newContent.replace(/style="[^"]+"/gi, function (match, capture) {
+    match = match.replace(/width:[^;]+;/gi, 'max-width:100%;').replace(/width:[^;]+;/gi, 'max-width:100%;');
+    return match;
+  });
+  newContent = newContent.replace(/<br[^>]*\/>/gi, '');
+  newContent = newContent.replace(/\<img/gi, '<img style="max-width:100%;height:auto;display:block;margin:10px 0;"');
+  return newContent;
+}
+/**
+   * 替换 图片src
+   * @param {Object} _content 富文本
+   * @param {Object} _url 图片前缀
+   */
+function replaceImgSrc(_content, _url) {
+  console.log('_content', typeof _content);
+  if ((0, _StringUtil.isEmpty)(_content)) {
+    return _content;
+  }
+  // a 为富文本的字符串内容，为了测试，只写了img标签
+  var b = /<img [^>]*src=['"]([^'"]+)[^>]*>/g; // img 标签取src里面内容的正则
+  var s = _content.match(b); // 取到所有img标签 放到数组 s里面
+  if (!(0, _StringUtil.isEmpty)(s)) {
+    for (var i = 0; i < s.length; i++) {
+      var srcImg = s[i].replace(b, '$1'); //取src面的内容
+      if (srcImg.slice(0, 4) == 'http' || srcImg.slice(0, 5) == 'https') {
+        //若src前4位置或者前5位是http、https则不做任何修改
+      } else {
+        //修改富文本字符串内容 img标签src 相对路径改为绝对路径
+        _content = _content.replace(srcImg, _url + srcImg);
+      }
+    }
+  }
+
+  return formatRichText(_content);
+}
+
+/***/ }),
 /* 279 */,
 /* 280 */,
 /* 281 */,
@@ -41007,10 +41200,11 @@ function loadActivitys(_that, _data) {
 /* 283 */,
 /* 284 */,
 /* 285 */,
-/* 286 */
-/*!*********************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/api/complaint/complaint.js ***!
-  \*********************************************************************/
+/* 286 */,
+/* 287 */
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/api/complaint/complaint.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41091,7 +41285,6 @@ function loadCompaintFinish(_that, _data) {
 }
 
 /***/ }),
-/* 287 */,
 /* 288 */,
 /* 289 */,
 /* 290 */,
@@ -41223,10 +41416,11 @@ function loadCompaintFinish(_that, _data) {
 /* 416 */,
 /* 417 */,
 /* 418 */,
-/* 419 */
-/*!***************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/api/repair/repair.js ***!
-  \***************************************************************/
+/* 419 */,
+/* 420 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/api/repair/repair.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41428,7 +41622,6 @@ function appraiseRepair(_that) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 420 */,
 /* 421 */,
 /* 422 */,
 /* 423 */,
@@ -41460,10 +41653,11 @@ function appraiseRepair(_that) {
 /* 449 */,
 /* 450 */,
 /* 451 */,
-/* 452 */
-/*!***********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/api/room/room.js ***!
-  \***********************************************************/
+/* 452 */,
+/* 453 */
+/*!************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/api/room/room.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41513,10 +41707,10 @@ function loadRoomAndOwner(_that, _data) {
 }
 
 /***/ }),
-/* 453 */
-/*!*********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/api/fee/fee.js ***!
-  \*********************************************************/
+/* 454 */
+/*!**********************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/api/fee/fee.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41625,7 +41819,6 @@ function getRoomOweFees(_that, _objData) {
 }
 
 /***/ }),
-/* 454 */,
 /* 455 */,
 /* 456 */,
 /* 457 */,
@@ -41633,10 +41826,11 @@ function getRoomOweFees(_that, _objData) {
 /* 459 */,
 /* 460 */,
 /* 461 */,
-/* 462 */
-/*!*************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/api/floor/floor.js ***!
-  \*************************************************************/
+/* 462 */,
+/* 463 */
+/*!**************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/api/floor/floor.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41668,16 +41862,16 @@ function loadFloors(_that, _data) {
 }
 
 /***/ }),
-/* 463 */,
 /* 464 */,
 /* 465 */,
 /* 466 */,
 /* 467 */,
 /* 468 */,
-/* 469 */
-/*!***********************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/api/unit/unit.js ***!
-  \***********************************************************/
+/* 469 */,
+/* 470 */
+/*!************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/api/unit/unit.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41708,7 +41902,6 @@ function loadUnits(_that, _data) {
 }
 
 /***/ }),
-/* 470 */,
 /* 471 */,
 /* 472 */,
 /* 473 */,
@@ -41728,10 +41921,11 @@ function loadUnits(_that, _data) {
 /* 487 */,
 /* 488 */,
 /* 489 */,
-/* 490 */
-/*!**************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/lib/weapp-qrcode.js ***!
-  \**************************************************************/
+/* 490 */,
+/* 491 */
+/*!***************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/lib/weapp-qrcode.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -42161,7 +42355,6 @@ var QRCode;
 module.exports = QRCode;
 
 /***/ }),
-/* 491 */,
 /* 492 */,
 /* 493 */,
 /* 494 */,
@@ -42186,7 +42379,138 @@ module.exports = QRCode;
 /* 513 */,
 /* 514 */,
 /* 515 */,
-/* 516 */,
+/* 516 */
+/*!**************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/api/apply/apply.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.loadApplyRooms = loadApplyRooms;exports.loadFeeDiscount = loadFeeDiscount;exports.uploadCheckUpdate = uploadCheckUpdate;exports.uploadReviewUpdate = uploadReviewUpdate;var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 193));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/**
+                                                                                                                                                                                                                                                                                                                                                                                                                              * 查询空置房信息
+                                                                                                                                                                                                                                                                                                                                                                                                                              * @param {Object} _that 上下文对象
+                                                                                                                                                                                                                                                                                                                                                                                                                              * @param {Object} _data 请求报文
+                                                                                                                                                                                                                                                                                                                                                                                                                              */
+function loadApplyRooms(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.listApplyRoom,
+      data: _data,
+      success: function success(res) {
+        if (res.data.code == 0) {
+          reslove(res.data.data);
+        } else {
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000 });
+
+        }
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/**
+   * 根据优惠类型查询优惠列表
+   */
+function loadFeeDiscount(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.queryFeeDiscount,
+      data: _data,
+      success: function success(res) {
+        if (res.data.code == 0) {
+          reslove(res.data.data);
+        } else {
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000 });
+
+        }
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/**
+   * 提交验房操作
+   */
+function uploadCheckUpdate(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.post({
+      url: _url.default.updateApplyRoomDiscount,
+      data: _data,
+      success: function success(res) {
+        if (res.data.code == 0) {
+          reslove();
+        } else {
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000 });
+
+        }
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/**
+   * 提交审核操作
+   */
+function uploadReviewUpdate(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.post({
+      url: _url.default.updateReviewApplyRoomDiscount,
+      data: _data,
+      success: function success(res) {
+        if (res.data.code == 0) {
+          reslove();
+        } else {
+          wx.showToast({
+            title: "服务器异常了",
+            icon: 'none',
+            duration: 2000 });
+
+        }
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000 });
+
+      } });
+
+  });
+}
+
+/***/ }),
 /* 517 */,
 /* 518 */,
 /* 519 */,
@@ -42203,17 +42527,35 @@ module.exports = QRCode;
 /* 530 */,
 /* 531 */,
 /* 532 */,
-/* 533 */
+/* 533 */,
+/* 534 */,
+/* 535 */,
+/* 536 */,
+/* 537 */,
+/* 538 */,
+/* 539 */,
+/* 540 */,
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */,
+/* 548 */,
+/* 549 */,
+/* 550 */,
+/* 551 */
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 534);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 552);
 
 /***/ }),
-/* 534 */
+/* 552 */
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -42244,7 +42586,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 535);
+module.exports = __webpack_require__(/*! ./runtime */ 553);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -42260,7 +42602,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 535 */
+/* 553 */
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -42991,10 +43333,10 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 536 */
-/*!***********************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/components/sx-rate/common.js ***!
-  \***********************************************************************/
+/* 554 */
+/*!************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/components/sx-rate/common.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43009,19 +43351,19 @@ if (hadRuntime) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 537 */,
-/* 538 */,
-/* 539 */,
-/* 540 */,
-/* 541 */,
-/* 542 */,
-/* 543 */,
-/* 544 */,
-/* 545 */,
-/* 546 */
-/*!************************************************************************!*\
-  !*** D:/HbuliderX_workplace/PropertyApp/components/uni-icons/icons.js ***!
-  \************************************************************************/
+/* 555 */,
+/* 556 */,
+/* 557 */,
+/* 558 */,
+/* 559 */,
+/* 560 */,
+/* 561 */,
+/* 562 */,
+/* 563 */,
+/* 564 */
+/*!*************************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/project/hc/vip/PropertyApp/components/uni-icons/icons.js ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

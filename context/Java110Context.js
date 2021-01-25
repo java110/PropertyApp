@@ -289,6 +289,15 @@ const getParam = function(key) {
 	}
 };
 
+const hasPrivilege = function(_privalege){
+	let _staffPrivilege = JSON.parse(uni.getStorageSync('hc_staff_privilege'));
+	if (_staffPrivilege == null) {
+	    _staffPrivilege = [];
+	}
+	
+	return _staffPrivilege.includes(_privalege);
+};
+
 
 
 
@@ -312,5 +321,6 @@ module.exports = {
 	clear: clear,
 	get: get,
 	setParam: setParam,
-	getParam: getParam
+	getParam: getParam,
+	hasPrivilege:hasPrivilege
 };

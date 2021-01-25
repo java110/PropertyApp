@@ -42,7 +42,9 @@
     "pages/feeDetail/feeDetail",
     "pages/roomPayFee/roomPayFee",
     "pages/meterReading/meterReading",
-    "pages/addmeter/addmeter"
+    "pages/addmeter/addmeter",
+    "pages/applyRoom/applyRoom",
+    "pages/applyRoomDetail/applyRoomDetail"
   ],
   "subPackages": [],
   "window": {

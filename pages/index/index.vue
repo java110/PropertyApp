@@ -69,14 +69,14 @@
 <script>
 	// 后期开启 远程开门 和抄表
 	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
-	import {loadAdvert,loadCategory,loadActivitys} from '../../api/index/index.js'
+	import {loadAdvert,loadCategory,loadActivitys,loadCategoryMenus,listStaffPrivileges} from '../../api/index/index.js'
 	export default {
 		data() {
 			return {
 				gridCol: 4,
 				currentCommunityId: '',
 				currentCommunityName: '',
-				categoryList:loadCategory(),
+				categoryList:[],
 				swiperList: [],
 				activitys: []
 			}
@@ -85,7 +85,17 @@
 			uniNoticeBar
 		},
 		onLoad() {
-			this._loadCommunity();	
+			this._loadCommunity();
+			let _that = this;
+			loadCategoryMenus(this,{
+				userId:this.java110Context.getUserInfo().userId,
+				groupType:'P_APP'
+			})
+			.then((menus) =>{
+				_that.categoryList = menus;
+			});
+			
+			listStaffPrivileges(this);
 		},
 		methods: {
 			_loadCommunity: function() {

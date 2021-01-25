@@ -107,11 +107,16 @@
 					if (res.statusCode == 200) {
 						let _advertPhotos = res.data;
 						let _aPhotos = [];
+						let _urlPath = '';
+						// #ifdef MP-WEIXIN
+						_urlPath = _that.java110Constant.url.hcBaseUrl
+						// #endif
 						_advertPhotos.forEach(function(_item) {
 							_item.type = "image";
-							_item.url = _that.java110Constant.url.hcBaseUrl + _item.url + "&time=" + new Date();
+							_item.url = _urlPath + _item.url + "&time=" + new Date();
 							_aPhotos.push(_item);
 						});
+						
 						_that.swiperList = _aPhotos;
 						console.log(_that.swiperList);
 						_that._loadActivitys();

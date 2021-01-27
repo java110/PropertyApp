@@ -201,7 +201,7 @@
 						_that.repairDetailInfo = _data[0];
 
 						let dateStr = _that.repairDetailInfo.appointmentTime;
-						let _date = new Date(dateStr);
+						let _date = new Date(dateStr.replace(/-/g, "/"));
 						_that.repairDetailInfo.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
 					},
 					fail: function(e) {

@@ -111,8 +111,8 @@
 				</view>
 			</view>
 			<view class="cu-item">
-				<button class="btn-check" v-if="applyRoomInfo.state == 1" @click="switchShowModel()">验房</button>
-				<button class="btn-check" v-if="applyRoomInfo.state == 2" @click="switchShowModel()">审核</button>
+				<button class="btn-check" v-if="applyRoomInfo.state == 1 && this.java110Context.hasPrivilege('502021010723590006')" @click="switchShowModel()">验房</button>
+				<button class="btn-check" v-if="applyRoomInfo.state == 2 && this.java110Context.hasPrivilege('502021010761730007')" @click="switchShowModel()">审核</button>
 			</view>
 		</view>
 		<!-- 编辑模态框 -->

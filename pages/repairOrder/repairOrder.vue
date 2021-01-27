@@ -105,7 +105,7 @@
 						_that.repairOrders.forEach(function(item) {
 							let dateStr = item.appointmentTime;
 							console.log(dateStr);
-							let _date = new Date(dateStr);
+							let _date = new Date(dateStr.replace(/-/g, "/"));
 							item.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
 						});
 					},

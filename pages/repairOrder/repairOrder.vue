@@ -23,7 +23,10 @@
 							</view>
 						</view>
 					</view>
-					<view v-if="item.repairWay == 100 && item.state == 1000" class="rob-order text-df text-white bg-green text-center" @tap.stop="_robOrder(item)">
+					<view v-if="item.state == 1000 && checkAuth('502019101946430010')" class="rob-order text-df text-white bg-green text-center" @tap.stop="dealRepair(item,'DISPATCH')">
+						派单
+					</view>
+					<view v-if="item.repairWay == 100 && item.state == 1000 && checkAuth('502021012099350016')" class="rob-order text-df text-white bg-green text-center" @tap.stop="_robOrder(item)">
 						抢单
 					</view>
 					<view v-else class="action">
@@ -33,6 +36,7 @@
 					</view>
 				</view>
 			</view>
+			<view class="load-more" @click="_loadRepairOrders()">加载更多</view>
 		</view>
 		<view v-else>
 			<no-data-page></no-data-page>
@@ -50,30 +54,37 @@
 				repairOrders: [],
 				repairName: '',
 				noData:false,
+				page: 1,
 			}
 		},
 		components: {
 			noDataPage
 		},
 		onLoad() {
+		},
+		onShow() {
 
 			let _userInfo = this.java110Context.getUserInfo();
 
 			let _storeId = _userInfo.storeId;
 
 			this.storeId = _storeId;
+			this.repairOrders = [];
+			this.page = 1;
 			this._loadRepairOrders();
 		},
-		onShow() {
-
-		},
 		methods: {
+			
+			checkAuth: function(pid){
+				return this.java110Context.hasPrivilege(pid);
+			},
+			
 			_loadRepairOrders: function() {
 				let _that = this;
 				let _userInfo = this.java110Context.getUserInfo();
 				let storeId = _userInfo.storeId;
 				let _objData = {
-					page: 1,
+					page: _that.page,
 					row: 15,
 					storeId: storeId,
 					userId: _userInfo.userId,
@@ -86,7 +97,6 @@
 					method: "GET",
 					data: _objData, //动态数据
 					success: function(res) {
-						console.log("请求返回信息：", res);
 						let _json = res.data;
 						if (_json.code != 0) {
 							uni.showToast({
@@ -95,19 +105,27 @@
 							});
 							return;
 						}
+						if(_json.data.length <= 0){
+							uni.showToast({
+								title: '已全部加载'
+							})
+							return;
+						}
+
 						let _data = _json.data;
-						_that.repairOrders = _data;
+						
+						_data.forEach(function(item) {
+							let dateStr = item.appointmentTime;
+							let _date = new Date(dateStr.replace(/-/g, "/"));
+							item.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
+						});
+						_that.repairOrders = _that.repairOrders.concat(_data);
+						_that.page ++;
+						
 						if(_that.repairOrders.length < 1){
 							_that.noData = true;
 							return ;
 						}
-
-						_that.repairOrders.forEach(function(item) {
-							let dateStr = item.appointmentTime;
-							console.log(dateStr);
-							let _date = new Date(dateStr.replace(/-/g, "/"));
-							item.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
-						});
 					},
 					fail: function(e) {
 						wx.showToast({
@@ -132,6 +150,9 @@
 			 * @param {Object} _item
 			 */
 			_robOrder: function(_item){
+				uni.showLoading({
+					title: '请稍候...'
+				})
 				let _that = this;
 				let _objData = {
 					communityId: _that.java110Context.getCurrentCommunity().communityId,
@@ -143,19 +164,40 @@
 					method: "POST",
 					data: _objData, //动态数据
 					success: function(res) {
+						uni.hideLoading();
 						wx.showToast({
 							title: res.data.msg,
 							duration: 2000
 						});
-						_that._loadRepairOrders();
+						setTimeout(()=>{
+							_that.repairOrders = [];
+							_that.page = 1;
+							_that._loadRepairOrders();
+						},1500)
 					},
 					fail: function(e) {
+						uni.hideLoading();
 						wx.showToast({
 							title: "服务器异常了",
 							icon: 'none',
 							duration: 2000
 						});
 					}
+				});
+			},
+			
+			/**
+			 * 派单
+			 * @param {Object} _item
+			 */
+			dealRepair: function(item, action){
+				uni.navigateTo({
+					url: '/pages/repairHandle/repairHandle?action=' +
+						action + "&repairId=" + item.repairId +
+						"&repairType=" + item.repairType +
+						"&preStaffId=" + item.preStaffId +
+						"&preStaffName=" + item.preStaffName +
+						"&repairObjType=" + item.repairObjType
 				});
 			}
 

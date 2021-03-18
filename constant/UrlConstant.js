@@ -5,8 +5,9 @@
  */
 // 服务器域名
 // const baseUrl = 'https://app.demo.winqi.cn/'; 
-const baseUrl = '/';
-const hcBaseUrl = '/'; // 登录接口
+import conf from '../conf/config.js'
+const baseUrl = conf.baseUrl;
+const hcBaseUrl = conf.baseUrl;
 
 const loginUrl = baseUrl + 'app/loginProperty';
 const areaUrl = baseUrl + "app/area.listAreas";

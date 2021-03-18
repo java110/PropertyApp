@@ -28,14 +28,23 @@ export default {
 		let _communityInfo = uni.getStorageSync(mapping.COMMUNITY_INFO);
 		let _that =this;
 		return new Promise(function(reslove,reject){
+			//小区没有就去登录
+			
 			if (util.isNotNull(_communityInfo) && reload != true) {
 				_communityInfo = JSON.parse(_communityInfo);
 				reslove(_communityInfo);
 				return;
 			}
-			//调用远程查询小区信息
 			
 			let _userInfo = _that.getUserInfo();
+			//如果用户不存在 则跳转为登录页面
+			if (util.isNull(_userInfo)) {
+				uni.redirectTo({
+					url: "/pages/login/login"
+				});
+				reject()
+				return;
+			}
 			if (util.isNull(_condition)) {
 				_condition = {
 					userId: '',

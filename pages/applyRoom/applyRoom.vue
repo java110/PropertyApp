@@ -79,7 +79,6 @@
 			 * 跳转详情页
 			 */
 			_toApplyRoomDetail: function(_item){
-				console.log(111);
 				uni.navigateTo({
 					url: '/pages/applyRoomDetail/applyRoomDetail?apply=' + JSON.stringify(_item)
 				});
@@ -89,15 +88,4 @@
 </script>
 
 <style>
-	.load-more{
-		width: 80%;
-		margin: 30rpx auto;
-		height: 90rpx;
-		line-height: 90rpx;
-		text-align: center;
-		background-color: #00AA00;
-		border-radius: 15rpx;
-		color: #fff;
-		font-size: 32rpx;
-	}
 </style>

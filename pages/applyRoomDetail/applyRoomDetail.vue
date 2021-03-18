@@ -229,7 +229,6 @@
 			let secondsOfEnd = new Date(_that.applyRoomInfo.endTime.split(' ')[0].replace(/-/g, "/")).getTime()-1000*60*60*24;
 			let yesterDay = dateUtil.date2String(secondsOfEnd).split(' ')[0];
 			_that.applyRoomInfo.endTime = yesterDay;
-			console.log(_that.applyRoomInfo);
 		},
 
 		/**
@@ -248,7 +247,6 @@
 			 * 失去焦点
 			 */
 			onBlur: function(){
-				console.log('blur');
 				uni.pageScrollTo({
 				    scrollTop: 0
 				});
@@ -302,7 +300,6 @@
 				};
 				loadFeeDiscount(this, params).then(function(res){
 					_that.discountIdRange = res
-					console.log(res);
 				});				
 			},
 			

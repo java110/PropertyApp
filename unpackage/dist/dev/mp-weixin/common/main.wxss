@@ -3731,6 +3731,18 @@ scroll-view.cu-steps .cu-item {
 .lines-white {
 	color: #ffffff;
 }
+.load-more{
+	width: 80%;
+	margin: 30rpx auto;
+	height: 90rpx;
+	line-height: 90rpx;
+	text-align: center;
+	background-color: #00AA00;
+	-webkit-border-radius: 15rpx;
+	        border-radius: 15rpx;
+	color: #fff;
+	font-size: 32rpx;
+}
 @-webkit-keyframes cuIcon-spin {
 0% {
 		-webkit-transform: rotate(0);

@@ -18,6 +18,8 @@
 </template>
 
 <script>
+	import conf from '../../conf/config.js'
+	import {replaceImgSrc} from '../../utils/ImageUtil.js'
 	export default {
 		data() {
 			return {
@@ -72,7 +74,9 @@
 			            let _tmpStartTime = new Date(_startTime);
 			
 			            _item.startTime = _that.java110Util.date.formatDate(_tmpStartTime);
+						_item.context = replaceImgSrc(_item.context,conf.baseUrl);
 			           _that.activity = _item;
+					   
 			          });
 			          return;
 			        }

@@ -29,7 +29,6 @@ export default {
 		let _that =this;
 		return new Promise(function(reslove,reject){
 			//小区没有就去登录
-			
 			if (util.isNotNull(_communityInfo) && reload != true) {
 				_communityInfo = JSON.parse(_communityInfo);
 				reslove(_communityInfo);

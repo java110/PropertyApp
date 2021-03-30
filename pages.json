@@ -281,6 +281,15 @@
 				"navigationBarTitleText": "空置房详情"
 			}
 		}
+        ,{
+            "path" : "pages/payFeeByQrCode/payFeeByQrCode",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "请扫二维码支付",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

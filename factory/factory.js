@@ -74,7 +74,7 @@ export default {
 					let data = res.data;
 					if (data.total < 1) {
 						uni.showToast({
-							icon: none,
+							icon: none, 
 							title: '当前员工还没有隶属小区,请先去后台添加'
 						});
 						return;

@@ -15,7 +15,7 @@ export default{
 	  let loginFlag = uni.getStorageSync(mapping.LOGIN_FLAG);
 	  let nowDate = new Date();
 	  if (loginFlag && loginFlag.expireTime > nowDate.getTime()) {
-			console.log("现在还是有效时间内");
+			// console.log("现在还是有效时间内");
 			callback();
 	  } else {
 	    // 无登录态

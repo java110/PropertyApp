@@ -85,6 +85,19 @@
 			uniNoticeBar
 		},
 		onLoad() {
+			// this._loadCommunity();
+			// let _that = this;
+			// loadCategoryMenus(this,{
+			// 	userId:this.java110Context.getUserInfo().userId,
+			// 	groupType:'P_APP'
+			// })
+			// .then((menus) =>{
+			// 	_that.categoryList = menus;
+			// });
+			
+			// listStaffPrivileges(this);
+		},
+		onShow() {
 			this._loadCommunity();
 			let _that = this;
 			loadCategoryMenus(this,{

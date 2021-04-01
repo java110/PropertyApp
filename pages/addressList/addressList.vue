@@ -236,7 +236,7 @@
 		position: fixed;
 		right: 0px;
 		bottom: 300upx;
-		padding: 20upx 20upx 20upx 60upx;
+		padding: 20upx 10upx 20upx 0upx;
 		display: flex;
 		align-items: center;
 	}

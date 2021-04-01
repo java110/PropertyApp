@@ -49,6 +49,7 @@ export default {
 	repairFinish: baseUrl + "app/ownerRepair.repairFinish",
 	//报修评价
 	appraiseRepair: baseUrl + 'app/repair/appraiseRepair',
+	appraiseRepairNew: baseUrl + 'callComponent/ownerRepair.appraiseRepair',
 	//查询房屋和业主接口
 	listRoomAndOwner: baseUrl + 'app/fee.listRoomsWhereFeeSet',
 	//查询费用信息
@@ -68,4 +69,14 @@ export default {
 	updateReviewApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/updateReviewApplyRoomDiscount",
 	queryMenus: baseUrl + "app/query.menu.info",
 	listStaffPrivileges: baseUrl + "callComponent/staffPrivilege/listStaffPrivileges",
+	queryRoomRenovation: baseUrl + "app/roomRenovation/queryRoomRenovation",
+	updateRoomToExamine: baseUrl + "app/roomRenovation/updateRoomToExamine",
+	saveRoomRenovationDetail: baseUrl + "app/roomRenovation/saveRoomRenovationDetail",
+	queryRoomRenovationRecord: baseUrl + "app/roomRenovation/queryRoomRenovationRecord",
+	updateRoomDecorationRecord: baseUrl + "app/roomRenovation/updateRoomDecorationRecord",
+	uploadVideo: baseUrl + "callComponent/upload/uploadVedio/upload",
+	queryRoomRenovationRecordDetail: baseUrl + "app/roomRenovation/queryRoomRenovationRecordDetail",
+	// 报修相关信息（维修类型/状态/商品类型...）
+	queryRepairInfo: baseUrl + "callComponent/core/list",
+	queryResourceStoreResName: baseUrl + "app/resourceStore/queryResourceStoreResName",
 }

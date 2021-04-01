@@ -61,9 +61,28 @@ const isEmpty=function (_value) {
 	}
 }
 
+/**
+ * 转义字符转换为普通字符
+ * @param {Object} str
+ */
+const escape2Html = function(str) {
+	var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+	return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];});
+}
+
+const checkPhoneNumber = function(_value){
+	let grep = /^(1(([35789][0-9])|(47)))\d{8}$/;
+	if(grep.test(_value)){
+		return true;
+	}	
+	return false;
+}
+
 
 module.exports = {
   isNull: isNull,
   isNotNull: isNotNull,
-  isEmpty:isEmpty
+  isEmpty:isEmpty,
+  escape2Html: escape2Html,
+  checkPhoneNumber: checkPhoneNumber
 };

@@ -18,6 +18,7 @@
 </template>
 
 <script>
+	import stringUtil from '../../utils/StringUtil.js';
 	export default {
 		data() {
 			return {
@@ -72,6 +73,13 @@
 			            let _tmpStartTime = new Date(_startTime);
 			
 			            _item.startTime = _that.java110Util.date.formatDate(_tmpStartTime);
+						// 拼接图片地址
+						_item.context = _item.context.replace(/src="\//g, "src=" + _that.java110Constant.url.hcBaseUrl + "/");
+						// 图片width样式调整
+						_item.context = _item.context.replace(/width:.*?;/g, 'width:100%');
+						// 转义字符处理
+						_item.context = stringUtil.escape2Html(_item.context);
+						console.log(_item.context);
 			           _that.activity = _item;
 			          });
 			          return;
@@ -100,6 +108,7 @@
 	
 	.detailContainer{ 
 	  background-color: #fff;
+	  overflow: hidden;
 	}
 	.detailContainer .headImg{
 	  width: 100%;

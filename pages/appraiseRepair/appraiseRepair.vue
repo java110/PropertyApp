@@ -8,12 +8,12 @@
 				</view>
 			</view>
 			<view class="cu-form-group padding align-start">
-				<view class="title padding-left-sm">服务评价</view>
-				<textarea maxlength="200" v-model="context" placeholder="请填写本地服务评价"></textarea>
+				<view class="title padding-left-sm">回访建议</view>
+				<textarea maxlength="200" v-model="remark" placeholder="请填写本地回访建议"></textarea>
 			</view>
 
 			<view class="flex flex-direction margin">
-				<button class="cu-btn bg-green margin-tb-sm lg" @click="submitAppraiseRepair()">评价</button>
+				<button class="cu-btn bg-green margin-tb-sm lg" @click="submitAppraiseRepair()">提交</button>
 			</view>
 
 		</view>
@@ -32,8 +32,12 @@
 				rateSync: 2,
 				animation: true,
 				curAppraise: 4,
-				context: '',
+				remark: '',
 				repairId: '',
+				repairType: '',
+				repairChannel: '',
+				publicArea: '',
+				communityId: '',
 				userId: '',
 				userName: ''
 			}
@@ -45,6 +49,10 @@
 			let _that = this;
 			let _repairId = options.repairId;
 			this.repairId = _repairId;
+			this.repairType = options.repairType;
+			this.repairChannel = options.repairChannel;
+			this.publicArea = options.publicArea;
+			this.communityId = options.communityId;
 			let _userInfo = this.java110Context.getUserInfo();
 			_that.userId = _userInfo.userId;
 			_that.userName = _userInfo.userName;

@@ -4,9 +4,10 @@
  * add by wuxw 2019-12-28
  */
 // 服务器域名
-// const baseUrl = 'https://app.demo.winqi.cn/';
-const baseUrl = '/';
-const hcBaseUrl = '/'; // 登录接口
+// const baseUrl = 'https://app.demo.winqi.cn/'; 
+import conf from '../conf/config.js'
+const baseUrl = conf.baseUrl;
+const hcBaseUrl = conf.baseUrl;
 
 const loginUrl = baseUrl + 'app/loginProperty';
 const areaUrl = baseUrl + "app/area.listAreas";

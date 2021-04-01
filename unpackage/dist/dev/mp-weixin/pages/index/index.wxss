@@ -553,13 +553,13 @@
 .notice-startTime {
 	margin-left: 16rpx;
 }
-.bock-icon{
+.bock-icon {
 	height: 34rpx;
 	width: 14rpx;
 	line-height: 100rpx;
 	background-color: #00AA00;
 }
-.tec-height{
+.tec-height {
 	height: 120rpx;
 }
 

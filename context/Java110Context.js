@@ -164,7 +164,13 @@ const getCurrentCommunity = function() {
  */
 const getCommunity = function(callBack, reload, _condition) {
 	let _communityInfo = uni.getStorageSync(constant.mapping.COMMUNITY_INFO);
-	console.log('本地小区信息', _communityInfo);
+	//小区没有就去登录
+	if (util.string.isNull(_communityInfo)) {
+		uni.redirectTo({
+			url: "/pages/login/login"
+		});
+		return;
+	}
 	if (_communityInfo != null && _communityInfo != undefined && _communityInfo != "" && reload != true) {
 		_communityInfo = JSON.parse(_communityInfo);
 		callBack(_communityInfo);

@@ -16,6 +16,7 @@
 
 <script>
 	import {replaceImgSrc} from '../../../utils/ImageUtil.js'
+	import conf from '../../../conf/config.js.js'
 	export default {
 		data() {
 			return {
@@ -54,7 +55,7 @@
 						console.log(res);
 						let notice = res.data.notices[0]
 						notice.timeStr = notice.startTime.replace(/:\d{1,2}$/, ' ');
-						notice.context = replaceImgSrc(notice.context,that.java110Constant.url.baseUrl);
+						notice.context = replaceImgSrc(notice.context,conf.baseUrl);
 						that.notice = notice;
 					}
 				});

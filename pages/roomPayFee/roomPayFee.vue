@@ -55,17 +55,6 @@
 			</view>
 		</view>
 
-		<view class="cu-modal" :class="payModal==true?'show':''">
-			<view class="cu-dialog">
-				<view class="padding-xl">
-					<canvas style="width: 300upx;height: 300upx;    margin: 0 auto;" canvas-id="oweFeeQrcode"></canvas>
-				</view>
-				<view class="cu-bar bg-white justify-end">
-					<view class="action margin-0 flex-sub  solid-left" @tap="_closePayModal()">关闭</view>
-				</view>
-			</view>
-		</view>
-
 	</view>
 </template>
 
@@ -79,7 +68,6 @@
 		toPayOweFee
 	} from '../../api/fee/fee.js';
 	
-	const qrCode = require('@/lib/weapp-qrcode.js')
 	export default {
 		data() {
 			return {
@@ -94,7 +82,22 @@
 				fees: [],
 				receivableAmount: 0.0,
 				payModal: false,
-				payQrImg: ''
+				payQrImg: '',
+				roomInfo:{
+					ownerName:'',
+					link:""
+				}
+			}
+		},
+		onShow() {
+			if(this.context.isPageBack()){
+				this.roomInfo = {
+					ownerName:'',
+					link:""
+				};
+				this.fees = [];
+				this.roomInfo.roomId = '';
+				this.roomNum = '';
 			}
 		},
 		methods: {
@@ -191,14 +194,7 @@
 				this.roomNum = _allNum[2];
 				this._loadRoomInfo();
 			},
-			_closePayModal: function() {
-				this.payModal = false;
-				this.roomInfo = {};
-				this.fees = [];
-				this.roomInfo.roomId = '';
-				this.roomNum = '';
-				
-			},
+			
 			_payOweFee: function() {
 				let _that = this;
 				let _data = {
@@ -219,15 +215,10 @@
 							});
 							return;
 						}
-						_that.payModal = true;
-						new qrCode('oweFeeQrcode', {
-							text: _data.codeUrl,
-							width: 150,
-							height: 150,
-							colorDark: "#333333",
-							colorLight: "#FFFFFF",
-							correctLevel: qrCode.CorrectLevel.H
+						this.context.navigateTo({
+							url:"/pages/payFeeByQrCode/payFeeByQrCode?url="+_data.codeUrl
 						})
+						
 					})
 
 			}

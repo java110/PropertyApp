@@ -19,6 +19,8 @@
 
 <script>
 	import stringUtil from '../../utils/StringUtil.js';
+	import conf from '../../conf/config.js'
+	import {replaceImgSrc} from '../../utils/ImageUtil.js'
 	export default {
 		data() {
 			return {
@@ -71,16 +73,11 @@
 			            _item.src = _that.java110Constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId + "&time=" + new Date();
 			            let _startTime = _item.startTime.replace(/\-/g, "/")
 			            let _tmpStartTime = new Date(_startTime);
-			
+
 			            _item.startTime = _that.java110Util.date.formatDate(_tmpStartTime);
-						// 拼接图片地址
-						_item.context = _item.context.replace(/src="\//g, "src=" + _that.java110Constant.url.hcBaseUrl + "/");
-						// 图片width样式调整
-						_item.context = _item.context.replace(/width:.*?;/g, 'width:100%');
-						// 转义字符处理
-						_item.context = stringUtil.escape2Html(_item.context);
-						console.log(_item.context);
-			           _that.activity = _item;
+						      _item.context = replaceImgSrc(_item.context,conf.baseUrl);
+			            _that.activity = _item;
+					   
 			          });
 			          return;
 			        }

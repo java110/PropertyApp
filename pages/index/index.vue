@@ -3,7 +3,7 @@
 		<view class="margin-bottom-xs">
 			<uni-notice-bar showIcon="true" scrollable="true" single="true" speed="30" text="HC掌上物业是免费开源的HC小区管理系统的分支项目，欢迎访问官网http://homecommunity.cn了解"></uni-notice-bar>
 		</view>
-		<scroll-view @scrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">	
+		<scroll-view @scrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">
 			<swiper class="categoryList padding-top-xs bg-white" indicator-dots="true" indicator-color="rgba(228,228,228,1)"
 			 indicator-active-color="#FECA49">
 				<block v-for="(item, index) in categoryList" :key="index">
@@ -69,14 +69,20 @@
 <script>
 	// 后期开启 远程开门 和抄表
 	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
-	import {loadAdvert,loadCategory,loadActivitys,loadCategoryMenus,listStaffPrivileges} from '../../api/index/index.js'
+	import {
+		loadAdvert,
+		loadCategory,
+		loadActivitys,
+		loadCategoryMenus,
+		listStaffPrivileges
+	} from '../../api/index/index.js'
 	export default {
 		data() {
 			return {
 				gridCol: 4,
 				currentCommunityId: '',
 				currentCommunityName: '',
-				categoryList:[],
+				categoryList: [],
 				swiperList: [],
 				activitys: []
 			}
@@ -100,23 +106,26 @@
 		onShow() {
 			this._loadCommunity();
 			let _that = this;
-			loadCategoryMenus(this,{
-				userId:this.java110Context.getUserInfo().userId,
-				groupType:'P_APP'
-			})
-			.then((menus) =>{
-				_that.categoryList = menus;
+			this._loadCommunity()
+			.then(()=>{
+				return loadCategoryMenus(this, {
+						userId: this.java110Context.getUserInfo().userId,
+						groupType: 'P_APP'
+					})
+			}).then((menus) => {
+						_that.categoryList = menus;
 			});
 			
+
 			listStaffPrivileges(this);
 		},
 		methods: {
 			_loadCommunity: function() {
 				let _that = this;
-				this.factory.getCommunity(true)
-				.then(function(_communitys){
-					_that._loadCurrentCommunity(_communitys);
-				})
+				return this.factory.getCommunity(true)
+					.then(function(_communitys) {
+						_that._loadCurrentCommunity(_communitys);
+					})
 			},
 			_loadAd: function() {
 				let _that = this;
@@ -125,32 +134,32 @@
 					row: 5,
 					communityId: this.currentCommunityId
 				};
-				loadAdvert(this,_objData)
-				.then(function(res){
-					if (res.statusCode == 200) {
-						let _advertPhotos = res.data;
-						let _aPhotos = [];
-						let _urlPath = '';
-						// #ifdef MP-WEIXIN
-						_urlPath = _that.java110Constant.url.hcBaseUrl
-						// #endif
-						_advertPhotos.forEach(function(_item) {
-							_item.type = "image";
-							_item.url = _urlPath + _item.url + "&time=" + new Date();
-							_aPhotos.push(_item);
-						});
-						
-						_that.swiperList = _aPhotos;
-						console.log(_that.swiperList);
-						_that._loadActivitys();
-						return;
-					}
-					wx.showToast({
-						title: "服务器异常了",
-						icon: 'none',
-						duration: 2000
+				loadAdvert(this, _objData)
+					.then(function(res) {
+						if (res.statusCode == 200) {
+							let _advertPhotos = res.data;
+							let _aPhotos = [];
+							let _urlPath = '';
+							// #ifdef MP-WEIXIN
+							_urlPath = _that.java110Constant.url.hcBaseUrl
+							// #endif
+							_advertPhotos.forEach(function(_item) {
+								_item.type = "image";
+								_item.url = _urlPath + _item.url + "&time=" + new Date();
+								_aPhotos.push(_item);
+							});
+
+							_that.swiperList = _aPhotos;
+							console.log(_that.swiperList);
+							_that._loadActivitys();
+							return;
+						}
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						})
 					})
-				})
 			},
 			_loadActivitys: function() {
 				let _that = this;
@@ -159,25 +168,25 @@
 					row: 5,
 					communityId: this.currentCommunityId
 				};
-				loadActivitys(this,_objData)
-				.then(function(res){
-					if (res.statusCode == 200) {
-						let _activites = res.data.activitiess;
-						let _acts = [];
-						_activites.forEach(function(_item) {
-							_item.src = _that.java110Constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId +
-								"&time=" + new Date();
-							_acts.push(_item);
-						});
-						_that.activitys = _acts;
-						return;
-					}
-					wx.showToast({
-						title: "服务器异常了",
-						icon: 'none',
-						duration: 2000
+				loadActivitys(this, _objData)
+					.then(function(res) {
+						if (res.statusCode == 200) {
+							let _activites = res.data.activitiess;
+							let _acts = [];
+							_activites.forEach(function(_item) {
+								_item.src = _that.java110Constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId +
+									"&time=" + new Date();
+								_acts.push(_item);
+							});
+							_that.activitys = _acts;
+							return;
+						}
+						wx.showToast({
+							title: "服务器异常了",
+							icon: 'none',
+							duration: 2000
+						})
 					})
-				})
 			},
 			_moreActivity: function() {
 				this.context.navigateTo({
@@ -191,11 +200,11 @@
 			},
 			_toHref: function(_item) {
 				this.context.navigateTo({
-					url:  _item.href
+					url: _item.href
 				});
 			},
-			_loadCurrentCommunity:function(_communitys){
-				let _that =this;
+			_loadCurrentCommunity: function(_communitys) {
+				let _that = this;
 				let currentCommunity = _that.java110Context.getCurrentCommunity(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO);
 				//随机放一个小区
 				let _tmpCommunityInfo = _communitys[0];
@@ -220,7 +229,7 @@
 					_that._loadAd();
 					return;
 				}
-				
+
 				_that.currentCommunityId = currentCommunity.communityId;
 				_that.currentCommunityName = currentCommunity.name;
 				_that._loadAd();
@@ -232,6 +241,7 @@
 
 <style>
 	@import "./index.css";
+
 	.swiper-height-index {
 		height: 240upx;
 		min-height: 240upx;
@@ -307,15 +317,15 @@
 	.notice-startTime {
 		margin-left: 16upx;
 	}
-	
-	.bock-icon{
+
+	.bock-icon {
 		height: 34upx;
 		width: 14upx;
 		line-height: 100upx;
 		background-color: #00AA00;
 	}
-	
-	.tec-height{
+
+	.tec-height {
 		height: 120upx;
 	}
 </style>

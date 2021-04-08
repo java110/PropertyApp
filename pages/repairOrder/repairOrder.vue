@@ -41,7 +41,9 @@
 		<view v-else>
 			<no-data-page></no-data-page>
 		</view>
-
+		<view v-if="checkAuth('502020062982156286')" class="record-add" @tap="_addRecord()">
+			<img src="/static/image/renovation-add.png" alt="">
+		</view>
 	</view>
 </template>
 
@@ -89,7 +91,8 @@
 					storeId: storeId,
 					userId: _userInfo.userId,
 					communityId: _that.java110Context.getCurrentCommunity().communityId,
-					repairName: _that.repairName
+					repairName: _that.repairName,
+					reqSource: 'mobile'
 				};
 				this.java110Context.request({
 					url: _that.java110Constant.url.listOwnerRepairs,
@@ -187,6 +190,15 @@
 			},
 			
 			/**
+			 * 跳转新增页
+			 */
+			_addRecord: function(){
+				uni.navigateTo({
+					url: '/pages/repairAdd/repairAdd'
+				});
+			},
+			
+			/**
 			 * 派单
 			 * @param {Object} _item
 			 */
@@ -213,11 +225,23 @@
 	.cu-list+.cu-list {
 		margin-top: 20upx;
 	}
+	
 	/* 抢单按钮 */
 	.rob-order{
 		width: 80upx;
 		height: 80upx;
 		line-height: 80upx;
 		border-radius: 50%;
+	}
+	.record-add{
+		position: fixed;
+		right: 10rpx;
+		bottom: 50rpx;
+		width: 100rpx;
+		height: 100rpx;
+	}
+	.record-add img{
+		width: 100%;
+		height: 100%;
 	}
 </style>

@@ -24,7 +24,8 @@
 				</view>
 				<view class="flex margin-top-xs justify-between">
 					<view class="text-gray">状态</view>
-					<view class="text-gray">{{item.stateName}}</view>
+					<view class="text-gray" v-if="item.state == '1800' && (item.returnVisitFlag == '001' || item.returnVisitFlag == '002')">{{item.stateName}}(定时任务处理)</view>
+					<view class="text-gray" v-else>{{item.stateName}}</view>
 				</view>
 				<view class="flex margin-top-xs justify-between">
 					<view class="text-gray">报修内容</view>
@@ -37,7 +38,7 @@
 					<button class="cu-btn sm bg-red margin-left" v-if="item.preStaffId != '-1'" @click="dealRepair(item,'BACK')">退单</button>
 					<button class="cu-btn sm bg-green margin-left" v-if="item.state == '1100' || item.state == '1200' ||item.state == '1300'"
 					 @click="dealRepair(item,'FINISH')">办结</button>
-					<button class="cu-btn sm bg-green margin-left" v-if="item.state == '1700'" @click="dealAppraise(item)">完成</button>
+					<button class="cu-btn sm bg-green margin-left" v-if="item.state == '1800' && item.returnVisitFlag == '003' && checkAuth('502021040151320003')" @click="dealAppraise(item)">回访</button>
 
 				</view>
 			</view>
@@ -77,6 +78,10 @@
 			this._loadMyModify();
 		},
 		methods: {
+			checkAuth: function(pid){
+				return this.java110Context.hasPrivilege(pid);
+			},
+			
 			_loadMyModify: function() {
 				//
 				let _that = this;
@@ -116,7 +121,6 @@
 							_that.noData = true;
 							return ;
 						}
-						
 						// _that.myOrders.forEach(function(item) {
 						// 	let dateStr = item.appointmentTime;
 						// 	let _date = new Date(dateStr.replace(/-/g, "/"));
@@ -134,7 +138,6 @@
 				});
 			},
 			repairDetail: function(_item) {
-				console.log('_item', _item);
 				//wx.setStorageSync("_toModifyComplaint_"+_item.complaintId, _item);
 				uni.navigateTo({
 					url: "/pages/repairDetail/repairDetail?repairId=" +
@@ -143,22 +146,30 @@
 				});
 			},
 			dealRepair: function(item, action) {
+				console.log('item', item);
 				uni.navigateTo({
 					url: '/pages/repairHandle/repairHandle?action=' +
 						action + "&repairId=" + item.repairId +
 						"&repairType=" + item.repairType +
 						"&preStaffId=" + item.preStaffId +
 						"&preStaffName=" + item.preStaffName +
-						"&repairObjType=" + item.repairObjType
+						"&repairObjType=" + item.repairObjType +
+						"&publicArea=" + item.publicArea +
+						"&repairChannel=" + item.repairChannel
 				});
 			},
 			dealAppraise: function(item) {
+				console.log(item);
 				this.context.navigateTo({
 					url: '/pages/appraiseRepair/appraiseRepair?' + "repairId=" + item.repairId +
 						"&repairType=" + item.repairType +
 						"&preStaffId=" + item.preStaffId +
 						"&preStaffName=" + item.preStaffName +
-						"&repairObjType=" + item.repairObjType
+						"&repairObjType=" + item.repairObjType +
+						"&repairType=" + item.repairType +
+						"&repairChannel=" + item.repairChannel +
+						"&publicArea=" + item.publicArea +
+						"&communityId=" + item.communityId
 				})
 			}
 		}

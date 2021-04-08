@@ -16,7 +16,7 @@
 
 <script>
 	import {replaceImgSrc} from '../../../utils/ImageUtil.js'
-	import conf from '../../../conf/config.js.js'
+	import conf from '../../../conf/config.js'
 	export default {
 		data() {
 			return {

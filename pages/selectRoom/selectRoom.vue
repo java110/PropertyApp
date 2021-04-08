@@ -70,7 +70,7 @@
 					page: 1,
 					row: 15,
 					communityId:  _that.java110Context.getCurrentCommunity().communityId,
-					name: this.searchValue,
+					roomNum: this.searchValue,
 					floorId: this.floorId,
 					unitId: this.unitId
 				};

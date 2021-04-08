@@ -73,10 +73,45 @@
 					<text class="text-grey text-sm">{{repairDetailInfo.context}}</text>
 				</view>
 			</view>
-			<view class="cu-item" v-if="repairDetailInfo.photos.length > 0">
-				<view class="margin-top grid text-center col-3 grid-square" >
-					<view class="" v-for="(_item,index) in repairDetailInfo.photos" :key="index">
-						<image mode="scaleToFill" :data-url="srcPath+_item.url" :src="srcPath+_item.url" @tap="preview"></image>
+			<view class="cu-item" v-if="repairDetailInfo.repairPhotos.length > 0">
+				<view class="content">
+					<text class="cuIcon-pic text-green"></text>
+					<text class="text-grey">业主报修图片</text>
+				</view>
+			</view>
+			<view class="cu-item" v-if="repairDetailInfo.repairPhotos.length > 0">
+				<!-- <view class="repair-img-title">业主报修图片</view> -->
+				<view class="margin-top grid text-center col-4 grid-square" >
+					<view class="" v-for="(_item,index) in repairDetailInfo.repairPhotos" :key="index">
+						<image mode="widthFix" :data-url="srcPath+_item.url" :src="srcPath+_item.url" @tap="preview"></image>
+					</view>
+				</view>
+			</view>
+			<view class="cu-item" v-if="repairDetailInfo.beforePhotos.length > 0">
+				<view class="content">
+					<text class="cuIcon-pic text-green"></text>
+					<text class="text-grey">维修前图片</text>
+				</view>
+			</view>
+			<view class="cu-item" v-if="repairDetailInfo.beforePhotos.length > 0">
+				<!-- <view class="repair-img-title">维修前图片</view> -->
+				<view class="margin-top grid text-center col-4 grid-square" >
+					<view class="" v-for="(_item,index) in repairDetailInfo.beforePhotos" :key="index">
+						<image mode="widthFix" :data-url="srcPath+_item.url" :src="srcPath+_item.url" @tap="preview"></image>
+					</view>
+				</view>
+			</view>
+			<view class="cu-item" v-if="repairDetailInfo.afterPhotos.length > 0">
+				<view class="content">
+					<text class="cuIcon-pic text-green"></text>
+					<text class="text-grey">维修后图片</text>
+				</view>
+			</view>
+			<view class="cu-item" v-if="repairDetailInfo.afterPhotos.length > 0">
+				<!-- <view class="repair-img-title">维修后图片</view> -->
+				<view class="margin-top grid text-center col-4 grid-square" >
+					<view class="" v-for="(_item,index) in repairDetailInfo.afterPhotos" :key="index">
+						<image mode="widthFix" :data-url="srcPath+_item.url" :src="srcPath+_item.url" @tap="preview"></image>
 					</view>
 				</view>
 			</view>
@@ -199,10 +234,10 @@
 						}
 						let _data = _json.data;
 						_that.repairDetailInfo = _data[0];
+						// let dateStr = _that.repairDetailInfo.appointmentTime;
+						// let _date = new Date(dateStr.replace(/-/g, "/"));
+						// _that.repairDetailInfo.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
 
-						let dateStr = _that.repairDetailInfo.appointmentTime;
-						let _date = new Date(dateStr.replace(/-/g, "/"));
-						_that.repairDetailInfo.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
 					},
 					fail: function(e) {
 						wx.showToast({
@@ -227,5 +262,5 @@
 </script>
 
 <style>
-
+	
 </style>

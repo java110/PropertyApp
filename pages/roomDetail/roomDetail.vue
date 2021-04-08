@@ -33,16 +33,16 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">户型</view>
-				{{roomInfo.apartment}}
+				{{roomInfo.apartmentName}}
 			</view>
 			<view class="cu-form-group">
 				<view class="title">建筑面积</view>
 				{{roomInfo.builtUpArea+'平方米'}}
 			</view>
-			<view class="cu-form-group">
+			<!-- <view class="cu-form-group">
 				<view class="title">单价</view>
 				{{roomInfo.unitPrice+'元/平方米'}}
-			</view>
+			</view> -->
 			<view class="block__title">业主信息</view>
 			<view class="cu-form-group">
 				<view class="title">名称</view>
@@ -214,7 +214,7 @@
 						
 						_that.fees.forEach(function(item) {
 							let dateStr = item.endTime;
-							let _date = new Date(dateStr);
+							let _date = new Date(dateStr.replace(/-/g, "/"));
 							item.newEndTime = (_date.getMonth() + 1) + '/' + _date.getDate();
 						});
 

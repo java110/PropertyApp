@@ -56,9 +56,6 @@
 						{{applyRoomInfo.startTime}}
 					</view>
 				</picker>
-				<!-- <view class="action">
-					<text class="text-grey text-sm">{{applyRoomInfo.startTime}}</text>
-				</view> -->
 			</view>
 			<view class="cu-item arrow">
 				<view class="content">
@@ -70,9 +67,6 @@
 						{{applyRoomInfo.endTime}}
 					</view>
 				</picker>
-				<!-- <view class="action">
-					<text class="text-grey text-sm">{{applyRoomInfo.endTime}}</text>
-				</view> -->
 			</view>
 			<view class="cu-item">
 				<view class="content">
@@ -241,7 +235,7 @@
 		 */
 		onShow: function() {},
 		
-		methods: {		
+		methods: {
 			
 			/**
 			 * 失去焦点
@@ -332,6 +326,9 @@
 			 * 保存修改
 			 */
 			submit: function(){
+				uni.showLoading({
+					title:"请稍候..."
+				})
 				let _that = this;
 				// 公共参数
 				let startTime = this.applyRoomInfo.startTime + ' 0:00:00';
@@ -347,6 +344,7 @@
 					createRemark: createRemark
 				};
 				if(!dateUtil.compareDate(this.applyRoomInfo.endTime, this.applyRoomInfo.startTime)){
+					uni.hideLoading();
 					uni.showToast({
 						title: '时间范围有误'
 					});
@@ -356,6 +354,7 @@
 					// 验房提交
 					let state = this.checkState.state;
 					if(state == null || !state){
+						uni.hideLoading();
 						uni.showToast({
 							title: '请选择验房状态'
 						});
@@ -363,6 +362,7 @@
 					}
 					let checkRemark = this.checkRemark;
 					if(checkRemark == '' || !checkRemark){
+						uni.hideLoading();
 						uni.showToast({
 							title: '请填写验房备注'
 						});
@@ -371,6 +371,7 @@
 					params.state = state;
 					params.checkRemark = checkRemark;
 					uploadCheckUpdate(this,params).then(function(res){
+						uni.hideLoading();
 						uni.showToast({
 							title:"保存成功"
 						})
@@ -382,6 +383,7 @@
 					// 审核提交
 					let state = this.reviewState.state;
 					if(state == null || !state){
+						uni.hideLoading();
 						uni.showToast({
 							title: '请选择审批状态'
 						});
@@ -393,6 +395,7 @@
 						params.checkRemark = this.applyRoomInfo.checkRemark;
 						discountId = this.discountId.discountId;
 						if(discountId == null || !discountId){
+							uni.hideLoading();
 							uni.showToast({
 								title: '请选择优惠名称'
 							});
@@ -401,6 +404,7 @@
 					}
 					let reviewRemark = this.reviewRemark;
 					if(reviewRemark == '' || !reviewRemark){
+						uni.hideLoading();
 						uni.showToast({
 							title: '请填写审批备注'
 						});
@@ -411,6 +415,7 @@
 					params.discountType = this.discountType.id;
 					params.discountId = discountId;
 					uploadReviewUpdate(this,params).then(function(res){
+						uni.hideLoading();
 						uni.showToast({
 							title:"保存成功"
 						})

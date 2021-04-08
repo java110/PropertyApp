@@ -88,6 +88,11 @@ const repairDispatch = baseUrl+"app/ownerRepair.repairDispatch";
 const listMeterWaters = baseUrl+"app/meterWater.listMeterWaters";
 // 报修抢单
 const robRepairOrder = baseUrl + "callComponent/ownerRepair.grabbingRepair";
+// 获取空置房申请列表
+const listApplyRoom = baseUrl + "app/applyRoomDiscount/queryApplyRoomDiscount";
+const queryFeeDiscount = baseUrl + 'app/feeDiscount/queryFeeDiscount';
+const listRepairSettings = baseUrl + 'app/repair.listRepairSettings';
+const saveHelpOwnerRepair = baseUrl + "callComponent/addOwnerRepair/save";
 
 	
 
@@ -132,5 +137,9 @@ module.exports = {
   listRepairTypeUsers:listRepairTypeUsers,
   repairDispatch:repairDispatch,
   listMeterWaters:listMeterWaters,
-  robRepairOrder: robRepairOrder
+  robRepairOrder: robRepairOrder,
+  listApplyRoom: listApplyRoom,
+	queryFeeDiscount: queryFeeDiscount,
+	listRepairSettings: listRepairSettings,
+	saveHelpOwnerRepair:　saveHelpOwnerRepair
 };

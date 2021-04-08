@@ -195,32 +195,12 @@
 				this._loadRoomInfo();
 			},
 			
-			_payOweFee: function() {
-				let _that = this;
-				let _data = {
-					roomId: this.roomInfo.roomId,
-					communityId: this.java110Context.getCurrentCommunity().communityId
-				}
-
-				toPayOweFee(this, _data)
-					.then((res) => {
-						console.log(res);
-
-						let _data = res.data;
-
-						if (_data.code != 0) {
-							uni.showToast({
-								icon: 'none',
-								title: _data.msg
-							});
-							return;
-						}
-						this.context.navigateTo({
-							url:"/pages/payFeeByQrCode/payFeeByQrCode?url="+_data.codeUrl
-						})
-						
-					})
-
+			_payOweFee:function(){
+				this.context.navigateTo({
+					url:"/pages/payFeeByQrCode/payFeeByQrCode?communityId=",
+					+this.java110Context.getCurrentCommunity().communityId
+					+"&roomId="+this.roomInfo.roomId;
+				})
 			}
 		}
 	}

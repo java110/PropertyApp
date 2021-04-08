@@ -12,6 +12,10 @@
 
 <script>
 	const qrCode = require('@/lib/weapp-qrcode.js')
+	import {
+		getRoomOweFees,
+		toPayOweFee
+	} from '../../api/fee/fee.js';
 	export default {
 		data() {
 			return {

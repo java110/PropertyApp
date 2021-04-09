@@ -199,7 +199,7 @@
 				this.context.navigateTo({
 					url:"/pages/payFeeByQrCode/payFeeByQrCode?communityId="
 					+this.java110Context.getCurrentCommunity().communityId
-					+"&roomId="+this.roomInfo.roomId;
+					+"&roomId="+this.roomInfo.roomId
 				})
 			}
 		}

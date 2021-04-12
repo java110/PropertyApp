@@ -12,26 +12,60 @@
 
 <script>
 	const qrCode = require('@/lib/weapp-qrcode.js')
+	import {
+		getRoomOweFees,
+		toPayOweFee
+	} from '../../api/fee/fee.js';
 	export default {
 		data() {
 			return {
-				
+				communityId:'',
+				roomId:'',
 			}
 		},
 		onLoad(options) {
-			new qrCode('oweFeeQrcode', {
-				text: options.url,
-				width: 150,
-				height: 150,
-				colorDark: "#333333",
-				colorLight: "#FFFFFF",
-				correctLevel: qrCode.CorrectLevel.H
-			})
+			this.roomId = options.roomId;
+			this.communityId = options.communityId;
+			this._payOweFee();
+			
 		},
 		methods: {
 			_closePayModal: function() {
 				this.context.navigateBack();
 			},
+			//roomId: this.roomInfo.roomId,
+			//		communityId: this.java110Context.getCurrentCommunity().communityId
+			_payOweFee: function() {
+				let _that = this;
+				let _data = {
+					roomId: this.roomId,
+					communityId: this.communityId
+				}
+			
+				toPayOweFee(this, _data)
+					.then((res) => {
+						console.log(res);
+			
+						let _data = res.data;
+			
+						if (_data.code != 0) {
+							uni.showToast({
+								icon: 'none',
+								title: _data.msg
+							});
+							return;
+						}
+						new qrCode('oweFeeQrcode', {
+							text: _data.codeUrl,
+							width: 150,
+							height: 150,
+							colorDark: "#333333",
+							colorLight: "#FFFFFF",
+							correctLevel: qrCode.CorrectLevel.H
+						})	
+					})
+			
+			}
 		}
 	}
 </script>

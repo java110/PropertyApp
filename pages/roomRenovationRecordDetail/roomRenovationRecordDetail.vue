@@ -19,9 +19,21 @@
 					<text class="text-grey text-sm">{{recordList.length>0 ? recordList[0].remark : ''}}</text>
 				</view>
 			</view>
-			<view v-for="(item,index) in recordList" :key="index">
-				<img class="record-img" v-if="item.relTypeCd == 19000" :src="item.url" alt="">
-				<video class="record-video" object-fit="contain" v-if="item.relTypeCd == 21000" :src="hcBaseUrl + item.url" controls></video>
+			<view v-if="imgRecordList.length>0">
+				<view class="text-grey">图片</view>
+				<view class="cu-item">
+					<view class="grid text-center col-4 grid-square" >
+						<view class="" v-for="(item,index) in imgRecordList" :key="index">
+							<image mode="widthFix" :data-url="commonBaseUrl + item.url" :data-index="index" :src="commonBaseUrl + item.url" @tap="preview"></image>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view v-if="videoRecordList.length>0">
+			<view class="text-grey">视频</view>
+				<view v-for="(item,index) in videoRecordList" :key="index">
+					<video class="record-video" object-fit="contain" :src="commonBaseUrl + item.url" controls></video>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -29,11 +41,15 @@
 
 <script>
 	import {queryRoomRenovationRecordDetail} from '../../api/renovation/renovation.js'
+	import conf from '../../conf/config.js'
 	export default {
 		data() {
 			return {
 				recordInfo: {},
 				recordList: [],
+				imgRecordList: [],
+				videoRecordList: [],
+				commonBaseUrl: '',
 			};
 		},
 
@@ -46,7 +62,7 @@
 		onLoad: function(options) {
 			let _that = this;
 			_that.recordInfo = JSON.parse(options.apply);
-			_that.hcBaseUrl = this.java110Constant.url.hcBaseUrl;
+			_that.commonBaseUrl = conf.commonBaseUrl;
 			this.loadRecordDetail();
 		},
 
@@ -77,6 +93,25 @@
 				queryRoomRenovationRecordDetail(this,_objData)
 				.then(function(res){
 					_that.recordList = res
+					res.forEach((item) => {
+						if(item.relTypeCd == 19000){
+							_that.imgRecordList.push(item);
+						}else if(item.relTypeCd == 21000){
+							_that.videoRecordList.push(item);
+						}
+					})
+				})
+			},
+			
+			preview: function(e){
+				let index = e.target.dataset.index;
+				let urls = [];
+				this.imgRecordList.forEach((item) => {
+					urls.push(item.url);
+				})
+				uni.previewImage({
+					current: index,
+					urls: urls
 				})
 			},
 		}
@@ -84,9 +119,6 @@
 </script>
 
 <style>
-	.record-img{
-		width: 100%;
-	}
 	uni-video{
 		width: 100%;
 	}

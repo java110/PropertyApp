@@ -38,16 +38,21 @@
 		</form>
 				
 		<view class="padding flex flex-direction">
-			<button class="cu-btn bg-green margin-tb-sm lg" @tap="_submitExcuteInspection()">提交</button>
+			<button class="cu-btn bg-green margin-tb-sm lg" @tap="$preventClick(_submitExcuteInspection)">提交</button>
 		</view>
 		
 	</view>
 </template>
 
 <script>
+	import * as TanslateImage from '../../utils/translate-image.js';
+	import {preventClick} from '../../utils/common.js';
+	import Vue from 'vue'
+	Vue.prototype.$preventClick = preventClick;
 	export default {
 		data() {
 			return {
+				onoff: true,
 				taskId:'',
 				taskDetailId:'',
 				inspectionId:'',
@@ -108,26 +113,27 @@
 				wx.chooseImage({
 					count: 4, //默认9
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
+					sourceType: ['camera'], //手机拍照
 					success: (res) => {
-						console.log(res);
 						that.$data.imgList.push(res.tempFilePaths[0]);
-						let _base64Photo = '';
-						that.java110Factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
-							_base64Photo = _res;
-							console.log('base64', _base64Photo);
-							that.photos.push(_base64Photo);
-						});
+						// let _base64Photo = '';
+						// that.java110Factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
+						// 	_base64Photo = _res;
+						// 	that.photos.push(_base64Photo);
+						// });
+						var tempFilePaths = res.tempFilePaths[0]
+						//#ifdef H5
+						TanslateImage.translate(tempFilePaths, (url) => {
+							that.photos.push(url);
+						})
+						//#endif
 					}
 				});
 			},
 			_submitExcuteInspection: function() {
-				/**
-				 * taskId:'',
-				taskDetailId:'',
-				inspectionId:'',
-				inspectionName:'',
-				 */
+				uni.showLoading({
+					title:'请稍后...'
+				})
 				let obj = {
 					"taskId": this.taskId,
 					"taskDetailId": this.taskDetailId,
@@ -172,6 +178,7 @@
 						icon: 'none',
 						duration: 2000
 					});
+					uni.hideLoading();
 				} else {
 					this.java110Context.request({
 						url: this.java110Constant.url.updateInspectionTaskDetail, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
@@ -185,6 +192,7 @@
 								})
 								return;
 							}
+							uni.hideLoading();
 							wx.showToast({
 								title: "服务器异常了",
 								icon: 'none',
@@ -192,6 +200,7 @@
 							})
 						},
 						fail: function(e) {
+							uni.hideLoading();
 							wx.showToast({
 								title: "服务器异常了",
 								icon: 'none',

@@ -79,9 +79,6 @@
 					username: this.username,
 					password: this.password
 				}
-				
-				console.log('login url : ', this.java110Constant.url.loginUrl);
-				console.log(this.java110Context.getHeaders());
 				uni.request({
 					url: this.java110Constant.url.loginUrl,
 					header: this.java110Context.getHeaders(),

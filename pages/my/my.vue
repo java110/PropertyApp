@@ -150,8 +150,16 @@
 				this.logoutUser = false;
 			},
 			_doLogoutUser:function(){
+				let token = wx.getStorageSync('token');
+				if(!token || token == ''){
+					uni.clearStorageSync();
+					uni.navigateTo({
+						url:"/pages/login/login"
+					});
+					return;
+				}
 				let _data = {
-					token:wx.getStorageSync('token')
+					token:token
 				}
 				this.java110Context.request({
 					url: this.java110Constant.url.userLogout,

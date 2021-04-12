@@ -13,6 +13,8 @@
 const baseUrl = '/'; 
 // #endif
 
+const commonBaseUrl= 'https://app.demo.winqi.cn';
+
 // #ifndef H5
 //服务器域名 小程序 或者 app 时 后端地址
 const baseUrl = 'https://app.demo.winqi.cn/'; 
@@ -27,5 +29,6 @@ const logLevel="DEBUG"; // 日志级别
 export default{
 	baseUrl:baseUrl,
 	logLevel:logLevel,
-	appPayKey:appPayKey
+	appPayKey:appPayKey,
+	commonBaseUrl: commonBaseUrl
 }

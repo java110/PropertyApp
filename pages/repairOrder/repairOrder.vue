@@ -15,7 +15,7 @@
 					<view class="content content-left">
 						<view class="text-grey">
 							<text class="cuIcon-notification text-cut text-green margin-right-xs"></text>
-						 {{item.repairObjName}}-{{item.repairTypeName}}
+							<text class="ellip">{{item.repairObjName}}-{{item.repairTypeName}}</text>
 						</view>
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
@@ -41,9 +41,9 @@
 		<view v-else>
 			<no-data-page></no-data-page>
 		</view>
-		<view v-if="checkAuth('502020062982156286')" class="record-add" @tap="_addRecord()">
+		<!-- <view v-if="checkAuth('502020062982156286')" class="record-add" @tap="_addRecord()">
 			<img src="/static/image/renovation-add.png" alt="">
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -192,11 +192,11 @@
 			/**
 			 * 跳转新增页
 			 */
-			_addRecord: function(){
-				uni.navigateTo({
-					url: '/pages/repairAdd/repairAdd'
-				});
-			},
+			// _addRecord: function(){
+			// 	uni.navigateTo({
+			// 		url: '/pages/repairAdd/repairAdd'
+			// 	});
+			// },
 			
 			/**
 			 * 派单
@@ -243,5 +243,16 @@
 	.record-add img{
 		width: 100%;
 		height: 100%;
+	}
+	.ellip{
+		  overflow: hidden;
+		  text-overflow: ellipsis;
+		  white-space: normal;
+		  word-break: break-all;
+		  display: -webkit-box;
+		  -webkit-line-clamp: 2;
+		  -webkit-box-orient: vertical;
+		  align-content: center;
+		  width: 400rpx;
 	}
 </style>

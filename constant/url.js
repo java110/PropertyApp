@@ -80,4 +80,8 @@ export default {
 	// 报修相关信息（维修类型/状态/商品类型...）
 	queryRepairInfo: baseUrl + "callComponent/core/list",
 	queryResourceStoreResName: baseUrl + "app/resourceStore/queryResourceStoreResName",
+	// 查询费用项（水电部分）
+	queryFeeTypesItems: baseUrl + "callComponent/roomCreateFeeAdd/list",
+	queryPreMeterWater: baseUrl + "app/meterWater/queryPreMeterWater",
+	saveMeterWater: baseUrl + "callComponent/meterWater.saveMeterWater",
 }

@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="margin-bottom-xs">
-			<uni-notice-bar showIcon="true" scrollable="true" single="true" speed="30" text="HC掌上物业是免费开源的HC小区管理系统的分支项目，欢迎访问官网http://homecommunity.cn了解"></uni-notice-bar>
+			<uni-notice-bar :showIcon="true" :scrollable="true" :single="true" :speed="30" text="HC掌上物业是免费开源的HC小区管理系统的分支项目，欢迎访问官网http://homecommunity.cn了解"></uni-notice-bar>
 		</view>
 		<scroll-view @scrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">
 			<swiper class="categoryList padding-top-xs bg-white" indicator-dots="true" indicator-color="rgba(228,228,228,1)"
@@ -21,7 +21,7 @@
 			</swiper>
 			<!-- 轮播图 -->
 			<view class="margin-top-xs">
-				<swiper class="screen-swiper swiper-height-index" :class="round-dot" :indicator-dots="true" :circular="true"
+				<swiper class="screen-swiper swiper-height-index" :indicator-dots="true" :circular="true"
 				 :autoplay="true" interval="5000" duration="500">
 					<swiper-item v-for="(item,index) in swiperList" :key="index">
 						<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
@@ -104,7 +104,7 @@
 			// listStaffPrivileges(this);
 		},
 		onShow() {
-			this._loadCommunity();
+			// this._loadCommunity();
 			let _that = this;
 			this._loadCommunity()
 			.then(()=>{
@@ -150,7 +150,6 @@
 							});
 
 							_that.swiperList = _aPhotos;
-							console.log(_that.swiperList);
 							_that._loadActivitys();
 							return;
 						}

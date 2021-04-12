@@ -43,11 +43,24 @@
 					</view>
 					<view v-if="goodsIndex!=0">
 						<view class="cu-form-group margin-top">
-							<view class="title">收费金额</view>
-							<input v-model="amount" :disabled="disabledPrice" placeholder="请输入收费金额"></input>
+							<view class="title">单价</view>
+							<input v-model="singlePrice" @input="goodsSinglePriceChange" :disabled="disabledPrice" placeholder="请输入单价"></input>
 						</view>
 						<view class="text-right text-grey" v-if="goods.outHighPrice == goods.outLowPrice">价格:{{goods.outLowPrice}}</view>
 						<view class="text-right text-grey" v-else>价格范围{{goods.outLowPrice}}-{{goods.outHighPrice}}</view>
+						<view class="cu-form-group margin-top">
+							<view class="title">数量</view>
+							<!-- <input v-model="useNumber" @input="goodsNumChange" placeholder="请输入数量"></input> -->
+							<view class="use-num-container">
+								<view class="dec" @tap="numDec">-</view>
+								<input class="use-num-input" v-model="useNumber" disabled="disabled" @input="goodsNumChange"></input>
+								<view class="inc" @tap="numInc">+</view>
+							</view>
+						</view>
+						<view class="cu-form-group margin-top">
+							<view class="title">总计</view>
+							<input v-model="amount" disabled="disabled"></input>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -127,7 +140,7 @@
 		</view>
 
 		<view v-if="action=='FINISH'" class="flex flex-direction margin-top">
-			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_finishRepair()">办结</button>
+			<button  class="cu-btn bg-green margin-tb-sm lg" @click="$preventClick(_finishRepair)">办结</button>
 		</view>
 		<view v-else class="flex flex-direction margin-top">
 			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_dispatchRepair()">提交</button>
@@ -145,9 +158,13 @@
 		queryRepairInfo
 	} from '../../api/repair/repair.js'
 	import * as TanslateImage from '../../utils/translate-image.js';
+	import {preventClick} from '../../utils/common.js';
+	import Vue from 'vue'
+	Vue.prototype.$preventClick = preventClick;
 	export default {
 		data() {
 			return {
+				onoff: true,
 				staffCloums: [{
 					staffName: '请选择员工'
 				}],
@@ -170,6 +187,8 @@
 				userName: '',
 				feeFlag: '1002',
 				amount: '',
+				singlePrice: '',
+				useNumber: 1,
 				disabledPrice: false,
 				feeCloums: [{
 						id: "1002",
@@ -323,18 +342,55 @@
 				let selected = this.goodsCloums[this.goodsIndex] //获取选中的数组
 				this.goods = selected
 				if(selected.outLowPrice == selected.outHighPrice){
-					this.amount = selected.outLowPrice;
+					this.singlePrice = selected.outLowPrice;
 					this.disabledPrice = true;
 				}else{
-					this.amount = '';
+					this.singlePrice = '';
 					this.disabledPrice = false;
 				}
+				this._updateTotalAmount();
 			},
 			
-			_priceChange: function(e){
-				let price = e.detail.value;
-				this.amount = price;
+			goodsSinglePriceChange: function(e){
+				this._updateTotalAmount();
 			},
+			
+			// goodsNumChange: function(e){
+			// 	this._updateTotalAmount();
+			// },
+			numDec: function(){
+				if(this.useNumber <= 1){
+					uni.showToast({
+						title: '不能再减少了',
+						icon: 'none'
+					})
+					return;
+				}
+				this.useNumber -= 1;
+				this._updateTotalAmount();
+			},
+			
+			numInc: function(){
+				if(this.useNumber >= this.goods.stock){
+					uni.showToast({
+						title: '库存不足',
+						icon: 'none'
+					})
+					return;
+				}
+				this.useNumber += 1;
+				this._updateTotalAmount();
+			},
+			
+			_updateTotalAmount: function(){
+				let total = this.useNumber * this.singlePrice;
+				this.amount = total.toFixed(2);
+			},
+			
+			// _priceChange: function(e){
+			// 	let price = e.detail.value;
+			// 	this.amount = price;
+			// },
 			
 			_deleteImage: function(e) {
 				let imageArr = this.imgList;
@@ -453,5 +509,27 @@
 </script>
 
 <style>
-
+	.use-num-container{
+		display: flex;
+		flex-direction: row;
+	}
+	.use-num-input{
+		width: 100rpx;
+		text-align: center;
+		padding: 0;
+	}
+	.inc,.dec{
+		border: 1px solid #000;
+		border-radius: 50%;
+		width: 40rpx;
+		height: 40rpx;
+		text-align: center;
+		line-height: 40rpx;
+	}
+	.dec{
+		
+	}
+	.inc{
+		
+	}
 </style>

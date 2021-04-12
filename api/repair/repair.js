@@ -143,8 +143,8 @@ export function finishRepair(_that){
 	
 	return new Promise(function(reslove,reject){
 		let _data = {
-			"amount": _that.amount ? _that.amount : 0,
-			"price": _that.amount,
+			"amount": _that.singlePrice ? _that.singlePrice : 0,
+			"price": _that.singlePrice,
 			"feeFlag": _that.feeFlag,
 			"context": _that.content,
 			"repairId": _that.repairId,
@@ -166,6 +166,8 @@ export function finishRepair(_that){
 				"goodsType": _that.goodsType,
 				"resId": _that.goods.resId,
 			},
+			"resId": _that.goods.resId,
+			"useNumber": _that.useNumber
 		}
 		console.log(_data);
 		let _beforeRepairPhotos = _that.beforeRepairPhotos;
@@ -185,11 +187,18 @@ export function finishRepair(_that){
 			// 有偿服务
 			if(_data.conditions.goodsType == ''){
 				msg = "请选择商品类型";
+			}else if (_data.useNumber < 1){
+				msg = "商品数量不能为零";
+			}else if (_data.useNumber > _that.goods.stock){
+				msg = "库存不足";
 			}else if (!_data.conditions.resId){
 				msg = "请选择商品";
 			}else if (_data.price == '' || !_data.price || parseFloat(_data.price) < parseFloat(_data.outLowPrice) || parseFloat(_data.price) > parseFloat(_data.outHighPrice)){
 				msg = "请输入有效金额";
 			}
+		}else{
+			// 无偿服务 修改商品数量为零
+			_data.useNumber = 0;
 		}
 		if (_data.context == "") {
 			msg = "请填写处理意见";

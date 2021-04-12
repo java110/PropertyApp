@@ -56,10 +56,15 @@
 		onLoad: function() {
 			this.communityId = this.java110Context.getCurrentCommunity().communityId;
 			let _userInfo = this.java110Context.getUserInfo();
-			console.log("_userInfo", _userInfo);
 			this.userName = _userInfo.userName;
 			this.userId = _userInfo.userId;
 			this._queryInstpectionTasks();
+		},
+		
+		onShow: function(){
+			if(this.userId && this.communityId){
+				this._queryInstpectionTasks();
+			}
 		},
 		methods: {
 			_startInspection:function(_item){

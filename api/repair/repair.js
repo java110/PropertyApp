@@ -193,7 +193,8 @@ export function finishRepair(_that){
 				msg = "库存不足";
 			}else if (!_data.conditions.resId){
 				msg = "请选择商品";
-			}else if (_data.price == '' || !_data.price || parseFloat(_data.price) < parseFloat(_data.outLowPrice) || parseFloat(_data.price) > parseFloat(_data.outHighPrice)){
+			// }else if (_data.price == '' || !_data.price || parseFloat(_data.price) < parseFloat(_data.outLowPrice) || parseFloat(_data.price) > parseFloat(_data.outHighPrice)){
+			}else if (_data.price == '' || !_data.price){
 				msg = "请输入有效金额";
 			}
 		}else{

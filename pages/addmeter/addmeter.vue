@@ -73,6 +73,7 @@
 <script>
 	import {queryFeeTypesItems,queryPreMeterWater,saveMeterWater} from '../../api/meter/meter.js'
 	import dateObj from '../../utils/date.js'
+	import uniDatetimePicker from '../../components/uni-datetime-picker/uni-datetime-picker.vue'
 	export default {
 		data() {
 			return {
@@ -101,6 +102,9 @@
 				curReadingTime:　null,
 				remark: '',
 			};
+		},
+		components:{
+			uniDatetimePicker
 		},
 		
 		onLoad(){

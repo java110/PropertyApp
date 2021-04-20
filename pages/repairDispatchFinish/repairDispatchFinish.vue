@@ -34,6 +34,7 @@
 					<button class="cu-btn sm line-gray" @click="repairDetail(item)">详情</button>
 				</view>
 			</view>
+			<view class="load-more" @click="_loadMyModify()">加载更多</view>
 		</view>
 		<view v-else>
 			<no-data-page></no-data-page>
@@ -50,7 +51,8 @@
 				myOrders: [],
 				orders: [],
 				storeId: '',
-				noData: false
+				noData: false,
+				page: 1,
 			}
 		},
 		components: {
@@ -70,7 +72,7 @@
 				let _userInfo = this.java110Context.getUserInfo();
 				let storeId = _userInfo.storeId;
 				let _objData = {
-					page: 1,
+					page: this.page,
 					row: 15,
 					userId: _userInfo.userId,
 					communityId: _that.java110Context.getCurrentCommunity().communityId
@@ -82,7 +84,6 @@
 					method: "GET",
 					data: _objData, //动态数据
 					success: function(res) {
-						console.log("请求返回信息：", res);
 						let _json = res.data;
 						if (_json.code != 0) {
 							uni.showToast({
@@ -91,19 +92,24 @@
 							});
 							return;
 						}
+						if(_json.data.length <= 0){
+							uni.showToast({
+								title: '已全部加载'
+							})
+							return;
+						}
 						let _data = _json.data;
-						_that.myOrders = _data;
+						_data.forEach(function(item) {
+							let dateStr = item.appointmentTime;
+							let _date = new Date(dateStr.replace(/-/g, "/"));
+							item.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
+						});
+						_that.myOrders = _that.myOrders.concat(_data);
+						_that.page ++;
 						if (_that.myOrders.length < 1) {
 							_that.noData = true;
 							return;
 						}
-						_that.myOrders.forEach(function(item) {
-							let dateStr = item.appointmentTime;
-							console.log(dateStr);
-							let _date = new Date(dateStr.replace(/-/g, "/"));
-							item.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
-						});
-						// _that.orders = _data.ownerRepairs;
 					},
 					fail: function(e) {
 						wx.showToast({

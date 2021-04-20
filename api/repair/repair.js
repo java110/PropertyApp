@@ -167,7 +167,9 @@ export function finishRepair(_that){
 				"resId": _that.goods.resId,
 			},
 			"resId": _that.goods.resId,
-			"useNumber": _that.useNumber
+			"useNumber": _that.useNumber,
+			"isCustom": _that.isCustom,
+			"customGoodsName": _that.customGoodsName,
 		}
 		console.log(_data);
 		let _beforeRepairPhotos = _that.beforeRepairPhotos;
@@ -191,8 +193,10 @@ export function finishRepair(_that){
 				msg = "商品数量不能为零";
 			}else if (_data.useNumber > _that.goods.stock){
 				msg = "库存不足";
-			}else if (!_data.conditions.resId){
+			}else if (!_data.isCustom && !_data.conditions.resId){
 				msg = "请选择商品";
+			}else if (_data.isCustom && !_data.customGoodsName){
+				msg = "请输入商品名";
 			// }else if (_data.price == '' || !_data.price || parseFloat(_data.price) < parseFloat(_data.outLowPrice) || parseFloat(_data.price) > parseFloat(_data.outHighPrice)){
 			}else if (_data.price == '' || !_data.price){
 				msg = "请输入有效金额";

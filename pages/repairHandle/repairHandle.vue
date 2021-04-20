@@ -42,12 +42,18 @@
 						</picker>
 					</view>
 					<view v-if="goodsIndex!=0">
+						<view class="cu-form-group margin-top" v-if="isCustom">
+							<view class="title">商品名</view>
+							<input v-model="customGoodsName" placeholder="请输入商品名"></input>
+						</view>
 						<view class="cu-form-group margin-top">
 							<view class="title">单价</view>
 							<input v-model="singlePrice" @input="goodsSinglePriceChange" :disabled="disabledPrice" placeholder="请输入单价"></input>
 						</view>
-						<view class="text-right text-grey" v-if="goods.outHighPrice == goods.outLowPrice">价格:{{goods.outLowPrice}}</view>
-						<view class="text-right text-grey" v-else>价格范围{{goods.outLowPrice}}-{{goods.outHighPrice}}</view>
+						<view v-if="!isCustom">
+							<view class="text-right text-grey" v-if="goods.outHighPrice == goods.outLowPrice">价格:{{goods.outLowPrice}}</view>
+							<view class="text-right text-grey" v-else>价格范围{{goods.outLowPrice}}-{{goods.outHighPrice}}</view>
+						</view>
 						<view class="cu-form-group margin-top">
 							<view class="title">数量</view>
 							<!-- <input v-model="useNumber" @input="goodsNumChange" placeholder="请输入数量"></input> -->
@@ -216,6 +222,8 @@
 					"outLowPrice": "",
 					"outHighPrice": "",
 				},
+				isCustom: false,
+				customGoodsName: '',
 			}
 		},
 		onLoad(options) {
@@ -298,6 +306,10 @@
 							return;
 						}
 						_that.goodsCloums = _that.goodsCloums.concat(_data);
+						// 如果是“其他类” 追加 “自定义” 选项
+						if(_that.goodsTypeCloums[_that.goodsTypeIndex].statusCd == '1003'){
+							_that.goodsCloums = _that.goodsCloums.concat([{resName: '自定义'}]);
+						}
 					});
 			},
 			
@@ -338,6 +350,14 @@
 				if (this.goodsIndex == 0) {
 					this.goods = ''
 					return;
+				}
+				// 自定义商品
+				if(this.goodsCloums[this.goodsIndex].resName == "自定义"){
+					this.goods = ''
+					this.isCustom = true;
+					return;
+				}else{
+					this.isCustom = false;
 				}
 				let selected = this.goodsCloums[this.goodsIndex] //获取选中的数组
 				this.goods = selected

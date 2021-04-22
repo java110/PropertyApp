@@ -272,12 +272,15 @@
 			_loadRepairGoodsType: function(){
 				let _that = this;
 				let _data = {
-					name: "resource_store",
-					type: "goods_type"
+					// name: "resource_store",
+					// type: "goods_type"
+					page: 1,
+					row: 100,
+					communityId: this.factory.getCurrentCommunity().communityId,
 				};
 				queryRepairInfo(this, _data)
 					.then(function(res) {
-						_that.goodsTypeCloums = _that.goodsTypeCloums.concat(res);
+						_that.goodsTypeCloums = _that.goodsTypeCloums.concat(res.data);
 					});
 			},
 			
@@ -285,7 +288,10 @@
 				let _that = this;
 				let _data = {
 					resId: "",
-					goodsType: this.goodsType
+					goodsType: this.goodsType,
+					page: 1,
+					row: 100,
+					communityId: this.factory.getCurrentCommunity().communityId,
 				};
 				queryResourceStoreResName(this, _data)
 					.then(function(res) {
@@ -307,7 +313,7 @@
 						}
 						_that.goodsCloums = _that.goodsCloums.concat(_data);
 						// 如果是“其他类” 追加 “自定义” 选项
-						if(_that.goodsTypeCloums[_that.goodsTypeIndex].statusCd == '1003'){
+						if(_that.goodsTypeCloums[_that.goodsTypeIndex].goodsType == '1003'){
 							_that.goodsCloums = _that.goodsCloums.concat([{resName: '自定义'}]);
 						}
 					});
@@ -341,7 +347,7 @@
 					return;
 				}
 				let selected = this.goodsTypeCloums[this.goodsTypeIndex] //获取选中的数组
-				this.goodsType = selected.statusCd //选中的id
+				this.goodsType = selected.goodsType //选中的id
 				this._loadRepairGoods();
 			},
 			
@@ -391,13 +397,13 @@
 			},
 			
 			numInc: function(){
-				if(this.useNumber >= this.goods.stock){
-					uni.showToast({
-						title: '库存不足',
-						icon: 'none'
-					})
-					return;
-				}
+				// if(this.useNumber >= this.goods.stock){
+				// 	uni.showToast({
+				// 		title: '库存不足',
+				// 		icon: 'none'
+				// 	})
+				// 	return;
+				// }
 				this.useNumber += 1;
 				this._updateTotalAmount();
 			},

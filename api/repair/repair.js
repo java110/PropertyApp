@@ -191,8 +191,8 @@ export function finishRepair(_that){
 				msg = "请选择商品类型";
 			}else if (_data.useNumber < 1){
 				msg = "商品数量不能为零";
-			}else if (_data.useNumber > _that.goods.stock){
-				msg = "库存不足";
+			// }else if (_data.useNumber > _that.goods.stock){
+			// 	msg = "库存不足";
 			}else if (!_data.isCustom && !_data.conditions.resId){
 				msg = "请选择商品";
 			}else if (_data.isCustom && !_data.customGoodsName){

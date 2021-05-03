@@ -91,6 +91,9 @@
 					},{
 						id: '888800010016',
 						name: '电费'
+					},{
+						id: '888800010009',
+						name: '电费'
 					}
 				],
 				feeConfig_index: -1,
@@ -179,7 +182,9 @@
 				let _feeTypeCd = this.feeTypes[this.feeType_index].id;
 				if (_feeTypeCd == '888800010015') {
 					_meterType = '2020';
-				}
+				}else if(_feeTypeCd == '888800010009'){
+                    _meterType = '3030';
+                }
 				let _objData = {
 					communityId: this.communityId,
 					objId: this.roomId,

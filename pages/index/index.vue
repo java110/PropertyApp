@@ -132,24 +132,13 @@
 				let _objData = {
 					page: 1,
 					row: 5,
-					communityId: this.currentCommunityId
+					locationTypeCd: '4000'
 				};
 				loadAdvert(this, _objData)
 					.then(function(res) {
 						if (res.statusCode == 200) {
 							let _advertPhotos = res.data;
-							let _aPhotos = [];
-							let _urlPath = '';
-							// #ifdef MP-WEIXIN
-							_urlPath = _that.java110Constant.url.hcBaseUrl
-							// #endif
-							_advertPhotos.forEach(function(_item) {
-								_item.type = "image";
-								_item.url = _urlPath + _item.url + "&time=" + new Date();
-								_aPhotos.push(_item);
-							});
-
-							_that.swiperList = _aPhotos;
+							_that.swiperList = _advertPhotos;
 							_that._loadActivitys();
 							return;
 						}

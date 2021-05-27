@@ -324,8 +324,13 @@
                 "navigationBarTitleText": "请扫二维码支付",
                 "enablePullDownRefresh": false
             }
-            
-        }
+        },
+		{
+		    "path" : "pages/resourceStoreManage/resourceStoreManage",
+		    "style" : {
+				"navigationBarTitleText": "我的物品"
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

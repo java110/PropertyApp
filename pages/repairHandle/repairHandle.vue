@@ -15,62 +15,38 @@
 			</view>
 		</view>
 		<view v-else>
-			<view v-if="repairObjType=='004'">
-				<view class="cu-form-group margin-top">
-					<view class="title">维修类型</view>
-					<picker :value="feeIndex" :range="feeCloums" :range-key="'name'" @change="feeChange">
-						<view class="picker">
-							{{feeCloums[feeIndex].name}}
-						</view>
-					</picker>
-				</view>
-				<view v-if="feeFlag=='1001'">
-					<view class="cu-form-group margin-top">
-						<view class="title">商品类型</view>
-						<picker :value="goodsTypeIndex" :range="goodsTypeCloums" :range-key="'name'" @change="goodsTypeChange">
-							<view class="picker">
-								{{goodsTypeCloums[goodsTypeIndex].name}}
-							</view>
-						</picker>
+			<view class="cu-form-group margin-top" v-if="repairObjType!='004'">
+				<view class="title">是否用料</view>
+				<picker :value="feeIndex" :range="feeCloums" :range-key="'name'" @change="feeChange">
+					<view class="picker">
+						{{feeCloums[feeIndex].name}}
 					</view>
-					<view class="cu-form-group margin-top" v-if="goodsType!=''">
-						<view class="title">商品</view>
-						<picker :value="goodsIndex" :range="goodsCloums" :range-key="'resName'" @change="goodsChange">
-							<view class="picker">
-								{{goodsCloums[goodsIndex].resName}}
-							</view>
-						</picker>
+				</picker>
+			</view>
+			<view class="cu-form-group margin-top" v-if="repairObjType=='004'">
+				<view class="title">维修类型</view>
+				<picker :value="feeIndex" :range="feeCloums" :range-key="'name'" @change="feeChange">
+					<view class="picker">
+						{{feeCloums[feeIndex].name}}
 					</view>
-					<view v-if="goodsIndex!=0">
-						<view class="cu-form-group margin-top" v-if="isCustom">
-							<view class="title">商品名</view>
-							<input v-model="customGoodsName" placeholder="请输入商品名"></input>
-						</view>
-						<view class="cu-form-group margin-top">
-							<view class="title">单价</view>
-							<input v-model="singlePrice" @input="goodsSinglePriceChange" :disabled="disabledPrice" placeholder="请输入单价"></input>
-						</view>
-						<view v-if="!isCustom">
-							<view class="text-right text-grey" v-if="goods.outHighPrice == goods.outLowPrice">价格:{{goods.outLowPrice}}</view>
-							<view class="text-right text-grey" v-else>价格范围{{goods.outLowPrice}}-{{goods.outHighPrice}}</view>
-						</view>
-						<view class="cu-form-group margin-top">
-							<view class="title">数量</view>
-							<!-- <input v-model="useNumber" @input="goodsNumChange" placeholder="请输入数量"></input> -->
-							<view class="use-num-container">
-								<view class="dec" @tap="numDec">-</view>
-								<input class="use-num-input" v-model="useNumber" disabled="disabled" @input="goodsNumChange"></input>
-								<view class="inc" @tap="numInc">+</view>
-							</view>
-						</view>
-						<view class="cu-form-group margin-top">
-							<view class="title">总计</view>
-							<input v-model="amount" disabled="disabled"></input>
-						</view>
-					</view>
+				</picker>
+			</view>
+			<view v-if="feeFlag=='1001' || feeFlag=='1003'" class="flex flex-direction margin-top">
+				<button class="cu-btn bg-blue margin-tb-sm lg" @click="_openSelectResourceModel()">选择商品</button>
+			</view>
+			<view v-if="resourceStoreInfo.length > 0">
+				<view class="resource-item" v-for="(item, index) in resourceStoreInfo">
+					<text class="item-t" v-if="!item.isCustom">{{item.resName}}</text>
+					<text class="item-t" v-else>{{item.customGoodsName}}</text>
+					<text class="item-t" v-show="feeFlag=='1001'">({{item.price}})</text>
+					<text class="item-t">* {{item.useNumber}}</text>
+					<text class="t-remove" @click="_removeResourceItem(index)">移除</text>
 				</view>
 			</view>
-
+			<view class="cu-form-group margin-top" v-if="feeFlag=='1001'">
+				<view class="title">总计</view>
+				<input v-model="amount" disabled="disabled"></input>
+			</view>
 		</view>
 
 		<view class="cu-form-group margin-top">
@@ -151,7 +127,7 @@
 		<view v-else class="flex flex-direction margin-top">
 			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_dispatchRepair()">提交</button>
 		</view>
-
+		<select-single-resource @getResourceInfo="_getResourceInfo" ref="selectsingleresource" :feeFlag="feeFlag"></select-single-resource>
 	</view>
 </template>
 
@@ -167,6 +143,7 @@
 	import {preventClick} from '../../utils/common.js';
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
+	import selectSingleResource from '../../components/select-single-resource/select-single-resource.vue'
 	export default {
 		data() {
 			return {
@@ -191,40 +168,22 @@
 				content: '',
 				userId: '',
 				userName: '',
-				feeFlag: '1002',
-				amount: '',
-				singlePrice: '',
-				useNumber: 1,
-				disabledPrice: false,
-				feeCloums: [{
-						id: "1002",
-						name: '无偿'
-					},
+				feeFlag: '',
+				amount: 0,
+				feeCloums: [
 					{
-						id: "1001",
-						name: '有偿'
+						id: "",
+						name: '请选择'
 					}
 				],
 				feeIndex: 0,
 				repairObjType: '',
 				storeId:'',
-				goodsTypeCloums: [{
-					name: '请选择商品类型'
-				}],
-				goodsTypeIndex: 0,
-				goodsType: '',
-				goodsCloums: [{
-					resName: '请选择商品'
-				}],
-				goodsIndex: 0,
-				goods: {
-					"resId": "",
-					"outLowPrice": "",
-					"outHighPrice": "",
-				},
-				isCustom: false,
-				customGoodsName: '',
+				resourceStoreInfo: [],
 			}
+		},
+		components:{
+			selectSingleResource
 		},
 		onLoad(options) {
 			this.publicArea = options.publicArea;
@@ -241,10 +200,46 @@
 				this.staffId = options.preStaffId
 				this.staffName = options.preStaffName
 			}
+			if(this.repairObjType == '004'){
+				this.feeCloums.push({
+						id: "1001",
+						name: '有偿服务'
+					},
+					{
+						id: "1002",
+						name: '无偿服务'
+					});
+			}else{
+				this.feeCloums.push({
+						id: "1003",
+						name: '需要用料'
+					},
+					{
+						id: "1004",
+						name: '无需用料'
+					});
+			}
 			this._loadRepairStaff();
-			this._loadRepairGoodsType();
 		},
 		methods: {
+			// 接收所选择物品信息
+			_getResourceInfo: function(data){
+				data = JSON.parse(data);
+				this.resourceStoreInfo.push(data);
+				this._updateTotalPrice();
+			},
+			_updateTotalPrice: function(){
+				this.amount = 0;
+				this.resourceStoreInfo.forEach((item) => {
+					this.amount += parseFloat(item.useNumber) * parseFloat(item.price);
+				})
+			},
+			_removeResourceItem: function(index){
+				this.resourceStoreInfo.splice(index, 1);
+			},
+			_openSelectResourceModel: function(){
+				this.$refs.selectsingleresource.switchShow();
+			},
 			_loadRepairStaff: function() {
 				let _that = this;
 				let _data = {
@@ -269,56 +264,6 @@
 					});
 			},
 			
-			_loadRepairGoodsType: function(){
-				let _that = this;
-				let _data = {
-					// name: "resource_store",
-					// type: "goods_type"
-					page: 1,
-					row: 100,
-					communityId: this.factory.getCurrentCommunity().communityId,
-				};
-				queryRepairInfo(this, _data)
-					.then(function(res) {
-						_that.goodsTypeCloums = _that.goodsTypeCloums.concat(res.data);
-					});
-			},
-			
-			_loadRepairGoods: function(){
-				let _that = this;
-				let _data = {
-					resId: "",
-					goodsType: this.goodsType,
-					page: 1,
-					row: 100,
-					communityId: this.factory.getCurrentCommunity().communityId,
-				};
-				queryResourceStoreResName(this, _data)
-					.then(function(res) {
-						let _json = res.data;
-						if (_json.code != 0) {
-							uni.showToast({
-								icon: 'none',
-								title: _json.msg
-							});
-							return;
-						}
-						let _data = _json.data;
-						_that.goodsCloums = [{resName: '请选择商品'}]
-						_that.goodsIndex = 0;
-						_that.goods = '';
-						_that.amount = '';
-						if(_data.length < 1){
-							return;
-						}
-						_that.goodsCloums = _that.goodsCloums.concat(_data);
-						// 如果是“其他类” 追加 “自定义” 选项
-						if(_that.goodsTypeCloums[_that.goodsTypeIndex].goodsType == '1003'){
-							_that.goodsCloums = _that.goodsCloums.concat([{resName: '自定义'}]);
-						}
-					});
-			},
-			
 			staffChange: function(e) {
 				this.repairStaffIndex = e.target.value //取其下标
 				if (this.repairStaffIndex == 0) {
@@ -334,89 +279,12 @@
 			feeChange: function(e) {
 				this.feeIndex = e.target.value //取其下标
 				if (this.feeIndex == 0) {
-					this.feeFlag = '1002' //选中的id
+					this.feeFlag = '' //未选择
 					return;
 				}
 				let selected = this.feeCloums[this.feeIndex] //获取选中的数组
 				this.feeFlag = selected.id //选中的id
 			},
-			goodsTypeChange: function(e){
-				this.goodsTypeIndex = e.target.value //取其下标
-				if (this.goodsTypeIndex == 0) {
-					this.goodsType = ''
-					return;
-				}
-				let selected = this.goodsTypeCloums[this.goodsTypeIndex] //获取选中的数组
-				this.goodsType = selected.goodsType //选中的id
-				this._loadRepairGoods();
-			},
-			
-			goodsChange: function(e){
-				this.goodsIndex = e.target.value //取其下标
-				if (this.goodsIndex == 0) {
-					this.goods = ''
-					return;
-				}
-				// 自定义商品
-				if(this.goodsCloums[this.goodsIndex].resName == "自定义"){
-					this.goods = ''
-					this.isCustom = true;
-					return;
-				}else{
-					this.isCustom = false;
-				}
-				let selected = this.goodsCloums[this.goodsIndex] //获取选中的数组
-				this.goods = selected
-				if(selected.outLowPrice == selected.outHighPrice){
-					this.singlePrice = selected.outLowPrice;
-					this.disabledPrice = true;
-				}else{
-					this.singlePrice = '';
-					this.disabledPrice = false;
-				}
-				this._updateTotalAmount();
-			},
-			
-			goodsSinglePriceChange: function(e){
-				this._updateTotalAmount();
-			},
-			
-			// goodsNumChange: function(e){
-			// 	this._updateTotalAmount();
-			// },
-			numDec: function(){
-				if(this.useNumber <= 1){
-					uni.showToast({
-						title: '不能再减少了',
-						icon: 'none'
-					})
-					return;
-				}
-				this.useNumber -= 1;
-				this._updateTotalAmount();
-			},
-			
-			numInc: function(){
-				// if(this.useNumber >= this.goods.stock){
-				// 	uni.showToast({
-				// 		title: '库存不足',
-				// 		icon: 'none'
-				// 	})
-				// 	return;
-				// }
-				this.useNumber += 1;
-				this._updateTotalAmount();
-			},
-			
-			_updateTotalAmount: function(){
-				let total = this.useNumber * this.singlePrice;
-				this.amount = total.toFixed(2);
-			},
-			
-			// _priceChange: function(e){
-			// 	let price = e.detail.value;
-			// 	this.amount = price;
-			// },
 			
 			_deleteImage: function(e) {
 				let imageArr = this.imgList;
@@ -441,11 +309,6 @@
 					sourceType: ['album'], //从相册选择
 					success: (res) => {
 						that.imgList.push(res.tempFilePaths[0]);
-						// let _base64Photo = '';
-						// this.java110Factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
-						// 	_base64Photo = _res;
-						// 	that.photos.push(_base64Photo);
-						// });
 						var tempFilePaths = res.tempFilePaths[0]
 
 						//#ifdef H5
@@ -492,7 +355,6 @@
 			},
 
 			_dispatchRepair: function(e) {
-
 				dispatchRepair(this)
 					.then(function(res) {
 						let _json = res.data;
@@ -552,10 +414,18 @@
 		text-align: center;
 		line-height: 40rpx;
 	}
-	.dec{
+	.resource-item{
+		width: 90%;
+		margin: 0 auto;
+		height: 60rpx;
+		line-height: 60rpx;
+	}
+	.item-t{
 		
 	}
-	.inc{
-		
+	.t-remove{
+		float: right;
+		color: #0081FF;
+		text-decoration: underline;
 	}
 </style>

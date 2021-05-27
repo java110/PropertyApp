@@ -1,5 +1,5 @@
 import mapping from '../constant/mapping.js'
-import url from '../utils/util.js'
+import url from '../constant/url.js'
 import util from '../utils/util.js'
 import AppConstant from '../constant/AppConstant.js'
 import date from '../utils/date.js'

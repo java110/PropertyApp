@@ -231,7 +231,7 @@
 					feeTypeCd: this.feeTypes[this.feeType_index].id,
 					objId: this.roomId,
 					roomId: this.roomId,
-					objName: this.roomNum,
+					objName: this.floorNum + this.unitNum + this.roomNum,
 					objType: this.objType,
 					remark: this.remark
 				};

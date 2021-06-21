@@ -68,7 +68,7 @@
 					page: 1,
 					row: 15,
 					communityId:  _that.java110Context.getCurrentCommunity().communityId,
-					name: this.searchValue,
+					unitNum: this.searchValue,
 					floorId: this.floorId
 				};
 				loadUnits(this,dataObj)

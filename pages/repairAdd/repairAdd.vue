@@ -348,6 +348,7 @@
 				}
 
 				if (msg != "") {
+					_that.onoff = true;
 					wx.hideLoading();
 					wx.showToast({
 						title: msg,
@@ -361,6 +362,7 @@
 						method: "POST",
 						data: obj, //动态数据
 						success: function(res) {
+							_that.onoff = true;
 							let _json = res.data;
 							if (_json.code == 0) {
 								wx.redirectTo({
@@ -376,6 +378,7 @@
 							})
 						},
 						fail: function(e) {
+							_that.onoff = true;
 							wx.hideLoading();
 							wx.showToast({
 								title: "服务器异常了",

@@ -330,6 +330,96 @@
 		    "style" : {
 				"navigationBarTitleText": "我的物品"
 			}
+		},
+		{
+		    "path" : "pages/purchaseApplyManage/purchaseApplyManage",
+		    "style" : {
+				"navigationBarTitleText": "采购申请列表"
+			}
+		},
+		{
+		    "path" : "pages/addPurchaseApplyStep/addPurchaseApplyStep",
+		    "style" : {
+				"navigationBarTitleText": "采购申请"
+			}
+		},
+		{
+		    "path" : "pages/purchaseApplyAuditOrders/purchaseApplyAuditOrders",
+		    "style" : {
+				"navigationBarTitleText": "采购审批"
+			}
+		},
+		{
+		    "path" : "pages/itemOutManage/itemOutManage",
+		    "style" : {
+				"navigationBarTitleText": "物品领用列表"
+			}
+		},
+		{
+		    "path" : "pages/addItemOutStep/addItemOutStep",
+		    "style" : {
+				"navigationBarTitleText": "物品领用"
+			}
+		},
+		{
+		    "path" : "pages/itemOutAuditOrders/itemOutAuditOrders",
+		    "style" : {
+				"navigationBarTitleText": "领用审批"
+			}
+		},
+		{
+		    "path" : "pages/itemOutDo/itemOutDo",
+		    "style" : {
+				"navigationBarTitleText": "物品发放"
+			}
+		},
+		{
+		    "path" : "pages/itemEnterDo/itemEnterDo",
+		    "style" : {
+				"navigationBarTitleText": "物品入库"
+			}
+		},
+		{
+		    "path" : "pages/allocationStorehouseManage/allocationStorehouseManage",
+		    "style" : {
+				"navigationBarTitleText": "物品调拨列表"
+			}
+		},
+		{
+		    "path" : "pages/allocationStorehouseApply/allocationStorehouseApply",
+		    "style" : {
+				"navigationBarTitleText": "物品调拨"
+			}
+		},
+		{
+		    "path" : "pages/allocationStorehouseAuditOrders/allocationStorehouseAuditOrders",
+		    "style" : {
+				"navigationBarTitleText": "调拨审批"
+			}
+		},
+		{
+		    "path" : "pages/allocationStorehouseApplyDetail/allocationStorehouseApplyDetail",
+		    "style" : {
+				"navigationBarTitleText": "调拨详情"
+			}
+		},
+		{
+		    "path" : "pages/resourceStoreReturn/resourceStoreReturn",
+		    "style" : {
+				"navigationBarTitleText": "物品退还"
+			}
+		},
+		{
+			"path" : "pages/resourceStoreTransfer/resourceStoreTransfer",
+			"style" : {
+				"navigationBarTitleText": "物品转赠"
+			}
+		},
+		{
+			"path" : "pages/inspectionTransfer/inspectionTransfer",
+			"style" : {
+				"navigationBarTitleText": "任务流转"
+			}
 		}
     ],
 	"globalStyle": {

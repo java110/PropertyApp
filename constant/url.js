@@ -86,4 +86,35 @@ export default {
 	queryFeeTypesItems: baseUrl + "callComponent/roomCreateFeeAdd/list",
 	queryPreMeterWater: baseUrl + "app/meterWater/queryPreMeterWater",
 	saveMeterWater: baseUrl + "callComponent/meterWater.saveMeterWater",
+	// 采购/出库申请部分
+	queryPurchaseApplyList: baseUrl + "callComponent/purchaseApplyManage/list",
+	queryResourceStoreList: baseUrl + "callComponent/chooseResourceStore/list",
+	queryResourceSupplier: baseUrl + "callComponent/resourceSupplier.listResourceSuppliers",
+	queryFirstStaff: baseUrl + "app/workflow/getFirstStaff",
+	savePurchaseApply: baseUrl + "app/purchase/purchaseApply",
+	saveItemOutApply: baseUrl + "app/collection/goodsCollection",
+	listMyAuditOrders: baseUrl + "callComponent/myAuditOrders/list",
+	listMyItemOutOrders: baseUrl + "app/collection/getCollectionAuditOrder",
+	listMyAllocationStoreAuditOrders: baseUrl + "callComponent/resourceStore.listAllocationStoreAuditOrders",
+	saveResourceOut: baseUrl + "app/collection/resourceOut",
+	saveResourceEnter: baseUrl + "app/purchase/resourceEnter",
+	listAuditHistoryOrders: baseUrl + "callComponent/auditUser.listAuditHistoryOrders",
+	listItemOutAuditHistoryOrders: baseUrl + "callComponent/auditUser.listItemOutAuditHistoryOrders",
+	listAllocationStoreHisAuditOrders: baseUrl + "callComponent/resourceStore.listAllocationStoreHisAuditOrders",
+	// listWorkflowAuditInfo2: baseUrl + "callComponent/workflow.listWorkflowAuditInfo",
+	// 调拨部分
+	listAllocationStorehouseApplys: baseUrl + "callComponent/resourceStore.listAllocationStorehouseApplys",
+	listStoreHouses: baseUrl + "callComponent/resourceStore.listStorehouses",
+	saveAllocationStorehouse: baseUrl + "callComponent/resourceStore.saveAllocationStorehouse",
+	listAllocationStorehouses: baseUrl + "callComponent/resourceStore.listAllocationStorehouses",
+	saveAuditAllocationStoreOrder: baseUrl + "callComponent/resourceStore.auditAllocationStoreOrder",
+	listWorkflowStepStaffs: baseUrl + "callComponent/workflow.listWorkflowStepStaffs",
+	saveMyAuditOrders: baseUrl + "callComponent/myAuditOrders/audit",
+	// 公司/员工信息
+	queryOrgInfo: baseUrl + "callComponent/orgManage/list",
+	queryStaffListInfo: baseUrl + "callComponent/searchStaff/listStaff",
+	// 巡检流转
+	UpdateInspectionTask: baseUrl + "callComponent/inspectionTask.updateInspectionTask",
+	// 物品转赠
+	saveResourceStoreTransfer: baseUrl + "callComponent/addAllocationUserStorehouse/save",
 }

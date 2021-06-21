@@ -9,6 +9,14 @@
 				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="_searchResource()">搜索</button>
 			</view>
 		</view>
+		<view class="cu-bar bg-white">
+			<view class="action">
+				<button class="cu-btn bg-blue" @tap="_returnResource()">退还</button>
+			</view>
+			<view class="action">
+				<button class="cu-btn bg-blue" @tap="_transferResource()">转赠</button>
+			</view>
+		</view>
 		<view class="margin-top" v-if="noData==false">
 			<view class="cu-list menu-avatar " v-for="(item,index) in resourceList" :key="index">
 				<view class="cu-item">
@@ -73,7 +81,6 @@
 				};
 				queryMyResourceStoreInfo(this, _objData)
 					.then(function(res) {
-						console.log('here is ', res);
 						if (res.code != 0) {
 							uni.showToast({
 								icon: 'none',
@@ -103,6 +110,18 @@
 				this.resourceList = [];
 				this.page = 1;
 				this._loadResourceList();
+			},
+			
+			_returnResource: function(){
+				uni.navigateTo({
+					url: '/pages/resourceStoreReturn/resourceStoreReturn'
+				})
+			},
+			
+			_transferResource: function(){
+				uni.navigateTo({
+					url: '/pages/resourceStoreTransfer/resourceStoreTransfer'
+				})
 			},
 		}
 	}

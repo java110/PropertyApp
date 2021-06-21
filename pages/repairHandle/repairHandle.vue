@@ -34,13 +34,34 @@
 			<view v-if="feeFlag=='1001' || feeFlag=='1003'" class="flex flex-direction margin-top">
 				<button class="cu-btn bg-blue margin-tb-sm lg" @click="_openSelectResourceModel()">选择商品</button>
 			</view>
-			<view v-if="resourceStoreInfo.length > 0">
-				<view class="resource-item" v-for="(item, index) in resourceStoreInfo">
-					<text class="item-t" v-if="!item.isCustom">{{item.resName}}</text>
-					<text class="item-t" v-else>{{item.customGoodsName}}</text>
-					<text class="item-t" v-show="feeFlag=='1001'">({{item.price}})</text>
-					<text class="item-t">* {{item.useNumber}}</text>
-					<text class="t-remove" @click="_removeResourceItem(index)">移除</text>
+			<view v-if="(feeFlag=='1001' || feeFlag=='1003') && resourceStoreInfo.length > 0">
+				<view class="row">
+					<view class="item-t text-bold">商品</view>
+					<view class="item-t text-bold" v-show="feeFlag=='1001'">价格</view>
+					<view class="item-t text-bold">数量</view>
+					<view class="item-t text-bold">操作</view>
+				</view>
+				<view class="resource-item text-grey" v-for="(item, index) in resourceStoreInfo">
+					<view class="row">
+						<view class="item-t" v-if="!item.isCustom">{{item.resName}}</view>
+						<view class="item-t" v-else>{{item.customGoodsName}}</view>
+						<view class="item-t" v-show="feeFlag=='1001'">
+							<input type="number" v-model="item.price" class="inline-input text-grey bg-white" @input="_updateTotalPrice()" :disabled="!item.isCustom && item.outHighPrice == item.outLowPrice" />
+						</view>
+						<view class="item-t">
+							<text class="cuIcon-move text-black padding-right-sm padding-left-sm" @click="userNumberChange(index, 'dec')"></text>
+							<input type="number" v-model="item.useNumber" class="inline-input text-grey bg-white" @input="_updateTotalPrice()" />
+							<text class="cuIcon-add text-black padding-right-sm padding-left-sm" @click="userNumberChange(index, 'inc')"></text>
+						</view>
+						<view class="item-t">
+							<text class="t-remove" @click="_removeResourceItem(index)">移除</text>
+						</view>
+					</view>
+					<view class="row" v-show="feeFlag == '1001' && !item.isCustom && item.outHighPrice != item.outLowPrice">
+						<!-- <view class="item-t text-grey text-sm"> -->
+							价格范围({{item.outLowPrice}} - {{item.outHighPrice}})
+						<!-- </view> -->
+					</view>
 				</view>
 			</view>
 			<view class="cu-form-group margin-top" v-if="feeFlag=='1001'">
@@ -228,14 +249,34 @@
 				this.resourceStoreInfo.push(data);
 				this._updateTotalPrice();
 			},
+			userNumberChange: function(index, action){
+				if(action == 'inc'){
+					this.resourceStoreInfo[index].useNumber = parseFloat(this.resourceStoreInfo[index].useNumber) + 1;
+				}else{
+					if(this.resourceStoreInfo[index].useNumber <= 1){
+						uni.showToast({
+							title:'不能再减少啦',
+							icon:'none'
+						});
+						return;
+					}
+					this.resourceStoreInfo[index].useNumber -= 1;
+				}
+				this._updateTotalPrice();
+			},
 			_updateTotalPrice: function(){
 				this.amount = 0;
 				this.resourceStoreInfo.forEach((item) => {
-					this.amount += parseFloat(item.useNumber) * parseFloat(item.price);
+					let num = parseFloat(item.useNumber);
+					let price = parseFloat(item.price);
+					if(!isNaN(num) && !isNaN(price)){
+						this.amount += num * price;
+					}
 				})
 			},
 			_removeResourceItem: function(index){
 				this.resourceStoreInfo.splice(index, 1);
+				this._updateTotalPrice();
 			},
 			_openSelectResourceModel: function(){
 				this.$refs.selectsingleresource.switchShow();
@@ -359,8 +400,8 @@
 					.then(function(res) {
 						let _json = res.data;
 						if (_json.code == 0) {
-							uni.navigateBack({
-								delta: 1
+							uni.navigateTo({
+								url: '/pages/repairDispatch/repairDispatch'
 							})
 							return;
 						}
@@ -372,6 +413,7 @@
 					});
 			},
 			_finishRepair: function() {
+				let _that = this;
 				uni.showLoading({
 					title:"处理中..."
 				})
@@ -379,8 +421,8 @@
 					.then(function(res) {
 						let _json = res.data;
 						if (_json.code == 0) {
-							uni.navigateBack({
-								delta: 1
+							uni.navigateTo({
+								url: '/pages/repairDispatch/repairDispatch'
 							})
 							return;
 						}
@@ -415,16 +457,27 @@
 		line-height: 40rpx;
 	}
 	.resource-item{
-		width: 90%;
+	}
+	.row{
+		width: 95%;
 		margin: 0 auto;
 		height: 60rpx;
 		line-height: 60rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 	}
 	.item-t{
-		
+		display: inline-block;
+		text-align: center;
+	}
+	.inline-input{
+		display: inline-block;
+		width: 100rpx;
+		vertical-align: middle;
+		border-radius: 15rpx;
 	}
 	.t-remove{
-		float: right;
 		color: #0081FF;
 		text-decoration: underline;
 	}

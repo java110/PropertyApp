@@ -222,11 +222,11 @@ switch.radius .uni-switch-input::before {
 
 switch .wx-switch-input::before,
 radio.radio::before,
-checkbox .wx-checkbox-input::before,
+/* checkbox .wx-checkbox-input::before, */
 radio .wx-radio-input::before,
 switch .uni-switch-input::before,
 radio.radio::before,
-checkbox .uni-checkbox-input::before,
+/* checkbox .uni-checkbox-input::before, */
 radio .uni-radio-input::before {
 	display: none;
 }
@@ -3916,8 +3916,9 @@ scroll-view.cu-steps .cu-item {
 	height: 90rpx;
 	line-height: 90rpx;
 	text-align: center;
-	background-color: #00AA00;
-	border-radius: 15rpx;
-	color: #fff;
+	/* background-color: #00AA00; */
+	/* border-radius: 15rpx; */
+	color: #007AFF;
 	font-size: 32rpx;
+	text-decoration: underline;
 }

@@ -14,13 +14,13 @@
 					<view class="title">商品名</view>
 					<input v-model="customGoodsName" placeholder="请输入商品名"></input>
 				</view>
-				<view class="cu-form-group margin-top" v-if="feeFlag == '1001'">
+				<view class="cu-form-group margin-top" v-show="feeFlag == '1001'">
 					<view class="title">自定义价格</view>
-					<input v-model="singlePrice" placeholder="请输入自定义价格"></input>
+					<input type="number" v-model="singlePrice" placeholder="请输入自定义价格"></input>
 				</view>
 			</view>
 			<view v-else>
-				<view class="cu-form-group margin-top" v-if="goodsType!=''">
+				<view class="cu-form-group margin-top" v-if="rstId!=''">
 					<view class="title">商品</view>
 					<picker :value="goodsIndex" :range="goodsCloums" :range-key="'resName'" @change="goodsChange">
 						<view class="picker">
@@ -29,22 +29,22 @@
 					</picker>
 				</view>
 				<view v-if="goodsIndex!=0">
-					<view class="cu-form-group margin-top">
+					<view class="cu-form-group margin-top" v-show="feeFlag == '1001'">
 						<view class="title">单价</view>
-						<input v-model="singlePrice" :disabled="disabledPrice" placeholder="请输入单价"></input>
+						<input type="number" v-model="singlePrice" :disabled="disabledPrice" placeholder="请输入单价"></input>
 					</view>
-					<view>
+					<view v-show="feeFlag == '1001'">
 						<view class="text-right text-grey" v-if="goods.outHighPrice == goods.outLowPrice">价格:{{goods.outLowPrice}}</view>
 						<view class="text-right text-grey" v-else>价格范围{{goods.outLowPrice}}-{{goods.outHighPrice}}</view>
 					</view>
-					<view class="cu-form-group margin-top">
-						<view class="title">数量</view>
-						<view class="use-num-container">
-							<view class="dec" @tap="numDec">-</view>
-							<input class="use-num-input" v-model="useNumber" disabled="disabled" @input="goodsNumChange"></input>
-							<view class="inc" @tap="numInc">+</view>
-						</view>
-					</view>
+				</view>
+			</view>
+			<view class="cu-form-group margin-top">
+				<view class="title">数量</view>
+				<view class="use-num-container">
+					<view class="dec" @tap="numDec">-</view>
+					<input class="use-num-input" v-model="useNumber" disabled="disabled" @input="goodsNumChange"></input>
+					<view class="inc" @tap="numInc">+</view>
 				</view>
 			</view>
 			<view class="flex flex-direction margin-top">
@@ -80,7 +80,7 @@
 					name: '请选择商品类型'
 				}],
 				goodsTypeIndex: 0,
-				goodsType: '',
+				rstId: '',
 				goodsCloums: [{
 					resName: '请选择商品'
 				}],
@@ -111,13 +111,51 @@
 		},
 
 		mounted() {
-			this._loadRepairGoodsType();
 		},
 
 		methods: {
 			
 			switchShow: function(){
+				this.resetData();
 				this.showModel = !this.showModel;
+			},
+			
+			resetData: function(){
+				let _that = this;
+				let initData = {
+					showModel: false,
+					amount: '',
+					singlePrice: '',
+					useNumber: 1,
+					disabledPrice: false,
+					goodsTypeCloums: [{
+						name: '请选择商品类型'
+					}],
+					goodsTypeIndex: 0,
+					rstId: '',
+					goodsCloums: [{
+						resName: '请选择商品'
+					}],
+					goodsIndex: 0,
+					goods: {
+						"resId": "",
+						"outLowPrice": "",
+						"outHighPrice": "",
+					},
+					isCustom: false,
+					customGoodsName: '',
+					resourceStoreInfo: [],
+				};
+				this.copyObject(initData, _that);
+				this._loadRepairGoodsType();
+			},
+			
+			copyObject: function (org, dst) {
+				for (let key in dst) {
+					if (org.hasOwnProperty(key)) {
+						dst[key] = org[key]
+					}
+				}
 			},
 			
 			_loadRepairGoodsType: function(){
@@ -137,7 +175,7 @@
 			// 追加自定义类
             _appendCustomResourceStoreType: function () {
                 let customeType = {
-                    goodsType: 'custom',
+                    rstId: 'custom',
                     name: '自定义'
                 };
                 this.goodsTypeCloums.push(customeType);
@@ -147,7 +185,7 @@
 				let _that = this;
 				let _data = {
 					resId: "",
-					goodsType: this.goodsType,
+					rstId: this.rstId,
 					page: 1,
 					row: 100,
 					communityId: this.factory.getCurrentCommunity().communityId,
@@ -155,7 +193,7 @@
 				queryResourceStoreResName(this, _data)
 					.then(function(res) {
 						let _json = res.data;
-						if (_json.code != 0) {
+						if (_json.total < 1) {
 							uni.showToast({
 								icon: 'none',
 								title: '暂无商品'
@@ -177,17 +215,18 @@
 			goodsTypeChange: function(e){
 				this.goodsTypeIndex = e.target.value //取其下标
 				if (this.goodsTypeIndex == 0) {
-					this.goodsType = ''
+					this.rstId = ''
 					return;
 				}
 				let selected = this.goodsTypeCloums[this.goodsTypeIndex] //获取选中的数组
-				if(selected.goodsType == 'custom'){
+				console.log(selected);
+				if(selected.rstId == 'custom'){
 					this.isCustom = true;
 					return;
 				}else{
 					this.isCustom = false;
 				}
-				this.goodsType = selected.goodsType //选中的id
+				this.rstId = selected.rstId //选中的id
 				this._loadRepairGoods();
 			},
 			
@@ -233,13 +272,13 @@
 						msg = '请输入有效金额';
 					}
 				}else{
-					if(this.goodsType == ''){
+					if(this.rstId == ''){
 						msg = "请选择商品类型";
 					}else if (this.useNumber < 1){
 						msg = "商品数量不能为零";
 					}else if (!this.goods){
 						msg = "请选择商品";
-					}else if (!this.singlePrice){
+					}else if (this.feeFlag == '1001' && !this.singlePrice){
 						msg = "请输入有效金额";
 					}
 				}

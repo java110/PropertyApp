@@ -35,6 +35,10 @@
 					</view>
 				</view>
 			</view>
+			<view class="cu-form-group margin-top">
+				<view class="title">当前位置</view>
+				<input type="text" v-model="reverseGeocoderSimplify" disabled="disabled" />
+			</view>
 		</form>
 				
 		<view class="padding flex flex-direction">
@@ -45,6 +49,7 @@
 </template>
 
 <script>
+	import conf from '../../conf/config.js'
 	import * as TanslateImage from '../../utils/translate-image.js';
 	import {preventClick} from '../../utils/common.js';
 	import Vue from 'vue'
@@ -57,6 +62,8 @@
 				taskDetailId:'',
 				inspectionId:'',
 				inspectionName:'',
+				pointStartTime: '',
+				pointEndTime: '',
 				patrols:['正常','异常'],
 				patrolTypes:['10001','20002'],
 				patrolType:'',
@@ -67,10 +74,23 @@
 				patrolIndex:0,
 				communityId:'',
 				userId:'',
-				userName:''
+				userName:'',
+				latitude: '',
+				longitude: '',
+				location: '',
+				reverseGeocoderSimplify: '正在获取...'
 			}
 		},
 		onLoad(option) {
+			let that = this;
+			wx.getLocation({
+				type: 'gcj02',
+				success: (res) => {
+					this.latitude = res.latitude;
+					this.longitude = res.longitude;
+					this.getCurrentLocation();
+				}
+			});
 			this.taskDetailId = option.taskDetailId;
 			this.taskId = option.taskId;
 			this.inspectionId = option.inspectionId;
@@ -82,21 +102,35 @@
 			this.userId = _userInfo.userId;
 		},
 		methods: {
+			// 地址逆解析
+			getCurrentLocation: function(){
+				let locationObj = this.latitude + ',' + this.longitude;
+				let url = 'https://apis.map.qq.com/ws/geocoder/v1?coord_type=5&get_poi=1&output=jsonp&poi_options=page_size=1;page_index=1';
+				this.$jsonp(url, {
+					key: conf.QQMapKey,
+					location: locationObj
+				})
+				.then(res => {
+					this.reverseGeocoderSimplify = res.result.address;
+				})
+				.catch(err => {
+					console.log(err);
+				});
+			},
 			patrolChange:function(e){
 				this.patrolTypeName = this.patrols[e.detail.value];
 				this.patrolType = this.patrolTypes[e.detail.value];
 			},
 			removePhoto: function(e) {
-				console.log(e);
 				let _imgList = [];
 				this.imgList.forEach(function(item, index) {
-					if (index != e.detail.index) {
+					if (index != e) {
 						_imgList.push(item);
 					}
 				});
 				let _photos = [];
 				this.photos.forEach(function(item, index) {
-					if (index != e.detail.index) {
+					if (index != e) {
 						_photos.push(item);
 					}
 				});
@@ -116,11 +150,6 @@
 					sourceType: ['camera'], //手机拍照
 					success: (res) => {
 						that.$data.imgList.push(res.tempFilePaths[0]);
-						// let _base64Photo = '';
-						// that.java110Factory.base64.urlTobase64(res.tempFilePaths[0]).then(function(_res) {
-						// 	_base64Photo = _res;
-						// 	that.photos.push(_base64Photo);
-						// });
 						var tempFilePaths = res.tempFilePaths[0]
 						//#ifdef H5
 						TanslateImage.translate(tempFilePaths, (url) => {
@@ -131,6 +160,7 @@
 				});
 			},
 			_submitExcuteInspection: function() {
+				let _that = this;
 				uni.showLoading({
 					title:'请稍后...'
 				})
@@ -144,7 +174,9 @@
 					"description":this.description,
 					"photos": [],
 					"userId": this.userId,
-					"userName": this.userName
+					"userName": this.userName,
+					"latitude": this.latitude,
+					"longitude": this.longitude
 				}
 			
 				let _photos = this.photos;
@@ -173,6 +205,7 @@
 				console.log(obj);
 			
 				if (msg != "") {
+					_that.onoff = true;
 					wx.showToast({
 						title: msg,
 						icon: 'none',
@@ -186,6 +219,7 @@
 						method: "POST",
 						data: obj, //动态数据
 						success: function(res) {
+							_that.onoff = true;
 							if (res.statusCode == 200) {
 								uni.navigateBack({
 									delta:1
@@ -200,6 +234,7 @@
 							})
 						},
 						fail: function(e) {
+							_that.onoff = true;
 							uni.hideLoading();
 							wx.showToast({
 								title: "服务器异常了",

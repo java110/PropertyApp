@@ -10,6 +10,8 @@ import date from 'utils/date.js'
 import store from './store'
 
 import cuCustom from './colorui/components/cu-custom.vue'
+import {VueJsonp} from 'vue-jsonp'
+Vue.use(VueJsonp)
 Vue.component('cu-custom',cuCustom)
 Vue.config.productionTip = false
 

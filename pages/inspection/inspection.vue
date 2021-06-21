@@ -28,6 +28,7 @@
 				<view class="text-gray">{{item.signTypeName}}</view>
 			</view>
 			<view class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
+				<button class="cu-btn sm bg-blue margin-left" @click="_transferInspection(item)">流转</button>
 				<button class="cu-btn sm bg-green margin-left" @click="_startInspection(item)">我要巡检</button>
 			</view>
 		</view>
@@ -40,6 +41,7 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import dateUtil from '../../utils/date.js'
 	export default {
 		data() {
 			return {
@@ -68,6 +70,13 @@
 		},
 		methods: {
 			_startInspection:function(_item){
+				if(dateUtil.compareDate(_item.planInsTime.replace(/-/g, '/'), dateUtil.getCurrentDateTime().replace(/-/g, '/'))){
+					uni.showToast({
+						title: "尚未开始",
+						icon: "none"
+					});
+					return;
+				}
 				console.log('开始巡检',_item);
 				uni.navigateTo({
 					url:'/pages/excuteInspection/excuteInspection?taskId='+_item.taskId+'&inspectionPlanName='+_item.inspectionPlanName
@@ -85,8 +94,8 @@
 						page: 1,
 						row: 10,
 						planUserId: _that.userId,
-						moreState:'20200405,20200406'
-						
+						moreState:'20200405,20200406',
+						isToday: 1
 					},
 					success: function(res) {
 						// TODO 判断
@@ -100,8 +109,13 @@
 						}
 					}
 				});
-			}
+			},
 
+			_transferInspection: function(_taskInfo){
+				uni.navigateTo({
+					url: '/pages/inspectionTransfer/inspectionTransfer?task=' + JSON.stringify(_taskInfo)
+				})
+			}
 		}
 	}
 </script>

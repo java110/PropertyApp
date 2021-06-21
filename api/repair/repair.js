@@ -143,16 +143,12 @@ export function finishRepair(_that){
 	
 	return new Promise(function(reslove,reject){
 		let _data = {
-			// "amount": _that.singlePrice ? _that.singlePrice : 0,
-			// "price": _that.singlePrice,
 			"feeFlag": _that.feeFlag,
 			"context": _that.content,
 			"repairId": _that.repairId,
 			"repairChannel": _that.repairChannel,
 			"publicArea": _that.publicArea,
 			"maintenanceType": _that.feeFlag,
-			// "outLowPrice": _that.goods.outLowPrice,
-			// "outHighPrice": _that.goods.outHighPrice,
 			"repairType": _that.repairType,
 			"action": _that.action,
 			"communityId":_that.java110Context.getCurrentCommunity().communityId,
@@ -164,14 +160,6 @@ export function finishRepair(_that){
 			"storeId":_that.storeId,
 			"choosedGoodsList": _that.resourceStoreInfo,
 			"totalPrice": _that.amount
-			// "conditions": {
-			// 	"goodsType": _that.goodsType,
-			// 	"resId": _that.goods.resId,
-			// },
-			// "resId": _that.goods.resId,
-			// "useNumber": _that.useNumber,
-			// "isCustom": _that.isCustom,
-			// "customGoodsName": _that.customGoodsName,
 		}
 		let _beforeRepairPhotos = _that.beforeRepairPhotos;
 		_beforeRepairPhotos.forEach(function(_item) {
@@ -186,13 +174,23 @@ export function finishRepair(_that){
 			});
 		});
 		let msg = "";
-		if (_data.context == "") {
+		if(!_data.feeFlag){
+			msg = "请选择类型";
+		}else if (_data.context == "") {
 			msg = "请填写处理意见";
 		}else if (_data.repairId == "") {
 			msg = "数据错误";
-		}
-		if(!_data.feeFlag){
-			msg = "请选择类型";
+		}else if ((_data.maintenanceType == '1001' || _data.maintenanceType == '1003') && _data.choosedGoodsList.length < 1){
+			msg = "请选择物品";
+		}else if ((_data.maintenanceType == '1001' || _data.maintenanceType == '1003') && _data.choosedGoodsList.length >= 1){
+			_data.choosedGoodsList.forEach((good) => {
+				if(!good.useNumber || good.useNumber < 1){
+					msg = "商品数量有误";
+				}
+				if(_data.maintenanceType == '1001' && (!good.price || good.price < 0)){
+					msg = "商品价格有误";
+				}
+			})
 		}
 		if (msg != "") {
 			wx.showToast({
@@ -200,19 +198,23 @@ export function finishRepair(_that){
 				icon: 'none',
 				duration: 2000
 			});
+			_that.onoff = true;
 			return;
 		}
 		// 无偿/不用料 商品数量为零
 		if(_data.maintenanceType == '1002' || _data.maintenanceType == '1004'){
 			_data.useNumber = 0;
+			_data.choosedGoodsList = [];
 		}
 		_that.context.post({
 			url: url.repairFinish,
 			data:_data,
 			success: function(res) {
+				_that.onoff = true;
 				reslove(res);
 			},
 			fail: function(e) {
+				_that.onoff = true;
 				wx.showToast({
 					title: "服务器异常了",
 					icon: 'none',

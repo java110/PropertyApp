@@ -3,12 +3,13 @@ export function preventClick(fn) {
 	if (that.onoff) {
 		that.onoff = false;
 		fn();
-		setTimeout(function () {
-			that.onoff = true;
-		}, 1500)
+		// setTimeout(function () {
+		// 	that.onoff = true;
+		// }, 3000)
 	} else {
 		uni.showToast({
-			title:'操作过于频繁'
+			title:'操作过于频繁',
+			icon: 'none'
 		})
 	}
 }

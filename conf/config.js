@@ -13,6 +13,8 @@
 const baseUrl = '/'; 
 // #endif
 
+// 腾讯地图Key, h5使用
+const QQMapKey = '';
 const commonBaseUrl= 'https://app.demo.winqi.cn';
 
 // #ifndef H5
@@ -30,5 +32,6 @@ export default{
 	baseUrl:baseUrl,
 	logLevel:logLevel,
 	appPayKey:appPayKey,
-	commonBaseUrl: commonBaseUrl
+	commonBaseUrl: commonBaseUrl,
+	QQMapKey: QQMapKey
 }

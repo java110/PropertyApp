@@ -7,6 +7,7 @@
 			 :key="index">
 				<view class="content shadow-blur" :class="(item.state == '20200407'?'bg-green':'')">
 					{{item.inspectionName}}
+					<text v-show="item.state != '20200407' && item.pointStartTime && item.pointEndTime">({{item.pointStartTime}} - {{item.pointEndTime}})</text>
 				</view>
 				<view class="bg-green content" v-if="item.state == '20200407'">
 					<text>处理意见：</text> {{item.description}}

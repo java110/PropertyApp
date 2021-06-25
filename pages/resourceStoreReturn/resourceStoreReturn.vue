@@ -8,29 +8,34 @@
 			</view>
 			<view class="margin-top">
 				<view class="cu-list menu-avatar " v-for="(item,index) in resourceStores" :key="index">
-					<view class="cu-item" style="height: 180rpx;">
+					<view class="cu-item" style="height: 220rpx;">
 						<view class="content content-left" style="width: 100%;">
-							<view class="text-grey">
+							<view class="text-grey flex-around">
 								<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
 								<text class="item-remove bg-red text-df" @click="_removeItem(index, item.resId)">移除</text>
 							</view>
-							<view class="text-gray flex text-df" style="margin: 10rpx 0;">
+							<view class="text-gray flex-around text-df" style="margin: 10rpx 0;">
+								<view>
 									<text>当前库存:</text>
 									<text>{{item.stock}}</text>
-							</view>
-							<view class="text-gray flex">
-								<view class="flex-item w50">
-									<label>数量:</label>
-									<input class="use-number bg-gray" type="text" v-model="item.curStock" value="" />
 								</view>
-								<view class="flex-item w50">
-									<label>仓库:</label>
+								<text class="item-remove bg-blue text-df" @click="_itemReturnAll(index, item.resId)">全部退还</text>
+							</view>
+							<view class="text-gray flex-around">
+									<label>退还数量:</label>
+									<view class="flex">
+										<text class="cuIcon-move" @click="_decItemCurstock(item.resId)"></text>
+										<input class="use-number bg-gray" type="text" v-model="item.curStock" value="" />
+										<text class="cuIcon-add" @click="_incItemCurstock(item.resId)"></text>
+									</view>
+							</view>
+							<view class="text-gray flex-around">
+									<label>退还仓库:</label>
 									<picker :value="selectedStoreHousesList[index]" :range="storeHouses" :range-key="'shName'" @change="_storeHousesChange(index,$event)">
 										<view class="picker">
 											{{storeHouses[selectedStoreHousesList[index]].shName}}
 										</view>
 									</picker>
-								</view>
 							</view>
 						</view>
 					</view>
@@ -154,6 +159,7 @@
 			_getResourceInfo: function(list){
 				this.resourceStores = list;
 				this.resourceStores.forEach((item)=>{
+					item.curStock = 0;
 					this.selectedStoreHousesList.push(0);
 				})
 			},
@@ -162,6 +168,33 @@
 				this.resourceStores.splice(index, 1);
 				// 通知子组件 取消选中checkbox
 				this.$refs.selectresourcestaff.removeSelectedItem(resId);
+			},
+			
+			_itemReturnAll: function(index, resId){
+				this.resourceStores.forEach((item) => {
+					if(item.resId == resId){
+						item.curStock = item.stock;
+					}
+				})
+				this.$forceUpdate();
+			},
+			
+			_decItemCurstock: function(resId){
+				this.resourceStores.forEach((item) => {
+					if(item.resId == resId && item.curStock > 1){
+						item.curStock -= 1;
+					}
+				})
+				this.$forceUpdate();
+			},
+			
+			_incItemCurstock: function(resId){
+				this.resourceStores.forEach((item) => {
+					if(item.resId == resId && item.stock > item.curStock){
+						item.curStock += 1;
+					}
+				})
+				this.$forceUpdate();
 			},
 			
 			_storeHousesChange: function(i, e) {
@@ -198,22 +231,15 @@
 		line-height: 80rpx;
 	}
 	.cu-list.menu-avatar>.cu-item .content-left {
-		left: 30upx;
+		left: 0;
 	}
 
 	.cu-list+.cu-list {
 		margin-top: 20upx;
 	}
 	
-	.flex-item{
-		display: flex;
-		flex-direction: row;
-	}
-	.w50{
-		width: 50%;
-	}
-	.flex label, .flex-item label{
-		width: 100rpx;
+	.flex label, .flex-around label{
+		width: 150rpx;
 	}
 	.use-number{
 		width: 200rpx;
@@ -226,5 +252,10 @@
 	.item-remove{
 		border-radius: 15rpx;
 		padding: 2rpx 10rpx;
+	}
+	.flex-around{
+		display: flex;
+		justify-content: space-between;
+		padding: 0 20rpx;
 	}
 </style>

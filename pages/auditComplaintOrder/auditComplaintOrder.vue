@@ -106,6 +106,7 @@
 			}
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
 			let _complaintId = options.complaintId;
 			this.complaintId = _complaintId;
 			console.log('_complaintId',_complaintId);
@@ -115,44 +116,6 @@
 			_loadComplaintOrder:function(){
 				
 				this.auditOrder = uni.getStorageSync("_auditComplaint_"+this.complaintId);
-				//
-				/* let _that = this;
-				let _userInfo = this.java110Context.getUserInfo();
-				let storeId = _userInfo.storeId;
-				let _objData = {
-					page: 1,
-					row: 1,
-					storeId: storeId,
-					userId: _userInfo.userId,
-					complaintId:this.complaintId,
-					communityId:_that.java110Context.getCurrentCommunity().communityId
-				};
-				
-				this.java110Context.request({
-					url: _that.java110Constant.url.listAuditComplaints,
-					header: _that.java110Context.getHeaders(),
-					method: "GET",
-					data: _objData, //动态数据
-					success: function(res) {
-						console.log("请求返回信息：", res);
-						if (res.statusCode != 200) {
-							uni.showToast({
-								icon:'none',
-								title:res.data
-							});
-							return;
-						}
-						let _data = res.data;
-						_that.auditOrder = _data.complaints[0];
-					},
-					fail: function(e) {
-						wx.showToast({
-							title: "服务器异常了",
-							icon: 'none',
-							duration: 2000
-						});
-					}
-				}); */
 			},
 			_changeResult:function(e){
 				this.stateIndex = e.detail.value;

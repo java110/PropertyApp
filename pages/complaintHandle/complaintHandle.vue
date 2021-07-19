@@ -22,6 +22,7 @@
 
 <script>
 	import {auditComplaint} from '../../api/complaint/complaint.js'
+	import {getCommunity,getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -49,6 +50,7 @@
 			}
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
 			this.complaintId = options.complaintId;
 			this.taskId = options.taskId;
 			let _userInfo = this.java110Context.getUserInfo();
@@ -61,7 +63,7 @@
 				let _data = {
 					state:this.state,
 					remark:this.content,
-					communityId:this.java110Context.getCurrentCommunity().communityId,
+					communityId:getCurrentCommunity().communityId,
 					taskId:this.taskId,
 					complaintId:this.complaintId,
 					storeId:this.storeId,

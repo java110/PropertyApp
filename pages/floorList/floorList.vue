@@ -37,6 +37,7 @@
 		},
 		
 		onLoad(options) {
+			this.java110Context.onLoad();
 			this.communityId = options.communityId;
 			this._loadFloors();
 		},

@@ -72,7 +72,7 @@
 
 <script>
 	import {queryFeeTypesItems,queryPreMeterWater,saveMeterWater} from '../../api/meter/meter.js'
-	import dateObj from '../../utils/date.js'
+	import dateObj from '../../lib/java110/utils/date.js'
 	import uniDatetimePicker from '../../components/uni-datetime-picker/uni-datetime-picker.vue'
 	export default {
 		data() {
@@ -111,6 +111,7 @@
 		},
 		
 		onLoad(){
+			this.java110Context.onLoad();
 			this.preReadingTime = dateObj.getCurrentDateTime();
 			this.communityId = this.java110Context.getCurrentCommunity().communityId;
 		},

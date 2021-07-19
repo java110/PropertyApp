@@ -1,11 +1,12 @@
 <template>
 	<view class="content">
 		<view class="margin-bottom-xs">
-			<uni-notice-bar :showIcon="true" :scrollable="true" :single="true" :speed="30" text="HC掌上物业是免费开源的HC小区管理系统的分支项目，欢迎访问官网http://homecommunity.cn了解"></uni-notice-bar>
+			<uni-notice-bar :showIcon="true" :scrollable="true" :single="true" :speed="30"
+				text="HC掌上物业是免费开源的HC小区管理系统的分支项目，欢迎访问官网http://homecommunity.cn了解"></uni-notice-bar>
 		</view>
 		<scroll-view @scrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">
-			<swiper class="categoryList padding-top-xs bg-white" indicator-dots="true" indicator-color="rgba(228,228,228,1)"
-			 indicator-active-color="#FECA49">
+			<swiper class="categoryList padding-top-xs bg-white" indicator-dots="true"
+				indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49">
 				<block v-for="(item, index) in categoryList" :key="index">
 					<swiper-item>
 						<block v-for="(item2, index2) in item" :key="index2">
@@ -22,10 +23,11 @@
 			<!-- 轮播图 -->
 			<view class="margin-top-xs">
 				<swiper class="screen-swiper swiper-height-index" :indicator-dots="true" :circular="true"
-				 :autoplay="true" interval="5000" duration="500">
+					:autoplay="true" interval="5000" duration="500">
 					<swiper-item v-for="(item,index) in swiperList" :key="index">
 						<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
-						<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
+						<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false"
+							objectFit="cover" v-if="item.type=='video'"></video>
 					</swiper-item>
 				</swiper>
 			</view>
@@ -76,6 +78,17 @@
 		loadCategoryMenus,
 		listStaffPrivileges
 	} from '../../api/index/index.js'
+
+	import {
+		getCommunity,
+		getCurrentCommunity
+	} from '../../api/community/community.js'
+	
+	import mapping from '../../constant/mapping.js'
+	
+	import {isNull} from '../../lib/java110/utils/StringUtil.js'
+	
+	import {getUserInfo} from '../../lib/java110/api/Java110SessionApi.js'
 	export default {
 		data() {
 			return {
@@ -91,38 +104,26 @@
 			uniNoticeBar
 		},
 		onLoad() {
-			// this._loadCommunity();
-			// let _that = this;
-			// loadCategoryMenus(this,{
-			// 	userId:this.java110Context.getUserInfo().userId,
-			// 	groupType:'P_APP'
-			// })
-			// .then((menus) =>{
-			// 	_that.categoryList = menus;
-			// });
-			
-			// listStaffPrivileges(this);
+			this.java110Context.onLoad();
 		},
 		onShow() {
-			// this._loadCommunity();
 			let _that = this;
 			this._loadCommunity()
-			.then(()=>{
-				return loadCategoryMenus(this, {
-						userId: this.java110Context.getUserInfo().userId,
+				.then(() => {
+					return loadCategoryMenus(this, {
+						userId: getUserInfo().userId,
 						groupType: 'P_APP'
 					})
-			}).then((menus) => {
-						_that.categoryList = menus;
-			});
-			
+				}).then((menus) => {
+					_that.categoryList = menus;
+				});
 
 			listStaffPrivileges(this);
 		},
 		methods: {
 			_loadCommunity: function() {
 				let _that = this;
-				return this.factory.getCommunity(true)
+				return getCommunity(true)
 					.then(function(_communitys) {
 						_that._loadCurrentCommunity(_communitys);
 					})
@@ -162,7 +163,8 @@
 							let _activites = res.data.activitiess;
 							let _acts = [];
 							_activites.forEach(function(_item) {
-								_item.src = _that.java110Constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId +
+								_item.src = _that.java110Constant.url.filePath + "?fileId=" + _item
+									.headerImg + "&communityId=" + _that.currentCommunityId +
 									"&time=" + new Date();
 								_acts.push(_item);
 							});
@@ -183,7 +185,8 @@
 			},
 			_toDetail: function(_item) {
 				this.context.navigateTo({
-					url: '/pages/activityDetail/activityDetail?activitiesId=' + _item.activitiesId + "&currentCommunityId=" + this.currentCommunityId
+					url: '/pages/activityDetail/activityDetail?activitiesId=' + _item.activitiesId +
+						"&currentCommunityId=" + this.currentCommunityId
 				});
 			},
 			_toHref: function(_item) {
@@ -193,11 +196,12 @@
 			},
 			_loadCurrentCommunity: function(_communitys) {
 				let _that = this;
-				let currentCommunity = _that.java110Context.getCurrentCommunity(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO);
+				let currentCommunity = getCurrentCommunity(mapping.CURRENT_COMMUNITY_INFO);
 				//随机放一个小区
 				let _tmpCommunityInfo = _communitys[0];
-				if (_that.java110Util.string.isNull(currentCommunity)) {
-					uni.setStorageSync(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(_tmpCommunityInfo));
+				if (isNull(currentCommunity)) {
+					uni.setStorageSync(mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(
+						_tmpCommunityInfo));
 					_that.currentCommunityId = _tmpCommunityInfo.communityId;
 					_that.currentCommunityName = _tmpCommunityInfo.name;
 					_that._loadAd();
@@ -211,7 +215,8 @@
 				});
 				//说明当前小区 已经没有权限管理了
 				if (_that.util.isNull(communityId)) {
-					uni.setStorageSync(_that.java110Constant.mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(_tmpCommunityInfo));
+					uni.setStorageSync(mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(
+						_tmpCommunityInfo));
 					_that.currentCommunityId = _tmpCommunityInfo.communityId;
 					_that.currentCommunityName = _tmpCommunityInfo.name;
 					_that._loadAd();

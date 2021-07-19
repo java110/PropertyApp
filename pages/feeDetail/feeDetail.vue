@@ -52,6 +52,7 @@
 		loadFees,
 		queryFeeDetail
 	} from '../../api/fee/fee.js';
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -60,12 +61,11 @@
 				noData: false
 			}
 		},
-
-
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			this.java110Context.onLoad();
 			this.feeId = options.feeId;
 			this._loadFees();
 			this._loadFeeDetail();
@@ -77,7 +77,7 @@
 					page: 1,
 					row: 30,
 					feeId: this.feeId,
-					communityId: this.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				}
 				queryFeeDetail(this, _objData)
 					.then(function(res) {

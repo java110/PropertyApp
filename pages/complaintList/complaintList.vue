@@ -43,17 +43,19 @@
 		loadTodoCompaint
 	} from '../../api/complaint/complaint.js'
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import conf from '../../conf/config.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
 				state: '10001',
-				orderImg: this.java110Constant.url.baseUrl + 'img/order.png',
+				orderImg: conf.baseUrl + 'img/order.png',
 				orders: [],
 				noData:false
 			}
 		},
 		onLoad() {
-			//this._loadComplaintOrder();
+			this.java110Context.onLoad();
 		},
 		onShow() {
 			this._loadComplaintOrder();
@@ -72,7 +74,7 @@
 					row: 15,
 					storeId: storeId,
 					userId: _userInfo.userId,
-					communityId: _that.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				};
 
 				loadTodoCompaint(this, _objData)

@@ -117,6 +117,7 @@
 			}
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
 			let _complaintId = options.complaintId;
 			
 			console.log('options',options);

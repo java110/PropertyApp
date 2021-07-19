@@ -32,6 +32,9 @@
 </template>
 
 <script>
+	
+	import {login} from '../../lib/java110/api/Java110SessionApi.js'
+	import conf from '../../conf/config.js'
 	export default {
 		data() {
 			return {
@@ -45,7 +48,7 @@
 				animation: false
 			});
 
-			this.logoUrl = this.java110Constant.url.baseUrl + 'logo.png';
+			this.logoUrl = conf.baseUrl + 'logo.png';
 		
 		},
 		onBackPress(options) {
@@ -74,52 +77,19 @@
 					});
 					return;
 				}
-
-				let userInfo = {
-					username: this.username,
-					password: this.password
-				}
-				uni.request({
-					url: this.java110Constant.url.loginUrl,
-					header: this.java110Context.getHeaders(),
-					method: "POST",
-					data: userInfo,
-					success: function(res) {
-						console.log('login success', res);
-						if (res.statusCode != 200) {
-							uni.showToast({
-								title: res.data
-							});
-							return;
-						}
-						let data = res.data;
-
-						let _tmpUserInfo = data.userInfo;
-						_tmpUserInfo['password'] = _that.password;
-						let _userInfo = _that.java110Util.des.desEncrypt(JSON.stringify(_tmpUserInfo));
-						uni.setStorageSync(_that.java110Constant.mapping.USER_INFO, _userInfo);
-						uni.setStorageSync(_that.java110Constant.mapping.TOKEN, data.token);
-						let afterOneHourDate = _that.java110Util.date.addHour(new Date(), 1);
-						wx.setStorageSync(_that.java110Constant.mapping.LOGIN_FLAG, {
-							sessionKey: _tmpUserInfo.userName,
-							expireTime: afterOneHourDate.getTime(),
-							createTime: new Date().getTime()
-						});
-						
-						uni.reLaunch({
-							url: "/pages/index/index"
-						});
-						
-					
-					},
-					fail: function(error) {
-						// 调用服务端登录接口失败
-						uni.showToast({
-							title: '调用接口失败'
-						});
-						console.log(error);
-					}
-				});
+				
+				login(this.username,this.password)
+				.then(res=>{
+					uni.reLaunch({
+						url:'/pages/index/index'
+					})
+				},err=>{
+					uni.showToast({
+						icon: 'none',
+						title: err
+					});
+				})
+				
 
 			}
 

@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import App from './App'
-import Java110Context from './context/Java110Context.js'
-import context from './context/context.js'
+import Java110Context from './lib/java110/Java110Context.js'
+import context from './lib/java110/context.js'
 import url from './constant/url.js'
-import factory from './factory/factory.js'
-import util from './utils/util.js'
-import date from 'utils/date.js'
+import factory from './lib/java110/factory/factory.js'
+import util from './lib/java110/utils/util.js'
+import date from './lib/java110/utils/date.js'
 //引入vuex
 import store from './store'
 
-import cuCustom from './colorui/components/cu-custom.vue'
+import cuCustom from './lib/colorui/components/cu-custom.vue'
 import {VueJsonp} from 'vue-jsonp'
 Vue.use(VueJsonp)
 Vue.component('cu-custom',cuCustom)

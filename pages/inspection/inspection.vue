@@ -41,7 +41,7 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
-	import dateUtil from '../../utils/date.js'
+	import dateUtil from '../../lib/java110/utils/date.js'
 	export default {
 		data() {
 			return {

@@ -2,7 +2,7 @@
 	<view>
 		<scroll-view scroll-x class="bg-white nav" scroll-with-animation :scroll-left="scrollLeft">
 			<view class="flex text-center">
-				
+
 				<view class="cu-item flex-sub" :class="state=='10002'?'text-green cur':''" @tap="_tabSelect('10002')">
 					发起投诉
 				</view>
@@ -14,7 +14,8 @@
 
 		<view class="margin-top" v-if="state=='10001'">
 			<view class="cu-list menu-avatar">
-				<view class="cu-item arrow" v-for="(item,index) in myOrders" :key="index" @tap="_toComplaintOrderDetail(item)">
+				<view class="cu-item arrow" v-for="(item,index) in myOrders" :key="index"
+					@tap="_toComplaintOrderDetail(item)">
 					<view class="cu-avatar round lg" :style="'background-image:url('+orderImg+');'">
 					</view>
 					<view class="content">
@@ -105,7 +106,8 @@
 				</view>
 				<view class="cu-form-group">
 					<view class="grid col-4 grid-square flex-sub">
-						<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
+						<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage"
+							:data-url="imgList[index]">
 							<image :src="imgList[index]" mode="aspectFill"></image>
 							<view class="cu-tag bg-red" @tap.stop="_delImg" :data-index="index">
 								<text class='cuIcon-close'></text>
@@ -127,14 +129,17 @@
 </template>
 
 <script>
+	import conf from '../../conf/config.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
 				state: '10002',
-				orderImg: this.java110Constant.url.baseUrl + 'img/order.png',
+				orderImg: conf.baseUrl + 'img/order.png',
 				myOrders: [],
 				imgList: [],
-				photos:[],
+				photos: [],
 				floorId: '',
 				floorNum: '',
 				unitId: '',
@@ -150,25 +155,25 @@
 			}
 		},
 		onLoad() {
-
+			this.java110Context.onLoad();
 		},
 		onShow() {
 			//this._loadMyOrders();
-			
+
 			let _floorInfo = this.java110Context.getParam("floorInfo");
-			if(_floorInfo){
+			if (_floorInfo) {
 				this.floorId = _floorInfo.floorId;
 				this.floorNum = _floorInfo.floorNum;
 			}
-			
+
 			let _unitInfo = this.java110Context.getParam("unitInfo");
-			if(_unitInfo){
+			if (_unitInfo) {
 				this.unitId = _unitInfo.unitId;
 				this.unitNum = _unitInfo.unitNum;
 			}
-			
+
 			let _roomInfo = this.java110Context.getParam("roomInfo");
-			if(_roomInfo){
+			if (_roomInfo) {
 				this.roomId = _roomInfo.roomId;
 				this.roomNum = _roomInfo.roomNum;
 			}
@@ -176,7 +181,7 @@
 		methods: {
 			_tabSelect: function(_state) {
 				this.state = _state;
-				console.log('_tabSelect_this.state',this.state)
+				console.log('_tabSelect_this.state', this.state)
 				if (_state == '10002') {
 					//this._loadOrder();
 				} else {
@@ -194,11 +199,11 @@
 					storeId: storeId,
 					userId: _userInfo.userId,
 					process: 'START',
-					communityId: _that.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 
 				};
 				this.java110Context.request({
-					url: _that.java110Constant.url.listAuditHistoryComplaints,
+					url: url.listAuditHistoryComplaints,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据
@@ -215,8 +220,8 @@
 						_that.myOrders = _data.complaints;
 
 						_data.complaints.forEach(function(item) {
-							let dateStr = item.createTime.replace(/-/g,"/");
-							console.log('_data.complaints_dateStr',dateStr);
+							let dateStr = item.createTime.replace(/-/g, "/");
+							console.log('_data.complaints_dateStr', dateStr);
 							let _date = new Date(dateStr);
 							item.createTime = (_date.getMonth() + 1) + '-' + _date.getDate();
 						});
@@ -241,9 +246,9 @@
 				let _that = this;
 				let _userInfo = this.java110Context.getUserInfo();
 				let _storeId = _userInfo.storeId;
-				if(this.typeCdIndex == 0){
+				if (this.typeCdIndex == 0) {
 					this.typeCd = '809001';
-				}else{
+				} else {
 					this.typeCd = '809002';
 				}
 				let obj = {
@@ -319,11 +324,12 @@
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album'], //从相册选择
 					success: (res) => {
-						 // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+						// 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
 						if (this.imgList.length != 0) {
 							this.imgList = this.imgList.concat(res.tempFilePaths);
-							_that.java110Factory.base64.urlTobase64(res.tempFilePaths).then(function(_baseInfo) {
-							  _that.photos.push(_baseInfo);
+							_that.java110Factory.base64.urlTobase64(res.tempFilePaths).then(function(
+								_baseInfo) {
+								_that.photos.push(_baseInfo);
 							});
 						} else {
 							this.imgList = res.tempFilePaths;
@@ -332,13 +338,14 @@
 					}
 				});
 			},
-			_delImg:function(e) {
+			_delImg: function(e) {
 				this.imgList.splice(e.currentTarget.dataset.index, 1);
 				this.photos.splice(e.currentTarget.dataset.index, 1);
 			},
 			_selectFloor: function() {
 				uni.navigateTo({
-					url: '/pages/floorList/floorList?communityId=' + this.java110Context.getCurrentCommunity().communityId
+					url: '/pages/floorList/floorList?communityId=' + this.java110Context.getCurrentCommunity()
+						.communityId
 				});
 			},
 			_selectUnit: function() {
@@ -351,7 +358,8 @@
 				}
 
 				uni.navigateTo({
-					url: '/pages/unitList/unitList?communityId=' + this.java110Context.getCurrentCommunity().communityId +
+					url: '/pages/unitList/unitList?communityId=' + this.java110Context.getCurrentCommunity()
+						.communityId +
 						"&floorId=" + this.floorId + "&floorNum=" + this.floorNum
 				});
 			},
@@ -373,8 +381,10 @@
 				}
 
 				uni.navigateTo({
-					url: '/pages/roomList/roomList?communityId=' + this.java110Context.getCurrentCommunity().communityId +
-						"&floorId=" + this.floorId + "&floorNum=" + this.floorNum + "&unitId=" + this.unitId + "&unitNum=" + this.unitNum
+					url: '/pages/roomList/roomList?communityId=' + this.java110Context.getCurrentCommunity()
+						.communityId +
+						"&floorId=" + this.floorId + "&floorNum=" + this.floorNum + "&unitId=" + this.unitId +
+						"&unitNum=" + this.unitNum
 				});
 			},
 			_changeResult: function(e) {

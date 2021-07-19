@@ -101,11 +101,11 @@
 
 <script>
 	// pages/enterCommunity/enterCommunity.js
-	import * as TanslateImage from '../../utils/translate-image.js';
-	import {preventClick} from '../../utils/common.js';
+	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
+	import {preventClick} from '../../lib/colorui/components/cu-custom.vue';
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
-	import stringUtil from '../../utils/StringUtil.js';
+	import stringUtil from '../../lib/java110/utils/StringUtil.js';
 
 	export default {
 		data() {

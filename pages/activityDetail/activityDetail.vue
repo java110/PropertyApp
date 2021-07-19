@@ -18,9 +18,9 @@
 </template>
 
 <script>
-	import stringUtil from '../../utils/StringUtil.js';
+	import stringUtil from '../../lib/java110/utils/StringUtil.js';
 	import conf from '../../conf/config.js'
-	import {replaceImgSrc} from '../../utils/ImageUtil.js'
+	import {replaceImgSrc} from '../../lib/java110/utils/ImageUtil.js'
 	export default {
 		data() {
 			return {
@@ -37,6 +37,7 @@
 			}
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
 			this.activitiesId = options.activitiesId;
 			this.currentCommunityId = options.currentCommunityId;
 			this._loadActivites();

@@ -38,6 +38,7 @@
 			}
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
 			this.currentCommunityId = options.currentCommunityId;
 			this._loadActivites();
 		},

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-	import {replaceImgSrc} from '../../../utils/ImageUtil.js'
+	import {replaceImgSrc} from '../../../lib/java110/utils/ImageUtil.js'
 	import conf from '../../../conf/config.js'
 	export default {
 		data() {

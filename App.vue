@@ -1,5 +1,6 @@
 <script>
 	import Vue from 'vue'
+	import {hasSession} from './lib/java110/api/Java110SessionApi.js'
 	export default {
 		onLaunch: function() {
 			uni.getSystemInfo({
@@ -29,7 +30,7 @@
 		},
 		onShow: function() {
 			//判断用户是否登录
-			this.java110Context.factory.login.checkLoginStatus();
+			hasSession();
 		},
 		onHide: function() {
 			console.log('App Hide')
@@ -39,7 +40,7 @@
 
 <style>
 	/*每个页面公共css */
-	@import "colorui/main.css";
-	@import "colorui/icon.css";
+	@import "lib/colorui/main.css";
+	@import "lib/colorui/icon.css";
 	
 </style>

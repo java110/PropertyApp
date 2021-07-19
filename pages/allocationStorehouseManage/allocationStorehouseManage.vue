@@ -39,6 +39,7 @@
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	import {listAllocationStorehouseApplys} from '../../api/resource/resource.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -51,11 +52,12 @@
 			noDataPage
 		},
 		onLoad: function(options) {
+			this.java110Context.onLoad();
 		},
 		onShow: function(){
 			this.page = 1;
 			this.applyList = [];
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
+			this.communityId = getCurrentCommunity().communityId;
 			this.loadApply();	
 		},
 		methods: {

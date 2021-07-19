@@ -55,7 +55,7 @@
 	import {
 		updateRoomDecorationRecord,uploadVideo
 	} from '../../api/renovation/renovation.js'
-	import * as TanslateImage from '../../utils/translate-image.js';
+	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
 	export default {
 		data() {
 			return {

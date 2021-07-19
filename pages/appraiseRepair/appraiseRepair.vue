@@ -25,6 +25,7 @@
 		appraiseRepair
 	} from '../../api/repair/repair.js'
 	import SxRate from '@/components/sx-rate'
+	import {getUserInfo} from '../../lib/java110/api/Java110SessionApi.js'
 	export default {
 		data() {
 			return {
@@ -46,6 +47,7 @@
 			SxRate
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
 			let _that = this;
 			let _repairId = options.repairId;
 			this.repairId = _repairId;
@@ -53,7 +55,7 @@
 			this.repairChannel = options.repairChannel;
 			this.publicArea = options.publicArea;
 			this.communityId = options.communityId;
-			let _userInfo = this.java110Context.getUserInfo();
+			let _userInfo = getUserInfo();
 			_that.userId = _userInfo.userId;
 			_that.userName = _userInfo.userName;
 

@@ -59,13 +59,7 @@
 			}
 		},
 		onLoad() {
-			//let list = [{}];
-
-			// for (let i = 0; i < 5; i++) {
-			// 	list[i] = {};
-			// 	list[i].name = String.fromCharCode(65 + i);
-			// }
-			//this.list = list;
+			this.java110Context.onLoad();
 			this._loadStaffInfo();
 
 		},

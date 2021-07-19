@@ -102,6 +102,9 @@
 				if(this.staffId == ''){
 					msg = '请选择员工';
 				}
+				if(this.staffId == this.java110Context.getUserInfo().userId){
+					msg = '不能流转给自己';
+				}
 				if(msg != ''){
 					_that.onoff = true;
 					this._showToast(msg);

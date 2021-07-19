@@ -160,6 +160,8 @@
 				if (this.depIndex == 0) {
 					return;
 				}
+				let selected = this.depCloums[this.depIndex]
+				this.selectedDep = selected
 				this._loadStaffList();
 			},
 			

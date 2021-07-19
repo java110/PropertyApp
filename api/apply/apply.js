@@ -74,7 +74,7 @@ export function uploadCheckUpdate(_that, _data){
 					reslove();
 				}else{
 					wx.showToast({
-						title: "服务器异常了",
+						title: res.data.msg,
 						icon: 'none',
 						duration: 2000
 					})
@@ -104,7 +104,7 @@ export function uploadReviewUpdate(_that, _data){
 					reslove();
 				}else{
 					wx.showToast({
-						title: "服务器异常了",
+						title: res.data.msg,
 						icon: 'none',
 						duration: 2000
 					})

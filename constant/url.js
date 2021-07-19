@@ -77,8 +77,9 @@ export default {
 	updateRoomDecorationRecord: baseUrl + "app/roomRenovation/updateRoomDecorationRecord",
 	uploadVideo: baseUrl + "callComponent/upload/uploadVedio/upload",
 	queryRoomRenovationRecordDetail: baseUrl + "app/roomRenovation/queryRoomRenovationRecordDetail",
+	// 查询字典表
+	queryDictInfo: baseUrl + "callComponent/core/list",
 	// 报修相关信息（维修类型/状态/商品类型...）
-	// queryRepairInfo: baseUrl + "callComponent/core/list",
 	queryRepairInfo: baseUrl + "callComponent/resourceStoreTypeManage/list",
 	// queryResourceStoreResName: baseUrl + "app/resourceStore/queryResourceStoreResName",
 	queryResourceStoreResName: baseUrl + "callComponent/resourceStore.listUserStorehouses",
@@ -117,4 +118,10 @@ export default {
 	UpdateInspectionTask: baseUrl + "callComponent/inspectionTask.updateInspectionTask",
 	// 物品转赠
 	saveResourceStoreTransfer: baseUrl + "callComponent/addAllocationUserStorehouse/save",
+	// 紧急采购
+	saveUrgentPurchaseApply: baseUrl + "app/purchase/urgentPurchaseApply",
+	//取消调拨
+	deleteAllocationStorehouse: baseUrl + "callComponent/resourceStore.deleteAllocationStorehouse",
+	// 取消申请
+	deletePurchaseApply: baseUrl + "callComponent/deletePurchaseApply/delete",
 }

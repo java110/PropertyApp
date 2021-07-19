@@ -164,6 +164,7 @@
 					page: 1,
 					row: 100,
 					communityId: this.factory.getCurrentCommunity().communityId,
+					giveType: 1
 				};
 				queryRepairInfo(this, _data)
 					.then(function(res) {
@@ -189,6 +190,7 @@
 					page: 1,
 					row: 100,
 					communityId: this.factory.getCurrentCommunity().communityId,
+					giveType: 1
 				};
 				queryResourceStoreResName(this, _data)
 					.then(function(res) {

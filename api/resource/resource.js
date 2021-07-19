@@ -140,6 +140,7 @@ export function savePurchaseApply(_that,_data){
 					icon: 'none',
 					duration: 2000
 				})
+				_that.onoff = true;
 			}
 		})
 	});
@@ -164,6 +165,7 @@ export function saveItemOutApply(_that,_data){
 					icon: 'none',
 					duration: 2000
 				})
+				_that.onoff = true;
 			}
 		})
 	});
@@ -564,6 +566,78 @@ export function saveResourceStoreTransfer(_that,_data){
 	return new Promise(function(reslove,reject){
 		_that.context.post({
 			url: url.saveResourceStoreTransfer,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+/**
+ * 紧急采购提交
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+export function saveUrgentPurchaseApply(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.post({
+			url: url.saveUrgentPurchaseApply,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+/**
+ * 取消调拨
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+export function deleteAllocationStorehouse(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.post({
+			url: url.deleteAllocationStorehouse,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+/**
+ * 取消申请
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+export function deletePurchaseApply(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.post({
+			url: url.deletePurchaseApply,
 			data:_data,
 			success: function(res) {
 				reslove(res.data);

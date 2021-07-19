@@ -4,9 +4,9 @@
 		<form>
 			<view class="cu-form-group">
 				<view class="title">巡检情况</view>
-				<picker @change="patrolChange" :value="patrolIndex" :range="patrols">
+				<picker @change="patrolChange" :value="patrolIndex" :range-key="'name'" :range="patrolTypes">
 					<view class="picker">
-						{{patrolTypeName?patrolTypeName:'请选择'}}
+						{{patrolTypes[patrolIndex].name}}
 					</view>
 				</picker>
 			</view>
@@ -50,6 +50,7 @@
 
 <script>
 	import conf from '../../conf/config.js'
+	import {queryDictInfo} from '../../api/inspection/inspection.js'
 	import * as TanslateImage from '../../utils/translate-image.js';
 	import {preventClick} from '../../utils/common.js';
 	import Vue from 'vue'
@@ -64,14 +65,15 @@
 				inspectionName:'',
 				pointStartTime: '',
 				pointEndTime: '',
-				patrols:['正常','异常'],
-				patrolTypes:['10001','20002'],
+				patrolTypes:[{
+					name: '请选择'
+				}],
+				patrolIndex:0,
 				patrolType:'',
 				patrolTypeName:'请选择',
 				description:'',
 				photos:[],
 				imgList:[],
-				patrolIndex:0,
 				communityId:'',
 				userId:'',
 				userName:'',
@@ -100,6 +102,7 @@
 			let _userInfo = this.java110Context.getUserInfo();
 			this.userName = _userInfo.userName;
 			this.userId = _userInfo.userId;
+			this._loadPatrolTypesList();
 		},
 		methods: {
 			// 地址逆解析
@@ -117,9 +120,29 @@
 					console.log(err);
 				});
 			},
+			// 查询字典表 信息
+			_loadPatrolTypesList: function(){
+				let _that = this;
+				let _objData = {
+					'name': "inspection_task_detail",
+					'type': "patrol_type",
+				};
+				queryDictInfo(this,_objData)
+				.then(function(res){
+					_that.patrolTypes = _that.patrolTypes.concat(res);
+				})
+			},
 			patrolChange:function(e){
-				this.patrolTypeName = this.patrols[e.detail.value];
-				this.patrolType = this.patrolTypes[e.detail.value];
+				this.patrolIndex = e.target.value //取其下标
+				
+				if (this.patrolIndex == 0) {
+					this.patrolTypeName = '';
+					this.patrolType = '';
+					return;
+				}
+				let selected = this.patrolTypes[this.patrolIndex]
+				this.patrolTypeName = selected.name;
+				this.patrolType = selected.statusCd;
 			},
 			removePhoto: function(e) {
 				let _imgList = [];

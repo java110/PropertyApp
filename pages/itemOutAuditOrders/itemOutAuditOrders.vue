@@ -30,7 +30,7 @@
 						</view>			
 						<block v-if="currentPage == 0">	
 							<block v-if="procure == false">
-								<view class="cu-btn round lg bg-green" v-if="userId != item.startUserId" @tap.stop="showAuditModel(item)">审核</view>
+								<view class="cu-btn round lg bg-green" v-if="item.state == '1000' || item.state == '1001'" @tap.stop="showAuditModel(item)">审核</view>
 								<view class="cu-btn round lg bg-red" v-else @tap.stop="finishAudit(item)">结束</view>
 							</block>
 							<block v-else>

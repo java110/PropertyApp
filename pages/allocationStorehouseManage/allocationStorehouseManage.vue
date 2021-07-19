@@ -6,7 +6,7 @@
 			</view>
 		</view>
 		<view class="margin-top" v-if="applyList.length > 0">
-			<view class="cu-list menu-avatar " v-for="(item,index) in applyList" :key="index">
+			<view class="cu-list menu-avatar " v-for="(item,index) in applyList" :key="index" @tap="_toApplyDetail(item)">
 				<view class="bg-white">
 					<view class="item-content">
 						<view class="text-grey">
@@ -25,6 +25,7 @@
 								时间：{{item.createTime}}
 							</view>
 						</view>
+						<view class="cu-btn round lg bg-green" v-if="item.state == 1200 && userId == item.startUserId" @tap.stop="cancelApply(item)">取消调拨</view>
 					</view>
 				</view>
 			</view>
@@ -38,13 +39,14 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
-	import {listAllocationStorehouseApplys} from '../../api/resource/resource.js'
+	import {listAllocationStorehouseApplys,deleteAllocationStorehouse} from '../../api/resource/resource.js'
 	export default {
 		data() {
 			return {
-				communityId: '',
+				communityId: this.java110Context.getCurrentCommunity().communityId,
 				applyList: [],
 				page: 1,
+				userId: this.java110Context.getUserInfo().userId,
 			}
 		},
 		components: {
@@ -55,7 +57,6 @@
 		onShow: function(){
 			this.page = 1;
 			this.applyList = [];
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
 			this.loadApply();	
 		},
 		methods: {
@@ -89,6 +90,48 @@
 				uni.navigateTo({
 					url: '/pages/allocationStorehouseApply/allocationStorehouseApply'
 				});
+			},
+			
+			/**
+			 * 跳转详情页
+			 */
+			_toApplyDetail: function(_item){
+				uni.navigateTo({
+					url: '/pages/allocationStorehouseApplyDetail/allocationStorehouseApplyDetail?applyId=' + _item.applyId
+				});
+			},
+			
+			/**
+			 * 取消调拨
+			 * @param {Object} item
+			 */
+			cancelApply: function(item){
+				let _that = this;
+				uni.showModal({
+					cancelText: "取消", // 取消按钮的文字  
+					confirmText: "确认", // 确认按钮文字 
+					title: '提示',
+					content: '是否取消调拨?',
+					confirmColor:'#3B8BFF',
+					cancelColor:'#222222',
+					success: res => {
+						if (res.confirm) {
+							deleteAllocationStorehouse(_that,item)
+							.then(function(res){
+								if(res.code == 0){
+									uni.showToast({
+										title: res.msg
+									})
+									_that.page = 1;
+									_that.applyList = [];
+									_that.loadApply();
+								}
+							})
+						} else if (res.cancel) {
+							console.log('cancel')
+						}
+					}
+				});
 			}
 		}
 	}
@@ -99,5 +142,13 @@
 		width: 100%;
 		margin-left: 20rpx;
 		line-height: 1.6em;
+	}
+	.bg-white{
+		position: relative;
+	}
+	.cu-btn{
+		position: absolute;
+		right: 10rpx;
+		top: 25rpx;
 	}
 </style>

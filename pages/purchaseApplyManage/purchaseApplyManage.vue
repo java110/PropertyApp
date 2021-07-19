@@ -4,6 +4,9 @@
 			<view class="action">
 				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="_toAddPurchaseApplyPage()">采购申请</button>
 			</view>
+			<view class="action">
+				<button class="cu-btn bg-gradual-green shadow-blur round" v-if="this.java110Context.hasPrivilege('502021071043650029')" @tap="_toAddUrgentPurchaseApplyPage()">紧急采购</button>
+			</view>
 		</view>
 		<view class="margin-top" v-if="applyList.length > 0">
 			<view class="cu-list menu-avatar " v-for="(item,index) in applyList" :key="index" @tap="_toApplyDetail(item)">
@@ -25,6 +28,7 @@
 								时间：{{item.createTime}}
 							</view>
 						</view>
+						<view class="cu-btn round lg bg-green" v-if="item.state == 1000 && userId == item.createUserId" @tap.stop="cancelApply(item)">取消申请</view>
 					</view>
 				</view>
 			</view>
@@ -38,13 +42,14 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
-	import {queryPurchaseApplyList} from '../../api/resource/resource.js'
+	import {queryPurchaseApplyList,deletePurchaseApply} from '../../api/resource/resource.js'
 	export default {
 		data() {
 			return {
-				communityId: '',
+				communityId: this.java110Context.getCurrentCommunity().communityId,
 				applyList: [],
 				page: 1,
+				userId: this.java110Context.getUserInfo().userId,
 			}
 		},
 		components: {
@@ -55,7 +60,6 @@
 		onShow: function(){
 			this.page = 1;
 			this.applyList = [];
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
 			this.loadApply();	
 		},
 		methods: {
@@ -100,6 +104,48 @@
 				uni.navigateTo({
 					url: '/pages/addPurchaseApplyStep/addPurchaseApplyStep'
 				});
+			},
+			
+			/**
+			 * 紧急采购
+			 */
+			_toAddUrgentPurchaseApplyPage: function(){
+				uni.navigateTo({
+					url: '/pages/urgentPurchaseApplyStep/urgentPurchaseApplyStep'
+				});
+			},
+			
+			/**
+			 * 取消申请
+			 * @param {Object} item
+			 */
+			cancelApply: function(item){
+				let _that = this;
+				uni.showModal({
+					cancelText: "取消", // 取消按钮的文字  
+					confirmText: "确认", // 确认按钮文字 
+					title: '提示',
+					content: '是否取消申请?',
+					confirmColor:'#3B8BFF',
+					cancelColor:'#222222',
+					success: res => {
+						if (res.confirm) {
+							deletePurchaseApply(_that,item)
+							.then(function(res){
+								if(res.code == 0){
+									uni.showToast({
+										title: res.msg
+									})
+									_that.page = 1;
+									_that.applyList = [];
+									_that.loadApply();
+								}
+							})
+						} else if (res.cancel) {
+							console.log('cancel')
+						}
+					}
+				});
 			}
 		}
 	}
@@ -118,5 +164,8 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		vertical-align: middle
+	}
+	.bg-white{
+		position: relative;
 	}
 </style>

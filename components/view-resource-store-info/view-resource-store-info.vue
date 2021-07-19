@@ -16,7 +16,7 @@
 						<view class="text-gray flex">
 							<view class="flex-item w50">
 								<label>数量:</label>
-								<input class="use-number bg-gray" type="text" v-model="item.quantity" value="" />
+								<input class="use-number bg-gray" type="number" v-model="item.quantity" value="" />
 							</view>
 							<!-- <view class="flex-item w50" v-show="resOrderType == '10000'">
 								<label>供应商:</label>

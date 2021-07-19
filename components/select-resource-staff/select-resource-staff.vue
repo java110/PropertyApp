@@ -74,6 +74,7 @@
 					page: this.page,
 					row: 10,
 					communityId: this.factory.getCurrentCommunity().communityId,
+					giveType: 1
 				};
 				queryMyResourceStoreInfo(this, _data)
 					.then(function(res) {

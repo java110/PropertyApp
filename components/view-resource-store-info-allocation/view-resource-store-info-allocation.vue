@@ -20,7 +20,7 @@
 						<view class="text-gray flex">
 							<view class="flex-item w50">
 								<label>数量:</label>
-								<input class="use-number bg-gray" type="text" v-model="item.curStock" value="" />
+								<input class="use-number bg-gray" type="number" v-model="item.curStock" value="" />
 							</view>
 							<view class="flex-item w50">
 								<label>仓库:</label>

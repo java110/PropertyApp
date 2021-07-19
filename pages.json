@@ -420,6 +420,18 @@
 			"style" : {
 				"navigationBarTitleText": "任务流转"
 			}
+		},
+		{
+			"path" : "pages/urgentPurchaseApplyStep/urgentPurchaseApplyStep",
+			"style" : {
+				"navigationBarTitleText": "紧急采购"
+			}
+		},
+		{
+			"path" : "pages/purchaseApplyDetail/purchaseApplyDetail",
+			"style" : {
+				"navigationBarTitleText": "申请详情"
+			}
 		}
     ],
 	"globalStyle": {

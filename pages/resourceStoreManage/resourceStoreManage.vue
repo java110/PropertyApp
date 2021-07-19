@@ -5,6 +5,10 @@
 				<text class="cuIcon-search"></text>
 				<input type="text" placeholder="输入物品名称" v-model="resName" confirm-type="search"></input>
 			</view>
+			<view class="search-form round" v-if="hasPrivilege">
+				<text class="cuIcon-search"></text>
+				<input type="text" placeholder="输入用户名称" v-model="searchUserName" confirm-type="search"></input>
+			</view>
 			<view class="action">
 				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="_searchResource()">搜索</button>
 			</view>
@@ -22,12 +26,17 @@
 				<view class="cu-item">
 					<view class="content content-left">
 						<view class="text-grey">
-							<!-- <text class="cuIcon-notification text-cut text-green margin-right-xs"></text> -->
-							<text class="ellip">{{item.resName}}-{{item.goodsTypeName}}</text>
+							<text class="text-green margin-right-xs" v-if="hasPrivilege">{{item.userName}}</text>
+							<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
 						</view>
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
-								库存：{{item.stock}}
+								库存：{{item.stock}}{{item.unitCodeName}}
+							</view>
+						</view>
+						<view class="text-gray text-sm flex">
+							<view class="text-cut">
+								最小计量总数：{{item.miniStock}}{{item.miniUnitCodeName}}
 							</view>
 						</view>
 					</view>
@@ -51,8 +60,10 @@
 				orderImg: this.java110Constant.url.baseUrl + 'img/order.png',
 				resourceList: [],
 				resName: '',
+				searchUserName: '',
 				noData:false,
 				page: 1,
+				hasPrivilege: this.java110Context.hasPrivilege('502021071018550002')
 			}
 		},
 		components: {
@@ -75,6 +86,7 @@
 				let _that = this;
 				let _objData = {
 					resName: _that.resName,
+					searchUserName: _that.searchUserName,
 					page: _that.page,
 					row: 10,
 					communityId: _that.java110Context.getCurrentCommunity().communityId

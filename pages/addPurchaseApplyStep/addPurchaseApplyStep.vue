@@ -11,7 +11,7 @@
 		</view>
 		<view class="footer-step-fixed">
 			<view class="step-item" :class="{'text-grey':step==1}" @click="prevStep()">上一步</view>
-			<view class="step-item" @click="nextStep">{{step == 3 ? '提交' : '下一步'}}</view>
+			<view class="step-item" @click="$preventClick(nextStep)">{{step == 3 ? '提交' : '下一步'}}</view>
 		</view>
 	</view>
 </template>
@@ -73,34 +73,41 @@
 					this.$refs.viewresourcestoreinfo.getResourceStores();
 					if(this.resourceStores.length < 1){
 						this._showToast('请选择物品');
+						_that.onoff = true;
 						return;
 					}
 					let msg = '';
 					this.resourceStores.forEach((item) => {
 						if(!item.hasOwnProperty('quantity') || item.quantity < 1){
 							msg = '请完善物品信息';
+							_that.onoff = true;
 							return;
 						}
 						if (this.resOrderType == '20000' && (parseInt(item.quantity) > parseInt(item.stock))) {
 							msg = item.resName + ",库存不足";
+							_that.onoff = true;
 							return;
 						}
 					})
 					if(msg != ''){
 						this._showToast(msg);
+						_that.onoff = true;
 						return;
 					}
 					// step 2 人员信息
 					if(this.step == 2 && (this.endUserName == '' || this.endUserTel == '' || this.description == '')){
 						this._showToast('请完善信息');
+						_that.onoff = true;
 						return;
 					}
 					this.step += 1;
+					_that.onoff = true;
 					return;
 				}
 				// step 3 审核人员
 				if(this.step == 3 && (this.staffId == '' || this.staffName == '')){
 					this._showToast('请完善信息');
+					_that.onoff = true;
 					return;
 				}else{
 					// 提交
@@ -111,11 +118,13 @@
 						resOrderType: this.resOrderType,
 						resourceStores: this.resourceStores,
 						staffId: this.staffId,
-						staffName: this.staffName
+						staffName: this.staffName,
+						communityId: this.java110Context.getCurrentCommunity().communityId
 					};
 					savePurchaseApply(this, _data)
 					.then(function(res) {
 						if (res.code == 0) {
+							_that.onoff = true;
 							if (_that.resOrderType == "10000") {
 								uni.navigateTo({
 									url: '/pages/purchaseApplyManage/purchaseApplyManage'

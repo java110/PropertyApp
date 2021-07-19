@@ -107,6 +107,8 @@ export function dispatchRepair(_that){
 			msg = "请填写师傅";
 		} else if (_data.repairId == "") {
 			msg = "数据错误";
+		} else if (_data.action == "TRANSFER" && _data.userId == _data.staffId){
+			msg = "不能转单给自己";
 		}
 		if (msg != "") {
 			wx.showToast({
@@ -178,6 +180,8 @@ export function finishRepair(_that){
 			msg = "请选择类型";
 		}else if (_data.context == "") {
 			msg = "请填写处理意见";
+		}else if (_data.beforeRepairPhotos.length <= 0 || _data.afterRepairPhotos.length <= 0){
+			msg = "请上传图片";
 		}else if (_data.repairId == "") {
 			msg = "数据错误";
 		}else if ((_data.maintenanceType == '1001' || _data.maintenanceType == '1003') && _data.choosedGoodsList.length < 1){

@@ -83,7 +83,8 @@
 				let _data = {
 					resourceStores: this.resourceStores,
 					remark: this.remark,
-					apply_type: this.apply_type
+					apply_type: this.apply_type,
+					communityId: this.java110Context.getCurrentCommunity().communityId
 				};
 				saveAllocationStorehouse(this, _data)
 				.then(function(res) {

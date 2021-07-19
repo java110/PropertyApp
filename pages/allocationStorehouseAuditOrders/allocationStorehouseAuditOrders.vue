@@ -29,8 +29,14 @@
 							</view>
 						</view>
 						<block v-if="currentPage == 0">
-							<view class="cu-btn round lg bg-green" v-if="userId != item.startUserId" @tap.stop="showAuditModel(item)">审核</view>
-							<view class="cu-btn round lg bg-red" v-else @tap.stop="finishAudit(item)">结束</view>
+							<block v-if="procure == false">
+								<view class="cu-btn round lg bg-green" v-if="item.state == 1200 || item.state == 1201" @tap.stop="showAuditModel(item)">审批</view>
+								<view class="cu-btn round lg bg-red" v-else @tap.stop="finishAudit(item)">结束</view>
+							</block>
+							<block v-else>
+								<view class="cu-btn round lg bg-green" v-if="item.state == 1201" @tap.stop="showAuditModel(item)">确认调拨</view>
+								<view class="cu-btn round lg bg-red" v-else @tap.stop="finishAudit(item)">结束</view>
+							</block>
 						</block>
 					</view>
 				</view>
@@ -52,10 +58,10 @@
 		data() {
 			return {
 				currentPage: 0,
-				communityId: '',
+				communityId: this.java110Context.getCurrentCommunity().communityId,
 				applyList: [],
 				page: 1,
-				userId: '',
+				userId: this.java110Context.getUserInfo().userId,
 				orderInfo: '',
 				procure: false,
 			}
@@ -69,8 +75,6 @@
 		onShow: function(){
 			this.page = 1;
 			this.applyList = [];
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
-			this.userId = this.java110Context.getUserInfo().userId;
 			this._loadStaff();
 			this.loadApply();	
 		},
@@ -143,6 +147,7 @@
 				let _that = this;
 				_auditInfo.taskId = this.orderInfo.taskId;
 				_auditInfo.applyId = this.orderInfo.applyId;
+				_auditInfo.procure = this.procure;
 				// 新增通知状态字段，区别是否为仓管及对应状态
 				if (_auditInfo.state == '1200') {
 					_auditInfo.noticeState = '1203';
@@ -169,7 +174,8 @@
 					taskId: _auditOrder.taskId,
 					applyId: _auditOrder.applyId,
 					state: '1200',
-					remark: '处理结束'
+					remark: '处理结束',
+					procure: _that.procure
 				};
 				saveAuditAllocationStoreOrder(this,_auditInfo)
 				.then(function(res){

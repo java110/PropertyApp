@@ -49,7 +49,7 @@
 			
 			<view class="cu-form-group">
 				<view class="title">上期读表时间</view>
-				<uni-datetime-picker v-model="preReadingTime"></uni-datetime-picker>
+				<uni-datetime-picker v-model="preReadingTime" :disabled="true"></uni-datetime-picker>
 			</view>
 			
 			<view class="cu-form-group">
@@ -217,7 +217,13 @@
 					msg = "本期度数必填";
 				}else if(this.curReadingTime == '' || this.curReadingTime == null){
 					msg = "本期读表时间必填";
-				}else{}
+				}else{
+					let start = Date.parse(new Date(this.preReadingTime.replace(/-/g, '/')))
+					let end = Date.parse(new Date(this.curReadingTime.replace(/-/g, '/')))
+					if (end == 0 || start - end >= 0) {
+						msg = "本期读表时间有误";
+					}
+				}
 				
 				if(msg != ''){
 					uni.showToast({

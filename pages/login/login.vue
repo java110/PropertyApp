@@ -33,8 +33,9 @@
 
 <script>
 	
-	import {login} from '../../lib/java110/api/Java110SessionApi.js'
+	import {login,reLogin} from '../../lib/java110/api/Java110SessionApi.js'
 	import conf from '../../conf/config.js'
+	
 	export default {
 		data() {
 			return {
@@ -47,6 +48,7 @@
 			uni.hideTabBar({
 				animation: false
 			});
+			reLogin();
 
 			this.logoUrl = conf.baseUrl + 'logo.png';
 		

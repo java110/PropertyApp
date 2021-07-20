@@ -27,6 +27,7 @@
 </template>
 
 <script>
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -56,7 +57,7 @@
 					storeId: storeId,
 					userId: _userInfo.userId,
 					floorNum:this.floorNum,
-					communityId:_that.java110Context.getCurrentCommunity().communityId
+					communityId:getCurrentCommunity().communityId
 				};
 				
 				

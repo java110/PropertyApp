@@ -33,6 +33,8 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -45,7 +47,7 @@
 			noDataPage
 		},
 		onLoad() {
-
+			this.java110Context.onLoad();
 			let _userInfo = this.java110Context.getUserInfo();
 
 			let _storeId = _userInfo.storeId;
@@ -66,11 +68,11 @@
 					row: 15,
 					storeId: storeId,
 					userId: _userInfo.userId,
-					communityId: _that.java110Context.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 					roomNum: _that.roomNum
 				};
 				this.java110Context.request({
-					url: _that.java110Constant.url.listMeterWaters,
+					url: url.listMeterWaters,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据

@@ -90,6 +90,7 @@
 	import {
 		loadFees
 	} from '../../api/fee/fee.js';
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -102,6 +103,9 @@
 				roomInfo: {},
 				fees: []
 			}
+		},
+		onLoad() {
+			this.java110Context.onLoad();
 		},
 		onShow() {
 			let _floor = uni.getStorageSync("_selectFloor");
@@ -184,7 +188,7 @@
 				let _data = {
 					page: 1,
 					row: 1,
-					communityId: this.java110Context.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 					roomId: this.roomId
 				}
 				loadRoomAndOwner(this, _data)
@@ -201,7 +205,7 @@
 				let _data = {
 					page: 1,
 					row: 100,
-					communityId: this.java110Context.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 					payerObjId: this.roomId
 				}
 				loadFees(this, _data)

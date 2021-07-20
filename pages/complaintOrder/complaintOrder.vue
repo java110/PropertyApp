@@ -260,7 +260,7 @@
 					"context": this.context,
 					userId: _userInfo.userId,
 					storeId: _storeId,
-					communityId: _that.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				}
 
 				let _photos = this.photos;
@@ -344,7 +344,7 @@
 			},
 			_selectFloor: function() {
 				uni.navigateTo({
-					url: '/pages/floorList/floorList?communityId=' + this.java110Context.getCurrentCommunity()
+					url: '/pages/floorList/floorList?communityId=' + getCurrentCommunity()
 						.communityId
 				});
 			},
@@ -358,7 +358,7 @@
 				}
 
 				uni.navigateTo({
-					url: '/pages/unitList/unitList?communityId=' + this.java110Context.getCurrentCommunity()
+					url: '/pages/unitList/unitList?communityId=' + getCurrentCommunity()
 						.communityId +
 						"&floorId=" + this.floorId + "&floorNum=" + this.floorNum
 				});
@@ -381,7 +381,7 @@
 				}
 
 				uni.navigateTo({
-					url: '/pages/roomList/roomList?communityId=' + this.java110Context.getCurrentCommunity()
+					url: '/pages/roomList/roomList?communityId=' + getCurrentCommunity()
 						.communityId +
 						"&floorId=" + this.floorId + "&floorNum=" + this.floorNum + "&unitId=" + this.unitId +
 						"&unitNum=" + this.unitNum

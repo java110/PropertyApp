@@ -70,6 +70,7 @@
 		},
 		
 		onLoad: function(options) {
+			this.java110Context.onLoad();
 			this.applyOrderId = options.applyOrderId;
 			this.resOrderType = options.resOrderType;
 			this.taskId = options.taskId;

@@ -32,8 +32,7 @@
 
 <script>
 	import context from '../../lib/java110/Java110Context.js'
-	const factory = context.factory;;
-	const constant = context.constant;
+
 	export default {
 		data() {
 			return {
@@ -44,7 +43,7 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
-			
+			this.java110Context.onLoad()
 		},
 		methods: {
 			onChange: function(e) {

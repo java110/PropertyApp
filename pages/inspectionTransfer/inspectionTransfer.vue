@@ -63,6 +63,7 @@
 			selectStaff
 		},
 		onLoad(_taskInfo) {
+			this.java110Context.onLoad();
 			_taskInfo = JSON.parse(_taskInfo.task);
 			this.communityId = _taskInfo.communityId;
 			this.inspectionPlanId = _taskInfo.inspectionPlanId;

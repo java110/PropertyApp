@@ -107,7 +107,7 @@
 				let _data = {
 					page: 1,
 					row: 1,
-					communityId: this.java110Context.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 					feeId: this.feeId
 				}
 				loadFees(this, _data)

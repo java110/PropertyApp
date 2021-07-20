@@ -18,6 +18,8 @@
 </template>
 
 <script>
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -29,6 +31,7 @@
 		},
 		
 		onLoad(options) {
+			this.java110Context.onLoad()
 			this.communityId = options.communityId;
 			this._loadPurchase();
 		},
@@ -45,10 +48,10 @@
 					page: 1,
 					row: 15,
 					storeId: storeId,
-					communityId:_that.java110Context.getCurrentCommunity().communityId
+					communityId:getCurrentCommunity().communityId
 				};
 				this.java110Context.request({
-					url: _that.java110Constant.url.listResourceStores,
+					url: url.listResourceStores,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据

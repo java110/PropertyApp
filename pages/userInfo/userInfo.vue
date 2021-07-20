@@ -73,6 +73,7 @@
 			}
 		},
 		onLoad() {
+			this.java110Context.onLoad();
 			let _userInfo = this.java110Context.getUserInfo();
 
 			console.log('_userInfo', _userInfo);

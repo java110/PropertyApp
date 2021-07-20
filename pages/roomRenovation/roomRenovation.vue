@@ -32,6 +32,7 @@
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	import {queryRoomRenovation} from '../../api/renovation/renovation.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -44,11 +45,12 @@
 			noDataPage
 		},
 		onLoad: function(options) {
+			this.java110Context.onLoad();
 		},
 		onShow: function(){
 			this.page = 1;
 			this.renovationRoomList = [];
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
+			this.communityId = getCurrentCommunity().communityId;
 			this.loadApply();	
 		},
 		methods: {

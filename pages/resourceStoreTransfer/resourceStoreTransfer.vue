@@ -62,6 +62,8 @@
 	import selectResourceStaff from '../../components/select-resource-staff/select-resource-staff.vue'
 	import selectStaff from '../../components/select-staff/select-staff.vue'
 	
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	
 	export default {
 		data() {
 			return {
@@ -78,6 +80,7 @@
 			selectStaff
 		},
 		onLoad() {
+			this.java110Context.onLoad();
 		},
 		methods: {
 			
@@ -142,7 +145,7 @@
 					description: this.description,
 					acceptUserId: this.acceptUserId,
 					acceptUserName: this.acceptUserName,
-					communityId: this.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				};
 				saveResourceStoreTransfer(this, _data)
 				.then(function(res) {

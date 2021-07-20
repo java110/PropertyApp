@@ -68,6 +68,7 @@
 		toPayOweFee
 	} from '../../api/fee/fee.js';
 	
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -88,6 +89,9 @@
 					link:""
 				}
 			}
+		},
+		onLoad() {
+			this.java110Context.onLoad();
 		},
 		onShow() {
 			if(this.context.isPageBack()){
@@ -110,7 +114,7 @@
 				let _data = {
 					page: 1,
 					row: 1,
-					communityId: this.java110Context.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 					floorNum: this.floorNum,
 					unitNum: this.unitNum,
 					roomNum: this.roomNum
@@ -156,7 +160,7 @@
 					payObjType: '3333',
 					page: 1,
 					row: 50,
-					communityId: this.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				}
 
 				getRoomOweFees(_that, _objData)
@@ -198,7 +202,7 @@
 			_payOweFee:function(){
 				this.context.navigateTo({
 					url:"/pages/payFeeByQrCode/payFeeByQrCode?communityId="
-					+this.java110Context.getCurrentCommunity().communityId
+					+getCurrentCommunity().communityId
 					+"&roomId="+this.roomInfo.roomId
 				})
 			}

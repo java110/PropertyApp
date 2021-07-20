@@ -152,6 +152,8 @@
 </template>
 
 <script>
+	import url from '../../constant/url.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -165,10 +167,11 @@
 			}
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
 			this.storeId = options.storeId;
 			this.repairId = options.repairId;
 			console.log('options', options);
-			this.srcPath = this.java110Constant.url.hcBaseUrl;
+			this.srcPath = url.hcBaseUrl;
 			this._queryRepairDetail();
 			//加载报修类型
 			this._loadRepairStaffs();
@@ -180,7 +183,7 @@
 
 			},
 			_loadRepairStaffs: function() {
-				let _communityInfo = this.java110Context.getCurrentCommunity();
+				let _communityInfo = getCurrentCommunity();
 				let _that = this;
 				let dataObj = {
 					page: 1,
@@ -189,7 +192,7 @@
 					repairId: this.repairId
 				};
 				uni.request({
-					url: _that.java110Constant.url.listRepairStaffs,
+					url: url.listRepairStaffs,
 					header: this.java110Context.getHeaders(),
 					method: "GET",
 					data: dataObj,
@@ -215,11 +218,11 @@
 					page: 1,
 					row: 1,
 					storeId: _that.storeId,
-					communityId: _that.java110Context.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 					repairId: _that.repairId
 				};
 				this.java110Context.request({
-					url: _that.java110Constant.url.listOwnerRepairs,
+					url: url.listOwnerRepairs,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据

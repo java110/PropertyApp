@@ -52,6 +52,8 @@
 </template>
 
 <script>
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -92,6 +94,7 @@
 			}
 		},
 		onLoad() {
+			this.java110Context.onLoad()
 			let _userInfo = this.java110Context.getUserInfo();
 			let _storeId = _userInfo.storeId;
 			this.storeId = _storeId;
@@ -114,7 +117,7 @@
 		methods: {
 			_selectFloor: function() {
 				uni.navigateTo({
-					url: '/pages/purchaseList/purchaseList?communityId=' + this.java110Context.getCurrentCommunity().communityId
+					url: '/pages/purchaseList/purchaseList?communityId=' + getCurrentCommunity().communityId
 				});
 			},
 			puchaseChange: function(e) {
@@ -149,7 +152,7 @@
 				console.log(_objData);
 				return;
 				this.java110Context.request({
-					url: _that.java110Constant.url.savePurchaseApply,
+					url: url.savePurchaseApply,
 					header: _that.java110Context.getHeaders(),
 					method: "POST",
 					data: _objData,

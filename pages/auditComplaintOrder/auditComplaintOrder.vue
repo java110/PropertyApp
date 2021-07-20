@@ -95,6 +95,9 @@
 </template>
 
 <script>
+	import url from '../../constant/url.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	
 	export default {
 		data() {
 			return {
@@ -154,12 +157,12 @@
 					remark:this.remark,
 					taskId:this.auditOrder.taskId,
 					complaintId:this.auditOrder.complaintId,
-					communityId:this.java110Context.getCurrentCommunity().communityId,
+					communityId:getCurrentCommunity().communityId,
 					storeId:this.java110Context.getUserInfo().storeId,
 					userId:this.java110Context.getUserInfo().userId
 				};
 				this.java110Context.request({
-					url: this.java110Constant.url.auditComplaint,
+					url: url.auditComplaint,
 					header: this.java110Context.getHeaders(),
 					method: "POST",
 					data: _objData,

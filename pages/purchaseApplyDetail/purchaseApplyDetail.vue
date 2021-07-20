@@ -129,6 +129,7 @@
 
 <script>
 	import {listWorkflowAuditInfo,queryPurchaseApplyList} from '../../api/resource/resource.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -140,8 +141,9 @@
 		components: {
 		},
 		onLoad: function(options) {
+			this.java110Context.onLoad();
 			let applyInfo = JSON.parse(options.apply);
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
+			this.communityId = getCurrentCommunity().communityId;
 			this._loadAuditInfo(applyInfo.resOrderType, applyInfo.applyOrderId);
 		},
 		onShow: function(){

@@ -66,29 +66,6 @@
 		<view class="cu-form-group margin-top">
 			<textarea v-model="context" placeholder="请输入报修内容"></textarea>
 		</view>
-		<!-- <view class="block__title">相关图片</view>
-
-		<view class="cu-bar bg-white ">
-			<view class="action">
-				图片上传
-			</view>
-			<view class="action">
-				{{imgList.length}}/4
-			</view>
-		</view>
-		<view class="cu-form-group">
-			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(img,index) in imgList" :key='index' bindtap="ViewImage" :data-url="imgList[index]">
-					<image :src='imgList[index]' mode='aspectFill'></image>
-					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
-						<text class="cuIcon-close"></text>
-					</view>
-				</view>
-				<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
-					<text class="cuIcon-cameraadd"></text>
-				</view>
-			</view>
-		</view> -->
 
 		<view class="button_up_blank"></view>
 
@@ -106,6 +83,8 @@
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	import stringUtil from '../../lib/java110/utils/StringUtil.js';
+	import {getCurrentCommunity} from '../../api/community/community.js';
+	import url from '../../constant/url.js';
 
 	export default {
 		data() {
@@ -169,9 +148,10 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			this.java110Context.onLoad();
 			let _userInfo = this.java110Context.getUserInfo();
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
-			this.communityName = this.java110Context.getCurrentCommunity().name;
+			this.communityId = getCurrentCommunity().communityId;
+			this.communityName = getCurrentCommunity().name;
 			//加载报修类型
 			this._loadRepairTypes();
 		},
@@ -256,7 +236,7 @@
 					publicArea: publicArea
 				};
 				this.java110Context.request({
-					url: _that.java110Constant.url.listRepairSettings,
+					url: url.listRepairSettings,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据
@@ -357,7 +337,7 @@
 					});
 				} else {
 					this.java110Context.request({
-						url: _that.java110Constant.url.saveHelpOwnerRepair,
+						url: url.saveHelpOwnerRepair,
 						header: _that.java110Context.getHeaders(),
 						method: "POST",
 						data: obj, //动态数据

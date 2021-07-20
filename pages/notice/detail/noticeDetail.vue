@@ -17,6 +17,7 @@
 <script>
 	import {replaceImgSrc} from '../../../lib/java110/utils/ImageUtil.js'
 	import conf from '../../../conf/config.js'
+	import url from '../../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -26,7 +27,7 @@
 		},
 
 		onLoad: function(options) {
-
+			this.java110Context.onLoad();
 			let _noticeId = options.noticeId;
 			this.noticeId = _noticeId;
 			this._loadNoticeDetail();
@@ -42,7 +43,7 @@
 				that.communityId = this.java110Context.getUserInfo().communityId;
 				this.java110Context.request({
 					header: that.java110Context.getHeaders(),
-					url: that.java110Constant.url.GetNoticeListUrl,
+					url: url.GetNoticeListUrl,
 					method: "GET",
 					data: {
 						communityId: that.communityId,

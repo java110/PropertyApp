@@ -40,6 +40,7 @@
 		queryOrgInfo,
 		queryStaffListInfo
 	} from '../../api/common/common.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 
 	export default {
 		components: {
@@ -78,7 +79,7 @@
 		},
 
 		mounted() {
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
+			this.communityId = getCurrentCommunity().communityId;
 			this._loadOrgList();
 		},
 

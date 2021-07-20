@@ -159,6 +159,7 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			this.java110Context.onLoad();
 			let _that = this;
 			_that.renovationInfo = JSON.parse(options.apply);
 		},

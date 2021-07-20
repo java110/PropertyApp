@@ -1,5 +1,6 @@
 
 import url from '../../constant/url.js'
+import {getCurrentCommunity} from '../community/community.js'
 
 /**
  * 查询报修信息
@@ -87,7 +88,7 @@ export function dispatchRepair(_that){
 			"repairId": _that.repairId,
 			"repairType": _that.repairType,
 			"action": _that.action,
-			"communityId":_that.java110Context.getCurrentCommunity().communityId,
+			"communityId":getCurrentCommunity().communityId,
 			"photos":[],
 			"userId":_that.userId,
 			"userName":_that.userName
@@ -151,7 +152,7 @@ export function finishRepair(_that){
 			"maintenanceType": _that.feeFlag,
 			"repairType": _that.repairType,
 			"action": _that.action,
-			"communityId":_that.java110Context.getCurrentCommunity().communityId,
+			"communityId":getCurrentCommunity().communityId,
 			"beforeRepairPhotos":[],
 			"afterRepairPhotos":[],
 			"repairObjType":_that.repairObjType,

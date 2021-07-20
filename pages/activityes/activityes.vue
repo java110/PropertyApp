@@ -30,6 +30,7 @@
 </template>
 
 <script>
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -57,7 +58,7 @@
 			      communityId: this.currentCommunityId
 			    };
 			    _that.java110Context.request({
-			      url: _that.java110Constant.url.listActivitiess,
+			      url: url.listActivitiess,
 			      header: _that.java110Context.getHeaders(),
 			      method: "GET",
 			      data: _objData, //动态数据
@@ -68,7 +69,7 @@
 			          let _activites = res.data.activitiess;
 			          let _acts = [];
 			          _activites.forEach(function (_item) {
-			            _item.src = _that.java110Constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId + "&time=" + new Date();
+			            _item.src = url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId + "&time=" + new Date();
 			            let _startTime = _item.startTime.replace(/\-/g, "/")
 			            let _tmpStartTime = new Date(_startTime);
 			

@@ -38,7 +38,7 @@
 	export default {
 		data() {
 			return {
-				orderImg: this.java110Constant.url.baseUrl + 'img/order.png',
+				orderImg: url.baseUrl + 'img/order.png',
 				meterReads: [],
 				roomNum: '',
 			}

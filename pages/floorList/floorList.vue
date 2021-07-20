@@ -28,6 +28,7 @@
 
 <script>
 	import {getCurrentCommunity} from '../../api/community/community.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -62,7 +63,7 @@
 				
 				
 				this.java110Context.request({
-					url: _that.java110Constant.url.queryFloors,
+					url: url.queryFloors,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据

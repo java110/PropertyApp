@@ -25,9 +25,9 @@
 				<swiper class="screen-swiper swiper-height-index" :indicator-dots="true" :circular="true"
 					:autoplay="true" interval="5000" duration="500">
 					<swiper-item v-for="(item,index) in swiperList" :key="index">
-						<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
-						<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false"
-							objectFit="cover" v-if="item.type=='video'"></video>
+						<image :src="item.url" mode="aspectFill"></image>
+						<!-- <video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false"
+							objectFit="cover" v-if="item.type=='video'"></video> -->
 					</swiper-item>
 				</swiper>
 			</view>
@@ -89,6 +89,7 @@
 	import {isNull} from '../../lib/java110/utils/StringUtil.js'
 	
 	import {getUserInfo} from '../../lib/java110/api/Java110SessionApi.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -163,7 +164,7 @@
 							let _activites = res.data.activitiess;
 							let _acts = [];
 							_activites.forEach(function(_item) {
-								_item.src = _that.java110Constant.url.filePath + "?fileId=" + _item
+								_item.src = url.filePath + "?fileId=" + _item
 									.headerImg + "&communityId=" + _that.currentCommunityId +
 									"&time=" + new Date();
 								_acts.push(_item);

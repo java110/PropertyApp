@@ -85,7 +85,7 @@
 
 				_that.java110Context.request({
 					header: _that.java110Context.getHeaders(),
-					url: _that.java110Constant.url.listInspectionTaskDetails,
+					url: url.listInspectionTaskDetails,
 					method: "GET",
 					data: {
 						communityId: _that.communityId,
@@ -100,7 +100,7 @@
 						_inspectionTaskDetails.forEach(function(_item) {
 							if (_item.state == '20200407') {
 								_item.photos.forEach(function(_photoTmp) {
-									_photoTmp.url = _that.java110Constant.url.hcBaseUrl + _photoTmp.url;
+									_photoTmp.url = url.hcBaseUrl + _photoTmp.url;
 								});
 							}
 

@@ -290,7 +290,7 @@
 					})
 				} else {
 					this.java110Context.request({
-						url: _that.java110Constant.url.saveComplaint,
+						url: url.saveComplaint,
 						header: _that.java110Context.getHeaders(),
 						method: "POST",
 						data: obj, //动态数据

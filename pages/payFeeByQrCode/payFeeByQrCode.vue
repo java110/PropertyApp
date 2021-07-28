@@ -24,6 +24,7 @@
 			}
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
 			this.roomId = options.roomId;
 			this.communityId = options.communityId;
 			this._payOweFee();
@@ -33,8 +34,6 @@
 			_closePayModal: function() {
 				this.context.navigateBack();
 			},
-			//roomId: this.roomInfo.roomId,
-			//		communityId: this.java110Context.getCurrentCommunity().communityId
 			_payOweFee: function() {
 				let _that = this;
 				let _data = {

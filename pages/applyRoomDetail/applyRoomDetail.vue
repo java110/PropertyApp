@@ -189,7 +189,7 @@
 
 <script>
 	// const factory = context.factory;
-	import dateUtil from '../../utils/date.js'
+	import dateUtil from '../../lib/java110/utils/date.js'
 	import {loadFeeDiscount,uploadCheckUpdate,uploadReviewUpdate} from '../../api/apply/apply.js'
 	export default {
 		data() {
@@ -221,6 +221,7 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			this.java110Context.onLoad();
 			let _that = this;
 			_that.applyRoomInfo = JSON.parse(options.apply);
 			_that.applyRoomInfo.startTime = _that.applyRoomInfo.startTime.split(' ')[0];

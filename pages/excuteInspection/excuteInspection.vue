@@ -47,6 +47,8 @@
 </template>
 
 <script>
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -64,10 +66,11 @@
 			}
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
 			this.taskId = options.taskId;
 			this.inspectionPlanName = options.inspectionPlanName;
-			this.srcPath = this.java110Constant.url.hcBaseUrl;
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
+			this.srcPath = url.hcBaseUrl;
+			this.communityId = getCurrentCommunity().communityId;
 			let _userInfo = this.java110Context.getUserInfo();
 			this.userName = _userInfo.userName;
 			this.userId = _userInfo.userId;
@@ -82,7 +85,7 @@
 
 				_that.java110Context.request({
 					header: _that.java110Context.getHeaders(),
-					url: _that.java110Constant.url.listInspectionTaskDetails,
+					url: url.listInspectionTaskDetails,
 					method: "GET",
 					data: {
 						communityId: _that.communityId,
@@ -92,15 +95,12 @@
 					},
 					success: function(res) {
 						// TODO 判断
-						console.log(res);
-						// res.data.inspectionTaskDetails.forEach(function(item, index) {
-						// 	item.timeStr = item.planInsTime.replace(/:\d{1,2}$/, ' ');
-						// });
+				
 						let _inspectionTaskDetails = res.data.inspectionTaskDetails;
 						_inspectionTaskDetails.forEach(function(_item) {
 							if (_item.state == '20200407') {
 								_item.photos.forEach(function(_photoTmp) {
-									_photoTmp.url = _that.java110Constant.url.hcBaseUrl + _photoTmp.url;
+									_photoTmp.url = url.hcBaseUrl + _photoTmp.url;
 								});
 							}
 

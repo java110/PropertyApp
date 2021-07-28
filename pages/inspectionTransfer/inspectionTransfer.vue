@@ -27,7 +27,7 @@
 		UpdateInspectionTask
 	} from '../../api/inspection/inspection.js'
 	// 防止多次点击
-	import {preventClick} from '../../utils/common.js';
+	import {preventClick} from '../../lib/java110/utils/common.js';
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	// 组件
@@ -63,6 +63,7 @@
 			selectStaff
 		},
 		onLoad(_taskInfo) {
+			this.java110Context.onLoad();
 			_taskInfo = JSON.parse(_taskInfo.task);
 			this.communityId = _taskInfo.communityId;
 			this.inspectionPlanId = _taskInfo.inspectionPlanId;

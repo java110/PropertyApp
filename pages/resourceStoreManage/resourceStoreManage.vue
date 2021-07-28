@@ -54,10 +54,12 @@
 	
 	import {queryMyResourceStoreInfo} from '../../api/resource/resource.js'
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import url from '../../constant/url.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
-				orderImg: this.java110Constant.url.baseUrl + 'img/order.png',
+				orderImg: url.baseUrl + 'img/order.png',
 				resourceList: [],
 				resName: '',
 				searchUserName: '',
@@ -70,6 +72,7 @@
 			noDataPage
 		},
 		onLoad() {
+			this.java110Context.onLoad();
 		},
 		onShow() {
 			this.resourceList = [];
@@ -89,7 +92,7 @@
 					searchUserName: _that.searchUserName,
 					page: _that.page,
 					row: 10,
-					communityId: _that.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				};
 				queryMyResourceStoreInfo(this, _objData)
 					.then(function(res) {

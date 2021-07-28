@@ -136,7 +136,7 @@
 
 <script>
 	// const factory = context.factory;
-	import dateUtil from '../../utils/date.js'
+	import dateUtil from '../../lib/java110/utils/date.js'
 	import {updateRoomToExamine,saveRoomRenovationDetail} from '../../api/renovation/renovation.js'
 	export default {
 		data() {
@@ -159,6 +159,7 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			this.java110Context.onLoad();
 			let _that = this;
 			_that.renovationInfo = JSON.parse(options.apply);
 		},

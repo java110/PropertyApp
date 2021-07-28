@@ -18,9 +18,10 @@
 </template>
 
 <script>
-	import stringUtil from '../../utils/StringUtil.js';
+	import stringUtil from '../../lib/java110/utils/StringUtil.js';
 	import conf from '../../conf/config.js'
-	import {replaceImgSrc} from '../../utils/ImageUtil.js'
+	import {replaceImgSrc} from '../../lib/java110/utils/ImageUtil.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -37,6 +38,7 @@
 			}
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
 			this.activitiesId = options.activitiesId;
 			this.currentCommunityId = options.currentCommunityId;
 			this._loadActivites();
@@ -61,7 +63,7 @@
 			      communityId: this.currentCommunityId
 			    };
 			    _that.java110Context.request({
-			      url: _that.java110Constant.url.listActivitiess,
+			      url: url.listActivitiess,
 			      header: _that.java110Context.getHeaders(),
 			      method: "GET",
 			      data: _objData, //动态数据
@@ -70,7 +72,7 @@
 			        if (res.statusCode == 200) {
 			          let _activites = res.data.activitiess;
 			          _activites.forEach(function (_item) {
-			            _item.src = _that.java110Constant.url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId + "&time=" + new Date();
+			            _item.src = url.filePath + "?fileId=" + _item.headerImg + "&communityId=" + _that.currentCommunityId + "&time=" + new Date();
 			            let _startTime = _item.startTime.replace(/\-/g, "/")
 			            let _tmpStartTime = new Date(_startTime);
 

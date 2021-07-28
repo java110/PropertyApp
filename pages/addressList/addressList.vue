@@ -47,6 +47,7 @@
 </template>
 
 <script>
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -59,13 +60,7 @@
 			}
 		},
 		onLoad() {
-			//let list = [{}];
-
-			// for (let i = 0; i < 5; i++) {
-			// 	list[i] = {};
-			// 	list[i].name = String.fromCharCode(65 + i);
-			// }
-			//this.list = list;
+			this.java110Context.onLoad();
 			this._loadStaffInfo();
 
 		},
@@ -91,7 +86,7 @@
 					name: this.name
 				};
 				this.java110Context.request({
-					url: _that.java110Constant.url.queryStaffInfos,
+					url: url.queryStaffInfos,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据

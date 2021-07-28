@@ -49,10 +49,13 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	import conf from '../../conf/config.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
-				orderImg: this.java110Constant.url.baseUrl + 'img/order.png',
+				orderImg: conf.baseUrl + 'img/order.png',
 				repairOrders: [],
 				repairName: '',
 				noData:false,
@@ -63,6 +66,7 @@
 			noDataPage
 		},
 		onLoad() {
+			this.java110Context.onLoad();
 		},
 		onShow() {
 
@@ -90,12 +94,12 @@
 					row: 15,
 					storeId: storeId,
 					userId: _userInfo.userId,
-					communityId: _that.java110Context.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 					repairName: _that.repairName,
 					reqSource: 'mobile'
 				};
 				this.java110Context.request({
-					url: _that.java110Constant.url.listOwnerRepairs,
+					url: url.listOwnerRepairs,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据
@@ -155,11 +159,11 @@
 				})
 				let _that = this;
 				let _objData = {
-					communityId: _that.java110Context.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 					repairId: _item.repairId
 				};
 				this.java110Context.request({
-					url: _that.java110Constant.url.robRepairOrder,
+					url: url.robRepairOrder,
 					header: _that.java110Context.getHeaders(),
 					method: "POST",
 					data: _objData, //动态数据

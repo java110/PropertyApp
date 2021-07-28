@@ -58,11 +58,13 @@
 		saveAllocationStorehouse,listStoreHouses
 	} from '../../api/resource/resource.js'
 	// 防止多次点击
-	import {preventClick} from '../../utils/common.js';
+	import {preventClick} from '../../lib/java110/utils/common.js';
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	// 组件
 	import selectResourceStaff from '../../components/select-resource-staff/select-resource-staff.vue'
+	
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	
 	export default {
 		data() {
@@ -85,6 +87,7 @@
 			selectResourceStaff
 		},
 		onLoad() {
+			this.java110Context.onLoad();
 			this._loadResourceStoreHouses();
 		},
 		methods: {
@@ -98,7 +101,7 @@
 				let _data = {
 					page: 1,
 					row: 100,
-					communityId: this.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				};
 				listStoreHouses(this, _data)
 					.then(function(res) {
@@ -143,7 +146,7 @@
 					resourceStores: this.resourceStores,
 					remark: this.remark,
 					apply_type: this.apply_type,
-					communityId: this.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				};
 				saveAllocationStorehouse(this, _data)
 				.then(function(res) {

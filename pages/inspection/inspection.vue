@@ -41,7 +41,9 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
-	import dateUtil from '../../utils/date.js'
+	import dateUtil from '../../lib/java110/utils/date.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -56,7 +58,8 @@
 			noDataPage
 		},
 		onLoad: function() {
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
+			this.java110Context.onLoad();
+			this.communityId = getCurrentCommunity().communityId;
 			let _userInfo = this.java110Context.getUserInfo();
 			this.userName = _userInfo.userName;
 			this.userId = _userInfo.userId;
@@ -87,7 +90,7 @@
 
 				_that.java110Context.request({
 					header: _that.java110Context.getHeaders(),
-					url: _that.java110Constant.url.listInspectionTasks,
+					url: url.listInspectionTasks,
 					method: "GET",
 					data: {
 						communityId: _that.communityId,

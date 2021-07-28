@@ -48,6 +48,7 @@
 		listStoreHouses
 	} from '../../api/resource/resource.js'
 	import selectResource from '../select-resource/select-resource.vue'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	
 	export default {
 		components: {
@@ -96,7 +97,7 @@
 				let _data = {
 					page: 1,
 					row: 100,
-					communityId: this.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				};
 				listStoreHouses(this, _data)
 					.then(function(res) {

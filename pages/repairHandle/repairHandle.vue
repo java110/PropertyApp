@@ -160,11 +160,12 @@
 		queryResourceStoreResName,
 		queryRepairInfo
 	} from '../../api/repair/repair.js'
-	import * as TanslateImage from '../../utils/translate-image.js';
-	import {preventClick} from '../../utils/common.js';
+	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
+	import {preventClick} from '../../lib/java110/utils/common.js';
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	import selectSingleResource from '../../components/select-single-resource/select-single-resource.vue'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -207,6 +208,7 @@
 			selectSingleResource
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
 			this.publicArea = options.publicArea;
 			this.action = options.action;
 			this.repairId = options.repairId;
@@ -285,7 +287,7 @@
 				let _that = this;
 				let _data = {
 					repairType: this.repairType,
-					communtiyId: this.factory.getCurrentCommunity().communityId,
+					communtiyId: getCurrentCommunity().communityId,
 					page: 1,
 					row: 50,
 					state: '9999'

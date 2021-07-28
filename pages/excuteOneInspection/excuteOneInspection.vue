@@ -50,9 +50,10 @@
 
 <script>
 	import conf from '../../conf/config.js'
-	import {queryDictInfo} from '../../api/inspection/inspection.js'
-	import * as TanslateImage from '../../utils/translate-image.js';
-	import {preventClick} from '../../utils/common.js';
+	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
+	import {preventClick} from '../../lib/java110/utils/common.js';
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	import url from '../../constant/url.js'
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	export default {
@@ -84,6 +85,8 @@
 			}
 		},
 		onLoad(option) {
+			this.java110Context.onLoad();
+			
 			let that = this;
 			wx.getLocation({
 				type: 'gcj02',
@@ -98,7 +101,7 @@
 			this.inspectionId = option.inspectionId;
 			this.inspectionName = option.inspectionName;
 			
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
+			this.communityId = getCurrentCommunity().communityId;
 			let _userInfo = this.java110Context.getUserInfo();
 			this.userName = _userInfo.userName;
 			this.userId = _userInfo.userId;
@@ -239,7 +242,7 @@
 					uni.hideLoading();
 				} else {
 					this.java110Context.request({
-						url: this.java110Constant.url.updateInspectionTaskDetail, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
+						url: url.updateInspectionTaskDetail, //  http://hc.demo.winqi.cn:8012/appApi/ownerRepair.saveOwnerRepair 
 						header: this.java110Context.getHeaders(),
 						method: "POST",
 						data: obj, //动态数据

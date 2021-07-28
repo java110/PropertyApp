@@ -44,10 +44,12 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import url from '../../constant/url.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
-				orderImg: this.java110Constant.url.baseUrl + 'img/order.png',
+				orderImg: url.baseUrl + 'img/order.png',
 				myOrders: [],
 				orders: [],
 				storeId: '',
@@ -59,7 +61,7 @@
 			noDataPage
 		},
 		onLoad() {
-
+			this.java110Context.onLoad();
 			let _userInfo = this.java110Context.getUserInfo();
 			let _storeId = _userInfo.storeId;
 			this.storeId = _storeId;
@@ -75,11 +77,11 @@
 					page: this.page,
 					row: 15,
 					userId: _userInfo.userId,
-					communityId: _that.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				};
 
 				this.java110Context.request({
-					url: _that.java110Constant.url.listStaffFinishRepairs,
+					url: url.listStaffFinishRepairs,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据

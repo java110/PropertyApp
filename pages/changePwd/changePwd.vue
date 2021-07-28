@@ -24,6 +24,8 @@
 </template>
 
 <script>
+	import {isNull} from '../../lib/java110/utils/StringUtil.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -32,10 +34,13 @@
 				newPwd:''
 			}
 		},
+		onLoad() {
+			this.java110Context.onLoad();
+			
+		},
 		methods: {
 			_doChangePwd:function(){
-				let _string = this.java110Util.string;
-				if(_string.isNull(this.oldPwd)){
+				if(isNull(this.oldPwd)){
 					uni.showToast({
 						icon:'none',
 						title:'密码不能为空'
@@ -43,7 +48,7 @@
 					return;
 				}
 				
-				if(_string.isNull(this.pwd)){
+				if(isNull(this.pwd)){
 					uni.showToast({
 						icon:'none',
 						title:'新密码不能为空'
@@ -51,7 +56,7 @@
 					return;
 				}
 				
-				if(_string.isNull(this.newPwd)){
+				if(isNull(this.newPwd)){
 					uni.showToast({
 						icon:'none',
 						title:'确认密码不能为空'
@@ -74,7 +79,7 @@
 				};
 				
 				this.java110Context.request({
-					url: this.java110Constant.url.changeStaffPwd,
+					url: url.changeStaffPwd,
 					header: this.java110Context.getHeaders(),
 					method: "POST",
 					data: _userInfo,

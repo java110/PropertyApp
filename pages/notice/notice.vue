@@ -28,6 +28,8 @@
 
 <script>
 	/** index.js **/
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -39,10 +41,11 @@
 		},
 		onLoad: function() {
 			let _that = this;
-			_that.communityId = _that.java110Context.getCurrentCommunity().communityId;
+			this.java110Context.onLoad();
+			_that.communityId = getCurrentCommunity().communityId;
 			_that.java110Context.request({
 				header: _that.java110Context.getHeaders(),
-				url: _that.java110Constant.url.GetNoticeListUrl,
+				url: url.GetNoticeListUrl,
 				method: "GET",
 				data: {
 					communityId: _that.communityId,

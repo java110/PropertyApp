@@ -87,6 +87,9 @@
 </template>
 
 <script>
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	import conf from '../../conf/config.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -100,14 +103,16 @@
 			}
 		},
 		onLoad() {
+			this.java110Context.onLoad();
+		
 			//加载员工名称
 			let _userInfo = this.java110Context.getUserInfo();
 			console.log("_userInfo",_userInfo);
 			this.staffInfo.name = _userInfo.userName;
-			this.staffInfo.img = this.java110Constant.url.baseUrl + 'logo.png';
+			this.staffInfo.img = conf.baseUrl + 'logo.png';
 		},
 		onShow() {
-			let _communityInfo = this.java110Context.getCurrentCommunity();
+			let _communityInfo = getCurrentCommunity();
 			console.log('_communityInfo',_communityInfo);
 			this.currentCommunityName = _communityInfo.name;
 		},
@@ -162,7 +167,7 @@
 					token:token
 				}
 				this.java110Context.request({
-					url: this.java110Constant.url.userLogout,
+					url: url.userLogout,
 					header: this.java110Context.getHeaders(),
 					method: "POST",
 					data: _data,

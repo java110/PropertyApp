@@ -71,6 +71,7 @@
 
 <script>
 	import {listAllocationStorehouseApplys,listWorkflowAuditInfo,listAllocationStorehouses} from '../../api/resource/resource.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -84,8 +85,9 @@
 		components: {
 		},
 		onLoad: function(options) {
+			this.java110Context.onLoad();
 			this.applyId = options.applyId;
-			this.communityId = this.java110Context.getCurrentCommunity().communityId;
+			this.communityId = getCurrentCommunity().communityId;
 			this._loadAuditInfo();
 			this._loadAuditResource();
 			this._loadAuditUser();

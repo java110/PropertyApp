@@ -28,6 +28,8 @@
 </template>
 
 <script>
+	import {getCommunity} from '../../api/community/community.js'
+	import mapping from '../../constant/mapping.js'
 	export default {
 		data() {
 			return {
@@ -36,6 +38,7 @@
 			}
 		},
 		onLoad() {
+			this.java110Context.onLoad();
 			this._loadCommunitys();
 		},
 		methods: {
@@ -44,7 +47,7 @@
 				let _condition = {
 					name:this.communityName
 				}
-				this.java110Context.getCommunity(function(_communitys){
+				getCommunity(function(_communitys){
 					_that.communitys = _communitys;
 					console.log('_communitys',_communitys);
 				},true,_condition);
@@ -53,7 +56,7 @@
 				this._loadCommunitys();	
 			},
 			_doChangeCommunity:function(_community){
-				uni.setStorageSync(this.java110Constant.mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(_community));
+				uni.setStorageSync(mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(_community));
 				uni.navigateBack({
 					delta:1
 				})

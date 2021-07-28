@@ -26,6 +26,8 @@
 </template>
 
 <script>
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	import url from '../../constant/url.js'
 	export default {
 		data() {
 			return {
@@ -37,6 +39,8 @@
 			}
 		},
 		onLoad(options) {
+			this.java110Context.onLoad();
+			
 			this.floorId = options.floorId;
 			this.unitId = options.unitId;
 			this.communityId = options.communityId;
@@ -58,12 +62,12 @@
 					floorId: this.floorId,
 					unitId:this.unitId,
 					roomNum:this.roomNum,
-					communityId:_that.java110Context.getCurrentCommunity().communityId
+					communityId:getCurrentCommunity().communityId
 				};
 				
 				
 				this.java110Context.request({
-					url: _that.java110Constant.url.queryRooms,
+					url: url.queryRooms,
 					header: _that.java110Context.getHeaders(),
 					method: "GET",
 					data: _objData, //动态数据

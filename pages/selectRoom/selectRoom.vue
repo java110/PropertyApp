@@ -25,6 +25,7 @@
 
 <script>
 	import {loadRooms} from '../../api/room/room.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -41,6 +42,7 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
+			this.java110Context.onLoad();
 			let _floorId = options.floorId;
 			this.floorId = _floorId;
 			this.unitId = options.unitId;
@@ -69,7 +71,7 @@
 				let dataObj = {
 					page: 1,
 					row: 15,
-					communityId:  _that.java110Context.getCurrentCommunity().communityId,
+					communityId:  getCurrentCommunity().communityId,
 					roomNum: this.searchValue,
 					floorId: this.floorId,
 					unitId: this.unitId

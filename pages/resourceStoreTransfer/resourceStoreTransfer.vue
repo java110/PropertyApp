@@ -55,12 +55,14 @@
 		saveResourceStoreTransfer
 	} from '../../api/resource/resource.js'
 	// 防止多次点击
-	import {preventClick} from '../../utils/common.js';
+	import {preventClick} from '../../lib/java110/utils/common.js';
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	// 组件
 	import selectResourceStaff from '../../components/select-resource-staff/select-resource-staff.vue'
 	import selectStaff from '../../components/select-staff/select-staff.vue'
+	
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	
 	export default {
 		data() {
@@ -78,6 +80,7 @@
 			selectStaff
 		},
 		onLoad() {
+			this.java110Context.onLoad();
 		},
 		methods: {
 			
@@ -143,7 +146,7 @@
 					description: this.description,
 					acceptUserId: this.acceptUserId,
 					acceptUserName: this.acceptUserName,
-					communityId: this.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				};
 				saveResourceStoreTransfer(this, _data)
 				.then(function(res) {

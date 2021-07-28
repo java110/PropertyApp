@@ -52,6 +52,7 @@
 </template>
 
 <script>
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
@@ -92,6 +93,8 @@
 			}
 		},
 		onLoad() {
+			this.java110Context.onLoad();
+			
 			let _userInfo = this.java110Context.getUserInfo();
 			let _storeId = _userInfo.storeId;
 			this.storeId = _storeId;
@@ -114,7 +117,7 @@
 		methods: {
 			_selectPurchase: function() {
 				uni.navigateTo({
-					url: '/pages/purchaseList/purchaseList?communityId=' + this.java110Context.getCurrentCommunity().communityId
+					url: '/pages/purchaseList/purchaseList?communityId=' + getCurrentCommunity().communityId
 				});
 			},
 			puchaseChange: function(e) {

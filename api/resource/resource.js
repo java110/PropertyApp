@@ -427,6 +427,7 @@ export function saveMyAuditOrders(_that,_data){
 				reslove(res.data);
 			},
 			fail: function(e) {
+				_that.onoff = true;
 				wx.showToast({
 					title: "服务器异常了",
 					icon: 'none',
@@ -451,6 +452,7 @@ export function saveResourceOut(_that,_data){
 				reslove(res.data);
 			},
 			fail: function(e) {
+				_that.onoff = true;
 				wx.showToast({
 					title: "服务器异常了",
 					icon: 'none',
@@ -475,6 +477,7 @@ export function saveResourceEnter(_that,_data){
 				reslove(res.data);
 			},
 			fail: function(e) {
+				_that.onoff = true;
 				wx.showToast({
 					title: "服务器异常了",
 					icon: 'none',

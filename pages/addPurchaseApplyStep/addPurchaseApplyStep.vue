@@ -78,12 +78,13 @@
 					}
 					let msg = '';
 					this.resourceStores.forEach((item) => {
-						if(!item.hasOwnProperty('quantity') || item.quantity < 1){
-							msg = '请完善物品信息';
+						if(!item.hasOwnProperty('quantity') || parseInt(item.quantity) < 1){
+							msg = '请填写数量';
 							_that.onoff = true;
 							return;
 						}
-						if (this.resOrderType == '20000' && (parseInt(item.quantity) > parseInt(item.stock))) {
+						item.quantity = parseInt(item.quantity);
+						if (this.resOrderType == '20000' && (item.quantity > parseInt(item.stock))) {
 							msg = item.resName + ",库存不足";
 							_that.onoff = true;
 							return;
@@ -125,15 +126,9 @@
 					.then(function(res) {
 						if (res.code == 0) {
 							_that.onoff = true;
-							if (_that.resOrderType == "10000") {
-								uni.navigateTo({
-									url: '/pages/purchaseApplyManage/purchaseApplyManage'
-								});
-							} else {
-								uni.navigateTo({
-									url: '/pages/itemOutManage/itemOutManage'
-								});
-							}
+							uni.navigateBack({
+								delta:1
+							})
 							return;
 						}
 					});

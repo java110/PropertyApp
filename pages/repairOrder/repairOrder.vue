@@ -112,19 +112,16 @@
 							uni.showToast({
 								title: '已全部加载'
 							})
-							return;
+						}else{
+							let _data = _json.data;
+							_data.forEach(function(item) {
+								let dateStr = item.appointmentTime;
+								let _date = new Date(dateStr.replace(/-/g, "/"));
+								item.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
+							});
+							_that.repairOrders = _that.repairOrders.concat(_data);
+							_that.page ++;
 						}
-
-						let _data = _json.data;
-						
-						_data.forEach(function(item) {
-							let dateStr = item.appointmentTime;
-							let _date = new Date(dateStr.replace(/-/g, "/"));
-							item.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
-						});
-						_that.repairOrders = _that.repairOrders.concat(_data);
-						_that.page ++;
-						
 						if(_that.repairOrders.length < 1){
 							_that.noData = true;
 							return ;

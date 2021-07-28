@@ -161,9 +161,9 @@
 				this.imgList = _imgList;
 			},
 			deleteImage: function(e) {
-				console.log(e);
 				let imageArr = this.$data.imgList;
 				imageArr.splice(e, 1);
+				this.photos.splice(e, 1);
 			},
 			ChooseImage: function(e) {
 				let that = this;
@@ -224,6 +224,8 @@
 					msg = "巡检说明不能为空";
 				} else if (obj.userId == "") {
 					msg = "数据异常，巡检人为空";
+				} else if (obj.photos.length <= 0) {
+					msg = "请上传巡检图片";
 				}
 				console.log(obj);
 			

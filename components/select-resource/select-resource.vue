@@ -13,7 +13,7 @@
 							</view>
 							<view class="text-gray text-sm flex">
 								<view class="text-cut">
-									编码：{{item.resCode}}
+									仓库：{{item.shName}}
 								</view>
 							</view>
 						</view>

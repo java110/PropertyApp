@@ -7,23 +7,27 @@
 		</view>
 		<view class="margin-top">
 			<view class="cu-list menu-avatar " v-for="(item,index) in resourceList" :key="index">
-				<view class="cu-item" style="height: 180rpx;">
+				<view class="cu-item" style="height: 240rpx;">
 					<view class="content content-left" style="width: 100%;">
-						<view class="text-grey">
+						<view class="text-grey flex-around">
 							<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
 							<text class="item-remove bg-red text-df" @click="_removeItem(index, item.resId)">移除</text>
 						</view>
-						<view class="text-gray flex text-df" style="margin: 10rpx 0;">
+						<view class="text-gray flex-around text-df" style="margin: 10rpx 0;">
 								<text>当前仓库:</text>
 								<text>{{item.shName}}</text>
 						</view>
-						<view class="text-gray flex">
+						<view class="text-gray flex-around text-df" style="margin: 10rpx 0;">
+								<text>当前库存:</text>
+								<text>{{item.stock}}</text>
+						</view>
+						<view class="text-gray flex-around">
 							<view class="flex-item w50">
-								<label>数量:</label>
+								<label>调拨数量:</label>
 								<input class="use-number bg-gray" type="number" v-model="item.curStock" value="" />
 							</view>
 							<view class="flex-item w50">
-								<label>仓库:</label>
+								<label>目标仓库:</label>
 								<picker :value="selectedStoreHousesList[index]" :range="storeHouses" :range-key="'shName'" @change="_storeHousesChange(index,$event)">
 									<view class="picker">
 										{{storeHouses[selectedStoreHousesList[index]].shName}}
@@ -127,7 +131,7 @@
 
 <style>
 	.cu-list.menu-avatar>.cu-item .content-left {
-		left: 30upx;
+		left: 0;
 	}
 
 	.cu-list+.cu-list {
@@ -142,7 +146,7 @@
 		width: 50%;
 	}
 	.flex label, .flex-item label{
-		width: 100rpx;
+		width: 140rpx;
 	}
 	.use-number{
 		width: 200rpx;
@@ -155,5 +159,10 @@
 	.item-remove{
 		border-radius: 15rpx;
 		padding: 2rpx 10rpx;
+	}
+	.flex-around{
+		display: flex;
+		justify-content: space-between;
+		padding: 0 20rpx;
 	}
 </style>

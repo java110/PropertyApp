@@ -104,14 +104,11 @@
 							uni.showToast({
 								title: '已全部加载'
 							})
-							return;
+						}else{
+							let _data = res.data;
+							_that.resourceList = _that.resourceList.concat(_data);
+							_that.page ++;
 						}
-						
-						let _data = res.data;
-						
-						_that.resourceList = _that.resourceList.concat(_data);
-						_that.page ++;
-						
 						if(_that.resourceList.length < 1){
 							_that.noData = true;
 							return ;

@@ -222,6 +222,9 @@
 					roomId: this.renovationInfo.roomId,
 					roomName: this.renovationInfo.roomName,
 					userId: this.renovationInfo.userId,
+					startTime: this.renovationInfo.startTime,
+					endTime: this.renovationInfo.endTime,
+					remark: this.renovationInfo.remark,
 					detailType: '1001'
 				};
 				if(this.renovationInfo.state == 1000){
@@ -243,7 +246,7 @@
 						return;
 					}
 					params.state = state;
-					params.remark = checkRemark;
+					params.examineRemark = checkRemark;
 					updateRoomToExamine(this,params).then(function(res){
 						uni.hideLoading();
 						uni.showToast({
@@ -272,7 +275,7 @@
 						return;
 					}
 					params.state = state;
-					params.remark = reviewRemark;
+					params.examineRemark = reviewRemark;
 					saveRoomRenovationDetail(this,params).then(function(res){
 						uni.hideLoading();
 						uni.showToast({

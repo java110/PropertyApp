@@ -51,7 +51,7 @@
 					<text class="cuIcon-time text-green"></text>
 					<text class="text-grey">开始时间</text>
 				</view>
-				<picker mode="date" :value="applyRoomInfo.startTime" start="2020-09-01" end="2050-09-01" @change="dateStartChange">
+				<picker mode="date" :value="applyRoomInfo.startTime" start="2020-09-01" end="2050-09-01" :disabled="pickerDisabled" @change="dateStartChange">
 					<view class="picker">
 						{{applyRoomInfo.startTime}}
 					</view>
@@ -62,7 +62,7 @@
 					<text class="cuIcon-time text-green"></text>
 					<text class="text-grey">结束时间</text>
 				</view>
-				<picker mode="date" :value="applyRoomInfo.endTime" start="2020-09-01" end="2050-09-01" @change="dateEndChange">
+				<picker mode="date" :value="applyRoomInfo.endTime" start="2020-09-01" end="2050-09-01" :disabled="pickerDisabled" @change="dateEndChange">
 					<view class="picker">
 						{{applyRoomInfo.endTime}}
 					</view>
@@ -211,6 +211,11 @@
 
 		components: {},
 		props: {},
+		computed:{
+			pickerDisabled(){
+				return !((this.applyRoomInfo.state == 1 && this.java110Context.hasPrivilege('502021010723590006')) || (this.applyRoomInfo.state == 2 && this.java110Context.hasPrivilege('502021010761730007')));
+			}
+		},
 
 		/**
 		 * 生命周期函数--监听页面加载

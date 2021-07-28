@@ -109,14 +109,16 @@
 					msg = '请输入申请说明';
 				}
 				this.resourceStores.forEach((item) => {
-					if(!item.hasOwnProperty('quantity') || item.quantity < 1){
+					if(!item.hasOwnProperty('quantity') || parseInt(item.quantity) < 1){
 						msg = '请完善数量信息';
 						return;
 					}
-					if(!item.hasOwnProperty('urgentPrice') || item.urgentPrice <= 0){
+					item.quantity = parseInt(item.quantity);
+					if(!item.hasOwnProperty('urgentPrice') || parseFloat(item.urgentPrice) <= 0){
 						msg = '请完善价格信息';
 						return;
 					}
+					item.urgentPrice = parseFloat(item.urgentPrice);
 				})
 				if(msg != ''){
 					_that.onoff = true;
@@ -135,9 +137,12 @@
 				saveUrgentPurchaseApply(this, _data)
 				.then(function(res) {
 					if (res.code == 0) {
-						uni.navigateTo({
-							url: '/pages/purchaseApplyManage/purchaseApplyManage'
-						});
+						// uni.navigateTo({
+						// 	url: '/pages/purchaseApplyManage/purchaseApplyManage'
+						// });
+						uni.navigateBack({
+							delta:1
+						})
 						return;
 					}
 				});

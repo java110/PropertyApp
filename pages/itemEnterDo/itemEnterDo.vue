@@ -35,7 +35,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-btn lg bg-blue fr margin-top margin-right" @click="save()">
+			<view class="cu-btn lg bg-blue fr margin-top margin-right" @click="$preventClick(save)">
 				提交
 			</view>
 		</view>
@@ -49,12 +49,17 @@
 		saveResourceEnter,
 		saveMyAuditOrders
 	} from '../../api/resource/resource.js'
+	// 防止多次点击
+	import {preventClick} from '../../utils/common.js';
+	import Vue from 'vue'
+	Vue.prototype.$preventClick = preventClick;
 	
 	export default {
 		components: {
 		},
 		data() {
 			return {
+				onoff: true,
 				itemEnterOrderInfo: '',
 				applyOrderId: '',
 				resOrderType: '',
@@ -126,20 +131,23 @@
 				let _that = this;
 				let msg = '';
 				this.itemEnterOrderInfo.purchaseApplyDetailVo.forEach((item) => {
-					if (item.purchaseQuantity == '' || item.purchaseQuantity < 1) {
-						msg = '采购数量未填写';
+					if (!item.hasOwnProperty('purchaseQuantity') || item.purchaseQuantity == '' || parseInt(item.purchaseQuantity) < 1) {
+						msg = '请填写采购数量';
 						return;
 					}
-					if (item.price == '' || !item.price) {
-						msg = '单价未填写';
+					item.purchaseQuantity = parseInt(item.purchaseQuantity);
+					if (!item.hasOwnProperty('price') || item.price == '' || parseFloat(item.price) <= 0) {
+						msg = '请填写单价';
 						return;
 					}
+					item.price = parseFloat(item.price);
 				});
 				if(msg != ''){
 					uni.showToast({
 						title:msg,
 						icon: 'none'
 					});
+					_that.onoff = true;
 					return;
 				}
 				saveResourceEnter(this,this.itemEnterOrderInfo)
@@ -151,6 +159,7 @@
 			},
 			
 			_saveMyAuditOrders: function(){
+				let _that = this;
 				let _auditInfo = {
 					taskId: this.taskId,
 					applyOrderId: this.applyOrderId,
@@ -160,12 +169,13 @@
 				};
 				saveMyAuditOrders(this,_auditInfo)
 				.then(function(res){
+					_that.onoff = true;
 					uni.showToast({
 						title:res.msg,
 						icon: 'none'
 					});
-					uni.navigateTo({
-						url:'/pages/purchaseApplyAuditOrders/purchaseApplyAuditOrders'
+					uni.navigateBack({
+						delta:1
 					})
 				})
 			}

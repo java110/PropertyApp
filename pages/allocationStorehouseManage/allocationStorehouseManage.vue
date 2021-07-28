@@ -25,7 +25,7 @@
 								时间：{{item.createTime}}
 							</view>
 						</view>
-						<view class="cu-btn round lg bg-green" v-if="item.state == 1200 && userId == item.startUserId" @tap.stop="cancelApply(item)">取消调拨</view>
+						<view class="cu-btn round shadow-blur bg-gradual-green btn-cancel" v-if="item.state == 1200 && userId == item.startUserId" @tap.stop="cancelApply(item)">取消调拨</view>
 					</view>
 				</view>
 			</view>
@@ -146,7 +146,7 @@
 	.bg-white{
 		position: relative;
 	}
-	.cu-btn{
+	.btn-cancel{
 		position: absolute;
 		right: 10rpx;
 		top: 25rpx;

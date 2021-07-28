@@ -57,10 +57,11 @@
 					msg = '请输入申请说明';
 				}
 				this.resourceStores.forEach((item) => {
-					if(!item.hasOwnProperty('curStock') || item.curStock < 1){
-						msg = '请完善物品信息';
+					if(!item.hasOwnProperty('curStock') || parseInt(item.curStock) < 1){
+						msg = '请填写数量';
 						return;
 					}
+					item.curStock = parseInt(item.curStock);
 					if (parseInt(item.curStock) > parseInt(item.stock)) {
 						msg = item.resName + ",库存不足";
 						return;
@@ -89,9 +90,12 @@
 				saveAllocationStorehouse(this, _data)
 				.then(function(res) {
 					if (res.code == 0) {
-						uni.navigateTo({
-							url: '/pages/allocationStorehouseManage/allocationStorehouseManage'
-						});
+						// uni.navigateTo({
+						// 	url: '/pages/allocationStorehouseManage/allocationStorehouseManage'
+						// });
+						uni.navigateBack({
+							delta:1
+						})
 						return;
 					}
 				});

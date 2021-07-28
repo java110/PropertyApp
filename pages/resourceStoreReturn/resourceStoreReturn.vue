@@ -17,7 +17,7 @@
 							<view class="text-gray flex-around text-df" style="margin: 10rpx 0;">
 								<view>
 									<text>当前库存:</text>
-									<text>{{item.stock}}</text>
+									<text>{{item.miniStock}}{{item.miniUnitCodeName}}</text>
 								</view>
 								<text class="item-remove bg-blue text-df" @click="_itemReturnAll(index, item.resId)">全部退还</text>
 							</view>
@@ -25,7 +25,7 @@
 									<label>退还数量:</label>
 									<view class="flex">
 										<text class="cuIcon-move" @click="_decItemCurstock(item.resId)"></text>
-										<input class="use-number bg-gray" type="text" v-model="item.curStock" value="" />
+										<input class="use-number bg-gray" type="number" v-model="item.curStock" value="" />
 										<text class="cuIcon-add" @click="_incItemCurstock(item.resId)"></text>
 									</view>
 							</view>
@@ -119,11 +119,12 @@
 					msg = '请输入退还说明';
 				}
 				this.resourceStores.forEach((item) => {
-					if(!item.hasOwnProperty('curStock') || item.curStock < 1){
-						msg = '请完善物品信息';
+					if(!item.hasOwnProperty('curStock') || parseInt(item.curStock) < 1){
+						msg = '请填写数量';
 						return;
 					}
-					if (parseInt(item.curStock) > parseInt(item.stock)) {
+					item.curStock = parseInt(item.curStock);
+					if (item.curStock > parseInt(item.miniStock)) {
 						msg = item.resName + ",库存不足";
 						return;
 					}
@@ -147,9 +148,9 @@
 				saveAllocationStorehouse(this, _data)
 				.then(function(res) {
 					if (res.code == 0) {
-						uni.navigateTo({
-							url: '/pages/resourceStoreManage/resourceStoreManage'
-						});
+						uni.navigateBack({
+							delta:1
+						})
 						return;
 					}
 				});
@@ -173,7 +174,7 @@
 			_itemReturnAll: function(index, resId){
 				this.resourceStores.forEach((item) => {
 					if(item.resId == resId){
-						item.curStock = item.stock;
+						item.curStock = item.miniStock;
 					}
 				})
 				this.$forceUpdate();
@@ -190,7 +191,7 @@
 			
 			_incItemCurstock: function(resId){
 				this.resourceStores.forEach((item) => {
-					if(item.resId == resId && item.stock > item.curStock){
+					if(item.resId == resId && item.miniStock > item.curStock){
 						item.curStock += 1;
 					}
 				})

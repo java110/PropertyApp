@@ -23,7 +23,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-btn lg bg-blue fr margin-top margin-right" @click="save()">
+			<view class="cu-btn lg bg-blue fr margin-top margin-right" @click="$preventClick(save)">
 				提交
 			</view>
 		</view>
@@ -36,12 +36,17 @@
 		saveResourceOut,
 		saveMyAuditOrders
 	} from '../../api/resource/resource.js'
+	// 防止多次点击
+	import {preventClick} from '../../utils/common.js';
+	import Vue from 'vue'
+	Vue.prototype.$preventClick = preventClick;
 	
 	export default {
 		components: {
 		},
 		data() {
 			return {
+				onoff: true,
 				itemOutOrderInfo: '',
 				applyOrderId: '',
 				resOrderType: '',
@@ -87,13 +92,12 @@
 				let _that = this;
 				let msg = '';
 				this.itemOutOrderInfo.purchaseApplyDetailVo.forEach((item) => {
-					if (item.purchaseQuantity == '' || item.purchaseQuantity < 1) {
-						msg = '采购数量未填写';
+					if (!item.hasOwnProperty('purchaseQuantity') || item.purchaseQuantity == '' || parseInt(item.purchaseQuantity) < 1) {
+						msg = '请填写发放数量';
 						return;
 					}
-					let _purchaseQuantity = parseFloat(item.purchaseQuantity).toFixed(2);
-					let _stock = parseFloat(item.stock).toFixed(2);
-					if (parseFloat(_purchaseQuantity) > parseFloat(_stock)) {
+					item.purchaseQuantity = parseInt(item.purchaseQuantity);
+					if (item.purchaseQuantity > parseInt(item.stock)) {
 						msg = item.resName + '库存不足';
 						return;
 					}
@@ -103,6 +107,7 @@
 						title:msg,
 						icon: 'none'
 					});
+					_that.onoff = true;
 					return;
 				}
 				saveResourceOut(this,this.itemOutOrderInfo)
@@ -114,6 +119,7 @@
 			},
 			
 			_saveMyAuditOrders: function(){
+				let _that = this;
 				let _auditInfo = {
 					taskId: this.taskId,
 					applyOrderId: this.applyOrderId,
@@ -122,13 +128,14 @@
 				};
 				saveMyAuditOrders(this,_auditInfo)
 				.then(function(res){
+					_that.onoff = true;
 					uni.showToast({
 						title:res.msg,
 						icon: 'none',
 						noticeState: '1002'
 					});
-					uni.navigateTo({
-						url:'/pages/itemOutAuditOrders/itemOutAuditOrders'
+					uni.navigateBack({
+						delta:1
 					})
 				})
 			}

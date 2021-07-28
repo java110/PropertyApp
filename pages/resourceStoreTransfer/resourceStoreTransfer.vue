@@ -16,12 +16,12 @@
 							</view>
 							<view class="text-gray flex text-df" style="margin: 10rpx 0;">
 									<text>当前库存:</text>
-									<text>{{item.stock}}</text>
+									<text>{{item.miniStock}}</text>
 							</view>
 							<view class="text-gray flex">
 								<view class="flex-item w50">
 									<label>数量:</label>
-									<input class="use-number bg-gray" type="text" v-model="item.giveQuantity" value="" />
+									<input class="use-number bg-gray" type="number" v-model="item.giveQuantity" value="" />
 								</view>
 							</view>
 						</view>
@@ -122,11 +122,12 @@
 					}
 				}
 				this.resourceStores.forEach((item) => {
-					if(!item.hasOwnProperty('giveQuantity') || item.giveQuantity < 1){
-						msg = '请完善物品信息';
+					if(!item.hasOwnProperty('giveQuantity') || parseInt(item.giveQuantity) < 1){
+						msg = '请填写数量';
 						return;
 					}
-					if (parseInt(item.giveQuantity) > parseInt(item.stock)) {
+					item.giveQuantity = parseInt(item.giveQuantity);
+					if (item.giveQuantity > parseInt(item.miniStock)) {
 						msg = item.resName + ",库存不足";
 						return;
 					}
@@ -147,9 +148,10 @@
 				saveResourceStoreTransfer(this, _data)
 				.then(function(res) {
 					if (res.code == 0) {
-						uni.navigateTo({
-							url: '/pages/resourceStoreManage/resourceStoreManage'
-						});
+						_that.onoff = true;
+						uni.navigateBack({
+							delta:1
+						})
 						return;
 					}else{
 						_that.onoff = true;

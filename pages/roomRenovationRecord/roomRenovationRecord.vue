@@ -26,7 +26,7 @@
 		<view v-else>
 			<no-data-page></no-data-page>
 		</view>
-		<view class="record-add" @tap="_addRecord()">
+		<view v-if="renovationInfo.state == '3000'" class="record-add" @tap="_addRecord()">
 			<img src="/static/image/renovation-add.png" alt="">
 		</view>
 	</view>

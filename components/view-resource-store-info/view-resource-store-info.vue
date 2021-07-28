@@ -7,29 +7,23 @@
 		</view>
 		<view class="margin-top">
 			<view class="cu-list menu-avatar " v-for="(item,index) in resourceList" :key="index">
-				<view class="cu-item" style="height: 160rpx;">
+				<view class="cu-item" style="height: 220rpx;">
 					<view class="content content-left" style="width: 100%;">
-						<view class="text-grey">
+						<view class="text-grey flex-around">
 							<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
 							<text class="item-remove bg-red text-df" @click="_removeItem(index, item.resId)">移除</text>
 						</view>
-						<view class="text-gray flex">
-							<view class="flex-item w50">
-								<label>数量:</label>
-								<input class="use-number bg-gray" type="number" v-model="item.quantity" value="" />
-							</view>
-							<!-- <view class="flex-item w50" v-show="resOrderType == '10000'">
-								<label>供应商:</label>
-								<picker :value="suppliersList[index]" :range="resourceSuppliers" :range-key="'supplierName'" @change="_resourceSuppliersChange(index,$event)">
-									<view class="picker">
-										{{resourceSuppliers[suppliersList[index]].supplierName}}
-									</view>
-								</picker>
-							</view> -->
+						<view class="text-gray flex-around">
+							<label>库存:</label>
+							<text class="text-df">{{item.stock}}{{item.unitCodeName}}</text>
 						</view>
-						<view class="text-gray flex" style="margin: 10rpx 0;">
-								<label>备注:</label>
-								<input class="remark bg-gray" type="text" v-model="item.remark" value="" />
+						<view class="text-gray flex-around">
+							<label>数量:</label>
+							<input class="use-number bg-gray" type="number" v-model="item.quantity" value="" />
+						</view>
+						<view class="text-gray flex-around" style="margin: 10rpx 0;">
+							<label>备注:</label>
+							<input class="remark bg-gray" type="text" v-model="item.remark" value="" />
 						</view>
 					</view>
 				</view>
@@ -129,7 +123,7 @@
 
 <style>
 	.cu-list.menu-avatar>.cu-item .content-left {
-		left: 30upx;
+		left: 0;
 	}
 
 	.cu-list+.cu-list {
@@ -144,7 +138,7 @@
 		width: 50%;
 	}
 	.flex label, .flex-item label{
-		width: 100rpx;
+		width: 150rpx;
 	}
 	.use-number{
 		width: 200rpx;
@@ -157,5 +151,10 @@
 	.item-remove{
 		border-radius: 15rpx;
 		padding: 2rpx 10rpx;
+	}
+	.flex-around{
+		display: flex;
+		justify-content: space-between;
+		padding: 0 20rpx;
 	}
 </style>

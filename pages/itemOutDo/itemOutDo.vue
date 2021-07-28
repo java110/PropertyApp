@@ -37,7 +37,7 @@
 		saveMyAuditOrders
 	} from '../../api/resource/resource.js'
 	// 防止多次点击
-	import {preventClick} from '../../utils/common.js';
+	import {preventClick} from '../../lib/java110/utils/common.js';
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	

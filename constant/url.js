@@ -124,6 +124,7 @@ export default {
 	deleteAllocationStorehouse: baseUrl + "callComponent/resourceStore.deleteAllocationStorehouse",
 	// 取消申请
 	deletePurchaseApply: baseUrl + "callComponent/deletePurchaseApply/delete",
+	//查询水电抄表记录
 	listMeterWaters: baseUrl+"app/meterWater.listMeterWaters",
 	listRepairSettings: baseUrl + 'app/repair.listRepairSettings',
 	saveHelpOwnerRepair: baseUrl + "callComponent/addOwnerRepair/save",

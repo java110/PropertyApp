@@ -11,7 +11,7 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">到期时间</view>
-			{{feeInfo.endTime}}
+			{{feeInfo.deadlineTime}}
 		</view>
 		<view class="cu-form-group">
 			<view class="title">费用标识</view>
@@ -53,6 +53,7 @@
 		queryFeeDetail
 	} from '../../api/fee/fee.js';
 	import {getCurrentCommunity} from '../../api/community/community.js'
+	import dateUtil from '../../lib/java110/utils/date.js'
 	export default {
 		data() {
 			return {
@@ -117,7 +118,12 @@
 						}
 						let _fees = res.data.fees;
 						_that.feeInfo = _fees[0];
-
+						// 周期费用 结束日期 -1 天； 其他不变
+						if(_that.feeInfo.feeFlag == '1003006'){
+							_that.feeInfo.deadlineTime = dateUtil.decSomeDays(_that.feeInfo.deadlineTime, 1);
+						}else{
+							_that.feeInfo.deadlineTime = dateUtil.formatDate(new Date(_that.feeInfo.deadlineTime.replace(/-/g, '/')));
+						}
 					})
 			},
 		}

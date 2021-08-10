@@ -154,7 +154,6 @@
 					return;
 				}
 				let _that = this;
-				_that.receivableAmount = 0.0;
 				let _objData = {
 					payObjId: this.roomInfo.roomId,
 					payObjType: '3333',
@@ -175,6 +174,7 @@
 						_that.fees = [];
 					})
 					.then(function(_fees) {
+						_that.receivableAmount = 0.0;
 						_fees.forEach(function(_item) {
 							_that.receivableAmount += _item.feePrice;
 

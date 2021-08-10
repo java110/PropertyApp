@@ -65,6 +65,7 @@
 		queryResourceStoreResName,
 		queryRepairInfo
 	} from '../../api/repair/repair.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 
 	export default {
 		components: {
@@ -163,7 +164,7 @@
 				let _data = {
 					page: 1,
 					row: 100,
-					communityId: this.factory.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 					giveType: 1
 				};
 				queryRepairInfo(this, _data)
@@ -189,7 +190,7 @@
 					rstId: this.rstId,
 					page: 1,
 					row: 100,
-					communityId: this.factory.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 					giveType: 1
 				};
 				queryResourceStoreResName(this, _data)

@@ -11,7 +11,7 @@ export function queryRoomRenovation(_that,_data){
 			data:_data,
 			success: function(res) {
 				if(res.data.code == 0){
-					reslove(res.data.data);
+					reslove(res.data);
 				}else{
 					wx.showToast({
 						title: "服务器异常了",
@@ -103,7 +103,7 @@ export function queryRoomRenovationRecord(_that,_data){
 			data:_data,
 			success: function(res) {
 				if(res.data.code == 0){
-					reslove(res.data.data);
+					reslove(res.data);
 				}else{
 					wx.showToast({
 						title: "服务器异常了",
@@ -204,6 +204,36 @@ export function queryRoomRenovationRecordDetail(_that,_data){
 				}else{
 					wx.showToast({
 						title: "服务器异常了",
+						icon: 'none',
+						duration: 2000
+					})
+				}
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+/**
+ * 添加跟踪记录操作
+ */
+export function updateRoomRenovationState(_that, _data){
+	return new Promise(function(reslove,reject){
+		_that.context.post({
+			url: url.updateRoomRenovationState,
+			data:_data,
+			success: function(res) {
+				if(res.data.code == 0){
+					reslove(res.data);
+				}else{
+					wx.showToast({
+						title: res.data.msg,
 						icon: 'none',
 						duration: 2000
 					})

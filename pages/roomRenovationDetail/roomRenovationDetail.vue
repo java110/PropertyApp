@@ -74,8 +74,9 @@
 				</view>
 			</view>
 			<view class="cu-item">
-				<button class="btn-check" v-if="renovationInfo.state == 1000 && this.java110Context.hasPrivilege('502021031698730003')" @click="switchShowModel()">审核</button>
-				<button class="btn-check" v-if="renovationInfo.state == 4000 && this.java110Context.hasPrivilege('502021012701630060')" @click="switchShowModel()">验收</button>
+				<button class="btn-check" v-if="renovationInfo.state == 1000 && renovationInfo.isViolation == 'N' && this.java110Context.hasPrivilege('502021031698730003')" @click="switchShowModel()">审核</button>
+				<button class="btn-check" v-if="renovationInfo.state == 4000 && renovationInfo.isViolation == 'N' && this.java110Context.hasPrivilege('502021012701630060')" @click="switchShowModel()">验收</button>
+				<button class="btn-check" v-if="renovationInfo.state == 3000 && renovationInfo.isViolation == 'N'" @click="renovationComplete()">装修完成</button>
 			</view>
 		</view>
 		<!-- 编辑模态框 -->
@@ -137,7 +138,7 @@
 <script>
 	// const factory = context.factory;
 	import dateUtil from '../../lib/java110/utils/date.js'
-	import {updateRoomToExamine,saveRoomRenovationDetail} from '../../api/renovation/renovation.js'
+	import {updateRoomToExamine,saveRoomRenovationDetail,updateRoomRenovationState} from '../../api/renovation/renovation.js'
 	export default {
 		data() {
 			return {
@@ -288,6 +289,35 @@
 						},1000)
 					});
 				}
+			},
+			
+			/**
+			 * 装修完成
+			 */
+			renovationComplete: function(){
+				let _that = this;
+				uni.showModal({
+					cancelText: "取消", // 取消按钮的文字  
+					confirmText: "确认", // 确认按钮文字 
+					title: '确认操作',
+					content: '是否完成房屋装修?',
+					confirmColor:'#3B8BFF',
+					cancelColor:'#222222',
+					success: res => {
+						if (res.confirm) {
+							updateRoomRenovationState(_that,_that.renovationInfo)
+							.then(function(res){
+								if(res.code == 0){
+									uni.navigateBack({
+										delta:1
+									})
+								}
+							})
+						} else if (res.cancel) {
+							console.log('cancel')
+						}
+					}
+				});
 			},
 			
 			goBack: function() {

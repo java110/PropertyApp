@@ -17,6 +17,7 @@
 	import {
 		saveAllocationStorehouse
 	} from '../../api/resource/resource.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	// 防止多次点击
 	import {preventClick} from '../../lib/java110/utils/common.js';
 	import Vue from 'vue'
@@ -85,7 +86,7 @@
 					resourceStores: this.resourceStores,
 					remark: this.remark,
 					apply_type: this.apply_type,
-					communityId: this.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				};
 				saveAllocationStorehouse(this, _data)
 				.then(function(res) {

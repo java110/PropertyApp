@@ -733,6 +733,17 @@ button.cuIcon.lg {
 	color: #ffffff;
 }
 
+.load-more{
+	width: 80%;
+	margin: 30rpx auto;
+	height: 90rpx;
+	line-height: 90rpx;
+	text-align: center;
+	color: #007AFF;
+	font-size: 32rpx;
+	text-decoration: underline;
+}
+
 /* ==================
           徽章
  ==================== */
@@ -3909,16 +3920,4 @@ scroll-view.cu-steps .cu-item {
 .line-white,
 .lines-white {
 	color: #ffffff;
-}
-.load-more{
-	width: 80%;
-	margin: 30rpx auto;
-	height: 90rpx;
-	line-height: 90rpx;
-	text-align: center;
-	/* background-color: #00AA00; */
-	/* border-radius: 15rpx; */
-	color: #007AFF;
-	font-size: 32rpx;
-	text-decoration: underline;
 }

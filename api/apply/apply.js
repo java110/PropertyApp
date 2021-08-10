@@ -11,7 +11,7 @@ export function loadApplyRooms(_that,_data){
 			data:_data,
 			success: function(res) {
 				if(res.data.code == 0){
-					reslove(res.data.data);
+					reslove(res.data);
 				}else{
 					wx.showToast({
 						title: "服务器异常了",

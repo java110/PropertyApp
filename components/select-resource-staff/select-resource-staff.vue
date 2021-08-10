@@ -33,6 +33,7 @@
 	import {
 		queryMyResourceStoreInfo
 	} from '../../api/resource/resource.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 
 	export default {
 		components: {
@@ -73,7 +74,7 @@
 				let _data = {
 					page: this.page,
 					row: 10,
-					communityId: this.factory.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 					giveType: 1
 				};
 				queryMyResourceStoreInfo(this, _data)

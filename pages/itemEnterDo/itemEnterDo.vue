@@ -175,9 +175,11 @@
 						title:res.msg,
 						icon: 'none'
 					});
-					uni.navigateBack({
-						delta:1
-					})
+					setTimeout(() => {
+						uni.navigateBack({
+							delta:1
+						})
+					}, 1500);
 				})
 			}
 		}

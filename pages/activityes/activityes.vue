@@ -73,7 +73,7 @@
 			            let _startTime = _item.startTime.replace(/\-/g, "/")
 			            let _tmpStartTime = new Date(_startTime);
 			
-			            _item.startTime = _that.java110Util.date.formatDate(_tmpStartTime);
+			            // _item.startTime = _that.java110Util.date.formatDate(_tmpStartTime);
 			            _acts.push(_item);
 			          });
 			          _that.activities= _acts;

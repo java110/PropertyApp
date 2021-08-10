@@ -22,8 +22,8 @@ export default {
 	queryRooms: baseUrl + "app/room.queryRooms", //查询房屋
 	applyVisitorApplicationKey: baseUrl + "app/applicationKey.applyVisitorApplicationKey", //上传业主照片
 	uploadOwnerPhoto: baseUrl + "app/owner.uploadOwnerPhoto",
-	getOwnerPhotoPath: hcBaseUrl + "/callComponent/download/getFile/fileByObjId",
-	filePath: hcBaseUrl + "/callComponent/download/getFile/file", //查询业主车位信息
+	getOwnerPhotoPath: hcBaseUrl + "callComponent/download/getFile/fileByObjId",
+	filePath: hcBaseUrl + "callComponent/download/getFile/file", //查询业主车位信息
 	queryParkingSpacesByOwner: baseUrl + "app/parkingSpace.queryParkingSpacesByOwner", //查询停车位费用
 	queryFeeByParkingSpace: baseUrl + "app/fee.queryFeeByParkingSpace", //查询物业费用
 	queryFeeByOwner: baseUrl + "app/fee.queryFee", //预下单
@@ -124,4 +124,8 @@ export default {
 	deleteAllocationStorehouse: baseUrl + "callComponent/resourceStore.deleteAllocationStorehouse",
 	// 取消申请
 	deletePurchaseApply: baseUrl + "callComponent/deletePurchaseApply/delete",
+	listMeterWaters: baseUrl+"app/meterWater.listMeterWaters",
+	listRepairSettings: baseUrl + 'app/repair.listRepairSettings',
+	saveHelpOwnerRepair: baseUrl + "callComponent/addOwnerRepair/save",
+	updateRoomRenovationState: baseUrl + "app/roomRenovation/updateRoomRenovationState",
 }

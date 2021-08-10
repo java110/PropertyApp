@@ -62,6 +62,7 @@
 	import {
 		saveUrgentPurchaseApply
 	} from '../../api/resource/resource.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	// 防止多次点击
 	import {preventClick} from '../../lib/java110/utils/common.js';
 	import Vue from 'vue'
@@ -132,7 +133,7 @@
 					resOrderType: this.resOrderType,
 					endUserName: this.endUserName,
 					endUserTel: this.endUserTel,
-					communityId: this.java110Context.getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId
 				};
 				saveUrgentPurchaseApply(this, _data)
 				.then(function(res) {
@@ -144,6 +145,9 @@
 							delta:1
 						})
 						return;
+					}else{
+						_that.onoff = true;
+						_that._showToast(res.msg);
 					}
 				});
 			},

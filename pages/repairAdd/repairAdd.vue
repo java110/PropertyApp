@@ -79,7 +79,7 @@
 <script>
 	// pages/enterCommunity/enterCommunity.js
 	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
-	import {preventClick} from '../../lib/colorui/components/cu-custom.vue';
+	import {preventClick} from '../../lib/java110/utils/common.js';
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	import stringUtil from '../../lib/java110/utils/StringUtil.js';

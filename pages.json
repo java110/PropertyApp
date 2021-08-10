@@ -432,13 +432,22 @@
 			"style" : {
 				"navigationBarTitleText": "申请详情"
 			}
+		},
+		{
+		    "path" : "pages/hcWebView/hcWebView",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": ""
+		    }
+		    
 		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "HC掌上物业",
 		"navigationBarBackgroundColor": "#00AA00",
-		"backgroundColor": "#00AA00"
+		"backgroundColor": "#00AA00",
+		"onReachBottonDistance":50
 	},
 	"tabBar": {
 		"color": "#272636",

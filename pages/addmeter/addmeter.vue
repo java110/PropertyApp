@@ -39,7 +39,7 @@
 			
 			<view class="cu-form-group">
 				<view class="title">上期度数</view>
-				<input placeholder="上期度数"　v-model="preDegrees"></input>
+				<input placeholder="上期度数"　v-model="preDegrees" disabled="disabled"></input>
 			</view>
 			
 			<view class="cu-form-group">

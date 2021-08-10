@@ -32,7 +32,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="load-more" @click="loadApply()">加载更多</view>
+			<uni-load-more :status="loadingStatus" :content-text="loadingContentText" />
 		</view>
 		<view v-else>
 			<no-data-page></no-data-page>
@@ -42,19 +42,27 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
-	import {queryPurchaseApplyList} from '../../api/resource/resource.js'
+	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
+	import {queryPurchaseApplyList,deletePurchaseApply} from '../../api/resource/resource.js'
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
-				communityId: this.java110Context.getCurrentCommunity().communityId,
+				communityId: '',
 				applyList: [],
 				page: 1,
 				userId: this.java110Context.getUserInfo().userId,
+				loadingStatus : 'loading',
+				loadingContentText: {
+					contentdown: '上拉加载更多',
+					contentrefresh: '加载中',
+					contentnomore: '没有更多'
+				}
 			}
 		},
 		components: {
-			noDataPage
+			noDataPage,
+			uniLoadMore
 		},
 		onLoad: function(options) {
 		},
@@ -64,11 +72,18 @@
 			this.communityId = getCurrentCommunity().communityId;
 			this.loadApply();
 		},
+		onReachBottom : function(){
+			if(this.loadingStatus == 'noMore'){
+				return;
+			}
+			this.loadApply();
+		},
 		methods: {
 			/**
 			 * 加载数据
 			 */
 			loadApply: function(){
+				this.loadingStatus = 'more';
 				let _that = this;
 				let _objData = {
 					page: this.page,
@@ -78,15 +93,12 @@
 				};
 				queryPurchaseApplyList(this,_objData)
 				.then(function(res){
-					console.log(res);
-					if(res.purchaseApplys.length <= 0){
-						uni.showToast({
-							title: '已全部加载'
-						})
-						return;
-					}
 					_that.applyList = _that.applyList.concat(res.purchaseApplys)
 					_that.page ++;
+					if(_that.applyList.length == res.total){
+						_that.loadingStatus = 'noMore';
+						return;
+					}
 				})
 			},
 			

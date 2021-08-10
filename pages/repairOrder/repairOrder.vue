@@ -36,19 +36,17 @@
 					</view>
 				</view>
 			</view>
-			<view class="load-more" @click="_loadRepairOrders()">加载更多</view>
+			<uni-load-more :status="loadingStatus" :content-text="loadingContentText" />
 		</view>
 		<view v-else>
 			<no-data-page></no-data-page>
 		</view>
-		<!-- <view v-if="checkAuth('502020062982156286')" class="record-add" @tap="_addRecord()">
-			<img src="/static/image/renovation-add.png" alt="">
-		</view> -->
 	</view>
 </template>
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	import conf from '../../conf/config.js'
 	import url from '../../constant/url.js'
@@ -60,23 +58,33 @@
 				repairName: '',
 				noData:false,
 				page: 1,
+				loadingStatus : 'loading',
+				loadingContentText: {
+					contentdown: '上拉加载更多',
+					contentrefresh: '加载中',
+					contentnomore: '没有更多'
+				}
 			}
 		},
 		components: {
-			noDataPage
+			noDataPage,
+			uniLoadMore
 		},
 		onLoad() {
 			this.java110Context.onLoad();
 		},
 		onShow() {
-
 			let _userInfo = this.java110Context.getUserInfo();
-
 			let _storeId = _userInfo.storeId;
-
 			this.storeId = _storeId;
 			this.repairOrders = [];
 			this.page = 1;
+			this._loadRepairOrders();
+		},
+		onReachBottom : function(){
+			if(this.loadingStatus == 'noMore'){
+				return;
+			}
 			this._loadRepairOrders();
 		},
 		methods: {
@@ -86,6 +94,7 @@
 			},
 			
 			_loadRepairOrders: function() {
+				this.loadingStatus = 'more';
 				let _that = this;
 				let _userInfo = this.java110Context.getUserInfo();
 				let storeId = _userInfo.storeId;
@@ -112,23 +121,23 @@
 							});
 							return;
 						}
-						if(_json.data.length <= 0){
-							uni.showToast({
-								title: '已全部加载'
-							})
-						}else{
-							let _data = _json.data;
-							_data.forEach(function(item) {
-								let dateStr = item.appointmentTime;
-								let _date = new Date(dateStr.replace(/-/g, "/"));
-								item.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
-							});
-							_that.repairOrders = _that.repairOrders.concat(_data);
-							_that.page ++;
-						}
+
+						let _data = _json.data;
+						_data.forEach(function(item) {
+							let dateStr = item.appointmentTime;
+							let _date = new Date(dateStr.replace(/-/g, "/"));
+							item.appointmentTime = (_date.getMonth() + 1) + '-' + _date.getDate();
+						});
+						_that.repairOrders = _that.repairOrders.concat(_data);
+						_that.page ++;
+
 						if(_that.repairOrders.length < 1){
 							_that.noData = true;
 							return ;
+						}
+						if(_that.repairOrders.length == _json.total){
+							_that.loadingStatus = 'noMore';
+							return;
 						}
 					},
 					fail: function(e) {

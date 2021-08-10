@@ -115,6 +115,12 @@
 				.then(function(res){
 					if(res.code == 0){
 						_that._saveMyAuditOrders();
+					}else{
+						uni.showToast({
+							title:res.msg,
+							icon: 'none'
+						});
+						_that.onoff = true;
 					}
 				})
 			},
@@ -125,19 +131,21 @@
 					taskId: this.taskId,
 					applyOrderId: this.applyOrderId,
 					state: '1100',
-					remark: '出库完成'
+					remark: '出库完成',
+					noticeState: '1002'
 				};
 				saveMyAuditOrders(this,_auditInfo)
 				.then(function(res){
 					_that.onoff = true;
 					uni.showToast({
 						title:res.msg,
-						icon: 'none',
-						noticeState: '1002'
+						icon: 'none'
 					});
-					uni.navigateBack({
-						delta:1
-					})
+					setTimeout(() => {
+						uni.navigateBack({
+							delta:1
+						})
+					}, 1000);
 				})
 			}
 		}

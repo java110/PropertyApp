@@ -21,7 +21,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="load-more" @click="loadApply()">加载更多</view>
+			<uni-load-more :status="loadingStatus" :content-text="loadingContentText" />
 		</view>
 		<view v-else>
 			<no-data-page></no-data-page>
@@ -34,6 +34,7 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	import {queryRoomRenovationRecord} from '../../api/renovation/renovation.js'
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
@@ -43,10 +44,17 @@
 				communityId: '',
 				renovationRecordList: [],
 				page: 1,
+				loadingStatus : 'loading',
+				loadingContentText: {
+					contentdown: '上拉加载更多',
+					contentrefresh: '加载中',
+					contentnomore: '没有更多'
+				}
 			}
 		},
 		components: {
-			noDataPage
+			noDataPage,
+			uniLoadMore
 		},
 		onLoad: function(options) {
 			this.java110Context.onLoad();
@@ -60,11 +68,18 @@
 			this.communityId = getCurrentCommunity().communityId;
 			this.loadApply();	
 		},
+		onReachBottom : function(){
+			if(this.loadingStatus == 'noMore'){
+				return;
+			}
+			this.loadApply();
+		},
 		methods: {
 			/**
 			 * 加载数据
 			 */
 			loadApply: function(){
+				this.loadingStatus = 'more';
 				let _that = this;
 				let _objData = {
 					page: this.page,
@@ -76,15 +91,12 @@
 				};
 				queryRoomRenovationRecord(this,_objData)
 				.then(function(res){
-					console.log(res);
-					if(res.length <= 0){
-						uni.showToast({
-							title: '已全部加载'
-						})
+					_that.renovationRecordList = _that.renovationRecordList.concat(res.data)
+					_that.page ++;
+					if(_that.renovationRecordList.length == res.total){
+						_that.loadingStatus = 'noMore';
 						return;
 					}
-					_that.renovationRecordList = _that.renovationRecordList.concat(res)
-					_that.page ++;
 				})
 			},
 			

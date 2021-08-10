@@ -37,6 +37,7 @@
 	import {
 		updateRoomDecorationRecord,uploadVideo
 	} from '../../api/renovation/renovation.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
 	export default {
 		data() {
@@ -47,11 +48,13 @@
 				videoName: '',
 				tempFilePath: '',
 				content: '',
+				communityId: '',
 			}
 		},
 		onLoad(options) {
 			this.java110Context.onLoad();
 			let _that = this;
+			this.communityId = getCurrentCommunity().communityId;
 			_that.renovationInfo = JSON.parse(options.apply);
 			console.log(_that.renovationInfo);
 		},
@@ -94,6 +97,8 @@
 					videoName: '',
 					remark: this.content,
 					detailType: '1001',
+					communityId: this.communityId,
+					examineRemark: '',
 				};
 				updateRoomDecorationRecord(this, params)
 					.then(function() {

@@ -31,17 +31,17 @@
 						<block v-if="currentPage == 0">
 							<block v-if="procure == false">
 								<view class="cu-btn round lg bg-green" v-if="item.state == '1000' || item.state == '1001'" @tap.stop="showAuditModel(item)">审核</view>
-								<view class="cu-btn round lg bg-red" v-else @tap.stop="finishAudit(item)">结束</view>
+								<view class="cu-btn round lg bg-red" v-else @tap.stop="$preventClick(finishAudit, item)">结束</view>
 							</block>
 							<block v-else>
 								<view class="cu-btn round lg bg-green" v-if="item.state == '1001'" @tap.stop="_distributionOrder(item)">采购入库</view>
-								<view class="cu-btn round lg bg-red" v-else @tap.stop="finishAudit(item)">结束</view>
+								<view class="cu-btn round lg bg-red" v-else @tap.stop="$preventClick(finishAudit, item)">结束</view>
 							</block>
 						</block>
 					</view>
 				</view>
 			</view>
-			<view class="load-more" @click="loadMore()">加载更多</view>
+			<uni-load-more :status="loadingStatus" :content-text="loadingContentText" />
 		</view>
 		<view v-else>
 			<no-data-page></no-data-page>
@@ -52,35 +52,59 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	import auditComponent from '@/components/audit/audit.vue'
 	import {listMyAuditOrders,listAuditHistoryOrders,listWorkflowStepStaffs,saveMyAuditOrders} from '../../api/resource/resource.js'
-	import {getCurrentCommunity} from '../../api/common/common.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
+	// 防止多次点击
+	import {preventClick} from '../../lib/java110/utils/common.js';
+	import Vue from 'vue'
+	Vue.prototype.$preventClick = preventClick;
 	export default {
 		data() {
 			return {
+				onoff: true,
 				currentPage: 0,
 				communityId: '',
 				applyList: [],
 				page: 1,
 				userId: '',
 				procure: false,
-				orderInfo: ''
+				orderInfo: '',
+				loadingStatus : 'loading',
+				loadingContentText: {
+					contentdown: '上拉加载更多',
+					contentrefresh: '加载中',
+					contentnomore: '没有更多'
+				}
 			}
 		},
 		components: {
 			noDataPage,
-			auditComponent
+			auditComponent,
+			uniLoadMore
 		},
 		onLoad: function(options) {
-			this.java110Context.onLoad()
-		},
-		onShow: function(){
-			this.page = 1;
-			this.applyList = [];
+			this.java110Context.onLoad();
 			this.communityId = getCurrentCommunity().communityId;
 			this.userId = this.java110Context.getUserInfo().userId;
 			this._loadStaff();
-			this.loadApply();	
+		},
+		onShow: function(){
+			this.page = 1;
+			this.currentPage = 0;
+			this.applyList = [];
+			this.loadApply();
+		},
+		onReachBottom : function(){
+			if(this.loadingStatus == 'noMore'){
+				return;
+			}
+			if(this.currentPage == 0){
+				this.loadApply();
+			}else{
+				this.loadApplyDone();
+			}
 		},
 		methods: {
 			
@@ -88,15 +112,8 @@
 				this.currentPage = e;
 				this.page = 1;
 				this.applyList = [];
+				this.loadingStatus = 'more';
 				if(e == 0){
-					this.loadApply();
-				}else{
-					this.loadApplyDone();
-				}
-			},
-			
-			loadMore: function(){
-				if(this.currentPage == 0){
 					this.loadApply();
 				}else{
 					this.loadApplyDone();
@@ -107,6 +124,7 @@
 			 * 加载数据
 			 */ 
 			loadApply: function(){
+				this.loadingStatus = 'more';
 				let _that = this;
 				let _objData = {
 					page: this.page,
@@ -114,14 +132,12 @@
 				};
 				listMyAuditOrders(this,_objData)
 				.then(function(res){
-					if(res.resourceOrders.length <= 0){
-						uni.showToast({
-							title: '已全部加载'
-						})
-						return;
-					}
 					_that.applyList = _that.applyList.concat(res.resourceOrders)
 					_that.page ++;
+					if(_that.applyList.length == res.total){
+						_that.loadingStatus = 'noMore';
+						return;
+					}
 				})
 			},
 			
@@ -129,6 +145,7 @@
 			 * 已办列表
 			 */
 			loadApplyDone: function(){
+				this.loadingStatus = 'more';
 				let _that = this;
 				let _objData = {
 					page: this.page,
@@ -136,14 +153,12 @@
 				};
 				listAuditHistoryOrders(this,_objData)
 				.then(function(res){
-					if(res.resourceOrders.length <= 0){
-						uni.showToast({
-							title: '已全部加载'
-						})
-						return;
-					}
 					_that.applyList = _that.applyList.concat(res.resourceOrders)
 					_that.page ++;
+					if(_that.applyList.length == res.total){
+						_that.loadingStatus = 'noMore';
+						return;
+					}
 				})
 			},
 			
@@ -168,6 +183,7 @@
 				let _that = this;
 				_auditInfo.taskId = this.orderInfo.taskId;
 				_auditInfo.applyOrderId = this.orderInfo.applyOrderId;
+				_auditInfo.communityId = this.communityId;
 				// 新增通知状态字段，区别是否为仓管及对应状态
 				if(_auditInfo.state == '1200'){
 					_auditInfo.noticeState = '1004';
@@ -206,6 +222,7 @@
 						title:res.msg,
 						icon: 'none'
 					});
+					_that.onoff = true;
 					_that.page = 1;
 					_that.applyList = [];
 					_that.loadApply();

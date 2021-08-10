@@ -21,6 +21,7 @@
 	import {
 		queryFirstStaff
 	} from '../../api/resource/resource.js'
+	import {getCurrentCommunity} from '../../api/community/community.js'
 
 	export default {
 		components: {
@@ -58,7 +59,7 @@
 				let _that = this;
 				let _data = {
 					flowType: this.flowType,
-					communityId: this.factory.getCurrentCommunity().communityId,
+					communityId: getCurrentCommunity().communityId,
 				};
 				queryFirstStaff(this, _data)
 				.then(function(res) {

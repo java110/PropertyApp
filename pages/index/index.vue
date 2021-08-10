@@ -24,7 +24,7 @@
 			<view class="margin-top-xs">
 				<swiper class="screen-swiper swiper-height-index" :indicator-dots="true" :circular="true"
 					:autoplay="true" interval="5000" duration="500">
-					<swiper-item v-for="(item,index) in swiperList" :key="index">
+					<swiper-item v-for="(item,index) in swiperList" :key="index" @click="_advertJump(item)">
 						<image :src="item.url" mode="aspectFill"></image>
 						<!-- <video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false"
 							objectFit="cover" v-if="item.type=='video'"></video> -->
@@ -134,7 +134,8 @@
 				let _objData = {
 					page: 1,
 					row: 5,
-					locationTypeCd: '4000'
+					locationTypeCd: '4000',
+					clientType: 'H5'
 				};
 				loadAdvert(this, _objData)
 					.then(function(res) {
@@ -156,7 +157,8 @@
 				let _objData = {
 					page: 1,
 					row: 5,
-					communityId: this.currentCommunityId
+					communityId: this.currentCommunityId,
+					clientType: 'H5'
 				};
 				loadActivitys(this, _objData)
 					.then(function(res) {
@@ -227,8 +229,29 @@
 				_that.currentCommunityId = currentCommunity.communityId;
 				_that.currentCommunityName = currentCommunity.name;
 				_that._loadAd();
-			}
-
+			},
+			
+			_advertJump: function(ad){
+				console.log(ad);
+				if(ad.advertType == 3 || !ad.pageUrl){
+					return;
+				}
+				if(ad.advertType == 2){
+					// 站外
+					let url = encodeURIComponent(ad.pageUrl)
+					uni.navigateTo({
+						url:'/pages/hcWebView/hcWebView?url='+url
+					})
+					return;
+				}
+				if(ad.advertType == 1){
+					// 站内
+					uni.navigateTo({
+						url: ad.pageUrl
+					})
+					return;
+				}
+			},
 		}
 	}
 </script>

@@ -170,12 +170,12 @@
 				};
 				saveMyAuditOrders(this,_auditInfo)
 				.then(function(res){
-					_that.onoff = true;
 					uni.showToast({
 						title:res.msg,
 						icon: 'none'
 					});
 					setTimeout(() => {
+						_that.onoff = true;
 						uni.navigateBack({
 							delta:1
 						})

@@ -126,10 +126,10 @@
 					saveItemOutApply(this, _data)
 					.then(function(res) {
 						if (res.code == 0) {
+							_that.onoff = true;
 							uni.navigateBack({
 								delta:1
 							})
-							_that.onoff = true;
 							return;
 						}
 					});

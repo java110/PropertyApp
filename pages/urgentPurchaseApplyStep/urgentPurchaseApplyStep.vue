@@ -137,6 +137,7 @@
 				};
 				saveUrgentPurchaseApply(this, _data)
 				.then(function(res) {
+					_that.onoff = true;
 					if (res.code == 0) {
 						// uni.navigateTo({
 						// 	url: '/pages/purchaseApplyManage/purchaseApplyManage'
@@ -146,7 +147,6 @@
 						})
 						return;
 					}else{
-						_that.onoff = true;
 						_that._showToast(res.msg);
 					}
 				});

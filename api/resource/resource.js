@@ -379,6 +379,7 @@ export function saveAuditAllocationStoreOrder(_that,_data){
 				reslove(res.data);
 			},
 			fail: function(e) {
+				_that.onoff = true;
 				wx.showToast({
 					title: "服务器异常了",
 					icon: 'none',
@@ -598,6 +599,7 @@ export function saveUrgentPurchaseApply(_that,_data){
 				reslove(res.data);
 			},
 			fail: function(e) {
+				_that.onoff = true;
 				wx.showToast({
 					title: "服务器异常了",
 					icon: 'none',

@@ -52,6 +52,7 @@
 	import conf from '../../conf/config.js'
 	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
 	import {preventClick} from '../../lib/java110/utils/common.js';
+	import {queryDictInfo} from '../../api/inspection/inspection.js';
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	import url from '../../constant/url.js'
 	import Vue from 'vue'

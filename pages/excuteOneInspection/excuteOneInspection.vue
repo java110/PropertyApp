@@ -55,6 +55,7 @@
 	import {queryDictInfo} from '../../api/inspection/inspection.js';
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	import url from '../../constant/url.js'
+	import {queryDictInfo} from '../../api/inspection/inspection.js'
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	export default {

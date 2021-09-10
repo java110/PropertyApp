@@ -88,6 +88,30 @@ export function saveOaWorkflowFormData(_that,_data){
 }
 
 /**
+ * 审核
+ * @param {Object} _that
+ * @param {Object} _data
+ */
+export function auditOaWorkflow(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.post({
+			url: url.auditOaWorkflow,
+			data:_data,
+			success: function(res) {
+				reslove(res);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+/**
  * 查询完成工作流
  * /oaWorkflow/queryOaWorkflowUserHisTaskFormData
  * @param {Object} _that 上下文对象
@@ -230,6 +254,39 @@ export function listRunWorkflowImage(_that,_data){
 	return new Promise(function(reslove,reject){
 		_that.context.get({
 			url: url.listRunWorkflowImage,
+			data:_data,
+			success: function(res) {
+				if(res.data.code == 0){
+					reslove(res.data);
+				}else{
+					wx.showToast({
+						title: "服务器异常了",
+						icon: 'none',
+						duration: 2000
+					})
+				}
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+/**
+ * 查询下一处理人
+ * /oaWorkflow/queryOaWorkflowFormData
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+export function getNextTask(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.get({
+			url: url.getNextTask,
 			data:_data,
 			success: function(res) {
 				if(res.data.code == 0){

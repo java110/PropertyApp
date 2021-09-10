@@ -137,6 +137,10 @@ export default {
 	queryOaWorkflowFormData: baseUrl + "app/oaWorkflow/queryOaWorkflowFormData",
 	queryOaWorkflowUser: baseUrl + "app/oaWorkflow/queryOaWorkflowUser",
 	listRunWorkflowImage: baseUrl + "app/workflow.listRunWorkflowImage",
+	getNextTask: baseUrl + "app/oaWorkflow/getNextTask",
+	auditOaWorkflow: baseUrl + "app/oaWorkflow/auditOaWorkflow",
+	
+	
 	
 	
 	

@@ -129,4 +129,15 @@ export default {
 	listRepairSettings: baseUrl + 'app/repair.listRepairSettings',
 	saveHelpOwnerRepair: baseUrl + "callComponent/addOwnerRepair/save",
 	updateRoomRenovationState: baseUrl + "app/roomRenovation/updateRoomRenovationState",
+	queryOaWorkflow: baseUrl + "app/oaWorkflow/queryOaWorkflow",
+	queryOaWorkflowForm: baseUrl + "app/oaWorkflow/queryOaWorkflowForm",
+	saveOaWorkflowFormData: baseUrl + "app/oaWorkflow/saveOaWorkflowFormData",
+	queryOaWorkflowUserHisTaskFormData: baseUrl + "app/oaWorkflow/queryOaWorkflowUserHisTaskFormData",
+	queryOaWorkflowUserTaskFormData: baseUrl + "app/oaWorkflow/queryOaWorkflowUserTaskFormData",
+	queryOaWorkflowFormData: baseUrl + "app/oaWorkflow/queryOaWorkflowFormData",
+	queryOaWorkflowUser: baseUrl + "app/oaWorkflow/queryOaWorkflowUser",
+	listRunWorkflowImage: baseUrl + "app/workflow.listRunWorkflowImage",
+	
+	
+	
 }

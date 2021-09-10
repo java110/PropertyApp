@@ -445,7 +445,52 @@
             "path" : "pages/oaWorkflow/oaWorkflow",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "流程办理",
+                "navigationBarTitleText": "OA流程",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/newOaWorkflowForm/newOaWorkflowForm",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "起草流程",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/newOaWorkflowFinish/newOaWorkflowFinish",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "流程已办",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/newOaWorkflowUndo/newOaWorkflowUndo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "流程待办",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/newOaWorkflowDetail/newOaWorkflowDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "待办处理",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/newOaWorkflowUndoAudit/newOaWorkflowUndoAudit",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
             

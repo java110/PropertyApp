@@ -42,5 +42,10 @@
 	/*每个页面公共css */
 	@import "lib/colorui/main.css";
 	@import "lib/colorui/icon.css";
+	/* #ifdef H5 */
+		uni-page-head {
+			display: none;
+		}
 	
+	/* #endif */
 </style>

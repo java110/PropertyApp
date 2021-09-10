@@ -441,6 +441,15 @@
 		    }
 		    
 		}
+        ,{
+            "path" : "pages/oaWorkflow/oaWorkflow",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "流程办理",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

@@ -14,8 +14,10 @@
 				<view class="text-gray">{{item.label}}</view>
 				<view class="text-gray">{{oaWorkflowData[item.key]}}</view>
 			</view>
-			<view class="solid-top flex justify-end margin-top padding-top-sm " v-if="action=='Audit'">
-				<button class="cu-btn sm bg-green margin-left" @click="doDealOaWorkflow()">处理</button>
+		
+			<view class="solid-top flex justify-end margin-top padding-top-sm " >
+				<button class="cu-btn sm bg-orange margin-left" @click="doEditOaWorkflow()"  v-if="isMe()">编辑</button>
+				<button class="cu-btn sm bg-green margin-left" @click="doDealOaWorkflow()" v-if="action=='Audit'">处理</button>
 			</view>
 		</view>
 
@@ -50,6 +52,7 @@
 		queryOaWorkflowUser,
 		listRunWorkflowImage
 	} from '../../api/oa/oa.js'
+	import {getUserInfo} from '../../lib/java110/api/Java110SessionApi.js'
 	export default {
 		data() {
 			return {
@@ -87,6 +90,13 @@
 						_that.components = _that.formJson.components;
 					})
 			},
+			isMe:function(){
+				let _userId = getUserInfo().userId;
+				if(this.oaWorkflowData.create_user_id == _userId){
+					return true;
+				}
+				return false;
+			},
 			_loadOaWorkflowDetail: function() {
 				let _that = this;
 				queryOaWorkflowFormData(this, {
@@ -121,6 +131,11 @@
 			doDealOaWorkflow:function(){				
 				this.context.navigateTo({
 					url:'/pages/newOaWorkflowUndoAudit/newOaWorkflowUndoAudit?flowId='+this.flowId+"&id="+this.id+"&taskId="+this.taskId
+				})
+			},
+			doEditOaWorkflow:function(){
+				this.context.navigateTo({
+					url:'/pages/newOaWorkflowFormEdit/newOaWorkflowFormEdit?flowId='+this.flowId+"&id="+this.id
 				})
 			},
 			

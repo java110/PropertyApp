@@ -87,6 +87,31 @@ export function saveOaWorkflowFormData(_that,_data){
 	});
 }
 
+
+/**
+ * 编辑申请
+ * @param {Object} _that
+ * @param {Object} _data
+ */
+export function updateOaWorkflowFormData(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.post({
+			url: url.updateOaWorkflowFormData,
+			data:_data,
+			success: function(res) {
+				reslove(res);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
 /**
  * 审核
  * @param {Object} _that

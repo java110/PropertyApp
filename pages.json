@@ -490,7 +490,16 @@
             "path" : "pages/newOaWorkflowUndoAudit/newOaWorkflowUndoAudit",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "流程审核",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/newOaWorkflowFormEdit/newOaWorkflowFormEdit",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "表单修改",
                 "enablePullDownRefresh": false
             }
             

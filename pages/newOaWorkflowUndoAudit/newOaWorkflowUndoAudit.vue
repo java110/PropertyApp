@@ -116,7 +116,7 @@
 							duration: 2000
 						})
 						uni.navigateBack({
-							delta: 1
+							delta: 2
 						})
 						return;
 					}

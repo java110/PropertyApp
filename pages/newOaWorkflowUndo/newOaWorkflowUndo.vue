@@ -48,6 +48,8 @@
 			this.java110Context.onLoad();
 			this.flowId = options.flowId;
 			this.flowName = options.flowName;
+		},
+		onShow() {
 			this._loadUndoOaWorkflow();
 		},
 

@@ -92,7 +92,7 @@
 			},
 			isMe:function(){
 				let _userId = getUserInfo().userId;
-				if(this.oaWorkflowData.create_user_id == _userId){
+				if(this.oaWorkflowData.create_user_id == _userId && this.action){
 					return true;
 				}
 				return false;

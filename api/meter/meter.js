@@ -34,6 +34,36 @@ export function queryFeeTypesItems(_that,_data){
 /**
  * 查询上期水电缴费信息
  */
+export function listMeterType(_that, _data){
+	return new Promise(function(reslove,reject){
+		_that.context.get({
+			url: url.listMeterType,
+			data:_data,
+			success: function(res) {
+				if(res.statusCode == 200){
+					reslove(res.data);
+				}else{
+					wx.showToast({
+						title: "服务器异常了",
+						icon: 'none',
+						duration: 2000
+					})
+				}
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+/**
+ * 查询上期水电缴费信息
+ */
 export function queryPreMeterWater(_that, _data){
 	return new Promise(function(reslove,reject){
 		_that.context.get({

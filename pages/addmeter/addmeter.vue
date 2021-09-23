@@ -19,6 +19,15 @@
 				</picker>
 			</view>
 			
+			<view class="cu-form-group">
+				<view class="title">抄表类型</view>
+				<picker @change="meterTypeChange" :value="meterTypeIndex" :range-key="'typeName'" :range="meterTypes">
+					<view class="picker">
+						{{meterTypeIndex>-1?meterTypes[meterTypeIndex].typeName:'请选择'}}
+					</view>
+				</picker>
+			</view>
+			
 			<view class="cu-form-group arrow" @tap="chooseFloor">
 				<view class="title">楼栋</view>
 				<input required readonly label="楼栋" v-model="floorNum" placeholder="请选择楼栋" name="floorNum" icon="arrow"></input>
@@ -71,7 +80,7 @@
 </template>
 
 <script>
-	import {queryFeeTypesItems,queryPreMeterWater,saveMeterWater} from '../../api/meter/meter.js'
+	import {queryFeeTypesItems,queryPreMeterWater,saveMeterWater,listMeterType} from '../../api/meter/meter.js'
 	import dateObj from '../../lib/java110/utils/date.js'
 	import uniDatetimePicker from '../../components/uni-datetime-picker/uni-datetime-picker.vue'
 	import {getCurrentCommunity} from '../../api/community/community.js'
@@ -94,7 +103,7 @@
 						name: '电费'
 					},{
 						id: '888800010009',
-						name: '电费'
+						name: '煤气费'
 					}
 				],
 				feeConfig_index: -1,
@@ -105,6 +114,9 @@
 				curDegrees: '',
 				curReadingTime:　null,
 				remark: '',
+				meterTypes:[],
+				meterType:'',
+				meterTypeIndex:-1,
 			};
 		},
 		components:{
@@ -115,11 +127,13 @@
 			this.java110Context.onLoad();
 			this.preReadingTime = dateObj.getCurrentDateTime();
 			this.communityId = getCurrentCommunity().communityId;
+			this._listMeterTypes();
 		},
 		
 		onShow(){
 			// 房屋信息
 			let _floor = uni.getStorageSync("_selectFloor");
+			console.log(_floor)
 			if (this.util.isNotNull(_floor)) {
 				this.floorNum = _floor.floorNum + "栋";
 				this.floorId = _floor.floorId;
@@ -168,11 +182,27 @@
 				// 查询上期读数
 				this._queryPreMeterWater();
 			},
-			
+			meterTypeChange:function(e){
+				let index = e.detail.value;
+				this.meterTypeIndex = index;
+				let selected = this.meterTypes[index];
+				this.meterType = selected.typeId;
+			},
 			// 收费项change
 			feeConfigsChange(e){
 				let index = e.detail.value;
 				this.feeConfig_index = index;
+			},
+			
+			_listMeterTypes:function(){
+				let _that =this;
+				listMeterType(this,{
+					page:1,
+					row:50,
+					communityId:this.communityId
+				}).then(_data =>{
+					_that.meterTypes = _data.data;
+				})
 			},
 			
 			// 查询上期缴费信息
@@ -180,13 +210,13 @@
 				if(this.feeType_index < 0 || this.roomId == ''){
 					return;
 				}
-				let _meterType = '1010';
-				let _feeTypeCd = this.feeTypes[this.feeType_index].id;
-				if (_feeTypeCd == '888800010015') {
-					_meterType = '2020';
-				}else if(_feeTypeCd == '888800010009'){
-                    _meterType = '3030';
-                }
+
+				let _meterType = this.meterType;
+				// if (_feeTypeCd == '888800010015') {
+				// 	_meterType = '2020';
+				// }else if(_feeTypeCd == '888800010009'){
+    //                 _meterType = '3030';
+    //             }
 				let _objData = {
 					communityId: this.communityId,
 					objId: this.roomId,
@@ -246,7 +276,8 @@
 					roomId: this.roomId,
 					objName: this.floorNum + this.unitNum + this.roomNum,
 					objType: this.objType,
-					remark: this.remark
+					remark: this.remark,
+					meterType: this.meterType
 				};
 				saveMeterWater(this,_objData)
 				.then((res) => {

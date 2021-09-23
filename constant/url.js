@@ -139,8 +139,10 @@ export default {
 	listRunWorkflowImage: baseUrl + "app/workflow.listRunWorkflowImage",
 	getNextTask: baseUrl + "app/oaWorkflow/getNextTask",
 	auditOaWorkflow: baseUrl + "app/oaWorkflow/auditOaWorkflow",
-	
 	updateOaWorkflowFormData: baseUrl +"app/oaWorkflow.updateOaWorkflowFormData",
+	listMeterType: baseUrl +"app/meterType.listMeterType",
+	
+	
 	
 	
 	

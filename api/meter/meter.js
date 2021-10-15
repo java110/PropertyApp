@@ -100,10 +100,10 @@ export function saveMeterWater(_that, _data){
 			url: url.saveMeterWater,
 			data:_data,
 			success: function(res) {
-				console.log(res);
 				if(res.statusCode == 200){
 					reslove(res.data);
 				}else{
+					_that.onoff = true;
 					wx.showToast({
 						title: "服务器异常了",
 						icon: 'none',
@@ -112,6 +112,7 @@ export function saveMeterWater(_that, _data){
 				}
 			},
 			fail: function(e) {
+				_that.onoff = true;
 				wx.showToast({
 					title: "服务器异常了",
 					icon: 'none',

@@ -41,12 +41,14 @@
 		<view class="margin-top">
 			<view class="row">
 				<view class="item-t text-bold">商品</view>
+				<view class="item-t text-bold">数量</view>
 				<view class="item-t text-bold">源仓库</view>
 				<view class="item-t text-bold">目标仓库</view>
 			</view>
 			<view class="resource-item text-grey" v-for="(item, index) in resourceInfo">
 				<view class="row">
 					<view class="item-t">{{item.resName}}</view>
+					<view class="item-t">{{item.stock}}{{item.unitCodeName}}</view>
 					<view class="item-t">{{item.shaName}}</view>
 					<view class="item-t">{{item.shzName}}</view>
 				</view>

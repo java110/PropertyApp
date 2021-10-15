@@ -124,13 +124,21 @@
 			<view class="cu-time">工单</view>
 			<view class="cu-item " v-for="(item,index) in staffs" :key="index">
 				<view class="bg-cyan content">
-					<text>{{item.startTime}} </text> 到达 {{item.staffName}} 工位
+					<text>{{item.startTime}} </text> 到达 {{item.staffName}} 工位 - {{item.stateName}}
 				</view>
-				<view class="bg-cyan content" v-if="item.endTime != undefined">
+				<!-- <view class="bg-cyan content" v-if="item.endTime != undefined">
 					<text>{{item.endTime}} </text> 处理完成
-				</view>
+				</view> -->
 				<view class="bg-cyan content" v-if="item.endTime != undefined">
 					<text>处理意见：</text> {{item.context}}
+					<block v-if="item.state == '12000' && item.payTypeName != undefined">
+						({{item.payTypeName}})
+					</block>
+				</view>
+				<!-- 待支付状态 - 详情描述 -->
+				<view class="bg-cyan content" v-if="item.state == '10009'">
+					<text>处理意见：</text> {{item.context}}
+					<block v-if="item.payTypeName != undefined">({{item.payTypeName}})</block>
 				</view>
 			</view>
 		</view>

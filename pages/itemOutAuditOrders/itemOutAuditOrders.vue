@@ -126,6 +126,7 @@
 				this.loadingStatus = 'more';
 				let _that = this;
 				let _objData = {
+					communityId: this.communityId,
 					page: this.page,
 					row: 10,
 				};
@@ -147,6 +148,7 @@
 				this.loadingStatus = 'more';
 				let _that = this;
 				let _objData = {
+					communityId: this.communityId,
 					page: this.page,
 					row: 10,
 				};
@@ -243,7 +245,8 @@
 					page: 1,
 					row: 1,
 					staffId: this.userId,
-					staffRole: '3003'
+					staffRole: '3003',
+					requestType: 'grantHandle'
 				};
 				listWorkflowStepStaffs(this,_objData)
 				.then(function(res){

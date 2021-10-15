@@ -10,24 +10,24 @@
 				<view class="cu-item" style="height: 240rpx;">
 					<view class="content content-left" style="width: 100%;">
 						<view class="text-grey flex-around">
-							<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
+							<text class="ellip text-df">{{item.resName}}({{item.parentRstName}}>{{item.rstName}})</text>
 							<text class="item-remove bg-red text-df" @click="_removeItem(index, item.resId)">移除</text>
 						</view>
 						<view class="text-gray flex-around text-df" style="margin: 10rpx 0;">
-								<text>当前仓库:</text>
+								<text class="text-df">当前仓库:</text>
 								<text>{{item.shName}}</text>
 						</view>
 						<view class="text-gray flex-around text-df" style="margin: 10rpx 0;">
-								<text>当前库存:</text>
-								<text>{{item.stock}}</text>
+								<text class="text-df">当前库存:</text>
+								<text>{{item.stock}}{{item.unitCodeName}}</text>
 						</view>
 						<view class="text-gray flex-around">
 							<view class="flex-item w50">
-								<label>调拨数量:</label>
-								<input class="use-number bg-gray" type="number" v-model="item.curStock" value="" />
+								<label class="text-df">调拨数量:</label>
+								<input class="use-number bg-gray" type="number" v-model="item.curStock" :placeholder="item.unitCodeName" placeholder-class="text-grey text-df" value="" />
 							</view>
 							<view class="flex-item w50">
-								<label>目标仓库:</label>
+								<label class="text-df">目标仓库:</label>
 								<picker :value="selectedStoreHousesList[index]" :range="storeHouses" :range-key="'shName'" @change="_storeHousesChange(index,$event)">
 									<view class="picker">
 										{{storeHouses[selectedStoreHousesList[index]].shName}}
@@ -97,7 +97,8 @@
 				let _data = {
 					page: 1,
 					row: 100,
-					communityId: getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId,
+					isShow: true
 				};
 				listStoreHouses(this, _data)
 					.then(function(res) {

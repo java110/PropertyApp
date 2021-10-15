@@ -5,17 +5,26 @@
 				<text class="cuIcon-search"></text>
 				<input type="text" placeholder="输入报修人" v-model="repairName" confirm-type="search"></input>
 			</view>
+			<!-- <view class="search-form round">
+				<text class="cuIcon-search"></text>
+				<picker :value="repairStatesIndex" :range="repairStates" :range-key="'name'" @change="repairStatesChange">
+					<view>{{repairStates[repairStatesIndex].name}}</view>
+				</picker>
+			</view> -->
 			<view class="action">
-				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="_searchRepair()">搜索</button>
+				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="$preventClick(_searchRepair)">搜索</button>
 			</view>
 		</view>
 		<view class="margin-top" v-if="noData==false">
+			<view class="text-df text-gray text-right">
+				共{{totalRecords}}条记录
+			</view>
 			<view class="cu-list menu-avatar " v-for="(item,index) in repairOrders" :key="index" @tap="_toRepairDetail(item)">
 				<view class="cu-item arrow">
 					<view class="content content-left">
 						<view class="text-grey">
 							<text class="cuIcon-notification text-cut text-green margin-right-xs"></text>
-							<text class="ellip">{{item.repairObjName}}-{{item.repairTypeName}}</text>
+							<text class="ellip">{{item.repairObjName}}-{{item.stateName}}</text>
 						</view>
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
@@ -48,11 +57,17 @@
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	import {getCurrentCommunity} from '../../api/community/community.js'
+	import {queryDictInfo} from '../../api/repair/repair.js'
 	import conf from '../../conf/config.js'
 	import url from '../../constant/url.js'
+	// 防止多次点击
+	import {preventClick} from '../../lib/java110/utils/common.js';
+	import Vue from 'vue'
+	Vue.prototype.$preventClick = preventClick;
 	export default {
 		data() {
 			return {
+				onoff: true,
 				orderImg: conf.baseUrl + 'img/order.png',
 				repairOrders: [],
 				repairName: '',
@@ -63,7 +78,13 @@
 					contentdown: '上拉加载更多',
 					contentrefresh: '加载中',
 					contentnomore: '没有更多'
-				}
+				},
+				totalRecords: 0
+				// repairStates: [{
+				// 	name: '请选择'
+				// }],
+				// repairStatesIndex: 0,
+				// repairState: '',
 			}
 		},
 		components: {
@@ -72,6 +93,7 @@
 		},
 		onLoad() {
 			this.java110Context.onLoad();
+			// this.loadRepairState();
 		},
 		onShow() {
 			let _userInfo = this.java110Context.getUserInfo();
@@ -89,6 +111,28 @@
 		},
 		methods: {
 			
+			loadRepairState: function(){
+				let _that = this;
+				let _objData = {
+					'name': "r_repair_pool",
+					'type': "state",
+				};
+				queryDictInfo(this,_objData)
+				.then(function(res){
+					_that.repairStates = _that.repairStates.concat(res);
+				})
+			},
+			
+			repairStatesChange: function(e){
+				this.repairStatesIndex = e.target.value;
+				if (this.repairStatesIndex == 0) {
+					this.repairState = '';
+					return;
+				}
+				let selected = this.repairStates[this.repairStatesIndex];
+				this.repairState = selected.statusCd;
+			},
+			
 			checkAuth: function(pid){
 				return this.java110Context.hasPrivilege(pid);
 			},
@@ -105,6 +149,7 @@
 					userId: _userInfo.userId,
 					communityId: getCurrentCommunity().communityId,
 					repairName: _that.repairName,
+					// state: _that.repairState,
 					reqSource: 'mobile'
 				};
 				this.java110Context.request({
@@ -115,12 +160,14 @@
 					success: function(res) {
 						let _json = res.data;
 						if (_json.code != 0) {
+							_that.onoff = true;
 							uni.showToast({
 								icon: 'none',
 								title: _json.msg
 							});
 							return;
 						}
+						_that.totalRecords = _json.total;
 
 						let _data = _json.data;
 						_data.forEach(function(item) {
@@ -132,10 +179,14 @@
 						_that.page ++;
 
 						if(_that.repairOrders.length < 1){
+							_that.onoff = true;
 							_that.noData = true;
 							return ;
+						}else{
+							_that.noData = false;
 						}
 						if(_that.repairOrders.length == _json.total){
+							_that.onoff = true;
 							_that.loadingStatus = 'noMore';
 							return;
 						}
@@ -150,6 +201,8 @@
 				});
 			},
 			_searchRepair: function() {
+				this.repairOrders = [];
+				this.page = 1;
 				this._loadRepairOrders();
 			},
 			_toRepairDetail: function(_item) {

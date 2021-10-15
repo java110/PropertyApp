@@ -162,7 +162,8 @@ export function finishRepair(_that){
 			"userName":_that.userName,
 			"storeId":_that.storeId,
 			"choosedGoodsList": _that.resourceStoreInfo,
-			"totalPrice": _that.amount
+			"totalPrice": _that.amount,
+			"payType": _that.payType
 		}
 		let _beforeRepairPhotos = _that.beforeRepairPhotos;
 		_beforeRepairPhotos.forEach(function(_item) {
@@ -187,6 +188,8 @@ export function finishRepair(_that){
 			msg = "数据错误";
 		}else if ((_data.maintenanceType == '1001' || _data.maintenanceType == '1003') && _data.choosedGoodsList.length < 1){
 			msg = "请选择物品";
+		}else if (_data.maintenanceType == '1001' && _data.payType == ''){
+			msg = "请选择支付方式";
 		}else if ((_data.maintenanceType == '1001' || _data.maintenanceType == '1003') && _data.choosedGoodsList.length >= 1){
 			_data.choosedGoodsList.forEach((good) => {
 				if(!good.useNumber || good.useNumber < 1){
@@ -283,3 +286,26 @@ export function appraiseRepair(_that){
 	});
 }
 
+/**
+ * 查询字典表
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+export function queryDictInfo(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.get({
+			url: url.queryDictInfo,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}

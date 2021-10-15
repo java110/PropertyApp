@@ -8,14 +8,14 @@
 			</view>
 			<view class="margin-top">
 				<view class="cu-list menu-avatar " v-for="(item,index) in resourceStores" :key="index">
-					<view class="cu-item" style="height: 220rpx;">
+					<view class="cu-item" style="height: 250rpx;">
 						<view class="content content-left" style="width: 100%;">
 							<view class="text-grey flex-around">
-								<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
+								<text class="ellip text-df">{{item.resName}}({{item.parentRstName}}>{{item.rstName}})</text>
 								<text class="item-remove bg-red text-df" @click="_removeItem(index, item.resId)">移除</text>
 							</view>
 							<view class="text-gray flex-around">
-									<label>申请数量:</label>
+									<label class="text-df">申请数量:</label>
 									<view class="flex">
 										<text class="cuIcon-move" @click="_decItemCurstock(item.resId)"></text>
 										<input class="use-number bg-gray" type="number" v-model="item.quantity" value="" />
@@ -23,13 +23,13 @@
 									</view>
 							</view>
 							<view class="text-gray flex-around">
-									<label>采购价格:</label>
+									<label class="text-df">采购价格:</label>
 									<view class="flex">
 										<input class="use-number bg-gray" type="number" v-model="item.urgentPrice" value="" />
 									</view>
 							</view>
 							<view class="text-gray flex-around">
-									<label>备注:</label>
+									<label class="text-df">备注:</label>
 									<view class="flex">
 										<input class="use-number bg-gray" type="text" v-model="item.remark" value="" />
 									</view>

@@ -11,7 +11,7 @@
 					<view class="cu-item" style="height: 220rpx;">
 						<view class="content content-left" style="width: 100%;">
 							<view class="text-grey flex-around">
-								<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
+								<text class="ellip">{{item.resName}}({{item.parentRstName}}>{{item.rstName}})</text>
 								<text class="item-remove bg-red text-df" @click="_removeItem(index, item.resId)">移除</text>
 							</view>
 							<view class="text-gray flex-around text-df" style="margin: 10rpx 0;">
@@ -22,7 +22,7 @@
 								<text class="item-remove bg-blue text-df" @click="_itemReturnAll(index, item.resId)">全部退还</text>
 							</view>
 							<view class="text-gray flex-around">
-									<label>退还数量:</label>
+									<label>退还数量({{item.miniUnitCodeName}}):</label>
 									<view class="flex">
 										<text class="cuIcon-move" @click="_decItemCurstock(item.resId)"></text>
 										<input class="use-number bg-gray" type="number" v-model="item.curStock" value="" />
@@ -101,7 +101,8 @@
 				let _data = {
 					page: 1,
 					row: 100,
-					communityId: getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId,
+					isShow: true
 				};
 				listStoreHouses(this, _data)
 					.then(function(res) {
@@ -243,7 +244,7 @@
 	}
 	
 	.flex label, .flex-around label{
-		width: 150rpx;
+		width: 250rpx;
 	}
 	.use-number{
 		width: 200rpx;

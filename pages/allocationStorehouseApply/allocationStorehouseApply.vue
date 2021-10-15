@@ -43,6 +43,27 @@
 			this.java110Context.onLoad();
 		},
 		methods: {
+			// 验证物品来自同一仓库
+			_resourcesFromSameHouse: function(resourcesList){
+				if(!resourcesList || resourcesList.length < 2){
+					return true;
+				}
+				let lastHouse = '';
+				let sign = true;
+				for(let i = 0; i < resourcesList.length; i++){
+					if(lastHouse == ''){
+						lastHouse = resourcesList[i].shId;
+						continue;
+					}
+					if(lastHouse == resourcesList[i].shId){
+						continue;
+					}else{
+						sign = false;
+						break;
+					}
+				}
+				return sign;
+			},
 			
 			save: function(){
 				let _that = this;
@@ -51,6 +72,11 @@
 				if(this.resourceStores.length < 1){
 					_that.onoff = true;
 					this._showToast('请选择物品');
+					return;
+				}
+				if(!this._resourcesFromSameHouse(this.resourceStores)){
+					_that.onoff = true;
+					this._showToast('调拨商品需来自同一仓库！');
 					return;
 				}
 				let msg = '';

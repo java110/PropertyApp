@@ -10,19 +10,17 @@
 				<view class="cu-list menu-avatar " v-for="(item,index) in resourceStores" :key="index">
 					<view class="cu-item" style="height: 180rpx;">
 						<view class="content content-left" style="width: 100%;">
-							<view class="text-grey">
-								<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
+							<view class="text-grey flex-around">
+								<text class="ellip">{{item.resName}}({{item.parentRstName}}>{{item.rstName}})</text>
 								<text class="item-remove bg-red text-df" @click="_removeItem(index, item.resId)">移除</text>
 							</view>
-							<view class="text-gray flex text-df" style="margin: 10rpx 0;">
+							<view class="text-gray flex-around text-df" style="margin: 10rpx 0;">
 									<text>当前库存:</text>
-									<text>{{item.miniStock}}</text>
+									<text>{{item.miniStock}}{{item.miniUnitCodeName}}</text>
 							</view>
-							<view class="text-gray flex">
-								<view class="flex-item w50">
-									<label>数量:</label>
-									<input class="use-number bg-gray" type="number" v-model="item.giveQuantity" value="" />
-								</view>
+							<view class="text-gray flex-around">
+								<label>数量({{item.miniUnitCodeName}}):</label>
+								<input class="use-number bg-gray" type="number" v-model="item.giveQuantity" value="" />
 							</view>
 						</view>
 					</view>
@@ -202,7 +200,7 @@
 		line-height: 80rpx;
 	}
 	.cu-list.menu-avatar>.cu-item .content-left {
-		left: 30upx;
+		left: 0;
 	}
 
 	.cu-list+.cu-list {
@@ -217,7 +215,7 @@
 		width: 50%;
 	}
 	.flex label, .flex-item label{
-		width: 100rpx;
+		width: 250rpx;
 	}
 	.use-number{
 		width: 200rpx;
@@ -230,5 +228,10 @@
 	.item-remove{
 		border-radius: 15rpx;
 		padding: 2rpx 10rpx;
+	}
+	.flex-around{
+		display: flex;
+		justify-content: space-between;
+		padding: 0 20rpx;
 	}
 </style>

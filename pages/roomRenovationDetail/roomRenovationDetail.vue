@@ -57,6 +57,51 @@
 			</view>
 			<view class="cu-item">
 				<view class="content">
+					<text class="cuIcon-service text-green"></text>
+					<text class="text-grey">装修单位</text>
+				</view>
+				<view class="action">
+					<text class="text-grey text-sm">{{renovationInfo.renovationCompany}}</text>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view class="content">
+					<text class="cuIcon-profile text-green"></text>
+					<text class="text-grey">装修负责人</text>
+				</view>
+				<view class="action">
+					<text class="text-grey text-sm">{{renovationInfo.personMain}}</text>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view class="content">
+					<text class="cuIcon-phone text-green"></text>
+					<text class="text-grey">负责人电话</text>
+				</view>
+				<view class="action">
+					<text class="text-grey text-sm">{{renovationInfo.personMainTel}}</text>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view class="content">
+					<text class="cuIcon-time text-green"></text>
+					<text class="text-grey">是否延期</text>
+				</view>
+				<view class="action">
+					<text class="text-grey text-sm">{{renovationInfo.isPostpone == 'N' ? '否' : '是'}}</text>
+				</view>
+			</view>
+			<view class="cu-item" v-if="renovationInfo.isPostpone == 'Y'">
+				<view class="content">
+					<text class="cuIcon-time text-green"></text>
+					<text class="text-grey">延期日期</text>
+				</view>
+				<view class="action">
+					<text class="text-grey text-sm">{{renovationInfo.postponeTime}}</text>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view class="content">
 					<text class="cuIcon-footprint text-green"></text>
 					<text class="text-grey">申请备注</text>
 				</view>
@@ -199,6 +244,7 @@
 			checkStateRangeChange: function(e){
 				let index = e.detail.value;
 				this.checkState = this.checkStateRange[index];
+				this.checkRemark = this.checkState.name;
 			},
 			
 			/**
@@ -207,6 +253,7 @@
 			reviewStateRangeChange: function(e){
 				let index = e.detail.value;
 				this.reviewState = this.reviewStateRange[index];
+				this.reviewRemark = this.reviewState.name;
 			},
 			
 			/**

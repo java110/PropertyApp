@@ -244,11 +244,11 @@
 					page: 1,
 					row: 1,
 					staffId: this.userId,
-					staffRole: '3003'
+					staffRole: '2002',
+					requestType: 'purchaseHandle'
 				};
 				listWorkflowStepStaffs(this,_objData)
 				.then(function(res){
-					console.log(res);
 					if(res.data.length>0){
 						_that.procure = true;
 					}

@@ -1,5 +1,20 @@
 <template>
 	<view>
+		<view class="cu-bar bg-white search ">
+			<view class="search-form round">
+				<text class="cuIcon-search"></text>
+				<input type="text" placeholder="输入报修人" v-model="repairName" confirm-type="search"></input>
+			</view>
+			<view class="search-form round">
+				<text class="cuIcon-search"></text>
+				<picker :value="repairStatesIndex" :range="repairStates" :range-key="'name'" @change="repairStatesChange">
+					<view>{{repairStates[repairStatesIndex].name}}</view>
+				</picker>
+			</view>
+			<view class="action">
+				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="$preventClick(_searchRepair)">搜索</button>
+			</view>
+		</view>
 		<view v-if="noData==false">
 			<view v-for="(item,index) in myOrders" :key="index" class="bg-white margin-top margin-right-xs radius margin-left-xs padding">
 				<view class="flex padding-bottom-xs solid-bottom justify-between">
@@ -55,9 +70,15 @@
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	import url from '../../constant/url.js'
 	import {getCurrentCommunity} from '../../api/community/community.js'
+	import {queryDictInfo} from '../../api/repair/repair.js'
+	// 防止多次点击
+	import {preventClick} from '../../lib/java110/utils/common.js';
+	import Vue from 'vue'
+	Vue.prototype.$preventClick = preventClick;
 	export default {
 		data() {
 			return {
+				onoff: true,
 				orderImg: url.baseUrl + 'img/order.png',
 				myOrders: [],
 				orders: [],
@@ -69,7 +90,13 @@
 					contentdown: '上拉加载更多',
 					contentrefresh: '加载中',
 					contentnomore: '没有更多'
-				}
+				},
+				repairStates: [{
+					name: '请选择'
+				}],
+				repairStatesIndex: 0,
+				repairState: '',
+				repairName: ''
 			}
 		},
 		components: {
@@ -78,6 +105,7 @@
 		},
 		onLoad() {
 			this.java110Context.onLoad()
+			this.loadRepairState();
 		},
 		onShow(){
 
@@ -95,6 +123,34 @@
 			this._loadMyModify();
 		},
 		methods: {
+			_searchRepair: function() {
+				this.myOrders = [];
+				this.page = 1;
+				this._loadMyModify();
+			},
+			
+			loadRepairState: function(){
+				let _that = this;
+				let _objData = {
+					'name': "r_repair_pool",
+					'type': "state",
+				};
+				queryDictInfo(this,_objData)
+				.then(function(res){
+					_that.repairStates = _that.repairStates.concat(res);
+				})
+			},
+			
+			repairStatesChange: function(e){
+				this.repairStatesIndex = e.target.value;
+				if (this.repairStatesIndex == 0) {
+					this.repairState = '';
+					return;
+				}
+				let selected = this.repairStates[this.repairStatesIndex];
+				this.repairState = selected.statusCd;
+			},
+			
 			checkAuth: function(pid){
 				return this.java110Context.hasPrivilege(pid);
 			},
@@ -108,7 +164,9 @@
 					page: _that.page,
 					row: 15,
 					userId: _userInfo.userId,
-					communityId: getCurrentCommunity().communityId
+					communityId: getCurrentCommunity().communityId,
+					repairName: _that.repairName,
+					state: _that.repairState,
 				};
 
 				this.java110Context.request({
@@ -123,19 +181,23 @@
 								icon: 'none',
 								title: _json.msg
 							});
+							_that.onoff = true;
 							return;
 						}
 						
 						let _data = _json.data;
 						_that.myOrders = _that.myOrders.concat(_data);
 						_that.page ++;
-						
 						if(_that.myOrders.length < 1){
 							_that.noData = true;
+							_that.onoff = true;
 							return ;
+						}else{
+							_that.noData = false;
 						}
 						if(_that.myOrders.length == _json.total){
 							_that.loadingStatus = 'noMore';
+							_that.onoff = true;
 							return;
 						}
 					},

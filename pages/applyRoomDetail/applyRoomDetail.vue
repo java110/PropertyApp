@@ -1,6 +1,15 @@
 <template>
 	<view>
 		<view class="cu-list menu margin-top">
+			<view class="cu-item arrow" @click="showApplyRoomRecord()">
+				<view class="content">
+					<text class="cuIcon-time text-green"></text>
+					<text class="text-grey">装修跟踪记录</text>
+				</view>
+				<view class="action">
+					<text class="text-grey text-sm">查看</text>
+				</view>
+			</view>
 			<view class="cu-item">
 				<view class="content">
 					<text class="cuIcon-edit text-green"></text>
@@ -138,6 +147,17 @@
 					<view class="cu-item arrow">
 						<view class="content">
 							<text class="cuIcon-time text-green"></text>
+							<text class="text-grey">审批状态</text>
+						</view>
+						<picker mode="selector" :value="reviewState.state" :range="reviewStateRange" range-key="name" @change="reviewStateRangeChange">
+							<view class="picker">
+								{{reviewState.name?reviewState.name:"请选择"}}
+							</view>
+						</picker>
+					</view>
+					<view class="cu-item arrow" v-show="reviewState.state == 4">
+						<view class="content">
+							<text class="cuIcon-time text-green"></text>
 							<text class="text-grey">折扣类型</text>
 						</view>
 						<picker mode="selector" :value="discountType.id" :range="discountTypeRange" range-key="name" @change="discountTypeRangeChange">
@@ -146,7 +166,7 @@
 							</view>
 						</picker>
 					</view>
-					<view class="cu-item arrow">
+					<view class="cu-item arrow" v-show="reviewState.state == 4 && discountIdRange.length > 0">
 						<view class="content">
 							<text class="cuIcon-time text-green"></text>
 							<text class="text-grey">折扣名称</text>
@@ -157,16 +177,25 @@
 							</view>
 						</picker>
 					</view>
-					<view class="cu-item arrow">
+					<view class="cu-item arrow" v-show="reviewState.state == 4">
 						<view class="content">
 							<text class="cuIcon-time text-green"></text>
-							<text class="text-grey">审批状态</text>
+							<text class="text-grey">返还方式</text>
 						</view>
-						<picker mode="selector" :value="reviewState.state" :range="reviewStateRange" range-key="name" @change="reviewStateRangeChange">
+						<picker mode="selector" :value="returnWayIndex" :range="returnWays" range-key="statName" @change="returnWaysChange">
 							<view class="picker">
-								{{reviewState.name?reviewState.name:"请选择"}}
+								{{returnWay ? returnWays[returnWayIndex].statName : '请选择返还方式'}}
 							</view>
 						</picker>
+					</view>
+					<view class="cu-item" v-show="reviewState.state == 4 && returnWay == '1002'">
+						<view class="checkbox-area">
+							<checkbox-group @change="checkboxChange">
+								<view class="checkbox text-df text-grey" v-for="(item,index) in fees" :key="index">
+									<checkbox :value="item.detailId" :checked="item.checked" />【{{item.feeName}}】<text class="text-red">{{item.receivedAmount}}元</text> - {{item.createTime}}
+								</view>
+							</checkbox-group>
+						</view>
 					</view>
 					<view class="cu-item">
 						<view class="content">
@@ -191,6 +220,7 @@
 	// const factory = context.factory;
 	import dateUtil from '../../lib/java110/utils/date.js'
 	import {loadFeeDiscount,uploadCheckUpdate,uploadReviewUpdate} from '../../api/apply/apply.js'
+	import {listFeeDetail} from '../../api/fee/fee.js'
 	export default {
 		data() {
 			return {
@@ -202,10 +232,15 @@
 				reviewState:{}, // 选中的审批状态
 				checkRemark: '', // 验房备注
 				reviewRemark: '' ,// 审批备注
-				discountTypeRange: [{'id':3003,'name':'优惠(需要申请)'}],
+				discountTypeRange: [{'id':'3003','name':'优惠(需要申请)'}],
 				discountType: {}, // 折扣类型
 				discountIdRange: [],
 				discountId: {}, // 折扣名称
+				returnWays: [{'statCd': 1001, 'statName': '享受缴纳折扣'},{'statCd': 1002, 'statName': '返还至余额账户'}],
+				returnWayIndex: 0,
+				returnWay: '',
+				fees: [], // 所选费用项缴费历史
+				selectedFees: [],
 			};
 		},
 
@@ -225,10 +260,12 @@
 			let _that = this;
 			_that.applyRoomInfo = JSON.parse(options.apply);
 			_that.applyRoomInfo.startTime = _that.applyRoomInfo.startTime.split(' ')[0];
+			_that.applyRoomInfo.endTime = _that.applyRoomInfo.endTime.split(' ')[0];
 			// 由于数据库中存储的结束日期为第二天的0点，因此在此将结束日期减一天
-			let secondsOfEnd = new Date(_that.applyRoomInfo.endTime.split(' ')[0].replace(/-/g, "/")).getTime()-1000*60*60*24;
-			let yesterDay = dateUtil.date2String(secondsOfEnd).split(' ')[0];
-			_that.applyRoomInfo.endTime = yesterDay;
+			// let secondsOfEnd = new Date(_that.applyRoomInfo.endTime.split(' ')[0].replace(/-/g, "/")).getTime()-1000*60*60*24;
+			// let yesterDay = dateUtil.date2String(secondsOfEnd).split(' ')[0];
+			// _that.applyRoomInfo.endTime = yesterDay;
+			this._listFeeDetail();
 		},
 
 		/**
@@ -242,6 +279,37 @@
 		onShow: function() {},
 		
 		methods: {
+			/**
+			 * 查询费用项缴费历史
+			 */
+			_listFeeDetail: function(){
+				let _that = this;
+				let params = {
+					page: 1,
+					row: 50,
+					communityId: this.applyRoomInfo.communityId,
+					feeId: this.applyRoomInfo.feeId,
+				};
+				listFeeDetail(this, params).then(function(res){
+					_that.fees = res.data.feeDetails;
+				});
+			},
+			
+			/**
+			 * 缴费历史复选框选择
+			 * @param {Object} e
+			 */
+			checkboxChange: function (e) {
+				var values = e.detail.value;
+				this.selectedFees = values;
+				this.fees.forEach((item, index) => {
+					if(values.includes(item.detailId)){
+						item.checked = true;
+					}
+				});
+			},
+			
+			empty: function(){},
 			
 			/**
 			 * 失去焦点
@@ -313,11 +381,22 @@
 			},
 			
 			/**
+			 * 修改返还方式
+			 * @param {Object} e
+			 */
+			returnWaysChange: function(e){
+				let index = e.detail.value;
+				this.returnWayIndex = index;
+				this.returnWay = this.returnWays[index].statCd;
+			},
+			
+			/**
 			 * 修改验房状态
 			 */
 			checkStateRangeChange: function(e){
 				let index = e.detail.value;
 				this.checkState = this.checkStateRange[index];
+				this.checkRemark = this.checkState.name;
 			},
 			
 			/**
@@ -326,6 +405,7 @@
 			reviewStateRangeChange: function(e){
 				let index = e.detail.value;
 				this.reviewState = this.reviewStateRange[index];
+				this.reviewRemark = this.reviewState.name;
 			},
 			
 			/**
@@ -386,40 +466,39 @@
 						},1000)
 					});
 				}else{
-					// 审核提交
-					let state = this.reviewState.state;
-					if(state == null || !state){
+					let msg = '';
+					if(this.reviewState.state == null || !this.reviewState.state){
+						msg = '请选择审批状态';
+					}else if(this.reviewState.state == 4 && (this.discountId.discountId == null || !this.discountId.discountId)){
+						msg = '请选择优惠名称';
+					}else if(this.reviewState.state == 4 && this.returnWay == ''){
+						msg = '请选择退还方式';
+					}else if(this.reviewState.state == 4 && this.returnWay == '1002' && this.selectedFees.length <= 0){
+						msg = '请选择缴费记录';
+					}else if(this.reviewRemark == ''){
+						msg = '请填写审批备注';
+					}
+					if(msg != ''){
 						uni.hideLoading();
 						uni.showToast({
-							title: '请选择审批状态'
+							title: msg,
+							icon: 'none'
 						});
 						return;
 					}
-					let discountId = '';
-					if(state == 4){
-						// 只有当审核通过时，优惠名称必填
-						params.checkRemark = this.applyRoomInfo.checkRemark;
-						discountId = this.discountId.discountId;
-						if(discountId == null || !discountId){
-							uni.hideLoading();
-							uni.showToast({
-								title: '请选择优惠名称'
-							});
-							return;
-						}
-					}
-					let reviewRemark = this.reviewRemark;
-					if(reviewRemark == '' || !reviewRemark){
-						uni.hideLoading();
-						uni.showToast({
-							title: '请填写审批备注'
-						});
-						return;
-					}
-					params.state = state;
-					params.reviewRemark = reviewRemark;
+					params.state = this.reviewState.state;
+					params.reviewRemark = this.reviewRemark;
 					params.discountType = this.discountType.id;
-					params.discountId = discountId;
+					params.discountId = this.discountId.discountId;
+					params.returnWay = this.returnWay;
+					params.selectedFees = this.selectedFees;
+					params.feeId = this.applyRoomInfo.feeId;
+					params.roomId = this.applyRoomInfo.roomId;
+					params.checkRemark = this.applyRoomInfo.checkRemark;
+					params.createRemark = this.applyRoomInfo.createRemark;
+					params.fees = this.fees;
+					params.configId = '';
+					params.discounts = this.discountIdRange;
 					uploadReviewUpdate(this,params).then(function(res){
 						uni.hideLoading();
 						uni.showToast({
@@ -427,7 +506,6 @@
 						})
 						setTimeout(()=>{
 							_that.goBack();
-							// uni.navigateBack({})
 						},1000)
 					});
 				}
@@ -453,6 +531,15 @@
 				return;  
 				// #endif  
 				uni.navigateBack(1)  
+			},
+			
+			/**
+			 * 查看跟踪记录
+			 */
+			showApplyRoomRecord: function(){
+				uni.navigateTo({
+					url: '/pages/applyRoomRecord/applyRoomRecord?apply=' + JSON.stringify(this.applyRoomInfo)
+				});
 			},
 		}
 	};
@@ -485,9 +572,10 @@
 	.pop-box{
 		position: relative;
 		width: 85%;
-		height: 700rpx;
+		max-height: 1000rpx;
 		background-color: #fff;
 		border-radius: 15rpx;
+		padding-bottom: 85rpx;
 	}
 	.pop-title{
 		padding: 30rpx 0;
@@ -520,5 +608,9 @@
 	}
 	.confirm{
 		color: #3488FE;
+	}
+	.checkbox-area{
+		max-height: 160rpx;
+		overflow-y: scroll;
 	}
 </style>

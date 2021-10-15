@@ -43,7 +43,7 @@
 				</view>
 				<view class="resource-item text-grey" v-for="(item, index) in resourceStoreInfo">
 					<view class="row">
-						<view class="item-t" v-if="!item.isCustom">{{item.resName}}</view>
+						<view class="item-t" v-if="!item.isCustom">{{item.resName}}({{item.specName ? item.specName : '-'}})</view>
 						<view class="item-t" v-else>{{item.customGoodsName}}</view>
 						<view class="item-t" v-show="feeFlag=='1001'">
 							<input type="number" v-model="item.price" class="inline-input text-grey bg-white" @input="_updateTotalPrice()" :disabled="!item.isCustom && item.outHighPrice == item.outLowPrice" />
@@ -68,6 +68,15 @@
 				<view class="title">总计</view>
 				<input v-model="amount" disabled="disabled"></input>
 			</view>
+		</view>
+		
+		<view class="cu-form-group margin-top" v-if="feeFlag=='1001'">
+			<view class="title">支付方式</view>
+			<picker :value="payTypeIndex" :range="payTypes" :range-key="'name'" @change="payTypeChange">
+				<view class="picker">
+					{{payTypes[payTypeIndex].name}}
+				</view>
+			</picker>
 		</view>
 
 		<view class="cu-form-group margin-top">
@@ -158,7 +167,8 @@
 		dispatchRepair,
 		finishRepair,
 		queryResourceStoreResName,
-		queryRepairInfo
+		queryRepairInfo,
+		queryDictInfo
 	} from '../../api/repair/repair.js'
 	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
 	import {preventClick} from '../../lib/java110/utils/common.js';
@@ -202,6 +212,14 @@
 				repairObjType: '',
 				storeId:'',
 				resourceStoreInfo: [],
+				payTypes: [
+					{
+						statusCd: "",
+						name: '请选择'
+					}
+				],
+				payTypeIndex: 0,
+				payType: '',
 			}
 		},
 		components:{
@@ -243,8 +261,30 @@
 					});
 			}
 			this._loadRepairStaff();
+			this._loadPayTypes();
 		},
 		methods: {
+			_loadPayTypes: function(){
+				let _that = this;
+				let _objData = {
+					'name': "r_repair_pool",
+					'type': "pay_type",
+				};
+				queryDictInfo(this,_objData)
+				.then(function(res){
+					_that.payTypes = _that.payTypes.concat(res);
+				})
+			},
+			payTypeChange: function(e){
+				this.payTypeIndex = e.target.value; //取其下标
+				if (this.payTypeIndex == 0) {
+					this.payType = '';
+					return;
+				}
+				let selected = this.payTypes[this.payTypeIndex]; //获取选中的数组
+				
+				this.payType = selected.statusCd;
+			},
 			// 接收所选择物品信息
 			_getResourceInfo: function(data){
 				data = JSON.parse(data);

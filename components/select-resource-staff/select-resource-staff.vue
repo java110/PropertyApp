@@ -9,7 +9,7 @@
 						</view>
 						<view class="content content-left">
 							<view class="text-grey">
-								<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
+								<text class="ellip">{{item.resName}}({{item.parentRstName}}>{{item.rstName}})</text>
 							</view>
 							<view class="text-gray text-sm flex">
 								<view class="text-cut">

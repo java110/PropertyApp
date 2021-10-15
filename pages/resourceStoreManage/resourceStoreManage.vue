@@ -24,10 +24,10 @@
 		<view class="margin-top" v-if="noData==false">
 			<view class="cu-list menu-avatar " v-for="(item,index) in resourceList" :key="index">
 				<view class="cu-item">
-					<view class="content content-left">
+					<view class="content">
 						<view class="text-grey">
 							<text class="text-green margin-right-xs" v-if="hasPrivilege">{{item.userName}}</text>
-							<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
+							<text class="ellip">{{item.resName}}({{item.parentRstName}} > {{item.rstName}})</text>
 						</view>
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
@@ -155,11 +155,12 @@
 </script>
 
 <style>
-	.cu-list.menu-avatar>.cu-item .content-left {
-		left: 30upx;
-	}
-
 	.cu-list+.cu-list {
 		margin-top: 20upx;
+	}
+
+	.cu-list.menu-avatar>.cu-item .content{
+		left: 20rpx;
+		width: 100%;
 	}
 </style>

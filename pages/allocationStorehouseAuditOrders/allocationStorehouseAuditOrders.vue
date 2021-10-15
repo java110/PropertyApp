@@ -223,7 +223,8 @@
 					page: 1,
 					row: 1,
 					staffId: this.userId,
-					staffRole: '3003'
+					staffRole: '3003',
+					requestType: 'allocationHandle'
 				};
 				listWorkflowStepStaffs(this,_objData)
 				.then(function(res){

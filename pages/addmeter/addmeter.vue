@@ -72,7 +72,7 @@
 			</view>
 			
 			<view class=" flex flex-direction">
-				<button class="cu-btn bg-red margin-tb-sm lg" @tap="submitMeter">提交</button>
+				<button class="cu-btn bg-red margin-tb-sm lg" @tap="$preventClick(submitMeter)">提交</button>
 			</view>
 			
 		</form>
@@ -84,9 +84,14 @@
 	import dateObj from '../../lib/java110/utils/date.js'
 	import uniDatetimePicker from '../../components/uni-datetime-picker/uni-datetime-picker.vue'
 	import {getCurrentCommunity} from '../../api/community/community.js'
+	// 防止多次点击
+	import {preventClick} from '../../lib/java110/utils/common.js';
+	import Vue from 'vue'
+	Vue.prototype.$preventClick = preventClick;
 	export default {
 		data() {
 			return {
+				onoff: true,
 				floorNum: '',
 				floorId: '',
 				unitNum: '',
@@ -103,7 +108,7 @@
 						name: '电费'
 					},{
 						id: '888800010009',
-						name: '煤气费'
+						name: '燃气费'
 					}
 				],
 				feeConfig_index: -1,
@@ -249,6 +254,8 @@
 					msg = "本期度数必填";
 				}else if(this.curReadingTime == '' || this.curReadingTime == null){
 					msg = "本期读表时间必填";
+				}else if(parseFloat(this.curDegrees) < parseFloat(this.preDegrees)){
+					msg = "本期度数不能小于上期度数";
 				}else{
 					let start = Date.parse(new Date(this.preReadingTime.replace(/-/g, '/')))
 					let end = Date.parse(new Date(this.curReadingTime.replace(/-/g, '/')))
@@ -262,6 +269,7 @@
 						title:msg,
 						icon:'none'
 					})
+					this.onoff = true;
 					return;
 				}
 				let _objData = {
@@ -287,8 +295,11 @@
 					})
 					if(res.code == 0){
 						setTimeout(() => {
+							this.onoff = true;
 							this.clearAddMeterWaterInfo();
 						}, 1500)
+					}else{
+						this.onoff = true;
 					}
 				})
 			},

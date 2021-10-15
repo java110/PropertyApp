@@ -10,19 +10,19 @@
 				<view class="cu-item" style="height: 220rpx;">
 					<view class="content content-left" style="width: 100%;">
 						<view class="text-grey flex-around">
-							<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
+							<text class="ellip text-df">{{item.resName}}({{item.parentRstName}}>{{item.rstName}})</text>
 							<text class="item-remove bg-red text-df" @click="_removeItem(index, item.resId)">移除</text>
 						</view>
 						<view class="text-gray flex-around">
-							<label>库存:</label>
+							<label class="text-df">库存:</label>
 							<text class="text-df">{{item.stock}}{{item.unitCodeName}}</text>
 						</view>
 						<view class="text-gray flex-around">
-							<label>数量:</label>
-							<input class="use-number bg-gray" type="number" v-model="item.quantity" value="" />
+							<label class="text-df">数量:</label>
+							<input class="use-number bg-gray" type="number" v-model="item.quantity" :placeholder="item.unitCodeName" placeholder-class="text-grey text-df" value="" />
 						</view>
 						<view class="text-gray flex-around" style="margin: 10rpx 0;">
-							<label>备注:</label>
+							<label class="text-df">备注:</label>
 							<input class="remark bg-gray" type="text" v-model="item.remark" value="" />
 						</view>
 					</view>

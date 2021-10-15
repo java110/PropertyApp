@@ -49,7 +49,7 @@
 </template>
 
 <script>
-	import {queryRoomRenovationRecordDetail,deleteRoomRenovationRecord} from '../../api/renovation/renovation.js'
+	import {queryApplyRoomRecordDetail,cutApplyRoomDiscountRecord} from '../../api/apply/apply.js'
 	import conf from '../../conf/config.js'
 	export default {
 		data() {
@@ -96,11 +96,10 @@
 					page: 1,
 					row: 10,
 					communityId: this.recordInfo.communityId,
-					recordId: this.recordInfo.recordId,
-					roomName: this.recordInfo.roomName,
-					roomId: this.recordInfo.roomId
+					ardrId: this.recordInfo.ardrId,
+					roomName: this.recordInfo.roomName
 				};
-				queryRoomRenovationRecordDetail(this,_objData)
+				queryApplyRoomRecordDetail(this,_objData)
 				.then(function(res){
 					_that.recordList = res
 					res.forEach((item) => {
@@ -131,7 +130,7 @@
 					content: '是否确认删除？',
 					success: (res) => {
 						if(res.confirm) {  
-							deleteRoomRenovationRecord(this,this.recordInfo)
+							cutApplyRoomDiscountRecord(this,this.recordInfo)
 							.then(function(res){
 								uni.navigateBack({
 									delta:1

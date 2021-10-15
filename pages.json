@@ -288,6 +288,24 @@
 			}
 		},
 		{
+		    "path" : "pages/applyRoomRecord/applyRoomRecord",
+		    "style" : {
+				"navigationBarTitleText": "空置房跟踪记录"
+			}
+		},
+		{
+		    "path" : "pages/applyRoomRecordHandle/applyRoomRecordHandle",
+		    "style" : {
+				"navigationBarTitleText": "添加跟踪记录"
+			}
+		},
+		{
+		    "path" : "pages/applyRoomRecordDetail/applyRoomRecordDetail",
+		    "style" : {
+				"navigationBarTitleText": "跟踪记录详情"
+			}
+		},
+		{
 		    "path" : "pages/roomRenovation/roomRenovation",
 		    "style" : {
 				"navigationBarTitleText": "装修记录"

@@ -104,9 +104,9 @@
 				<view class="row">
 					<view class="item-t">{{item.resName}}</view>
 					<view class="item-t">{{item.price}}</view>
-					<view class="item-t">{{item.quantity}}</view>
+					<view class="item-t">{{item.quantity}}{{item.unitCodeName}}</view>
 					<view class="item-t" v-if="applyInfo.resOrderType==10000">{{item.purchasePrice ? item.purchasePrice : '-'}}</view>
-					<view class="item-t">{{item.purchaseQuantity ? item.purchaseQuantity : '-'}}</view>
+					<view class="item-t">{{item.purchaseQuantity ? item.purchaseQuantity + item.unitCodeName : '-'}}</view>
 				</view>
 			</view>
 		</view>

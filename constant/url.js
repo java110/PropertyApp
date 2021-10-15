@@ -141,9 +141,16 @@ export default {
 	auditOaWorkflow: baseUrl + "app/oaWorkflow/auditOaWorkflow",
 	updateOaWorkflowFormData: baseUrl +"app/oaWorkflow.updateOaWorkflowFormData",
 	listMeterType: baseUrl +"app/meterType.listMeterType",
-	
-	
-	
-	
-	
+	// 空置房跟踪记录列表
+	listApplyRoomDiscountRecord: baseUrl + "app/applyRoomDiscountRecord/queryApplyRoomDiscountRecord",
+	// 空置房跟踪记录详情
+	listApplyRoomDiscountRecordDetail: baseUrl + "app/applyRoomDiscountRecord/queryApplyRoomDiscountRecordDetail",
+	// 添加空置房跟踪记录
+	saveApplyRoomDiscountRecord: baseUrl + "app/applyRoomDiscountRecord/addApplyRoomDiscountRecord",
+	// 删除空置房跟踪记录
+	cutApplyRoomDiscountRecord: baseUrl + "app/applyRoomDiscountRecord/cutApplyRoomDiscountRecord",
+	// 删除装修跟踪记录
+	deleteRoomRenovationRecord: baseUrl + "app/roomRenovation/deleteRoomRenovationRecord",
+	// 查询缴费历史
+	listFeeDetail: baseUrl + "callComponent/propertyFee/listFeeDetail",
 }

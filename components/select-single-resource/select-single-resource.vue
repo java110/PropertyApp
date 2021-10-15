@@ -3,7 +3,7 @@
 		<view>
 			<view class="cu-form-group margin-top">
 				<view class="title">商品类型</view>
-				<picker :value="goodsTypeIndex" :range="goodsTypeCloums" :range-key="'name'" @change="goodsTypeChange">
+				<picker :value="goodsTypeIndex" :range="goodsTypeCloums" :range-key="'name'" @change="goodsParentTypeChange">
 					<view class="picker">
 						{{goodsTypeCloums[goodsTypeIndex].name}}
 					</view>
@@ -20,6 +20,14 @@
 				</view>
 			</view>
 			<view v-else>
+				<view class="cu-form-group margin-top">
+					<view class="title">二级分类</view>
+					<picker :value="goodsSonTypeIndex" :range="goodsSonTypeCloums" :range-key="'name'" @change="goodsTypeChange">
+						<view class="picker">
+							{{goodsSonTypeCloums[goodsSonTypeIndex].name}}
+						</view>
+					</picker>
+				</view>
 				<view class="cu-form-group margin-top" v-if="rstId!=''">
 					<view class="title">商品</view>
 					<picker :value="goodsIndex" :range="goodsCloums" :range-key="'resName'" @change="goodsChange">
@@ -36,6 +44,10 @@
 					<view v-show="feeFlag == '1001'">
 						<view class="text-right text-grey" v-if="goods.outHighPrice == goods.outLowPrice">价格:{{goods.outLowPrice}}</view>
 						<view class="text-right text-grey" v-else>价格范围{{goods.outLowPrice}}-{{goods.outHighPrice}}</view>
+					</view>
+					<view class="cu-form-group margin-top">
+						<view class="title">规格</view>
+						<input type="text" v-model="goods.specName" disabled="disabled"></input>
 					</view>
 				</view>
 			</view>
@@ -81,6 +93,11 @@
 					name: '请选择商品类型'
 				}],
 				goodsTypeIndex: 0,
+				parentRstId: '',
+				goodsSonTypeCloums: [{
+					name: '请选择商品类型'
+				}],
+				goodsSonTypeIndex: 0,
 				rstId: '',
 				goodsCloums: [{
 					resName: '请选择商品'
@@ -133,6 +150,11 @@
 						name: '请选择商品类型'
 					}],
 					goodsTypeIndex: 0,
+					parentRstId: '',
+					goodsSonTypeCloums: [{
+						name: '请选择商品类型'
+					}],
+					goodsSonTypeIndex: 0,
 					rstId: '',
 					goodsCloums: [{
 						resName: '请选择商品'
@@ -215,20 +237,53 @@
 					});
 			},
 			
-			goodsTypeChange: function(e){
-				this.goodsTypeIndex = e.target.value //取其下标
+			// 父分类change
+			goodsParentTypeChange: function(e){
+				// 清空二级分类
+				this.goodsSonTypeCloums = [{name: '请选择商品类型'}];
+				this.goodsSonTypeIndex = 0;
+				this.rstId = '';
+				//取其下标
+				this.goodsTypeIndex = e.target.value
 				if (this.goodsTypeIndex == 0) {
-					this.rstId = ''
+					this.parentRstId = ''
 					return;
 				}
 				let selected = this.goodsTypeCloums[this.goodsTypeIndex] //获取选中的数组
-				console.log(selected);
 				if(selected.rstId == 'custom'){
 					this.isCustom = true;
 					return;
 				}else{
 					this.isCustom = false;
 				}
+				this.parentRstId = selected.rstId //选中的id
+				this._loadSonGoodsTypes();
+			},
+			// 查询子分类
+			_loadSonGoodsTypes: function(){
+				let _that = this;
+				let _data = {
+					page: 1,
+					row: 100,
+					communityId: getCurrentCommunity().communityId,
+					parentId: this.parentRstId
+				};
+				queryRepairInfo(this, _data)
+					.then(function(res) {
+						_that.goodsSonTypeCloums = [{
+							name: '请选择商品类型'
+						}];
+						_that.goodsSonTypeCloums = _that.goodsSonTypeCloums.concat(res.data);
+					});
+			},
+			// 子分类change
+			goodsTypeChange: function(e){
+				this.goodsSonTypeIndex = e.target.value //取其下标
+				if (this.goodsSonTypeIndex == 0) {
+					this.rstId = ''
+					return;
+				}
+				let selected = this.goodsSonTypeCloums[this.goodsSonTypeIndex] //获取选中的数组
 				this.rstId = selected.rstId //选中的id
 				this._loadRepairGoods();
 			},

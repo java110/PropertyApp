@@ -40,14 +40,14 @@
 
 <script>
 	import {
-		updateRoomDecorationRecord,uploadVideo
-	} from '../../api/renovation/renovation.js'
+		saveApplyRoomDiscountRecord
+	} from '../../api/apply/apply.js'
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
 	export default {
 		data() {
 			return {
-				renovationInfo: [],
+				applyRoomInfo: [],
 				imgList: [],
 				photos: [],
 				videoName: '',
@@ -75,7 +75,7 @@
 			this.java110Context.onLoad();
 			let _that = this;
 			this.communityId = getCurrentCommunity().communityId;
-			_that.renovationInfo = JSON.parse(options.apply);
+			_that.applyRoomInfo = JSON.parse(options.apply);
 		},
 		methods: {
 			
@@ -117,11 +117,11 @@
 					title:"上传中..."
 				})
 				let params={
-					rId: this.renovationInfo.rId,
-					roomId: this.renovationInfo.roomId,
-					roomName: this.renovationInfo.roomName,
-					state: this.renovationInfo.state,
-					stateName: this.renovationInfo.stateName,
+					ardId: this.applyRoomInfo.ardId,
+					roomId: this.applyRoomInfo.roomId,
+					roomName: this.applyRoomInfo.roomName,
+					state: this.applyRoomInfo.state,
+					stateName: this.applyRoomInfo.stateName,
 					photos: this.photos,
 					videoName: '',
 					remark: this.content,
@@ -143,7 +143,7 @@
 					});
 					return;
 				}
-				updateRoomDecorationRecord(this, params)
+				saveApplyRoomDiscountRecord(this, params)
 					.then(function() {
 						uni.showToast({
 							title:"保存成功"

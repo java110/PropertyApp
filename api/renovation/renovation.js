@@ -10,6 +10,7 @@ export function queryRoomRenovation(_that,_data){
 			url: url.queryRoomRenovation,
 			data:_data,
 			success: function(res) {
+				_that.onoff = true;
 				if(res.data.code == 0){
 					reslove(res.data);
 				}else{
@@ -234,6 +235,60 @@ export function updateRoomRenovationState(_that, _data){
 				}else{
 					wx.showToast({
 						title: res.data.msg,
+						icon: 'none',
+						duration: 2000
+					})
+				}
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+/**
+ * 查询字典表
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+export function queryDictInfo(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.get({
+			url: url.queryDictInfo,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+/**
+ * 删除跟踪记录操作
+ */
+export function deleteRoomRenovationRecord(_that, _data){
+	return new Promise(function(reslove,reject){
+		_that.context.post({
+			url: url.deleteRoomRenovationRecord,
+			data:_data,
+			success: function(res) {
+				if(res.data.code == 0){
+					reslove();
+				}else{
+					wx.showToast({
+						title: "服务器异常了",
 						icon: 'none',
 						duration: 2000
 					})

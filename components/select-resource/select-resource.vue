@@ -1,5 +1,20 @@
 <template>
 	<view class="select-resource" v-if="showModel">
+		<view class="cu-bar bg-white search ">
+			<view class="search-form round">
+				<text class="cuIcon-search"></text>
+				<input type="text" placeholder="输入物品名" v-model="resName" confirm-type="search"></input>
+			</view>
+			<view class="search-form round">
+				<text class="cuIcon-search"></text>
+				<picker :value="storeHousesIndex" :range="storeHouses" :range-key="'shName'" @change="storeHousesChange">
+					<view>{{storeHouses[storeHousesIndex].shName}}</view>
+				</picker>
+			</view>
+			<view class="action">
+				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="$preventClick(_searchStoreHouses)">搜索</button>
+			</view>
+		</view>
 		<view class="">
 			<checkbox-group @change="checkboxChange">
 				<view class="cu-list menu-avatar " v-for="(item,index) in resourceList" :key="index">
@@ -7,9 +22,9 @@
 						<view>
 							<checkbox :value="item.resId" :checked="item.checked" />
 						</view>
-						<view class="content content-left">
+						<view class="content">
 							<view class="text-grey">
-								<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
+								<text class="ellip">{{item.resName}}({{item.parentRstName}}>{{item.rstName}})</text>
 							</view>
 							<view class="text-gray text-sm flex">
 								<view class="text-cut">
@@ -31,19 +46,31 @@
 
 <script>
 	import {
-		queryResourceStoreList
+		queryResourceStoreList,
+		listStoreHouses
 	} from '../../api/resource/resource.js'
 	import {getCurrentCommunity} from '../../api/community/community.js'
+	// 防止多次点击
+	import {preventClick} from '../../lib/java110/utils/common.js';
+	import Vue from 'vue'
+	Vue.prototype.$preventClick = preventClick;
 
 	export default {
 		components: {
 		},
 		data() {
 			return {
+				onoff: true,
 				showModel: false,
 				resourceList: [],
 				page: 1,
 				selectedResId: [],
+				resName: '',
+				storeHouses: [{
+					shName: '请选择仓库'
+				}],
+				storeHousesIndex: 0,
+				shId: '',
 			}
 		},
 		props: {
@@ -66,12 +93,44 @@
 
 		mounted() {
 			this._loadResourceList();
+			this._loadStoreHouses();
 		},
 
 		methods: {
 			
 			switchShow: function(){
 				this.showModel = !this.showModel;
+			},
+			
+			_loadStoreHouses: function(){
+				let _that = this;
+				let _objData = {
+					page: 1,
+					row: 100,
+					communityId: getCurrentCommunity().communityId,
+					shType: this.shType,
+					isShow: true
+				};
+				listStoreHouses(this,_objData)
+				.then(function(res){
+					_that.storeHouses = _that.storeHouses.concat(res.data);
+				})
+			},
+			
+			storeHousesChange: function(e){
+				this.storeHousesIndex = e.target.value;
+				if (this.storeHousesIndex == 0) {
+					this.shId = '';
+					return;
+				}
+				let selected = this.storeHouses[this.storeHousesIndex];
+				this.shId = selected.shId;
+			},
+			
+			_searchStoreHouses: function() {
+				this.resourceList = [];
+				this.page = 1;
+				this._loadResourceList();
 			},
 			
 			_loadResourceList: function(){
@@ -81,10 +140,14 @@
 					row: 10,
 					communityId: getCurrentCommunity().communityId,
 					resOrderType: this.resOrderType,
-					shType: this.shType
+					shType: this.shType,
+					shId: this.shId,
+					resName: this.resName,
+					isShow: true
 				};
 				queryResourceStoreList(this, _data)
 					.then(function(res) {
+						_that.onoff = true;
 						if(res.resourceStores.length <= 0){
 							uni.showToast({
 								title: '已全部加载'
@@ -163,5 +226,9 @@
 	}
 	.btn-box button{
 		width: 40%;
+	}
+	.cu-list.menu-avatar>.cu-item .content{
+		left: 40rpx;
+		width: 80%;
 	}
 </style>

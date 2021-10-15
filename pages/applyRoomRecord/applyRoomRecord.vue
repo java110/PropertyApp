@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<view class="margin-top" v-if="renovationRecordList.length > 0">
-			<view class="cu-list menu-avatar " v-for="(item,index) in renovationRecordList" :key="index" @tap="_showDetail(item)">
+		<view class="margin-top" v-if="applyRoomRecordList.length > 0">
+			<view class="cu-list menu-avatar " v-for="(item,index) in applyRoomRecordList" :key="index" @tap="_showDetail(item)">
 				<view class="cu-item arrow">
 					<view class="item-content">
 						<view class="text-grey">
@@ -10,7 +10,7 @@
 						</view>
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">
-								操作人员：{{item.staffName}}
+								操作人员：{{item.createUserName}}
 							</view>
 						</view>
 					</view>
@@ -35,14 +35,14 @@
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
-	import {queryRoomRenovationRecord} from '../../api/renovation/renovation.js'
+	import {queryApplyRoomRecord} from '../../api/apply/apply.js'
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
 			return {
-				renovationInfo: [],
+				applyRoomInfo: [],
 				communityId: '',
-				renovationRecordList: [],
+				applyRoomRecordList: [],
 				page: 1,
 				loadingStatus : 'loading',
 				loadingContentText: {
@@ -59,12 +59,12 @@
 		onLoad: function(options) {
 			this.java110Context.onLoad();
 			let _that = this;
-			_that.renovationInfo = JSON.parse(options.apply);
-			console.log(_that.renovationInfo);
+			_that.applyRoomInfo = JSON.parse(options.apply);
+			console.log(_that.applyRoomInfo);
 		},
 		onShow: function(){
 			this.page = 1;
-			this.renovationRecordList = [];
+			this.applyRoomRecordList = [];
 			this.communityId = getCurrentCommunity().communityId;
 			this.loadApply();	
 		},
@@ -84,16 +84,16 @@
 				let _objData = {
 					page: this.page,
 					row: 10,
-					communityId: this.renovationInfo.communityId,
-					rId: this.renovationInfo.rId,
-					roomName: this.renovationInfo.roomName,
-					roomId: this.renovationInfo.roomId
+					communityId: this.applyRoomInfo.communityId,
+					ardId: this.applyRoomInfo.ardId,
+					roomName: this.applyRoomInfo.roomName,
+					roomId: this.applyRoomInfo.roomId
 				};
-				queryRoomRenovationRecord(this,_objData)
+				queryApplyRoomRecord(this,_objData)
 				.then(function(res){
-					_that.renovationRecordList = _that.renovationRecordList.concat(res.data)
+					_that.applyRoomRecordList = _that.applyRoomRecordList.concat(res.data)
 					_that.page ++;
-					if(_that.renovationRecordList.length == res.total){
+					if(_that.applyRoomRecordList.length == res.total){
 						_that.loadingStatus = 'noMore';
 						return;
 					}
@@ -105,14 +105,14 @@
 			 */
 			_addRecord: function(){
 				uni.navigateTo({
-					url: '/pages/roomRenovationRecordHandle/roomRenovationRecordHandle?apply=' + JSON.stringify(this.renovationInfo)
+					url: '/pages/applyRoomRecordHandle/applyRoomRecordHandle?apply=' + JSON.stringify(this.applyRoomInfo)
 				});
 			},
 			
 			_showDetail: function(_item){
-				_item.communityId = this.renovationInfo.communityId;
+				_item.communityId = this.applyRoomInfo.communityId;
 				uni.navigateTo({
-					url: '/pages/roomRenovationRecordDetail/roomRenovationRecordDetail?apply=' + JSON.stringify(_item)
+					url: '/pages/applyRoomRecordDetail/applyRoomRecordDetail?apply=' + JSON.stringify(_item)
 				});
 			}
 		}

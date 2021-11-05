@@ -94,15 +94,16 @@
 			this.java110Context.onLoad();
 		},
 		onShow() {
-			if(this.context.isPageBack()){
-				this.roomInfo = {
-					ownerName:'',
-					link:""
-				};
-				this.fees = [];
-				this.roomInfo.roomId = '';
-				this.roomNum = '';
-			}
+			this._queryRoom();
+			// if(this.context.isPageBack()){
+			// 	this.roomInfo = {
+			// 		ownerName:'',
+			// 		link:""
+			// 	};
+			// 	this.fees = [];
+			// 	this.roomInfo.roomId = '';
+			// 	this.roomNum = '';
+			// }
 		},
 		methods: {
 			/**
@@ -183,6 +184,9 @@
 					})
 			},
 			_queryRoom: function() {
+				if(!this.roomName){
+					return;
+				}
 				let _allNum = this.roomName.split("-");
 
 				if (_allNum.length != 3) {

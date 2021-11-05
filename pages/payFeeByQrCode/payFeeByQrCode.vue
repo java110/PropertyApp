@@ -32,7 +32,10 @@
 		},
 		methods: {
 			_closePayModal: function() {
-				this.context.navigateBack();
+				// this.context.navigateBack();
+				uni.navigateBack({
+					delta:1
+				})
 			},
 			_payOweFee: function() {
 				let _that = this;

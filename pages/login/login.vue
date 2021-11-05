@@ -40,8 +40,8 @@
 		data() {
 			return {
 				logoUrl: '',
-				username: 'wuxw',
-				password: 'admin'
+				username: '',
+				password: ''
 			}
 		},
 		onLoad() {

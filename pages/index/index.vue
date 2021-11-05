@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="margin-bottom-xs">
 			<uni-notice-bar :showIcon="true" :scrollable="true" :single="true" :speed="30"
-				text="HC掌上物业欢迎您"></uni-notice-bar>
+				text="KK智慧云物业欢迎您"></uni-notice-bar>
 		</view>
 		<scroll-view @scrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">
 			<swiper class="categoryList padding-top-xs bg-white" indicator-dots="true"

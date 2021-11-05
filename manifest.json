@@ -85,13 +85,14 @@
                     "changeOrigin" : true, //是否跨域
                     "secure" : true // 设置支持https协议的代理
                 },
-				"/callComponent" : {
-				    "target" : "http://property.homecommunity.cn", //目标接口域名http://192.168.1.16:8012
-				    "changeOrigin" : true, //是否跨域
-				    "secure" : true // 设置支持https协议的代理
-				}
+                "/callComponent" : {
+                    "target" : "http://property.homecommunity.cn", //目标接口域名http://192.168.1.16:8012
+                    "changeOrigin" : true, //是否跨域
+                    "secure" : true // 设置支持https协议的代理
+                }
             }
         },
-        "domain" : "http://property.homecommunity.cn"
+        "domain" : "http://property.homecommunity.cn",
+        "title" : "KK智慧云"
     }
 }

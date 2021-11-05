@@ -66,6 +66,28 @@
 		<view class="cu-form-group margin-top">
 			<textarea v-model="context" placeholder="请输入报修内容"></textarea>
 		</view>
+		<view class="block__title">相关图片</view>
+		<view class="cu-bar bg-white ">
+			<view class="action">
+				图片上传
+			</view>
+			<view class="action">
+				{{imgList.length}}/4
+			</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="grid col-4 grid-square flex-sub">
+				<view class="bg-img" v-for="(img,index) in imgList" :key='index' bindtap="ViewImage" :data-url="imgList[index]">
+					<image :src='imgList[index]' mode='aspectFill'></image>
+					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
+						<text class="cuIcon-close"></text>
+					</view>
+				</view>
+				<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
+					<text class="cuIcon-cameraadd"></text>
+				</view>
+			</view>
+		</view>
 
 		<view class="button_up_blank"></view>
 
@@ -278,7 +300,7 @@
 					"appointmentTime": this.bindDate + " " + this.bindTime + ":00",
 					"tel": this.bindTel,
 					"roomId": this.roomId,
-					// "photos": [],
+					 "photos": [],
 					"context": this.context,
 					"communityId": this.communityId,
 					"bindDate": this.bindDate,
@@ -301,12 +323,12 @@
 					obj.repairObjName = this.floorNum + this.unitNum + this.roomNum;
 				}
 
-				// let _photos = this.photos;
-				// _photos.forEach(function(_item) {
-				// 	obj.photos.push({
-				// 		"photo": _item
-				// 	});
-				// });
+				let _photos = this.photos;
+				_photos.forEach(function(_item) {
+					obj.photos.push({
+						"photo": _item
+					});
+				});
 
 				let msg = "";
 				if (obj.repairType == "") {
@@ -416,29 +438,29 @@
 					url: '/pages/selectRoom/selectRoom?floorId=' + this.floorId + "&unitId=" + this.unitId
 				});
 			},
-			// deleteImage: function(e) {
-			// 	console.log(e);
-			// 	let imageArr = this.$data.imgList;
-			// 	imageArr.splice(e, 1);
-			// 	this.photos.splice(e, 1);
-			// },
-			// ChooseImage: function(e) {
-			// 	let that = this;
-			// 	wx.chooseImage({
-			// 		count: 4, //默认9
-			// 		sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
-			// 		sourceType: ['album'], //从相册选择
-			// 		success: (res) => {
-			// 			console.log(res);
-			// 			that.$data.imgList.push(res.tempFilePaths[0]);
-			// 			var tempFilePaths = res.tempFilePaths[0]
+			deleteImage: function(e) {
+				console.log(e);
+				let imageArr = this.$data.imgList;
+				imageArr.splice(e, 1);
+				this.photos.splice(e, 1);
+			},
+			ChooseImage: function(e) {
+				let that = this;
+				wx.chooseImage({
+					count: 4, //默认9
+					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album'], //从相册选择
+					success: (res) => {
+						console.log(res);
+						that.$data.imgList.push(res.tempFilePaths[0]);
+						var tempFilePaths = res.tempFilePaths[0]
 
-			// 			TanslateImage.translate(tempFilePaths, (url) => {
-			// 				that.photos.push(url);
-			// 			})
-			// 		}
-			// 	});
-			// },
+						TanslateImage.translate(tempFilePaths, (url) => {
+							that.photos.push(url);
+						})
+					}
+				});
+			},
 			repairScopeChange: function(e) {
 				this.repairScopeIndex = e.target.value //取其下标
 				let selected = this.repairScopes[this.repairScopeIndex] //获取选中的数组

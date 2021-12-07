@@ -15,11 +15,11 @@ const baseUrl = '/';
 
 // 腾讯地图Key, h5使用
 const QQMapKey = '';
-const commonBaseUrl= 'http://c.dgkaywin.com';
+const commonBaseUrl= 'http://property.homecommunity.cn';
 
 // #ifndef H5
 //服务器域名 小程序 或者 app 时 后端地址
-const baseUrl = 'http://c.dgkaywin.com/'; 
+const baseUrl = 'http://property.homecommunity.cn/'; 
 // #endif
 
 

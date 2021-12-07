@@ -19,7 +19,7 @@
 				<button class="cu-btn sm bg-orange margin-left" @click="doEditOaWorkflow()" v-if="isMe()">编辑</button>
 				<button class="cu-btn sm bg-green margin-left" @click="doDealOaWorkflow()"
 					v-if="action=='Audit'">处理</button>
-				<button class="cu-btn sm bg-orange margin-left" @click="downLoadOaWorkflowFile()">下载</button>
+				<button class="cu-btn sm bg-orange margin-left" @click="downLoadOaWorkflowFile()" v-if="oaWorkflowData.files && oaWorkflowData.files.length >0">下载</button>
 			</view>
 		</view>
 
@@ -169,6 +169,7 @@
 				return "未知"
 			},
 			downLoadOaWorkflowFile: function() {
+				// #ifndef H5
 				uni.downloadFile({
 					url: this.oaWorkflowData.files[0].realFileName, //文件链接
 					header: {},
@@ -197,6 +198,10 @@
 					}
 
 				});
+				// #endif
+				// #ifdef H5
+					window.location.href = this.oaWorkflowData.files[0].realFileName
+				// #endif
 			}
 		}
 	}

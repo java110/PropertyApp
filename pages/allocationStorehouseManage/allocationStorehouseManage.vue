@@ -134,14 +134,12 @@
 						if (res.confirm) {
 							deleteAllocationStorehouse(_that,item)
 							.then(function(res){
-								if(res.code == 0){
-									uni.showToast({
-										title: res.msg
-									})
-									_that.page = 1;
-									_that.applyList = [];
-									_that.loadApply();
-								}
+								uni.showToast({
+									title: res.msg
+								})
+								_that.page = 1;
+								_that.applyList = [];
+								_that.loadApply();
 							})
 						} else if (res.cancel) {
 							console.log('cancel')

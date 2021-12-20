@@ -3,17 +3,22 @@
 		<view class="">
 			<checkbox-group @change="checkboxChange">
 				<view class="cu-list menu-avatar " v-for="(item,index) in resourceList" :key="index">
-					<view class="cu-item" style="height: 80rpx;">
+					<view class="cu-item">
 						<view>
 							<checkbox :value="item.resId" :checked="item.checked" />
 						</view>
-						<view class="content content-left">
+						<view class="content">
 							<view class="text-grey">
 								<text class="ellip">{{item.resName}}({{item.parentRstName}}>{{item.rstName}})</text>
 							</view>
 							<view class="text-gray text-sm flex">
 								<view class="text-cut">
 									编码：{{item.resCode}}
+								</view>
+							</view>
+							<view class="text-gray text-sm flex">
+								<view class="text-cut">
+									固定资产：{{item.isFixedName}}
 								</view>
 							</view>
 						</view>
@@ -157,5 +162,12 @@
 	}
 	.btn-box button{
 		width: 40%;
+	}
+	.cu-list.menu-avatar>.cu-item .content{
+		left: 40rpx;
+		width: 80%;
+	}
+	.cu-list{
+		margin: 0;
 	}
 </style>

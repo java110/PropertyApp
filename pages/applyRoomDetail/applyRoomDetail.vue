@@ -4,7 +4,7 @@
 			<view class="cu-item arrow" @click="showApplyRoomRecord()">
 				<view class="content">
 					<text class="cuIcon-time text-green"></text>
-					<text class="text-grey">装修跟踪记录</text>
+					<text class="text-grey">空置房跟踪记录</text>
 				</view>
 				<view class="action">
 					<text class="text-grey text-sm">查看</text>

@@ -39,6 +39,11 @@
 								最小计量总数：{{item.miniStock}}{{item.miniUnitCodeName}}
 							</view>
 						</view>
+						<view class="text-gray text-sm flex">
+							<view class="text-cut">
+								固定资产：{{item.isFixedName}}
+							</view>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -155,12 +160,16 @@
 </script>
 
 <style>
+	.cu-list.menu-avatar>.cu-item{
+		height: auto;
+	}
 	.cu-list+.cu-list {
 		margin-top: 20upx;
 	}
 
 	.cu-list.menu-avatar>.cu-item .content{
-		left: 20rpx;
+		position: static;
+		margin-left: 20upx;
 		width: 100%;
 	}
 </style>

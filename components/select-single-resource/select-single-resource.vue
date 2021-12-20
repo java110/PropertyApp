@@ -213,7 +213,8 @@
 					page: 1,
 					row: 100,
 					communityId: getCurrentCommunity().communityId,
-					giveType: 1
+					giveType: 1,
+					flag: 1
 				};
 				queryResourceStoreResName(this, _data)
 					.then(function(res) {

@@ -14,10 +14,12 @@
 				<view class="text-gray">{{item.label}}</view>
 				<view class="text-gray">{{oaWorkflowData[item.key]}}</view>
 			</view>
-		
-			<view class="solid-top flex justify-end margin-top padding-top-sm " >
-				<button class="cu-btn sm bg-orange margin-left" @click="doEditOaWorkflow()"  v-if="isMe()">编辑</button>
-				<button class="cu-btn sm bg-green margin-left" @click="doDealOaWorkflow()" v-if="action=='Audit'">处理</button>
+
+			<view class="solid-top flex justify-end margin-top padding-top-sm ">
+				<button class="cu-btn sm bg-orange margin-left" @click="doEditOaWorkflow()" v-if="isMe()">编辑</button>
+				<button class="cu-btn sm bg-green margin-left" @click="doDealOaWorkflow()"
+					v-if="action=='Audit'">处理</button>
+				<button class="cu-btn sm bg-orange margin-left" @click="downLoadOaWorkflowFile()" v-if="oaWorkflowData.files && oaWorkflowData.files.length >0">下载</button>
 			</view>
 		</view>
 
@@ -35,7 +37,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="cu-timeline bg-white margin-top margin-right-xs radius margin-left-xs padding">
 			<view class="cu-time">流程图</view>
 			<view class="">
@@ -52,7 +54,9 @@
 		queryOaWorkflowUser,
 		listRunWorkflowImage
 	} from '../../api/oa/oa.js'
-	import {getUserInfo} from '../../lib/java110/api/Java110SessionApi.js'
+	import {
+		getUserInfo
+	} from '../../lib/java110/api/Java110SessionApi.js'
 	export default {
 		data() {
 			return {
@@ -60,10 +64,10 @@
 				id: '',
 				flowId: '',
 				components: [],
-				comments:[],
-				flowImage:'',
-				action:'',
-				taskId:''
+				comments: [],
+				flowImage: '',
+				action: '',
+				taskId: ''
 			}
 		},
 		onLoad(option) {
@@ -90,9 +94,9 @@
 						_that.components = _that.formJson.components;
 					})
 			},
-			isMe:function(){
+			isMe: function() {
 				let _userId = getUserInfo().userId;
-				if(this.oaWorkflowData.create_user_id == _userId && this.action){
+				if (this.oaWorkflowData.create_user_id == _userId && this.action) {
 					return true;
 				}
 				return false;
@@ -119,26 +123,28 @@
 					_that.comments = _data.data;
 				})
 			},
-			_listRunWorkflowImage:function(){
+			_listRunWorkflowImage: function() {
 				let _that = this;
-				listRunWorkflowImage(this,{
-					communityId:'',
-					businessKey:this.id
-				}).then(_data=>{
-					_that.flowImage ='data:image/png;base64,' + _data.data;
+				listRunWorkflowImage(this, {
+					communityId: '',
+					businessKey: this.id
+				}).then(_data => {
+					_that.flowImage = 'data:image/png;base64,' + _data.data;
 				})
 			},
-			doDealOaWorkflow:function(){				
+			doDealOaWorkflow: function() {
 				this.context.navigateTo({
-					url:'/pages/newOaWorkflowUndoAudit/newOaWorkflowUndoAudit?flowId='+this.flowId+"&id="+this.id+"&taskId="+this.taskId
+					url: '/pages/newOaWorkflowUndoAudit/newOaWorkflowUndoAudit?flowId=' + this.flowId +
+						"&id=" + this.id + "&taskId=" + this.taskId
 				})
 			},
-			doEditOaWorkflow:function(){
+			doEditOaWorkflow: function() {
 				this.context.navigateTo({
-					url:'/pages/newOaWorkflowFormEdit/newOaWorkflowFormEdit?flowId='+this.flowId+"&id="+this.id
+					url: '/pages/newOaWorkflowFormEdit/newOaWorkflowFormEdit?flowId=' + this.flowId + "&id=" +
+						this.id
 				})
 			},
-			
+
 			_getNewOaWorkflowDetailState: function(_finish) {
 				/**
 				 * 1001 申请 1002 待审核 1003 退回 1004 委托 1005 办结
@@ -161,6 +167,41 @@
 				}
 
 				return "未知"
+			},
+			downLoadOaWorkflowFile: function() {
+				// #ifndef H5
+				uni.downloadFile({
+					url: this.oaWorkflowData.files[0].realFileName, //文件链接
+					header: {},
+					success: ({
+						statusCode,
+						tempFIlePath
+					}) => {
+						//statusCode状态为200表示请求成功，tempFIlePath临时路径
+						if (statusCode == 200) {
+							//保存到本地
+							uni.saveFile({
+								tempFIlePath,
+								success: function(res) {
+									//res.savedFilePath文件的保存路径
+									uni.showToast({
+										icon: 'none',
+										title: '文件保存至' + res.savedFilePath
+									})
+								},
+								fail: () => console.log('下载失败')
+							})
+						}
+					},
+					fail: function() {
+						console.log('下载失败')
+					}
+
+				});
+				// #endif
+				// #ifdef H5
+					window.location.href = this.oaWorkflowData.files[0].realFileName
+				// #endif
 			}
 		}
 	}

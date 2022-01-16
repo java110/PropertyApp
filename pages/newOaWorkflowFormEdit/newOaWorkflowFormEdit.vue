@@ -65,6 +65,13 @@
 				</view>
 			</checkbox-group>
 
+			<view v-if="item.type== 'button' && item.action == 'submit'" class=" text-right">
+				<view class="button_up_blank"></view>
+				<view>{{fileName}}</view>
+				<view class="flex flex-direction">
+					<button class="cu-btn bg-white margin-tb-sm lg" @click="_doUploadFile()">上传附件</button>
+				</view>
+			</view>
 			<!--提交框-->
 			<view v-if="item.type== 'button' && item.action == 'submit'">
 				<view class="button_up_blank"></view>
@@ -85,6 +92,7 @@
 </template>
 
 <script>
+	import {getHeaders} from '../../lib/java110/api/SystemApi.js'
 	import {
 		queryOaWorkflowForm,
 		updateOaWorkflowFormData,
@@ -100,7 +108,9 @@
 				components: [],
 				flowId: '',
 				flowName: '',
-				id:''
+				id: '',
+				fileName:'',
+				realFileName:''
 			}
 		},
 		onLoad(options) {
@@ -130,7 +140,7 @@
 							item.valueIndex = 0;
 						}
 					})
-				}).then(_data=>{
+				}).then(_data => {
 					return queryOaWorkflowFormData(this, {
 						page: 1,
 						row: 1,
@@ -138,15 +148,19 @@
 						id: this.id
 					})
 				}).then(_data => {
-						let _oaData = _data.data[0];
-						_that.components.forEach(item => {
-							item.value = _oaData[item.key];
-						})
-						console.log(_that.components);
-						_that.$forceUpdate();
+					let _oaData = _data.data[0];
+					_that.components.forEach(item => {
+						item.value = _oaData[item.key];
+					})
+					console.log(_that.components);
+					if(_oaData.files){
+						_that.fileName = _oaData.files[0].fileName;
+						_that.realFileName = _oaData.files[0].realFileName;
+					}
+					_that.$forceUpdate();
 				})
 			},
-			
+
 			dateChange: function(e, obj) {
 				obj.value = e.detail.value;
 				this.$forceUpdate();
@@ -172,7 +186,10 @@
 			_doSubmit: function() {
 				//做数据校验
 				let _components = this.components;
-				let _data = {};
+				let _data = {
+					fileName:this.fileName,
+					realFileName:this.realFileName
+				};
 				_components.forEach(item => {
 					if (item.validate && item.validate.required == true && isEmpty(item.value)) {
 						uni.showToast({
@@ -233,6 +250,52 @@
 					}
 				});
 				this.$forceUpdate();
+			},
+			_doUploadFile: function() {
+				uni.chooseFile({
+					count: 1, //默认100
+					extension: ['.zip'],
+					success: (res) => {
+						console.log(res);
+						if (res.tempFiles[0].size / 1024 / 1024 > 20) {
+							this.$refs.uToast.show({
+								title: '附件大小不能超过20M',
+								type: 'warning',
+							})
+							return;
+						}
+				 	this.resultPath(res.tempFilePaths[0], res.tempFiles[0].name);
+					}
+				});
+			},
+			resultPath(path,fileName) {
+			    let _that = this;
+			    uni.showLoading({
+			      title: '上传中...',
+			    });
+			    uni.uploadFile({
+			        url: '/callComponent/upload/uploadVedio/upload', 
+			        filePath: path,
+					name: 'uploadFile',
+			        header:getHeaders(),
+			        formData: {
+			            // 'user': 'test'
+			        },
+			        success: (uploadFileRes) => {
+						uni.hideLoading();
+			             let obj = JSON.parse(uploadFileRes.data);
+			             _that.fileName = obj.fileName;
+						 _that.realFileName = obj.realFileName;
+						 
+			         },
+			         fail:(err) =>{
+			             this.$refs.uToast.show({
+			                 title: '上传失败',
+			                 type: 'error',
+			             });
+			             uni.hideLoading();
+			         }
+			    });
 			}
 		}
 	}

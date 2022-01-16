@@ -83,7 +83,7 @@
 				<!-- <view class="repair-img-title">业主报修图片</view> -->
 				<view class="margin-top grid text-center col-4 grid-square" >
 					<view class="" v-for="(_item,index) in repairDetailInfo.repairPhotos" :key="index">
-						<image mode="widthFix" :data-url="srcPath+_item.url" :src="srcPath+_item.url" @tap="preview"></image>
+						<image mode="widthFix" :data-url="_item.url" :src="_item.url" @tap="preview"></image>
 					</view>
 				</view>
 			</view>
@@ -97,7 +97,7 @@
 				<!-- <view class="repair-img-title">维修前图片</view> -->
 				<view class="margin-top grid text-center col-4 grid-square" >
 					<view class="" v-for="(_item,index) in repairDetailInfo.beforePhotos" :key="index">
-						<image mode="widthFix" :data-url="srcPath+_item.url" :src="srcPath+_item.url" @tap="preview"></image>
+						<image mode="widthFix" :data-url="_item.url" :src="_item.url" @tap="preview"></image>
 					</view>
 				</view>
 			</view>
@@ -111,7 +111,7 @@
 				<!-- <view class="repair-img-title">维修后图片</view> -->
 				<view class="margin-top grid text-center col-4 grid-square" >
 					<view class="" v-for="(_item,index) in repairDetailInfo.afterPhotos" :key="index">
-						<image mode="widthFix" :data-url="srcPath+_item.url" :src="srcPath+_item.url" @tap="preview"></image>
+						<image mode="widthFix" :data-url="_item.url" :src="_item.url" @tap="preview"></image>
 					</view>
 				</view>
 			</view>

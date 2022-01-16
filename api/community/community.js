@@ -48,10 +48,13 @@ export function getCommunity(reload, _condition) {
 			data: _condition,
 			success: function(res) {
 				if (res.statusCode != 200) {
-					uni.showToast({
-						icon: 'none',
-						title: res.data
-					});
+					// uni.showToast({
+					// 	icon: 'none',
+					// 	title: res.data
+					// });
+					uni.navigateTo({
+						url:'/pages/login/login'
+					})
 					return;
 				}
 				let data = res.data;

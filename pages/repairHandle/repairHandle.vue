@@ -428,11 +428,11 @@
 					success: (res) => {
 						that.afterRepairImgList.push(res.tempFilePaths[0]);
 						var tempFilePaths = res.tempFilePaths[0]
-						//#ifdef H5
+						
 						TanslateImage.translate(tempFilePaths, (url) => {
 							that.afterRepairPhotos.push(url);
 						})
-						//#endif
+						
 					}
 				});
 			},

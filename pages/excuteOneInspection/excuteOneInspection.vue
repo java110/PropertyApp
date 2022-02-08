@@ -178,11 +178,11 @@
 					success: (res) => {
 						that.$data.imgList.push(res.tempFilePaths[0]);
 						var tempFilePaths = res.tempFilePaths[0]
-						//#ifdef H5
+				
 						TanslateImage.translate(tempFilePaths, (url) => {
 							that.photos.push(url);
 						})
-						//#endif
+				
 					}
 				});
 			},

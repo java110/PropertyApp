@@ -210,10 +210,13 @@
 					success: function(res) {
 						console.log("请求返回信息：", res);
 						if (res.statusCode != 200) {
-							uni.showToast({
-								icon: 'none',
-								title: res.data
-							});
+							// uni.showToast({
+							// 	icon: 'none',
+							// 	title: res.data
+							// });
+							uni.navigateTo({
+								url:'/pages/login/login'
+							})
 							return;
 						}
 						let _data = res.data;
@@ -297,10 +300,13 @@
 						success: function(res) {
 							console.log(res);
 							if (res.statusCode != 200) {
-								uni.showToast({
-									icon: 'none',
-									title: res.data
-								});
+								// uni.showToast({
+								// 	icon: 'none',
+								// 	title: res.data
+								// });
+								uni.navigateTo({
+									url:'/pages/login/login'
+								})
 								return;
 							}
 							_that.state = '10001';

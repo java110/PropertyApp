@@ -81,10 +81,13 @@
 				loadCompaintFinish(this, _objData)
 					.then(function(res) {
 						if (res.statusCode != 200) {
-							uni.showToast({
-								icon: 'none',
-								title: res.data
-							});
+							// uni.showToast({
+							// 	icon: 'none',
+							// 	title: res.data
+							// });
+							uni.navigateTo({
+								url:'/pages/login/login'
+							})
 							return;
 						}
 						let _data = res.data;

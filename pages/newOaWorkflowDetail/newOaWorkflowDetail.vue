@@ -19,7 +19,16 @@
 				<button class="cu-btn sm bg-orange margin-left" @click="doEditOaWorkflow()" v-if="isMe()">编辑</button>
 				<button class="cu-btn sm bg-green margin-left" @click="doDealOaWorkflow()"
 					v-if="action=='Audit'">处理</button>
-				<button class="cu-btn sm bg-orange margin-left" @click="downLoadOaWorkflowFile()" v-if="oaWorkflowData.files && oaWorkflowData.files.length >0">下载</button>
+				<!-- #ifdef H5 -->
+				<a class="table-btn" v-if="oaWorkflowData.files && oaWorkflowData.files.length >0" 
+				 :href="oaWorkflowData.files[0].realFileName" target='_blank'>下载</a>
+				<!-- #endif -->
+
+				<!-- #ifdef MP-WEIXIN -->
+				<button class="cu-btn sm bg-orange margin-left" @click="downLoadOaWorkflowFile()"
+					v-if="oaWorkflowData.files && oaWorkflowData.files.length >0">下载</button>
+				<!-- #endif -->
+
 			</view>
 		</view>
 
@@ -200,7 +209,13 @@
 				});
 				// #endif
 				// #ifdef H5
-					window.location.href = this.oaWorkflowData.files[0].realFileName
+				//window.location.href = this.oaWorkflowData.files[0].realFileName
+				let el = document.createElement('a')
+				document.body.appendChild(el)
+				el.href = this.oaWorkflowData.files[0].realFileName
+				el.target = '_blank'
+				el.click()
+				document.body.removeChild(el)
 				// #endif
 			}
 		}

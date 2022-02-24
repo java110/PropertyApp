@@ -23,7 +23,7 @@
 									</view>
 							</view>
 							<view class="text-gray flex-around">
-									<label class="text-df">采购价格:</label>
+									<label class="text-df">采购单价:</label>
 									<view class="flex">
 										<input class="use-number bg-gray" type="number" v-model="item.urgentPrice" value="" />
 									</view>

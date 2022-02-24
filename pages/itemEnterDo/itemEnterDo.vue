@@ -16,7 +16,7 @@
 								<input class="use-number bg-gray" type="number" v-model="item.purchaseQuantity" value="" />
 							</view>
 							<view class="flex-item w50">
-								<label>采购价格:</label>
+								<label>采购单价:</label>
 								<input class="use-number bg-gray" type="number" v-model="item.price" value="" />
 							</view>
 						</view>

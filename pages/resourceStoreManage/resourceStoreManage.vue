@@ -18,10 +18,13 @@
 				<button class="cu-btn bg-blue" @tap="_returnResource()">退还</button>
 			</view>
 			<view class="action">
+				<button class="cu-btn bg-blue" @tap="_scrapResource()">损耗</button>
+			</view>
+			<view class="action">
 				<button class="cu-btn bg-blue" @tap="_transferResource()">转赠</button>
 			</view>
 		</view>
-		<view class="margin-top" v-if="noData==false">
+		<view class="margin-top" v-if="resourceList.length>0">
 			<view class="cu-list menu-avatar " v-for="(item,index) in resourceList" :key="index">
 				<view class="cu-item">
 					<view class="content">
@@ -69,7 +72,7 @@
 				resourceList: [],
 				resName: '',
 				searchUserName: '',
-				noData:false,
+				// noData:false,
 				page: 1,
 				hasPrivilege: this.java110Context.hasPrivilege('502021071018550002'),
 				loadingStatus : 'loading',
@@ -128,10 +131,10 @@
 						_that.resourceList = _that.resourceList.concat(_data);
 						_that.page ++;
 
-						if(_that.resourceList.length < 1){
-							_that.noData = true;
-							return ;
-						}
+						// if(_that.resourceList.length < 1){
+						// 	_that.noData = true;
+						// 	return ;
+						// }
 						if(_that.resourceList.length == res.total){
 							_that.loadingStatus = 'noMore';
 							return;
@@ -147,6 +150,12 @@
 			_returnResource: function(){
 				uni.navigateTo({
 					url: '/pages/resourceStoreReturn/resourceStoreReturn'
+				})
+			},
+			
+			_scrapResource: function(){
+				uni.navigateTo({
+					url: '/pages/resourceStoreScrap/resourceStoreScrap'
 				})
 			},
 			

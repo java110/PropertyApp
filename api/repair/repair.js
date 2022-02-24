@@ -309,3 +309,51 @@ export function queryDictInfo(_that,_data){
 		})
 	});
 }
+
+/**
+ * 维修任务暂停
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+export function repairStop(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.post({
+			url: url.repairStop,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+/**
+ * 维修任务开始
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+export function repairStart(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.post({
+			url: url.repairStart,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}

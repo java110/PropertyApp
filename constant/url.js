@@ -153,4 +153,6 @@ export default {
 	deleteRoomRenovationRecord: baseUrl + "app/roomRenovation/deleteRoomRenovationRecord",
 	// 查询缴费历史
 	listFeeDetail: baseUrl + "callComponent/propertyFee/listFeeDetail",
+	repairStop: baseUrl + "callComponent/ownerRepair.repairStop",
+	repairStart: baseUrl + "callComponent/ownerRepair.repairStart",
 }

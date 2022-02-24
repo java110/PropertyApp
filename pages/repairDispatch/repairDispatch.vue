@@ -48,13 +48,16 @@
 				</view>
 				<view class="solid-top flex justify-end margin-top padding-top-sm ">
 					<button class="cu-btn sm line-gray" @click="repairDetail(item)">详情</button>
-					<button class="cu-btn sm bg-orange margin-left" v-if="item.state == '1100' || item.state == '1200' ||item.state == '1300'"
-					 @click="dealRepair(item,'TRANSFER')">转单</button>
-					<button class="cu-btn sm bg-red margin-left" v-if="item.preStaffId != '-1'" @click="dealRepair(item,'BACK')">退单</button>
-					<button class="cu-btn sm bg-green margin-left" v-if="item.state == '1100' || item.state == '1200' ||item.state == '1300'"
-					 @click="dealRepair(item,'FINISH')">办结</button>
-					<button class="cu-btn sm bg-green margin-left" v-if="item.state == '1800' && item.returnVisitFlag == '003' && checkAuth('502021040151320003')" @click="dealAppraise(item)">回访</button>
-
+					<view v-if="item.state == '2001'">
+						<button class="cu-btn sm bg-green margin-left" @click="startRepair(item)">启动</button>
+					</view>
+					<view v-else>
+						<button class="cu-btn sm bg-orange margin-left" v-if="item.state == '1100' || item.state == '1200' ||item.state == '1300'" @click="dealRepair(item,'TRANSFER')">转单</button>
+						<button class="cu-btn sm bg-orange margin-left" v-if="item.state == '1100' || item.state == '1200' ||item.state == '1300'" @click="stopRepair(item)">暂停</button>
+						<button class="cu-btn sm bg-red margin-left" v-if="item.preStaffId != '-1'" @click="dealRepair(item,'BACK')">退单</button>
+						<button class="cu-btn sm bg-green margin-left" v-if="item.state == '1100' || item.state == '1200' ||item.state == '1300'" @click="dealRepair(item,'FINISH')">办结</button>
+						<button class="cu-btn sm bg-green margin-left" v-if="item.state == '1800' && item.returnVisitFlag == '003' && checkAuth('502021040151320003')" @click="dealAppraise(item)">回访</button>
+					</view>
 				</view>
 			</view>
 			<uni-load-more :status="loadingStatus" :content-text="loadingContentText" />
@@ -62,15 +65,17 @@
 		<view v-else>
 			<no-data-page></no-data-page>
 		</view>
+		<myModal :modalData='modal' @dataInput='dataInput'></myModal>
 	</view>
 </template>
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
+	import myModal from '@/components/modal/modal.vue'
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	import url from '../../constant/url.js'
 	import {getCurrentCommunity} from '../../api/community/community.js'
-	import {queryDictInfo} from '../../api/repair/repair.js'
+	import {queryDictInfo, repairStart, repairStop} from '../../api/repair/repair.js'
 	// 防止多次点击
 	import {preventClick} from '../../lib/java110/utils/common.js';
 	import Vue from 'vue'
@@ -96,19 +101,24 @@
 				}],
 				repairStatesIndex: 0,
 				repairState: '',
-				repairName: ''
+				repairName: '',
+				modal:{
+					showModal: false,
+					title:'暂停原因',
+					text:'请填写暂停原因'
+				}
 			}
 		},
 		components: {
 			noDataPage,
-			uniLoadMore
+			uniLoadMore,
+			myModal
 		},
 		onLoad() {
 			this.java110Context.onLoad()
 			this.loadRepairState();
 		},
 		onShow(){
-
 			let _userInfo = this.java110Context.getUserInfo();
 			let _storeId = _userInfo.storeId;
 			this.storeId = _storeId;
@@ -243,6 +253,56 @@
 						"&repairChannel=" + item.repairChannel +
 						"&publicArea=" + item.publicArea +
 						"&communityId=" + item.communityId
+				})
+			},
+			
+			startRepair: function(item){
+				uni.showModal({
+				    title: '提示',
+				    content: '确认启动报修',
+				    success: (res) => {
+				        if (res.confirm) {
+				            repairStart(this, item)
+							.then((result) => {
+								if(result.code == 0){
+									this.myOrders = [];
+									this.page = 1;
+									this._loadMyModify();
+								}
+								uni.showToast({
+									title: result.msg
+								})
+							})
+				        } else if (res.cancel) {
+				            console.log('用户点击取消');
+				        }
+				    }
+				});
+			},
+			
+			stopRepair(item){
+				this.actItem = item;
+				this.modal.showModal = true
+			},
+			
+			// 组件中input中传过来的值
+			dataInput(res){
+				let objData = {
+					communityId: this.actItem.communityId,
+					remark: res,
+					repairId: this.actItem.repairId,
+					repairType: this.actItem.repairType
+				};
+				repairStop(this, objData)
+				.then((result) => {
+					if(result.code == 0){
+						this.myOrders = [];
+						this.page = 1;
+						this._loadMyModify();
+					}
+					uni.showToast({
+						title: result.msg
+					})
 				})
 			}
 		}

@@ -428,6 +428,12 @@
 			}
 		},
 		{
+		    "path" : "pages/resourceStoreScrap/resourceStoreScrap",
+		    "style" : {
+				"navigationBarTitleText": "物品损耗"
+			}
+		},
+		{
 			"path" : "pages/resourceStoreTransfer/resourceStoreTransfer",
 			"style" : {
 				"navigationBarTitleText": "物品转赠"

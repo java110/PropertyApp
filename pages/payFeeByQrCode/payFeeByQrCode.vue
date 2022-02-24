@@ -63,7 +63,7 @@
 							height: 150,
 							colorDark: "#333333",
 							colorLight: "#FFFFFF",
-							correctLevel: qrCode.CorrectLevel.H
+							correctLevel: qrCode.CorrectLevel.L
 						})	
 					})
 			

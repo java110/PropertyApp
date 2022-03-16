@@ -48,3 +48,28 @@ export function queryDictInfo(_that,_data){
 		})
 	});
 }
+
+/**
+ * 投票问卷
+ * @param {Object} _data 评价内容
+ */
+export function queryInspectionItemTitle(_that,_data) {
+	return new Promise((resolve, reject) => {
+		let moreRooms = [];
+		_that.context.get({
+			url: url.listInspectionItemTitle,
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				if (_data.code == 0) {
+					resolve(_data);
+					return ;
+				}
+				reject(_data.msg);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}

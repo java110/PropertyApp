@@ -117,7 +117,7 @@
 				console.log('巡检点', _item);
 				uni.navigateTo({
 					url: '/pages/excuteOneInspection/excuteOneInspection?taskDetailId=' + _item.taskDetailId + "&taskId=" + _item.taskId +
-						"&inspectionId=" + _item.inspectionId + "&inspectionName=" + _item.inspectionName
+						"&inspectionId=" + _item.inspectionId + "&inspectionName=" + _item.inspectionName+"&itemId="+_item.itemId
 				});
 			},
 			preview: function(_src) {

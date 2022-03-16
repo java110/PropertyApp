@@ -2,17 +2,31 @@
 	<view>
 		<view class="block__title">{{inspectionName}}巡检</view>
 		<form>
-			<view class="cu-form-group">
-				<view class="title">巡检情况</view>
-				<picker @change="patrolChange" :value="patrolIndex" :range-key="'name'" :range="patrolTypes">
-					<view class="picker">
-						{{patrolTypes[patrolIndex].name}}
+			<view class="" v-for="(item,index) in titles" :key="index">
+				<view class="block__title">{{item.itemTitle}}</view>
+				<radio-group class="block" @change="radioChange($event,item)" v-if="item.titleType == '1001'">
+					<view class="cu-form-group" v-for="(valueItem,valueIndex) in item.inspectionItemTitleValueDtos"
+						:key="valueIndex">
+						<view class="title">{{valueItem.itemValue}}</view>
+						<radio :class="item.radio==valueItem.itemValue?'checked':''"
+							:checked="item.radio==valueItem.itemValue?true:false" :value="valueItem.itemValue">
+						</radio>
 					</view>
-				</picker>
-			</view>
-			
-			<view class="cu-form-group margin-top">
-				<textarea maxlength="-1" v-model="description" placeholder="请输入巡检说明"></textarea>
+				</radio-group>
+				<checkbox-group class="block" @change="checkboxChange($event,item)" v-else-if="item.titleType == '2002'">
+					<view class="cu-form-group " v-for="(valueItem,valueIndex) in item.inspectionItemTitleValueDtos">
+						<view class="title">{{valueItem.itemValue}}</view>
+						<checkbox :class="item.radio[valueIndex].selected == '1'?'checked':''"
+							:checked="item.radio[valueIndex].selected == '1'?true:false" :value="valueItem.itemValue">
+						</checkbox>
+					</view>
+					<!--:checked="item.radio[valueIndex].checked?true:false"-->
+				</checkbox-group>
+				<view v-else>
+					<view class="cu-form-group ">
+						<textarea maxlength="512" v-model="item.radio" placeholder="请回答"></textarea>
+					</view>
+				</view>
 			</view>
 			<view class="cu-bar bg-white margin-top">
 				<view class="action">
@@ -52,7 +66,7 @@
 	import conf from '../../conf/config.js'
 	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
 	import {preventClick} from '../../lib/java110/utils/common.js';
-	import {queryDictInfo} from '../../api/inspection/inspection.js';
+	import {queryDictInfo,queryInspectionItemTitle} from '../../api/inspection/inspection.js';
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	import url from '../../constant/url.js'
 	import Vue from 'vue'
@@ -71,7 +85,7 @@
 					name: '请选择'
 				}],
 				patrolIndex:0,
-				patrolType:'',
+				patrolType:'10001',
 				patrolTypeName:'请选择',
 				description:'',
 				photos:[],
@@ -82,7 +96,9 @@
 				latitude: '',
 				longitude: '',
 				location: '',
-				reverseGeocoderSimplify: '正在获取...'
+				reverseGeocoderSimplify: '正在获取...',
+				titles: [],
+				itemId:''
 			}
 		},
 		onLoad(option) {
@@ -101,14 +117,45 @@
 			this.taskId = option.taskId;
 			this.inspectionId = option.inspectionId;
 			this.inspectionName = option.inspectionName;
+			this.itemId = option.itemId;
 			
 			this.communityId = getCurrentCommunity().communityId;
 			let _userInfo = this.java110Context.getUserInfo();
 			this.userName = _userInfo.userName;
 			this.userId = _userInfo.userId;
 			this._loadPatrolTypesList();
+			this._loadInspectionItem();
 		},
 		methods: {
+			_loadInspectionItem:function(){
+				let that = this;
+				queryInspectionItemTitle(this,{
+						communityId: that.communityId,
+						itemId: that.itemId,
+						page: 1,
+						row: 100
+					})
+					.then(_data => {
+						_data.data.forEach(item => {
+							if (item.titleType == '1001') {
+								item.radio = ''
+							} else if (item.titleType == '2002') {
+								// checked: false
+								item.radio = [];
+								item.inspectionItemTitleValueDtos.forEach(value => {
+									item.radio.push({
+										checked: false,
+										itemValue: value.itemValue,
+										selected: '0'
+									})
+								})
+							} else {
+								item.radio = ''
+							}
+						})
+						that.titles = _data.data;
+					})
+			},
 			// 地址逆解析
 			getCurrentLocation: function(){
 				let locationObj = this.latitude + ',' + this.longitude;
@@ -176,6 +223,7 @@
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['camera'], //手机拍照
 					success: (res) => {
+					
 						that.$data.imgList.push(res.tempFilePaths[0]);
 						var tempFilePaths = res.tempFilePaths[0]
 				
@@ -190,6 +238,20 @@
 				let _that = this;
 				uni.showLoading({
 					title:'请稍后...'
+				});
+				this.description = '';
+				this.titles.forEach(item=>{
+					let _itemValue = ''
+					if(item.titleType == '2002'){
+						item.radio.forEach(_radio => {
+							if (_radio.selected == '1') {
+								_itemValue += (_radio.itemValue+',')
+							}
+						})
+						this.description +=(item.itemTitle+':'+_itemValue+';')
+					}else{
+						this.description +=(item.itemTitle+':'+item.radio+';')
+					}
 				})
 				let obj = {
 					"taskId": this.taskId,
@@ -274,6 +336,31 @@
 					});
 			
 				}
+			},
+			radioChange: function(e, item) {
+				console.log(e, item)
+				item.radio = e.detail.value;
+				console.log('item.radio', item.radio, e)
+				
+			},
+			checkboxChange: function(e, item) {
+				item.radio.forEach(value => {
+					value.selected = '0';
+					value.checked = false;
+				})
+			
+				item.radio.forEach(value => {
+					e.detail.value.forEach(_dValue =>{
+						if (value.itemValue == _dValue) {
+							if (value.selected == '0') {
+								value.selected = '1';
+								value.checked = true;
+							}
+						}
+					})
+				})
+			
+				console.log('item.radio', item.radio, e)
 			},
 			
 		}

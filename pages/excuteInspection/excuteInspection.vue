@@ -95,7 +95,6 @@
 					},
 					success: function(res) {
 						// TODO 判断
-				
 						let _inspectionTaskDetails = res.data.inspectionTaskDetails;
 						_inspectionTaskDetails.forEach(function(_item) {
 							if (_item.state == '20200407') {

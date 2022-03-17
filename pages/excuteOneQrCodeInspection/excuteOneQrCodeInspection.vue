@@ -62,7 +62,7 @@
 						let _inspectionTaskDetails = res.data.inspectionTaskDetails;
 						_that.taskDetails = _inspectionTaskDetails;
 
-						if (!_that.taskDetails || _that.taskDetails.length < 0) {
+						if (!_that.taskDetails || _that.taskDetails.length < 1) {
 							return;
 						}
 						

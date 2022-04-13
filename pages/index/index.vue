@@ -4,7 +4,7 @@
 			<uni-notice-bar :showIcon="true" :scrollable="true" :single="true" :speed="30"
 				text="HC掌上物业欢迎您"></uni-notice-bar>
 		</view>
-		<scroll-view @scrolltolower="lower" class="scroll-restaurants-list" scroll-y="true" style="height:100%">
+		<scroll-view  class="scroll-restaurants-list" scroll-y="true" style="height:100%">
 			<swiper class="categoryList padding-top-xs bg-white" indicator-dots="true"
 				indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49">
 				<block v-for="(item, index) in categoryList" :key="index">

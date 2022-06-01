@@ -24,7 +24,7 @@
 					<view class="content content-left">
 						<view class="text-grey">
 							<text class="cuIcon-notification text-cut text-green margin-right-xs"></text>
-							<text class="ellip">{{item.repairObjName}}-{{item.stateName}}</text>
+							<text class="ellip">{{item.repairObjName}}-{{item.stateName}}({{item.repairSettingTypeName}})</text>
 						</view>
 						<view class="text-gray text-sm flex">
 							<view class="text-cut">

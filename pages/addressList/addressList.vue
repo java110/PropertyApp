@@ -81,7 +81,7 @@
 				let storeId = _userInfo.storeId;
 				let _objData = {
 					page: 1,
-					row: 15,
+					row: 1000,
 					storeId: storeId,
 					name: this.name
 				};

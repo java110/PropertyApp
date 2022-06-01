@@ -1,9 +1,9 @@
 import conf from '../conf/config.js'
 const baseUrl = conf.baseUrl;
-const hcBaseUrl = conf.baseUrl;
+const hcBaseUrl = conf.commonBaseUrl;
 export default {
 	baseUrl: baseUrl,
-	hcBaseUrl: baseUrl, // 登录接口
+	hcBaseUrl: hcBaseUrl, // 登录接口
 	loginUrl: baseUrl + 'app/loginProperty',
 	areaUrl: baseUrl + "app/area.listAreas",
 	GetNoticeListUrl: baseUrl + 'app/notice.listNotices', //公告接口

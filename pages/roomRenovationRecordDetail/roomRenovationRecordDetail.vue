@@ -33,7 +33,7 @@
 				<view class="cu-item">
 					<view class="grid text-center col-4 grid-square" >
 						<view class="" v-for="(item,index) in imgRecordList" :key="index">
-							<image mode="widthFix" :data-url="commonBaseUrl + item.url" :data-index="index" :src="commonBaseUrl + item.url" @tap="preview"></image>
+							<image mode="widthFix" :data-url="item.url" :data-index="index" :src="item.url" @tap="preview"></image>
 						</view>
 					</view>
 				</view>
@@ -41,7 +41,7 @@
 			<view v-if="videoRecordList.length>0">
 			<view class="text-grey">视频</view>
 				<view v-for="(item,index) in videoRecordList" :key="index">
-					<video class="record-video" object-fit="contain" :src="commonBaseUrl + item.url" controls></video>
+					<video class="record-video" object-fit="contain" :src="item.url" controls></video>
 				</view>
 			</view>
 		</view>

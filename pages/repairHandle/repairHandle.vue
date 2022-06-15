@@ -389,16 +389,14 @@
 				wx.chooseImage({
 					count: 4, //默认9
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
+					sourceType: ['camera','album'], //从相册选择
 					success: (res) => {
 						that.imgList.push(res.tempFilePaths[0]);
 						var tempFilePaths = res.tempFilePaths[0]
 
-						//#ifdef H5
 						TanslateImage.translate(tempFilePaths, (url) => {
 							that.photos.push(url);
 						})
-						//#endif
 					}
 				});
 			},
@@ -407,15 +405,15 @@
 				wx.chooseImage({
 					count: 4, //默认9
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
+					sourceType: ['camera','album'], //从相册选择
 					success: (res) => {
 						that.beforeRepairImgList.push(res.tempFilePaths[0]);
 						var tempFilePaths = res.tempFilePaths[0]
-						//#ifdef H5
+				
 						TanslateImage.translate(tempFilePaths, (url) => {
 							that.beforeRepairPhotos.push(url);
 						})
-						//#endif
+
 					}
 				});
 			},
@@ -424,7 +422,7 @@
 				wx.chooseImage({
 					count: 4, //默认9
 					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
+					sourceType: ['camera','album'], //从相册选择
 					success: (res) => {
 						that.afterRepairImgList.push(res.tempFilePaths[0]);
 						var tempFilePaths = res.tempFilePaths[0]

@@ -157,7 +157,7 @@
 		<view v-else class="flex flex-direction margin-top">
 			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_dispatchRepair()">提交</button>
 		</view>
-		<select-single-resource @getResourceInfo="_getResourceInfo" ref="selectsingleresource" :feeFlag="feeFlag"></select-single-resource>
+		<!-- <select-single-resource @getResourceInfo="_getResourceInfo" ref="selectsingleresource" :feeFlag="feeFlag"></select-single-resource> -->
 	</view>
 </template>
 
@@ -174,7 +174,7 @@
 	import {preventClick} from '../../lib/java110/utils/common.js';
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
-	import selectSingleResource from '../../components/select-single-resource/select-single-resource.vue'
+	// import selectSingleResource from '../../components/select-single-resource/select-single-resource.vue'
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	export default {
 		data() {
@@ -223,9 +223,10 @@
 			}
 		},
 		components:{
-			selectSingleResource
+			//selectSingleResource
 		},
 		onLoad(options) {
+			let _that = this;
 			this.java110Context.onLoad();
 			this.publicArea = options.publicArea;
 			this.action = options.action;
@@ -262,6 +263,12 @@
 			}
 			this._loadRepairStaff();
 			this._loadPayTypes();
+			uni.$on('_getResourceInfo',function(_data){
+				_that._getResourceInfo();
+			});
+		},
+		onUnload() {
+			uni.$off('_getResourceInfo');
 		},
 		methods: {
 			_loadPayTypes: function(){
@@ -321,7 +328,10 @@
 				this._updateTotalPrice();
 			},
 			_openSelectResourceModel: function(){
-				this.$refs.selectsingleresource.switchShow();
+				//this.$refs.selectsingleresource.switchShow();
+				uni.navigateTo({
+					url:'/pages/repairHandle/selectResource?feeFlag='+this.feeFlag
+				})
 			},
 			_loadRepairStaff: function() {
 				let _that = this;

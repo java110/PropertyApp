@@ -15,11 +15,11 @@ const baseUrl = '/';
 
 // 腾讯地图Key, h5使用
 const QQMapKey = '';
-const commonBaseUrl= 'http://jiuding16888.com';
+const commonBaseUrl= 'http://wy.yxkj.ltd/';
 
 // #ifndef H5
 //服务器域名 小程序 或者 app 时 后端地址
-const baseUrl = 'http://jiuding16888.com/'; 
+const baseUrl = 'http://wy.yxkj.ltd/'; 
 // #endif
 
 

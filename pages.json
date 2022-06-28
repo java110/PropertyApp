@@ -537,6 +537,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/repairHandle/selectResource",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "选择物品",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

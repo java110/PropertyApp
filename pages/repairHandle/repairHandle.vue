@@ -263,12 +263,13 @@
 			}
 			this._loadRepairStaff();
 			this._loadPayTypes();
-			uni.$on('_getResourceInfo',function(_data){
-				_that._getResourceInfo();
+			uni.$on('getResourceInfo',function(_data){
+				console.log(_data)
+				_that._getResourceInfo(_data);
 			});
 		},
 		onUnload() {
-			uni.$off('_getResourceInfo');
+			uni.$off('getResourceInfo');
 		},
 		methods: {
 			_loadPayTypes: function(){

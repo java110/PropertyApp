@@ -49,7 +49,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-form-group margin-top">
+			<view class="cu-form-group margin-top" v-if="mapKey">
 				<view class="title">当前位置</view>
 				<input type="text" v-model="reverseGeocoderSimplify" disabled="disabled" />
 			</view>
@@ -98,13 +98,16 @@
 				location: '',
 				reverseGeocoderSimplify: '正在获取...',
 				titles: [],
-				itemId:''
+				itemId:'',
+				mapKey:''
 			}
 		},
 		onLoad(option) {
 			this.java110Context.onLoad();
 			
 			let that = this;
+			
+			this.mapKey = conf.QQMapKey;
 			wx.getLocation({
 				type: 'gcj02',
 				success: (res) => {
@@ -161,7 +164,7 @@
 				let locationObj = this.latitude + ',' + this.longitude;
 				let url = 'https://apis.map.qq.com/ws/geocoder/v1?coord_type=5&get_poi=1&output=jsonp&poi_options=page_size=1;page_index=1';
 				this.$jsonp(url, {
-					key: conf.QQMapKey,
+					key: this.mapKey,
 					location: locationObj
 				})
 				.then(res => {

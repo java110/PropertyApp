@@ -113,104 +113,92 @@
 					<text class="text-grey text-sm">{{applyRoomInfo.stateName}}</text>
 				</view>
 			</view>
-			<view class="cu-item">
-				<button class="btn-check" v-if="applyRoomInfo.state == 1 && this.java110Context.hasPrivilege('502021010723590006')" @click="switchShowModel()">验房</button>
-				<button class="btn-check" v-if="applyRoomInfo.state == 2 && this.java110Context.hasPrivilege('502021010761730007')" @click="switchShowModel()">审核</button>
+			<!-- 验房状态 -->
+			<view class="cu-item" v-if="applyRoomInfo.state == 1">
+				<view class="content">
+					<text class="cuIcon-time text-green"></text>
+					<text class="text-grey">验房状态</text>
+				</view>
+				<picker mode="selector" :value="checkState.state" :range="checkStateRange" range-key="name" @change="checkStateRangeChange">
+					<view class="picker">
+						{{checkState.name?checkState.name:"请选择"}}
+					</view>
+				</picker>
 			</view>
-		</view>
-		<!-- 编辑模态框 -->
-		<view class="pop-bg" @click="switchShowModel()" v-show="errorSwitch">
-			<view class="pop-box" @click.stop="empty">
-				<view class="pop-title">{{applyRoomInfo.state == 1 ? "验房" : "审核"}}</view>
-				<view class="cu-list menu margin-top" v-if="applyRoomInfo.state == 1">
-					<!-- 验房状态 -->
-					<view class="cu-item arrow">
-						<view class="content">
-							<text class="cuIcon-time text-green"></text>
-							<text class="text-grey">验房状态</text>
-						</view>
-						<picker mode="selector" :value="checkState.state" :range="checkStateRange" range-key="name" @change="checkStateRangeChange">
-							<view class="picker">
-								{{checkState.name?checkState.name:"请选择"}}
-							</view>
-						</picker>
-					</view>
-					<view class="cu-item">
-						<view class="content">
-							<text class="cuIcon-time text-green"></text>
-							<text class="text-grey">验房备注</text>
-						</view>
-						<input type="text" v-model="checkRemark" @blur="onBlur()">
-					</view>
+			<view class="cu-item" v-if="applyRoomInfo.state == 1">
+				<view class="content">
+					<text class="cuIcon-time text-green"></text>
+					<text class="text-grey">验房备注</text>
 				</view>
-				<view class="cu-list menu margin-top" v-if="applyRoomInfo.state == 2">
-					<view class="cu-item arrow">
-						<view class="content">
-							<text class="cuIcon-time text-green"></text>
-							<text class="text-grey">审批状态</text>
-						</view>
-						<picker mode="selector" :value="reviewState.state" :range="reviewStateRange" range-key="name" @change="reviewStateRangeChange">
-							<view class="picker">
-								{{reviewState.name?reviewState.name:"请选择"}}
-							</view>
-						</picker>
-					</view>
-					<view class="cu-item arrow" v-show="reviewState.state == 4">
-						<view class="content">
-							<text class="cuIcon-time text-green"></text>
-							<text class="text-grey">折扣类型</text>
-						</view>
-						<picker mode="selector" :value="discountType.id" :range="discountTypeRange" range-key="name" @change="discountTypeRangeChange">
-							<view class="picker">
-								{{discountType.name?discountType.name:"请选择"}}
-							</view>
-						</picker>
-					</view>
-					<view class="cu-item arrow" v-show="reviewState.state == 4 && discountIdRange.length > 0">
-						<view class="content">
-							<text class="cuIcon-time text-green"></text>
-							<text class="text-grey">折扣名称</text>
-						</view>
-						<picker mode="selector" :value="discountId.discountId" :range="discountIdRange" range-key="discountName" @change="discountIdRangeChange">
-							<view class="picker">
-								{{discountId.discountName?discountId.discountName:"必填,请选择"}}
-							</view>
-						</picker>
-					</view>
-					<view class="cu-item arrow" v-show="reviewState.state == 4">
-						<view class="content">
-							<text class="cuIcon-time text-green"></text>
-							<text class="text-grey">返还方式</text>
-						</view>
-						<picker mode="selector" :value="returnWayIndex" :range="returnWays" range-key="statName" @change="returnWaysChange">
-							<view class="picker">
-								{{returnWay ? returnWays[returnWayIndex].statName : '请选择返还方式'}}
-							</view>
-						</picker>
-					</view>
-					<view class="cu-item" v-show="reviewState.state == 4 && returnWay == '1002'">
-						<view class="checkbox-area">
-							<checkbox-group @change="checkboxChange">
-								<view class="checkbox text-df text-grey" v-for="(item,index) in fees" :key="index">
-									<checkbox :value="item.detailId" :checked="item.checked" />【{{item.feeName}}】<text class="text-red">{{item.receivedAmount}}元</text> - {{item.createTime}}
-								</view>
-							</checkbox-group>
-						</view>
-					</view>
-					<view class="cu-item">
-						<view class="content">
-							<text class="cuIcon-time text-green"></text>
-							<text class="text-grey">审批备注</text>
-						</view>
-						<input type="text" v-model="reviewRemark" @blur="onBlur()">
-					</view>
+				<input type="text" v-model="checkRemark" @blur="onBlur()">
+			</view>
+			<uploadImage v-if="applyRoomInfo.state == 1" ref="vcUploadRef" :maxPhotoNum="maxPhotoNum" :sendImgList="sendImgList" @sendImagesData="getBase64List"></uploadImage>
+			
+			
+			<view class="cu-item" v-if="applyRoomInfo.state == 2">
+				<view class="content">
+					<text class="cuIcon-time text-green"></text>
+					<text class="text-grey">审批状态</text>
 				</view>
-				<view class="pop-bottom">
-					<view class="btn-box">
-						<view class="cancel" @click="switchShowModel()">取消</view>
-						<view class="confirm" @click="submit()">保存</view>
+				<picker mode="selector" :value="reviewState.state" :range="reviewStateRange" range-key="name" @change="reviewStateRangeChange">
+					<view class="picker">
+						{{reviewState.name?reviewState.name:"请选择"}}
 					</view>
+				</picker>
+			</view>
+			<view class="cu-item" v-show="applyRoomInfo.state == 2 && reviewState.state == 4">
+				<view class="content">
+					<text class="cuIcon-time text-green"></text>
+					<text class="text-grey">折扣类型</text>
 				</view>
+				<picker mode="selector" :value="discountType.id" :range="discountTypeRange" range-key="name" @change="discountTypeRangeChange">
+					<view class="picker">
+						{{discountType.name?discountType.name:"请选择"}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-item" v-show="applyRoomInfo.state == 2 && reviewState.state == 4 && discountIdRange.length > 0">
+				<view class="content">
+					<text class="cuIcon-time text-green"></text>
+					<text class="text-grey">折扣名称</text>
+				</view>
+				<picker mode="selector" :value="discountId.discountId" :range="discountIdRange" range-key="discountName" @change="discountIdRangeChange">
+					<view class="picker">
+						{{discountId.discountName?discountId.discountName:"必填,请选择"}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-item" v-show="applyRoomInfo.state == 2 && reviewState.state == 4">
+				<view class="content">
+					<text class="cuIcon-time text-green"></text>
+					<text class="text-grey">返还方式</text>
+				</view>
+				<picker mode="selector" :value="returnWayIndex" :range="returnWays" range-key="statName" @change="returnWaysChange">
+					<view class="picker">
+						{{returnWay ? returnWays[returnWayIndex].statName : '请选择返还方式'}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-item" v-show="applyRoomInfo.state == 2 && reviewState.state == 4 && returnWay == '1002'">
+				<view class="checkbox-area">
+					<checkbox-group @change="checkboxChange">
+						<view class="checkbox text-df text-grey" v-for="(item,index) in fees" :key="index">
+							<checkbox :value="item.detailId" :checked="item.checked" />【{{item.feeName}}】<text class="text-red">{{item.receivedAmount}}元</text> - {{item.createTime}}
+						</view>
+					</checkbox-group>
+				</view>
+			</view>
+			<view class="cu-item" v-if="applyRoomInfo.state == 2">
+				<view class="content">
+					<text class="cuIcon-time text-green"></text>
+					<text class="text-grey">审批备注</text>
+				</view>
+				<input type="text" v-model="reviewRemark" @blur="onBlur()">
+			</view>
+			<uploadImage v-if="applyRoomInfo.state == 2" ref="vcUploadRef" :maxPhotoNum="maxPhotoNum" :sendImgList="sendImgList" :canEdit="canEdit" :title="imgTitle"></uploadImage>
+			<view class="cu-item">
+				<button class="btn-check" v-if="applyRoomInfo.state == 1 && this.java110Context.hasPrivilege('502021010723590006')" @click="submit()">验房</button>
+				<button class="btn-check" v-if="applyRoomInfo.state == 2 && this.java110Context.hasPrivilege('502021010761730007')" @click="submit()">审核</button>
 			</view>
 		</view>
 	</view>
@@ -219,8 +207,9 @@
 <script>
 	// const factory = context.factory;
 	import dateUtil from '../../lib/java110/utils/date.js'
-	import {loadFeeDiscount,uploadCheckUpdate,uploadReviewUpdate} from '../../api/apply/apply.js'
+	import {loadApplyRooms,loadFeeDiscount,uploadCheckUpdate,uploadReviewUpdate} from '../../api/apply/apply.js'
 	import {listFeeDetail} from '../../api/fee/fee.js'
+	import uploadImage from "../../components/vc-upload/vc-upload.vue";	
 	export default {
 		data() {
 			return {
@@ -241,10 +230,17 @@
 				returnWay: '',
 				fees: [], // 所选费用项缴费历史
 				selectedFees: [],
+				maxPhotoNum: 4,
+				sendImgList: [],
+				photos: [],
+				canEdit: false,
+				imgTitle: '图片材料'
 			};
 		},
 
-		components: {},
+		components: {
+			uploadImage
+		},
 		props: {},
 		computed:{
 			pickerDisabled(){
@@ -258,14 +254,25 @@
 		onLoad: function(options) {
 			this.java110Context.onLoad();
 			let _that = this;
-			_that.applyRoomInfo = JSON.parse(options.apply);
-			_that.applyRoomInfo.startTime = _that.applyRoomInfo.startTime.split(' ')[0];
-			_that.applyRoomInfo.endTime = _that.applyRoomInfo.endTime.split(' ')[0];
+			let _objData = {
+				page: 1,
+				row: 1,
+				communityId: options.communityId,
+				ardId: options.ardId
+			};
+			loadApplyRooms(this,_objData)
+			.then(function(res){
+				_that.applyRoomInfo = res.data[0];
+				_that.sendImgList = _that.applyRoomInfo.urls;
+				console.log(_that.sendImgList);
+				_that.applyRoomInfo.startTime = _that.applyRoomInfo.startTime.split(' ')[0];
+				_that.applyRoomInfo.endTime = _that.applyRoomInfo.endTime.split(' ')[0];
+				_that._listFeeDetail();
+			})
 			// 由于数据库中存储的结束日期为第二天的0点，因此在此将结束日期减一天
 			// let secondsOfEnd = new Date(_that.applyRoomInfo.endTime.split(' ')[0].replace(/-/g, "/")).getTime()-1000*60*60*24;
 			// let yesterDay = dateUtil.date2String(secondsOfEnd).split(' ')[0];
 			// _that.applyRoomInfo.endTime = yesterDay;
-			this._listFeeDetail();
 		},
 
 		/**
@@ -279,6 +286,9 @@
 		onShow: function() {},
 		
 		methods: {
+			getBase64List: function(_data){
+				this.photos = _data;
+			},
 			/**
 			 * 查询费用项缴费历史
 			 */
@@ -418,7 +428,8 @@
 				let _that = this;
 				// 公共参数
 				let startTime = this.applyRoomInfo.startTime + ' 0:00:00';
-				let endTime = dateUtil.date2String(dateUtil.addDay(new Date(this.applyRoomInfo.endTime.replace(/-/g, "/")), 1));
+				// let endTime = dateUtil.date2String(dateUtil.addDay(new Date(this.applyRoomInfo.endTime.replace(/-/g, "/")), 1));
+				let endTime = this.applyRoomInfo.endTime + ' 23:59:59';
 				let ardId = this.applyRoomInfo.ardId;
 				let communityId = this.applyRoomInfo.communityId;
 				let createRemark = this.applyRoomInfo.createRemark;
@@ -456,6 +467,7 @@
 					}
 					params.state = state;
 					params.checkRemark = checkRemark;
+					params.photos = this.photos;
 					uploadCheckUpdate(this,params).then(function(res){
 						uni.hideLoading();
 						uni.showToast({

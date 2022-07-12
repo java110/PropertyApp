@@ -152,7 +152,7 @@
 			 */
 			_toApplyRoomDetail: function(_item){
 				uni.navigateTo({
-					url: '/pages/applyRoomDetail/applyRoomDetail?apply=' + JSON.stringify(_item)
+					url: '/pages/applyRoomDetail/applyRoomDetail?ardId=' + _item.ardId + '&communityId=' + _item.communityId
 				});
 			}
 		}

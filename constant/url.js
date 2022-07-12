@@ -155,5 +155,7 @@ export default {
 	listFeeDetail: baseUrl + "callComponent/propertyFee/listFeeDetail",
 	repairStop: baseUrl + "callComponent/ownerRepair.repairStop",
 	repairStart: baseUrl + "callComponent/ownerRepair.repairStart",
-	listInspectionItemTitle: baseUrl + "app/inspectionItemTitle.listInspectionItemTitle"
+	listInspectionItemTitle: baseUrl + "app/inspectionItemTitle.listInspectionItemTitle",
+	listResourceStoreTypes: baseUrl + "app/resourceStoreType.listResourceStoreTypes",
+	
 }

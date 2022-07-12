@@ -562,6 +562,32 @@ export function listAllocationStoreHisAuditOrders(_that,_data){
 }
 
 /**
+ * 查询我物品类型
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+export function listResourceStoreTypes(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.get({
+			url: url.listResourceStoreTypes,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+
+
+/**
  * 物品转赠提交
  * @param {Object} _that 上下文对象
  * @param {Object} _data 请求报文

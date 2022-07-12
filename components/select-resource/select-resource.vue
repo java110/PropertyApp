@@ -3,12 +3,20 @@
 		<view class="cu-bar bg-white search ">
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
-				<input type="text" placeholder="输入物品名" v-model="resName" confirm-type="search"></input>
+				<input type="text" placeholder="请输入物品名" v-model="resName" confirm-type="search"></input>
 			</view>
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
 				<picker :value="storeHousesIndex" :range="storeHouses" :range-key="'shName'" @change="storeHousesChange">
 					<view>{{storeHouses[storeHousesIndex].shName}}</view>
+				</picker>
+			</view>
+		</view>
+		<view class="cu-bar bg-white search ">
+			<view class="search-form round">
+				<text class="cuIcon-search"></text>
+				<picker :value="rssIndex" :range="resourceStoreTypes" :range-key="'name'" @change="rssChange">
+					<view>{{resourceStoreTypes[rssIndex].name}}</view>
 				</picker>
 			</view>
 			<view class="action">
@@ -36,6 +44,12 @@
 									固定资产：{{item.isFixedName}}
 								</view>
 							</view>
+							<view class="text-gray text-sm flex">
+								<view class="text-cut">
+									规格：{{item.rssName}}
+								</view>
+							</view>
+							
 						</view>
 					</view>
 				</view>
@@ -52,7 +66,8 @@
 <script>
 	import {
 		queryResourceStoreList,
-		listStoreHouses
+		listStoreHouses,
+		listResourceStoreTypes
 	} from '../../api/resource/resource.js'
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	// 防止多次点击
@@ -70,10 +85,16 @@
 				resourceList: [],
 				page: 1,
 				selectedResId: [],
+				rstId:'',
 				resName: '',
 				storeHouses: [{
 					shName: '请选择仓库'
 				}],
+				resourceStoreTypes:[{
+					rstId:'',
+					name: '请选择类型'
+				}],
+				rssIndex:0,
 				storeHousesIndex: 0,
 				shId: '',
 			}
@@ -99,6 +120,7 @@
 		mounted() {
 			this._loadResourceList();
 			this._loadStoreHouses();
+			this._listResourceStoreTypes();
 		},
 
 		methods: {
@@ -121,6 +143,19 @@
 					_that.storeHouses = _that.storeHouses.concat(res.data);
 				})
 			},
+			_listResourceStoreTypes: function(){
+				let _that = this;
+				let _objData = {
+					page: 1,
+					row: 100,
+					communityId: getCurrentCommunity().communityId,
+				};
+				listResourceStoreTypes(this,_objData)
+				.then(function(res){
+					_that.resourceStoreTypes = _that.resourceStoreTypes.concat(res.data);
+					
+				})
+			},
 			
 			storeHousesChange: function(e){
 				this.storeHousesIndex = e.target.value;
@@ -132,6 +167,15 @@
 				this.shId = selected.shId;
 			},
 			
+			rssChange: function(e){
+				this.rssIndex = e.target.value;
+				if (this.rssIndex == 0) {
+					this.rstId = '';
+					return;
+				}
+				let selected = this.resourceStoreTypes[this.rssIndex];
+				this.rstId = selected.rstId;
+			},
 			_searchStoreHouses: function() {
 				this.resourceList = [];
 				this.page = 1;
@@ -148,6 +192,7 @@
 					shType: this.shType,
 					shId: this.shId,
 					resName: this.resName,
+					rstId: this.rstId,
 					isShow: true
 				};
 				queryResourceStoreList(this, _data)

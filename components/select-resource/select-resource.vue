@@ -36,17 +36,12 @@
 							</view>
 							<view class="text-gray text-sm flex">
 								<view class="text-cut">
-									仓库：{{item.shName}}
+									仓库：{{item.shName}} > 规格：{{item.rssName}}
 								</view>
 							</view>
 							<view class="text-gray text-sm flex">
 								<view class="text-cut">
 									固定资产：{{item.isFixedName}}
-								</view>
-							</view>
-							<view class="text-gray text-sm flex">
-								<view class="text-cut">
-									规格：{{item.rssName}}
 								</view>
 							</view>
 							

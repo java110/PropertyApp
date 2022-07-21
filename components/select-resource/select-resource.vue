@@ -187,7 +187,7 @@
 					shType: this.shType,
 					shId: this.shId,
 					resName: this.resName,
-					rstId: this.rstId,
+					parentRstId: this.rstId,
 					isShow: true
 				};
 				queryResourceStoreList(this, _data)

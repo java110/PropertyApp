@@ -69,7 +69,7 @@ export default {
 	updateApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/updateApplyRoomDiscount",
 	updateReviewApplyRoomDiscount: baseUrl + "app/applyRoomDiscount/updateReviewApplyRoomDiscount",
 	queryMenus: baseUrl + "app/query.menu.info",
-	listStaffPrivileges: baseUrl + "callComponent/staffPrivilege/listStaffPrivileges",
+	listStaffPrivileges: baseUrl + "app/query.user.privilege",
 	queryRoomRenovation: baseUrl + "app/roomRenovation/queryRoomRenovation",
 	updateRoomToExamine: baseUrl + "app/roomRenovation/updateRoomToExamine",
 	saveRoomRenovationDetail: baseUrl + "app/roomRenovation/saveRoomRenovationDetail",

@@ -37,7 +37,7 @@
 				step: 1,
 				resOrderType: '10000',
 				flowType: '30003',
-				shType: '2806',
+				shType: '',
 				resourceStores: [],
 				endUserName: '',
 				endUserTel: '',

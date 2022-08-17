@@ -62,7 +62,7 @@ export default {
 	listOweFees: baseUrl + 'app/feeApi/listOweFees',
 	toQrOweFeePay: baseUrl + 'app/payment/toQrOweFeePay',
 	// 报修抢单
-	robRepairOrder: baseUrl + 'callComponent/ownerRepair.grabbingRepair',
+	robRepairOrder: baseUrl + 'app/ownerRepair.grabbingRepair',
 	// 获取空置房申请列表
 	listApplyRoom: baseUrl + 'app/applyRoomDiscount/queryApplyRoomDiscount',
 	queryFeeDiscount: baseUrl + "app/feeDiscount/queryFeeDiscount",
@@ -80,54 +80,54 @@ export default {
 	// 查询字典表
 	queryDictInfo: baseUrl + "callComponent/core/list",
 	// 报修相关信息（维修类型/状态/商品类型...）
-	queryRepairInfo: baseUrl + "callComponent/resourceStoreTypeManage/list",
+	queryRepairInfo: baseUrl + "app/resourceStoreType.listResourceStoreTypes",
 	// queryResourceStoreResName: baseUrl + "app/resourceStore/queryResourceStoreResName",
-	queryResourceStoreResName: baseUrl + "callComponent/resourceStore.listUserStorehouses",
+	queryResourceStoreResName: baseUrl + "app/resourceStore.listUserStorehouses",
 	// 查询费用项（水电部分）
-	queryFeeTypesItems: baseUrl + "callComponent/roomCreateFeeAdd/list",
+	queryFeeTypesItems: baseUrl + "app/feeConfig.listFeeConfigs",
 	queryPreMeterWater: baseUrl + "app/meterWater/queryPreMeterWater",
-	saveMeterWater: baseUrl + "callComponent/meterWater.saveMeterWater",
+	saveMeterWater: baseUrl + "app/meterWater.saveMeterWater",
 	// 采购/出库申请部分
-	queryPurchaseApplyList: baseUrl + "callComponent/purchaseApplyManage/list",
-	queryResourceStoreList: baseUrl + "callComponent/chooseResourceStore/list",
-	queryResourceSupplier: baseUrl + "callComponent/resourceSupplier.listResourceSuppliers",
+	queryPurchaseApplyList: baseUrl + "app/purchaseApply.listPurchaseApplys",
+	queryResourceStoreList: baseUrl + "app/resourceStore.listResourceStores",
+	queryResourceSupplier: baseUrl + "app/resourceSupplier.listResourceSuppliers",
 	queryFirstStaff: baseUrl + "app/workflow/getFirstStaff",
 	savePurchaseApply: baseUrl + "app/purchase/purchaseApply",
 	saveItemOutApply: baseUrl + "app/collection/goodsCollection",
-	listMyAuditOrders: baseUrl + "callComponent/myAuditOrders/list",
+	listMyAuditOrders: baseUrl + "app/auditUser.listAuditOrders",
 	listMyItemOutOrders: baseUrl + "app/collection/getCollectionAuditOrder",
-	listMyAllocationStoreAuditOrders: baseUrl + "callComponent/resourceStore.listAllocationStoreAuditOrders",
+	listMyAllocationStoreAuditOrders: baseUrl + "app/resourceStore.listAllocationStoreAuditOrders",
 	saveResourceOut: baseUrl + "app/collection/resourceOut",
 	saveResourceEnter: baseUrl + "app/purchase/resourceEnter",
-	listAuditHistoryOrders: baseUrl + "callComponent/auditUser.listAuditHistoryOrders",
-	listItemOutAuditHistoryOrders: baseUrl + "callComponent/auditUser.listItemOutAuditHistoryOrders",
-	listAllocationStoreHisAuditOrders: baseUrl + "callComponent/resourceStore.listAllocationStoreHisAuditOrders",
+	listAuditHistoryOrders: baseUrl + "app/auditUser.listAuditHistoryOrders",
+	listItemOutAuditHistoryOrders: baseUrl + "app/auditUser.listItemOutAuditHistoryOrders",
+	listAllocationStoreHisAuditOrders: baseUrl + "app/resourceStore.listAllocationStoreHisAuditOrders",
 	// listWorkflowAuditInfo2: baseUrl + "callComponent/workflow.listWorkflowAuditInfo",
 	// 调拨部分
-	listAllocationStorehouseApplys: baseUrl + "callComponent/resourceStore.listAllocationStorehouseApplys",
-	listStoreHouses: baseUrl + "callComponent/resourceStore.listStorehouses",
-	saveAllocationStorehouse: baseUrl + "callComponent/resourceStore.saveAllocationStorehouse",
-	listAllocationStorehouses: baseUrl + "callComponent/resourceStore.listAllocationStorehouses",
-	saveAuditAllocationStoreOrder: baseUrl + "callComponent/resourceStore.auditAllocationStoreOrder",
-	listWorkflowStepStaffs: baseUrl + "callComponent/workflow.listWorkflowStepStaffs",
-	saveMyAuditOrders: baseUrl + "callComponent/myAuditOrders/audit",
+	listAllocationStorehouseApplys: baseUrl + "app/resourceStore.listAllocationStorehouseApplys",
+	listStoreHouses: baseUrl + "app/resourceStore.listStorehouses",
+	saveAllocationStorehouse: baseUrl + "app/resourceStore.saveAllocationStorehouse",
+	listAllocationStorehouses: baseUrl + "app/resourceStore.listAllocationStorehouses",
+	saveAuditAllocationStoreOrder: baseUrl + "app/resourceStore.auditAllocationStoreOrder",
+	listWorkflowStepStaffs: baseUrl + "app/workflow.listWorkflowStepStaffs",
+	saveMyAuditOrders: baseUrl + "app/myAuditOrders/audit",
 	// 公司/员工信息
-	queryOrgInfo: baseUrl + "callComponent/orgManage/list",
-	queryStaffListInfo: baseUrl + "callComponent/searchStaff/listStaff",
+	queryOrgInfo: baseUrl + "app/org.listOrgs",
+	queryStaffListInfo: baseUrl + "app/query.staff.infos",
 	// 巡检流转
-	UpdateInspectionTask: baseUrl + "callComponent/inspectionTask.updateInspectionTask",
+	UpdateInspectionTask: baseUrl + "app/inspectionTask.updateInspectionTask",
 	// 物品转赠
-	saveResourceStoreTransfer: baseUrl + "callComponent/addAllocationUserStorehouse/save",
+	saveResourceStoreTransfer: baseUrl + "app/resourceStore.saveAllocationUserStorehouse",
 	// 紧急采购
 	saveUrgentPurchaseApply: baseUrl + "app/purchase/urgentPurchaseApply",
 	//取消调拨
-	deleteAllocationStorehouse: baseUrl + "callComponent/resourceStore.deleteAllocationStorehouse",
+	deleteAllocationStorehouse: baseUrl + "app/resourceStore.deleteAllocationStorehouse",
 	// 取消申请
-	deletePurchaseApply: baseUrl + "callComponent/deletePurchaseApply/delete",
+	deletePurchaseApply: baseUrl + "app/purchaseApply.deletePurchaseApply",
 	//查询水电抄表记录
 	listMeterWaters: baseUrl+"app/meterWater.listMeterWaters",
 	listRepairSettings: baseUrl + 'app/repair.listRepairSettings',
-	saveHelpOwnerRepair: baseUrl + "callComponent/addOwnerRepair/save",
+	saveHelpOwnerRepair: baseUrl + "app/ownerRepair.saveOwnerRepair",
 	updateRoomRenovationState: baseUrl + "app/roomRenovation/updateRoomRenovationState",
 	queryOaWorkflow: baseUrl + "app/oaWorkflow/queryOaWorkflow",
 	queryOaWorkflowForm: baseUrl + "app/oaWorkflow/queryOaWorkflowForm",
@@ -152,10 +152,11 @@ export default {
 	// 删除装修跟踪记录
 	deleteRoomRenovationRecord: baseUrl + "app/roomRenovation/deleteRoomRenovationRecord",
 	// 查询缴费历史
-	listFeeDetail: baseUrl + "callComponent/propertyFee/listFeeDetail",
-	repairStop: baseUrl + "callComponent/ownerRepair.repairStop",
-	repairStart: baseUrl + "callComponent/ownerRepair.repairStart",
+	listFeeDetail: baseUrl + "app/fee.queryFeeDetail",
+	repairStop: baseUrl + "app/ownerRepair.repairStop",
+	repairStart: baseUrl + "app/ownerRepair.repairStart",
 	listInspectionItemTitle: baseUrl + "app/inspectionItemTitle.listInspectionItemTitle",
 	listResourceStoreTypes: baseUrl + "app/resourceStoreType.listResourceStoreTypes",
+	listSystemInfo:baseUrl+"app/system.listSystemInfo"
 	
 }

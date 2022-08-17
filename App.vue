@@ -38,9 +38,16 @@
 			requestNoAuth({
 				url: url.listSystemInfo,
 				method: "GET",
-				data: _data,
+				data: {
+					page:1,
+					row:1
+				},
 				success: function(res) {
-					reslove(res);
+					console.log(res.data);
+					if(res.data.data && res.data.data.length >0){
+						uni.setStorageSync('java110SystemConfig',res.data.data[0])
+					}
+					//reslove(res);
 				},
 				fail: function(e) {}
 

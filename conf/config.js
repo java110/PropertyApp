@@ -8,30 +8,40 @@
  * @QQ 928255095
  */
 
+let _systemConfig = uni.getStorageSync('java110SystemConfig');
+
 // #ifdef H5
 // 服务器域名 公众号时，配置为 / 就可以
-const baseUrl = '/'; 
+let baseUrl = '/'; 
 // #endif
 
 // 腾讯地图Key, h5使用
-const QQMapKey = '';
-const commonBaseUrl= 'http://wy.yxkj.ltd/';
+let QQMapKey = '';
+let commonBaseUrl= 'http://wy.yxkj.ltd/';
 
 // #ifndef H5
 //服务器域名 小程序 或者 app 时 后端地址
-const baseUrl = 'http://wy.yxkj.ltd/'; 
+let baseUrl = 'http://wy.yxkj.ltd/'; 
 // #endif
 
-
 //app支付时这里需要填写支付秘钥
-const appPayKey="";
+let appPayKey="";
 
-const logLevel="DEBUG"; // 日志级别
+let logLevel="DEBUG"; // 日志级别
+
+let systemName="物业版";
+
+if(_systemConfig){
+	QQMapKey = _systemConfig.qqMapKey;
+	commonBaseUrl = _systemConfig.imgUrl;
+	systemName = _systemConfig.propertyTitle;
+}
 
 export default{
 	baseUrl:baseUrl,
 	logLevel:logLevel,
 	appPayKey:appPayKey,
 	commonBaseUrl: commonBaseUrl,
-	QQMapKey: QQMapKey
+	QQMapKey: QQMapKey,
+	systemName:systemName
 }

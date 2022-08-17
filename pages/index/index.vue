@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="margin-bottom-xs">
 			<uni-notice-bar :showIcon="true" :scrollable="true" :single="true" :speed="30"
-				text="HC掌上物业欢迎您"></uni-notice-bar>
+				:text="welcomeTitle"></uni-notice-bar>
 		</view>
 		<scroll-view  class="scroll-restaurants-list" scroll-y="true" style="height:100%">
 			<swiper class="categoryList padding-top-xs bg-white" indicator-dots="true"
@@ -86,7 +86,8 @@
 	import {isNull} from '../../lib/java110/utils/StringUtil.js'
 	
 	import {getUserInfo} from '../../lib/java110/api/Java110SessionApi.js'
-	import url from '../../constant/url.js'
+	import url from '../../constant/url.js';
+	import conf from '@/conf/config.js'
 	export default {
 		data() {
 			return {
@@ -95,13 +96,18 @@
 				currentCommunityName: '',
 				categoryList: [],
 				swiperList: [],
-				activitys: []
+				activitys: [],
+				welcomeTitle:''
 			}
 		},
 		components: {
 			uniNoticeBar
 		},
 		onLoad() {
+			this.welcomeTitle = conf.systemName + '欢迎您'
+			uni.setNavigationBarTitle({
+				title:conf.systemName
+			})
 			this.java110Context.onLoad();
 		},
 		onShow() {

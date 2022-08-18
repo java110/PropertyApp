@@ -110,7 +110,7 @@ export default {
 	listAllocationStorehouses: baseUrl + "app/resourceStore.listAllocationStorehouses",
 	saveAuditAllocationStoreOrder: baseUrl + "app/resourceStore.auditAllocationStoreOrder",
 	listWorkflowStepStaffs: baseUrl + "app/workflow.listWorkflowStepStaffs",
-	saveMyAuditOrders: baseUrl + "app/myAuditOrders/audit",
+	saveMyAuditOrders: baseUrl + "app/purchaseApply.auditApplyOrder",
 	// 公司/员工信息
 	queryOrgInfo: baseUrl + "app/org.listOrgs",
 	queryStaffListInfo: baseUrl + "app/query.staff.infos",

@@ -233,7 +233,8 @@
 						uni.hideLoading();
 						wx.showToast({
 							title: res.data.msg,
-							duration: 2000
+							duration: 2000,
+							icon: 'none'
 						});
 						setTimeout(()=>{
 							_that.repairOrders = [];

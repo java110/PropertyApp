@@ -93,6 +93,13 @@
             }
         },
         "domain" : "http://property.homecommunity.cn",
-        "title" : "物业版"
+        "title" : "物业版",
+        "sdkConfigs" : {
+            "maps" : {
+                "qqmap" : {
+                    "key" : "4KSBZ-JOBCJ-ADKFY-FENTH-L2CF2-ULBAP"
+                }
+            }
+        }
     }
 }

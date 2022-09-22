@@ -132,7 +132,7 @@
 				</view>
 				<input type="text" v-model="checkRemark" @blur="onBlur()">
 			</view>
-			<uploadImage v-if="applyRoomInfo.state == 1" ref="vcUploadRef" :maxPhotoNum="maxPhotoNum" :sendImgList="sendImgList" @sendImagesData="getBase64List"></uploadImage>
+			<uploadImageAsync v-if="applyRoomInfo.state == 1" ref="vcUploadRef" :maxPhotoNum="maxPhotoNum" :sendImgList="sendImgList" @sendImagesData="getBase64List"></uploadImageAsync>
 			
 			
 			<view class="cu-item" v-if="applyRoomInfo.state == 2">
@@ -195,7 +195,7 @@
 				</view>
 				<input type="text" v-model="reviewRemark" @blur="onBlur()">
 			</view>
-			<uploadImage v-if="applyRoomInfo.state == 2" ref="vcUploadRef" :maxPhotoNum="maxPhotoNum" :sendImgList="sendImgList" :canEdit="canEdit" :title="imgTitle"></uploadImage>
+			<uploadImageAsync v-if="applyRoomInfo.state == 2" ref="vcUploadRef" :maxPhotoNum="maxPhotoNum" :sendImgList="sendImgList" :canEdit="canEdit" :title="imgTitle"></uploadImageAsync>
 			<view class="cu-item">
 				<button class="btn-check" v-if="applyRoomInfo.state == 1 && this.java110Context.hasPrivilege('502021010723590006')" @click="submit()">验房</button>
 				<button class="btn-check" v-if="applyRoomInfo.state == 2 && this.java110Context.hasPrivilege('502021010761730007')" @click="submit()">审核</button>
@@ -209,7 +209,7 @@
 	import dateUtil from '../../lib/java110/utils/date.js'
 	import {loadApplyRooms,loadFeeDiscount,uploadCheckUpdate,uploadReviewUpdate} from '../../api/apply/apply.js'
 	import {listFeeDetail} from '../../api/fee/fee.js'
-	import uploadImage from "../../components/vc-upload/vc-upload.vue";	
+	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";	
 	export default {
 		data() {
 			return {
@@ -239,7 +239,7 @@
 		},
 
 		components: {
-			uploadImage
+			uploadImageAsync
 		},
 		props: {},
 		computed:{

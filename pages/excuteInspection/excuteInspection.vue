@@ -13,8 +13,8 @@
 					<text>处理意见：</text> {{item.description}}
 				</view>
 				<view class="margin-top grid text-center col-3 grid-square" v-if="item.state == '20200407' && item.photos.length > 0">
-					<view class="" v-for="(_itemc,index) in item.photos" :key="index">
-						<image mode="scaleToFill" :data-url="srcPath+_itemc.url" :src="srcPath+_itemc.url" @tap="preview(srcPath+_itemc.url)"></image>
+					<view class="" v-for="(_itemc,pindex) in item.photos" :key="pindex">
+						<image mode="scaleToFill" :data-url="_itemc.url" :src="_itemc.url" @tap="preview(index,pindex)"></image>
 					</view>
 				</view>
 
@@ -23,24 +23,11 @@
 					<button class="cu-btn  line-green block margin-tb-sm lg " @click="_excuteInspection(item)">
 						<text class="cuIcon-upload"></text>巡检</button>
 				</view>
-				<view class="margin-top-sm margin-right grid text-center col-3 grid-square">
-					<view class="" v-for="(_item,index) in item.photos" :key="index">
-						<image mode="scaleToFill" :src="_item.url" @tap="preview(_item.url)"></image>
+				<!-- <view class="margin-top-sm margin-right grid text-center col-3 grid-square">
+					<view class="" v-for="(_item,pindex) in item.photos" :key="pindex">
+						<image mode="scaleToFill" :src="_item.url" @tap="preview(index,pindex)"></image>
 					</view>
-				</view>
-			</view>
-
-		</view>
-
-		<view class="cu-modal" :class="viewImage?'show':''">
-			<view class="cu-dialog">
-				<view class="bg-img" :style="'background-image: url('+ viewImageSrc +');height:800rpx;'">
-					<view class="cu-bar justify-end text-white">
-						<view class="action" @tap="closeViewImage()">
-							<text class="cuIcon-close "></text>
-						</view>
-					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</view>
@@ -52,7 +39,6 @@
 	export default {
 		data() {
 			return {
-				srcPath: '',
 				taskId: '',
 				inspectionPlanName: '',
 				scroll: 0,
@@ -60,8 +46,6 @@
 				userId: '',
 				userName: '',
 				taskDetails: [],
-				viewImage: false,
-				viewImageSrc: ''
 
 			}
 		},
@@ -69,7 +53,6 @@
 			this.java110Context.onLoad();
 			this.taskId = options.taskId;
 			this.inspectionPlanName = options.inspectionPlanName;
-			this.srcPath = url.hcBaseUrl;
 			this.communityId = getCurrentCommunity().communityId;
 			let _userInfo = this.java110Context.getUserInfo();
 			this.userName = _userInfo.userName;
@@ -119,13 +102,20 @@
 						"&inspectionId=" + _item.inspectionId + "&inspectionName=" + _item.inspectionName+"&itemId="+_item.itemId
 				});
 			},
-			preview: function(_src) {
-				this.viewImage = true;
-				this.viewImageSrc = _src;
+			preview: function(index, pindex) {
+				let urls = [];
+				this.taskDetails.forEach((item, i) => {
+					if(i == index){
+						item.photos.forEach((i) => {
+							urls.push(i.url);
+						})
+					}
+				})
+				uni.previewImage({
+					urls: urls,
+					current: pindex
+				})
 			},
-			closeViewImage: function() {
-				this.viewImage = false;
-			}
 		}
 	}
 </script>

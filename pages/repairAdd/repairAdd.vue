@@ -67,30 +67,9 @@
 			<textarea v-model="context" placeholder="请输入报修内容"></textarea>
 		</view>
 		<view class="block__title">相关图片</view>
-		<view class="cu-bar bg-white ">
-			<view class="action">
-				图片上传
-			</view>
-			<view class="action">
-				{{imgList.length}}/4
-			</view>
-		</view>
-		<view class="cu-form-group">
-			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(img,index) in imgList" :key='index' bindtap="ViewImage" :data-url="imgList[index]">
-					<image :src='imgList[index]' mode='aspectFill'></image>
-					<view class="cu-tag bg-red" @tap="deleteImage(index)" :data-index="index">
-						<text class="cuIcon-close"></text>
-					</view>
-				</view>
-				<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
-					<text class="cuIcon-cameraadd"></text>
-				</view>
-			</view>
-		</view>
+		<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImage.maxPhotoNum" :canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData"></uploadImageAsync>
 
 		<view class="button_up_blank"></view>
-
 		<view class="flex flex-direction">
 			<button class="cu-btn bg-green margin-tb-sm lg" @click="$preventClick(submitRepair)">提交</button>
 		</view>
@@ -107,6 +86,7 @@
 	import stringUtil from '../../lib/java110/utils/StringUtil.js';
 	import {getCurrentCommunity} from '../../api/community/community.js';
 	import url from '../../constant/url.js';
+	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
 
 	export default {
 		data() {
@@ -163,7 +143,16 @@
 				roomNum: '',
 				roomId: '',
 				priceScope: '',
+				uploadImage: {
+					maxPhotoNum: 4,
+					imgTitle: '图片上传',
+					canEdit: true
+				}
 			};
+		},
+		
+		components: {
+			uploadImageAsync
 		},
 
 		/**
@@ -234,6 +223,14 @@
 		 */
 		onShareAppMessage: function() {},
 		methods: {
+			sendImagesData: function(e){
+				this.photos = [];
+				if(e.length > 0){
+					e.forEach((img) => {
+						this.photos.push(img.fileId);
+					})
+				}
+			},
 			formatter(type, value) {
 				if (type === 'year') {
 					return `${value}年`;
@@ -300,7 +297,7 @@
 					"appointmentTime": this.bindDate + " " + this.bindTime + ":00",
 					"tel": this.bindTel,
 					"roomId": this.roomId,
-					 "photos": [],
+					 "photos": this.photos,
 					"context": this.context,
 					"communityId": this.communityId,
 					"bindDate": this.bindDate,
@@ -323,13 +320,6 @@
 					obj.repairObjName = this.floorNum + this.unitNum + this.roomNum;
 				}
 
-				let _photos = this.photos;
-				_photos.forEach(function(_item) {
-					obj.photos.push({
-						"photo": _item
-					});
-				});
-
 				let msg = "";
 				if (obj.repairType == "") {
 					msg = "请选择报修类型";
@@ -344,7 +334,7 @@
 				} else if (obj.bindTime == "请选择") {
 					msg = "请选择预约时间";
 				} else if (obj.context == "") {
-					msg = "请填写投诉内容";
+					msg = "请填写报修内容";
 				} else if (obj.repairObjId == '') {
 					msg = "请选择报修位置";
 				}
@@ -436,29 +426,6 @@
 				this.roomId = '';
 				uni.navigateTo({
 					url: '/pages/selectRoom/selectRoom?floorId=' + this.floorId + "&unitId=" + this.unitId
-				});
-			},
-			deleteImage: function(e) {
-				console.log(e);
-				let imageArr = this.$data.imgList;
-				imageArr.splice(e, 1);
-				this.photos.splice(e, 1);
-			},
-			ChooseImage: function(e) {
-				let that = this;
-				wx.chooseImage({
-					count: 4, //默认9
-					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
-					success: (res) => {
-						console.log(res);
-						that.$data.imgList.push(res.tempFilePaths[0]);
-						var tempFilePaths = res.tempFilePaths[0]
-
-						TanslateImage.translate(tempFilePaths, (url) => {
-							that.photos.push(url);
-						})
-					}
 				});
 			},
 			repairScopeChange: function(e) {

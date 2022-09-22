@@ -84,71 +84,11 @@
 		</view>
 
 		<view v-if="action == 'FINISH'">
-			<view class="cu-bar bg-white margin-top">
-				<view class="action">
-					维修前图片上传
-				</view>
-				<view class="action">
-					{{beforeRepairImgList.length}}/4
-				</view>
-			</view>
-			<view class="cu-form-group ">
-				<view class="grid col-4 grid-square flex-sub">
-					<view class="bg-img" v-for="(img,index) in beforeRepairImgList" bindtap="ViewImage" :key="index" :data-url="beforeRepairImgList[index]">
-						<image :src='beforeRepairImgList[index]' mode='aspectFill'></image>
-						<view class="cu-tag bg-red" @tap="_deleteBeforeRepairImage(index)" :data-index="index">
-							<text class="cuIcon-close"></text>
-						</view>
-					</view>
-					<view class="solids" @tap="_chooseBeforeRepairImage" v-if="beforeRepairImgList.length<4">
-						<text class="cuIcon-cameraadd"></text>
-					</view>
-				</view>
-			</view>
-			<view class="cu-bar bg-white margin-top">
-				<view class="action">
-					维修后图片上传
-				</view>
-				<view class="action">
-					{{afterRepairImgList.length}}/4
-				</view>
-			</view>
-			<view class="cu-form-group ">
-				<view class="grid col-4 grid-square flex-sub">
-					<view class="bg-img" v-for="(img,index) in afterRepairImgList" bindtap="ViewImage" :key="index" :data-url="afterRepairImgList[index]">
-						<image :src='afterRepairImgList[index]' mode='aspectFill'></image>
-						<view class="cu-tag bg-red" @tap="_deleteAfterRepairImage(index)" :data-index="index">
-							<text class="cuIcon-close"></text>
-						</view>
-					</view>
-					<view class="solids" @tap="_chooseAfterRepairImage" v-if="afterRepairImgList.length<4">
-						<text class="cuIcon-cameraadd"></text>
-					</view>
-				</view>
-			</view>
+			<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImageBefore.maxPhotoNum" :canEdit="uploadImageBefore.canEdit" :title="uploadImageBefore.imgTitle" @sendImagesData="sendImagesDataBefore" style="margin-top:30upx"></uploadImageAsync>
+			<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImageAfter.maxPhotoNum" :canEdit="uploadImageAfter.canEdit" :title="uploadImageAfter.imgTitle" @sendImagesData="sendImagesDataAfter" style="margin-top:30upx"></uploadImageAsync>
 		</view>
 		<view v-else>
-			<view class="cu-bar bg-white margin-top">
-				<view class="action">
-					图片上传
-				</view>
-				<view class="action">
-					{{imgList.length}}/4
-				</view>
-			</view>
-			<view class="cu-form-group ">
-				<view class="grid col-4 grid-square flex-sub">
-					<view class="bg-img" v-for="(img,index) in imgList" bindtap="ViewImage" :key="index" :data-url="imgList[index]">
-						<image :src='imgList[index]' mode='aspectFill'></image>
-						<view class="cu-tag bg-red" @tap="_deleteImage(index)" :data-index="index">
-							<text class="cuIcon-close"></text>
-						</view>
-					</view>
-					<view class="solids" @tap="_chooseImage" v-if="imgList.length<4">
-						<text class="cuIcon-cameraadd"></text>
-					</view>
-				</view>
-			</view>
+			<!-- 派单、转单、退单 操作 去掉图片上传 -->
 		</view>
 
 		<view v-if="action=='FINISH'" class="flex flex-direction margin-top">
@@ -170,12 +110,12 @@
 		queryRepairInfo,
 		queryDictInfo
 	} from '../../api/repair/repair.js'
-	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
 	import {preventClick} from '../../lib/java110/utils/common.js';
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	// import selectSingleResource from '../../components/select-single-resource/select-single-resource.vue'
 	import {getCurrentCommunity} from '../../api/community/community.js'
+	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
 	export default {
 		data() {
 			return {
@@ -220,13 +160,26 @@
 				],
 				payTypeIndex: 0,
 				payType: '',
+				communityId: '',
+				uploadImageBefore: {
+					maxPhotoNum: 4,
+					imgTitle: '维修前图片上传',
+					canEdit: true
+				},
+				uploadImageAfter: {
+					maxPhotoNum: 4,
+					imgTitle: '维修后图片上传',
+					canEdit: true
+				}
 			}
 		},
 		components:{
+			uploadImageAsync
 			//selectSingleResource
 		},
 		onLoad(options) {
 			let _that = this;
+			this.communityId = getCurrentCommunity().communityId;
 			this.java110Context.onLoad();
 			this.publicArea = options.publicArea;
 			this.action = options.action;
@@ -272,6 +225,24 @@
 			uni.$off('getResourceInfo');
 		},
 		methods: {
+			sendImagesDataBefore: function(e){
+				console.log('before', e);
+				this.beforeRepairPhotos = [];
+				if(e.length > 0){
+					e.forEach((img) => {
+						this.beforeRepairPhotos.push(img.fileId);
+					})
+				}
+			},
+			sendImagesDataAfter: function(e){
+				console.log('after', e);
+				this.afterRepairPhotos = [];
+				if(e.length > 0){
+					e.forEach((img) => {
+						this.afterRepairPhotos.push(img.fileId);
+					})
+				}
+			},
 			_loadPayTypes: function(){
 				let _that = this;
 				let _objData = {
@@ -379,78 +350,19 @@
 				let selected = this.feeCloums[this.feeIndex] //获取选中的数组
 				this.feeFlag = selected.id //选中的id
 			},
-			
-			_deleteImage: function(e) {
-				let imageArr = this.imgList;
-				imageArr.splice(e, 1);
-				this.photos.splice(e, 1);
-			},
-			_deleteBeforeRepairImage: function(e){
-				let imageArr = this.beforeRepairImgList;
-				imageArr.splice(e, 1);
-				this.beforeRepairPhotos.splice(e, 1);
-			},
-			_deleteAfterRepairImage: function(e){
-				let imageArr = this.afterRepairImgList;
-				imageArr.splice(e, 1);
-				this.afterRepairPhotos.splice(e, 1);
-			},
-			_chooseImage: function(e) {
-				let that = this;
-				wx.chooseImage({
-					count: 4, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['camera','album'], //从相册选择
-					success: (res) => {
-						that.imgList.push(res.tempFilePaths[0]);
-						var tempFilePaths = res.tempFilePaths[0]
-
-						TanslateImage.translate(tempFilePaths, (url) => {
-							that.photos.push(url);
-						})
-					}
-				});
-			},
-			_chooseBeforeRepairImage: function(e){
-				let that = this;
-				wx.chooseImage({
-					count: 4, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['camera','album'], //从相册选择
-					success: (res) => {
-						that.beforeRepairImgList.push(res.tempFilePaths[0]);
-						var tempFilePaths = res.tempFilePaths[0]
-				
-						TanslateImage.translate(tempFilePaths, (url) => {
-							that.beforeRepairPhotos.push(url);
-						})
-
-					}
-				});
-			},
-			_chooseAfterRepairImage: function(e){
-				let that = this;
-				wx.chooseImage({
-					count: 4, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['camera','album'], //从相册选择
-					success: (res) => {
-						that.afterRepairImgList.push(res.tempFilePaths[0]);
-						var tempFilePaths = res.tempFilePaths[0]
-						
-						TanslateImage.translate(tempFilePaths, (url) => {
-							that.afterRepairPhotos.push(url);
-						})
-						
-					}
-				});
-			},
 
 			_dispatchRepair: function(e) {
+				let _that = this;
 				dispatchRepair(this)
 					.then(function(res) {
 						let _json = res.data;
 						if (_json.code == 0) {
+							if(_that.action == 'DISPATCH'){
+								uni.navigateTo({
+									url: '/pages/repairOrder/repairOrder'
+								})
+								return;
+							}
 							uni.navigateTo({
 								url: '/pages/repairDispatch/repairDispatch'
 							})

@@ -9,27 +9,9 @@
 				<view>{{violations[violationIndex].name}}</view>
 			</picker>
 		</view>
-		<view class="cu-bar bg-white margin-top">
-			<view class="action">
-				图片上传
-			</view>
-			<view class="action">
-				{{imgList.length}}/4
-			</view>
-		</view>
-		<view class="cu-form-group ">
-			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(img,index) in imgList" bindtap="ViewImage" :key="index" :data-url="imgList[index]">
-					<image :src='imgList[index]' mode='aspectFill'></image>
-					<view class="cu-tag bg-red" @tap="_deleteImage(index)" :data-index="index">
-						<text class="cuIcon-close"></text>
-					</view>
-				</view>
-				<view class="solids" @tap="_chooseImage" v-if="imgList.length<4">
-					<text class="cuIcon-cameraadd"></text>
-				</view>
-			</view>
-		</view>
+		
+		<view class="block__title">相关图片</view>
+		<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImage.maxPhotoNum" :canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData"></uploadImageAsync>
 
 		<view class="flex flex-direction margin-top">
 			<button  class="cu-btn bg-green margin-tb-sm lg" @click="_dispatchRecord()">提交</button>
@@ -44,6 +26,7 @@
 	} from '../../api/apply/apply.js'
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
+	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
 	export default {
 		data() {
 			return {
@@ -69,8 +52,18 @@
 				],
 				violationIndex: 0,
 				violation: '',
+				uploadImage: {
+					maxPhotoNum: 4,
+					imgTitle: '图片上传',
+					canEdit: true
+				}
 			}
 		},
+		
+		components: {
+			uploadImageAsync
+		},
+		
 		onLoad(options) {
 			this.java110Context.onLoad();
 			let _that = this;
@@ -78,7 +71,14 @@
 			_that.applyRoomInfo = JSON.parse(options.apply);
 		},
 		methods: {
-			
+			sendImagesData: function(e){
+				this.photos = [];
+				if(e.length > 0){
+					e.forEach((img) => {
+						this.photos.push(img.fileId);
+					})
+				}
+			},
 			violationChange: function(e){
 				this.violationIndex = e.target.value;
 				if (this.violationIndex == 0) {
@@ -87,29 +87,6 @@
 				}
 				let selected = this.violations[this.violationIndex];
 				this.violation = selected.value;
-			},
-			
-			_deleteImage: function(e) {
-				let imageArr = this.imgList;
-				imageArr.splice(e, 1);
-				this.photos.splice(e, 1);
-			},
-			_chooseImage: function(e) {
-				let that = this;
-				wx.chooseImage({
-					count: 4, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
-					success: (res) => {
-						that.imgList.push(res.tempFilePaths[0]);
-						var tempFilePaths = res.tempFilePaths[0]
-						
-						TanslateImage.translate(tempFilePaths, (url) => {
-							that.photos.push(url);
-						})
-						
-					}
-				});
 			},
 			
 			_dispatchRecord: function() {
@@ -161,5 +138,11 @@
 </script>
 
 <style>
-
+	.block__title {
+		margin: 0;
+		font-weight: 400;
+		font-size: 14px;
+		color: rgba(69, 90, 100, .6);
+		padding: 40rpx 30rpx 20rpx;
+	}
 </style>

@@ -46,3 +46,27 @@ export function queryStaffListInfo(_that,_data){
 		})
 	});
 }
+
+// 异步上传图片
+export function uploadImageAsync(_objData,_that) {
+	return new Promise( (resolve, reject) => {
+		_that.context.post({
+			url: url.uploadImage,
+			data: _objData,
+			//动态数据
+			success: function(res) {
+				if (res.statusCode == 200) {
+					let imgInfo = res.data;
+					resolve(imgInfo);
+				}
+			},
+			fail: function(e) {
+				uni.hideLoading();
+				uni.showToast({
+					title: "服务器异常了",
+					icon: 'none'
+				})
+			}
+		});
+	})
+}

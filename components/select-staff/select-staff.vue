@@ -125,6 +125,7 @@
 					row: 50,
 					parentOrgId: this.selectedOrg.orgId,
 					departmentOrgId: this.selectedDep.orgId,
+					orgId: this.selectedDep.orgId,
 					communityId: this.communityId,
 				};
 				queryStaffListInfo(this, _data)

@@ -33,7 +33,7 @@
 				<view class="cu-item">
 					<view class="grid text-center col-4 grid-square" >
 						<view class="" v-for="(item,index) in imgRecordList" :key="index">
-							<image mode="widthFix" :data-url="commonBaseUrl + item.url" :data-index="index" :src="commonBaseUrl + item.url" @tap="preview"></image>
+							<image mode="widthFix" :data-url="item.url" :data-index="index" :src="item.url" @tap="preview"></image>
 						</view>
 					</view>
 				</view>

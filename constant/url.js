@@ -157,6 +157,7 @@ export default {
 	repairStart: baseUrl + "app/ownerRepair.repairStart",
 	listInspectionItemTitle: baseUrl + "app/inspectionItemTitle.listInspectionItemTitle",
 	listResourceStoreTypes: baseUrl + "app/resourceStoreType.listResourceStoreTypes",
-	listSystemInfo:baseUrl+"app/system.listSystemInfo"
+	listSystemInfo:baseUrl+"app/system.listSystemInfo",
+	uploadImage: baseUrl + "callComponent/uploadFile/uploadPhotoImage"
 	
 }

@@ -28,27 +28,9 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-bar bg-white margin-top">
-				<view class="action">
-					巡检图片
-				</view>
-				<view class="action">
-					{{imgList.length}}/4
-				</view>
-			</view>
-			<view class="cu-form-group">
-				<view class="grid col-4 grid-square flex-sub">
-					<view class="bg-img" v-for="(img,index) in imgList" :key= "index" bindtap="ViewImage" :data-url="imgList[index]">
-						<image :src='imgList[index]' mode='aspectFill'></image>
-						<view class="cu-tag bg-red" @tap="removePhoto(index)" :data-index="index">
-							<text class="cuIcon-close"></text>
-						</view>
-					</view>
-					<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
-						<text class="cuIcon-cameraadd"></text>
-					</view>
-				</view>
-			</view>
+			
+			<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImage.maxPhotoNum" :canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData" style="margin-top: 30rpx;"></uploadImageAsync>
+
 			<view class="cu-form-group margin-top" v-if="mapKey">
 				<view class="title">当前位置</view>
 				<input type="text" v-model="reverseGeocoderSimplify" disabled="disabled" />
@@ -64,11 +46,11 @@
 
 <script>
 	import conf from '../../conf/config.js'
-	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
 	import {preventClick} from '../../lib/java110/utils/common.js';
 	import {queryDictInfo,queryInspectionItemTitle} from '../../api/inspection/inspection.js';
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	import url from '../../constant/url.js'
+	import uploadImageAsync from "../../components/vc-upload-async/vc-upload-async.vue";
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	export default {
@@ -99,9 +81,19 @@
 				reverseGeocoderSimplify: '正在获取...',
 				titles: [],
 				itemId:'',
-				mapKey:''
+				mapKey:'',
+				uploadImage: {
+					maxPhotoNum: 4,
+					imgTitle: '巡检图片',
+					canEdit: true
+				}
 			}
 		},
+		
+		components: {
+			uploadImageAsync
+		},
+		
 		onLoad(option) {
 			this.java110Context.onLoad();
 			
@@ -130,6 +122,14 @@
 			this._loadInspectionItem();
 		},
 		methods: {
+			sendImagesData: function(e){
+				this.photos = [];
+				if(e.length > 0){
+					e.forEach((img) => {
+						this.photos.push(img.fileId);
+					})
+				}
+			},
 			_loadInspectionItem:function(){
 				let that = this;
 				queryInspectionItemTitle(this,{
@@ -264,19 +264,12 @@
 					"communityId": this.communityId,
 					"patrolType":this.patrolType,
 					"description":this.description,
-					"photos": [],
+					"photos": this.photos,
 					"userId": this.userId,
 					"userName": this.userName,
 					"latitude": this.latitude,
 					"longitude": this.longitude
 				}
-			
-				let _photos = this.photos;
-				_photos.forEach(function(_item) {
-					obj.photos.push({
-						"photo": _item
-					});
-				});
 			
 				let msg = "";
 				if (obj.taskId == "") {
@@ -337,7 +330,6 @@
 							})
 						}
 					});
-			
 				}
 			},
 			radioChange: function(e, item) {

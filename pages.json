@@ -146,6 +146,13 @@
 				
 			}
         }
+		,{
+		    "path" : "pages/inspectionReexamine/inspectionReexamine",
+		    "style" : {
+				"navigationBarTitleText": "巡检补检"
+				
+			}
+		}
         ,{
             "path" : "pages/purchase/purchase",
             "style" : {

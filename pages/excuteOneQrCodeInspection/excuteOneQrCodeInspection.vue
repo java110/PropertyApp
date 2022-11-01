@@ -1,11 +1,11 @@
 <template>
 	<view>
-		<view class="text-center margin-top-100" v-if="taskDetails.length > 0">
+		<view class="text-center margin-top-100" v-if="!taskDetails || taskDetails.length == 0">
 			<view class="">
 				<text class=" cuIcon-warnfill light text-orange no-data-icon"></text>
 			</view>
 			<view class="">
-				<text class="text-gray">当前没有巡检任务</text>
+				<text class="text-gray">当前没有巡检任务或者没到巡检时间</text>
 			</view>
 			
 		</view>

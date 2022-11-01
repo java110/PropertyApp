@@ -14,7 +14,7 @@
 
 <script>
 	import url from '../../constant/url.js'
-	import {formatDate,addDay} from '../../lib/java110/utils/DateUtil.js'
+	import {formatDate,formatTime,addDay} from '../../lib/java110/utils/DateUtil.js'
 	import {
 		getCurrentCommunity
 	} from '../../api/community/community.js'
@@ -57,7 +57,7 @@
 						planUserId: this.userId,
 						inspectionId: this.inspectionId,
 						state: '20200405',
-						qrCodeTime:formatDate(new Date()),
+						qrCodeTime:formatTime(new Date()),
 					},
 					success: function(res) {
 						// TODO 判断

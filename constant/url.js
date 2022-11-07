@@ -125,7 +125,7 @@ export default {
 	// 取消申请
 	deletePurchaseApply: baseUrl + "app/purchaseApply.deletePurchaseApply",
 	//查询水电抄表记录
-	listMeterWaters: baseUrl+"app/meterWater.listMeterWaters",
+	listMeterWaters: baseUrl + "app/meterWater.listMeterWaters",
 	listRepairSettings: baseUrl + 'app/repair.listRepairSettings',
 	saveHelpOwnerRepair: baseUrl + "app/ownerRepair.saveOwnerRepair",
 	updateRoomRenovationState: baseUrl + "app/roomRenovation/updateRoomRenovationState",
@@ -139,8 +139,8 @@ export default {
 	listRunWorkflowImage: baseUrl + "app/workflow.listRunWorkflowImage",
 	getNextTask: baseUrl + "app/oaWorkflow/getNextTask",
 	auditOaWorkflow: baseUrl + "app/oaWorkflow/auditOaWorkflow",
-	updateOaWorkflowFormData: baseUrl +"app/oaWorkflow.updateOaWorkflowFormData",
-	listMeterType: baseUrl +"app/meterType.listMeterType",
+	updateOaWorkflowFormData: baseUrl + "app/oaWorkflow.updateOaWorkflowFormData",
+	listMeterType: baseUrl + "app/meterType.listMeterType",
 	// 空置房跟踪记录列表
 	listApplyRoomDiscountRecord: baseUrl + "app/applyRoomDiscountRecord/queryApplyRoomDiscountRecord",
 	// 空置房跟踪记录详情
@@ -157,7 +157,11 @@ export default {
 	repairStart: baseUrl + "app/ownerRepair.repairStart",
 	listInspectionItemTitle: baseUrl + "app/inspectionItemTitle.listInspectionItemTitle",
 	listResourceStoreTypes: baseUrl + "app/resourceStoreType.listResourceStoreTypes",
-	listSystemInfo:baseUrl+"app/system.listSystemInfo",
-	uploadImage: baseUrl + "callComponent/uploadFile/uploadPhotoImage"
-	
+	listSystemInfo: baseUrl + "app/system.listSystemInfo",
+	uploadImage: baseUrl + "callComponent/uploadFile/uploadPhotoImage",
+	// 查询核销订单
+	listCommunitySpaceConfirmOrder: baseUrl + "app/communitySpace.listCommunitySpaceConfirmOrder",
+	// 核销订单
+	saveCommunitySpaceConfirmOrder: baseUrl + "app/communitySpace.saveCommunitySpaceConfirmOrder",
+
 }

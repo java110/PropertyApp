@@ -5,22 +5,19 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
-		}
-	    ,{
-            "path" : "pages/addressList/addressList",
-            "style" : {
+		}, {
+			"path": "pages/addressList/addressList",
+			"style": {
 				"navigationBarTitleText": "通讯录"
 			}
-        }
-        ,{
-            "path" : "pages/my/my",
-            "style" : {
+		}, {
+			"path": "pages/my/my",
+			"style": {
 				"navigationBarTitleText": "我的"
 			}
-        }
-        ,{
-            "path" : "pages/login/login",
-            "style" : {
+		}, {
+			"path": "pages/login/login",
+			"style": {
 				// "navigationBarTitleText": "请登录"
 				"app-plus": {
 					"titleNView": false,
@@ -28,538 +25,494 @@
 					"scrollIndicator": "none"
 				},
 				"navigationStyle": "custom"
-				
+
 			}
-        }
-        ,{
-            "path" : "pages/activityes/activityes",
-            "style" : {
+		}, {
+			"path": "pages/activityes/activityes",
+			"style": {
 				"navigationBarTitleText": "小区文化"
 			}
-        }
-        ,{
-            "path" : "pages/activityDetail/activityDetail",
-            "style" : {
+		}, {
+			"path": "pages/activityDetail/activityDetail",
+			"style": {
 				"navigationBarTitleText": "文化详情"
 			}
-        }
-        ,{
-            "path" : "pages/notice/notice",
-            "style" : {
-            	"navigationBarTitleText": "公告"
-            }
-        }
-        ,{
-            "path" : "pages/changeCommunity/changeCommunity",
-            "style" : {
+		}, {
+			"path": "pages/notice/notice",
+			"style": {
+				"navigationBarTitleText": "公告"
+			}
+		}, {
+			"path": "pages/changeCommunity/changeCommunity",
+			"style": {
 				"navigationBarTitleText": "切换小区"
 			}
-        }
-        ,{
-            "path" : "pages/userInfo/userInfo",
-            "style" : {
+		}, {
+			"path": "pages/userInfo/userInfo",
+			"style": {
 				"navigationBarTitleText": "个人信息"
 			}
-        }
-        ,{
-            "path" : "pages/changePwd/changePwd",
-            "style" : {
+		}, {
+			"path": "pages/changePwd/changePwd",
+			"style": {
 				"navigationBarTitleText": "修改密码"
 			}
-        }
-        ,{
-            "path" : "pages/notice/detail/noticeDetail",
-            "style" : {
+		}, {
+			"path": "pages/notice/detail/noticeDetail",
+			"style": {
 				"navigationBarTitleText": "通知页面详情"
-				}
-        }
-        ,{
-            "path" : "pages/complaintList/complaintList",
-            "style" : {
+			}
+		}, {
+			"path": "pages/complaintList/complaintList",
+			"style": {
 				"navigationBarTitleText": "投诉受理单"
 			}
-        }
-        ,{
-            "path" : "pages/auditComplaintOrder/auditComplaintOrder",
-            "style" : {
+		}, {
+			"path": "pages/auditComplaintOrder/auditComplaintOrder",
+			"style": {
 				"navigationBarTitleText": "处理投诉单"
 			}
-        }
-        ,{
-            "path" : "pages/complaintOrderDetail/complaintOrderDetail",
-            "style" : {
+		}, {
+			"path": "pages/complaintOrderDetail/complaintOrderDetail",
+			"style": {
 				"navigationBarTitleText": "投诉单详情"
 			}
-        }
-        ,{
-            "path" : "pages/complaintOrder/complaintOrder",
-            "style" : {
+		}, {
+			"path": "pages/complaintOrder/complaintOrder",
+			"style": {
 				"navigationBarTitleText": "投诉录单"
 			}
-        }
-        ,{
-            "path" : "pages/floorList/floorList",
-            "style" : {
+		}, {
+			"path": "pages/floorList/floorList",
+			"style": {
 				"navigationBarTitleText": "选择楼栋"
 			}
-        }
-        ,{
-            "path" : "pages/unitList/unitList",
-            "style" : {
+		}, {
+			"path": "pages/unitList/unitList",
+			"style": {
 				"navigationBarTitleText": "选择单元"
 			}
-        }
-        ,{
-            "path" : "pages/roomList/roomList",
-            "style" : {
+		}, {
+			"path": "pages/roomList/roomList",
+			"style": {
 				"navigationBarTitleText": "选择房屋"
 			}
-        },
+		},
 		{
-		    "path" : "pages/repairOrder/repairOrder",
-		    "style" : {
+			"path": "pages/repairOrder/repairOrder",
+			"style": {
 				"navigationBarTitleText": "维修工单池"
 			}
 		},
 		{
-		    "path" : "pages/repairDispatch/repairDispatch",
-		    "style" : {
+			"path": "pages/repairDispatch/repairDispatch",
+			"style": {
 				"navigationBarTitleText": "维修待办单"
 			}
 		},
 		{
-		    "path" : "pages/repairDetail/repairDetail",
-		    "style" : {
+			"path": "pages/repairDetail/repairDetail",
+			"style": {
 				"navigationBarTitleText": "维修详情"
 			}
-		}
-		,{
-		    "path" : "pages/repairAdd/repairAdd",
-		    "style" : {
+		}, {
+			"path": "pages/repairAdd/repairAdd",
+			"style": {
 				"navigationBarTitleText": "添加记录"
 			}
-		}
-        ,{
-            "path" : "pages/inspection/inspection",
-            "style" : {
+		}, {
+			"path": "pages/inspection/inspection",
+			"style": {
 				"navigationBarTitleText": "巡检打卡"
-				
+
 			}
-        }
-		,{
-		    "path" : "pages/inspectionReexamine/inspectionReexamine",
-		    "style" : {
+		}, {
+			"path": "pages/inspectionReexamine/inspectionReexamine",
+			"style": {
 				"navigationBarTitleText": "巡检补检"
-				
+
 			}
-		}
-        ,{
-            "path" : "pages/purchase/purchase",
-            "style" : {
+		}, {
+			"path": "pages/purchase/purchase",
+			"style": {
 				"navigationBarTitleText": "采购管理",
-				"navigationBarBackgroundColor":"#57fef6"
+				"navigationBarBackgroundColor": "#57fef6"
 			}
-        }
-        ,{
-            "path" : "pages/excuteInspection/excuteInspection",
-            "style" : {
+		}, {
+			"path": "pages/excuteInspection/excuteInspection",
+			"style": {
 				"navigationBarTitleText": "巡检过程"
 			}
-        }
-        ,{
-            "path" : "pages/excuteOneInspection/excuteOneInspection",
-            "style" : {
+		}, {
+			"path": "pages/excuteOneInspection/excuteOneInspection",
+			"style": {
 				"navigationBarTitleText": "执行巡检"
 			}
-        },{
-            "path" : "pages/purchaseRequest/purchaseRequest",
-            "style" : {
+		}, {
+			"path": "pages/purchaseRequest/purchaseRequest",
+			"style": {
 				"navigationBarTitleText": "采购申请"
 			}
-        }
-        ,{
-            "path" : "pages/pOutOfStorageRequest/pOutOfStorageRequest",
-            "style" : {
+		}, {
+			"path": "pages/pOutOfStorageRequest/pOutOfStorageRequest",
+			"style": {
 				"navigationBarTitleText": "出库申请"
 			}
-        }
-        ,{
-            "path" : "pages/purchasingSchedule/purchasingSchedule",
-            "style" : {
+		}, {
+			"path": "pages/purchasingSchedule/purchasingSchedule",
+			"style": {
 				"navigationBarTitleText": "申请进度"
 			}
-        }
-        ,{
-            "path" : "pages/purchaseReview/purchaseReview",
-            "style" : {
+		}, {
+			"path": "pages/purchaseReview/purchaseReview",
+			"style": {
 				"navigationBarTitleText": "采购审核"
 			}
-        }
-        ,{
-            "path" : "pages/purchaseList/purchaseList",
-            "style" : {
+		}, {
+			"path": "pages/purchaseList/purchaseList",
+			"style": {
 				"navigationBarTitleText": "选择类型"
 			}
-        }
-        ,{
-            "path" : "pages/repairHandle/repairHandle",
-            "style" : {
+		}, {
+			"path": "pages/repairHandle/repairHandle",
+			"style": {
 				"navigationBarTitleText": "订单处理"
 			}
-        }
-        ,{
-            "path" : "pages/repairDispatchFinish/repairDispatchFinish",
-            "style" : {
+		}, {
+			"path": "pages/repairDispatchFinish/repairDispatchFinish",
+			"style": {
 				"navigationBarTitleText": "维修已办"
-				
+
 			}
-        }
-        ,{
-            "path" : "pages/appraiseRepair/appraiseRepair",
-            "style" : {
+		}, {
+			"path": "pages/appraiseRepair/appraiseRepair",
+			"style": {
 				"navigationBarTitleText": "回访工单"
 			}
-        }
-        ,{
-            "path" : "pages/complaintFinish/complaintFinish",
-            "style" : {
+		}, {
+			"path": "pages/complaintFinish/complaintFinish",
+			"style": {
 				"navigationBarTitleText": "投诉已办单"
 			}
-        }
-        ,{
-            "path" : "pages/complaintHandle/complaintHandle",
-            "style" : {
-				"navigationBarTitleText": "投诉处理"	
+		}, {
+			"path": "pages/complaintHandle/complaintHandle",
+			"style": {
+				"navigationBarTitleText": "投诉处理"
 			}
-        }
-        ,{
-            "path" : "pages/roomDetail/roomDetail",
-            "style" : {
+		}, {
+			"path": "pages/roomDetail/roomDetail",
+			"style": {
 				"navigationBarTitleText": "房产信息"
 			}
-        }
-        ,{
-            "path" : "pages/selectFloor/selectFloor",
-            "style" : {
+		}, {
+			"path": "pages/selectFloor/selectFloor",
+			"style": {
 				"navigationBarTitleText": "选择楼栋"
-				
+
 			}
-        }
-        ,{
-            "path" : "pages/selectUnit/selectUnit",
-            "style" : {
+		}, {
+			"path": "pages/selectUnit/selectUnit",
+			"style": {
 				"navigationBarTitleText": "选择单元"
-				
+
 			}
-        }
-        ,{
-            "path" : "pages/selectRoom/selectRoom",
-            "style" : {
+		}, {
+			"path": "pages/selectRoom/selectRoom",
+			"style": {
 				"navigationBarTitleText": "选择房屋"
 			}
-        }
-        ,{
-            "path" : "pages/feeDetail/feeDetail",
-            "style" : {
+		}, {
+			"path": "pages/feeDetail/feeDetail",
+			"style": {
 				"navigationBarTitleText": "费用详情"
 			}
-        }
-        ,{
-            "path" : "pages/roomPayFee/roomPayFee",
-            "style" : {
+		}, {
+			"path": "pages/roomPayFee/roomPayFee",
+			"style": {
 				"navigationBarTitleText": "收银台"
 			}
-        },
+		},
 		{
-		    "path" : "pages/meterReading/meterReading",
-		    "style" : {
+			"path": "pages/meterReading/meterReading",
+			"style": {
 				"navigationBarTitleText": "水电抄表"
 			}
 		},
 		{
-		    "path" : "pages/addmeter/addmeter",
-		    "style" : {
+			"path": "pages/addmeter/addmeter",
+			"style": {
 				"navigationBarTitleText": "抄表"
 			}
 		},
 		{
-		    "path" : "pages/applyRoom/applyRoom",
-		    "style" : {
+			"path": "pages/applyRoom/applyRoom",
+			"style": {
 				"navigationBarTitleText": "空置房"
 			}
 		},
 		{
-		    "path" : "pages/applyRoomDetail/applyRoomDetail",
-		    "style" : {
+			"path": "pages/applyRoomDetail/applyRoomDetail",
+			"style": {
 				"navigationBarTitleText": "空置房详情"
 			}
 		},
 		{
-		    "path" : "pages/applyRoomRecord/applyRoomRecord",
-		    "style" : {
+			"path": "pages/applyRoomRecord/applyRoomRecord",
+			"style": {
 				"navigationBarTitleText": "空置房跟踪记录"
 			}
 		},
 		{
-		    "path" : "pages/applyRoomRecordHandle/applyRoomRecordHandle",
-		    "style" : {
+			"path": "pages/applyRoomRecordHandle/applyRoomRecordHandle",
+			"style": {
 				"navigationBarTitleText": "添加跟踪记录"
 			}
 		},
 		{
-		    "path" : "pages/applyRoomRecordDetail/applyRoomRecordDetail",
-		    "style" : {
+			"path": "pages/applyRoomRecordDetail/applyRoomRecordDetail",
+			"style": {
 				"navigationBarTitleText": "跟踪记录详情"
 			}
 		},
 		{
-		    "path" : "pages/roomRenovation/roomRenovation",
-		    "style" : {
+			"path": "pages/roomRenovation/roomRenovation",
+			"style": {
 				"navigationBarTitleText": "装修记录"
 			}
 		},
 		{
-		    "path" : "pages/roomRenovationDetail/roomRenovationDetail",
-		    "style" : {
+			"path": "pages/roomRenovationDetail/roomRenovationDetail",
+			"style": {
 				"navigationBarTitleText": "装修详情"
 			}
 		},
 		{
-		    "path" : "pages/roomRenovationRecord/roomRenovationRecord",
-		    "style" : {
+			"path": "pages/roomRenovationRecord/roomRenovationRecord",
+			"style": {
 				"navigationBarTitleText": "跟踪记录"
 			}
 		},
 		{
-		    "path" : "pages/roomRenovationRecordHandle/roomRenovationRecordHandle",
-		    "style" : {
+			"path": "pages/roomRenovationRecordHandle/roomRenovationRecordHandle",
+			"style": {
 				"navigationBarTitleText": "添加跟踪记录"
 			}
 		},
 		{
-		    "path" : "pages/roomRenovationRecordDetail/roomRenovationRecordDetail",
-		    "style" : {
+			"path": "pages/roomRenovationRecordDetail/roomRenovationRecordDetail",
+			"style": {
 				"navigationBarTitleText": "跟踪记录详情"
 			}
-		}
-        ,{
-            "path" : "pages/payFeeByQrCode/payFeeByQrCode",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "请扫二维码支付",
-                "enablePullDownRefresh": false
-            }
-        },
+		}, {
+			"path": "pages/payFeeByQrCode/payFeeByQrCode",
+			"style": {
+				"navigationBarTitleText": "请扫二维码支付",
+				"enablePullDownRefresh": false
+			}
+		},
 		{
-		    "path" : "pages/resourceStoreManage/resourceStoreManage",
-		    "style" : {
+			"path": "pages/resourceStoreManage/resourceStoreManage",
+			"style": {
 				"navigationBarTitleText": "我的物品"
 			}
 		},
 		{
-		    "path" : "pages/purchaseApplyManage/purchaseApplyManage",
-		    "style" : {
+			"path": "pages/purchaseApplyManage/purchaseApplyManage",
+			"style": {
 				"navigationBarTitleText": "采购申请列表"
 			}
 		},
 		{
-		    "path" : "pages/addPurchaseApplyStep/addPurchaseApplyStep",
-		    "style" : {
+			"path": "pages/addPurchaseApplyStep/addPurchaseApplyStep",
+			"style": {
 				"navigationBarTitleText": "采购申请"
 			}
 		},
 		{
-		    "path" : "pages/purchaseApplyAuditOrders/purchaseApplyAuditOrders",
-		    "style" : {
+			"path": "pages/purchaseApplyAuditOrders/purchaseApplyAuditOrders",
+			"style": {
 				"navigationBarTitleText": "采购审批"
 			}
 		},
 		{
-		    "path" : "pages/itemOutManage/itemOutManage",
-		    "style" : {
+			"path": "pages/itemOutManage/itemOutManage",
+			"style": {
 				"navigationBarTitleText": "物品领用列表"
 			}
 		},
 		{
-		    "path" : "pages/addItemOutStep/addItemOutStep",
-		    "style" : {
+			"path": "pages/addItemOutStep/addItemOutStep",
+			"style": {
 				"navigationBarTitleText": "物品领用"
 			}
 		},
 		{
-		    "path" : "pages/itemOutAuditOrders/itemOutAuditOrders",
-		    "style" : {
+			"path": "pages/itemOutAuditOrders/itemOutAuditOrders",
+			"style": {
 				"navigationBarTitleText": "领用审批"
 			}
 		},
 		{
-		    "path" : "pages/itemOutDo/itemOutDo",
-		    "style" : {
+			"path": "pages/itemOutDo/itemOutDo",
+			"style": {
 				"navigationBarTitleText": "物品发放"
 			}
 		},
 		{
-		    "path" : "pages/itemEnterDo/itemEnterDo",
-		    "style" : {
+			"path": "pages/itemEnterDo/itemEnterDo",
+			"style": {
 				"navigationBarTitleText": "物品入库"
 			}
 		},
 		{
-		    "path" : "pages/allocationStorehouseManage/allocationStorehouseManage",
-		    "style" : {
+			"path": "pages/allocationStorehouseManage/allocationStorehouseManage",
+			"style": {
 				"navigationBarTitleText": "物品调拨列表"
 			}
 		},
 		{
-		    "path" : "pages/allocationStorehouseApply/allocationStorehouseApply",
-		    "style" : {
+			"path": "pages/allocationStorehouseApply/allocationStorehouseApply",
+			"style": {
 				"navigationBarTitleText": "物品调拨"
 			}
 		},
 		{
-		    "path" : "pages/allocationStorehouseAuditOrders/allocationStorehouseAuditOrders",
-		    "style" : {
+			"path": "pages/allocationStorehouseAuditOrders/allocationStorehouseAuditOrders",
+			"style": {
 				"navigationBarTitleText": "调拨审批"
 			}
 		},
 		{
-		    "path" : "pages/allocationStorehouseApplyDetail/allocationStorehouseApplyDetail",
-		    "style" : {
+			"path": "pages/allocationStorehouseApplyDetail/allocationStorehouseApplyDetail",
+			"style": {
 				"navigationBarTitleText": "调拨详情"
 			}
 		},
 		{
-		    "path" : "pages/resourceStoreReturn/resourceStoreReturn",
-		    "style" : {
+			"path": "pages/resourceStoreReturn/resourceStoreReturn",
+			"style": {
 				"navigationBarTitleText": "物品退还"
 			}
 		},
 		{
-		    "path" : "pages/resourceStoreScrap/resourceStoreScrap",
-		    "style" : {
+			"path": "pages/resourceStoreScrap/resourceStoreScrap",
+			"style": {
 				"navigationBarTitleText": "物品损耗"
 			}
 		},
 		{
-			"path" : "pages/resourceStoreTransfer/resourceStoreTransfer",
-			"style" : {
+			"path": "pages/resourceStoreTransfer/resourceStoreTransfer",
+			"style": {
 				"navigationBarTitleText": "物品转赠"
 			}
 		},
 		{
-			"path" : "pages/inspectionTransfer/inspectionTransfer",
-			"style" : {
+			"path": "pages/inspectionTransfer/inspectionTransfer",
+			"style": {
 				"navigationBarTitleText": "任务流转"
 			}
 		},
 		{
-			"path" : "pages/urgentPurchaseApplyStep/urgentPurchaseApplyStep",
-			"style" : {
+			"path": "pages/urgentPurchaseApplyStep/urgentPurchaseApplyStep",
+			"style": {
 				"navigationBarTitleText": "紧急采购"
 			}
 		},
 		{
-			"path" : "pages/purchaseApplyDetail/purchaseApplyDetail",
-			"style" : {
+			"path": "pages/purchaseApplyDetail/purchaseApplyDetail",
+			"style": {
 				"navigationBarTitleText": "申请详情"
 			}
 		},
 		{
-		    "path" : "pages/hcWebView/hcWebView",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": ""
-		    }
-		    
+			"path": "pages/hcWebView/hcWebView",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+
+		}, {
+			"path": "pages/oaWorkflow/oaWorkflow",
+			"style": {
+				"navigationBarTitleText": "OA流程",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/newOaWorkflowForm/newOaWorkflowForm",
+			"style": {
+				"navigationBarTitleText": "起草流程",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/newOaWorkflowFinish/newOaWorkflowFinish",
+			"style": {
+				"navigationBarTitleText": "流程已办",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/newOaWorkflowUndo/newOaWorkflowUndo",
+			"style": {
+				"navigationBarTitleText": "流程待办",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/newOaWorkflowDetail/newOaWorkflowDetail",
+			"style": {
+				"navigationBarTitleText": "待办处理",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/newOaWorkflowUndoAudit/newOaWorkflowUndoAudit",
+			"style": {
+				"navigationBarTitleText": "流程审核",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/newOaWorkflowFormEdit/newOaWorkflowFormEdit",
+			"style": {
+				"navigationBarTitleText": "表单修改",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/excuteOneQrCodeInspection/excuteOneQrCodeInspection",
+			"style": {
+				"navigationBarTitleText": "二维码巡检",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/repairHandle/selectResource",
+			"style": {
+				"navigationBarTitleText": "选择物品",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/appointment/appointment",
+			"style": {
+				"navigationBarTitleText": "预约核销"
+			}
+		},
+		{
+			"path": "pages/appointment/hou_one",
+			"style": {
+				"navigationBarTitleText": "核销扫码"
+			}
 		}
-        ,{
-            "path" : "pages/oaWorkflow/oaWorkflow",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "OA流程",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/newOaWorkflowForm/newOaWorkflowForm",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "起草流程",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/newOaWorkflowFinish/newOaWorkflowFinish",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "流程已办",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/newOaWorkflowUndo/newOaWorkflowUndo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "流程待办",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/newOaWorkflowDetail/newOaWorkflowDetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "待办处理",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/newOaWorkflowUndoAudit/newOaWorkflowUndoAudit",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "流程审核",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/newOaWorkflowFormEdit/newOaWorkflowFormEdit",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "表单修改",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/excuteOneQrCodeInspection/excuteOneQrCodeInspection",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "二维码巡检",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/repairHandle/selectResource",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "选择物品",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "物业版",
 		"navigationBarBackgroundColor": "#00AA00",
 		"backgroundColor": "#00AA00",
-		"onReachBottonDistance":50
+		"onReachBottonDistance": 50
 	},
 	"tabBar": {
 		"color": "#272636",
@@ -571,22 +524,22 @@
 		"iconWidth": "24px",
 		"spacing": "3px",
 		"list": [{
-			"pagePath": "pages/index/index",
-			"iconPath": "static/image/home.png",
-			"selectedIconPath": "static/image/home-selected.png",
-			"text": "首页"
-		}, {
-			"pagePath": "pages/addressList/addressList",
-			"iconPath": "static/image/addressList.png",
-			"selectedIconPath": "static/image/addressList-selected.png",
-			"text": "通讯录"
-		},
-		{
-			"pagePath": "pages/my/my",
-			"iconPath": "static/image/my.png",
-			"selectedIconPath": "static/image/my-selected.png",
-			"text": "我的"
-		}
+				"pagePath": "pages/index/index",
+				"iconPath": "static/image/home.png",
+				"selectedIconPath": "static/image/home-selected.png",
+				"text": "首页"
+			}, {
+				"pagePath": "pages/addressList/addressList",
+				"iconPath": "static/image/addressList.png",
+				"selectedIconPath": "static/image/addressList-selected.png",
+				"text": "通讯录"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"iconPath": "static/image/my.png",
+				"selectedIconPath": "static/image/my-selected.png",
+				"text": "我的"
+			}
 		]
 	},
 	"networkTimeout": {

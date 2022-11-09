@@ -506,7 +506,43 @@
 				"navigationBarTitleText": "核销扫码"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/maintainance/maintainance",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设备保养",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/maintainance/excuteMaintainance",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "保养",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/maintainance/excuteOneMaintainance",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/maintainance/maintainanceTransfer",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "物业版",

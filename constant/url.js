@@ -33,10 +33,20 @@ export default {
 	listAdvertPhoto: baseUrl + "app/advert.listAdvertPhoto",
 	//查询巡检任务
 	listInspectionTasks: baseUrl + "app/inspectionTask.listInspectionTasks",
+	
+	listMaintainanceTask:baseUrl+"app/maintainanceTask.listMaintainanceTask",
 	//巡检任务详情
 	listInspectionTaskDetails: baseUrl + 'app/inspectionTaskDetail.listInspectionTaskDetails',
+	
+	//保养明细
+	listMaintainanceTaskDetail: baseUrl + 'app/maintainanceTask.listMaintainanceTaskDetail',
+	
 	//巡检
 	updateInspectionTaskDetail: baseUrl + 'app/inspectionTaskDetail.updateInspectionTaskDetail',
+	
+	//保养
+	updateMaintainanceTaskDetail: baseUrl + 'app/maintainanceTask.updateMaintainanceTaskDetail',
+	
 	// 查询报修单处理师傅
 	listRepairStaffs: baseUrl + "app/ownerRepair.listRepairStaffs",
 	//查询员工报修单
@@ -116,6 +126,9 @@ export default {
 	queryStaffListInfo: baseUrl + "app/query.staff.infos",
 	// 巡检流转
 	UpdateInspectionTask: baseUrl + "app/inspectionTask.updateInspectionTask",
+	
+	// 保养流转
+	UpdateMaintainanceTask: baseUrl + "app/maintainanceTask.updateMaintainanceTask",
 	// 物品转赠
 	saveResourceStoreTransfer: baseUrl + "app/resourceStore.saveAllocationUserStorehouse",
 	// 紧急采购
@@ -156,6 +169,7 @@ export default {
 	repairStop: baseUrl + "app/ownerRepair.repairStop",
 	repairStart: baseUrl + "app/ownerRepair.repairStart",
 	listInspectionItemTitle: baseUrl + "app/inspectionItemTitle.listInspectionItemTitle",
+	listMaintainanceItem: baseUrl + "app/maintainance.listMaintainanceItem",
 	listResourceStoreTypes: baseUrl + "app/resourceStoreType.listResourceStoreTypes",
 	listSystemInfo: baseUrl + "app/system.listSystemInfo",
 	uploadImage: baseUrl + "callComponent/uploadFile/uploadPhotoImage",

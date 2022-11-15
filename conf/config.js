@@ -43,5 +43,6 @@ export default{
 	appPayKey:appPayKey,
 	commonBaseUrl: commonBaseUrl,
 	QQMapKey: QQMapKey,
+	imgUrl:commonBaseUrl,
 	systemName:systemName
 }

@@ -542,6 +542,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/inspection/inspectionTodayReport",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

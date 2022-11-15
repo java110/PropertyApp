@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="block__title">今日巡检统计</view>
+		<view class="block__title">{{staffName}}巡检情况</view>
 		<view class="cu-form-group arrow">
 			<view class="title">查询日期</view>
 			<picker mode="date" :value="bindDate" start="2020-09-01" end="2050-09-01" @change="dateChange">
@@ -15,10 +15,10 @@
 			<view class="cu-item arrow">
 				<view class="content padding-tb-sm">
 					<view>
-						<view class="text-cut" style="width:85%;">{{inspection.staffName}}</view>
+						<view class="text-cut" style="width:85%;">{{inspection.inspectionName}}({{inspection.stateName}})</view>
 					</view>
 					<view class="text-gray text-sm">
-						<text class="margin-right-xs">已巡检:</text> {{inspection.finishCount}} ; 未巡检:{{inspection.waitCount}}</view>
+						<text class="margin-right-xs">巡检时间:</text> {{inspection.planInsTime}} - {{inspection.pointEndTime}}</view>
 				</view>
 			</view>
 		</view>
@@ -30,7 +30,7 @@
 
 <script>
 	import {formatDate} from '@/lib/java110/utils/DateUtil.js';
-	import {queryReportStaffInspection} from '@/api/inspection/inspection.js';
+	import {listInspectionTaskDetails} from '@/api/inspection/inspection.js';
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	
 	
@@ -40,35 +40,38 @@
 			return {
 				inpections:[],
 				bindDate: '请选择',
+				staffId:'',
+				staffName:''
 			}
 		},
 		components:{
 			noDataPage
 		},
 		onLoad(options) {
+			this.staffId = options.staffId;
+			this.staffName = options.staffName;
 			this.bindDate = formatDate(new Date());
-			this._loadTodayInspectionReport();
+			this._loadTodayInspectionReportDetail();
 			
 		},
 		methods: {
 			
-			_loadTodayInspectionReport:function(){
+			_loadTodayInspectionReportDetail:function(){
 				let _that = this;
-				queryReportStaffInspection(this,{
+				listInspectionTaskDetails(this,{
 					communityId: getCurrentCommunity().communityId,
-					queryTime:this.bindDate
+					planUserId:this.staffId,
+					state:'20200405',
+					queryTime:this.bindDate,
+					page:1,
+					row:100
 				}).then(_data=>{
-					_that.inpections = _data.data;
+					_that.inpections = _data.inspectionTaskDetails;
 				})
 			},
 			dateChange: function(e) {
 				this.bindDate = e.detail.value;
 			},
-			gotoDetail:function(_inpection){
-				uni.navigateTo({
-					url:'/pages/inspection/staffNoInspection?staffId='+_inpection.staffId+"&staffName="+_inpection.staffName
-				})
-			}
 			
 		}
 	}

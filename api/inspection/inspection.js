@@ -73,3 +73,50 @@ export function queryInspectionItemTitle(_that,_data) {
 		});
 	})
 }
+
+export function queryReportStaffInspection(_that,_data){
+	return new Promise((resolve, reject) => {
+		let moreRooms = [];
+		_that.context.get({
+			url: url.queryReportStaffInspection,
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				if (_data.code == 0) {
+					resolve(_data);
+					return ;
+				}
+				reject(_data.msg);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}
+
+/**
+ * 查询巡检明细
+ * @param {} _that 
+ * @param {*} _data 
+ */
+export function listInspectionTaskDetails(_that,_data){
+	return new Promise((resolve, reject) => {
+		let moreRooms = [];
+		_that.context.get({
+			url: url.listInspectionTaskDetails,
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				if (_data.code == 0) {
+					resolve(_data);
+					return ;
+				}
+				reject(_data.msg);
+			},
+			fail: function(e) {
+				reject(e);
+			}
+		});
+	})
+}

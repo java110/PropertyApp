@@ -546,7 +546,16 @@
             "path" : "pages/inspection/inspectionTodayReport",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "今日巡检",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/inspection/staffNoInspection",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "员工未巡检",
                 "enablePullDownRefresh": false
             }
             

@@ -66,6 +66,7 @@
 					page:1,
 					row:100
 				}).then(_data=>{
+					console.log(_data)
 					_that.inpections = _data.inspectionTaskDetails;
 				})
 			},

@@ -560,6 +560,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/coupon/writeOffCoupon",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "核销优惠券",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

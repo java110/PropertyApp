@@ -177,6 +177,12 @@ export default {
 	listCommunitySpaceConfirmOrder: baseUrl + "app/communitySpace.listCommunitySpaceConfirmOrder",
 	// 核销订单
 	saveCommunitySpaceConfirmOrder: baseUrl + "app/communitySpace.saveCommunitySpaceConfirmOrder",
-	queryReportStaffInspection: baseUrl+"app/inspection.queryReportStaffInspection"
+	queryReportStaffInspection: baseUrl+"app/inspection.queryReportStaffInspection",
+	listCouponPropertyUserDetail: baseUrl+"app/couponProperty.listCouponPropertyUserDetail",
+	writeOffCouponPropertyUser: baseUrl+"app/couponProperty.writeOffCouponPropertyUser"
+	
+	
+	
+	
 
 }

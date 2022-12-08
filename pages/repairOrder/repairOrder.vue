@@ -220,9 +220,11 @@
 					title: '请稍候...'
 				})
 				let _that = this;
+				let _userInfo = this.java110Context.getUserInfo();
 				let _objData = {
 					communityId: getCurrentCommunity().communityId,
-					repairId: _item.repairId
+					repairId: _item.repairId,
+					userName: _userInfo.userName
 				};
 				this.java110Context.request({
 					url: url.robRepairOrder,

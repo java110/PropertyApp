@@ -1,12 +1,14 @@
 <template>
 	<view>
 		<view class="block__title">
-			巡检任务
-			<view style="float: right;">
-				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="_torReexamineInspection()">巡检补检</button>
+			巡检任务（补检）
+		</view>
+		<view class="block__title">
+			<view>选择日期：</view>
+			<view>
+				<uni-datetime-picker type="date" :clear-icon="false" v-model="planInsTime" @change="maskClick" :border="false"/>
 			</view>
 		</view>
-
 		<view v-if="noData==false">
 		<view v-for="(item,index) in tasks" :key="index" class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding-top padding-left padding-right">
 			<view class="flex padding-bottom-xs solid-bottom justify-between">
@@ -34,8 +36,8 @@
 				<view class="text-gray">{{item.signTypeName}}</view>
 			</view>
 			<view class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
-				<button class="cu-btn sm bg-blue margin-left" @click="_transferInspection(item)">流转</button>
-				<button class="cu-btn sm bg-green margin-left" @click="_startInspection(item)">我要巡检</button>
+				<!-- <button class="cu-btn sm bg-blue margin-left" @click="_transferInspection(item)">流转</button> -->
+				<button class="cu-btn sm bg-green margin-left" @click="_startInspection(item)">补检</button>
 			</view>
 		</view>
 		</view>
@@ -49,6 +51,7 @@
 	import noDataPage from '@/components/no-data-page/no-data-page.vue'
 	import dateUtil from '../../lib/java110/utils/date.js'
 	import {getCurrentCommunity} from '../../api/community/community.js'
+	import uniDatetimePicker from '../../components/uni-datetime-picker/uni-datetime-picker.vue'
 	import url from '../../constant/url.js'
 	export default {
 		data() {
@@ -57,11 +60,13 @@
 				communityId: '',
 				userId: '',
 				userName: '',
+				planInsTime:'',
 				noData:false
 			}
 		},
 		components: {
-			noDataPage
+			noDataPage,
+			uniDatetimePicker
 		},
 		onLoad: function() {
 			this.java110Context.onLoad();
@@ -79,13 +84,13 @@
 		},
 		methods: {
 			_startInspection:function(_item){
-				if(dateUtil.compareDate(_item.planInsTime.replace(/-/g, '/'), dateUtil.getCurrentDateTime().replace(/-/g, '/'))){
-					uni.showToast({
-						title: "尚未开始",
-						icon: "none"
-					});
-					return;
-				}
+				// if(dateUtil.compareDate(_item.planInsTime.replace(/-/g, '/'), dateUtil.getCurrentDateTime().replace(/-/g, '/'))){
+				// 	uni.showToast({
+				// 		title: "尚未开始",
+				// 		icon: "none"
+				// 	});
+				// 	return;
+				// }
 				console.log('开始巡检',_item);
 				uni.navigateTo({
 					url:'/pages/excuteInspection/excuteInspection?taskId='+_item.taskId+'&inspectionPlanName='+_item.inspectionPlanName
@@ -104,6 +109,8 @@
 						row: 10,
 						planUserId: _that.userId,
 						moreState:'20200405,20200406',
+						canReexamine:'2000',
+						planInsTime: _that.planInsTime,
 						isToday: 1
 					},
 					success: function(res) {
@@ -119,21 +126,15 @@
 					}
 				});
 			},
-
-			_transferInspection: function(_taskInfo){
-				uni.navigateTo({
-					url: '/pages/inspectionTransfer/inspectionTransfer?task=' + JSON.stringify(_taskInfo)
-				})
-			},
-			
-			/**
-			 * 跳转巡检补检
-			 */
-			_torReexamineInspection: function(){
-				uni.navigateTo({
-					url: '/pages/inspectionReexamine/inspectionReexamine'
-				});
-			},
+			// _transferInspection: function(_taskInfo){
+			// 	uni.navigateTo({
+			// 		url: '/pages/inspectionTransfer/inspectionTransfer?task=' + JSON.stringify(_taskInfo)
+			// 	})
+			// },
+			maskClick(e){
+				this.planInsTime = e;
+				this._queryInstpectionTasks();
+			}
 		}
 	}
 </script>

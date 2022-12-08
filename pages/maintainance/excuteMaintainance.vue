@@ -1,12 +1,12 @@
 <template>
 	<view>
-		<view class="block__title">{{inspectionPlanName}}</view>
+		<view class="block__title">{{planName}}</view>
 		<view class="cu-timeline margin-left-xs margin-right-xs">
-			<view class="cu-time">巡检点</view>
+			<view class="cu-time">设备</view>
 			<view class="cu-item cuIcon-noticefill" :class="(item.state == '20200407'?'text-green':'')" v-for="(item,index) in taskDetails"
 			 :key="index">
 				<view class="content shadow-blur" :class="(item.state == '20200407'?'bg-green':'')">
-					{{item.inspectionName}}
+					{{item.machineName}}
 					<text v-show="item.state != '20200407' && item.pointStartTime && item.pointEndTime">({{item.pointStartTime}} - {{item.pointEndTime}})</text>
 				</view>
 				<view class="bg-green content" v-if="item.state == '20200407'">
@@ -20,27 +20,23 @@
 
 
 				<view class="text-right" v-if="item.state != '20200407'">
-					<button class="cu-btn  line-green block margin-tb-sm lg " @click="_excuteInspection(item)">
-						<text class="cuIcon-upload"></text>巡检</button>
+					<button class="cu-btn  line-green block margin-tb-sm lg " @click="_excuteMaintaainance(item)">
+						<text class="cuIcon-upload"></text>保养</button>
 				</view>
-				<!-- <view class="margin-top-sm margin-right grid text-center col-3 grid-square">
-					<view class="" v-for="(_item,pindex) in item.photos" :key="pindex">
-						<image mode="scaleToFill" :src="_item.url" @tap="preview(index,pindex)"></image>
-					</view>
-				</view> -->
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import {getCurrentCommunity} from '../../api/community/community.js'
-	import url from '../../constant/url.js'
+	import {getCurrentCommunity} from '@/api/community/community.js'
+	import url from '../../constant/url.js';
+	import {queryMaintainanceTaskDetail} from '@/api/maintainance/maintainance.js'
 	export default {
 		data() {
 			return {
 				taskId: '',
-				inspectionPlanName: '',
+				planName: '',
 				scroll: 0,
 				communityId: '',
 				userId: '',
@@ -52,7 +48,7 @@
 		onLoad(options) {
 			this.java110Context.onLoad();
 			this.taskId = options.taskId;
-			this.inspectionPlanName = options.inspectionPlanName;
+			this.planName = options.planName;
 			this.communityId = getCurrentCommunity().communityId;
 			let _userInfo = this.java110Context.getUserInfo();
 			this.userName = _userInfo.userName;
@@ -65,41 +61,24 @@
 		methods: {
 			_queryTaskDetail: function() {
 				let _that = this;
-
-				_that.java110Context.request({
-					header: _that.java110Context.getHeaders(),
-					url: url.listInspectionTaskDetails,
-					method: "GET",
-					data: {
-						communityId: _that.communityId,
-						page: 1,
-						row: 100,
-						taskId: _that.taskId
-					},
-					success: function(res) {
-						// TODO 判断
-						let _inspectionTaskDetails = res.data.inspectionTaskDetails;
-						// _inspectionTaskDetails.forEach(function(_item) {
-						// 	if (_item.state == '20200407') {
-						// 		_item.photos.forEach(function(_photoTmp) {
-						// 			_photoTmp.url = url.hcBaseUrl + _photoTmp.url;
-						// 		});
-						// 	}
-
-						// })
-						_that.taskDetails = _inspectionTaskDetails;
-					}
-				});
+				
+				queryMaintainanceTaskDetail(this,{
+					communityId: _that.communityId,
+					page: 1,
+					row: 100,
+					taskId: _that.taskId
+				}).then(_data=>{
+					_that.taskDetails =_data
+				})
 			},
 
 			ScrollSteps() {
 				this.scroll = this.scroll == 9 ? 0 : this.scroll + 1
 			},
-			_excuteInspection: function(_item) {
-				console.log('巡检点', _item);
+			_excuteMaintaainance: function(_item) {
 				uni.navigateTo({
-					url: '/pages/excuteOneInspection/excuteOneInspection?taskDetailId=' + _item.taskDetailId + "&taskId=" + _item.taskId +
-						"&inspectionId=" + _item.inspectionId + "&inspectionName=" + _item.inspectionName+"&itemId="+_item.itemId
+					url: '/pages/maintainance/excuteOneMaintainance?taskDetailId=' + _item.taskDetailId + "&taskId=" + _item.taskId +
+						"&machineId=" + _item.machineId + "&machineName=" + _item.machineName+"&standardId="+_item.standardId
 				});
 			},
 			preview: function(index, pindex) {

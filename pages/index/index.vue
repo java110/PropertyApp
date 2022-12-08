@@ -1,10 +1,10 @@
 <template>
 	<view class="content">
 		<view class="margin-bottom-xs">
-			<uni-notice-bar :showIcon="true" :scrollable="true" :single="true" :speed="30"
-				:text="welcomeTitle"></uni-notice-bar>
+			<uni-notice-bar :showIcon="true" :scrollable="true" :single="true" :speed="30" :text="welcomeTitle">
+			</uni-notice-bar>
 		</view>
-		<scroll-view  class="scroll-restaurants-list" scroll-y="true" style="height:100%">
+		<scroll-view class="scroll-restaurants-list" scroll-y="true" style="height:100%">
 			<swiper class="categoryList padding-top-xs bg-white" indicator-dots="true"
 				indicator-color="rgba(228,228,228,1)" indicator-active-color="#FECA49">
 				<block v-for="(item, index) in categoryList" :key="index">
@@ -35,13 +35,13 @@
 			<view class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action">
 					<view class="bock-icon "></view>
-					<text class="margin-left-xs">小区文化</text>
+					<text class="margin-left-xs">小区活动</text>
 				</view>
 				<view class="action" @tap="_moreActivity()">
 					<text class="lg text-gray cuIcon-more"></text>
 				</view>
 			</view>
-			<view class="noticesList">
+			<view class="noticesList" v-if="activitys && activitys.length>0">
 				<block v-for="(item,index) in activitys" :key="index" wx:key="index">
 
 					<view class="noticesList-list" @tap="_toDetail(item)">
@@ -60,6 +60,10 @@
 						</view>
 					</view>
 				</block>
+			</view>
+			<view class="active_empty" v-else>
+				<image :src="noImg" />
+				<text class="text">暂无活动哦~</text>
 			</view>
 		</scroll-view>
 	</view>
@@ -80,12 +84,16 @@
 		getCommunity,
 		getCurrentCommunity
 	} from '../../api/community/community.js'
-	
+
 	import mapping from '../../constant/mapping.js'
-	
-	import {isNull} from '../../lib/java110/utils/StringUtil.js'
-	
-	import {getUserInfo} from '../../lib/java110/api/Java110SessionApi.js'
+
+	import {
+		isNull
+	} from '../../lib/java110/utils/StringUtil.js'
+
+	import {
+		getUserInfo
+	} from '../../lib/java110/api/Java110SessionApi.js'
 	import url from '../../constant/url.js';
 	import conf from '@/conf/config.js'
 	export default {
@@ -95,9 +103,16 @@
 				currentCommunityId: '',
 				currentCommunityName: '',
 				categoryList: [],
-				swiperList: [],
+				swiperList: [{
+						url: this.imgUrl + '/h5/images/serve/banner1.jpg'
+					},
+					{
+						url: this.imgUrl + '/h5/images/serve/banner2.jpg'
+					}
+				],
+				noImg:this.imgUrl+'/h5/images/serve/empty.png',
 				activitys: [],
-				welcomeTitle:''
+				welcomeTitle: ''
 			}
 		},
 		components: {
@@ -106,7 +121,7 @@
 		onLoad() {
 			this.welcomeTitle = conf.systemName + '欢迎您'
 			uni.setNavigationBarTitle({
-				title:conf.systemName
+				title: conf.systemName
 			})
 			this.java110Context.onLoad();
 		},
@@ -144,7 +159,9 @@
 					.then(function(res) {
 						if (res.statusCode == 200) {
 							let _advertPhotos = res.data;
-							_that.swiperList = _advertPhotos;
+							if (_advertPhotos && _advertPhotos.length > 0) {
+								_that.swiperList = _advertPhotos;
+							}
 							_that._loadActivitys();
 							return;
 						}
@@ -233,21 +250,21 @@
 				_that.currentCommunityName = currentCommunity.name;
 				_that._loadAd();
 			},
-			
-			_advertJump: function(ad){
+
+			_advertJump: function(ad) {
 				console.log(ad);
-				if(ad.advertType == 3 || !ad.pageUrl){
+				if (ad.advertType == 3 || !ad.pageUrl) {
 					return;
 				}
-				if(ad.advertType == 2){
+				if (ad.advertType == 2) {
 					// 站外
 					let url = encodeURIComponent(ad.pageUrl)
 					uni.navigateTo({
-						url:'/pages/hcWebView/hcWebView?url='+url
+						url: '/pages/hcWebView/hcWebView?url=' + url
 					})
 					return;
 				}
-				if(ad.advertType == 1){
+				if (ad.advertType == 1) {
 					// 站内
 					uni.navigateTo({
 						url: ad.pageUrl
@@ -259,8 +276,9 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	@import "./index.css";
+
 
 	.swiper-height-index {
 		height: 240upx;
@@ -347,5 +365,26 @@
 
 	.tec-height {
 		height: 120upx;
+	}
+	
+	.active_empty {
+		background: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		padding: 100rpx 0;
+		border-radius: 10px;
+	
+		image {
+			width: 50%;
+			height: 200upx;
+		}
+	
+		.text {
+			font-size: 28rpx;
+			color: #333;
+			margin-top: 20rpx;
+		}
 	}
 </style>

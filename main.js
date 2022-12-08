@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App'
+import conf from './conf/config.js';
 import Java110Context from './lib/java110/Java110Context.js'
 import context from './lib/java110/context.js'
 import url from './constant/url.js'
@@ -25,6 +26,7 @@ Vue.prototype.url = url;
 Vue.prototype.factory = factory;
 Vue.prototype.util = util;
 Vue.prototype.date = date;
+Vue.prototype.imgUrl = conf.imgUrl;
 
 App.mpType = 'app'
 

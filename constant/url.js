@@ -179,7 +179,16 @@ export default {
 	saveCommunitySpaceConfirmOrder: baseUrl + "app/communitySpace.saveCommunitySpaceConfirmOrder",
 	queryReportStaffInspection: baseUrl+"app/inspection.queryReportStaffInspection",
 	listCouponPropertyUserDetail: baseUrl+"app/couponProperty.listCouponPropertyUserDetail",
-	writeOffCouponPropertyUser: baseUrl+"app/couponProperty.writeOffCouponPropertyUser"
+	writeOffCouponPropertyUser: baseUrl+"app/couponProperty.writeOffCouponPropertyUser",
+	listIntegralSetting: baseUrl+"app/integral.listIntegralSetting",
+	queryOwners: baseUrl+"app/owner.queryOwners",
+		queryOwnerAccount: baseUrl+"app/account/queryOwnerAccount",
+	useIntegral: baseUrl+"app/integral.useIntegral",
+	listIntegralUserDetail: baseUrl+"app/integral.listIntegralUserDetail",
+	
+	
+	
+	
 	
 	
 	

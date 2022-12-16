@@ -567,13 +567,21 @@
                 "navigationBarTitleText": "核销优惠券",
                 "enablePullDownRefresh": false
             }
-            
         }
         ,{
             "path" : "pages/coupon/writeOffIntegral",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/coupon/wirteOffReserve",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "核销预约",
                 "enablePullDownRefresh": false
             }
             

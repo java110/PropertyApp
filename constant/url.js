@@ -185,6 +185,10 @@ export default {
 		queryOwnerAccount: baseUrl+"app/account/queryOwnerAccount",
 	useIntegral: baseUrl+"app/integral.useIntegral",
 	listIntegralUserDetail: baseUrl+"app/integral.listIntegralUserDetail",
+	listReserveGoodsConfirmOrder: baseUrl+"app/reserveOrder.listReserveGoodsConfirmOrder",
+	saveReserveGoodsConfirmOrder: baseUrl+"app/reserveOrder.saveReserveGoodsConfirmOrder",
+	
+	
 	
 	
 	

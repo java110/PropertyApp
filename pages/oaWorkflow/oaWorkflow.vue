@@ -89,7 +89,8 @@
 				queryOaWorkflow(this, {
 					page: 1,
 					row: 100,
-					state: 'C'
+					state: 'C',
+					flowType:'1001'
 				}).then(_data => {
 					_that.oaWorkflowFlows = _data.data;
 				})

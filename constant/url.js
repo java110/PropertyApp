@@ -179,10 +179,14 @@ export default {
 	saveCommunitySpaceConfirmOrder: baseUrl + "app/communitySpace.saveCommunitySpaceConfirmOrder",
 	queryReportStaffInspection: baseUrl+"app/inspection.queryReportStaffInspection",
 	listCouponPropertyUserDetail: baseUrl+"app/couponProperty.listCouponPropertyUserDetail",
-	writeOffCouponPropertyUser: baseUrl+"app/couponProperty.writeOffCouponPropertyUser"
-	
-	
-	
-	
+	writeOffCouponPropertyUser: baseUrl+"app/couponProperty.writeOffCouponPropertyUser",
+	queryUndoItemRelease: baseUrl+"app/itemRelease.queryUndoItemRelease",
+	queryFinishItemRelease: baseUrl+"app/itemRelease.queryFinishItemRelease",
+	listItemRelease: baseUrl+"app/itemRelease.listItemRelease",
+	listItemReleaseRes: baseUrl+"app/itemRelease.listItemReleaseRes",
+	queryOaWorkflowUser: baseUrl+"app/oaWorkflow/queryOaWorkflowUser",
+	queryNextDealUser: baseUrl+"app/oaWorkflow.queryNextDealUser",
+	auditUndoItemRelease: baseUrl+"app/itemRelease.auditUndoItemRelease",
+
 
 }

@@ -187,6 +187,23 @@ export default {
 	queryOaWorkflowUser: baseUrl+"app/oaWorkflow/queryOaWorkflowUser",
 	queryNextDealUser: baseUrl+"app/oaWorkflow.queryNextDealUser",
 	auditUndoItemRelease: baseUrl+"app/itemRelease.auditUndoItemRelease",
-
+	listIntegralSetting: baseUrl+"app/integral.listIntegralSetting",
+	queryOwners: baseUrl+"app/owner.queryOwners",
+	queryOwnerAccount: baseUrl+"app/account/queryOwnerAccount",
+	useIntegral: baseUrl+"app/integral.useIntegral",
+	listIntegralUserDetail: baseUrl+"app/integral.listIntegralUserDetail",
+	listReserveGoodsConfirmOrder: baseUrl+"app/reserveOrder.listReserveGoodsConfirmOrder",
+	saveReserveGoodsConfirmOrder: baseUrl+"app/reserveOrder.saveReserveGoodsConfirmOrder",
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+>>>>>>> f0b05be2b2526a8fbb6a0d40eace5e09873e1328
 
 }

@@ -194,5 +194,8 @@ export default {
 	listIntegralUserDetail: baseUrl+"app/integral.listIntegralUserDetail",
 	listReserveGoodsConfirmOrder: baseUrl+"app/reserveOrder.listReserveGoodsConfirmOrder",
 	saveReserveGoodsConfirmOrder: baseUrl+"app/reserveOrder.saveReserveGoodsConfirmOrder",
-
+	queryUndoVisit: baseUrl+"app/visit.queryUndoVisit",
+	queryFinishVisit: baseUrl+"app/visit.queryFinishVisit",
+	listVisit: baseUrl+"app/visit.listVisits",
+	auditUndoVisit: baseUrl+"app/visit.auditUndoVisit",
 }

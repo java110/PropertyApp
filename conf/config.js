@@ -21,7 +21,7 @@ let commonBaseUrl= 'http://wy.yxkj.ltd/';
 
 // #ifndef H5
 //服务器域名 小程序 或者 app 时 后端地址
-let baseUrl = 'http://wy.yxkj.ltd/'; 
+let baseUrl = 'http://demo.homecommunity.cn/'; 
 // #endif
 
 //app支付时这里需要填写支付秘钥

@@ -100,6 +100,7 @@ export default {
 	// 采购/出库申请部分
 	queryPurchaseApplyList: baseUrl + "app/purchaseApply.listPurchaseApplys",
 	queryResourceStoreList: baseUrl + "app/resourceStore.listResourceStores",
+	listResourceStoresAndTimes: baseUrl + "app/resourceStore.listResourceStoresAndTimes",
 	queryResourceSupplier: baseUrl + "app/resourceSupplier.listResourceSuppliers",
 	queryFirstStaff: baseUrl + "app/workflow/getFirstStaff",
 	savePurchaseApply: baseUrl + "app/purchase/purchaseApply",

@@ -6,10 +6,6 @@
 				<input v-model="companyName" placeholder="请输入所属公司" disabled="disabled"></input>
 			</view>
 			<view class="cu-form-group margin-top">
-				<view class="title">所属部门</view>
-				<input v-model="departmentName" placeholder="请输入所属部门" disabled="disabled"></input>
-			</view>
-			<view class="cu-form-group margin-top">
 				<view class="title">员工</view>
 				<input v-model="staffName" placeholder="请输入员工" disabled="disabled"></input>
 			</view>

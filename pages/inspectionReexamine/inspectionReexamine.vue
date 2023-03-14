@@ -3,11 +3,9 @@
 		<view class="block__title">
 			巡检任务（补检）
 		</view>
-		<view class="block__title">
-			<view>选择日期：</view>
-			<view>
-				<uni-datetime-picker type="date" :clear-icon="false" v-model="planInsTime" @change="maskClick" :border="false"/>
-			</view>
+		<view class="cu-form-group arrow" >
+			<view class="title">补检日期</view>
+			<uni-datetime-picker type="date" :clear-icon="false" v-model="planInsTime" @change="maskClick" :border="false"/>
 		</view>
 		<view v-if="noData==false">
 		<view v-for="(item,index) in tasks" :key="index" class="bg-white margin-bottom margin-right-xs radius margin-left-xs padding-top padding-left padding-right">

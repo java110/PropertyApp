@@ -6,7 +6,7 @@
 					:class="{'uni-datetime-picker-disabled': disabled, 'uni-datetime-picker-timebox': border}">
 					<text class="uni-datetime-picker-text">{{time}}</text>
 					<view v-if="!time" class="uni-datetime-picker-time">
-						<text class="uni-datetime-picker-text">选择{{title}}</text>
+						<text class="uni-datetime-picker-text">请选择{{title}} ></text>
 					</view>
 				</view>
 			</slot>

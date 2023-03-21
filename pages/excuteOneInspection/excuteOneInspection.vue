@@ -29,7 +29,7 @@
 				</view>
 			</view>
 			
-			<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :maxPhotoNum="uploadImage.maxPhotoNum" :canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData" style="margin-top: 30rpx;"></uploadImageAsync>
+			<uploadImageAsync ref="vcUploadRef" :communityId="communityId" :sourceType="sourceType" :maxPhotoNum="uploadImage.maxPhotoNum" :canEdit="uploadImage.canEdit" :title="uploadImage.imgTitle" @sendImagesData="sendImagesData" style="margin-top: 30rpx;"></uploadImageAsync>
 
 			<view class="cu-form-group margin-top" v-if="mapKey">
 				<view class="title">当前位置</view>
@@ -86,19 +86,17 @@
 					maxPhotoNum: 4,
 					imgTitle: '巡检图片',
 					canEdit: true
-				}
+				},
+				sourceType:[ 'camera']
 			}
 		},
 		
 		components: {
 			uploadImageAsync
 		},
-		
 		onLoad(option) {
 			this.java110Context.onLoad();
-			
 			let that = this;
-			
 			this.mapKey = conf.QQMapKey;
 			wx.getLocation({
 				type: 'gcj02',
@@ -198,45 +196,7 @@
 				this.patrolTypeName = selected.name;
 				this.patrolType = selected.statusCd;
 			},
-			removePhoto: function(e) {
-				let _imgList = [];
-				this.imgList.forEach(function(item, index) {
-					if (index != e) {
-						_imgList.push(item);
-					}
-				});
-				let _photos = [];
-				this.photos.forEach(function(item, index) {
-					if (index != e) {
-						_photos.push(item);
-					}
-				});
-				this.photos = _photos;
-				this.imgList = _imgList;
-			},
-			deleteImage: function(e) {
-				let imageArr = this.$data.imgList;
-				imageArr.splice(e, 1);
-				this.photos.splice(e, 1);
-			},
-			ChooseImage: function(e) {
-				let that = this;
-				wx.chooseImage({
-					count: 4, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['camera'], //手机拍照
-					success: (res) => {
-					
-						that.$data.imgList.push(res.tempFilePaths[0]);
-						var tempFilePaths = res.tempFilePaths[0]
-				
-						TanslateImage.translate(tempFilePaths, (url) => {
-							that.photos.push(url);
-						})
-				
-					}
-				});
-			},
+
 			_submitExcuteInspection: function() {
 				let _that = this;
 				uni.showLoading({

@@ -142,7 +142,7 @@
 						var tempFilePaths = upImgRes.tempFilePaths[0]
 						that.imgList.push(tempFilePaths);
 						that.$forceUpdate();
-						//#ifdef H5
+			
 						TanslateImage.translate(tempFilePaths, (base64) => {
 							let _objData = {
 								uploadFile: base64,
@@ -152,19 +152,6 @@
 								that.photos.push(res);
 							})
 						})
-						//#endif
-
-						//#ifndef H5
-						factory.base64.urlTobase64(tempFilePaths).then(function(base64) {
-							let _objData = {
-								uploadFile: base64,
-								communityId: that.communityId
-							}
-							uploadImageAsync(_objData, that).then((res) => {
-								that.photos.push(res);
-							})
-						});
-						//#endif
 					}
 				});
 			},

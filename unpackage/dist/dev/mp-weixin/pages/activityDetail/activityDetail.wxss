@@ -1,6 +1,7 @@
 
 .detailContainer{ 
   background-color: #fff;
+  overflow: hidden;
 }
 .detailContainer .headImg{
   width: 100%;

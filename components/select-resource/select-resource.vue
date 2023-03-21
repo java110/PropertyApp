@@ -41,7 +41,7 @@
 							</view>
 							<view class="text-gray text-sm flex">
 								<view class="text-cut">
-									固定资产：{{item.isFixedName}}
+									价格：{{item.price}} > 库存：{{item.stock}}
 								</view>
 							</view>
 							

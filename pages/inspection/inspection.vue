@@ -1,9 +1,11 @@
 <template>
 	<view>
-		<view class="block__title">
+		<view class="block__title flex justify-between">
+			<view class="title">
 			巡检任务
-			<view style="float: right;">
-				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="_torReexamineInspection()">巡检补检</button>
+			</view>
+			<view >
+				<button class="cu-btn line-green round" @tap="_torReexamineInspection()">巡检补检</button>
 			</view>
 		</view>
 
@@ -34,7 +36,7 @@
 				<view class="text-gray">{{item.signTypeName}}</view>
 			</view>
 			<view class="solid-top flex justify-end margin-top padding-top-sm padding-bottom-sm">
-				<button class="cu-btn sm bg-blue margin-left" @click="_transferInspection(item)">流转</button>
+				<button class="cu-btn sm line-blue margin-left" @click="_transferInspection(item)">流转</button>
 				<button class="cu-btn sm bg-green margin-left" @click="_startInspection(item)">我要巡检</button>
 			</view>
 		</view>
@@ -138,7 +140,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.solid-bottom::after {
 		border-bottom: 2upx solid rgba(0, 0, 0, 0.1);
 	}
@@ -150,8 +152,11 @@
 	.block__title {
 	  margin: 0;
 	  font-weight: 400;
-	  font-size: 14px;
+	  font-size: 32upx;
 	  color: rgba(69,90,100,.6);
 	  padding: 40rpx 30rpx 20rpx;
+	  .title{
+		  line-height: 60upx;
+	  }
 	}
 </style>

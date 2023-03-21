@@ -7,15 +7,21 @@
 		</view>
 		<view class="margin-top">
 			<view class="cu-list menu-avatar " v-for="(item,index) in resourceList" :key="index">
-				<view class="cu-item" style="height: 220rpx;">
+				<view class="cu-item" style="height: 300rpx;">
 					<view class="content content-left" style="width: 100%;">
 						<view class="text-grey flex-around">
 							<text class="ellip text-df">{{item.resName}}({{item.parentRstName}}>{{item.rstName}})</text>
 							<text class="item-remove bg-red text-df" @click="_removeItem(index, item.resId)">移除</text>
 						</view>
 						<view class="text-gray flex-around">
+							<label class="text-df">价格:</label>
+							<picker :range="item.times" :range-key="'price'" @change="timesChange($event, index)">
+								<view>{{item.times[item.selectedTimesIndex].price}}</view>
+							</picker>
+						</view>
+						<view class="text-gray flex-around">
 							<label class="text-df">库存:</label>
-							<text class="text-df">{{item.stock}}{{item.unitCodeName}}</text>
+							<text class="text-df">{{_getTimesStock(item)}}{{item.unitCodeName}}</text>
 						</view>
 						<view class="text-gray flex-around">
 							<label class="text-df">数量:</label>
@@ -104,6 +110,10 @@
 			_getResourceInfo: function(list){
 				this.resourceList = list;
 				this.resourceList.forEach((item)=>{
+					item.timesId = '';
+					item.selectedTimesIndex = 0;
+					item.selectedTimesStock = 0;
+					item.times.unshift({timesId: '', price: '请选择'})
 					this.suppliersList.push(0);
 				})
 			},
@@ -116,6 +126,35 @@
 				this.resourceList.splice(index, 1);
 				// 通知子组件 取消选中checkbox
 				this.$refs.selectresource.removeSelectedItem(resId);
+			},
+			
+			timesChange: function(e, index){
+				let timeIndex = e.target.value;
+				this.resourceList[index].selectedTimesIndex = timeIndex;
+				if(timeIndex == 0){
+					this.resourceList[index].timesId = '';
+					this.resourceList[index].selectedTimesStock = 0;
+				}else{
+					this.resourceList[index].timesId = this.resourceList[index].times[timeIndex].timesId;
+					this.resourceList[index].selectedTimesStock = this.resourceList[index].times[timeIndex].stock;
+				}
+				this.$forceUpdate();
+			},
+			
+			_getTimesStock: function(_resourceStore) {
+				if (!_resourceStore.timesId) {
+					return "-";
+				}
+				let _stock = 0;
+				_resourceStore.times.forEach(_item => {
+					if (_item.timesId == _resourceStore.timesId) {
+						_stock = _item.stock;
+					}
+				});
+				if (!_resourceStore.quantity) {
+					_resourceStore.quantity = '';
+				}
+				return _stock;
 			}
 		}
 	}

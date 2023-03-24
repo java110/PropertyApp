@@ -85,7 +85,12 @@
 							return;
 						}
 						item.quantity = parseInt(item.quantity);
-						if (this.resOrderType == '20000' && (item.quantity > parseInt(item.stock))) {
+						if (this.resOrderType == '20000' && !item.timesId) {
+							msg = item.resName + ",未选择价格";
+							_that.onoff = true;
+							return;
+						}
+						if (this.resOrderType == '20000' && (item.quantity > parseInt(item.selectedTimesStock))) {
 							msg = item.resName + ",库存不足";
 							_that.onoff = true;
 							return;
@@ -125,8 +130,8 @@
 					};
 					saveItemOutApply(this, _data)
 					.then(function(res) {
+						_that.onoff = true;
 						if (res.code == 0) {
-							_that.onoff = true;
 							uni.navigateBack({
 								delta:1
 							})

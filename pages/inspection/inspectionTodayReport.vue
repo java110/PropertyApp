@@ -63,10 +63,11 @@
 			},
 			dateChange: function(e) {
 				this.bindDate = e.detail.value;
+				this._loadTodayInspectionReport();
 			},
 			gotoDetail:function(_inpection){
 				uni.navigateTo({
-					url:'/pages/inspection/staffNoInspection?staffId='+_inpection.staffId+"&staffName="+_inpection.staffName
+					url:'/pages/inspection/staffNoInspection?staffId='+_inpection.staffId+"&staffName="+_inpection.staffName+"&queryTime="+this.bindDate
 				})
 			}
 			

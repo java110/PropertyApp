@@ -109,7 +109,7 @@
 						moreState:'20200405,20200406',
 						canReexamine:'2000',
 						planInsTime: _that.planInsTime,
-						isToday: 1
+						isToday: null
 					},
 					success: function(res) {
 						// TODO 判断
@@ -120,6 +120,8 @@
 						_that.tasks = res.data.inspectionTasks;
 						if(_that.tasks.length < 1){
 							_that.noData = true;
+						}else{
+							_that.noData = false;
 						}
 					}
 				});

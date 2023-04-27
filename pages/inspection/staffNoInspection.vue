@@ -1,18 +1,18 @@
 <template>
 	<view>
 		<view class="block__title">{{staffName}}巡检情况</view>
-		<view class="cu-form-group arrow">
+		<!-- <view class="cu-form-group arrow">
 			<view class="title">查询日期</view>
 			<picker mode="date" :value="bindDate" start="2020-09-01" end="2050-09-01" @change="dateChange">
 				<view class="picker">
 					{{bindDate}}
 				</view>
 			</picker>
-		</view>
+		</view> -->
 		<view class="cu-list menu margin-top" v-if="inpections && inpections.length > 0" v-for="(inspection, idx) in inpections" :key="idx" 
 		:data-item="inspection"
-		 @click="gotoDetail(inspection)">
-			<view class="cu-item arrow">
+		 >
+			<view class="cu-item ">
 				<view class="content padding-tb-sm">
 					<view>
 						<view class="text-cut" style="width:85%;">{{inspection.inspectionName}}({{inspection.stateName}})</view>
@@ -50,7 +50,7 @@
 		onLoad(options) {
 			this.staffId = options.staffId;
 			this.staffName = options.staffName;
-			this.bindDate = formatDate(new Date());
+			this.bindDate = options.queryTime;
 			this._loadTodayInspectionReportDetail();
 			
 		},
@@ -61,7 +61,7 @@
 				listInspectionTaskDetails(this,{
 					communityId: getCurrentCommunity().communityId,
 					planUserId:this.staffId,
-					state:'20200405',
+					//state:'20200405',
 					queryTime:this.bindDate,
 					page:1,
 					row:100

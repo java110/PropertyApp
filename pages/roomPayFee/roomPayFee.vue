@@ -39,7 +39,7 @@
 							<text class="margin-right-xs">{{item.endTime}}至{{item.deadlineTime}}</text></view>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">应缴:￥{{item.totalFeePrice}}</text>
+						<text class="text-grey text-sm">应缴:￥{{item.feeTotalPrice}}</text>
 					</view>
 				</view>
 			</view>

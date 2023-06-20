@@ -64,12 +64,12 @@
             "urlCheck" : false
         },
         "usingComponents" : true,
-		"permission" : {
-		            "scope.userLocation" : {
-		                "desc" : "物业员工巡检需要获取巡检地方位置"
-		            }
-		        },
-		  "requiredPrivateInfos": ["getLocation"]
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "物业员工巡检需要获取巡检地方位置"
+            }
+        },
+        "requiredPrivateInfos" : [ "getLocation" ]
     },
     "mp-alipay" : {
         "usingComponents" : true

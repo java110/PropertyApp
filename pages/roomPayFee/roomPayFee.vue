@@ -177,7 +177,7 @@
 					.then(function(_fees) {
 						_that.receivableAmount = 0.0;
 						_fees.forEach(function(_item) {
-							_that.receivableAmount += _item.feePrice;
+							_that.receivableAmount += _item.feeTotalPrice;
 
 						})
 						_that.receivableAmount = _that.receivableAmount.toFixed(2);

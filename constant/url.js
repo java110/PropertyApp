@@ -70,7 +70,7 @@ export default {
 	// 投诉 处理意见
 	listWorkflowAuditInfo: baseUrl + 'app/workflow.listWorkflowAuditInfo',
 	listOweFees: baseUrl + 'app/feeApi/listOweFees',
-	toQrOweFeePay: baseUrl + 'app/payment/toQrOweFeePay',
+	toQrOweFeePay: baseUrl + 'app/payment.nativeQrcodePayment',
 	// 报修抢单
 	robRepairOrder: baseUrl + 'app/ownerRepair.grabbingRepair',
 	// 获取空置房申请列表

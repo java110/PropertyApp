@@ -41,7 +41,8 @@
 				let _that = this;
 				let _data = {
 					roomId: this.roomId,
-					communityId: this.communityId
+					communityId: this.communityId,
+					business:'oweFee'
 				}
 			
 				toPayOweFee(this, _data)

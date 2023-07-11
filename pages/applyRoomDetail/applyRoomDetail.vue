@@ -467,7 +467,11 @@
 					}
 					params.state = state;
 					params.checkRemark = checkRemark;
-					params.photos = this.photos;
+					let _photos = [];
+					this.photos.forEach(item=>{
+						_photos.push(item.fileId);
+					})
+					params.photos = _photos;
 					uploadCheckUpdate(this,params).then(function(res){
 						uni.hideLoading();
 						uni.showToast({

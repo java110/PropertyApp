@@ -1,7 +1,7 @@
 <template>
 	<view class="select-single-resource" v-if="showModel">
 		<view>
-			<view class="cu-form-group margin-top">
+			<!-- <view class="cu-form-group margin-top">
 				<view class="title">公司</view>
 				<picker :value="orgIndex" :range="orgCloums" :range-key="'orgName'" @change="orgChange">
 					<view class="picker">
@@ -16,7 +16,7 @@
 						{{depCloums[depIndex].orgName}}
 					</view>
 				</picker>
-			</view>
+			</view> -->
 			<view class="cu-form-group margin-top">
 				<view class="title">员工</view>
 				<picker :value="staffIndex" :range="staffCloums" :range-key="'name'" @change="staffChange">
@@ -80,7 +80,8 @@
 
 		mounted() {
 			this.communityId = getCurrentCommunity().communityId;
-			this._loadOrgList();
+			//this._loadOrgList();
+			this._loadStaffList();
 		},
 
 		methods: {
@@ -123,9 +124,9 @@
 				let _data = {
 					page: 1,
 					row: 50,
-					parentOrgId: this.selectedOrg.orgId,
-					departmentOrgId: this.selectedDep.orgId,
-					orgId: this.selectedDep.orgId,
+					// parentOrgId: this.selectedOrg.orgId,
+					// departmentOrgId: this.selectedDep.orgId,
+					// orgId: this.selectedDep.orgId,
 					communityId: this.communityId,
 				};
 				queryStaffListInfo(this, _data)
@@ -170,7 +171,7 @@
 			staffChange: function(e){
 				this.staffIndex = e.target.value //取其下标
 				this.selectedStaff = '';
-				if (this.orgIndex == 0) {
+				if (this.staffIndex == 0) {
 					return;
 				}
 				let selected = this.staffCloums[this.staffIndex] //获取选中的数组

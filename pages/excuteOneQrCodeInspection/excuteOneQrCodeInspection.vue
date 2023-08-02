@@ -73,7 +73,7 @@
 							url: '/pages/excuteOneInspection/excuteOneInspection?taskDetailId=' +
 								_item.taskDetailId + "&taskId=" + _item.taskId +
 								"&inspectionId=" + _that.inspectionId + "&inspectionName=" + _that
-								.inspectionName + "&itemId=" + _that.itemId
+								.inspectionName + "&itemId=" + _that.itemId+"&fromPage=QrCode"
 						});
 
 					}

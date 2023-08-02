@@ -87,12 +87,12 @@
             "disableHostCheck" : true,
             "proxy" : {
                 "/app" : {
-                    "target" : "http://192.168.100.108:8088", //目标接口域名http://192.168.1.16:8012
+                    "target" : "http://127.0.0.1:8008", //目标接口域名http://192.168.1.16:8012
                     "changeOrigin" : true, //是否跨域
                     "secure" : true // 设置支持https协议的代理
                 },
                 "/callComponent" : {
-                    "target" : "http://192.168.100.108:8088", //目标接口域名http://192.168.1.16:8012
+                    "target" : "http://127.0.0.1:8008", //目标接口域名http://192.168.1.16:8012
                     "changeOrigin" : true, //是否跨域
                     "secure" : true // 设置支持https协议的代理
                 }

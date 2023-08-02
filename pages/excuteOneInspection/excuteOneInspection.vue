@@ -98,7 +98,8 @@
 					imgTitle: '巡检图片',
 					canEdit: true
 				},
-				sourceType: ['camera']
+				sourceType: ['camera'],
+				fromPage:''
 			}
 		},
 
@@ -128,6 +129,7 @@
 			this.inspectionId = option.inspectionId;
 			this.inspectionName = option.inspectionName;
 			this.itemId = option.itemId;
+			this.fromPage = option.fromPage
 
 			this.communityId = getCurrentCommunity().communityId;
 			let _userInfo = this.java110Context.getUserInfo();
@@ -304,6 +306,12 @@
 						success: function(res) {
 							_that.onoff = true;
 							if (res.statusCode == 200) {
+								if(_that.fromPage == 'QrCode'){
+									uni.navigateTo({
+										url:'/pages/inspection/inspection'
+									});
+									return;
+								}
 								uni.navigateBack({
 									delta: 1
 								})

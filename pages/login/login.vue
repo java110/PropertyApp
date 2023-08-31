@@ -40,8 +40,8 @@
 		data() {
 			return {
 				logoUrl: '',
-				username: '',
-				password: ''
+				username: '18909711443',
+				password: '18909711443'
 			}
 		},
 		onLoad() {

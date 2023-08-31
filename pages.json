@@ -626,7 +626,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "物业版",
-		"navigationBarBackgroundColor": "#00AA00",
+		"navigationBarBackgroundColor": "#368CFE",
 		"backgroundColor": "#00AA00",
 		"onReachBottonDistance": 50
 	},

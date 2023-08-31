@@ -196,7 +196,7 @@ EDE.prototype._unpad = DES.prototype._unpad;
 
 /***/ }),
 
-/***/ 1018:
+/***/ 1016:
 /*!******************************************************!*\
   !*** C:/project/hc/PropertyApp/api/common/common.js ***!
   \******************************************************/
@@ -310,6 +310,20 @@ exports.createDecipher = exports.Decipher = deciphers.createDecipher
 exports.createDecipheriv = exports.Decipheriv = deciphers.createDecipheriv
 exports.listCiphers = exports.getCiphers = getCiphers
 
+
+/***/ }),
+
+/***/ 1029:
+/*!************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@babel/runtime/regenerator/index.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// TODO(Babel 8): Remove this file.
+
+var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 1030)();
+module.exports = runtime;
 
 /***/ }),
 
@@ -438,21 +452,7 @@ exports.createCipher = createCipher
 
 /***/ }),
 
-/***/ 1031:
-/*!************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@babel/runtime/regenerator/index.js ***!
-  \************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// TODO(Babel 8): Remove this file.
-
-var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 1032)();
-module.exports = runtime;
-
-/***/ }),
-
-/***/ 1032:
+/***/ 1030:
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/regeneratorRuntime.js ***!
   \*******************************************************************/
@@ -774,7 +774,7 @@ module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.e
 
 /***/ }),
 
-/***/ 1033:
+/***/ 1031:
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/asyncToGenerator.js ***!
   \*****************************************************************/
@@ -815,7 +815,7 @@ module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exp
 
 /***/ }),
 
-/***/ 1034:
+/***/ 1032:
 /*!**************************************************************!*\
   !*** C:/project/hc/PropertyApp/components/sx-rate/common.js ***!
   \**************************************************************/
@@ -1016,7 +1016,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 /***/ }),
 
-/***/ 1098:
+/***/ 1096:
 /*!****************************************************!*\
   !*** C:/project/hc/PropertyApp/api/staff/staff.js ***!
   \****************************************************/
@@ -1138,7 +1138,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 /***/ }),
 
-/***/ 1104:
+/***/ 1102:
 /*!**********************************************************************************************!*\
   !*** C:/project/hc/PropertyApp/uni_modules/mumu-getQrcode/components/mumu-getQrcode/jsQR.js ***!
   \**********************************************************************************************/
@@ -11837,7 +11837,7 @@ exports.encrypt = function (self, chunk) {
 
 /***/ }),
 
-/***/ 1112:
+/***/ 1110:
 /*!****************************************************!*\
   !*** C:/project/hc/PropertyApp/api/owner/owner.js ***!
   \****************************************************/
@@ -11966,156 +11966,6 @@ function incr32 (iv) {
 }
 module.exports = incr32
 
-
-/***/ }),
-
-/***/ 1137:
-/*!***************************************************************!*\
-  !*** C:/project/hc/PropertyApp/components/uni-icons/icons.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  "pulldown": "\uE588",
-  "refreshempty": "\uE461",
-  "back": "\uE471",
-  "forward": "\uE470",
-  "more": "\uE507",
-  "more-filled": "\uE537",
-  "scan": "\uE612",
-  "qq": "\uE264",
-  "weibo": "\uE260",
-  "weixin": "\uE261",
-  "pengyouquan": "\uE262",
-  "loop": "\uE565",
-  "refresh": "\uE407",
-  "refresh-filled": "\uE437",
-  "arrowthindown": "\uE585",
-  "arrowthinleft": "\uE586",
-  "arrowthinright": "\uE587",
-  "arrowthinup": "\uE584",
-  "undo-filled": "\uE7D6",
-  "undo": "\uE406",
-  "redo": "\uE405",
-  "redo-filled": "\uE7D9",
-  "bars": "\uE563",
-  "chatboxes": "\uE203",
-  "camera": "\uE301",
-  "chatboxes-filled": "\uE233",
-  "camera-filled": "\uE7EF",
-  "cart-filled": "\uE7F4",
-  "cart": "\uE7F5",
-  "checkbox-filled": "\uE442",
-  "checkbox": "\uE7FA",
-  "arrowleft": "\uE582",
-  "arrowdown": "\uE581",
-  "arrowright": "\uE583",
-  "smallcircle-filled": "\uE801",
-  "arrowup": "\uE580",
-  "circle": "\uE411",
-  "eye-filled": "\uE568",
-  "eye-slash-filled": "\uE822",
-  "eye-slash": "\uE823",
-  "eye": "\uE824",
-  "flag-filled": "\uE825",
-  "flag": "\uE508",
-  "gear-filled": "\uE532",
-  "reload": "\uE462",
-  "gear": "\uE502",
-  "hand-thumbsdown-filled": "\uE83B",
-  "hand-thumbsdown": "\uE83C",
-  "hand-thumbsup-filled": "\uE83D",
-  "heart-filled": "\uE83E",
-  "hand-thumbsup": "\uE83F",
-  "heart": "\uE840",
-  "home": "\uE500",
-  "info": "\uE504",
-  "home-filled": "\uE530",
-  "info-filled": "\uE534",
-  "circle-filled": "\uE441",
-  "chat-filled": "\uE847",
-  "chat": "\uE263",
-  "mail-open-filled": "\uE84D",
-  "email-filled": "\uE231",
-  "mail-open": "\uE84E",
-  "email": "\uE201",
-  "checkmarkempty": "\uE472",
-  "list": "\uE562",
-  "locked-filled": "\uE856",
-  "locked": "\uE506",
-  "map-filled": "\uE85C",
-  "map-pin": "\uE85E",
-  "map-pin-ellipse": "\uE864",
-  "map": "\uE364",
-  "minus-filled": "\uE440",
-  "mic-filled": "\uE332",
-  "minus": "\uE410",
-  "micoff": "\uE360",
-  "mic": "\uE302",
-  "clear": "\uE434",
-  "smallcircle": "\uE868",
-  "close": "\uE404",
-  "closeempty": "\uE460",
-  "paperclip": "\uE567",
-  "paperplane": "\uE503",
-  "paperplane-filled": "\uE86E",
-  "person-filled": "\uE131",
-  "contact-filled": "\uE130",
-  "person": "\uE101",
-  "contact": "\uE100",
-  "images-filled": "\uE87A",
-  "phone": "\uE200",
-  "images": "\uE87B",
-  "image": "\uE363",
-  "image-filled": "\uE877",
-  "location-filled": "\uE333",
-  "location": "\uE303",
-  "plus-filled": "\uE439",
-  "plus": "\uE409",
-  "plusempty": "\uE468",
-  "help-filled": "\uE535",
-  "help": "\uE505",
-  "navigate-filled": "\uE884",
-  "navigate": "\uE501",
-  "mic-slash-filled": "\uE892",
-  "search": "\uE466",
-  "settings": "\uE560",
-  "sound": "\uE590",
-  "sound-filled": "\uE8A1",
-  "spinner-cycle": "\uE465",
-  "download-filled": "\uE8A4",
-  "personadd-filled": "\uE132",
-  "videocam-filled": "\uE8AF",
-  "personadd": "\uE102",
-  "upload": "\uE402",
-  "upload-filled": "\uE8B1",
-  "starhalf": "\uE463",
-  "star-filled": "\uE438",
-  "star": "\uE408",
-  "trash": "\uE401",
-  "phone-filled": "\uE230",
-  "compose": "\uE400",
-  "videocam": "\uE300",
-  "trash-filled": "\uE8DC",
-  "download": "\uE403",
-  "chatbubble-filled": "\uE232",
-  "chatbubble": "\uE202",
-  "cloud-download": "\uE8E4",
-  "cloud-upload-filled": "\uE8E5",
-  "cloud-upload": "\uE8E6",
-  "cloud-download-filled": "\uE8E9",
-  "headphones": "\uE8BF",
-  "shop": "\uE609"
-};
-exports.default = _default;
 
 /***/ }),
 
@@ -26132,7 +25982,7 @@ var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
  * @param {Object} _obj 判断对象
  */
 var isNull = function isNull(_obj) {
-  if (_obj == null || _obj == undefined || _obj == '') {
+  if (!_obj || _obj == null || _obj == undefined || _obj == '') {
     return true;
   }
   return false;
@@ -26650,7 +26500,7 @@ var _default = (_baseUrl$hcBaseUrl$lo = {
   // 投诉 处理意见
   listWorkflowAuditInfo: baseUrl + 'app/workflow.listWorkflowAuditInfo',
   listOweFees: baseUrl + 'app/feeApi/listOweFees',
-  toQrOweFeePay: baseUrl + 'app/payment/toQrOweFeePay',
+  toQrOweFeePay: baseUrl + 'app/payment.nativeQrcodePayment',
   // 报修抢单
   robRepairOrder: baseUrl + 'app/ownerRepair.grabbingRepair',
   // 获取空置房申请列表
@@ -31148,344 +30998,6 @@ module.exports = _nonIterableSpread, module.exports.__esModule = true, module.ex
 
 /***/ }),
 
-/***/ 216:
-/*!****************************************************!*\
-  !*** C:/project/hc/PropertyApp/api/index/index.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(wx, uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.listStaffPrivileges = listStaffPrivileges;
-exports.loadActivitys = loadActivitys;
-exports.loadAdvert = loadAdvert;
-exports.loadCategory = loadCategory;
-exports.loadCategoryMenus = loadCategoryMenus;
-/**
- * 查询 广告信息
- * @param {Object} _that 上下文对象
- * @param {Object} _data 请求内容
- */
-function loadAdvert(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.get({
-      url: _that.url.listAdvertPhoto,
-      data: _data,
-      //动态数据
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-
-/**
- * 查询 权限
- * @param {Object} _that 上下文对象
- */
-function listStaffPrivileges(_that) {
-  _that.context.get({
-    url: _that.url.listStaffPrivileges,
-    data: {
-      a: '123'
-    },
-    //动态数据
-    success: function success(res) {
-      var _data = res.data;
-      var _privilege = [];
-      _data.datas.forEach(function (item) {
-        _privilege.push(item.pId);
-      });
-      uni.setStorageSync('hc_staff_privilege', JSON.stringify(_privilege));
-    },
-    fail: function fail(e) {}
-  });
-}
-
-/**
- * 查询首页 目录
- */
-function loadCategoryMenus(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.get({
-      url: _that.url.queryMenus,
-      data: _data,
-      //动态数据
-      success: function success(res) {
-        var _data = res.data;
-        if (_data == null || _data == undefined || _data.length < 1) {
-          reslove(_data);
-          return;
-        }
-        var _menus = _data[0].childs;
-        _menus = _menus.sort(function (a, b) {
-          return a.seq - b.seq;
-        });
-        var _tempMenuData = {};
-        var _menuPage = [];
-        var _curMenu = {};
-        for (var _menuIndex = 0; _menuIndex < _menus.length; _menuIndex++) {
-          _curMenu = _menus[_menuIndex];
-          if (_curMenu.isShow != 'Y') {
-            continue;
-          }
-          _menuPage.push({
-            name: _curMenu.name,
-            src: _curMenu.description,
-            href: _curMenu.href
-          });
-          if ((_menuIndex + 1) % 8 == 0 && _menuIndex != 0) {
-            _tempMenuData[_menuIndex] = _menuPage;
-            _menuPage = [];
-          }
-        }
-        if (_menuPage.length > 0) {
-          _tempMenuData[_menus.length] = _menuPage;
-        }
-        console.log('_tempMenuData', _tempMenuData);
-        reslove(_tempMenuData);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-
-/**
- * 查询首页 目录
- */
-function loadCategory() {
-  return {
-    pageone: [{
-      name: "维修工单",
-      src: "/static/image/index_repair.png",
-      href: "/pages/repairOrder/repairOrder"
-    }, {
-      name: "维修待办",
-      src: "/static/image/index_dealRepair.png",
-      href: "/pages/repairDispatch/repairDispatch"
-    }, {
-      name: "巡检打卡",
-      src: "/static/image/index_inspection.png",
-      href: "/pages/inspection/inspection"
-    }, {
-      name: "投诉待办",
-      src: "/static/image/index_complaint.png",
-      href: "/pages/complaintList/complaintList"
-    }, {
-      name: "公告",
-      src: "/static/image/index_notice.png",
-      href: "/pages/notice/notice"
-    }, {
-      name: "房产查询",
-      src: "/static/image/index_bill.png",
-      href: "/pages/roomDetail/roomDetail"
-    }, {
-      name: "收银台",
-      src: "/static/image/payOweFee.png",
-      href: "/pages/roomPayFee/roomPayFee"
-    }, {
-      name: "水电抄表",
-      src: "/static/image/index_meter.png",
-      href: "/pages/meterReading/meterReading"
-    }],
-    pagetwo: [{
-      name: "空置房",
-      src: "/static/image/index_complaint.png",
-      href: "/pages/applyRoom/applyRoom"
-    }]
-  };
-}
-
-/**
- * 查询文化
- * @param {Object} _that 上下文 对象
- * @param {Object} _data 查询内容
- */
-function loadActivitys(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.get({
-      url: _that.url.listActivitiess,
-      data: _data,
-      //动态数据
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 217:
-/*!************************************************************!*\
-  !*** C:/project/hc/PropertyApp/api/community/community.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getCommunity = getCommunity;
-exports.getCurrentCommunity = getCurrentCommunity;
-var _mapping = _interopRequireDefault(__webpack_require__(/*! ../../constant/mapping.js */ 218));
-var _util = _interopRequireDefault(__webpack_require__(/*! ../../lib/java110/utils/util.js */ 205));
-var _Java110SessionApi = __webpack_require__(/*! ../../lib/java110/api/Java110SessionApi.js */ 30);
-var _request = _interopRequireDefault(__webpack_require__(/*! ../../lib/java110/request.js */ 197));
-var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
-var _SystemApi = __webpack_require__(/*! ../../lib/java110/api/SystemApi.js */ 32);
-/**
- * 获取小区信息
- * @param {Object} reload 是否重新加载 小区信息
- * @param {Object} _condition 查询小区条件
- */
-function getCommunity(reload, _condition) {
-  var _communityInfo = uni.getStorageSync(_mapping.default.COMMUNITY_INFO);
-  var _that = this;
-  return new Promise(function (reslove, reject) {
-    //小区没有就去登录
-    if (_util.default.isNotNull(_communityInfo) && reload != true) {
-      _communityInfo = JSON.parse(_communityInfo);
-      reslove(_communityInfo);
-      return;
-    }
-    var _userInfo = (0, _Java110SessionApi.getUserInfo)();
-    if (_util.default.isNull(_condition)) {
-      _condition = {
-        userId: '',
-        storeId: '',
-        page: 1,
-        row: 50
-      };
-    }
-    if (!_condition.hasOwnProperty("page")) {
-      _condition.page = 1;
-      _condition.row = 50;
-    }
-    _condition.userId = _userInfo.userId;
-    _condition.storeId = _userInfo.storeId;
-    _request.default.request({
-      url: _url.default.listMyEnteredCommunitys,
-      header: (0, _SystemApi.getHeaders)(),
-      data: _condition,
-      success: function success(res) {
-        if (res.statusCode != 200) {
-          // uni.showToast({
-          // 	icon: 'none',
-          // 	title: res.data
-          // });
-          uni.navigateTo({
-            url: '/pages/login/login'
-          });
-          return;
-        }
-        var data = res.data;
-        if (data.total < 1) {
-          uni.showToast({
-            icon: none,
-            title: '当前员工还没有隶属小区,请先去后台添加'
-          });
-          return;
-        }
-        var _communitys = data.communitys;
-        uni.setStorageSync(_mapping.default.COMMUNITY_INFO, JSON.stringify(_communitys));
-        reslove(_communitys);
-      },
-      fail: function fail(error) {
-        // 调用服务端登录接口失败
-        uni.showToast({
-          title: '调用接口失败'
-        });
-      }
-    });
-  });
-}
-function getCurrentCommunity() {
-  var currentCommunity = uni.getStorageSync(_mapping.default.CURRENT_COMMUNITY_INFO);
-  if (_util.default.isNull(currentCommunity)) {
-    return {};
-  }
-  if (currentCommunity instanceof Object) {
-    return currentCommunity;
-  }
-  return JSON.parse(currentCommunity);
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 218:
-/*!*****************************************************!*\
-  !*** C:/project/hc/PropertyApp/constant/mapping.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  LOGIN_FLAG: 'loginFlag',
-  //登录标识
-
-  TOKEN: "token",
-  // token 标识
-
-  USER_INFO: "STAFF_USER_INFO",
-  // 用户信息
-
-  AREA_INFO: "areaInfo",
-  // 地区信息
-
-  COMMUNITY_INFO: "communityInfo",
-  // 小区信息
-
-  OWNER_INFO: "ownerInfo",
-  // 当前业主信息
-
-  CURRENT_COMMUNITY_INFO: "currentCommunityInfo",
-  //业主当前小区信息
-
-  INDEX_LISTENER: "index_listener" // 首页监听
-};
-exports.default = _default;
-
-/***/ }),
-
 /***/ 22:
 /*!*************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-i18n/dist/uni-i18n.es.js ***!
@@ -32029,6 +31541,150 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 230:
+/*!************************************************************!*\
+  !*** C:/project/hc/PropertyApp/api/community/community.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getCommunity = getCommunity;
+exports.getCurrentCommunity = getCurrentCommunity;
+var _mapping = _interopRequireDefault(__webpack_require__(/*! ../../constant/mapping.js */ 231));
+var _util = _interopRequireDefault(__webpack_require__(/*! ../../lib/java110/utils/util.js */ 205));
+var _Java110SessionApi = __webpack_require__(/*! ../../lib/java110/api/Java110SessionApi.js */ 30);
+var _request = _interopRequireDefault(__webpack_require__(/*! ../../lib/java110/request.js */ 197));
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
+var _SystemApi = __webpack_require__(/*! ../../lib/java110/api/SystemApi.js */ 32);
+/**
+ * 获取小区信息
+ * @param {Object} reload 是否重新加载 小区信息
+ * @param {Object} _condition 查询小区条件
+ */
+function getCommunity(reload, _condition) {
+  var _communityInfo = uni.getStorageSync(_mapping.default.COMMUNITY_INFO);
+  var _that = this;
+  return new Promise(function (reslove, reject) {
+    //小区没有就去登录
+    if (_util.default.isNotNull(_communityInfo) && reload != true) {
+      _communityInfo = JSON.parse(_communityInfo);
+      reslove(_communityInfo);
+      return;
+    }
+    var _userInfo = (0, _Java110SessionApi.getUserInfo)();
+    if (_util.default.isNull(_condition)) {
+      _condition = {
+        userId: '',
+        storeId: '',
+        page: 1,
+        row: 50
+      };
+    }
+    if (!_condition.hasOwnProperty("page")) {
+      _condition.page = 1;
+      _condition.row = 50;
+    }
+    _condition.userId = _userInfo.userId;
+    _condition.storeId = _userInfo.storeId;
+    _request.default.request({
+      url: _url.default.listMyEnteredCommunitys,
+      header: (0, _SystemApi.getHeaders)(),
+      data: _condition,
+      success: function success(res) {
+        if (res.statusCode != 200) {
+          // uni.showToast({
+          // 	icon: 'none',
+          // 	title: res.data
+          // });
+          uni.navigateTo({
+            url: '/pages/login/login'
+          });
+          return;
+        }
+        var data = res.data;
+        if (data.total < 1) {
+          uni.showToast({
+            icon: none,
+            title: '当前员工还没有隶属小区,请先去后台添加'
+          });
+          return;
+        }
+        var _communitys = data.communitys;
+        uni.setStorageSync(_mapping.default.COMMUNITY_INFO, JSON.stringify(_communitys));
+        reslove(_communitys);
+      },
+      fail: function fail(error) {
+        // 调用服务端登录接口失败
+        uni.showToast({
+          title: '调用接口失败'
+        });
+      }
+    });
+  });
+}
+function getCurrentCommunity() {
+  var currentCommunity = uni.getStorageSync(_mapping.default.CURRENT_COMMUNITY_INFO);
+  if (_util.default.isNull(currentCommunity)) {
+    return {};
+  }
+  if (currentCommunity instanceof Object) {
+    return currentCommunity;
+  }
+  return JSON.parse(currentCommunity);
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+
+/***/ 231:
+/*!*****************************************************!*\
+  !*** C:/project/hc/PropertyApp/constant/mapping.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  LOGIN_FLAG: 'loginFlag',
+  //登录标识
+
+  TOKEN: "token",
+  // token 标识
+
+  USER_INFO: "STAFF_USER_INFO",
+  // 用户信息
+
+  AREA_INFO: "areaInfo",
+  // 地区信息
+
+  COMMUNITY_INFO: "communityInfo",
+  // 小区信息
+
+  OWNER_INFO: "ownerInfo",
+  // 当前业主信息
+
+  CURRENT_COMMUNITY_INFO: "currentCommunityInfo",
+  //业主当前小区信息
+
+  INDEX_LISTENER: "index_listener" // 首页监听
+};
+exports.default = _default;
 
 /***/ }),
 
@@ -38142,7 +37798,7 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 259:
+/***/ 256:
 /*!****************************************************************!*\
   !*** C:/project/hc/PropertyApp/lib/java110/utils/ImageUtil.js ***!
   \****************************************************************/
@@ -38222,6 +37878,99 @@ function replaceImgSrc(_content, _url) {
 /***/ (function(module, exports) {
 
 
+
+/***/ }),
+
+/***/ 299:
+/*!************************************************************!*\
+  !*** C:/project/hc/PropertyApp/api/complaint/complaint.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.auditComplaint = auditComplaint;
+exports.loadCompaintFinish = loadCompaintFinish;
+exports.loadTodoCompaint = loadTodoCompaint;
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
+/**
+ * 查询投诉待办
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+function loadTodoCompaint(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.listAuditComplaints,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+
+/**
+ * 投诉处理
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+function auditComplaint(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.post({
+      url: _url.default.auditComplaint,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+
+/**
+ * 查询投诉待办
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+function loadCompaintFinish(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.listAuditHistoryComplaints,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
 
@@ -38373,102 +38122,15 @@ function getUserInfo() {
     return;
   }
   var _userInfo = JSON.parse((0, _DesUtil.desDecrypt)(userInfo));
+  if ((0, _StringUtil.isNull)(userInfo)) {
+    uni.redirectTo({
+      url: "/pages/login/login"
+    });
+    return;
+  }
   return _userInfo;
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 302:
-/*!************************************************************!*\
-  !*** C:/project/hc/PropertyApp/api/complaint/complaint.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(wx) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.auditComplaint = auditComplaint;
-exports.loadCompaintFinish = loadCompaintFinish;
-exports.loadTodoCompaint = loadTodoCompaint;
-var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
-/**
- * 查询投诉待办
- * @param {Object} _that 上下文对象
- * @param {Object} _data 请求报文
- */
-function loadTodoCompaint(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.get({
-      url: _url.default.listAuditComplaints,
-      data: _data,
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-
-/**
- * 投诉处理
- * @param {Object} _that 上下文对象
- * @param {Object} _data 请求报文
- */
-function auditComplaint(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.post({
-      url: _url.default.auditComplaint,
-      data: _data,
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-
-/**
- * 查询投诉待办
- * @param {Object} _that 上下文对象
- * @param {Object} _data 请求报文
- */
-function loadCompaintFinish(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.get({
-      url: _url.default.listAuditHistoryComplaints,
-      data: _data,
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
 
@@ -38796,7 +38458,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 345:
+/***/ 342:
 /*!******************************************************!*\
   !*** C:/project/hc/PropertyApp/api/repair/repair.js ***!
   \******************************************************/
@@ -38820,7 +38482,7 @@ exports.queryResourceStoreResName = queryResourceStoreResName;
 exports.repairStart = repairStart;
 exports.repairStop = repairStop;
 var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
-var _community = __webpack_require__(/*! ../community/community.js */ 217);
+var _community = __webpack_require__(/*! ../community/community.js */ 230);
 /**
  * 查询报修信息
  * @param {Object} _that 上下文对象
@@ -39176,7 +38838,7 @@ function repairStart(_that, _data) {
 
 /***/ }),
 
-/***/ 346:
+/***/ 343:
 /*!*************************************************************!*\
   !*** C:/project/hc/PropertyApp/lib/java110/utils/common.js ***!
   \*************************************************************/
@@ -39299,7 +38961,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 367:
+/***/ 364:
 /*!**********************************************************************!*\
   !*** C:/project/hc/PropertyApp/lib/java110/utils/translate-image.js ***!
   \**********************************************************************/
@@ -45197,7 +44859,7 @@ exports.features = {};
 
 /***/ }),
 
-/***/ 408:
+/***/ 405:
 /*!**************************************************************!*\
   !*** C:/project/hc/PropertyApp/api/inspection/inspection.js ***!
   \**************************************************************/
@@ -45338,6 +45000,920 @@ function listInspectionTaskDetails(_that, _data) {
     });
   });
 }
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 406:
+/*!***********************************************************!*\
+  !*** C:/project/hc/PropertyApp/lib/qqmap-wx-jssdk.min.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(wx) {var _classCallCheck = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23);
+var _createClass = __webpack_require__(/*! @babel/runtime/helpers/createClass */ 24);
+var ERROR_CONF = {
+  KEY_ERR: 311,
+  KEY_ERR_MSG: 'key格式错误',
+  PARAM_ERR: 310,
+  PARAM_ERR_MSG: '请求参数信息有误',
+  SYSTEM_ERR: 600,
+  SYSTEM_ERR_MSG: '系统错误',
+  WX_ERR_CODE: 1000,
+  WX_OK_CODE: 200
+};
+var BASE_URL = 'https://apis.map.qq.com/ws/';
+var URL_SEARCH = BASE_URL + 'place/v1/search';
+var URL_SUGGESTION = BASE_URL + 'place/v1/suggestion';
+var URL_GET_GEOCODER = BASE_URL + 'geocoder/v1/';
+var URL_CITY_LIST = BASE_URL + 'district/v1/list';
+var URL_AREA_LIST = BASE_URL + 'district/v1/getchildren';
+var URL_DISTANCE = BASE_URL + 'distance/v1/';
+var URL_DIRECTION = BASE_URL + 'direction/v1/';
+var MODE = {
+  driving: 'driving',
+  transit: 'transit'
+};
+var EARTH_RADIUS = 6378136.49;
+var Utils = {
+  safeAdd: function safeAdd(x, y) {
+    var lsw = (x & 0xffff) + (y & 0xffff);
+    var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+    return msw << 16 | lsw & 0xffff;
+  },
+  bitRotateLeft: function bitRotateLeft(num, cnt) {
+    return num << cnt | num >>> 32 - cnt;
+  },
+  md5cmn: function md5cmn(q, a, b, x, s, t) {
+    return this.safeAdd(this.bitRotateLeft(this.safeAdd(this.safeAdd(a, q), this.safeAdd(x, t)), s), b);
+  },
+  md5ff: function md5ff(a, b, c, d, x, s, t) {
+    return this.md5cmn(b & c | ~b & d, a, b, x, s, t);
+  },
+  md5gg: function md5gg(a, b, c, d, x, s, t) {
+    return this.md5cmn(b & d | c & ~d, a, b, x, s, t);
+  },
+  md5hh: function md5hh(a, b, c, d, x, s, t) {
+    return this.md5cmn(b ^ c ^ d, a, b, x, s, t);
+  },
+  md5ii: function md5ii(a, b, c, d, x, s, t) {
+    return this.md5cmn(c ^ (b | ~d), a, b, x, s, t);
+  },
+  binlMD5: function binlMD5(x, len) {
+    x[len >> 5] |= 0x80 << len % 32;
+    x[(len + 64 >>> 9 << 4) + 14] = len;
+    var i;
+    var olda;
+    var oldb;
+    var oldc;
+    var oldd;
+    var a = 1732584193;
+    var b = -271733879;
+    var c = -1732584194;
+    var d = 271733878;
+    for (i = 0; i < x.length; i += 16) {
+      olda = a;
+      oldb = b;
+      oldc = c;
+      oldd = d;
+      a = this.md5ff(a, b, c, d, x[i], 7, -680876936);
+      d = this.md5ff(d, a, b, c, x[i + 1], 12, -389564586);
+      c = this.md5ff(c, d, a, b, x[i + 2], 17, 606105819);
+      b = this.md5ff(b, c, d, a, x[i + 3], 22, -1044525330);
+      a = this.md5ff(a, b, c, d, x[i + 4], 7, -176418897);
+      d = this.md5ff(d, a, b, c, x[i + 5], 12, 1200080426);
+      c = this.md5ff(c, d, a, b, x[i + 6], 17, -1473231341);
+      b = this.md5ff(b, c, d, a, x[i + 7], 22, -45705983);
+      a = this.md5ff(a, b, c, d, x[i + 8], 7, 1770035416);
+      d = this.md5ff(d, a, b, c, x[i + 9], 12, -1958414417);
+      c = this.md5ff(c, d, a, b, x[i + 10], 17, -42063);
+      b = this.md5ff(b, c, d, a, x[i + 11], 22, -1990404162);
+      a = this.md5ff(a, b, c, d, x[i + 12], 7, 1804603682);
+      d = this.md5ff(d, a, b, c, x[i + 13], 12, -40341101);
+      c = this.md5ff(c, d, a, b, x[i + 14], 17, -1502002290);
+      b = this.md5ff(b, c, d, a, x[i + 15], 22, 1236535329);
+      a = this.md5gg(a, b, c, d, x[i + 1], 5, -165796510);
+      d = this.md5gg(d, a, b, c, x[i + 6], 9, -1069501632);
+      c = this.md5gg(c, d, a, b, x[i + 11], 14, 643717713);
+      b = this.md5gg(b, c, d, a, x[i], 20, -373897302);
+      a = this.md5gg(a, b, c, d, x[i + 5], 5, -701558691);
+      d = this.md5gg(d, a, b, c, x[i + 10], 9, 38016083);
+      c = this.md5gg(c, d, a, b, x[i + 15], 14, -660478335);
+      b = this.md5gg(b, c, d, a, x[i + 4], 20, -405537848);
+      a = this.md5gg(a, b, c, d, x[i + 9], 5, 568446438);
+      d = this.md5gg(d, a, b, c, x[i + 14], 9, -1019803690);
+      c = this.md5gg(c, d, a, b, x[i + 3], 14, -187363961);
+      b = this.md5gg(b, c, d, a, x[i + 8], 20, 1163531501);
+      a = this.md5gg(a, b, c, d, x[i + 13], 5, -1444681467);
+      d = this.md5gg(d, a, b, c, x[i + 2], 9, -51403784);
+      c = this.md5gg(c, d, a, b, x[i + 7], 14, 1735328473);
+      b = this.md5gg(b, c, d, a, x[i + 12], 20, -1926607734);
+      a = this.md5hh(a, b, c, d, x[i + 5], 4, -378558);
+      d = this.md5hh(d, a, b, c, x[i + 8], 11, -2022574463);
+      c = this.md5hh(c, d, a, b, x[i + 11], 16, 1839030562);
+      b = this.md5hh(b, c, d, a, x[i + 14], 23, -35309556);
+      a = this.md5hh(a, b, c, d, x[i + 1], 4, -1530992060);
+      d = this.md5hh(d, a, b, c, x[i + 4], 11, 1272893353);
+      c = this.md5hh(c, d, a, b, x[i + 7], 16, -155497632);
+      b = this.md5hh(b, c, d, a, x[i + 10], 23, -1094730640);
+      a = this.md5hh(a, b, c, d, x[i + 13], 4, 681279174);
+      d = this.md5hh(d, a, b, c, x[i], 11, -358537222);
+      c = this.md5hh(c, d, a, b, x[i + 3], 16, -722521979);
+      b = this.md5hh(b, c, d, a, x[i + 6], 23, 76029189);
+      a = this.md5hh(a, b, c, d, x[i + 9], 4, -640364487);
+      d = this.md5hh(d, a, b, c, x[i + 12], 11, -421815835);
+      c = this.md5hh(c, d, a, b, x[i + 15], 16, 530742520);
+      b = this.md5hh(b, c, d, a, x[i + 2], 23, -995338651);
+      a = this.md5ii(a, b, c, d, x[i], 6, -198630844);
+      d = this.md5ii(d, a, b, c, x[i + 7], 10, 1126891415);
+      c = this.md5ii(c, d, a, b, x[i + 14], 15, -1416354905);
+      b = this.md5ii(b, c, d, a, x[i + 5], 21, -57434055);
+      a = this.md5ii(a, b, c, d, x[i + 12], 6, 1700485571);
+      d = this.md5ii(d, a, b, c, x[i + 3], 10, -1894986606);
+      c = this.md5ii(c, d, a, b, x[i + 10], 15, -1051523);
+      b = this.md5ii(b, c, d, a, x[i + 1], 21, -2054922799);
+      a = this.md5ii(a, b, c, d, x[i + 8], 6, 1873313359);
+      d = this.md5ii(d, a, b, c, x[i + 15], 10, -30611744);
+      c = this.md5ii(c, d, a, b, x[i + 6], 15, -1560198380);
+      b = this.md5ii(b, c, d, a, x[i + 13], 21, 1309151649);
+      a = this.md5ii(a, b, c, d, x[i + 4], 6, -145523070);
+      d = this.md5ii(d, a, b, c, x[i + 11], 10, -1120210379);
+      c = this.md5ii(c, d, a, b, x[i + 2], 15, 718787259);
+      b = this.md5ii(b, c, d, a, x[i + 9], 21, -343485551);
+      a = this.safeAdd(a, olda);
+      b = this.safeAdd(b, oldb);
+      c = this.safeAdd(c, oldc);
+      d = this.safeAdd(d, oldd);
+    }
+    return [a, b, c, d];
+  },
+  binl2rstr: function binl2rstr(input) {
+    var i;
+    var output = '';
+    var length32 = input.length * 32;
+    for (i = 0; i < length32; i += 8) {
+      output += String.fromCharCode(input[i >> 5] >>> i % 32 & 0xff);
+    }
+    return output;
+  },
+  rstr2binl: function rstr2binl(input) {
+    var i;
+    var output = [];
+    output[(input.length >> 2) - 1] = undefined;
+    for (i = 0; i < output.length; i += 1) {
+      output[i] = 0;
+    }
+    var length8 = input.length * 8;
+    for (i = 0; i < length8; i += 8) {
+      output[i >> 5] |= (input.charCodeAt(i / 8) & 0xff) << i % 32;
+    }
+    return output;
+  },
+  rstrMD5: function rstrMD5(s) {
+    return this.binl2rstr(this.binlMD5(this.rstr2binl(s), s.length * 8));
+  },
+  rstrHMACMD5: function rstrHMACMD5(key, data) {
+    var i;
+    var bkey = this.rstr2binl(key);
+    var ipad = [];
+    var opad = [];
+    var hash;
+    ipad[15] = opad[15] = undefined;
+    if (bkey.length > 16) {
+      bkey = this.binlMD5(bkey, key.length * 8);
+    }
+    for (i = 0; i < 16; i += 1) {
+      ipad[i] = bkey[i] ^ 0x36363636;
+      opad[i] = bkey[i] ^ 0x5c5c5c5c;
+    }
+    hash = this.binlMD5(ipad.concat(this.rstr2binl(data)), 512 + data.length * 8);
+    return this.binl2rstr(this.binlMD5(opad.concat(hash), 512 + 128));
+  },
+  rstr2hex: function rstr2hex(input) {
+    var hexTab = '0123456789abcdef';
+    var output = '';
+    var x;
+    var i;
+    for (i = 0; i < input.length; i += 1) {
+      x = input.charCodeAt(i);
+      output += hexTab.charAt(x >>> 4 & 0x0f) + hexTab.charAt(x & 0x0f);
+    }
+    return output;
+  },
+  str2rstrUTF8: function str2rstrUTF8(input) {
+    return unescape(encodeURIComponent(input));
+  },
+  rawMD5: function rawMD5(s) {
+    return this.rstrMD5(this.str2rstrUTF8(s));
+  },
+  hexMD5: function hexMD5(s) {
+    return this.rstr2hex(this.rawMD5(s));
+  },
+  rawHMACMD5: function rawHMACMD5(k, d) {
+    return this.rstrHMACMD5(this.str2rstrUTF8(k), str2rstrUTF8(d));
+  },
+  hexHMACMD5: function hexHMACMD5(k, d) {
+    return this.rstr2hex(this.rawHMACMD5(k, d));
+  },
+  md5: function md5(string, key, raw) {
+    if (!key) {
+      if (!raw) {
+        return this.hexMD5(string);
+      }
+      return this.rawMD5(string);
+    }
+    if (!raw) {
+      return this.hexHMACMD5(key, string);
+    }
+    return this.rawHMACMD5(key, string);
+  },
+  getSig: function getSig(requestParam, sk, feature, mode) {
+    var sig = null;
+    var requestArr = [];
+    Object.keys(requestParam).sort().forEach(function (key) {
+      requestArr.push(key + '=' + requestParam[key]);
+    });
+    if (feature == 'search') {
+      sig = '/ws/place/v1/search?' + requestArr.join('&') + sk;
+    }
+    if (feature == 'suggest') {
+      sig = '/ws/place/v1/suggestion?' + requestArr.join('&') + sk;
+    }
+    if (feature == 'reverseGeocoder') {
+      sig = '/ws/geocoder/v1/?' + requestArr.join('&') + sk;
+    }
+    if (feature == 'geocoder') {
+      sig = '/ws/geocoder/v1/?' + requestArr.join('&') + sk;
+    }
+    if (feature == 'getCityList') {
+      sig = '/ws/district/v1/list?' + requestArr.join('&') + sk;
+    }
+    if (feature == 'getDistrictByCityId') {
+      sig = '/ws/district/v1/getchildren?' + requestArr.join('&') + sk;
+    }
+    if (feature == 'calculateDistance') {
+      sig = '/ws/distance/v1/?' + requestArr.join('&') + sk;
+    }
+    if (feature == 'direction') {
+      sig = '/ws/direction/v1/' + mode + '?' + requestArr.join('&') + sk;
+    }
+    sig = this.md5(sig);
+    return sig;
+  },
+  location2query: function location2query(data) {
+    if (typeof data == 'string') {
+      return data;
+    }
+    var query = '';
+    for (var i = 0; i < data.length; i++) {
+      var d = data[i];
+      if (!!query) {
+        query += ';';
+      }
+      if (d.location) {
+        query = query + d.location.lat + ',' + d.location.lng;
+      }
+      if (d.latitude && d.longitude) {
+        query = query + d.latitude + ',' + d.longitude;
+      }
+    }
+    return query;
+  },
+  rad: function rad(d) {
+    return d * Math.PI / 180.0;
+  },
+  getEndLocation: function getEndLocation(location) {
+    var to = location.split(';');
+    var endLocation = [];
+    for (var i = 0; i < to.length; i++) {
+      endLocation.push({
+        lat: parseFloat(to[i].split(',')[0]),
+        lng: parseFloat(to[i].split(',')[1])
+      });
+    }
+    return endLocation;
+  },
+  getDistance: function getDistance(latFrom, lngFrom, latTo, lngTo) {
+    var radLatFrom = this.rad(latFrom);
+    var radLatTo = this.rad(latTo);
+    var a = radLatFrom - radLatTo;
+    var b = this.rad(lngFrom) - this.rad(lngTo);
+    var distance = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLatFrom) * Math.cos(radLatTo) * Math.pow(Math.sin(b / 2), 2)));
+    distance = distance * EARTH_RADIUS;
+    distance = Math.round(distance * 10000) / 10000;
+    return parseFloat(distance.toFixed(0));
+  },
+  getWXLocation: function getWXLocation(success, fail, complete) {
+    wx.getLocation({
+      type: 'gcj02',
+      success: success,
+      fail: fail,
+      complete: complete
+    });
+  },
+  getLocationParam: function getLocationParam(location) {
+    if (typeof location == 'string') {
+      var locationArr = location.split(',');
+      if (locationArr.length === 2) {
+        location = {
+          latitude: location.split(',')[0],
+          longitude: location.split(',')[1]
+        };
+      } else {
+        location = {};
+      }
+    }
+    return location;
+  },
+  polyfillParam: function polyfillParam(param) {
+    param.success = param.success || function () {};
+    param.fail = param.fail || function () {};
+    param.complete = param.complete || function () {};
+  },
+  checkParamKeyEmpty: function checkParamKeyEmpty(param, key) {
+    if (!param[key]) {
+      var errconf = this.buildErrorConfig(ERROR_CONF.PARAM_ERR, ERROR_CONF.PARAM_ERR_MSG + key + '参数格式有误');
+      param.fail(errconf);
+      param.complete(errconf);
+      return true;
+    }
+    return false;
+  },
+  checkKeyword: function checkKeyword(param) {
+    return !this.checkParamKeyEmpty(param, 'keyword');
+  },
+  checkLocation: function checkLocation(param) {
+    var location = this.getLocationParam(param.location);
+    if (!location || !location.latitude || !location.longitude) {
+      var errconf = this.buildErrorConfig(ERROR_CONF.PARAM_ERR, ERROR_CONF.PARAM_ERR_MSG + ' location参数格式有误');
+      param.fail(errconf);
+      param.complete(errconf);
+      return false;
+    }
+    return true;
+  },
+  buildErrorConfig: function buildErrorConfig(errCode, errMsg) {
+    return {
+      status: errCode,
+      message: errMsg
+    };
+  },
+  handleData: function handleData(param, data, feature) {
+    if (feature == 'search') {
+      var searchResult = data.data;
+      var searchSimplify = [];
+      for (var i = 0; i < searchResult.length; i++) {
+        searchSimplify.push({
+          id: searchResult[i].id || null,
+          title: searchResult[i].title || null,
+          latitude: searchResult[i].location && searchResult[i].location.lat || null,
+          longitude: searchResult[i].location && searchResult[i].location.lng || null,
+          address: searchResult[i].address || null,
+          category: searchResult[i].category || null,
+          tel: searchResult[i].tel || null,
+          adcode: searchResult[i].ad_info && searchResult[i].ad_info.adcode || null,
+          city: searchResult[i].ad_info && searchResult[i].ad_info.city || null,
+          district: searchResult[i].ad_info && searchResult[i].ad_info.district || null,
+          province: searchResult[i].ad_info && searchResult[i].ad_info.province || null
+        });
+      }
+      param.success(data, {
+        searchResult: searchResult,
+        searchSimplify: searchSimplify
+      });
+    } else if (feature == 'suggest') {
+      var suggestResult = data.data;
+      var suggestSimplify = [];
+      for (var i = 0; i < suggestResult.length; i++) {
+        suggestSimplify.push({
+          adcode: suggestResult[i].adcode || null,
+          address: suggestResult[i].address || null,
+          category: suggestResult[i].category || null,
+          city: suggestResult[i].city || null,
+          district: suggestResult[i].district || null,
+          id: suggestResult[i].id || null,
+          latitude: suggestResult[i].location && suggestResult[i].location.lat || null,
+          longitude: suggestResult[i].location && suggestResult[i].location.lng || null,
+          province: suggestResult[i].province || null,
+          title: suggestResult[i].title || null,
+          type: suggestResult[i].type || null
+        });
+      }
+      param.success(data, {
+        suggestResult: suggestResult,
+        suggestSimplify: suggestSimplify
+      });
+    } else if (feature == 'reverseGeocoder') {
+      var reverseGeocoderResult = data.result;
+      var reverseGeocoderSimplify = {
+        address: reverseGeocoderResult.address || null,
+        latitude: reverseGeocoderResult.location && reverseGeocoderResult.location.lat || null,
+        longitude: reverseGeocoderResult.location && reverseGeocoderResult.location.lng || null,
+        adcode: reverseGeocoderResult.ad_info && reverseGeocoderResult.ad_info.adcode || null,
+        city: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.city || null,
+        district: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.district || null,
+        nation: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.nation || null,
+        province: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.province || null,
+        street: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.street || null,
+        street_number: reverseGeocoderResult.address_component && reverseGeocoderResult.address_component.street_number || null,
+        recommend: reverseGeocoderResult.formatted_addresses && reverseGeocoderResult.formatted_addresses.recommend || null,
+        rough: reverseGeocoderResult.formatted_addresses && reverseGeocoderResult.formatted_addresses.rough || null
+      };
+      if (reverseGeocoderResult.pois) {
+        var pois = reverseGeocoderResult.pois;
+        var poisSimplify = [];
+        for (var i = 0; i < pois.length; i++) {
+          poisSimplify.push({
+            id: pois[i].id || null,
+            title: pois[i].title || null,
+            latitude: pois[i].location && pois[i].location.lat || null,
+            longitude: pois[i].location && pois[i].location.lng || null,
+            address: pois[i].address || null,
+            category: pois[i].category || null,
+            adcode: pois[i].ad_info && pois[i].ad_info.adcode || null,
+            city: pois[i].ad_info && pois[i].ad_info.city || null,
+            district: pois[i].ad_info && pois[i].ad_info.district || null,
+            province: pois[i].ad_info && pois[i].ad_info.province || null
+          });
+        }
+        param.success(data, {
+          reverseGeocoderResult: reverseGeocoderResult,
+          reverseGeocoderSimplify: reverseGeocoderSimplify,
+          pois: pois,
+          poisSimplify: poisSimplify
+        });
+      } else {
+        param.success(data, {
+          reverseGeocoderResult: reverseGeocoderResult,
+          reverseGeocoderSimplify: reverseGeocoderSimplify
+        });
+      }
+    } else if (feature == 'geocoder') {
+      var geocoderResult = data.result;
+      var geocoderSimplify = {
+        title: geocoderResult.title || null,
+        latitude: geocoderResult.location && geocoderResult.location.lat || null,
+        longitude: geocoderResult.location && geocoderResult.location.lng || null,
+        adcode: geocoderResult.ad_info && geocoderResult.ad_info.adcode || null,
+        province: geocoderResult.address_components && geocoderResult.address_components.province || null,
+        city: geocoderResult.address_components && geocoderResult.address_components.city || null,
+        district: geocoderResult.address_components && geocoderResult.address_components.district || null,
+        street: geocoderResult.address_components && geocoderResult.address_components.street || null,
+        street_number: geocoderResult.address_components && geocoderResult.address_components.street_number || null,
+        level: geocoderResult.level || null
+      };
+      param.success(data, {
+        geocoderResult: geocoderResult,
+        geocoderSimplify: geocoderSimplify
+      });
+    } else if (feature == 'getCityList') {
+      var provinceResult = data.result[0];
+      var cityResult = data.result[1];
+      var districtResult = data.result[2];
+      param.success(data, {
+        provinceResult: provinceResult,
+        cityResult: cityResult,
+        districtResult: districtResult
+      });
+    } else if (feature == 'getDistrictByCityId') {
+      var districtByCity = data.result[0];
+      param.success(data, districtByCity);
+    } else if (feature == 'calculateDistance') {
+      var calculateDistanceResult = data.result.elements;
+      var distance = [];
+      for (var i = 0; i < calculateDistanceResult.length; i++) {
+        distance.push(calculateDistanceResult[i].distance);
+      }
+      param.success(data, {
+        calculateDistanceResult: calculateDistanceResult,
+        distance: distance
+      });
+    } else if (feature == 'direction') {
+      var direction = data.result.routes;
+      param.success(data, direction);
+    } else {
+      param.success(data);
+    }
+  },
+  buildWxRequestConfig: function buildWxRequestConfig(param, options, feature) {
+    var that = this;
+    options.header = {
+      "content-type": "application/json"
+    };
+    options.method = 'GET';
+    options.success = function (res) {
+      var data = res.data;
+      if (data.status === 0) {
+        that.handleData(param, data, feature);
+      } else {
+        param.fail(data);
+      }
+    };
+    options.fail = function (res) {
+      res.statusCode = ERROR_CONF.WX_ERR_CODE;
+      param.fail(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));
+    };
+    options.complete = function (res) {
+      var statusCode = +res.statusCode;
+      switch (statusCode) {
+        case ERROR_CONF.WX_ERR_CODE:
+          {
+            param.complete(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));
+            break;
+          }
+        case ERROR_CONF.WX_OK_CODE:
+          {
+            var data = res.data;
+            if (data.status === 0) {
+              param.complete(data);
+            } else {
+              param.complete(that.buildErrorConfig(data.status, data.message));
+            }
+            break;
+          }
+        default:
+          {
+            param.complete(that.buildErrorConfig(ERROR_CONF.SYSTEM_ERR, ERROR_CONF.SYSTEM_ERR_MSG));
+          }
+      }
+    };
+    return options;
+  },
+  locationProcess: function locationProcess(param, locationsuccess, locationfail, locationcomplete) {
+    var that = this;
+    locationfail = locationfail || function (res) {
+      res.statusCode = ERROR_CONF.WX_ERR_CODE;
+      param.fail(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));
+    };
+    locationcomplete = locationcomplete || function (res) {
+      if (res.statusCode == ERROR_CONF.WX_ERR_CODE) {
+        param.complete(that.buildErrorConfig(ERROR_CONF.WX_ERR_CODE, res.errMsg));
+      }
+    };
+    if (!param.location) {
+      that.getWXLocation(locationsuccess, locationfail, locationcomplete);
+    } else if (that.checkLocation(param)) {
+      var location = Utils.getLocationParam(param.location);
+      locationsuccess(location);
+    }
+  }
+};
+var QQMapWX = /*#__PURE__*/function () {
+  "use strict";
+
+  function QQMapWX(options) {
+    _classCallCheck(this, QQMapWX);
+    if (!options.key) {
+      throw Error('key值不能为空');
+    }
+    this.key = options.key;
+  }
+  _createClass(QQMapWX, [{
+    key: "search",
+    value: function search(options) {
+      var that = this;
+      options = options || {};
+      Utils.polyfillParam(options);
+      if (!Utils.checkKeyword(options)) {
+        return;
+      }
+      var requestParam = {
+        keyword: options.keyword,
+        orderby: options.orderby || '_distance',
+        page_size: options.page_size || 10,
+        page_index: options.page_index || 1,
+        output: 'json',
+        key: that.key
+      };
+      if (options.address_format) {
+        requestParam.address_format = options.address_format;
+      }
+      if (options.filter) {
+        requestParam.filter = options.filter;
+      }
+      var distance = options.distance || "1000";
+      var auto_extend = options.auto_extend || 1;
+      var region = null;
+      var rectangle = null;
+      if (options.region) {
+        region = options.region;
+      }
+      if (options.rectangle) {
+        rectangle = options.rectangle;
+      }
+      var locationsuccess = function locationsuccess(result) {
+        if (region && !rectangle) {
+          requestParam.boundary = "region(" + region + "," + auto_extend + "," + result.latitude + "," + result.longitude + ")";
+          if (options.sig) {
+            requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');
+          }
+        } else if (rectangle && !region) {
+          requestParam.boundary = "rectangle(" + rectangle + ")";
+          if (options.sig) {
+            requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');
+          }
+        } else {
+          requestParam.boundary = "nearby(" + result.latitude + "," + result.longitude + "," + distance + "," + auto_extend + ")";
+          if (options.sig) {
+            requestParam.sig = Utils.getSig(requestParam, options.sig, 'search');
+          }
+        }
+        wx.request(Utils.buildWxRequestConfig(options, {
+          url: URL_SEARCH,
+          data: requestParam
+        }, 'search'));
+      };
+      Utils.locationProcess(options, locationsuccess);
+    }
+  }, {
+    key: "getSuggestion",
+    value: function getSuggestion(options) {
+      var that = this;
+      options = options || {};
+      Utils.polyfillParam(options);
+      if (!Utils.checkKeyword(options)) {
+        return;
+      }
+      var requestParam = {
+        keyword: options.keyword,
+        region: options.region || '全国',
+        region_fix: options.region_fix || 0,
+        policy: options.policy || 0,
+        page_size: options.page_size || 10,
+        page_index: options.page_index || 1,
+        get_subpois: options.get_subpois || 0,
+        output: 'json',
+        key: that.key
+      };
+      if (options.address_format) {
+        requestParam.address_format = options.address_format;
+      }
+      if (options.filter) {
+        requestParam.filter = options.filter;
+      }
+      if (options.location) {
+        var locationsuccess = function locationsuccess(result) {
+          requestParam.location = result.latitude + ',' + result.longitude;
+          if (options.sig) {
+            requestParam.sig = Utils.getSig(requestParam, options.sig, 'suggest');
+          }
+          wx.request(Utils.buildWxRequestConfig(options, {
+            url: URL_SUGGESTION,
+            data: requestParam
+          }, "suggest"));
+        };
+        Utils.locationProcess(options, locationsuccess);
+      } else {
+        if (options.sig) {
+          requestParam.sig = Utils.getSig(requestParam, options.sig, 'suggest');
+        }
+        wx.request(Utils.buildWxRequestConfig(options, {
+          url: URL_SUGGESTION,
+          data: requestParam
+        }, "suggest"));
+      }
+    }
+  }, {
+    key: "reverseGeocoder",
+    value: function reverseGeocoder(options) {
+      var that = this;
+      options = options || {};
+      Utils.polyfillParam(options);
+      var requestParam = {
+        coord_type: options.coord_type || 5,
+        get_poi: options.get_poi || 0,
+        output: 'json',
+        key: that.key
+      };
+      if (options.poi_options) {
+        requestParam.poi_options = options.poi_options;
+      }
+      var locationsuccess = function locationsuccess(result) {
+        requestParam.location = result.latitude + ',' + result.longitude;
+        if (options.sig) {
+          requestParam.sig = Utils.getSig(requestParam, options.sig, 'reverseGeocoder');
+        }
+        wx.request(Utils.buildWxRequestConfig(options, {
+          url: URL_GET_GEOCODER,
+          data: requestParam
+        }, 'reverseGeocoder'));
+      };
+      Utils.locationProcess(options, locationsuccess);
+    }
+  }, {
+    key: "geocoder",
+    value: function geocoder(options) {
+      var that = this;
+      options = options || {};
+      Utils.polyfillParam(options);
+      if (Utils.checkParamKeyEmpty(options, 'address')) {
+        return;
+      }
+      var requestParam = {
+        address: options.address,
+        output: 'json',
+        key: that.key
+      };
+      if (options.region) {
+        requestParam.region = options.region;
+      }
+      if (options.sig) {
+        requestParam.sig = Utils.getSig(requestParam, options.sig, 'geocoder');
+      }
+      wx.request(Utils.buildWxRequestConfig(options, {
+        url: URL_GET_GEOCODER,
+        data: requestParam
+      }, 'geocoder'));
+    }
+  }, {
+    key: "getCityList",
+    value: function getCityList(options) {
+      var that = this;
+      options = options || {};
+      Utils.polyfillParam(options);
+      var requestParam = {
+        output: 'json',
+        key: that.key
+      };
+      if (options.sig) {
+        requestParam.sig = Utils.getSig(requestParam, options.sig, 'getCityList');
+      }
+      wx.request(Utils.buildWxRequestConfig(options, {
+        url: URL_CITY_LIST,
+        data: requestParam
+      }, 'getCityList'));
+    }
+  }, {
+    key: "getDistrictByCityId",
+    value: function getDistrictByCityId(options) {
+      var that = this;
+      options = options || {};
+      Utils.polyfillParam(options);
+      if (Utils.checkParamKeyEmpty(options, 'id')) {
+        return;
+      }
+      var requestParam = {
+        id: options.id || '',
+        output: 'json',
+        key: that.key
+      };
+      if (options.sig) {
+        requestParam.sig = Utils.getSig(requestParam, options.sig, 'getDistrictByCityId');
+      }
+      wx.request(Utils.buildWxRequestConfig(options, {
+        url: URL_AREA_LIST,
+        data: requestParam
+      }, 'getDistrictByCityId'));
+    }
+  }, {
+    key: "calculateDistance",
+    value: function calculateDistance(options) {
+      var that = this;
+      options = options || {};
+      Utils.polyfillParam(options);
+      if (Utils.checkParamKeyEmpty(options, 'to')) {
+        return;
+      }
+      var requestParam = {
+        mode: options.mode || 'walking',
+        to: Utils.location2query(options.to),
+        output: 'json',
+        key: that.key
+      };
+      if (options.from) {
+        options.location = options.from;
+      }
+      if (requestParam.mode == 'straight') {
+        var locationsuccess = function locationsuccess(result) {
+          var locationTo = Utils.getEndLocation(requestParam.to);
+          var data = {
+            message: "query ok",
+            result: {
+              elements: []
+            },
+            status: 0
+          };
+          for (var i = 0; i < locationTo.length; i++) {
+            data.result.elements.push({
+              distance: Utils.getDistance(result.latitude, result.longitude, locationTo[i].lat, locationTo[i].lng),
+              duration: 0,
+              from: {
+                lat: result.latitude,
+                lng: result.longitude
+              },
+              to: {
+                lat: locationTo[i].lat,
+                lng: locationTo[i].lng
+              }
+            });
+          }
+          var calculateResult = data.result.elements;
+          var distanceResult = [];
+          for (var i = 0; i < calculateResult.length; i++) {
+            distanceResult.push(calculateResult[i].distance);
+          }
+          return options.success(data, {
+            calculateResult: calculateResult,
+            distanceResult: distanceResult
+          });
+        };
+        Utils.locationProcess(options, locationsuccess);
+      } else {
+        var locationsuccess = function locationsuccess(result) {
+          requestParam.from = result.latitude + ',' + result.longitude;
+          if (options.sig) {
+            requestParam.sig = Utils.getSig(requestParam, options.sig, 'calculateDistance');
+          }
+          wx.request(Utils.buildWxRequestConfig(options, {
+            url: URL_DISTANCE,
+            data: requestParam
+          }, 'calculateDistance'));
+        };
+        Utils.locationProcess(options, locationsuccess);
+      }
+    }
+  }, {
+    key: "direction",
+    value: function direction(options) {
+      var that = this;
+      options = options || {};
+      Utils.polyfillParam(options);
+      if (Utils.checkParamKeyEmpty(options, 'to')) {
+        return;
+      }
+      var requestParam = {
+        output: 'json',
+        key: that.key
+      };
+      if (typeof options.to == 'string') {
+        requestParam.to = options.to;
+      } else {
+        requestParam.to = options.to.latitude + ',' + options.to.longitude;
+      }
+      var SET_URL_DIRECTION = null;
+      options.mode = options.mode || MODE.driving;
+      SET_URL_DIRECTION = URL_DIRECTION + options.mode;
+      if (options.from) {
+        options.location = options.from;
+      }
+      if (options.mode == MODE.driving) {
+        if (options.from_poi) {
+          requestParam.from_poi = options.from_poi;
+        }
+        if (options.heading) {
+          requestParam.heading = options.heading;
+        }
+        if (options.speed) {
+          requestParam.speed = options.speed;
+        }
+        if (options.accuracy) {
+          requestParam.accuracy = options.accuracy;
+        }
+        if (options.road_type) {
+          requestParam.road_type = options.road_type;
+        }
+        if (options.to_poi) {
+          requestParam.to_poi = options.to_poi;
+        }
+        if (options.from_track) {
+          requestParam.from_track = options.from_track;
+        }
+        if (options.waypoints) {
+          requestParam.waypoints = options.waypoints;
+        }
+        if (options.policy) {
+          requestParam.policy = options.policy;
+        }
+        if (options.plate_number) {
+          requestParam.plate_number = options.plate_number;
+        }
+      }
+      if (options.mode == MODE.transit) {
+        if (options.departure_time) {
+          requestParam.departure_time = options.departure_time;
+        }
+        if (options.policy) {
+          requestParam.policy = options.policy;
+        }
+      }
+      var locationsuccess = function locationsuccess(result) {
+        requestParam.from = result.latitude + ',' + result.longitude;
+        if (options.sig) {
+          requestParam.sig = Utils.getSig(requestParam, options.sig, 'direction', options.mode);
+        }
+        wx.request(Utils.buildWxRequestConfig(options, {
+          url: SET_URL_DIRECTION,
+          data: requestParam
+        }, 'direction'));
+      };
+      Utils.locationProcess(options, locationsuccess);
+    }
+  }]);
+  return QQMapWX;
+}();
+;
+module.exports = QQMapWX;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
@@ -47888,7 +48464,7 @@ if (typeof Object.create === 'function') {
 
 /***/ }),
 
-/***/ 489:
+/***/ 487:
 /*!**************************************************!*\
   !*** C:/project/hc/PropertyApp/api/room/room.js ***!
   \**************************************************/
@@ -47932,6 +48508,154 @@ function loadRoomAndOwner(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.get({
       url: _url.default.listRoomAndOwner,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 488:
+/*!************************************************!*\
+  !*** C:/project/hc/PropertyApp/api/fee/fee.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getRoomOweFees = getRoomOweFees;
+exports.listFeeDetail = listFeeDetail;
+exports.loadFees = loadFees;
+exports.queryFeeDetail = queryFeeDetail;
+exports.toPayOweFee = toPayOweFee;
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
+var _date = _interopRequireDefault(__webpack_require__(/*! ../../lib/java110/utils/date.js */ 196));
+/**
+ * 查询费用信息
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+function loadFees(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.listFee,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+function toPayOweFee(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.post({
+      url: _url.default.toQrOweFeePay,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+
+/**
+ * 查询缴费历史
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+function queryFeeDetail(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.queryFeeDetail,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+
+/**
+ * 查询欠费信息
+ * @param {Object} _objData 欠费对象
+ */
+function getRoomOweFees(_that, _objData) {
+  return new Promise(function (resolve, reject) {
+    _that.context.get({
+      url: _url.default.listOweFees,
+      data: _objData,
+      //动态数据
+      success: function success(res) {
+        if (res.statusCode == 200) {
+          //成功情况下跳转
+          var _roomFees = res.data.data;
+          if (_roomFees.length < 1) {
+            //_that.noData = true;
+            reject();
+          }
+          _roomFees.forEach(function (_roomFee) {
+            _roomFee.endTime = _date.default.dateTimeStringToDateString(_roomFee.endTime);
+            _roomFee.deadlineTime = _date.default.dateTimeStringToDateString(_roomFee.deadlineTime);
+          });
+          resolve(_roomFees);
+          return;
+        }
+        reject();
+      },
+      fail: function fail(e) {
+        reject();
+      }
+    });
+  });
+}
+
+/**
+ * 查询缴费历史
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+function listFeeDetail(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.listFeeDetail,
       data: _data,
       success: function success(res) {
         reslove(res);
@@ -48108,155 +48832,7 @@ module.exports = MD5
 
 /***/ }),
 
-/***/ 490:
-/*!************************************************!*\
-  !*** C:/project/hc/PropertyApp/api/fee/fee.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(wx) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getRoomOweFees = getRoomOweFees;
-exports.listFeeDetail = listFeeDetail;
-exports.loadFees = loadFees;
-exports.queryFeeDetail = queryFeeDetail;
-exports.toPayOweFee = toPayOweFee;
-var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
-var _date = _interopRequireDefault(__webpack_require__(/*! ../../lib/java110/utils/date.js */ 196));
-/**
- * 查询费用信息
- * @param {Object} _that 上下文对象
- * @param {Object} _data 请求报文
- */
-function loadFees(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.get({
-      url: _url.default.listFee,
-      data: _data,
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-function toPayOweFee(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.post({
-      url: _url.default.toQrOweFeePay,
-      data: _data,
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-
-/**
- * 查询缴费历史
- * @param {Object} _that 上下文对象
- * @param {Object} _data 请求报文
- */
-function queryFeeDetail(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.get({
-      url: _url.default.queryFeeDetail,
-      data: _data,
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-
-/**
- * 查询欠费信息
- * @param {Object} _objData 欠费对象
- */
-function getRoomOweFees(_that, _objData) {
-  return new Promise(function (resolve, reject) {
-    _that.context.get({
-      url: _url.default.listOweFees,
-      data: _objData,
-      //动态数据
-      success: function success(res) {
-        if (res.statusCode == 200) {
-          //成功情况下跳转
-          var _roomFees = res.data.data;
-          if (_roomFees.length < 1) {
-            //_that.noData = true;
-            reject();
-          }
-          _roomFees.forEach(function (_roomFee) {
-            _roomFee.endTime = _date.default.dateTimeStringToDateString(_roomFee.endTime);
-            _roomFee.deadlineTime = _date.default.dateTimeStringToDateString(_roomFee.deadlineTime);
-          });
-          resolve(_roomFees);
-          return;
-        }
-        reject();
-      },
-      fail: function fail(e) {
-        reject();
-      }
-    });
-  });
-}
-
-/**
- * 查询缴费历史
- * @param {Object} _that 上下文对象
- * @param {Object} _data 请求报文
- */
-function listFeeDetail(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.get({
-      url: _url.default.listFeeDetail,
-      data: _data,
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 499:
+/***/ 497:
 /*!****************************************************!*\
   !*** C:/project/hc/PropertyApp/api/floor/floor.js ***!
   \****************************************************/
@@ -48424,7 +49000,7 @@ module.exports = HashBase
 
 /***/ }),
 
-/***/ 506:
+/***/ 504:
 /*!**************************************************!*\
   !*** C:/project/hc/PropertyApp/api/unit/unit.js ***!
   \**************************************************/
@@ -50083,7 +50659,7 @@ function eventTargetAgnosticAddListener(emitter, name, listener, flags) {
 
 /***/ }),
 
-/***/ 543:
+/***/ 541:
 /*!****************************************************!*\
   !*** C:/project/hc/PropertyApp/api/meter/meter.js ***!
   \****************************************************/
@@ -50241,7 +50817,7 @@ module.exports = __webpack_require__(/*! events */ 54).EventEmitter;
 
 /***/ }),
 
-/***/ 552:
+/***/ 550:
 /*!****************************************************!*\
   !*** C:/project/hc/PropertyApp/api/apply/apply.js ***!
   \****************************************************/
@@ -50769,7 +51345,7 @@ if (util && util.inspect && util.inspect.custom) {
 
 /***/ }),
 
-/***/ 593:
+/***/ 591:
 /*!**************************************************************!*\
   !*** C:/project/hc/PropertyApp/api/renovation/renovation.js ***!
   \**************************************************************/
@@ -52122,7 +52698,7 @@ function config (name) {
 
 /***/ }),
 
-/***/ 634:
+/***/ 632:
 /*!*****************************************************!*\
   !*** C:/project/hc/PropertyApp/lib/weapp-qrcode.js ***!
   \*****************************************************/
@@ -52962,314 +53538,7 @@ module.exports = QRCode;
 
 /***/ }),
 
-/***/ 64:
-/*!***********************************************************!*\
-  !*** ./node_modules/string_decoder/lib/string_decoder.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
-/*<replacement>*/
-
-var Buffer = __webpack_require__(/*! safe-buffer */ 42).Buffer;
-/*</replacement>*/
-
-var isEncoding = Buffer.isEncoding || function (encoding) {
-  encoding = '' + encoding;
-  switch (encoding && encoding.toLowerCase()) {
-    case 'hex':case 'utf8':case 'utf-8':case 'ascii':case 'binary':case 'base64':case 'ucs2':case 'ucs-2':case 'utf16le':case 'utf-16le':case 'raw':
-      return true;
-    default:
-      return false;
-  }
-};
-
-function _normalizeEncoding(enc) {
-  if (!enc) return 'utf8';
-  var retried;
-  while (true) {
-    switch (enc) {
-      case 'utf8':
-      case 'utf-8':
-        return 'utf8';
-      case 'ucs2':
-      case 'ucs-2':
-      case 'utf16le':
-      case 'utf-16le':
-        return 'utf16le';
-      case 'latin1':
-      case 'binary':
-        return 'latin1';
-      case 'base64':
-      case 'ascii':
-      case 'hex':
-        return enc;
-      default:
-        if (retried) return; // undefined
-        enc = ('' + enc).toLowerCase();
-        retried = true;
-    }
-  }
-};
-
-// Do not cache `Buffer.isEncoding` when checking encoding names as some
-// modules monkey-patch it to support additional encodings
-function normalizeEncoding(enc) {
-  var nenc = _normalizeEncoding(enc);
-  if (typeof nenc !== 'string' && (Buffer.isEncoding === isEncoding || !isEncoding(enc))) throw new Error('Unknown encoding: ' + enc);
-  return nenc || enc;
-}
-
-// StringDecoder provides an interface for efficiently splitting a series of
-// buffers into a series of JS strings without breaking apart multi-byte
-// characters.
-exports.StringDecoder = StringDecoder;
-function StringDecoder(encoding) {
-  this.encoding = normalizeEncoding(encoding);
-  var nb;
-  switch (this.encoding) {
-    case 'utf16le':
-      this.text = utf16Text;
-      this.end = utf16End;
-      nb = 4;
-      break;
-    case 'utf8':
-      this.fillLast = utf8FillLast;
-      nb = 4;
-      break;
-    case 'base64':
-      this.text = base64Text;
-      this.end = base64End;
-      nb = 3;
-      break;
-    default:
-      this.write = simpleWrite;
-      this.end = simpleEnd;
-      return;
-  }
-  this.lastNeed = 0;
-  this.lastTotal = 0;
-  this.lastChar = Buffer.allocUnsafe(nb);
-}
-
-StringDecoder.prototype.write = function (buf) {
-  if (buf.length === 0) return '';
-  var r;
-  var i;
-  if (this.lastNeed) {
-    r = this.fillLast(buf);
-    if (r === undefined) return '';
-    i = this.lastNeed;
-    this.lastNeed = 0;
-  } else {
-    i = 0;
-  }
-  if (i < buf.length) return r ? r + this.text(buf, i) : this.text(buf, i);
-  return r || '';
-};
-
-StringDecoder.prototype.end = utf8End;
-
-// Returns only complete characters in a Buffer
-StringDecoder.prototype.text = utf8Text;
-
-// Attempts to complete a partial non-UTF-8 character using bytes from a Buffer
-StringDecoder.prototype.fillLast = function (buf) {
-  if (this.lastNeed <= buf.length) {
-    buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, this.lastNeed);
-    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
-  }
-  buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, buf.length);
-  this.lastNeed -= buf.length;
-};
-
-// Checks the type of a UTF-8 byte, whether it's ASCII, a leading byte, or a
-// continuation byte. If an invalid byte is detected, -2 is returned.
-function utf8CheckByte(byte) {
-  if (byte <= 0x7F) return 0;else if (byte >> 5 === 0x06) return 2;else if (byte >> 4 === 0x0E) return 3;else if (byte >> 3 === 0x1E) return 4;
-  return byte >> 6 === 0x02 ? -1 : -2;
-}
-
-// Checks at most 3 bytes at the end of a Buffer in order to detect an
-// incomplete multi-byte UTF-8 character. The total number of bytes (2, 3, or 4)
-// needed to complete the UTF-8 character (if applicable) are returned.
-function utf8CheckIncomplete(self, buf, i) {
-  var j = buf.length - 1;
-  if (j < i) return 0;
-  var nb = utf8CheckByte(buf[j]);
-  if (nb >= 0) {
-    if (nb > 0) self.lastNeed = nb - 1;
-    return nb;
-  }
-  if (--j < i || nb === -2) return 0;
-  nb = utf8CheckByte(buf[j]);
-  if (nb >= 0) {
-    if (nb > 0) self.lastNeed = nb - 2;
-    return nb;
-  }
-  if (--j < i || nb === -2) return 0;
-  nb = utf8CheckByte(buf[j]);
-  if (nb >= 0) {
-    if (nb > 0) {
-      if (nb === 2) nb = 0;else self.lastNeed = nb - 3;
-    }
-    return nb;
-  }
-  return 0;
-}
-
-// Validates as many continuation bytes for a multi-byte UTF-8 character as
-// needed or are available. If we see a non-continuation byte where we expect
-// one, we "replace" the validated continuation bytes we've seen so far with
-// a single UTF-8 replacement character ('\ufffd'), to match v8's UTF-8 decoding
-// behavior. The continuation byte check is included three times in the case
-// where all of the continuation bytes for a character exist in the same buffer.
-// It is also done this way as a slight performance increase instead of using a
-// loop.
-function utf8CheckExtraBytes(self, buf, p) {
-  if ((buf[0] & 0xC0) !== 0x80) {
-    self.lastNeed = 0;
-    return '\ufffd';
-  }
-  if (self.lastNeed > 1 && buf.length > 1) {
-    if ((buf[1] & 0xC0) !== 0x80) {
-      self.lastNeed = 1;
-      return '\ufffd';
-    }
-    if (self.lastNeed > 2 && buf.length > 2) {
-      if ((buf[2] & 0xC0) !== 0x80) {
-        self.lastNeed = 2;
-        return '\ufffd';
-      }
-    }
-  }
-}
-
-// Attempts to complete a multi-byte UTF-8 character using bytes from a Buffer.
-function utf8FillLast(buf) {
-  var p = this.lastTotal - this.lastNeed;
-  var r = utf8CheckExtraBytes(this, buf, p);
-  if (r !== undefined) return r;
-  if (this.lastNeed <= buf.length) {
-    buf.copy(this.lastChar, p, 0, this.lastNeed);
-    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
-  }
-  buf.copy(this.lastChar, p, 0, buf.length);
-  this.lastNeed -= buf.length;
-}
-
-// Returns all complete UTF-8 characters in a Buffer. If the Buffer ended on a
-// partial character, the character's bytes are buffered until the required
-// number of bytes are available.
-function utf8Text(buf, i) {
-  var total = utf8CheckIncomplete(this, buf, i);
-  if (!this.lastNeed) return buf.toString('utf8', i);
-  this.lastTotal = total;
-  var end = buf.length - (total - this.lastNeed);
-  buf.copy(this.lastChar, 0, end);
-  return buf.toString('utf8', i, end);
-}
-
-// For UTF-8, a replacement character is added when ending on a partial
-// character.
-function utf8End(buf) {
-  var r = buf && buf.length ? this.write(buf) : '';
-  if (this.lastNeed) return r + '\ufffd';
-  return r;
-}
-
-// UTF-16LE typically needs two bytes per character, but even if we have an even
-// number of bytes available, we need to check if we end on a leading/high
-// surrogate. In that case, we need to wait for the next two bytes in order to
-// decode the last character properly.
-function utf16Text(buf, i) {
-  if ((buf.length - i) % 2 === 0) {
-    var r = buf.toString('utf16le', i);
-    if (r) {
-      var c = r.charCodeAt(r.length - 1);
-      if (c >= 0xD800 && c <= 0xDBFF) {
-        this.lastNeed = 2;
-        this.lastTotal = 4;
-        this.lastChar[0] = buf[buf.length - 2];
-        this.lastChar[1] = buf[buf.length - 1];
-        return r.slice(0, -1);
-      }
-    }
-    return r;
-  }
-  this.lastNeed = 1;
-  this.lastTotal = 2;
-  this.lastChar[0] = buf[buf.length - 1];
-  return buf.toString('utf16le', i, buf.length - 1);
-}
-
-// For UTF-16LE we do not explicitly append special replacement characters if we
-// end on a partial character, we simply let v8 handle that.
-function utf16End(buf) {
-  var r = buf && buf.length ? this.write(buf) : '';
-  if (this.lastNeed) {
-    var end = this.lastTotal - this.lastNeed;
-    return r + this.lastChar.toString('utf16le', 0, end);
-  }
-  return r;
-}
-
-function base64Text(buf, i) {
-  var n = (buf.length - i) % 3;
-  if (n === 0) return buf.toString('base64', i);
-  this.lastNeed = 3 - n;
-  this.lastTotal = 3;
-  if (n === 1) {
-    this.lastChar[0] = buf[buf.length - 1];
-  } else {
-    this.lastChar[0] = buf[buf.length - 2];
-    this.lastChar[1] = buf[buf.length - 1];
-  }
-  return buf.toString('base64', i, buf.length - n);
-}
-
-function base64End(buf) {
-  var r = buf && buf.length ? this.write(buf) : '';
-  if (this.lastNeed) return r + this.lastChar.toString('base64', 0, 3 - this.lastNeed);
-  return r;
-}
-
-// Pass bytes on through for single-byte encodings (e.g. ascii, latin1, hex)
-function simpleWrite(buf) {
-  return buf.toString(this.encoding);
-}
-
-function simpleEnd(buf) {
-  return buf && buf.length ? this.write(buf) : '';
-}
-
-/***/ }),
-
-/***/ 641:
+/***/ 639:
 /*!**********************************************************!*\
   !*** C:/project/hc/PropertyApp/api/resource/resource.js ***!
   \**********************************************************/
@@ -54018,6 +54287,313 @@ function deletePurchaseApply(_that, _data) {
   });
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 64:
+/*!***********************************************************!*\
+  !*** ./node_modules/string_decoder/lib/string_decoder.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+/*<replacement>*/
+
+var Buffer = __webpack_require__(/*! safe-buffer */ 42).Buffer;
+/*</replacement>*/
+
+var isEncoding = Buffer.isEncoding || function (encoding) {
+  encoding = '' + encoding;
+  switch (encoding && encoding.toLowerCase()) {
+    case 'hex':case 'utf8':case 'utf-8':case 'ascii':case 'binary':case 'base64':case 'ucs2':case 'ucs-2':case 'utf16le':case 'utf-16le':case 'raw':
+      return true;
+    default:
+      return false;
+  }
+};
+
+function _normalizeEncoding(enc) {
+  if (!enc) return 'utf8';
+  var retried;
+  while (true) {
+    switch (enc) {
+      case 'utf8':
+      case 'utf-8':
+        return 'utf8';
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return 'utf16le';
+      case 'latin1':
+      case 'binary':
+        return 'latin1';
+      case 'base64':
+      case 'ascii':
+      case 'hex':
+        return enc;
+      default:
+        if (retried) return; // undefined
+        enc = ('' + enc).toLowerCase();
+        retried = true;
+    }
+  }
+};
+
+// Do not cache `Buffer.isEncoding` when checking encoding names as some
+// modules monkey-patch it to support additional encodings
+function normalizeEncoding(enc) {
+  var nenc = _normalizeEncoding(enc);
+  if (typeof nenc !== 'string' && (Buffer.isEncoding === isEncoding || !isEncoding(enc))) throw new Error('Unknown encoding: ' + enc);
+  return nenc || enc;
+}
+
+// StringDecoder provides an interface for efficiently splitting a series of
+// buffers into a series of JS strings without breaking apart multi-byte
+// characters.
+exports.StringDecoder = StringDecoder;
+function StringDecoder(encoding) {
+  this.encoding = normalizeEncoding(encoding);
+  var nb;
+  switch (this.encoding) {
+    case 'utf16le':
+      this.text = utf16Text;
+      this.end = utf16End;
+      nb = 4;
+      break;
+    case 'utf8':
+      this.fillLast = utf8FillLast;
+      nb = 4;
+      break;
+    case 'base64':
+      this.text = base64Text;
+      this.end = base64End;
+      nb = 3;
+      break;
+    default:
+      this.write = simpleWrite;
+      this.end = simpleEnd;
+      return;
+  }
+  this.lastNeed = 0;
+  this.lastTotal = 0;
+  this.lastChar = Buffer.allocUnsafe(nb);
+}
+
+StringDecoder.prototype.write = function (buf) {
+  if (buf.length === 0) return '';
+  var r;
+  var i;
+  if (this.lastNeed) {
+    r = this.fillLast(buf);
+    if (r === undefined) return '';
+    i = this.lastNeed;
+    this.lastNeed = 0;
+  } else {
+    i = 0;
+  }
+  if (i < buf.length) return r ? r + this.text(buf, i) : this.text(buf, i);
+  return r || '';
+};
+
+StringDecoder.prototype.end = utf8End;
+
+// Returns only complete characters in a Buffer
+StringDecoder.prototype.text = utf8Text;
+
+// Attempts to complete a partial non-UTF-8 character using bytes from a Buffer
+StringDecoder.prototype.fillLast = function (buf) {
+  if (this.lastNeed <= buf.length) {
+    buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, this.lastNeed);
+    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
+  }
+  buf.copy(this.lastChar, this.lastTotal - this.lastNeed, 0, buf.length);
+  this.lastNeed -= buf.length;
+};
+
+// Checks the type of a UTF-8 byte, whether it's ASCII, a leading byte, or a
+// continuation byte. If an invalid byte is detected, -2 is returned.
+function utf8CheckByte(byte) {
+  if (byte <= 0x7F) return 0;else if (byte >> 5 === 0x06) return 2;else if (byte >> 4 === 0x0E) return 3;else if (byte >> 3 === 0x1E) return 4;
+  return byte >> 6 === 0x02 ? -1 : -2;
+}
+
+// Checks at most 3 bytes at the end of a Buffer in order to detect an
+// incomplete multi-byte UTF-8 character. The total number of bytes (2, 3, or 4)
+// needed to complete the UTF-8 character (if applicable) are returned.
+function utf8CheckIncomplete(self, buf, i) {
+  var j = buf.length - 1;
+  if (j < i) return 0;
+  var nb = utf8CheckByte(buf[j]);
+  if (nb >= 0) {
+    if (nb > 0) self.lastNeed = nb - 1;
+    return nb;
+  }
+  if (--j < i || nb === -2) return 0;
+  nb = utf8CheckByte(buf[j]);
+  if (nb >= 0) {
+    if (nb > 0) self.lastNeed = nb - 2;
+    return nb;
+  }
+  if (--j < i || nb === -2) return 0;
+  nb = utf8CheckByte(buf[j]);
+  if (nb >= 0) {
+    if (nb > 0) {
+      if (nb === 2) nb = 0;else self.lastNeed = nb - 3;
+    }
+    return nb;
+  }
+  return 0;
+}
+
+// Validates as many continuation bytes for a multi-byte UTF-8 character as
+// needed or are available. If we see a non-continuation byte where we expect
+// one, we "replace" the validated continuation bytes we've seen so far with
+// a single UTF-8 replacement character ('\ufffd'), to match v8's UTF-8 decoding
+// behavior. The continuation byte check is included three times in the case
+// where all of the continuation bytes for a character exist in the same buffer.
+// It is also done this way as a slight performance increase instead of using a
+// loop.
+function utf8CheckExtraBytes(self, buf, p) {
+  if ((buf[0] & 0xC0) !== 0x80) {
+    self.lastNeed = 0;
+    return '\ufffd';
+  }
+  if (self.lastNeed > 1 && buf.length > 1) {
+    if ((buf[1] & 0xC0) !== 0x80) {
+      self.lastNeed = 1;
+      return '\ufffd';
+    }
+    if (self.lastNeed > 2 && buf.length > 2) {
+      if ((buf[2] & 0xC0) !== 0x80) {
+        self.lastNeed = 2;
+        return '\ufffd';
+      }
+    }
+  }
+}
+
+// Attempts to complete a multi-byte UTF-8 character using bytes from a Buffer.
+function utf8FillLast(buf) {
+  var p = this.lastTotal - this.lastNeed;
+  var r = utf8CheckExtraBytes(this, buf, p);
+  if (r !== undefined) return r;
+  if (this.lastNeed <= buf.length) {
+    buf.copy(this.lastChar, p, 0, this.lastNeed);
+    return this.lastChar.toString(this.encoding, 0, this.lastTotal);
+  }
+  buf.copy(this.lastChar, p, 0, buf.length);
+  this.lastNeed -= buf.length;
+}
+
+// Returns all complete UTF-8 characters in a Buffer. If the Buffer ended on a
+// partial character, the character's bytes are buffered until the required
+// number of bytes are available.
+function utf8Text(buf, i) {
+  var total = utf8CheckIncomplete(this, buf, i);
+  if (!this.lastNeed) return buf.toString('utf8', i);
+  this.lastTotal = total;
+  var end = buf.length - (total - this.lastNeed);
+  buf.copy(this.lastChar, 0, end);
+  return buf.toString('utf8', i, end);
+}
+
+// For UTF-8, a replacement character is added when ending on a partial
+// character.
+function utf8End(buf) {
+  var r = buf && buf.length ? this.write(buf) : '';
+  if (this.lastNeed) return r + '\ufffd';
+  return r;
+}
+
+// UTF-16LE typically needs two bytes per character, but even if we have an even
+// number of bytes available, we need to check if we end on a leading/high
+// surrogate. In that case, we need to wait for the next two bytes in order to
+// decode the last character properly.
+function utf16Text(buf, i) {
+  if ((buf.length - i) % 2 === 0) {
+    var r = buf.toString('utf16le', i);
+    if (r) {
+      var c = r.charCodeAt(r.length - 1);
+      if (c >= 0xD800 && c <= 0xDBFF) {
+        this.lastNeed = 2;
+        this.lastTotal = 4;
+        this.lastChar[0] = buf[buf.length - 2];
+        this.lastChar[1] = buf[buf.length - 1];
+        return r.slice(0, -1);
+      }
+    }
+    return r;
+  }
+  this.lastNeed = 1;
+  this.lastTotal = 2;
+  this.lastChar[0] = buf[buf.length - 1];
+  return buf.toString('utf16le', i, buf.length - 1);
+}
+
+// For UTF-16LE we do not explicitly append special replacement characters if we
+// end on a partial character, we simply let v8 handle that.
+function utf16End(buf) {
+  var r = buf && buf.length ? this.write(buf) : '';
+  if (this.lastNeed) {
+    var end = this.lastTotal - this.lastNeed;
+    return r + this.lastChar.toString('utf16le', 0, end);
+  }
+  return r;
+}
+
+function base64Text(buf, i) {
+  var n = (buf.length - i) % 3;
+  if (n === 0) return buf.toString('base64', i);
+  this.lastNeed = 3 - n;
+  this.lastTotal = 3;
+  if (n === 1) {
+    this.lastChar[0] = buf[buf.length - 1];
+  } else {
+    this.lastChar[0] = buf[buf.length - 2];
+    this.lastChar[1] = buf[buf.length - 1];
+  }
+  return buf.toString('base64', i, buf.length - n);
+}
+
+function base64End(buf) {
+  var r = buf && buf.length ? this.write(buf) : '';
+  if (this.lastNeed) return r + this.lastChar.toString('base64', 0, 3 - this.lastNeed);
+  return r;
+}
+
+// Pass bytes on through for single-byte encodings (e.g. ascii, latin1, hex)
+function simpleWrite(buf) {
+  return buf.toString(this.encoding);
+}
+
+function simpleEnd(buf) {
+  return buf && buf.length ? this.write(buf) : '';
+}
 
 /***/ }),
 
@@ -55705,7 +56281,7 @@ module.exports = __webpack_require__(/*! ./readable */ 51).Transform
 
 /***/ }),
 
-/***/ 809:
+/***/ 807:
 /*!**********************************************!*\
   !*** C:/project/hc/PropertyApp/api/oa/oa.js ***!
   \**********************************************/
@@ -56394,7 +56970,7 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
 
 /***/ }),
 
-/***/ 882:
+/***/ 880:
 /*!****************************************************************!*\
   !*** C:/project/hc/PropertyApp/api/appointment/appointment.js ***!
   \****************************************************************/
@@ -56479,7 +57055,7 @@ module.exports = function (iterations, keylen) {
 
 /***/ }),
 
-/***/ 895:
+/***/ 893:
 /*!******************************************************************!*\
   !*** C:/project/hc/PropertyApp/api/maintainance/maintainance.js ***!
   \******************************************************************/
@@ -57015,7 +57591,7 @@ DES.prototype._final = function () {
 
 /***/ }),
 
-/***/ 944:
+/***/ 942:
 /*!******************************************************!*\
   !*** C:/project/hc/PropertyApp/api/coupon/coupon.js ***!
   \******************************************************/
@@ -57490,7 +58066,7 @@ exports.padSplit = function padSplit(num, size, group) {
 
 /***/ }),
 
-/***/ 963:
+/***/ 961:
 /*!*******************************************************************!*\
   !*** C:/project/hc/PropertyApp/api/itemRelease/itemReleaseApi.js ***!
   \*******************************************************************/
@@ -57832,7 +58408,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 
 /***/ }),
 
-/***/ 978:
+/***/ 976:
 /*!*******************************************************!*\
   !*** C:/project/hc/PropertyApp/api/visit/visitApi.js ***!
   \*******************************************************/

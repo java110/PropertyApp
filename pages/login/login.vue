@@ -22,7 +22,7 @@
 			</view>
 
 			<view class="padding flex flex-direction">
-				<button class="cu-btn bg-green margin-tb-sm lg" @tap="doLogin()">登录</button>
+				<button class="cu-btn bg-blue margin-tb-sm lg" @tap="doLogin()">登录</button>
 			</view>
 		</scroll-view>
 
@@ -137,7 +137,7 @@
 	}
 
 	.login-nav {
-		background-color: #00AA00;
+		background-color: #368CFE;
 		height: 120upx;
 	}
 

@@ -8,7 +8,7 @@
 	width: 180rpx;
 }
 .login-nav {
-	background-color: #00AA00;
+	background-color: #368CFE;
 	height: 120rpx;
 }
 .login-nav text {

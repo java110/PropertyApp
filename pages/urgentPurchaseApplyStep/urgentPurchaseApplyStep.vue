@@ -68,7 +68,7 @@
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	// 组件
-	import selectResource from '../../components/select-resource/select-resource.vue'
+	import selectResource from '../../components/resource/select-resource.vue'
 	
 	export default {
 		data() {

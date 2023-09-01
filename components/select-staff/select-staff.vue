@@ -1,22 +1,6 @@
 <template>
 	<view class="select-single-resource" v-if="showModel">
 		<view>
-			<!-- <view class="cu-form-group margin-top">
-				<view class="title">公司</view>
-				<picker :value="orgIndex" :range="orgCloums" :range-key="'orgName'" @change="orgChange">
-					<view class="picker">
-						{{orgCloums[orgIndex].orgName}}
-					</view>
-				</picker>
-			</view>
-			<view class="cu-form-group margin-top">
-				<view class="title">部门</view>
-				<picker :value="depIndex" :range="depCloums" :range-key="'orgName'" @change="depChange">
-					<view class="picker">
-						{{depCloums[depIndex].orgName}}
-					</view>
-				</picker>
-			</view> -->
 			<view class="cu-form-group margin-top">
 				<view class="title">员工</view>
 				<picker :value="staffIndex" :range="staffCloums" :range-key="'name'" @change="staffChange">
@@ -49,16 +33,8 @@
 			return {
 				showModel: false,
 				communityId: '',
-				orgCloums: [{
-					orgName: '请选择公司'
-				}],
 				orgIndex: 0,
 				selectedOrg: '',
-				depCloums: [{
-					orgName: '请选择部门'
-				}],
-				depIndex: 0,
-				selectedDep: '',
 				staffCloums: [{
 					name: '请选择员工'
 				}],
@@ -85,48 +61,14 @@
 		},
 
 		methods: {
-			
 			switchShow: function(){
 				this.showModel = !this.showModel;
 			},
-			
-			_loadOrgList: function(){
-				let _that = this;
-				let _data = {
-					page: 1,
-					row: 100,
-					orgLevel: 2,
-					communityId: this.communityId,
-				};
-				queryOrgInfo(this, _data)
-					.then(function(res) {
-						_that.orgCloums = _that.orgCloums.concat(res.data.orgs);
-					});
-			},
-			
-			_loadDepList: function(){
-				let _that = this;
-				let _data = {
-					page: 1,
-					row: 100,
-					orgLevel: 3,
-					parentOrgId: this.selectedOrg.orgId,
-					communityId: this.communityId,
-				};
-				queryOrgInfo(this, _data)
-					.then(function(res) {
-						_that.depCloums = _that.depCloums.concat(res.data.orgs);
-					});
-			},
-			
 			_loadStaffList: function(){
 				let _that = this;
 				let _data = {
 					page: 1,
 					row: 50,
-					// parentOrgId: this.selectedOrg.orgId,
-					// departmentOrgId: this.selectedDep.orgId,
-					// orgId: this.selectedDep.orgId,
 					communityId: this.communityId,
 				};
 				queryStaffListInfo(this, _data)

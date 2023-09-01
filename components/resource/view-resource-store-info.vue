@@ -46,7 +46,7 @@
 		queryResourceSupplier,
 		queryRepairInfo
 	} from '../../api/resource/resource.js'
-	import selectResource from '../select-resource/select-resource.vue'
+	import selectResource from '../resource/select-resource.vue'
 
 	export default {
 		components: {
@@ -68,7 +68,10 @@
 			},
 			shType: {
 				type: String
-			}
+			},
+			shId: {
+				type: String
+			},
 		},
 
 		watch: {},
@@ -84,7 +87,7 @@
 		methods: {
 
 			_openChooseResourceModel: function() {
-				this.$refs.selectresource.switchShow();
+				this.$refs.selectresource.switchShow(this.shId);
 			},
 
 			_loadResourceSuppliers: function() {

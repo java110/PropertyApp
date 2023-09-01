@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="cu-bar bg-white margin-top solid-bottom" style="justify-content: space-around;">
+		<view class="cu-bar bg-white  solid-bottom" style="justify-content: space-around;">
 			<view class="action" @click="changeListType(0)">
 				<text class="text-blue" :class="{'cuIcon-roundcheckfill' : currentPage == 0, 'cuIcon-roundcheck' : currentPage == 1}"></text>待办
 			</view>
@@ -132,7 +132,7 @@
 				};
 				listMyAuditOrders(this,_objData)
 				.then(function(res){
-					_that.applyList = _that.applyList.concat(res.resourceOrders)
+					_that.applyList = _that.applyList.concat(res.data)
 					_that.page ++;
 					if(_that.applyList.length == res.total){
 						_that.loadingStatus = 'noMore';
@@ -153,7 +153,7 @@
 				};
 				listAuditHistoryOrders(this,_objData)
 				.then(function(res){
-					_that.applyList = _that.applyList.concat(res.resourceOrders)
+					_that.applyList = _that.applyList.concat(res.data)
 					_that.page ++;
 					if(_that.applyList.length == res.total){
 						_that.loadingStatus = 'noMore';
@@ -167,7 +167,7 @@
 			 */
 			_toApplyDetail: function(_item){
 				uni.navigateTo({
-					url: '/pages/purchaseApplyDetail/purchaseApplyDetail?apply=' + JSON.stringify(_item)
+					url: '/pages/resource/purchaseApplyDetail?apply=' + JSON.stringify(_item)
 				});
 			},
 			

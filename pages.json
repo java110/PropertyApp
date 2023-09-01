@@ -329,7 +329,7 @@
 			}
 		},
 		{
-			"path": "pages/purchaseApplyAuditOrders/purchaseApplyAuditOrders",
+			"path": "pages/resource/purchaseApplyAuditOrders",
 			"style": {
 				"navigationBarTitleText": "采购审批"
 			}
@@ -419,7 +419,7 @@
 			}
 		},
 		{
-			"path": "pages/purchaseApplyDetail/purchaseApplyDetail",
+			"path": "pages/resource/purchaseApplyDetail",
 			"style": {
 				"navigationBarTitleText": "申请详情"
 			}

@@ -6,7 +6,7 @@
 			<picker bindchange="PickerChange" :value="storehouseIndex" :range="storehouses" :range-key="'shName'"
 				@change="_computeFlow">
 				<view class="picker">
-					{{storehouseIndex == '-1'?'请选择':storehouses[storehouseIndex].shName}}
+					{{storehouses[storehouseIndex].shName}}
 				</view>
 			</picker>
 		</view>
@@ -19,11 +19,17 @@
 			<input v-model="endUserTel" placeholder="请输入手机号" class="text-right"></input>
 		</view>
 		<view class="cu-form-group ">
-			<textarea v-model="description" placeholder="请输入报修内容"></textarea>
+			<textarea v-model="description" placeholder="请输入申请说明"></textarea>
 		</view>
 
 		<view-resource-store-info @getResourceStores="_getResourceStores" ref="viewresourcestoreinfo"
-			:resOrderType="resOrderType" :shType="shType"></view-resource-store-info>
+			:resOrderType="resOrderType" :shId="shId"></view-resource-store-info>
+
+
+		<view class="margin-top">
+			<select-audit-staff ref="selectAuditStaffRef" @getAuditInfo="_getAuditInfo"></select-audit-staff>
+		</view>
+
 
 		<view class="footer-step-fixed-bk"></view>
 
@@ -39,10 +45,11 @@
 <script>
 	import {
 		listStoreHouses,
-		queryFirstAuditStaff
+		savePurchaseApply
 	} from '../../api/resource/resource.js';
-	import viewResourceStoreInfo from '../../components/resource/view-resource-store-info.vue'
-	
+	import viewResourceStoreInfo from '../../components/resource/view-resource-store-info.vue';
+	import selectAuditStaff from '../../components/audit/select-audit-staff.vue'
+
 	export default {
 		data() {
 			return {
@@ -64,12 +71,13 @@
 				communityId: '',
 				shId: '',
 				storehouses: [],
-				storehouseIndex: -1,
+				storehouseIndex: 0,
 				flowId: '',
 			}
 		},
 		components: {
-			viewResourceStoreInfo
+			viewResourceStoreInfo,
+			selectAuditStaff
 		},
 		onLoad() {
 			this.java110Context.onLoad();
@@ -90,6 +98,10 @@
 				};
 				listStoreHouses(this, param).then(_data => {
 					_that.storehouses = _data.data;
+					_that.storehouses.unshift({
+						shId: '',
+						shName: '请选择'
+					})
 				})
 			},
 			_getResourceStores: function(list) {
@@ -106,16 +118,52 @@
 				if (!_flowId) {
 					return;
 				}
-				this._loadStaffOrg(_flowId);
+				//this._loadStaffOrg(_flowId);
+				this.$refs.selectAuditStaffRef._loadStaffOrg(_flowId);
 			},
-			_loadStaffOrg: function(_flowId) {
+
+			_getAuditInfo: function(_audit) {
+				console.log('_that.audit', _audit)
+				this.audit = _audit;
+			},
+			_toAddPurchaseApplyPage: function() {
+
 				let _that = this;
-				queryFirstAuditStaff(this, {
-					communityId: this.getCommunityId(),
-					flowId: _flowId
-				}).then(_data => {
-					_that.audit = _data.data
-				})
+				this.$refs.viewresourcestoreinfo.getResourceStores();
+				let _resourceStores = _that.resourceStores;
+
+				if (!_resourceStores || _resourceStores.length < 1) {
+					uni.showToast({
+						icon:'none',
+						title:"未选择采购物品"
+					})
+					return;
+				}
+				// 提交
+				let _data = {
+					description: this.description,
+					endUserName: this.endUserName,
+					endUserTel: this.endUserTel,
+					resOrderType: this.resOrderType,
+					shId: this.shId,
+					resourceStores: this.resourceStores,
+					audit: this.audit,
+					flowId: this.flowId,
+					communityId: this.getCommunityId()
+				};
+				savePurchaseApply(this, _data)
+					.then(function(res) {
+						uni.showToast({
+							icon:'none',
+							title:res.msg
+						})
+						if (res.code == 0) {
+							uni.navigateBack({
+								delta: 1
+							})
+							return;
+						}
+					});
 			},
 
 		}
@@ -142,7 +190,8 @@
 		box-shadow: 0px -5px 5px #ccc;
 		background-color: #fff;
 	}
-	.footer-step-fixed-bk{
+
+	.footer-step-fixed-bk {
 		height: 200upx;
 	}
 </style>

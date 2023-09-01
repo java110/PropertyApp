@@ -105,7 +105,7 @@
 			 */
 			_toApplyDetail: function(_item){
 				uni.navigateTo({
-					url: '/pages/purchaseApplyDetail/purchaseApplyDetail?apply=' + JSON.stringify(_item)
+					url: '/pages/resource/purchaseApplyDetail?apply=' + JSON.stringify(_item)
 				});
 			},
 			

@@ -30,7 +30,7 @@
 				this.undoMenus = [{
 					icon: '/static/image/index_apply_audit.png',
 					name: '采购待办',
-					url: '/pages/purchaseApplyAuditOrders/purchaseApplyAuditOrders',
+					url: '/pages/resource/purchaseApplyAuditOrders',
 					undoCount:_data.purchase
 				}, {
 					icon: '/static/image/index_itemout_audit.png',

@@ -47,7 +47,7 @@
 	import {
 		listStoreHouses
 	} from '../../api/resource/resource.js'
-	import selectResource from '../select-resource/select-resource.vue'
+	import selectResource from '../resource/select-resource.vue'
 	import {getCurrentCommunity} from '../../api/community/community.js'
 	
 	export default {

@@ -25,7 +25,7 @@
 	import Vue from 'vue'
 	Vue.prototype.$preventClick = preventClick;
 	// 组件
-	import viewResourceStoreInfo from '../../components/view-resource-store-info/view-resource-store-info.vue'
+	import viewResourceStoreInfo from '../../components/resource/view-resource-store-info.vue'
 	import addPurchaseApplyView from '../../components/add-purchase-apply-view/add-purchase-apply-view.vue'
 	import purchaseApprovers from '../../components/purchase-approvers/purchase-approvers.vue'
 	import {getCurrentCommunity} from '../../api/community/community.js'

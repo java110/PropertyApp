@@ -57,7 +57,7 @@
     "pages/roomRenovationRecordDetail/roomRenovationRecordDetail",
     "pages/payFeeByQrCode/payFeeByQrCode",
     "pages/resourceStoreManage/resourceStoreManage",
-    "pages/purchaseApplyManage/purchaseApplyManage",
+    "pages/resource/purchaseApplyManage",
     "pages/addPurchaseApplyStep/addPurchaseApplyStep",
     "pages/purchaseApplyAuditOrders/purchaseApplyAuditOrders",
     "pages/itemOutManage/itemOutManage",

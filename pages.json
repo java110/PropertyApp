@@ -317,13 +317,13 @@
 			}
 		},
 		{
-			"path": "pages/purchaseApplyManage/purchaseApplyManage",
+			"path": "pages/resource/purchaseApplyManage",
 			"style": {
-				"navigationBarTitleText": "采购申请列表"
+				"navigationBarTitleText": "采购申请"
 			}
 		},
 		{
-			"path": "pages/addPurchaseApplyStep/addPurchaseApplyStep",
+			"path": "pages/resource/addPurchaseApply",
 			"style": {
 				"navigationBarTitleText": "采购申请"
 			}

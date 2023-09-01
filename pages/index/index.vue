@@ -50,11 +50,18 @@
 		},
 		onLoad() {
 			this.java110Context.onLoad();
-			this.$refs.indexHeaderRef._initData(this.undo);
-			this.$refs.indexUndoRef._initData(this.undo);
+			let _that = this;
+			setTimeout(function(){
+				_that.$refs.indexHeaderRef._initData(this.undo);
+				_that.$refs.indexUndoRef._initData(this.undo);
+			},1000)
+			
 		},
 		onShow() {
-			this.$refs.indexUndoOaRef._queryOaWorkFlow();
+				let _that = this;
+			setTimeout(function(){
+				_that.$refs.indexUndoOaRef._queryOaWorkFlow();
+			},1000)
 			this._loadUndoData();
 		},
 

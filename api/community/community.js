@@ -88,3 +88,18 @@ export function getCurrentCommunity() {
 	}
 	return JSON.parse(currentCommunity);
 }
+
+/**
+ * 获取小区ID
+ */
+export function getCommunityId(){
+	return getCurrentCommunity().communityId
+}
+
+/**
+ * 获取小区ID
+ */
+export function getCommunityName(){
+	return getCurrentCommunity().communityId
+}
+

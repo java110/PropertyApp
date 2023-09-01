@@ -103,6 +103,7 @@ export default {
 	listResourceStoresAndTimes: baseUrl + "app/resourceStore.listResourceStoresAndTimes",
 	queryResourceSupplier: baseUrl + "app/resourceSupplier.listResourceSuppliers",
 	queryFirstStaff: baseUrl + "app/workflow/getFirstStaff",
+	queryFirstAuditStaff: baseUrl + "app/oaWorkflow.queryFirstAuditStaff",
 	savePurchaseApply: baseUrl + "app/purchase/purchaseApply",
 	saveItemOutApply: baseUrl + "app/collection/goodsCollection",
 	listMyAuditOrders: baseUrl + "app/auditUser.listAuditOrders",

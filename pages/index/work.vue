@@ -16,7 +16,10 @@
 			workFunction
 		},
 		onLoad() {
-			this.$refs.workFunctionRef._loadMenu();
+			let _that = this;
+			setTimeout(function(){
+				_that.$refs.workFunctionRef._loadMenu();
+			},1000)
 		},
 		methods: {
 			

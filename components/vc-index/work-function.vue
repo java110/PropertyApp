@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="real_list">
-			<view class="title">常用工具</view>
+			<view class="title">常用功能</view>
 			<view class="list">
 				<view class="item" v-for="(item,index) in real_list" :key="index" @tap="to(item)">
 					<image :src="item.description"></image>

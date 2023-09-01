@@ -1,5 +1,5 @@
 <template>
-	<view class="index-undo">
+	<view class="index-undo" v-if="oaWorkflowFlows && oaWorkflowFlows.length>0">
 		<view class="undo-title">
 			<text class="text-bold">OA待办</text>
 		</view>

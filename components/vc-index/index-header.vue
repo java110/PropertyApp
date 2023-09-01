@@ -19,30 +19,33 @@
 		name: "indexHeader",
 		data() {
 			return {
-				headerMenus: [{
+				headerMenus: []
+			};
+		},
+		methods: {
+			_initData:function(_data){
+				this.headerMenus = [{
 					icon: '/static/image/index/i_complaint.png',
 					name: '投诉待办',
 					url: '/pages/complaintList/complaintList',
-					undoCount:0
+					undoCount:_data.complaint
 				}, {
 					icon: '/static/image/index/i_repair.png',
 					name: '报修待办',
 					url: '/pages/repairDispatch/repairDispatch',
-					undoCount:5
+					undoCount:_data.repair
 				}, {
 					icon: '/static/image/index/i_inspection.png',
 					name: '待巡检',
 					url: '/pages/inspection/inspection',
-					undoCount:0
+					undoCount:_data.inspectionTaskCount
 				}, {
 					icon: '/static/image/index/i_machine.png',
 					name: '设备保养',
 					url: '/pages/maintainance/maintainance',
-					undoCount:0
+					undoCount:_data.maintainanceTaskCount
 				}]
-			};
-		},
-		methods: {
+			},
 			_toPage: function(_item) {
 				uni.navigateTo({
 					url: _item.url

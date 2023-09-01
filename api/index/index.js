@@ -58,11 +58,11 @@ export function loadCategoryMenus(_that, _data) {
 			data: _data, //动态数据
 			success: function(res) {
 				let _data = res.data;
+				if (_data == null || _data == undefined || _data.length < 1) {
+					reslove(_data);
+					return;
+				}
 				reslove(_data[0].childs);
-				// if (_data == null || _data == undefined || _data.length < 1) {
-				// 	reslove(_data);
-				// 	return;
-				// }
 
 				// let _menus = _data[0].childs;
 				// _menus = _menus.sort(function(a, b) {
@@ -177,3 +177,28 @@ export function loadActivitys(_that, _data) {
 		});
 	});
 }
+
+/**
+ * 查询首页待办
+ * @param {Object} _that
+ * @param {Object} _data
+ */
+export function queryUndoCount(_that, _data) {
+	return new Promise(function(reslove, reject) {
+		_that.context.get({
+			url: _that.url.queryUndoCount,
+			data: _data, //动态数据
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		});
+	});
+}
+

@@ -22,35 +22,38 @@
 		name: "indexUndo",
 		data() {
 			return {
-				undoMenus: [{
+				undoMenus: []
+			};
+		},
+		methods:{
+			_initData:function(_data){
+				this.undoMenus = [{
 					icon: '/static/image/index_apply_audit.png',
 					name: '采购待办',
 					url: '/pages/purchaseApplyAuditOrders/purchaseApplyAuditOrders',
-					undoCount:0
+					undoCount:_data.purchase
 				}, {
 					icon: '/static/image/index_itemout_audit.png',
 					name: '领用待办',
 					url: '/pages/itemOutAuditOrders/itemOutAuditOrders',
-					undoCount:3
+					undoCount:_data.collection
 				}, {
 					icon: '/static/image/index_allocation.png',
 					name: '调拨待办',
 					url: '/pages/allocationStorehouseAuditOrders/allocationStorehouseAuditOrders',
-					undoCount:0
+					undoCount:_data.allocation
 				}, {
 					icon: '/static/image/index_complaint.png',
 					name: '物品放行',
 					url: '/pages/itemRelease/itemRelease',
-					undoCount:0
+					undoCount:_data.itemReleaseCount
 				}, {
 					icon: '/static/image/index_repair.png',
 					name: '访客待办',
 					url: '/pages/visit/visit',
-					undoCount:0
+					undoCount:_data.visitUndoCount
 				}]
-			};
-		},
-		methods:{
+			},
 			_toPage: function(_item) {
 				uni.navigateTo({
 					url: _item.url

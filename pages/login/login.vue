@@ -32,10 +32,21 @@
 </template>
 
 <script>
-	
-	import {login,reLogin} from '../../lib/java110/api/Java110SessionApi.js'
-	import conf from '../../conf/config.js'
-	
+	import {
+		login,
+		reLogin
+	} from '../../lib/java110/api/Java110SessionApi.js'
+	import conf from '../../conf/config.js';
+	import {
+		getCurrentCommunity,getCommunity
+	} from '../../api/community/community.js'
+	import {
+		isNull
+	} from '../../lib/java110/utils/StringUtil.js'
+	import {
+		listStaffPrivileges
+	} from '../../api/index/index.js'
+	import mapping from '../../constant/mapping.js'
 	export default {
 		data() {
 			return {
@@ -51,11 +62,11 @@
 			reLogin();
 
 			this.logoUrl = conf.baseUrl + 'logo.png';
-		
+
 		},
 		onBackPress(options) {
 			if (options.from === 'navigateBack') {
-			  return false;
+				return false;
 			}
 			plus.runtime.quit();
 			return true;
@@ -79,19 +90,37 @@
 					});
 					return;
 				}
-				
-				login(this.username,this.password)
-				.then(res=>{
-					uni.reLaunch({
-						url:'/pages/index/index'
+
+				login(this.username, this.password)
+					.then(res => {
+						return res;
+
+					}, err => {
+						uni.showToast({
+							icon: 'none',
+							title: err
+						});
+					}).then((_data) => {
+						listStaffPrivileges(_that);
+						return getCommunity(true);
+					}).then(function(_communitys) {
+						if(!_communitys || _communitys.length <1){
+							uni.showToast({
+								icon:'none',
+								title:'员工未分配小区'
+							});
+							return;
+						}
+						//随机放一个小区
+						let _tmpCommunityInfo = _communitys[0];
+						uni.setStorageSync(mapping.CURRENT_COMMUNITY_INFO, JSON.stringify(
+							_tmpCommunityInfo));
+						uni.reLaunch({
+							url: '/pages/index/index'
+						})
 					})
-				},err=>{
-					uni.showToast({
-						icon: 'none',
-						title: err
-					});
-				})
-			}
+			},
+
 		}
 	}
 </script>

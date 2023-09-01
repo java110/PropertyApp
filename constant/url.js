@@ -199,4 +199,5 @@ export default {
 	queryFinishVisit: baseUrl+"app/visit.queryFinishVisit",
 	listVisit: baseUrl+"app/visit.listVisits",
 	auditUndoVisit: baseUrl+"app/visit.auditUndoVisit",
+	queryUndoCount: baseUrl+"callComponent/undo/list",
 }

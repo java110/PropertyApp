@@ -7,7 +7,6 @@
 			<view class="">
 				<text class="text-gray">当前没有巡检任务或者没到巡检时间</text>
 			</view>
-			
 		</view>
 	</view>
 </template>

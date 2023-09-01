@@ -4,9 +4,14 @@
 			<text class="text-bold">工作待办</text>
 		</view>
 		<view class="undo-menu flex justify-start flex-wrap">
-			<view class="menu-item" v-for="(item,index) in undoMenus" :key="index">
-				<image :src="item.icon"></image>
-				<view><text>{{item.name}}</text></view>
+			<view class="menu-item" v-for="(item,index) in undoMenus" :key="index" @click="_toPage(item)">
+				<view style="position: relative;">
+					<image :src="item.icon"></image>
+					<view><text>{{item.name}}</text></view>
+					<view class="cu-tag badge" v-if="item.undoCount>0">
+						<block>{{item.undoCount>99?'99+':item.undoCount}}</block>
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -18,35 +23,39 @@
 		data() {
 			return {
 				undoMenus: [{
-					icon: '/static/image/index_repair.png',
+					icon: '/static/image/index_apply_audit.png',
 					name: '采购待办',
-					url: '',
+					url: '/pages/purchaseApplyAuditOrders/purchaseApplyAuditOrders',
+					undoCount:0
 				}, {
-					icon: '/static/image/index_repair.png',
+					icon: '/static/image/index_itemout_audit.png',
 					name: '领用待办',
-					url: ''
+					url: '/pages/itemOutAuditOrders/itemOutAuditOrders',
+					undoCount:3
 				}, {
-					icon: '/static/image/index_repair.png',
+					icon: '/static/image/index_allocation.png',
 					name: '调拨待办',
-					url: ''
+					url: '/pages/allocationStorehouseAuditOrders/allocationStorehouseAuditOrders',
+					undoCount:0
 				}, {
-					icon: '/static/image/index_repair.png',
+					icon: '/static/image/index_complaint.png',
 					name: '物品放行',
-					url: ''
-				}, {
-					icon: '/static/image/index_repair.png',
-					name: '合同起草',
-					url: ''
-				}, {
-					icon: '/static/image/index_repair.png',
-					name: '合同变更',
-					url: ''
+					url: '/pages/itemRelease/itemRelease',
+					undoCount:0
 				}, {
 					icon: '/static/image/index_repair.png',
 					name: '访客待办',
-					url: ''
+					url: '/pages/visit/visit',
+					undoCount:0
 				}]
 			};
+		},
+		methods:{
+			_toPage: function(_item) {
+				uni.navigateTo({
+					url: _item.url
+				})
+			}
 		}
 	}
 </script>
@@ -63,6 +72,7 @@
 		.undo-menu{
 			padding:20upx;
 			.menu-item{
+				
 				width: 33.33%;
 				padding: 30upx;
 				text-align: center;
@@ -76,7 +86,7 @@
 			.menu-item:nth-child(3n+3) {
 			    border-right: none;
 			}
-			.menu-item:nth-child(n+7) {
+			.menu-item:nth-child(n+4) {
 				border-bottom: none;
 			}
 		}

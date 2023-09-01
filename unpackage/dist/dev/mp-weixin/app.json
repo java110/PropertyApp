@@ -99,7 +99,8 @@
     "pages/itemRelease/itemRelease",
     "pages/itemRelease/itemReleaseDetail",
     "pages/visit/visit",
-    "pages/visit/visitDetail"
+    "pages/visit/visitDetail",
+    "pages/index/work"
   ],
   "subPackages": [],
   "window": {
@@ -124,6 +125,12 @@
         "iconPath": "static/image/home.png",
         "selectedIconPath": "static/image/home-selected.png",
         "text": "首页"
+      },
+      {
+        "pagePath": "pages/index/work",
+        "iconPath": "static/image/rent.png",
+        "selectedIconPath": "static/image/rent-selected.png",
+        "text": "工作台"
       },
       {
         "pagePath": "pages/addressList/addressList",

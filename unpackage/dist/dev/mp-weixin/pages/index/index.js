@@ -146,12 +146,12 @@ var indexHeader = function indexHeader() {
 };
 var indexUndo = function indexUndo() {
   __webpack_require__.e(/*! require.ensure | components/vc-index/index-undo */ "components/vc-index/index-undo").then((function () {
-    return resolve(__webpack_require__(/*! @/components/vc-index/index-undo.vue */ 1205));
+    return resolve(__webpack_require__(/*! @/components/vc-index/index-undo.vue */ 997));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var indexUndoOa = function indexUndoOa() {
-  __webpack_require__.e(/*! require.ensure | components/vc-index/index-undo-oa */ "components/vc-index/index-undo-oa").then((function () {
-    return resolve(__webpack_require__(/*! @/components/vc-index/index-undo-oa.vue */ 1228));
+  Promise.all(/*! require.ensure | components/vc-index/index-undo-oa */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/vc-index/index-undo-oa")]).then((function () {
+    return resolve(__webpack_require__(/*! @/components/vc-index/index-undo-oa.vue */ 1004));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -165,6 +165,9 @@ var _default = {
   },
   onLoad: function onLoad() {
     this.java110Context.onLoad();
+  },
+  onShow: function onShow() {
+    this.$refs.indexUndoOaRef._queryOaWorkFlow();
   },
   methods: {}
 };

@@ -196,99 +196,6 @@ EDE.prototype._unpad = DES.prototype._unpad;
 
 /***/ }),
 
-/***/ 1016:
-/*!******************************************************!*\
-  !*** C:/project/hc/PropertyApp/api/common/common.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(wx, uni) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.queryOrgInfo = queryOrgInfo;
-exports.queryStaffListInfo = queryStaffListInfo;
-exports.uploadImageAsync = uploadImageAsync;
-var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
-/**
- * 查询组织信息
- * @param {Object} _that 上下文对象
- * @param {Object} _data 请求报文
- */
-function queryOrgInfo(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.get({
-      url: _url.default.queryOrgInfo,
-      data: _data,
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-
-/**
- * 查询员工信息
- * @param {Object} _that 上下文对象
- * @param {Object} _data 请求报文
- */
-function queryStaffListInfo(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.get({
-      url: _url.default.queryStaffListInfo,
-      data: _data,
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-
-// 异步上传图片
-function uploadImageAsync(_objData, _that) {
-  return new Promise(function (resolve, reject) {
-    _that.context.post({
-      url: _url.default.uploadImage,
-      data: _objData,
-      //动态数据
-      success: function success(res) {
-        if (res.statusCode == 200) {
-          var imgInfo = res.data;
-          resolve(imgInfo);
-        }
-      },
-      fail: function fail(e) {
-        uni.hideLoading();
-        uni.showToast({
-          title: "服务器异常了",
-          icon: 'none'
-        });
-      }
-    });
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
 /***/ 102:
 /*!************************************************!*\
   !*** ./node_modules/browserify-aes/browser.js ***!
@@ -310,20 +217,6 @@ exports.createDecipher = exports.Decipher = deciphers.createDecipher
 exports.createDecipheriv = exports.Decipheriv = deciphers.createDecipheriv
 exports.listCiphers = exports.getCiphers = getCiphers
 
-
-/***/ }),
-
-/***/ 1029:
-/*!************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@babel/runtime/regenerator/index.js ***!
-  \************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// TODO(Babel 8): Remove this file.
-
-var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 1030)();
-module.exports = runtime;
 
 /***/ }),
 
@@ -453,6 +346,142 @@ exports.createCipher = createCipher
 /***/ }),
 
 /***/ 1030:
+/*!******************************************************!*\
+  !*** C:/project/hc/PropertyApp/api/common/common.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx, uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.queryOrgInfo = queryOrgInfo;
+exports.queryStaffListInfo = queryStaffListInfo;
+exports.uploadImageAsync = uploadImageAsync;
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
+/**
+ * 查询组织信息
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+function queryOrgInfo(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.queryOrgInfo,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+
+/**
+ * 查询员工信息
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+function queryStaffListInfo(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.queryStaffListInfo,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+
+// 异步上传图片
+function uploadImageAsync(_objData, _that) {
+  return new Promise(function (resolve, reject) {
+    _that.context.post({
+      url: _url.default.uploadImage,
+      data: _objData,
+      //动态数据
+      success: function success(res) {
+        if (res.statusCode == 200) {
+          var imgInfo = res.data;
+          resolve(imgInfo);
+        }
+      },
+      fail: function fail(e) {
+        uni.hideLoading();
+        uni.showToast({
+          title: "服务器异常了",
+          icon: 'none'
+        });
+      }
+    });
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+
+/***/ 104:
+/*!****************************************************!*\
+  !*** ./node_modules/browserify-aes/modes/index.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var modeModules = {
+  ECB: __webpack_require__(/*! ./ecb */ 105),
+  CBC: __webpack_require__(/*! ./cbc */ 106),
+  CFB: __webpack_require__(/*! ./cfb */ 108),
+  CFB8: __webpack_require__(/*! ./cfb8 */ 109),
+  CFB1: __webpack_require__(/*! ./cfb1 */ 110),
+  OFB: __webpack_require__(/*! ./ofb */ 111),
+  CTR: __webpack_require__(/*! ./ctr */ 112),
+  GCM: __webpack_require__(/*! ./ctr */ 112)
+}
+
+var modes = __webpack_require__(/*! ./list.json */ 114)
+
+for (var key in modes) {
+  modes[key].module = modeModules[modes[key].mode]
+}
+
+module.exports = modes
+
+
+/***/ }),
+
+/***/ 1043:
+/*!************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@babel/runtime/regenerator/index.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// TODO(Babel 8): Remove this file.
+
+var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 1044)();
+module.exports = runtime;
+
+/***/ }),
+
+/***/ 1044:
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/regeneratorRuntime.js ***!
   \*******************************************************************/
@@ -774,7 +803,7 @@ module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.e
 
 /***/ }),
 
-/***/ 1031:
+/***/ 1045:
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/asyncToGenerator.js ***!
   \*****************************************************************/
@@ -815,7 +844,7 @@ module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exp
 
 /***/ }),
 
-/***/ 1032:
+/***/ 1046:
 /*!**************************************************************!*\
   !*** C:/project/hc/PropertyApp/components/sx-rate/common.js ***!
   \**************************************************************/
@@ -836,35 +865,6 @@ function getClientRect(selector, component) {
   });
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 104:
-/*!****************************************************!*\
-  !*** ./node_modules/browserify-aes/modes/index.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var modeModules = {
-  ECB: __webpack_require__(/*! ./ecb */ 105),
-  CBC: __webpack_require__(/*! ./cbc */ 106),
-  CFB: __webpack_require__(/*! ./cfb */ 108),
-  CFB8: __webpack_require__(/*! ./cfb8 */ 109),
-  CFB1: __webpack_require__(/*! ./cfb1 */ 110),
-  OFB: __webpack_require__(/*! ./ofb */ 111),
-  CTR: __webpack_require__(/*! ./ctr */ 112),
-  GCM: __webpack_require__(/*! ./ctr */ 112)
-}
-
-var modes = __webpack_require__(/*! ./list.json */ 114)
-
-for (var key in modes) {
-  modes[key].module = modeModules[modes[key].mode]
-}
-
-module.exports = modes
-
 
 /***/ }),
 
@@ -1016,49 +1016,6 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 /***/ }),
 
-/***/ 1096:
-/*!****************************************************!*\
-  !*** C:/project/hc/PropertyApp/api/staff/staff.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(wx) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.queryStaffInfos = queryStaffInfos;
-var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
-/**
- * 查询楼栋信息
- * @param {Object} _that 上下文对象
- * @param {Object} _data 请求报文
- */
-function queryStaffInfos(_that, _data) {
-  return new Promise(function (reslove, reject) {
-    _that.context.get({
-      url: _url.default.queryStaffInfos,
-      data: _data,
-      success: function success(res) {
-        reslove(res);
-      },
-      fail: function fail(e) {
-        wx.showToast({
-          title: "服务器异常了",
-          icon: 'none',
-          duration: 2000
-        });
-      }
-    });
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
-
-/***/ }),
-
 /***/ 11:
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
@@ -1138,7 +1095,78 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 /***/ }),
 
-/***/ 1102:
+/***/ 111:
+/*!**************************************************!*\
+  !*** ./node_modules/browserify-aes/modes/ofb.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(/*! buffer-xor */ 107)
+
+function getBlock (self) {
+  self._prev = self._cipher.encryptBlock(self._prev)
+  return self._prev
+}
+
+exports.encrypt = function (self, chunk) {
+  while (self._cache.length < chunk.length) {
+    self._cache = Buffer.concat([self._cache, getBlock(self)])
+  }
+
+  var pad = self._cache.slice(0, chunk.length)
+  self._cache = self._cache.slice(chunk.length)
+  return xor(chunk, pad)
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 43).Buffer))
+
+/***/ }),
+
+/***/ 1110:
+/*!****************************************************!*\
+  !*** C:/project/hc/PropertyApp/api/staff/staff.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.queryStaffInfos = queryStaffInfos;
+var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
+/**
+ * 查询楼栋信息
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+function queryStaffInfos(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _url.default.queryStaffInfos,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 1116:
 /*!**********************************************************************************************!*\
   !*** C:/project/hc/PropertyApp/uni_modules/mumu-getQrcode/components/mumu-getQrcode/jsQR.js ***!
   \**********************************************************************************************/
@@ -11809,35 +11837,48 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 /***/ }),
 
-/***/ 111:
+/***/ 112:
 /*!**************************************************!*\
-  !*** ./node_modules/browserify-aes/modes/ofb.js ***!
+  !*** ./node_modules/browserify-aes/modes/ctr.js ***!
   \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(/*! buffer-xor */ 107)
+var xor = __webpack_require__(/*! buffer-xor */ 107)
+var Buffer = __webpack_require__(/*! safe-buffer */ 42).Buffer
+var incr32 = __webpack_require__(/*! ../incr32 */ 113)
 
 function getBlock (self) {
-  self._prev = self._cipher.encryptBlock(self._prev)
-  return self._prev
+  var out = self._cipher.encryptBlockRaw(self._prev)
+  incr32(self._prev)
+  return out
 }
 
+var blockSize = 16
 exports.encrypt = function (self, chunk) {
-  while (self._cache.length < chunk.length) {
-    self._cache = Buffer.concat([self._cache, getBlock(self)])
+  var chunkNum = Math.ceil(chunk.length / blockSize)
+  var start = self._cache.length
+  self._cache = Buffer.concat([
+    self._cache,
+    Buffer.allocUnsafe(chunkNum * blockSize)
+  ])
+  for (var i = 0; i < chunkNum; i++) {
+    var out = getBlock(self)
+    var offset = start + i * blockSize
+    self._cache.writeUInt32BE(out[0], offset + 0)
+    self._cache.writeUInt32BE(out[1], offset + 4)
+    self._cache.writeUInt32BE(out[2], offset + 8)
+    self._cache.writeUInt32BE(out[3], offset + 12)
   }
-
   var pad = self._cache.slice(0, chunk.length)
   self._cache = self._cache.slice(chunk.length)
   return xor(chunk, pad)
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../buffer/index.js */ 43).Buffer))
 
 /***/ }),
 
-/***/ 1110:
+/***/ 1124:
 /*!****************************************************!*\
   !*** C:/project/hc/PropertyApp/api/owner/owner.js ***!
   \****************************************************/
@@ -11899,47 +11940,6 @@ function queryOwnerAccount(_that, _data) {
   });
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 112:
-/*!**************************************************!*\
-  !*** ./node_modules/browserify-aes/modes/ctr.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var xor = __webpack_require__(/*! buffer-xor */ 107)
-var Buffer = __webpack_require__(/*! safe-buffer */ 42).Buffer
-var incr32 = __webpack_require__(/*! ../incr32 */ 113)
-
-function getBlock (self) {
-  var out = self._cipher.encryptBlockRaw(self._prev)
-  incr32(self._prev)
-  return out
-}
-
-var blockSize = 16
-exports.encrypt = function (self, chunk) {
-  var chunkNum = Math.ceil(chunk.length / blockSize)
-  var start = self._cache.length
-  self._cache = Buffer.concat([
-    self._cache,
-    Buffer.allocUnsafe(chunkNum * blockSize)
-  ])
-  for (var i = 0; i < chunkNum; i++) {
-    var out = getBlock(self)
-    var offset = start + i * blockSize
-    self._cache.writeUInt32BE(out[0], offset + 0)
-    self._cache.writeUInt32BE(out[1], offset + 4)
-    self._cache.writeUInt32BE(out[2], offset + 8)
-    self._cache.writeUInt32BE(out[3], offset + 12)
-  }
-  var pad = self._cache.slice(0, chunk.length)
-  self._cache = self._cache.slice(chunk.length)
-  return xor(chunk, pad)
-}
-
 
 /***/ }),
 
@@ -16386,6 +16386,206 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+
+/***/ 1250:
+/*!****************************************************!*\
+  !*** C:/project/hc/PropertyApp/api/index/index.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx, uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.listStaffPrivileges = listStaffPrivileges;
+exports.loadActivitys = loadActivitys;
+exports.loadAdvert = loadAdvert;
+exports.loadCategory = loadCategory;
+exports.loadCategoryMenus = loadCategoryMenus;
+/**
+ * 查询 广告信息
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求内容
+ */
+function loadAdvert(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _that.url.listAdvertPhoto,
+      data: _data,
+      //动态数据
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+
+/**
+ * 查询 权限
+ * @param {Object} _that 上下文对象
+ */
+function listStaffPrivileges(_that) {
+  _that.context.get({
+    url: _that.url.listStaffPrivileges,
+    data: {
+      a: '123'
+    },
+    //动态数据
+    success: function success(res) {
+      var _data = res.data;
+      var _privilege = [];
+      _data.datas.forEach(function (item) {
+        _privilege.push(item.pId);
+      });
+      uni.setStorageSync('hc_staff_privilege', JSON.stringify(_privilege));
+    },
+    fail: function fail(e) {}
+  });
+}
+
+/**
+ * 查询首页 目录
+ */
+function loadCategoryMenus(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _that.url.queryMenus,
+      data: _data,
+      //动态数据
+      success: function success(res) {
+        var _data = res.data;
+        reslove(_data[0].childs);
+        // if (_data == null || _data == undefined || _data.length < 1) {
+        // 	reslove(_data);
+        // 	return;
+        // }
+
+        // let _menus = _data[0].childs;
+        // _menus = _menus.sort(function(a, b) {
+        // 	return a.seq - b.seq;
+        // });
+
+        // let _tempMenuData = {};
+        // let _menuPage = [];
+        // let _curMenu = {};
+        // for (let _menuIndex = 0; _menuIndex < _menus.length; _menuIndex++) {
+        // 	_curMenu = _menus[_menuIndex];
+        // 	if (_curMenu.isShow != 'Y') {
+        // 		continue;
+        // 	}
+        // 	_menuPage.push({
+        // 		name: _curMenu.name,
+        // 		src: _curMenu.description,
+        // 		href: _curMenu.href
+        // 	});
+        // 	if ((_menuIndex + 1) % 8 == 0 && _menuIndex != 0) {
+        // 		_tempMenuData[_menuIndex] = _menuPage;
+        // 		_menuPage = [];
+        // 	}
+        // }
+
+        // if (_menuPage.length > 0) {
+        // 	_tempMenuData[_menus.length] = _menuPage;
+        // }
+
+        // console.log('_tempMenuData', _tempMenuData)
+        // reslove(_tempMenuData);
+      },
+
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+
+/**
+ * 查询首页 目录
+ */
+function loadCategory() {
+  return {
+    pageone: [{
+      name: "维修工单",
+      src: "/static/image/index_repair.png",
+      href: "/pages/repairOrder/repairOrder"
+    }, {
+      name: "维修待办",
+      src: "/static/image/index_dealRepair.png",
+      href: "/pages/repairDispatch/repairDispatch"
+    }, {
+      name: "巡检打卡",
+      src: "/static/image/index_inspection.png",
+      href: "/pages/inspection/inspection"
+    }, {
+      name: "投诉待办",
+      src: "/static/image/index_complaint.png",
+      href: "/pages/complaintList/complaintList"
+    }, {
+      name: "公告",
+      src: "/static/image/index_notice.png",
+      href: "/pages/notice/notice"
+    }, {
+      name: "房产查询",
+      src: "/static/image/index_bill.png",
+      href: "/pages/roomDetail/roomDetail"
+    }, {
+      name: "收银台",
+      src: "/static/image/payOweFee.png",
+      href: "/pages/roomPayFee/roomPayFee"
+    }, {
+      name: "水电抄表",
+      src: "/static/image/index_meter.png",
+      href: "/pages/meterReading/meterReading"
+    }],
+    pagetwo: [{
+      name: "空置房",
+      src: "/static/image/index_complaint.png",
+      href: "/pages/applyRoom/applyRoom"
+    }]
+  };
+}
+
+/**
+ * 查询文化
+ * @param {Object} _that 上下文 对象
+ * @param {Object} _data 查询内容
+ */
+function loadActivitys(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.get({
+      url: _that.url.listActivitiess,
+      data: _data,
+      //动态数据
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 
@@ -28105,7 +28305,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"物业版","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"物业版","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -37256,7 +37456,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"物业版","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"物业版","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -37277,14 +37477,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"物业版","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"物业版","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"物业版","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"物业版","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -37380,7 +37580,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"物业版","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"物业版","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));

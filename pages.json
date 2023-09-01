@@ -622,6 +622,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/index/work",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "工作台",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
@@ -644,6 +653,11 @@
 				"iconPath": "static/image/home.png",
 				"selectedIconPath": "static/image/home-selected.png",
 				"text": "首页"
+			},{
+				"pagePath": "pages/index/work",
+				"iconPath": "static/image/rent.png",
+				"selectedIconPath": "static/image/rent-selected.png",
+				"text": "工作台"
 			}, {
 				"pagePath": "pages/addressList/addressList",
 				"iconPath": "static/image/addressList.png",

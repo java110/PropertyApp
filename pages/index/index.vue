@@ -7,7 +7,7 @@
 		</view>
 		<!-- oa待办 -->
 		<view class="margin-top">
-			<index-undo-oa></index-undo-oa>
+			<index-undo-oa ref="indexUndoOaRef"></index-undo-oa>
 		</view>
 			
 	</view>
@@ -31,6 +31,9 @@
 		},
 		onLoad() {
 			this.java110Context.onLoad();
+		},
+		onShow() {
+			this.$refs.indexUndoOaRef._queryOaWorkFlow();
 		},
 		
 		methods: {

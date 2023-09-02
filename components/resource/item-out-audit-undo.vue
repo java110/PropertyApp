@@ -34,7 +34,7 @@
 					</view>
 					<view class="flex justify-start margin-top-sm">
 						<button class="cu-btn round sm line-blue margin-left-sm" v-if="item.curTaskName == '仓库管理员'"
-							@tap="_distributionOrder(item)">采购入库</button>
+							@tap="_distributionOrder(item)">领用出库</button>
 						<button class="cu-btn round sm line-blue margin-left-sm" v-else
 							@tap="_undoAudit(item)">审核</button>
 					</view>
@@ -50,9 +50,9 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue';
-	import {listMyAuditOrders,listAuditHistoryOrders,listWorkflowStepStaffs,saveMyAuditOrders} from '../../api/resource/resource.js';
+	import {listMyItemOutOrders,listAuditHistoryOrders,listWorkflowStepStaffs,saveMyAuditOrders} from '../../api/resource/resource.js';
 	export default {
-		name:"purchaseApplyAuditUndo",
+		name:"itemOutAuditUndo",
 		data() {
 			return {
 				applyList:[],
@@ -79,7 +79,7 @@
 					row: 50,
 					communityId:this.getCommunityId()
 				};
-				listMyAuditOrders(this,_objData)
+				listMyItemOutOrders(this,_objData)
 				.then(function(res){
 					//_that.applyList = _that.applyList.concat(res.data)
 					_that.applyList = res.data;
@@ -100,12 +100,12 @@
 			 */
 			_distributionOrder: function(item){
 				uni.navigateTo({
-					url:'/pages/resource/itemEnterDo?applyOrderId=' + item.applyOrderId + '&resOrderType=' + item.resOrderType + '&taskId=' + item.taskId
+					url:'/pages/resource/itemOutDo?applyOrderId=' + item.applyOrderId + '&resOrderType=' + item.resOrderType + '&taskId=' + item.taskId
 				})
 			},
 			_undoAudit:function(_purchaseApply){
 				uni.navigateTo({
-					url:'/pages/audit/undoAudit?business=purchaseApply&id='+_purchaseApply.applyOrderId
+					url:'/pages/audit/undoAudit?business=itemOut&id='+_purchaseApply.applyOrderId
 					+"&taskId="+_purchaseApply.taskId+"&startUserId="+_purchaseApply.createUserId
 					+"&flowId="+_purchaseApply.flowId
 				})

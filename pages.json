@@ -335,25 +335,25 @@
 			}
 		},
 		{
-			"path": "pages/itemOutManage/itemOutManage",
-			"style": {
-				"navigationBarTitleText": "物品领用列表"
-			}
-		},
-		{
-			"path": "pages/addItemOutStep/addItemOutStep",
+			"path": "pages/resource/itemOutManage",
 			"style": {
 				"navigationBarTitleText": "物品领用"
 			}
 		},
 		{
-			"path": "pages/itemOutAuditOrders/itemOutAuditOrders",
+			"path": "pages/resource/addItemOut",
+			"style": {
+				"navigationBarTitleText": "领用申请"
+			}
+		},
+		{
+			"path": "pages/resource/itemOutAuditOrders",
 			"style": {
 				"navigationBarTitleText": "领用审批"
 			}
 		},
 		{
-			"path": "pages/itemOutDo/itemOutDo",
+			"path": "pages/resource/itemOutDo",
 			"style": {
 				"navigationBarTitleText": "物品发放"
 			}
@@ -636,6 +636,15 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "待办审核",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/resource/editPurchaseApply",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "修改采购",
                 "enablePullDownRefresh": false
             }
             

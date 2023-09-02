@@ -60,8 +60,8 @@
     "pages/resource/purchaseApplyManage",
     "pages/resource/addPurchaseApply",
     "pages/resource/purchaseApplyAuditOrders",
-    "pages/itemOutManage/itemOutManage",
-    "pages/addItemOutStep/addItemOutStep",
+    "pages/resource/itemOutManage",
+    "pages/resource/addItemOut",
     "pages/itemOutAuditOrders/itemOutAuditOrders",
     "pages/itemOutDo/itemOutDo",
     "pages/resource/itemEnterDo",
@@ -101,7 +101,8 @@
     "pages/visit/visit",
     "pages/visit/visitDetail",
     "pages/index/work",
-    "pages/audit/undoAudit"
+    "pages/audit/undoAudit",
+    "pages/resource/editPurchaseApply"
   ],
   "subPackages": [],
   "window": {

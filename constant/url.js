@@ -105,6 +105,7 @@ export default {
 	queryFirstStaff: baseUrl + "app/workflow/getFirstStaff",
 	queryFirstAuditStaff: baseUrl + "app/oaWorkflow.queryFirstAuditStaff",
 	savePurchaseApply: baseUrl + "app/purchase/purchaseApply",
+	updatePurchaseApply: baseUrl + "app/purchaseApply.updatePurchaseApply",
 	saveItemOutApply: baseUrl + "app/collection/goodsCollection",
 	listMyAuditOrders: baseUrl + "app/auditUser.listAuditOrders",
 	listMyItemOutOrders: baseUrl + "app/collection/getCollectionAuditOrder",

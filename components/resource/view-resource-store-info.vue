@@ -73,23 +73,13 @@
 				type: String
 			},
 		},
-
-		watch: {},
-
-		created() {},
-
-		computed: {},
-
-		mounted() {
-			// this._loadResourceSuppliers();
-		},
-
 		methods: {
-
+			_setResourceStore:function(_resourceStores){
+				this._getResourceInfo(_resourceStores);
+			},
 			_openChooseResourceModel: function() {
 				this.$refs.selectresource.switchShow(this.shId);
 			},
-
 			_loadResourceSuppliers: function() {
 				let _that = this;
 				let _data = {
@@ -101,12 +91,10 @@
 						_that.resourceSuppliers = _that.resourceSuppliers.concat(res.data);
 					});
 			},
-
 			_resourceSuppliersChange: function(i, e) {
 				this.$set(this.suppliersList, i, e.target.value)
 				this.resourceList[i].rsId = this.resourceSuppliers[this.suppliersList[i]].rsId
 			},
-
 			_getResourceInfo: function(list) {
 				this.resourceList = list;
 				this.resourceList.forEach((item) => {
@@ -120,17 +108,14 @@
 					this.suppliersList.push(0);
 				})
 			},
-
 			getResourceStores: function() {
 				this.$emit('getResourceStores', this.resourceList);
 			},
-
 			_removeItem: function(index, resId) {
 				this.resourceList.splice(index, 1);
 				// 通知子组件 取消选中checkbox
 				this.$refs.selectresource.removeSelectedItem(resId);
 			},
-
 			timesChange: function(e, index) {
 				let timeIndex = e.target.value;
 				this.resourceList[index].selectedTimesIndex = timeIndex;
@@ -143,7 +128,6 @@
 				}
 				this.$forceUpdate();
 			},
-
 			_getTimesStock: function(_resourceStore) {
 				if (!_resourceStore.timesId) {
 					return "-";

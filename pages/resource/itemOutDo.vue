@@ -1,30 +1,41 @@
 <template>
 	<view class="select-single-resource">
 		<view class="margin-top">
-			<view class="cu-list menu-avatar " v-for="(item,index) in itemOutOrderInfo.purchaseApplyDetailVo" :key="index">
-				<view class="cu-item" style="height: 200rpx;">
-					<view class="content content-left" style="width: 100%;">
-						<view class="text-grey">
-							<text class="ellip">{{item.resName}}-{{item.rstName}}</text>
+			<view class="resource-header flex justify-between bg-white">
+				<view class="text-bold">出库物品</view>
+				<view>
+				</view>
+			</view>
+			<view class=" ">
+				<view class="resource-item bg-white" v-for="(item,index) in itemOutOrderInfo.purchaseApplyDetailVo" :key="index">
+					<view class=" " style="">
+						<view class=" flex-around">
+							<label class="text-df">物品:</label>
+							<text class="ellip text-df">{{item.resName}}-{{item.rstName}}</text>
 						</view>
-						<view class="text-grey">
-							<text class="ellip">库存:{{item.stock}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;申请数量：{{item.quantity}}</text>
+						<view class=" flex-around">
+							<label class="text-df">库存:</label>
+							<text class="text-df">{{item.stock}}</text>
 						</view>
-						<view class="text-gray flex">
-							<view class="flex-item w50">
-								<label>发放数量:</label>
-								<input class="use-number bg-gray" type="number" v-model="item.purchaseQuantity" value="" />
-							</view>
+						<view class=" flex-around">
+							<label class="text-df">申请数量:</label>
+							<text class="text-df">{{item.quantity}}</text>
 						</view>
-						<view class="text-gray flex" style="margin: 10rpx 0;">
-								<label>备注:</label>
-								<input class="remark bg-gray" type="text" v-model="item.purchaseRemark" value="" />
+						<view class=" flex-around">
+							<label class="text-df">发放数量:</label>
+							<input class="  text-right" type="number" v-model="item.purchaseQuantity" placeholder="请输入发放数量"
+								placeholder-class="text-grey text-df" value="" />
+						</view>
+						<view class=" flex-around">
+							<label class="text-df">备注:</label>
+							<input class="  text-right" type="text" placeholder="选填,请输入备注"
+								placeholder-class="text-grey text-df" v-model="item.remark" value="" />
 						</view>
 					</view>
 				</view>
 			</view>
-			<view class="cu-btn lg bg-blue fr margin-top margin-right" @click="$preventClick(save)">
-				提交
+			<view class="margin-top text-right">
+				<button class="cu-btn bg-blue  round" @tap="save()">提交</button>
 			</view>
 		</view>
 	</view>
@@ -66,7 +77,6 @@
 		},
 
 		methods: {
-			
 			_loadItemOutResources: function(){
 				let _that = this;
 				let _objData = {
@@ -111,72 +121,41 @@
 					_that.onoff = true;
 					return;
 				}
+				this.itemOutOrderInfo.taskId =this.taskId;
 				saveResourceOut(this,this.itemOutOrderInfo)
-				.then(function(res){
-					if(res.code == 0){
-						_that._saveMyAuditOrders();
-					}else{
-						uni.showToast({
-							title:res.msg,
-							icon: 'none'
-						});
-						_that.onoff = true;
-					}
-				})
-			},
-			
-			_saveMyAuditOrders: function(){
-				let _that = this;
-				let _auditInfo = {
-					taskId: this.taskId,
-					applyOrderId: this.applyOrderId,
-					state: '1100',
-					remark: '出库完成',
-					noticeState: '1002'
-				};
-				saveMyAuditOrders(this,_auditInfo)
 				.then(function(res){
 					uni.showToast({
 						title:res.msg,
 						icon: 'none'
 					});
-					setTimeout(() => {
-						_that.onoff = true;
+					if(res.code == 0){
 						uni.navigateBack({
 							delta:1
 						})
-					}, 1000);
+					}
 				})
-			}
+			},
 		}
 	}
 </script>
 
-<style>
-	.cu-list.menu-avatar>.cu-item .content-left {
-		left: 30upx;
+<style lang="scss">
+	.item-remove {
+		border-radius: 15rpx;
+		padding: 2rpx 10rpx;
+	}
+	.resource-header {
+		margin-top: 30upx;
+		padding: 20upx
 	}
 
-	.cu-list+.cu-list {
-		margin-top: 20upx;
-	}
-	
-	.flex-item{
-		display: flex;
-		flex-direction: row;
-	}
-	.w50{
-		width: 50%;
-	}
-	.flex label, .flex-item label{
-		width: 130rpx;
-	}
-	.use-number{
-		width: 200rpx;
-		border-radius: 15rpx;
-	}
-	.remark{
-		width: 75%;
-		border-radius: 15rpx;
+	.resource-item {
+		margin-top: 2upx;
+		padding:20upx;
+		.flex-around {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 15upx;
+		}
 	}
 </style>

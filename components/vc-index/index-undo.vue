@@ -35,7 +35,7 @@
 				}, {
 					icon: '/static/image/index_itemout_audit.png',
 					name: '领用待办',
-					url: '/pages/itemOutAuditOrders/itemOutAuditOrders',
+					url: '/pages/resource/itemOutAuditOrders',
 					undoCount:_data.collection
 				}, {
 					icon: '/static/image/index_allocation.png',

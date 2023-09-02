@@ -142,6 +142,9 @@
 				if(this.business == 'purchaseApply'){
 					return url.saveMyAuditOrders;
 				}
+				if(this.business == 'itemOut'){
+					return url.saveMyAuditOrders;
+				}
 				return _url;
 				
 			},

@@ -26492,6 +26492,7 @@ var _default = (_baseUrl$hcBaseUrl$lo = {
   queryFirstStaff: baseUrl + "app/workflow/getFirstStaff",
   queryFirstAuditStaff: baseUrl + "app/oaWorkflow.queryFirstAuditStaff",
   savePurchaseApply: baseUrl + "app/purchase/purchaseApply",
+  updatePurchaseApply: baseUrl + "app/purchaseApply.updatePurchaseApply",
   saveItemOutApply: baseUrl + "app/collection/goodsCollection",
   listMyAuditOrders: baseUrl + "app/auditUser.listAuditOrders",
   listMyItemOutOrders: baseUrl + "app/collection/getCollectionAuditOrder",
@@ -54168,6 +54169,7 @@ exports.saveResourceEnter = saveResourceEnter;
 exports.saveResourceOut = saveResourceOut;
 exports.saveResourceStoreTransfer = saveResourceStoreTransfer;
 exports.saveUrgentPurchaseApply = saveUrgentPurchaseApply;
+exports.updatePurchaseApply = updatePurchaseApply;
 var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
 /**
  * 查询我的物品列表
@@ -54665,6 +54667,31 @@ function saveResourceEnter(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.post({
       url: _url.default.saveResourceEnter,
+      data: _data,
+      success: function success(res) {
+        reslove(res.data);
+      },
+      fail: function fail(e) {
+        _that.onoff = true;
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+
+/**
+ * 修改采购
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+function updatePurchaseApply(_that, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.post({
+      url: _url.default.updatePurchaseApply,
       data: _data,
       success: function success(res) {
         reslove(res.data);

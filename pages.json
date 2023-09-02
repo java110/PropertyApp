@@ -377,7 +377,7 @@
 			}
 		},
 		{
-			"path": "pages/allocationStorehouseAuditOrders/allocationStorehouseAuditOrders",
+			"path": "pages/resource/allocationStorehouseAuditOrders",
 			"style": {
 				"navigationBarTitleText": "调拨审批"
 			}

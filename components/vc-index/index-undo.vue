@@ -40,7 +40,7 @@
 				}, {
 					icon: '/static/image/index_allocation.png',
 					name: '调拨待办',
-					url: '/pages/allocationStorehouseAuditOrders/allocationStorehouseAuditOrders',
+					url: '/pages/resource/allocationStorehouseAuditOrders',
 					undoCount:_data.allocation
 				}, {
 					icon: '/static/image/index_complaint.png',

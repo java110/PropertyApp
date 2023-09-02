@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="cu-bar bg-white margin-top solid-bottom" style="justify-content: space-around;">
+		<view class="cu-bar bg-white  solid-bottom" style="justify-content: space-around;">
 			<view class="action" @click="changeListType(0)">
 				<text class="text-blue" :class="{'cuIcon-roundcheckfill' : currentPage == 0, 'cuIcon-roundcheck' : currentPage == 1}"></text>待办
 			</view>

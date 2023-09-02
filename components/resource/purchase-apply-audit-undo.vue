@@ -35,8 +35,8 @@
 					<view class="flex justify-start margin-top-sm">
 						<button class="cu-btn round sm line-blue margin-left-sm" v-if="item.curTaskName == '仓库管理员'"
 							@tap="_distributionOrder(item)">采购入库</button>
-						<button class="cu-btn round sm line-blue margin-left-sm"
-							@tap="showAuditModel(item)">审核</button>
+						<button class="cu-btn round sm line-blue margin-left-sm" v-else
+							@tap="_undoAudit(item)">审核</button>
 					</view>
 				</view>
 			</view>
@@ -68,21 +68,22 @@
 		},
 		methods:{
 			/**
-			 * 已办列表
+			 * 待办列表
 			 */
 			loadApply: function(){
 				this.loadingStatus = 'more';
 			
 				let _that = this;
 				let _objData = {
-					page: this.page,
-					row: 10,
+					page: 1,
+					row: 50,
 					communityId:this.getCommunityId()
 				};
 				listMyAuditOrders(this,_objData)
 				.then(function(res){
-					_that.applyList = _that.applyList.concat(res.data)
-					_that.page ++;
+					//_that.applyList = _that.applyList.concat(res.data)
+					_that.applyList = res.data;
+					//_that.page ++;
 					if(_that.applyList.length == res.total){
 						_that.loadingStatus = 'noMore';
 						return;
@@ -97,11 +98,15 @@
 			 */
 			_distributionOrder: function(item){
 				uni.navigateTo({
-					url:'/pages/itemEnterDo/itemEnterDo?applyOrderId=' + item.applyOrderId + '&resOrderType=' + item.resOrderType + '&taskId=' + item.taskId
+					url:'/pages/resource/itemEnterDo?applyOrderId=' + item.applyOrderId + '&resOrderType=' + item.resOrderType + '&taskId=' + item.taskId
 				})
 			},
-			showAuditModel:function(){
-				
+			_undoAudit:function(_purchaseApply){
+				uni.navigateTo({
+					url:'/pages/audit/undoAudit?business=purchaseApply&id='+_purchaseApply.applyOrderId
+					+"&taskId="+_purchaseApply.taskId+"&startUserId="+_purchaseApply.createUserId
+					+"&flowId="+_purchaseApply.flowId
+				})
 			},
 			
 			/**

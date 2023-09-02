@@ -137,6 +137,30 @@ export function auditOaWorkflow(_that,_data){
 }
 
 /**
+ * 审核
+ * @param {Object} _that
+ * @param {Object} _data
+ */
+export function auditUndo(_that,_url,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.post({
+			url: _url,
+			data:_data,
+			success: function(res) {
+				reslove(res);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+/**
  * 查询完成工作流
  * /oaWorkflow/queryOaWorkflowUserHisTaskFormData
  * @param {Object} _that 上下文对象
@@ -334,4 +358,26 @@ export function getNextTask(_that,_data){
 		})
 	});
 }
+
+ export function queryNextDealUser(_that,dataObj) {
+ 	return new Promise(
+ 		(resolve, reject) => {
+ 			_that.context.get({
+ 				url: url.queryNextDealUser,
+ 				data: dataObj,
+ 				//动态数据
+ 				success: function(res) {
+ 					if (res.data.code == 0) {
+ 						let _data = res.data.data;
+ 						resolve(_data);
+ 						return ;
+ 					}
+ 					reject('未包含数据');
+ 				},
+ 				fail: function(e) {
+ 					reject(e);
+ 				}
+ 			});
+ 		})
+ }
 

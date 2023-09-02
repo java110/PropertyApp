@@ -56600,8 +56600,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.auditOaWorkflow = auditOaWorkflow;
+exports.auditUndo = auditUndo;
 exports.getNextTask = getNextTask;
 exports.listRunWorkflowImage = listRunWorkflowImage;
+exports.queryNextDealUser = queryNextDealUser;
 exports.queryOaWorkflow = queryOaWorkflow;
 exports.queryOaWorkflowForm = queryOaWorkflowForm;
 exports.queryOaWorkflowFormData = queryOaWorkflowFormData;
@@ -56610,7 +56612,7 @@ exports.queryOaWorkflowUserHisTaskFormData = queryOaWorkflowUserHisTaskFormData;
 exports.queryOaWorkflowUserTaskFormData = queryOaWorkflowUserTaskFormData;
 exports.saveOaWorkflowFormData = saveOaWorkflowFormData;
 exports.updateOaWorkflowFormData = updateOaWorkflowFormData;
-var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
+var _url2 = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js */ 198));
 /**
  * 查询工作流
  * @param {Object} _that 上下文对象
@@ -56619,7 +56621,7 @@ var _url = _interopRequireDefault(__webpack_require__(/*! ../../constant/url.js 
 function queryOaWorkflow(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.get({
-      url: _url.default.queryOaWorkflow,
+      url: _url2.default.queryOaWorkflow,
       data: _data,
       success: function success(res) {
         if (res.data.code == 0) {
@@ -56651,7 +56653,7 @@ function queryOaWorkflow(_that, _data) {
 function queryOaWorkflowForm(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.get({
-      url: _url.default.queryOaWorkflowForm,
+      url: _url2.default.queryOaWorkflowForm,
       data: _data,
       success: function success(res) {
         if (res.data.code == 0) {
@@ -56683,7 +56685,7 @@ function queryOaWorkflowForm(_that, _data) {
 function saveOaWorkflowFormData(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.post({
-      url: _url.default.saveOaWorkflowFormData,
+      url: _url2.default.saveOaWorkflowFormData,
       data: _data,
       success: function success(res) {
         reslove(res);
@@ -56707,7 +56709,7 @@ function saveOaWorkflowFormData(_that, _data) {
 function updateOaWorkflowFormData(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.post({
-      url: _url.default.updateOaWorkflowFormData,
+      url: _url2.default.updateOaWorkflowFormData,
       data: _data,
       success: function success(res) {
         reslove(res);
@@ -56731,7 +56733,31 @@ function updateOaWorkflowFormData(_that, _data) {
 function auditOaWorkflow(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.post({
-      url: _url.default.auditOaWorkflow,
+      url: _url2.default.auditOaWorkflow,
+      data: _data,
+      success: function success(res) {
+        reslove(res);
+      },
+      fail: function fail(e) {
+        wx.showToast({
+          title: "服务器异常了",
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
+  });
+}
+
+/**
+ * 审核
+ * @param {Object} _that
+ * @param {Object} _data
+ */
+function auditUndo(_that, _url, _data) {
+  return new Promise(function (reslove, reject) {
+    _that.context.post({
+      url: _url,
       data: _data,
       success: function success(res) {
         reslove(res);
@@ -56756,7 +56782,7 @@ function auditOaWorkflow(_that, _data) {
 function queryOaWorkflowUserTaskFormData(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.get({
-      url: _url.default.queryOaWorkflowUserTaskFormData,
+      url: _url2.default.queryOaWorkflowUserTaskFormData,
       data: _data,
       success: function success(res) {
         if (res.data.code == 0) {
@@ -56789,7 +56815,7 @@ function queryOaWorkflowUserTaskFormData(_that, _data) {
 function queryOaWorkflowUserHisTaskFormData(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.get({
-      url: _url.default.queryOaWorkflowUserHisTaskFormData,
+      url: _url2.default.queryOaWorkflowUserHisTaskFormData,
       data: _data,
       success: function success(res) {
         if (res.data.code == 0) {
@@ -56822,7 +56848,7 @@ function queryOaWorkflowUserHisTaskFormData(_that, _data) {
 function queryOaWorkflowFormData(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.get({
-      url: _url.default.queryOaWorkflowFormData,
+      url: _url2.default.queryOaWorkflowFormData,
       data: _data,
       success: function success(res) {
         if (res.data.code == 0) {
@@ -56855,7 +56881,7 @@ function queryOaWorkflowFormData(_that, _data) {
 function queryOaWorkflowUser(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.get({
-      url: _url.default.queryOaWorkflowUser,
+      url: _url2.default.queryOaWorkflowUser,
       data: _data,
       success: function success(res) {
         if (res.data.code == 0) {
@@ -56888,7 +56914,7 @@ function queryOaWorkflowUser(_that, _data) {
 function listRunWorkflowImage(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.get({
-      url: _url.default.listRunWorkflowImage,
+      url: _url2.default.listRunWorkflowImage,
       data: _data,
       success: function success(res) {
         if (res.data.code == 0) {
@@ -56921,7 +56947,7 @@ function listRunWorkflowImage(_that, _data) {
 function getNextTask(_that, _data) {
   return new Promise(function (reslove, reject) {
     _that.context.get({
-      url: _url.default.getNextTask,
+      url: _url2.default.getNextTask,
       data: _data,
       success: function success(res) {
         if (res.data.code == 0) {
@@ -56940,6 +56966,26 @@ function getNextTask(_that, _data) {
           icon: 'none',
           duration: 2000
         });
+      }
+    });
+  });
+}
+function queryNextDealUser(_that, dataObj) {
+  return new Promise(function (resolve, reject) {
+    _that.context.get({
+      url: _url2.default.queryNextDealUser,
+      data: dataObj,
+      //动态数据
+      success: function success(res) {
+        if (res.data.code == 0) {
+          var _data = res.data.data;
+          resolve(_data);
+          return;
+        }
+        reject('未包含数据');
+      },
+      fail: function fail(e) {
+        reject(e);
       }
     });
   });

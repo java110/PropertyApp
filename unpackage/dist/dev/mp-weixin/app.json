@@ -64,7 +64,7 @@
     "pages/addItemOutStep/addItemOutStep",
     "pages/itemOutAuditOrders/itemOutAuditOrders",
     "pages/itemOutDo/itemOutDo",
-    "pages/itemEnterDo/itemEnterDo",
+    "pages/resource/itemEnterDo",
     "pages/allocationStorehouseManage/allocationStorehouseManage",
     "pages/allocationStorehouseApply/allocationStorehouseApply",
     "pages/allocationStorehouseAuditOrders/allocationStorehouseAuditOrders",
@@ -100,7 +100,8 @@
     "pages/itemRelease/itemReleaseDetail",
     "pages/visit/visit",
     "pages/visit/visitDetail",
-    "pages/index/work"
+    "pages/index/work",
+    "pages/audit/undoAudit"
   ],
   "subPackages": [],
   "window": {

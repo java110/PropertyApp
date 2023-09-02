@@ -62,8 +62,8 @@
 				};
 				listAuditHistoryOrders(this,_objData)
 				.then(function(res){
-					_that.applyList = _that.applyList.concat(res.data)
-					_that.page ++;
+					_that.applyList = res.data;
+					//_that.page ++;
 					if(_that.applyList.length == res.total){
 						_that.loadingStatus = 'noMore';
 						return;

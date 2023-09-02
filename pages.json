@@ -359,7 +359,7 @@
 			}
 		},
 		{
-			"path": "pages/itemEnterDo/itemEnterDo",
+			"path": "pages/resource/itemEnterDo",
 			"style": {
 				"navigationBarTitleText": "物品入库"
 			}
@@ -627,6 +627,15 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "工作台",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/audit/undoAudit",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "待办审核",
                 "enablePullDownRefresh": false
             }
             

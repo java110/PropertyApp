@@ -365,13 +365,13 @@
 			}
 		},
 		{
-			"path": "pages/allocationStorehouseManage/allocationStorehouseManage",
+			"path": "pages/resource/allocationStorehouseManage",
 			"style": {
-				"navigationBarTitleText": "物品调拨列表"
+				"navigationBarTitleText": "调拨列表"
 			}
 		},
 		{
-			"path": "pages/allocationStorehouseApply/allocationStorehouseApply",
+			"path": "pages/resource/allocationStorehouseApply",
 			"style": {
 				"navigationBarTitleText": "物品调拨"
 			}
@@ -383,7 +383,7 @@
 			}
 		},
 		{
-			"path": "pages/allocationStorehouseApplyDetail/allocationStorehouseApplyDetail",
+			"path": "pages/resource/allocationStorehouseApplyDetail",
 			"style": {
 				"navigationBarTitleText": "调拨详情"
 			}

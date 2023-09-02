@@ -213,7 +213,7 @@
 			 */
 			_toApplyDetail: function(_item){
 				uni.navigateTo({
-					url: '/pages/allocationStorehouseApplyDetail/allocationStorehouseApplyDetail?applyId=' + _item.applyId
+					url: '/pages/resource/allocationStorehouseApplyDetail?applyId=' + _item.applyId
 				});
 			},
 			

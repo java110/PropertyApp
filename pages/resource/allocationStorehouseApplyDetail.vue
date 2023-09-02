@@ -58,7 +58,7 @@
 			<view class="cu-time">工单</view>
 			<view class="cu-item " v-for="(item,index) in staffs" :key="index">
 				<view class="bg-cyan content">
-					<text>{{item.startTime}} </text> 到达 {{item.auditName}} 工位
+					<text>{{item.startTime || ''}} </text> 到达 {{item.userName ||item.auditName}} 工位
 				</view>
 				<view class="bg-cyan content" v-if="item.endTime != undefined">
 					<text>{{item.endTime}} </text> 处理完成

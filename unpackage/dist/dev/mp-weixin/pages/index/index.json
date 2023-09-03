@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "",
-  "usingComponents": {
-    "index-header": "/components/vc-index/index-header",
-    "index-undo": "/components/vc-index/index-undo",
-    "index-undo-oa": "/components/vc-index/index-undo-oa"
-  }
-}

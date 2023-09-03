@@ -1,9 +1,0 @@
-
-.user-container {
-	padding: 60rpx 0 40rpx 0;
-}
-.lage-avatar {
-	width: 200rpx;
-	height: 200rpx;
-}
-

@@ -202,4 +202,6 @@ export default {
 	listVisit: baseUrl+"app/visit.listVisits",
 	auditUndoVisit: baseUrl+"app/visit.auditUndoVisit",
 	queryUndoCount: baseUrl+"callComponent/undo/list",
+	allocationStoreEnter: baseUrl+"app/resourceStore.allocationStoreEnter",
+	
 }

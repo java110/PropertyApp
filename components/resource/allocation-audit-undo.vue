@@ -92,7 +92,7 @@
 			},
 			_openEditPurchaseModel:function(_item){
 				uni.navigateTo({
-					url:'/pages/resource/editPurchaseApply?applyId=' + _item.applyOrderId + '&resOrderType=' + _item.resOrderType 
+					url:'/pages/resource/editPurchaseApply?applyId=' + _item.applyId + '&resOrderType=' + _item.resOrderType 
 				})
 			},
 			/**
@@ -100,7 +100,7 @@
 			 */
 			_distributionOrder: function(item){
 				uni.navigateTo({
-					url:'/pages/resource/itemOutDo?applyId=' + item.applyOrderId + '&resOrderType=' + item.resOrderType + '&taskId=' + item.taskId
+					url:'/pages/resource/allocationEnterDo?applyId=' + item.applyId + '&taskId=' + item.taskId
 				})
 			},
 			_undoAudit:function(_purchaseApply){

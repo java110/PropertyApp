@@ -649,6 +649,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/resource/allocationEnterDo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "调拨",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

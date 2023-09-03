@@ -597,7 +597,7 @@ export function listItemOutAuditHistoryOrders(_that,_data){
  * @param {Object} _that 上下文对象
  * @param {Object} _data 请求报文
  */
-export function listAllocationStoreHisAuditOrders(_that,_data){
+export function getAllocationHisAudit(_that,_data){
 	return new Promise(function(reslove,reject){
 		_that.context.get({
 			url: url.listAllocationStoreHisAuditOrders,

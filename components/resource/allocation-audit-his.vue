@@ -5,7 +5,7 @@
 				<view class="apply-title flex justify-between">
 					<view>
 						<text class="cuIcon-goods text-cut text-green margin-right-xs"></text>
-						<text class="text-bold">{{item.applyOrderId}}</text>
+						<text class="text-bold">{{item.applyId}}</text>
 						<text class="margin-left-sm">({{item.stateName}})</text>
 					</view>
 					<view class="flex justify-start">
@@ -16,15 +16,15 @@
 				<view class="apply-content flex justify-start flex-wrap">
 					<view class="item">
 						<text>申请人:</text>
-						<text>{{item.userName}}</text>
+						<text>{{item.startUserName}}</text>
 					</view>
 					<view class="item">
 						<text>时间:</text>
 						<text>{{item.createTime}}</text>
 					</view>
 					<view class="item">
-						<text>联系电话:</text>
-						<text>{{item.endUserTel}}</text>
+						<text>调拨数量:</text>
+						<text>{{item.applyCount}}</text>
 					</view>
 				</view>
 			</view>
@@ -38,7 +38,7 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue';
-	import {listMyAuditOrders,listItemOutAuditHistoryOrders,listWorkflowStepStaffs,saveMyAuditOrders} from '../../api/resource/resource.js'
+	import {listMyAuditOrders,getAllocationHisAudit,listWorkflowStepStaffs,saveMyAuditOrders} from '../../api/resource/resource.js'
 	export default {
 		name:"allocationAuditHis",
 		data() {
@@ -60,7 +60,7 @@
 					row: 10,
 					communityId:this.getCommunityId()
 				};
-				listItemOutAuditHistoryOrders(this,_objData)
+				getAllocationHisAudit(this,_objData)
 				.then(function(res){
 					_that.applyList = res.data;
 					//_that.page ++;
@@ -76,7 +76,7 @@
 			 */
 			_toApplyDetail: function(_item){
 				uni.navigateTo({
-					url: '/pages/resource/purchaseApplyDetail?apply=' + JSON.stringify(_item)
+					url: '/pages/resource/allocationStorehouseApplyDetail?applyId=' + _item.applyId
 				});
 			},
 		}

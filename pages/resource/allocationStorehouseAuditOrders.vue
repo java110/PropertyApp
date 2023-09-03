@@ -45,25 +45,12 @@
 			allocationAuditUndo
 		},
 		onLoad: function(options) {
+			let _that =this;
 			this.java110Context.onLoad();
-		},
-		onShow: function(){
-			this.page = 1;
-			this.applyList = [];
-			this.communityId = getCurrentCommunity().communityId;
-			this.userId = this.java110Context.getUserInfo().userId;
-			this._loadStaff();
-			this.loadApply();	
-		},
-		onReachBottom : function(){
-			if(this.loadingStatus == 'noMore'){
-				return;
-			}
-			if(this.currentPage == 0){
-				this.loadApply();
-			}else{
-				this.loadApplyDone();
-			}
+			setTimeout(function(){
+				_that.changeListType(0);
+			},1000)
+					
 		},
 		methods: {
 			
@@ -73,133 +60,11 @@
 				this.applyList = [];
 				this.loadingStatus = 'more';
 				if(e == 0){
-					this.loadApply();
+					this.$refs.allocationAuditUndoRef.loadApply();
 				}else{
-					this.loadApplyDone();
+					this.$refs.allocationAuditHisRef.loadApplyDone();
 				}
 			},
-			
-			/**
-			 * 加载数据
-			 */ 
-			loadApply: function(){
-				this.loadingStatus = 'more';
-				let _that = this;
-				let _objData = {
-					page: this.page,
-					row: 10,
-				};
-				listMyAllocationStoreAuditOrders(this,_objData)
-				.then(function(res){
-					_that.applyList = _that.applyList.concat(res.data)
-					_that.page ++;
-					if(_that.applyList.length == res.total){
-						_that.loadingStatus = 'noMore';
-						return;
-					}
-				})
-			},
-			
-			/**
-			 * 已办列表
-			 */
-			loadApplyDone: function(){
-				this.loadingStatus = 'more';
-				let _that = this;
-				let _objData = {
-					page: this.page,
-					row: 10,
-				};
-				listAllocationStoreHisAuditOrders(this,_objData)
-				.then(function(res){
-					_that.applyList = _that.applyList.concat(res.data)
-					_that.page ++;
-					if(_that.applyList.length == res.total){
-						_that.loadingStatus = 'noMore';
-						return;
-					}
-				})
-			},
-			
-			getAuditInfo: function(_auditInfo){
-				let _that = this;
-				_auditInfo.taskId = this.orderInfo.taskId;
-				_auditInfo.applyId = this.orderInfo.applyId;
-				_auditInfo.procure = this.procure;
-				_auditInfo.communityId = this.communityId;
-				// 新增通知状态字段，区别是否为仓管及对应状态
-				if (_auditInfo.state == '1200') {
-					_auditInfo.noticeState = '1203';
-				} else if (this.procure) {
-					_auditInfo.noticeState = '1204';
-				} else {
-					_auditInfo.noticeState = '1201';
-				}
-				saveAuditAllocationStoreOrder(this,_auditInfo)
-				.then(function(res){
-					uni.showToast({
-						title:res.msg,
-						icon: 'none'
-					});
-					_that.page = 1;
-					_that.applyList = [];
-					_that.loadApply();
-				})
-			},
-			
-			finishAudit: function(_auditOrder){
-				let _that = this;
-				 let _auditInfo = {
-					taskId: _auditOrder.taskId,
-					applyId: _auditOrder.applyId,
-					state: '1200',
-					remark: '处理结束',
-					procure: _that.procure
-				};
-				saveAuditAllocationStoreOrder(this,_auditInfo)
-				.then(function(res){
-					uni.showToast({
-						title:res.msg,
-						icon: 'none'
-					});
-					_that.onoff = true;
-					_that.page = 1;
-					_that.applyList = [];
-					_that.loadApply();
-				})
-			},
-			
-			/**
-			 * 跳转详情页
-			 */
-			_toApplyDetail: function(_item){
-				uni.navigateTo({
-					url: '/pages/resource/allocationStorehouseApplyDetail?applyId=' + _item.applyId
-				});
-			},
-			
-			_loadStaff: function(){
-				let _that = this;
-				let _objData = {
-					page: 1,
-					row: 1,
-					staffId: this.userId,
-					staffRole: '3003',
-					requestType: 'allocationHandle'
-				};
-				listWorkflowStepStaffs(this,_objData)
-				.then(function(res){
-					console.log(res);
-					if(res.data.length>0){
-						_that.procure = true;
-					}
-				})
-			},
-			
-			showAuditModel: function(_item){
-				this.orderInfo = _item;
-				this.$refs.auditRef.switchShow();
-			}
 		}
 	}
 </script>

@@ -145,6 +145,9 @@
 				if(this.business == 'itemOut'){
 					return url.saveMyAuditOrders;
 				}
+				if(this.business == 'allocation'){
+					return url.saveAuditAllocationStoreOrder;
+				}
 				return _url;
 				
 			},

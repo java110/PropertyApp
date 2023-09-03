@@ -5,11 +5,11 @@
 				<view class="apply-title flex justify-between">
 					<view>
 						<text class="cuIcon-goods text-cut text-green margin-right-xs"></text>
-						<text class="text-bold">{{item.applyOrderId}}</text>
+						<text class="text-bold">{{item.applyId}}</text>
 						<text class="margin-left-sm">({{item.stateName}})</text>
 					</view>
 					<view class="flex justify-start">
-						<button class="cu-btn round sm line-black margin-left-sm" v-if="item.createUserId == currentUserId"
+						<button class="cu-btn round sm line-black margin-left-sm" v-if="item.startUserId == currentUserId"
 							@tap="_openEditPurchaseModel(item)">修改</button>
 						<button class="cu-btn round sm line-black margin-left-sm"
 							@tap="_toApplyDetail(item)">详情</button>
@@ -18,15 +18,15 @@
 				<view class="apply-content flex justify-start flex-wrap">
 					<view class="item">
 						<text>申请人:</text>
-						<text>{{item.userName}}</text>
+						<text>{{item.startUserName}}</text>
 					</view>
 					<view class="item">
 						<text>时间:</text>
 						<text>{{item.createTime}}</text>
 					</view>
 					<view class="item">
-						<text>联系电话:</text>
-						<text>{{item.endUserTel}}</text>
+						<text>调拨数量:</text>
+						<text>{{item.applyCount}}</text>
 					</view>
 				</view>
 				<view class="apply-btn flex justify-between">
@@ -34,7 +34,7 @@
 					</view>
 					<view class="flex justify-start margin-top-sm">
 						<button class="cu-btn round sm line-blue margin-left-sm" v-if="item.curTaskName == '仓库管理员'"
-							@tap="_distributionOrder(item)">领用出库</button>
+							@tap="_distributionOrder(item)">调拨出库</button>
 						<button class="cu-btn round sm line-blue margin-left-sm" v-else
 							@tap="_undoAudit(item)">审核</button>
 					</view>
@@ -50,9 +50,9 @@
 
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue';
-	import {listMyItemOutOrders,listAuditHistoryOrders,listWorkflowStepStaffs,saveMyAuditOrders} from '../../api/resource/resource.js';
+	import {listMyAllocationStoreAuditOrders,listAuditHistoryOrders,listWorkflowStepStaffs,saveMyAuditOrders} from '../../api/resource/resource.js';
 	export default {
-		name:"itemOutAuditUndo",
+		name:"allocationAuditUndo",
 		data() {
 			return {
 				applyList:[],
@@ -79,7 +79,7 @@
 					row: 50,
 					communityId:this.getCommunityId()
 				};
-				listMyItemOutOrders(this,_objData)
+				listMyAllocationStoreAuditOrders(this,_objData)
 				.then(function(res){
 					//_that.applyList = _that.applyList.concat(res.data)
 					_that.applyList = res.data;
@@ -92,7 +92,7 @@
 			},
 			_openEditPurchaseModel:function(_item){
 				uni.navigateTo({
-					url:'/pages/resource/editPurchaseApply?applyOrderId=' + _item.applyOrderId + '&resOrderType=' + _item.resOrderType 
+					url:'/pages/resource/editPurchaseApply?applyId=' + _item.applyOrderId + '&resOrderType=' + _item.resOrderType 
 				})
 			},
 			/**
@@ -100,13 +100,13 @@
 			 */
 			_distributionOrder: function(item){
 				uni.navigateTo({
-					url:'/pages/resource/itemOutDo?applyOrderId=' + item.applyOrderId + '&resOrderType=' + item.resOrderType + '&taskId=' + item.taskId
+					url:'/pages/resource/itemOutDo?applyId=' + item.applyOrderId + '&resOrderType=' + item.resOrderType + '&taskId=' + item.taskId
 				})
 			},
 			_undoAudit:function(_purchaseApply){
 				uni.navigateTo({
-					url:'/pages/audit/undoAudit?business=itemOut&id='+_purchaseApply.applyOrderId
-					+"&taskId="+_purchaseApply.taskId+"&startUserId="+_purchaseApply.createUserId
+					url:'/pages/audit/undoAudit?business=allocation&id='+_purchaseApply.applyId
+					+"&taskId="+_purchaseApply.taskId+"&startUserId="+_purchaseApply.startUserId
 					+"&flowId="+_purchaseApply.flowId
 				})
 			},
@@ -116,7 +116,7 @@
 			 */
 			_toApplyDetail: function(_item){
 				uni.navigateTo({
-					url: '/pages/resource/purchaseApplyDetail?apply=' + JSON.stringify(_item)
+					url: '/pages/resource/allocationStorehouseApplyDetail?applyId=' + _item.applyId
 				});
 			},
 		}

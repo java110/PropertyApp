@@ -56,6 +56,8 @@
 					_that.audit.assignee = _data.data[0].assignee;
 					if(_that.audit.assignee == '-2'){
 						_that._loadStaffList();
+					}else{
+						_that.audit.staffId = _data.data[0].assignee;
 					}
 				})
 			},

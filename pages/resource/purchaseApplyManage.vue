@@ -5,8 +5,8 @@
 				<button class="cu-btn round line-blue" @tap="_toAddPurchaseApplyPage()">采购</button>
 			</view>
 			<view class="action">
-				<button class="cu-btn round line-blue" v-if="this.java110Context.hasPrivilege('502021071043650029')"
-					@tap="_toAddUrgentPurchaseApplyPage()">紧急采购</button>
+				<!-- <button class="cu-btn round line-blue" v-if="this.java110Context.hasPrivilege('502021071043650029')"
+					@tap="_toAddUrgentPurchaseApplyPage()">紧急采购</button> -->
 			</view>
 		</view>
 		<view class="margin-top" v-if="applyList.length > 0">

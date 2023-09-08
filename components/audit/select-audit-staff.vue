@@ -58,6 +58,7 @@
 						_that._loadStaffList();
 					}else{
 						_that.audit.staffId = _data.data[0].assignee;
+						this.$emit('getAuditInfo', this.audit)
 					}
 				})
 			},

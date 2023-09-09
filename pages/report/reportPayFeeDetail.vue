@@ -29,13 +29,13 @@
 			<view class="bg-white margin-bottom padding-sm margin-sm radius-sm" v-for="(item,index) in feeDetails" :key="index" >
 				<view class="apply-title flex justify-between">
 					<view>
-						<text class="cuIcon-goods text-cut text-green margin-right-xs"></text>
 						<text class="text-bold">{{item.objName}}/{{item.ownerName}}</text>
 						<text class="margin-left-sm">({{item.stateName}})</text>
 					</view>
 					<view class="flex justify-start">
 						<!-- <button class="cu-btn round sm line-black margin-left-sm"
 							@tap="_toApplyDetail(item)">详情</button> -->
+							{{item.createTime}}
 					</view>
 				</view>
 				<view class="apply-content flex justify-start flex-wrap">
@@ -52,10 +52,6 @@
 						<text>{{item.startTime}}~{{item.endTime}}</text>
 					</view>
 					<view class="item">
-						<text>缴费时间:</text>
-						<text>{{item.createTime}}</text>
-					</view>
-					<view class="item">
 						<text>收银员:</text>
 						<text>{{item.cashierName}}</text>
 					</view>
@@ -67,7 +63,10 @@
 						<text>实收金额:</text>
 						<text>{{item.receivedAmount}}</text>
 					</view>
-					
+					<view class="item">
+						<text>订单:</text>
+						<text>{{item.oId}}</text>
+					</view>
 					
 				</view>
 			</view>

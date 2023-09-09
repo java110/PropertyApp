@@ -52,8 +52,8 @@
 			this.java110Context.onLoad();
 			let _that = this;
 			setTimeout(function(){
-				_that.$refs.indexHeaderRef._initData(this.undo);
-				_that.$refs.indexUndoRef._initData(this.undo);
+				_that.$refs.indexHeaderRef._initData(_that.undo);
+				_that.$refs.indexUndoRef._initData(_that.undo);
 			},1000)
 			
 		},

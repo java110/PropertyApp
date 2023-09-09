@@ -667,6 +667,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/report/reportPayFeeDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "缴费明细表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

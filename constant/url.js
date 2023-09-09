@@ -209,6 +209,8 @@ export default {
 	queryOrderDataReport:baseUrl+"app/dataReport.queryOrderDataReport",
 	queryInoutDataReport:baseUrl+"app/dataReport.queryInoutDataReport",
 	queryOthersDataReport:baseUrl+"app/dataReport.queryOthersDataReport",
+	queryPayFeeDetail:baseUrl+"app/reportFeeMonthStatistics/queryPayFeeDetail",
+	
 	
 	
 }

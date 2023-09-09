@@ -165,7 +165,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.item-content {
 		width: 100%;
 		margin-left: 20rpx;

@@ -62,38 +62,7 @@ export function loadCategoryMenus(_that, _data) {
 					reslove(_data);
 					return;
 				}
-				reslove(_data[0].childs);
-
-				// let _menus = _data[0].childs;
-				// _menus = _menus.sort(function(a, b) {
-				// 	return a.seq - b.seq;
-				// });
-
-				// let _tempMenuData = {};
-				// let _menuPage = [];
-				// let _curMenu = {};
-				// for (let _menuIndex = 0; _menuIndex < _menus.length; _menuIndex++) {
-				// 	_curMenu = _menus[_menuIndex];
-				// 	if (_curMenu.isShow != 'Y') {
-				// 		continue;
-				// 	}
-				// 	_menuPage.push({
-				// 		name: _curMenu.name,
-				// 		src: _curMenu.description,
-				// 		href: _curMenu.href
-				// 	});
-				// 	if ((_menuIndex + 1) % 8 == 0 && _menuIndex != 0) {
-				// 		_tempMenuData[_menuIndex] = _menuPage;
-				// 		_menuPage = [];
-				// 	}
-				// }
-
-				// if (_menuPage.length > 0) {
-				// 	_tempMenuData[_menus.length] = _menuPage;
-				// }
-
-				// console.log('_tempMenuData', _tempMenuData)
-				// reslove(_tempMenuData);
+				reslove(_data);
 			},
 			fail: function(e) {
 				wx.showToast({

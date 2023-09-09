@@ -658,6 +658,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/report/dataReport",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "数据统计",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

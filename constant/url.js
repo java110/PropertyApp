@@ -204,4 +204,11 @@ export default {
 	queryUndoCount: baseUrl+"callComponent/undo/list",
 	allocationStoreEnter: baseUrl+"app/resourceStore.allocationStoreEnter",
 	
+	//todo 报表相关接口
+	queryFeeDataReport:baseUrl+"app/dataReport.queryFeeDataReport",
+	queryOrderDataReport:baseUrl+"app/dataReport.queryOrderDataReport",
+	queryInoutDataReport:baseUrl+"app/dataReport.queryInoutDataReport",
+	queryOthersDataReport:baseUrl+"app/dataReport.queryOthersDataReport",
+	
+	
 }

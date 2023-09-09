@@ -1,9 +1,18 @@
 <template>
 	<view>
-		<view class="real_list">
+		<view class="real_list" v-if="real_list && real_list.length>0">
 			<view class="title">常用功能</view>
 			<view class="list">
 				<view class="item" v-for="(item,index) in real_list" :key="index" @tap="to(item)">
+					<image :src="item.description"></image>
+					<view class="text">{{item.name}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="real_list" v-if="reportMenus && reportMenus.length>0">
+			<view class="title">报表</view>
+			<view class="list">
+				<view class="item" v-for="(item,index) in reportMenus" :key="index" @tap="to(item)">
 					<image :src="item.description"></image>
 					<view class="text">{{item.name}}</view>
 				</view>
@@ -24,6 +33,7 @@
 		data() {
 			return {
 				real_list: [],
+				reportMenus:[]
 			};
 		},
 		created() {
@@ -37,12 +47,20 @@
 				});	
 			},
 			_loadMenu: function() {
+				let _that =this;
 				loadCategoryMenus(this, {
 					userId: getUserInfo().userId,
 					groupType: 'P_APP'
 				}).then(_data=>{
 					console.log(_data);
-					this.real_list = _data;
+					_data.forEach(_menu=>{
+						if(_menu.name == "物业手机版"){
+							_that.real_list = _menu.childs;
+						}
+						if(_menu.name == "手机报表"){
+							_that.reportMenus = _menu.childs;
+						}
+					})
 				})
 			}
 		}

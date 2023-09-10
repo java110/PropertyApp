@@ -685,6 +685,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/report/reportFeeSummary",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "费用汇总表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

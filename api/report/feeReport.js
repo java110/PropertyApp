@@ -86,6 +86,27 @@ export function queryOthersDataReport(_that, _data) {
 	})
 }
 
+export function queryReportFeeDetailRoom(_that, _data) {
+	return new Promise(function(reslove, reject) {
+		_that.context.get({
+			url: _that.url.queryReportFeeDetailRoom,
+			data: _data, //动态数据
+			success: function(res) {
+				let _data = res.data;
+				reslove(_data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		});
+	})
+}
+
+
 
 
 

@@ -676,6 +676,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/report/reportRoomFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "房屋费用明细",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

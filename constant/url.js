@@ -210,7 +210,7 @@ export default {
 	queryInoutDataReport:baseUrl+"app/dataReport.queryInoutDataReport",
 	queryOthersDataReport:baseUrl+"app/dataReport.queryOthersDataReport",
 	queryPayFeeDetail:baseUrl+"app/reportFeeMonthStatistics/queryPayFeeDetail",
-	
+	queryReportFeeDetailRoom:baseUrl+"app/reportFeeMonthStatistics.queryReportFeeDetailRoom",
 	
 	
 }

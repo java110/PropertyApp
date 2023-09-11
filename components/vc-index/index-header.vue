@@ -38,7 +38,7 @@
 					pri:'502021012507510017'
 				}, {
 					icon: '/static/image/index/i_inspection.png',
-					name: '待巡检',
+					name: '巡检打卡',
 					url: '/pages/inspection/inspection',
 					undoCount:_data.inspectionTaskCount,
 					pri:'502021012567490019'

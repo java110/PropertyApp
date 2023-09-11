@@ -48,7 +48,7 @@
 						<text class="text-grey">系统版本</text>
 					</view>
 					<view class="action">
-						<text class="text-grey text-sm">V0.01</text>
+						<text class="text-grey text-sm">V1.6</text>
 					</view>
 				</view>
 				

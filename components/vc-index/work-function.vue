@@ -33,6 +33,17 @@
 		data() {
 			return {
 				real_list: [],
+				real_list_noshow:[
+					'/pages/complaintList/complaintList',
+					'/pages/repairDispatch/repairDispatch',
+					'/pages/inspection/inspection',
+					'/pages/maintainance/maintainance',
+					'/pages/resource/purchaseApplyAuditOrders',
+					'/pages/resource/itemOutAuditOrders',
+					'/pages/resource/allocationStorehouseAuditOrders',
+					'/pages/itemRelease/itemRelease',
+					'/pages/visit/visit',
+				],
 				reportMenus:[]
 			};
 		},
@@ -55,7 +66,13 @@
 					console.log(_data);
 					_data.forEach(_menu=>{
 						if(_menu.name == "物业手机版"){
-							_that.real_list = _menu.childs;
+							let _childs = [];
+							_menu.childs.forEach(item=>{
+								if(_that.real_list_noshow.indexOf(item.href) < 0){
+									_childs.push(item);
+								}
+							})
+							_that.real_list = _childs;
 						}
 						if(_menu.name == "手机报表"){
 							_that.reportMenus = _menu.childs;

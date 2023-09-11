@@ -28,25 +28,36 @@
 					icon: '/static/image/index/i_complaint.png',
 					name: '投诉待办',
 					url: '/pages/complaintList/complaintList',
-					undoCount:_data.complaint
+					undoCount:_data.complaint,
+					pri:'502021012519810021'
 				}, {
 					icon: '/static/image/index/i_repair.png',
 					name: '报修待办',
 					url: '/pages/repairDispatch/repairDispatch',
-					undoCount:_data.repair
+					undoCount:_data.repair,
+					pri:'502021012507510017'
 				}, {
 					icon: '/static/image/index/i_inspection.png',
 					name: '待巡检',
 					url: '/pages/inspection/inspection',
-					undoCount:_data.inspectionTaskCount
+					undoCount:_data.inspectionTaskCount,
+					pri:'502021012567490019'
 				}, {
 					icon: '/static/image/index/i_machine.png',
 					name: '设备保养',
 					url: '/pages/maintainance/maintainance',
-					undoCount:_data.maintainanceTaskCount
+					undoCount:_data.maintainanceTaskCount,
+					pri:'502022110923120007'
 				}]
 			},
 			_toPage: function(_item) {
+				if(!this.java110Context.hasPrivilege(_item.pri)){
+					uni.showToast({
+						icon:'none',
+						title:'无权限，联系管理员'
+					});
+					return ;
+				}
 				uni.navigateTo({
 					url: _item.url
 				})

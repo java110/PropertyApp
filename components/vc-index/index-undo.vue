@@ -31,30 +31,42 @@
 					icon: '/static/image/index_apply_audit.png',
 					name: '采购待办',
 					url: '/pages/resource/purchaseApplyAuditOrders',
-					undoCount:_data.purchase
+					undoCount:_data.purchase,
+					pri:'502021052747070004'
 				}, {
 					icon: '/static/image/index_itemout_audit.png',
 					name: '领用待办',
 					url: '/pages/resource/itemOutAuditOrders',
-					undoCount:_data.collection
+					undoCount:_data.collection,
+					pri:'502021052762260006'
 				}, {
 					icon: '/static/image/index_allocation.png',
 					name: '调拨待办',
 					url: '/pages/resource/allocationStorehouseAuditOrders',
-					undoCount:_data.allocation
+					undoCount:_data.allocation,
+					pri:'502021052707250008'
 				}, {
 					icon: '/static/image/index_complaint.png',
 					name: '物品放行',
 					url: '/pages/itemRelease/itemRelease',
-					undoCount:_data.itemReleaseCount
+					undoCount:_data.itemReleaseCount,
+					pri:'502023011673900012'
 				}, {
 					icon: '/static/image/index_repair.png',
 					name: '访客待办',
 					url: '/pages/visit/visit',
-					undoCount:_data.visitUndoCount
+					undoCount:_data.visitUndoCount,
+					pri:'502023012597990035'
 				}]
 			},
 			_toPage: function(_item) {
+				if(!this.java110Context.hasPrivilege(_item.pri)){
+					uni.showToast({
+						icon:'none',
+						title:'无权限，联系管理员'
+					});
+					return ;
+				}
 				uni.navigateTo({
 					url: _item.url
 				})

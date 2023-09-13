@@ -694,6 +694,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/my/staffDetailAttendance",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "员工考勤",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

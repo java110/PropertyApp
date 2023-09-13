@@ -36,6 +36,12 @@
 						<text class="text-grey">投诉已办</text>
 					</view>
 				</view>
+				<view class="cu-item arrow" @tap="_myAttendance()">
+					<view class="content">
+						<text class="lg text-gray cuIcon-favor"></text>
+						<text class="text-grey">我的考勤</text>
+					</view>
+				</view>
 				<view class="cu-item arrow" @tap="_changePwd()">
 					<view class="content">
 						<text class="lg text-gray cuIcon-lock"></text>
@@ -139,6 +145,11 @@
 			_complaintFinish:function(){
 				this.context.navigateTo({
 					url:'/pages/complaintFinish/complaintFinish'
+				})
+			},
+			_myAttendance:function(){
+				this.context.navigateTo({
+					url:'/pages/my/staffDetailAttendance'
 				})
 			},
 			//修改密码

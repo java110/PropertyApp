@@ -58,3 +58,28 @@ export function getStaffName(){
 export function getStaffTel(){
 	return getStaff().tel;
 }
+
+
+/**
+ * 查询员工考勤
+ * @param {Object} _that 上下文对象
+ * @param {Object} _data 请求报文
+ */
+export function queryAttendanceClassesTask(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.get({
+			url: url.queryAttendanceClassesTask,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}

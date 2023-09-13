@@ -203,6 +203,9 @@ export default {
 	auditUndoVisit: baseUrl+"app/visit.auditUndoVisit",
 	queryUndoCount: baseUrl+"callComponent/undo/list",
 	allocationStoreEnter: baseUrl+"app/resourceStore.allocationStoreEnter",
+	queryAttendanceClassesTask: baseUrl+"app//attendanceClass/queryAttendanceClassesTask",
+	
+	
 	
 	//todo 报表相关接口
 	queryFeeDataReport:baseUrl+"app/dataReport.queryFeeDataReport",

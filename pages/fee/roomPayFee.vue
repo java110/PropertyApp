@@ -27,7 +27,7 @@
 			<scroll-view scroll-x class="bg-white nav margin-top">
 				<view class="flex text-center">
 					<view class="cu-item flex-sub" :class="active==0?'text-green cur':''" @tap="tabSelect(0)">
-						综合缴费
+						欠费缴费
 					</view>
 					<view class="cu-item flex-sub" :class="active==1?'text-green cur':''" @tap="tabSelect(1)">
 						缴费记录

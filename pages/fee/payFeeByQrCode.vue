@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="padding-xl margin-top">
-			<canvas style="width: 300upx;height: 300upx;  margin: 0 auto;" canvas-id="oweFeeQrcode"></canvas>
+			<canvas style="width: 450upx;height: 450upx;  margin: 0 auto;" canvas-id="oweFeeQrcode"></canvas>
 		</view>
 	
 		<view class="padding flex flex-direction margin-top">
@@ -21,12 +21,14 @@
 			return {
 				communityId:'',
 				roomId:'',
+				feeIds:[]
 			}
 		},
 		onLoad(options) {
 			this.java110Context.onLoad();
 			this.roomId = options.roomId;
 			this.communityId = options.communityId;
+			this.feeIds = options.feeIds.split(',');
 			this._payOweFee();
 			
 		},
@@ -42,15 +44,13 @@
 				let _data = {
 					roomId: this.roomId,
 					communityId: this.communityId,
-					business:'oweFee'
+					business:'oweFee',
+					feeIds:this.feeIds
 				}
 			
 				toPayOweFee(this, _data)
 					.then((res) => {
-						console.log(res);
-			
 						let _data = res.data;
-			
 						if (_data.code != 0) {
 							uni.showToast({
 								icon: 'none',
@@ -60,8 +60,9 @@
 						}
 						new qrCode('oweFeeQrcode', {
 							text: _data.codeUrl,
-							width: 150,
-							height: 150,
+							//text:_data.msg,
+							width: 220,
+							height: 220,
 							colorDark: "#333333",
 							colorLight: "#FFFFFF",
 							correctLevel: qrCode.CorrectLevel.L

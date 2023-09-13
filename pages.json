@@ -227,7 +227,7 @@
 				"navigationBarTitleText": "费用详情"
 			}
 		}, {
-			"path": "pages/roomPayFee/roomPayFee",
+			"path": "pages/fee/roomPayFee",
 			"style": {
 				"navigationBarTitleText": "收银台"
 			}
@@ -304,7 +304,7 @@
 				"navigationBarTitleText": "跟踪记录详情"
 			}
 		}, {
-			"path": "pages/payFeeByQrCode/payFeeByQrCode",
+			"path": "pages/fee/payFeeByQrCode",
 			"style": {
 				"navigationBarTitleText": "请扫二维码支付",
 				"enablePullDownRefresh": false

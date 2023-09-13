@@ -20,7 +20,7 @@
 					<view class=" flex-around">
 						<label class="text-df">价格:</label>
 						<picker :range="item.times" :range-key="'price'" @change="timesChange($event, index)">
-							<view>{{item.selectedTimesIndex <0?'请选择': item.times[item.selectedTimesIndex].price}}</view>
+							<view>{{item.selectedTimesIndex <0?'请选择': item.times[item.selectedTimesIndex].price}}  ></view>
 						</picker>
 					</view>
 					<view class=" flex-around">
@@ -121,9 +121,15 @@
 				this.resourceList = list;
 				this.resourceList.forEach((item) => {
 					item.timesId = '';
-					item.selectedTimesIndex = 0;
+					if (item.times && item.times.length > 0) {
+						item.timesId = item.times[0].timesId;
+						item.selectedTimesIndex = 1;
+						item.selectedTimesStock = 1;
+					} else {
+						item.selectedTimesIndex = 0;
+						item.selectedTimesStock = 0;
+					}
 					item.selectedShzIndex = 0;
-					item.selectedTimesStock = 0;
 					item.times.unshift({
 						timesId: '',
 						price: '请选择'

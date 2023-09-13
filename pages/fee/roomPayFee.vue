@@ -19,13 +19,9 @@
 				<view class="title">建筑面积</view>
 				{{roomInfo.builtUpArea != undefined ?roomInfo.builtUpArea+'平方米':''}}
 			</view>
-			<view class="cu-form-group">
-				<view class="title">业主名称</view>
-				{{roomInfo.ownerName}}
-			</view>
-			<view class="cu-form-group">
-				<view class="title">联系方式</view>
-				{{roomInfo.link}}
+			<view class="cu-form-group" >
+				<view class="title">业主</view>
+				<view>{{roomInfo.ownerName}}<text v-if="roomInfo.link">({{roomInfo.link}})</text></view>
 			</view>
 
 			<view class="block__title" v-if="fees.length > 0">欠费信息</view>

@@ -42,8 +42,8 @@
 						<view class="sub-info-item text-gray text-sm" v-if="item.payerObjName">
 							<text class="margin-right-xs">房号:{{item.payerObjName}}</text>
 						</view>
-						<view class="sub-info-item text-gray text-sm">
-							<text class="margin-right-xs">单价:{{item.squarePrice}}</text>
+						<view class="sub-info-item text-gray text-sm" >
+							<text class="margin-right-xs">单价:{{item.mwPrice && item.mwPrice>0?item.mwPrice:item.squarePrice}}</text>
 						</view>
 					</view>
 				</view>

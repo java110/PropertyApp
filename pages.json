@@ -703,6 +703,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/car/ownerCar",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

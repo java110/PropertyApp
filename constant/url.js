@@ -203,9 +203,10 @@ export default {
 	auditUndoVisit: baseUrl+"app/visit.auditUndoVisit",
 	queryUndoCount: baseUrl+"callComponent/undo/list",
 	allocationStoreEnter: baseUrl+"app/resourceStore.allocationStoreEnter",
-	queryAttendanceClassesTask: baseUrl+"app//attendanceClass/queryAttendanceClassesTask",
+	queryAttendanceClassesTask: baseUrl+"app/attendanceClass/queryAttendanceClassesTask",
 	
-	
+	//todo 车辆相关
+	queryOwnerCars: baseUrl+"app/owner.queryOwnerCars",
 	
 	//todo 报表相关接口
 	queryFeeDataReport:baseUrl+"app/dataReport.queryFeeDataReport",
@@ -215,6 +216,7 @@ export default {
 	queryPayFeeDetail:baseUrl+"app/reportFeeMonthStatistics/queryPayFeeDetail",
 	queryReportFeeDetailRoom:baseUrl+"app/reportFeeMonthStatistics.queryReportFeeDetailRoom",
 	queryReportFeeSummary:baseUrl+"app/reportFeeMonthStatistics.queryReportFeeSummary",
+	
 	
 	
 }

@@ -9,6 +9,15 @@
 				</view>
 			</view>
 		</view>
+		<view class="real_list" v-if="cars && cars.length>0">
+			<view class="title">停车</view>
+			<view class="list">
+				<view class="item" v-for="(item,index) in cars" :key="index" @tap="to(item)">
+					<image :src="item.description"></image>
+					<view class="text">{{item.name}}</view>
+				</view>
+			</view>
+		</view>
 		<view class="real_list" v-if="reportMenus && reportMenus.length>0">
 			<view class="title">报表</view>
 			<view class="list">
@@ -18,6 +27,7 @@
 				</view>
 			</view>
 		</view>
+		
 	</view>
 </template>
 
@@ -44,7 +54,8 @@
 					'/pages/itemRelease/itemRelease',
 					'/pages/visit/visit',
 				],
-				reportMenus:[]
+				reportMenus:[],
+				cars:[]
 			};
 		},
 		created() {
@@ -76,6 +87,9 @@
 						}
 						if(_menu.name == "手机报表"){
 							_that.reportMenus = _menu.childs;
+						}
+						if(_menu.name == "手机停车"){
+							_that.cars = _menu.childs;
 						}
 					})
 				})

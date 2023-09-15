@@ -721,6 +721,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/report/chargeMachineOrder",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "充电桩订单",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

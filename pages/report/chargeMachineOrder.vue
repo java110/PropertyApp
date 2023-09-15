@@ -2,56 +2,76 @@
 	<view>
 		<view class="q-query flex justify-start flex-wrap">
 			<view class="q-item">
-				<input type="text" class="q-input" placeholder="输入人员名称" v-model="name"></input>
+				<input type="text" class="q-input" placeholder="输入用户名称" v-model="personName"></input>
 			</view>
 			<view class="q-item">
 				<picker bindchange="PickerChange" :value="machineIndex" :range-key="'machineName'" :range="machines"
 				 @change="machineChange">
 					<view class="picker">
-						{{machineIndex==-1 ? "请选择" : machines[machineIndex].machineName}}
+						{{machineIndex==-1 ? "请选择充电桩" : machines[machineIndex].machineName}}
 					</view>
 				</picker>
 			</view>
 			<view class="q-item-btn">
-				<button class="cu-btn  line-blue round q-input" @click="_loadOpenDoorLog">搜索</button>
+				<button class="cu-btn  line-blue round q-input" @click="_loadChargeMachineOrder">搜索</button>
 			</view>
 		</view>
-		<view class="margin-top" v-if="logs.length > 0">
-			<view class="bg-white margin-bottom padding-sm margin-sm radius-sm" v-for="(item,index) in logs"
+		<view class="margin-top" v-if="orders.length > 0">
+			<view class="bg-white margin-bottom padding-sm margin-sm radius-sm" v-for="(item,index) in orders"
 				:key="index">
 				<view class="apply-title flex justify-between">
 					<view>
-						<text class="text-bold">{{item.name}}</text>
+						<text class="text-bold">{{item.personName}}/{{item.personTel}}</text>
 					</view>
 					<view class="flex justify-start">
 						<!-- <button class="cu-btn round sm line-black margin-left-sm"
 							@tap="_toApplyDetail(item)">详情</button> -->
-						{{item.createTime}}
+						{{item.orderId}}
 					</view>
 				</view>
-				<view class="apply-content flex justify-start">
+				<view class="apply-content flex justify-start flex-wrap">
 					<view class="item">
-						<image :src="item.faceUrl" ></image>
+						<text>充电桩:</text>
+						<text>{{item.machineName}}>{{item.machineCode}}</text>
 					</view>
-					<view class="margin-left">
-						<view class="item">
-							<text>门禁:</text>
-							<text>{{item.machineName}}</text>
-						</view>
-						<view class="item">
-							<text>门禁编码:</text>
-							<text>{{item.machineCode}}</text>
-						</view>
-						<view class="item">
-							<text>位置:</text>
-							<text>{{item.locationObjName}}</text>
-						</view>
-						<view class="item">
-							<text>开门方式:</text>
-							<text>{{item.openTypeName || '-'}}</text>
-						</view>
+					<view class="item">
+						<text>插座:</text>
+						<text>{{item.portCode}}</text>
+					</view>
+					<view class="item">
+						<text>充电小时:</text>
+						<text>{{item.chargeHours}}</text>
+					</view>
+					<view class="item">
+						<text>小时电价:</text>
+						<text>{{item.durationPrice}}</text>
+					</view>
+					<view class="item">
+						<text>充电量:</text>
+						<text>{{item.energy}}</text>
+					</view>
+					<view class="item">
+						<text>扣款金额:</text>
+						<text>{{item.amount}}</text>
+					</view>
+					<view class="item">
+						<text>开始时间:</text>
+						<text>{{item.startTime}}</text>
+					</view>
+					<view class="item">
+						<text>结束时间:</text>
+						<text>{{item.endTime}}</text>
 					</view>
 					
+					<view class="item">
+						<text>状态:</text>
+						<text>{{item.stateName}}</text>
+					</view>
+					<view class="item">
+						<text>备注:</text>
+						<text>{{item.remark}}</text>
+					</view>
+				
 				</view>
 			</view>
 		</view>
@@ -63,45 +83,43 @@
 
 <script>
 	import noDataPage from '../../components/no-data-page/no-data-page.vue'
-	import {listMachines,listMachineRecords} from '../../api/machine/machineApi.js';
+	import {listChargeMachine,listChargeMachineOrder} from '../../api/machine/machineApi.js';
 	export default {
 		data() {
 			return {
-				name:'',
+				personName:'',
 				machines:[],
 				machineIndex:-1,
 				machineId:'',
-				logs:[]
+				orders:[]
 			}
 		},
 		onLoad() {
-			this._loadAccessControl();
-			this._loadOpenDoorLog();
+			this._loadChargeMachine();
+			this._loadChargeMachineOrder();
 		},
 		components:{
 			noDataPage
 		},
 		methods: {
-			_loadOpenDoorLog:function(){
+			_loadChargeMachineOrder:function(){
 				let _that =this;
-				listMachineRecords(this,{
+				listChargeMachineOrder(this,{
 					machineId:this.machineId,
 					communityId:this.getCommunityId(),
 					page:1,
 					row:100,
-					name:this.name
+					personName:this.personName
 				}).then(_data=>{
-					_that.logs = _data.machineRecords;
+					_that.orders = _data.data;
 				})
 			},
-			_loadAccessControl:function(){
+			_loadChargeMachine:function(){
 				let _that =this;
-				listMachines(this,{
+				listChargeMachine(this,{
 					communityId:this.getCommunityId(),
 					page:1,
 					row:100,
-					machineTypeCd:'9999',
-					domain:'ACCESS_CONTROL'
 				}).then(_data=>{
 					_that.machines = _data.machines;
 				})
@@ -156,13 +174,8 @@
 	
 	.apply-content {
 		.item {
-			//width: 50%;
+			width: 50%;
 			margin-top: 20upx;
-			image{
-				width: 180upx;
-				height: 180upx;
-				border-radius: 10upx;
-			}
 		}
 	}
 	

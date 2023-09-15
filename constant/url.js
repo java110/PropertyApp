@@ -208,6 +208,10 @@ export default {
 	//todo 设备相关
 	listMachines: baseUrl+"app/machine.listMachines",
 	listMachineRecords: baseUrl+"app/machineRecord.listMachineRecords",
+	listChargeMachine: baseUrl+"app/chargeMachine.listChargeMachine",
+	listChargeMachineOrder: baseUrl+"app/chargeMachine.listChargeMachineOrder",
+	
+	
 	
 	
 	//todo 车辆相关

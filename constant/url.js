@@ -205,6 +205,11 @@ export default {
 	allocationStoreEnter: baseUrl+"app/resourceStore.allocationStoreEnter",
 	queryAttendanceClassesTask: baseUrl+"app/attendanceClass/queryAttendanceClassesTask",
 	
+	//todo 设备相关
+	listMachines: baseUrl+"app/machine.listMachines",
+	listMachineRecords: baseUrl+"app/machineRecord.listMachineRecords",
+	
+	
 	//todo 车辆相关
 	queryOwnerCars: baseUrl+"app/owner.queryOwnerCars",
 	

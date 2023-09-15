@@ -707,7 +707,16 @@
             "path" : "pages/car/ownerCar",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "业主车辆",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/report/openDoorLog",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "开门记录",
                 "enablePullDownRefresh": false
             }
             

@@ -205,6 +205,12 @@ export default {
 	allocationStoreEnter: baseUrl+"app/resourceStore.allocationStoreEnter",
 	queryAttendanceClassesTask: baseUrl+"app/attendanceClass/queryAttendanceClassesTask",
 	
+	//todo 费用
+	listOweFeeCallable: baseUrl+"app/oweFeeCallable.listOweFeeCallable",
+	writeOweFeeCallable: baseUrl+"app/oweFeeCallable.writeOweFeeCallable",
+	
+	
+	
 	//todo 设备相关
 	listMachines: baseUrl+"app/machine.listMachines",
 	listMachineRecords: baseUrl+"app/machineRecord.listMachineRecords",

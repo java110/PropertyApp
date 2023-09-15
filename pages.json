@@ -730,6 +730,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/fee/oweFeeCallable",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "催缴登记",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/fee/writeOweFeeCallable",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "催缴登记",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

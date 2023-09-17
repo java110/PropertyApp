@@ -160,6 +160,9 @@
 					resCode: this.resCode,
 					isShow: true
 				};
+				if(_data.shId){
+					_data.communityId = '';
+				}
 				queryResourceStoreList(this, _data)
 					.then(function(res) {
 						_that.onoff = true;

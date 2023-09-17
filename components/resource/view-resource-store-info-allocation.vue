@@ -102,7 +102,7 @@
 				let _data = {
 					page: 1,
 					row: 100,
-					communityId: getCurrentCommunity().communityId,
+					//communityId: getCurrentCommunity().communityId,
 					isShow: true
 				};
 				listStoreHouses(this, _data)

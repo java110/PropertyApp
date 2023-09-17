@@ -175,7 +175,7 @@
 				let param = {
 					page: 1,
 					row: 100,
-					communityId: this.getCommunityId(),
+					//communityId: this.getCommunityId(),
 				};
 				listStoreHouses(this, param).then(_data => {
 					_that.storehouses = _data.data;

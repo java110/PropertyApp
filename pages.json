@@ -132,13 +132,7 @@
 				"navigationBarTitleText": "巡检补检"
 
 			}
-		}, {
-			"path": "pages/purchase/purchase",
-			"style": {
-				"navigationBarTitleText": "采购管理",
-				"navigationBarBackgroundColor": "#57fef6"
-			}
-		}, {
+		},  {
 			"path": "pages/excuteInspection/excuteInspection",
 			"style": {
 				"navigationBarTitleText": "巡检过程"

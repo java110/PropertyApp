@@ -9,10 +9,28 @@
 				</view>
 			</view>
 		</view>
+		<view class="real_list" v-if="orders && orders.length>0">
+			<view class="title">工单</view>
+			<view class="list">
+				<view class="item" v-for="(item,index) in orders" :key="index" @tap="to(item)">
+					<image :src="item.description"></image>
+					<view class="text">{{item.name}}</view>
+				</view>
+			</view>
+		</view>
 		<view class="real_list" v-if="cars && cars.length>0">
 			<view class="title">停车</view>
 			<view class="list">
 				<view class="item" v-for="(item,index) in cars" :key="index" @tap="to(item)">
+					<image :src="item.description"></image>
+					<view class="text">{{item.name}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="real_list" v-if="wirteOffs && wirteOffs.length>0">
+			<view class="title">核销</view>
+			<view class="list">
+				<view class="item" v-for="(item,index) in wirteOffs" :key="index" @tap="to(item)">
 					<image :src="item.description"></image>
 					<view class="text">{{item.name}}</view>
 				</view>
@@ -55,7 +73,9 @@
 					'/pages/visit/visit',
 				],
 				reportMenus:[],
-				cars:[]
+				cars:[],
+				wirteOffs:[],
+				orders:[]
 			};
 		},
 		created() {
@@ -85,12 +105,19 @@
 							})
 							_that.real_list = _childs;
 						}
+						if(_menu.name == "手机工单"){
+							_that.orders = _menu.childs;
+						}
 						if(_menu.name == "手机报表"){
 							_that.reportMenus = _menu.childs;
 						}
 						if(_menu.name == "手机停车"){
 							_that.cars = _menu.childs;
 						}
+						if(_menu.name == "手机核销"){
+							_that.wirteOffs = _menu.childs;
+						}
+						
 					})
 				})
 			}

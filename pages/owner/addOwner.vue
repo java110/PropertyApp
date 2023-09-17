@@ -3,11 +3,11 @@
 		<view class="block__title">基本信息</view>
 		<view class="cu-form-group">
 			<view class="title">姓名</view>
-			<input v-model="name" placeholder="请输入成员名称"></input>
+			<input v-model="name" placeholder="必填,请输入成员名称"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">身份证</view>
-			<input v-model="idCard" placeholder="请输入身份证"></input>
+			<input v-model="idCard" placeholder="选填,请输入身份证"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">性别</view>
@@ -21,13 +21,13 @@
 			<view class="title">人员类型</view>
 			<picker :value="typeCdIndex" :range="typeCds" range-key="name" @change="_changeTypeCd">
 				<view class="picker">
-					{{typeCds[typeCdIndex].name}}
+					{{typeCdIndex == -1 ?'请选择':typeCds[typeCdIndex].name}}
 				</view>
 			</picker>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">房屋</view>
-			<input v-model="roomName" placeholder="请输入房屋楼栋-单元-房屋"></input>
+			<input v-model="roomName" placeholder="必填,请输入房屋楼栋-单元-房屋"></input>
 		</view>
 		<view class="cu-form-group">
 			<view class="title">家庭住址</view>
@@ -37,7 +37,7 @@
 		<view class="block__title">联系信息</view>
 		<view class="cu-form-group">
 			<view class="title">手机号</view>
-			<input v-model="link" placeholder="请输入手机号(没有手机号随便写一个)"></input>
+			<input v-model="link" placeholder="必填,请输入手机号(没有手机号随便写一个)"></input>
 		</view>
 
 		<view class="block__title">相关图片</view>
@@ -47,7 +47,7 @@
 
 
 		<view class="cu-form-group margin-top">
-			<textarea v-model="remark" placeholder="请输入备注"></textarea>
+			<textarea v-model="remark" placeholder="选填,请输入备注"></textarea>
 		</view>
 
 		<view class="flex flex-direction margin-top margin-bottom">
@@ -92,8 +92,8 @@
 						name: '其他'
 					}
 				],
-				typeCdIndex: 0,
-				ownerTypeCd: "1002",
+				typeCdIndex: -1,
+				ownerTypeCd: "",
 				idCard: "",
 				address: "",
 				roomName: "",
@@ -165,35 +165,6 @@
 					}
 					uni.navigateBack()
 				})
-				// context.request({
-				// 	url: constant.url.saveOwner,
-				// 	header: context.getHeaders(),
-				// 	method: "POST",
-				// 	data: obj,
-				// 	success: function(res) {
-				// 		if (res.statusCode == 200 && res.data.code == 0) {
-				// 			uni.hideLoading();
-				// 			uni.navigateBack();
-				// 			return;
-				// 		}
-
-				// 		uni.hideLoading();
-				// 		uni.showToast({
-				// 			title: res.data.msg,
-				// 			icon: 'none',
-				// 			duration: 2000
-				// 		});
-				// 	},
-				// 	fail: function(e) {
-				// 		uni.hideLoading();
-				// 		uni.showToast({
-				// 			title: "服务器异常了",
-				// 			icon: 'none',
-				// 			duration: 2000
-				// 		})
-				// 	}
-				// });
-
 			},
 			_changeTypeCd: function(e) {
 				this.typeCdIndex = e.detail.value;

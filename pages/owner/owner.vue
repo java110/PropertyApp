@@ -21,10 +21,10 @@
 				:key="index">
 				<view class="apply-title flex justify-between">
 					<view>
-						<text class="text-bold">{{item.name}}</text>
+						<text class="text-bold">{{item.name}}({{item.ownerTypeName}})</text>
 					</view>
 					<view class="flex justify-start">
-						{{item.ownerTypeName}}
+						<button  class="cu-btn sm bg-red " @click="_deleteOwnerMember(item)">删除</button>
 					</view>
 				</view>
 				<view class="apply-content flex justify-start">
@@ -56,12 +56,30 @@
 		<view v-else>
 			<no-data-page></no-data-page>
 		</view>
+		
+		<view class="cu-modal" :class="delOwnerMemberFlag==true?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">温馨提示</view>
+					<view class="action" @tap="_cancleCall()">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">
+					您确认删除该成员？
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action margin-0 flex-sub  solid-left" @tap="_cancleDeleteOwnerMember()">取消</view>
+					<view class="action margin-0 flex-sub text-green solid-left" @tap="_doDeleteOwnerMember()">确认</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
 	import noDataPage from '../../components/no-data-page/no-data-page.vue';
-	import {queryOwnerAndMembers} from '../../api/owner/owner.js';
+	import {queryOwnerAndMembers,deleteOwner} from '../../api/owner/owner.js';
 	import conf from '../../conf/config.js';
 	export default {
 		data() {
@@ -70,7 +88,9 @@
 				ownerName:'',
 				link:'',
 				owners:[],
-				noFace:''
+				noFace:'',
+				delOwnerMemberFlag:false,
+				curOwnerMember:{}
 			}
 		},
 		onLoad() {
@@ -94,6 +114,35 @@
 			_addOwner:function(){
 				uni.navigateTo({
 					url:'/pages/owner/addOwner'
+				})
+			},
+			_deleteOwnerMember:function(item){
+				this.delOwnerMemberFlag = true;
+				this.curOwnerMember = item;
+			},
+			_cancleDeleteOwnerMember:function(item){
+				this.delOwnerMemberFlag = false;
+			},
+			_doDeleteOwnerMember:function(){
+				let that = this;
+				this.curOwnerMember.communityId = this.getCommunityId();
+				deleteOwner(this,this.curOwnerMember)
+				.then((_data)=>{
+					uni.showToast({
+						icon:'none',
+						title:_data.msg
+					});
+					if(_data.code != 0){
+						return;
+					}
+					that._cancleDeleteOwnerMember();
+					that._queryOwner();
+				},(err)=>{
+					uni.showToast({
+						icon:'none',
+						title:err
+					});
+					that._cancleDeleteOwnerMember();
 				})
 			}
 		}

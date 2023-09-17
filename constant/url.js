@@ -192,6 +192,9 @@ export default {
 	auditUndoItemRelease: baseUrl+"app/itemRelease.auditUndoItemRelease",
 	listIntegralSetting: baseUrl+"app/integral.listIntegralSetting",
 	queryOwners: baseUrl+"app/owner.queryOwners",
+	queryOwnerAndMembers: baseUrl+"app/owner.queryOwnerAndMembers",
+	saveRoomOwner: baseUrl+"app/owner.saveRoomOwner",
+	
 	queryOwnerAccount: baseUrl+"app/account/queryOwnerAccount",
 	useIntegral: baseUrl+"app/integral.useIntegral",
 	listIntegralUserDetail: baseUrl+"app/integral.listIntegralUserDetail",
@@ -231,6 +234,9 @@ export default {
 	queryPayFeeDetail:baseUrl+"app/reportFeeMonthStatistics/queryPayFeeDetail",
 	queryReportFeeDetailRoom:baseUrl+"app/reportFeeMonthStatistics.queryReportFeeDetailRoom",
 	queryReportFeeSummary:baseUrl+"app/reportFeeMonthStatistics.queryReportFeeSummary",
+	
+	
+	
 	
 	
 	

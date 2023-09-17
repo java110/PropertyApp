@@ -727,8 +727,7 @@
             {
                 "navigationBarTitleText": "充电桩订单",
                 "enablePullDownRefresh": false
-            }
-            
+            } 
         }
         ,{
             "path" : "pages/fee/oweFeeCallable",
@@ -744,6 +743,24 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "催缴登记",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/owner/owner",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "业主",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/owner/addOwner",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
             

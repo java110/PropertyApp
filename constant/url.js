@@ -228,6 +228,18 @@ export default {
 	queryOwnerCars: baseUrl+"app/owner.queryOwnerCars",
 	listParkingAreas: baseUrl+"app/parkingArea.listParkingAreas",
 	listParkingAreaMachines: baseUrl+"app/machine.listParkingAreaMachines",
+	openDoor: baseUrl+"app/machine/openDoor",
+	closeDoor: baseUrl+"app/machine/closeDoor",
+	customCarInOut: baseUrl+"app/machine.customCarInOutCmd",
+	listCarInParkingArea: baseUrl+"app/carInout.listCarInParkingAreaCmd",
+	listParkingCouponCar: baseUrl+"app/parkingCoupon.listParkingCouponCar",
+	getTempCarFeeOrder: baseUrl+"app/tempCarFee.getTempCarFeeOrder",
+	
+	
+	
+	
+	
+	
 	
 	
 	

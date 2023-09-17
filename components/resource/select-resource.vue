@@ -1,58 +1,59 @@
 <template>
-	<view class="cu-modal bottom-modal" :class="showModel?'show':''">
-		<view class="cu-dialog">
-			<view class="cu-bar bg-white search ">
-				<view class="search-form round">
-					<text class="cuIcon-search"></text>
-					<input type="text" placeholder="请输入物品名" v-model="resName" confirm-type="search"></input>
+	<view>
+		<view class="cu-modal bottom-modal" :class="showModel?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white search ">
+					<view class="search-form round">
+						<text class="cuIcon-search"></text>
+						<input type="text" placeholder="请输入物品名" v-model="resName" confirm-type="search"></input>
+					</view>
+					<view class="search-form round">
+						<text class="cuIcon-search"></text>
+						<input type="text" placeholder="请输入物品编码" v-model="resCode" confirm-type="search"></input>
+					</view>
+					<view class="action">
+						<button class="cu-btn bg-gradual-green shadow-blur round"
+							@tap="$preventClick(_searchStoreHouses)">搜索</button>
+					</view>
 				</view>
-				<view class="search-form round">
-					<text class="cuIcon-search"></text>
-					<input type="text" placeholder="请输入物品编码" v-model="resCode" confirm-type="search"></input>
-				</view>
-				<view class="action">
-					<button class="cu-btn bg-gradual-green shadow-blur round"
-						@tap="$preventClick(_searchStoreHouses)">搜索</button>
-				</view>
-			</view>
-			<scroll-view scroll-y style="height: 800upx;">
-				<view class="">
-					<checkbox-group @change="checkboxChange">
-						<view class="cu-list menu-avatar " v-for="(item,index) in resourceList" :key="index">
-							<view class="cu-item">
-								<view>
-									<checkbox :value="item.resId" :checked="item.checked" />
-								</view>
-								<view class="content">
-									<view class="text-grey">
-										<text
-											class="ellip">{{item.resName}}({{item.parentRstName}}>{{item.rstName}})</text>
+				<scroll-view scroll-y style="height: 800upx;">
+					<view class="">
+						<checkbox-group @change="checkboxChange">
+							<view class="cu-list menu-avatar " v-for="(item,index) in resourceList" :key="index">
+								<view class="cu-item">
+									<view>
+										<checkbox :value="item.resId" :checked="item.checked" />
 									</view>
-									<view class="text-gray text-sm flex">
-										<view class="text-cut">
-											仓库：{{item.shName}} > 规格：{{item.rssName}}
+									<view class="content">
+										<view class="text-grey">
+											<text
+												class="ellip">{{item.resName}}({{item.parentRstName}}>{{item.rstName}})</text>
 										</view>
-									</view>
-									<view class="text-gray text-sm flex">
-										<view class="text-cut">
-											价格：{{item.price}} > 库存：{{item.stock}}
+										<view class="text-gray text-sm flex">
+											<view class="text-cut">
+												仓库：{{item.shName}} > 规格：{{item.rssName}}
+											</view>
 										</view>
-									</view>
+										<view class="text-gray text-sm flex">
+											<view class="text-cut">
+												价格：{{item.price}} > 库存：{{item.stock}}
+											</view>
+										</view>
 
+									</view>
 								</view>
 							</view>
-						</view>
-					</checkbox-group>
-				</view>
-				<view class="load-more" @click="_loadResourceList()">加载更多</view>
+						</checkbox-group>
+					</view>
+					<view class="load-more" @click="_loadResourceList()">加载更多</view>
 
-			</scroll-view>
-			<view class="btn-box">
-				<button type="default" @click="cancel()">取消</button>
-				<button type="primary" @click="saveSelected()">保存</button>
+				</scroll-view>
+				<view class="btn-box">
+					<button type="default" @click="cancel()">取消</button>
+					<button type="primary" @click="saveSelected()">保存</button>
+				</view>
 			</view>
 		</view>
-	</view>
 	</view>
 </template>
 
@@ -83,7 +84,7 @@
 				selectedResId: [],
 				rstId: '',
 				resName: '',
-				resCode:'',
+				resCode: '',
 				storeHouses: [{
 					shName: '请选择仓库'
 				}],
@@ -160,7 +161,7 @@
 					resCode: this.resCode,
 					isShow: true
 				};
-				if(_data.shId){
+				if (_data.shId) {
 					_data.communityId = '';
 				}
 				queryResourceStoreList(this, _data)

@@ -768,6 +768,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/car/carInParkingArea",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "手工进场",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/car/carOutParkingArea",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "手工出场",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

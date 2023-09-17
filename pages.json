@@ -759,6 +759,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/car/barrierGate",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "道闸",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

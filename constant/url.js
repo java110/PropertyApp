@@ -226,6 +226,12 @@ export default {
 	
 	//todo 车辆相关
 	queryOwnerCars: baseUrl+"app/owner.queryOwnerCars",
+	listParkingAreas: baseUrl+"app/parkingArea.listParkingAreas",
+	listParkingAreaMachines: baseUrl+"app/machine.listParkingAreaMachines",
+	
+	
+	
+	
 	
 	//todo 报表相关接口
 	queryFeeDataReport:baseUrl+"app/dataReport.queryFeeDataReport",

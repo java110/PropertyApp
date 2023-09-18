@@ -215,6 +215,9 @@ export default {
 	//todo 费用
 	listOweFeeCallable: baseUrl+"app/oweFeeCallable.listOweFeeCallable",
 	writeOweFeeCallable: baseUrl+"app/oweFeeCallable.writeOweFeeCallable",
+	saveRoomCreateFee: baseUrl+"app/fee.saveRoomCreateFee",
+	
+	
 	
 	
 	

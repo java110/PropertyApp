@@ -795,6 +795,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/fee/createFee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "创建费用",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

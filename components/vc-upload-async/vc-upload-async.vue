@@ -88,12 +88,7 @@
 		methods: {
 			_initImageList: function(_imageLists) {
 				this.sendImgList = _imageLists;
-				if (this.sendImgList.length > 0) {
-					uni.showLoading({
-						title: "图片加载中...",
-						mask: true
-					})
-				}
+				
 				this.sendImgList.forEach((item, index) => {
 					if (item.indexOf('base64,') > -1) {
 						this.imgList.push(_photo);
@@ -117,7 +112,7 @@
 						});
 					}
 				})
-				uni.hideLoading();
+				
 				console.log(this.imgList);
 			},
 			// 向父组件传递base64数据

@@ -6,7 +6,9 @@
 				<input type="text" placeholder="输入房屋编号 楼栋-单元-房屋" v-model="roomName" confirm-type="search"></input>
 			</view>
 			<view class="action">
-				<button class="cu-btn bg-gradual-green shadow-blur round" @tap="_queryRoom()">搜索</button>
+				<button class="cu-btn line-blue round" @tap="_queryRoom()">搜索</button>
+				<button v-if="roomInfo.roomId" class="cu-btn line-blue round margin-left" @tap="_createFee()">创建费用</button>
+				
 			</view>
 		</view>
 		<view>
@@ -160,6 +162,11 @@
 					});
 					return;
 				}
+			},
+			_createFee:function(){
+				uni.navigateTo({
+					url:'/pages/fee/createFee?payerObjId='+this.roomInfo.roomId+"&payerObjName="+this.roomInfo.roomName
+				})
 			}
 		}
 	}

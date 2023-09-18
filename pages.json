@@ -786,6 +786,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/owner/editOwner",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "修改业主",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

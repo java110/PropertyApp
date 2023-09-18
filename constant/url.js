@@ -194,7 +194,10 @@ export default {
 	queryOwners: baseUrl+"app/owner.queryOwners",
 	queryOwnerAndMembers: baseUrl+"app/owner.queryOwnerAndMembers",
 	saveRoomOwner: baseUrl+"app/owner.saveRoomOwner",
-		deleteOwner: baseUrl + "app/owner.deleteOwner",
+	deleteOwner: baseUrl + "app/owner.deleteOwner",
+	editOwner: baseUrl + "app/owner.editOwner",
+		
+		
 	
 	queryOwnerAccount: baseUrl+"app/account/queryOwnerAccount",
 	useIntegral: baseUrl+"app/integral.useIntegral",

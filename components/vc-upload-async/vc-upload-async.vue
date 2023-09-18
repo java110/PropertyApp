@@ -27,16 +27,19 @@
 <script>
 	import * as TanslateImage from '../../lib/java110/utils/translate-image.js';
 	import conf from '../../conf/config.js'
-	import {uploadImageAsync} from '../../api/common/common.js'
+	import {
+		uploadImageAsync
+	} from '../../api/common/common.js'
 	const context = require("../../lib/java110/Java110Context.js");
 	const factory = context.factory;
 	export default {
-		name:"vc-upload",
+		name: "vc-upload",
 		data() {
 			return {
 				photos: [],
 				imgList: [],
 				photoUrl: conf.commonBaseUrl + '/callComponent/download/getFile/file',
+				sendImgList: []
 			};
 		},
 		props: {
@@ -51,12 +54,6 @@
 			maxPhotoNum: {
 				type: Number,
 				default: 1
-			},
-			sendImgList: {
-				type: Array,
-				default () {
-					return []
-				}
 			},
 			count: {
 				type: Number,
@@ -79,48 +76,64 @@
 				default: true
 			}
 		},
-		watch:{
-			photos:function(val){
+		watch: {
+			photos: function(val) {
 				this.sendData();
 			},
 			deep: true
 		},
 		mounted() {
-			if(this.sendImgList.length > 0){
-				uni.showLoading({
-					title: "图片加载中...",
-					mask: true
-				})
-			}
-			this.sendImgList.forEach((item, index) => {
-				if (item.indexOf('base64,') > -1) {
-					this.imgList.push(_photo);
-				}
-				if (item.indexOf("https") > -1 || item.indexOf("http") > -1 || item.indexOf(this.photoUrl) > -1) {
-					this.imgList.push(item);
-					let urlParams = this._getUrlParams(item);
-					if(urlParams['fileId']){
-						this.photos.push({fileId:urlParams['fileId'], url:item});
-					}
-				}else{
-					let url = this.photoUrl + "?fileId=" + item + "&communityId=-1&time=" + new Date();
-					this.imgList.push(url);
-					this.photos.push({fileId:item, url:url});
-				}
-			})
-			uni.hideLoading();
-			console.log(this.imgList);
+			this._initImageList(this.sendImgList);
 		},
-		methods:{
+		methods: {
+			_initImageList: function(_imageLists) {
+				this.sendImgList = _imageLists;
+				if (this.sendImgList.length > 0) {
+					uni.showLoading({
+						title: "图片加载中...",
+						mask: true
+					})
+				}
+				this.sendImgList.forEach((item, index) => {
+					if (item.indexOf('base64,') > -1) {
+						this.imgList.push(_photo);
+					}
+					if (item.indexOf("https") > -1 || item.indexOf("http") > -1 || item.indexOf(this
+						.photoUrl) > -1) {
+						this.imgList.push(item);
+						let urlParams = this._getUrlParams(item);
+						if (urlParams['fileId']) {
+							this.photos.push({
+								fileId: urlParams['fileId'],
+								url: item
+							});
+						}
+					} else {
+						let url = this.photoUrl + "?fileId=" + item + "&communityId=-1&time=" + new Date();
+						this.imgList.push(url);
+						this.photos.push({
+							fileId: item,
+							url: url
+						});
+					}
+				})
+				uni.hideLoading();
+				console.log(this.imgList);
+			},
 			// 向父组件传递base64数据
 			sendData() {
 				this.$emit('sendImagesData', this.photos)
 			},
 			_getUrlParams: function(url) {
+				if (url.indexOf('?') < 0) {
+					return {
+						fileId: url.substring(url.indexOf('img')),
+					};
+				}
 				let urlStr = url.split('?')[1]
 				let obj = {};
 				let paramsArr = urlStr.split('&')
-				for(let i = 0,len = paramsArr.length;i < len;i++){
+				for (let i = 0, len = paramsArr.length; i < len; i++) {
 					let arr = paramsArr[i].split('=')
 					obj[arr[0]] = arr[1];
 				}
@@ -142,7 +155,7 @@
 						var tempFilePaths = upImgRes.tempFilePaths[0]
 						that.imgList.push(tempFilePaths);
 						that.$forceUpdate();
-			
+
 						TanslateImage.translate(tempFilePaths, (base64) => {
 							let _objData = {
 								uploadFile: base64,
@@ -156,16 +169,16 @@
 				});
 			},
 			// 预览
-			preview: function(index){
+			preview: function(index) {
 				let urls = this.imgList;
 				// 空集合 return
-				if(urls.length < 1){
+				if (urls.length < 1) {
 					return;
 				}
 				// domain拼接
 				urls.forEach((item, index) => {
 					let start = item.indexOf("/callComponent");
-					if(start == 0){
+					if (start == 0) {
 						urls[index] = conf.commonBaseUrl + item;
 					}
 				})

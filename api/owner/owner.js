@@ -102,3 +102,26 @@ export function deleteOwner(_that,_data) {
 		})
 	});
 }
+/**
+ * 修改业主
+ * @param {Object} _that 当前对象
+ * @param {Object} _data数据
+ */
+export function updateRoomOwner(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.post({
+			url: url.editOwner,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}

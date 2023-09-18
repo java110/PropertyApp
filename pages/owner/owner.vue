@@ -24,7 +24,8 @@
 						<text class="text-bold">{{item.name}}({{item.ownerTypeName}})</text>
 					</view>
 					<view class="flex justify-start">
-						<button  class="cu-btn sm bg-red " @click="_deleteOwnerMember(item)">删除</button>
+						<button  class="cu-btn sm line-blue " @click="_updateOwnerMember(item)">修改</button>
+						<button  class="cu-btn sm line-red margin-left " @click="_deleteOwnerMember(item)">删除</button>
 					</view>
 				</view>
 				<view class="apply-content flex justify-start">
@@ -122,6 +123,11 @@
 			},
 			_cancleDeleteOwnerMember:function(item){
 				this.delOwnerMemberFlag = false;
+			},
+			_updateOwnerMember:function(_owner){
+				uni.navigateTo({
+					url:'/pages/owner/editOwner?memberId='+_owner.memberId
+				})
 			},
 			_doDeleteOwnerMember:function(){
 				let that = this;

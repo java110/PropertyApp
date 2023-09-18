@@ -194,4 +194,43 @@ export function getTempCarFeeOrder(_that,_data){
 	});
 }
 
+export function getCarInoutDetail(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.get({
+			url: url.listCarInoutDetail,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+export function getCarInoutPayment(_that,_data){
+	return new Promise(function(reslove,reject){
+		_that.context.get({
+			url: url.listCarInoutPayment,
+			data:_data,
+			success: function(res) {
+				reslove(res.data);
+			},
+			fail: function(e) {
+				wx.showToast({
+					title: "服务器异常了",
+					icon: 'none',
+					duration: 2000
+				})
+			}
+		})
+	});
+}
+
+
+
 

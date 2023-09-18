@@ -31,6 +31,12 @@
 			<view class="padding-sm" v-show="currentPage == 0">
 				<barrier-gate-control ref="barrierGateControlRef"></barrier-gate-control>
 			</view>
+			<view class="padding-sm" v-show="currentPage == 1">
+				<barrier-control-inouts ref="barrierControlInoutsRef"></barrier-control-inouts> 
+			</view>
+			<view class="padding-sm" v-show="currentPage == 2">
+				<barrier-control-payment ref="barrierControlPaymentRef"></barrier-control-payment> 
+			</view>
 		</view>
 	</view>
 </template>
@@ -41,6 +47,8 @@
 		queryParkingAreas
 	} from '../../api/car/carApi.js';
 	import barrierGateControl from '../../components/car/barrier-gate-control.vue';
+	import barrierControlInouts from '../../components/car/barrier-control-inouts.vue';
+	import barrierControlPayment from '../../components/car/barrier-control-payment.vue';
 	export default {
 		data() {
 			return {
@@ -54,7 +62,9 @@
 		},
 		components: {
 			noDataPage,
-			barrierGateControl
+			barrierGateControl,
+			barrierControlInouts,
+			barrierControlPayment
 		},
 		methods: {
 			_loadParkingArea: function() {
@@ -85,9 +95,9 @@
 			changeListType: function(e) {
 				this.currentPage = e;
 				if (e == 1) {
-					
+					this.$refs.barrierControlInoutsRef._loadInouts(this.paId);
 				} else if (e == 2) {
-					
+					this.$refs.barrierControlPaymentRef._loadPayments(this.paId);
 				}else{
 					this.$refs.barrierGateControlRef._loadMachines(this.paId);
 				}

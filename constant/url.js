@@ -234,8 +234,8 @@ export default {
 	listCarInParkingArea: baseUrl+"app/carInout.listCarInParkingAreaCmd",
 	listParkingCouponCar: baseUrl+"app/parkingCoupon.listParkingCouponCar",
 	getTempCarFeeOrder: baseUrl+"app/tempCarFee.getTempCarFeeOrder",
-	
-	
+	listCarInoutDetail: baseUrl+"app/carInoutDetail.listCarInoutDetail",
+	listCarInoutPayment: baseUrl+"app/carInoutPayment.listCarInoutPayment",
 	
 	
 	

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="header flex justify-around">
+		<view class="header flex justify-around align-center">
 			<view class="header-item " v-for="(item,index) in headerMenus" :key="index" @click="_toPage(item)">
 				<view style="position: relative;">
 					<image :src="item.icon"></image>
@@ -69,12 +69,17 @@
 <style lang="scss">
 	.header {
 		width: 100%;
+		/** #ifndef H5 **/
 		height: 220upx;
+		/** #endif **/
+		/** #ifdef H5 **/
+		height: 300upx;
+		/** #endif **/
 		background-color: #368CFE;
 		color: #FFFFFF;
 
 		.header-item {
-			margin-top: 50upx;
+			//margin-top: 50upx;
 			text-align: center;
 
 			image {

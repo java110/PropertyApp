@@ -150,9 +150,9 @@
 		}
 
 		image {
-			height: 44upx;
-			width: 44upx;
-			margin-bottom: 10upx;
+			height: 68upx;
+			width: 68upx;
+			margin-bottom: 8upx;
 		}
 
 		.text {

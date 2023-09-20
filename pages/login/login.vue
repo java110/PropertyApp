@@ -47,12 +47,13 @@
 		listStaffPrivileges
 	} from '../../api/index/index.js'
 	import mapping from '../../constant/mapping.js'
+import { rejects } from 'assert';
 	export default {
 		data() {
 			return {
 				logoUrl: '',
-				username: '18909711443',
-				password: '18909711443'
+				username: '',
+				password: ''
 			}
 		},
 		onLoad() {
@@ -94,12 +95,8 @@
 				login(this.username, this.password)
 					.then(res => {
 						return res;
-
 					}, err => {
-						uni.showToast({
-							icon: 'none',
-							title: err
-						});
+						rejects(err);
 					}).then((_data) => {
 						listStaffPrivileges(_that);
 						return getCommunity(true);

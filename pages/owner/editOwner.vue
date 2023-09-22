@@ -89,7 +89,7 @@
 		 */
 		onLoad: function(options) {
 			this.communityId = this.getCommunityId();
-			this.memberId = this.memberId;
+			this.memberId = options.memberId;
 			this._loadOwnerMember();
 		},
 		methods: {

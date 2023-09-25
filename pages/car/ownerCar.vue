@@ -86,13 +86,14 @@
 				let _that =this;
 				queryOwnerCars(this,{
 					page:1,
-					row:50,
+					row:15,
 					communityId:this.getCommunityId(),
 					carNumLike:this.carNumLike,
 					num:this.num,
-					ownerName:'',
+					ownerName:this.ownerName,
 					link:this.link,
 					memberCarNumLike:this.memberCarNumLike,
+					carTypeCds:"1002,1001"
 				}).then(_data=>{
 					_that.cars = _data.data;
 				})

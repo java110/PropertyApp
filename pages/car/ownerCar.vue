@@ -28,7 +28,7 @@
 					<view>
 						<text class="text-bold">{{item.carNum}}</text>
 					</view>
-					<view class="flex justify-start">
+					<view class="flex justify-start" @click="_toTel(item.link)">
 						<!-- <button class="cu-btn round sm line-black margin-left-sm"
 							@tap="_toApplyDetail(item)">详情</button> -->
 						{{item.ownerName}}/{{item.link}}
@@ -97,6 +97,23 @@
 				}).then(_data=>{
 					_that.cars = _data.data;
 				})
+			},
+			_toTel:function(_tel){
+				uni.makePhoneCall({
+					// 手机号
+					phoneNumber: _tel,
+				
+					// 成功回调
+					success: (res) => {
+						console.log('调用成功!')
+					},
+				
+					// 失败回调
+					fail: (res) => {
+						console.log('调用失败!')
+					}
+				
+				});
 			}
 			
 		}

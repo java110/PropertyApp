@@ -31,7 +31,7 @@
 					<view class="flex justify-start" @click="_toTel(item.link)">
 						<!-- <button class="cu-btn round sm line-black margin-left-sm"
 							@tap="_toApplyDetail(item)">详情</button> -->
-						{{item.ownerName}}/{{item.link}}
+						<text class="text-blue cuIcon-dianhua photo_icon margin-right-xs"></text>{{item.ownerName}}/{{item.link}}
 					</view>
 				</view>
 				<view class="apply-content flex justify-start flex-wrap">

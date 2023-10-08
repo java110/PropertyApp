@@ -90,6 +90,7 @@
 			_carOut: function() {
 				customCarInOut(this, {
 					machineId: this.machineId,
+					communityId:this.getCommunityId(),
 					paId: this.paId,
 					boxId: this.boxId,
 					carNum: this.carNum,

@@ -129,16 +129,17 @@
 			},
 			_inParkArea:function(){
 				let _that = this;
-				if(!this.curMachine.machineId){
+				if(!_that.curMachine.machineId){
 					uni.showToast({
 						icon:'none',
 						title:'未选择摄像头'
 					});
 					return;
 				}
+				let _curMachine = _that.curMachine;
 				this.cancel();
 				uni.navigateTo({
-					url:'/pages/car/carInParkingArea?machineId='+this.curMachine.machineId+"&machineCode="+this.curMachine.machineCode+"&paId="+this.paId+"&boxId="+this.curMachine.locationObjId
+					url:'/pages/car/carInParkingArea?machineId='+_curMachine.machineId+'&machineCode='+_curMachine.machineCode+'&paId='+_that.paId+"&boxId="+_curMachine.locationObjId
 				})
 			},
 			_outParkArea:function(){
@@ -150,9 +151,10 @@
 					});
 					return;
 				}
+					let _curMachine = _that.curMachine;
 				this.cancel();
 				uni.navigateTo({
-					url:'/pages/car/carOutParkingArea?machineId='+this.curMachine.machineId+"&machineCode="+this.curMachine.machineCode+"&paId="+this.paId+"&boxId="+this.curMachine.locationObjId
+					url:'/pages/car/carOutParkingArea?machineId='+_curMachine.machineId+"&machineCode="+_curMachine.machineCode+"&paId="+this.paId+"&boxId="+_curMachine.locationObjId
 				})
 			}
 		}

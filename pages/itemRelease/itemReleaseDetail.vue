@@ -78,7 +78,7 @@
 				taskId: '',
 				audit: {
 					auditCode: '1100',
-					auditMessage: '',
+					auditMessage: '同意',
 					staffId: '',
 					staffName: '',
 					taskId: ''

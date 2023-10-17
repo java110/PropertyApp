@@ -22,7 +22,7 @@
 					<view v-if="item.rest">{{item.rest}}</view>
 					<view v-else>
 						{{item.specCd=='1001'?'上班':'下班'}}：
-						<text v-if="item.state != '10000'">{{vc.timeFormat(item.checkTime)}}</text>
+						<text v-if="item.state != '10000'">{{timeFormat(item.checkTime)}}</text>
 						<text v-else> - </text>
 						<text>({{item.stateName}})</text>
 					</view>
@@ -122,12 +122,16 @@
 				});
 				return _attendance;
 			},
+
+			add0: function(m) {
+				return m < 10 ? '0' + m : m
+			},
 			timeFormat: function(_time) {
 				let _date = new Date(_time);
 				let h = _date.getHours();
 				let mm = _date.getMinutes();
 				let s = _date.getSeconds();
-				return add0(h) + ':' + add0(mm) + ':' + add0(s);
+				return this.add0(h) + ':' + this.add0(mm) + ':' + this.add0(s);
 			},
 			_loadStaffAttendances: function() {
 				let staffId = this.getStaffId();

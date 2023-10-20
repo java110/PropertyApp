@@ -65,8 +65,9 @@ export function loadCategoryMenus(_that, _data) {
 				reslove(_data);
 			},
 			fail: function(e) {
+				console.log(123123123,e)
 				wx.showToast({
-					title: "服务器异常了",
+					title: e,
 					icon: 'none',
 					duration: 2000
 				})

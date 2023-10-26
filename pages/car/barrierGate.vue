@@ -76,21 +76,18 @@
 				}).then(_data => {
 					_that.parkingAreas = _data.parkingAreas;
 					if (_data.parkingAreas && _data.parkingAreas.length == 1) {
-						_that._chooseArea(_data.parkingAreas[0]);
+							_that._chooseArea(_data.parkingAreas[0]);
 					}
 				})
 			},
 			_chooseArea: function(_area) {
 				let _that =this;
 				this.paId = _area.paId;
-				// #ifdef H5
+			
 					setTimeout(function(){
 						_that.changeListType(0);
 					},1000)
-				// #endif
-				// #ifndef H5
-					_that.changeListType(0);
-				// #endif
+				
 			},
 			changeListType: function(e) {
 				this.currentPage = e;

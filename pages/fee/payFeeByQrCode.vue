@@ -59,7 +59,7 @@
 							return;
 						}
 						new qrCode('oweFeeQrcode', {
-							text: _data.codeUrl,
+							text: _data.data.codeUrl,
 							//text:_data.msg,
 							width: 220,
 							height: 220,

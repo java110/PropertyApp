@@ -189,7 +189,8 @@
 					page: 1,
 					row: 100,
 					communityId: getCurrentCommunity().communityId,
-					giveType: 1
+					giveType: 1,
+					parentId: '0'
 				};
 				queryRepairInfo(this, _data)
 					.then(function(res) {

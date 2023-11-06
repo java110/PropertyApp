@@ -67,7 +67,7 @@
 				let _that = this;
 				let dataObj = {
 					page: 1,
-					row: 15,
+					row: 50,
 					communityId: getCurrentCommunity().communityId,
 					floorNum: this.searchValue
 				};

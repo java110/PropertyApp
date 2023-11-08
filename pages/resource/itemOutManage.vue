@@ -100,7 +100,8 @@
 					page: 1,
 					row: 50,
 					communityId: this.communityId,
-					resOrderType: 20000
+					resOrderType: 20000,
+					createUserId:this.userId,
 				};
 				queryPurchaseApplyList(this, _objData)
 					.then(function(res) {

@@ -61,6 +61,7 @@
 		data() {
 			return {
 				memberId: '',
+				ownerId:'',
 				name: "",
 				sexArr: ["男", "女"],
 				index: 0,
@@ -71,7 +72,7 @@
 				address: "",
 				ownerTypeCd:'',
 				communityId: '',
-				photos: [],
+				photos: '',
 				uploadImage: {
 					maxPhotoNum: 1,
 					imgTitle: '图片上传',
@@ -111,7 +112,8 @@
 					"address": this.address,
 					sex: this.sex,
 					"ownerPhoto": this.photos,
-					memberId:this.memberId
+					memberId:this.memberId,
+					ownerId:this.ownerId
 				}
 
 				let msg = "";
@@ -153,6 +155,7 @@
 					communityId: this.getCommunityId(),
 				}).then(_data => {
 					_that.memberId = _data.data[0].memberId;
+					_that.ownerId = _data.data[0].ownerId;
 					_that.name = _data.data[0].name;
 					_that.index = _data.data[0].sex;
 					_that.sex = _data.data[0].sex;

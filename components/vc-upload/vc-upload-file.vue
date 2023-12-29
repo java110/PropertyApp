@@ -21,6 +21,9 @@
 			};
 		},
 		methods:{
+			_setFileName:function(_fileName){
+				this.fileName = _fileName;
+			},
 			_doUploadFile: function() {
 				uni.chooseFile({
 					count: 1, //默认100

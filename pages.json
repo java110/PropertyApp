@@ -827,6 +827,22 @@
         		"navigationBarTitleText" : "",
         		"enablePullDownRefresh" : false
         	}
+        },
+        {
+        	"path" : "pages/work/editWrok",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "修改工作单",
+        		"enablePullDownRefresh" : false
+        	}
+        },
+        {
+        	"path" : "pages/work/doWork",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "办理工作单",
+        		"enablePullDownRefresh" : false
+        	}
         }
     ],
 	"globalStyle": {

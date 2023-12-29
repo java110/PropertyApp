@@ -269,6 +269,12 @@ export default {
 	listWorkPool:baseUrl+"app/work.listWorkPool",
 	listWorkEvent:baseUrl+"app/workEvent.listWorkEvent",
 	listWorkPoolFile:baseUrl+"app/work.listWorkPoolFile",
+	listWorkCopy:baseUrl+"app/work.listWorkCopy",
+	listWorkCycle:baseUrl+"app/workCycle.listWorkCycle",
+	updateWorkPool:baseUrl+"app/work.updateWorkPool",
+	deleteWorkPool:baseUrl+"app/work.deleteWorkPool",
+	queryTaskWork:baseUrl+"app/work.queryTaskWork",
+	
 	
 	
 }

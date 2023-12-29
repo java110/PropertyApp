@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<view class="cu-list menu margin-top">
+		<view class="flex justify-between">
+			<view class="block__title">工作单详情</view>
+			<view class="" style="padding: 32rpx 30rpx 20rpx;" v-if="staffId == workTaskDetailInfo.createUserId">
+				<button class="cu-btn round sm line-blue margin-left-sm" @tap="_toEditWork()">修改</button>
+				<button class="cu-btn round sm line-red margin-left-sm" @tap="_openDeleteWork()">删除</button>
+			</view>
+		</view>
+		<view class="cu-list menu ">
 			<view class="cu-item">
 				<view class="content">
 					<text class="text-grey">工单编号</text>
@@ -100,7 +107,7 @@
 			</view>
 		</view>
 
-		<view class="cu-timeline margin-top">
+		<view class="cu-timeline margin-top" v-if="events && events.length>0">
 			<view class="cu-time">流转</view>
 			<view class="cu-item " v-for="(item,index) in events" :key="index">
 				<view class="bg-cyan content">
@@ -125,7 +132,23 @@
 				</view>
 			</view>
 		</view>
-
+		<view class="cu-modal" :class="delWorkDetailFlag==true?'show':''">
+			<view class="cu-dialog">
+				<view class="cu-bar bg-white justify-end">
+					<view class="content">温馨提示</view>
+					<view class="action" @tap="_cancleCall()">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view class="padding-xl">
+					您确认删除工作单？
+				</view>
+				<view class="cu-bar bg-white justify-end">
+					<view class="action margin-0 flex-sub  solid-left" @tap="_cancleDelete()">取消</view>
+					<view class="action margin-0 flex-sub text-green solid-left" @tap="_doDeleteWork()">确认</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -134,10 +157,12 @@
 	import {
 		getCurrentCommunity
 	} from '../../api/community/community.js';
+	import {getStaffId} from '@/api/staff/staff.js'
 	import {
 		getWorkPool,
 		getWorkEvent,
-		getWorkPoolFile
+		getWorkPoolFile,
+		deleteWorkPool
 	} from '@/api/oa/workApi.js';
 	export default {
 		data() {
@@ -149,7 +174,9 @@
 				taskId: '',
 				events: [],
 				files: [],
-				srcPath: ''
+				delWorkDetailFlag: false,
+				staffId:'',
+				
 			}
 		},
 		onLoad(options) {
@@ -157,6 +184,7 @@
 			this.workId = options.workId;
 			this.taskId = options.taskId;
 			this.srcPath = url.hcBaseUrl;
+			this.staffId = getStaffId();
 			this._queryWorkDetail();
 			this._queryWorkEvent();
 			this._queryWorkFiles();
@@ -195,12 +223,33 @@
 					_that.files = _data.data;
 				})
 			},
+			_toEditWork: function() {
+				uni.navigateTo({
+					url: '/pages/work/editWrok?workId=' + this.workId
+				});
+			},
+			_openDeleteWork: function() {
+				this.delWorkDetailFlag = true;
+			},
+			_doDeleteWork: function() {
+				let _that = this;
+				deleteWorkPool(this, {
+					workId : this.workId,
+				}).then(_data => {
+					uni.navigateBack({
+						delta:2
+					});
+				})
+			},
+			_cancleDelete:function(){
+				this.delWorkDetailFlag = false;
+			},
 			_downloadFile: function(_url) {
 				uni.downloadFile({
 					url: _url, //仅为示例，并非真实的资源
 					success: (res) => {
 						if (res.statusCode === 200) {
-							
+
 							let tempFile = res.tempFilePath;
 							//保存成功之后 打开文件
 							uni.getFileSystemManager().saveFile({

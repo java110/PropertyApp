@@ -35,7 +35,7 @@
 					pri:'502021052747070004'
 				}, {
 					name: '办',
-					url: '/pages/resource/itemOutAuditOrders',
+					url: '/pages/work/doWork',
 					undoCount:_data.collection,
 					pri:'502021052762260006'
 				}, {
@@ -46,13 +46,13 @@
 				}]
 			},
 			_toPage: function(_item) {
-				if(!this.java110Context.hasPrivilege(_item.pri)){
-					uni.showToast({
-						icon:'none',
-						title:'无权限，联系管理员'
-					});
-					return ;
-				}
+				// if(!this.java110Context.hasPrivilege(_item.pri)){
+				// 	uni.showToast({
+				// 		icon:'none',
+				// 		title:'无权限，联系管理员'
+				// 	});
+				// 	return ;
+				// }
 				uni.navigateTo({
 					url: _item.url
 				})

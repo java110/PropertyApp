@@ -803,6 +803,30 @@
                 "enablePullDownRefresh": false
             }
             
+        },
+        {
+        	"path" : "pages/work/startWork",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "发工作单",
+        		"enablePullDownRefresh" : false
+        	}
+        },
+        {
+        	"path" : "pages/work/workDetail",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "工作单详情",
+        		"enablePullDownRefresh" : false
+        	}
+        },
+        {
+        	"path" : "pages/work/workTask",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "",
+        		"enablePullDownRefresh" : false
+        	}
         }
     ],
 	"globalStyle": {

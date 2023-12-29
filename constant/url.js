@@ -261,8 +261,14 @@ export default {
 	queryReportFeeSummary:baseUrl+"app/reportFeeMonthStatistics.queryReportFeeSummary",
 	
 	
-	
-	
+	//todo 工作大
+	queryStartWork:baseUrl+"app/work.queryStartWork",
+	listWorkType:baseUrl+"app/workType.listWorkType",
+	saveWorkPool:baseUrl+"app/work.saveWorkPool",
+	listWorkTask:baseUrl+"app/work.listWorkTask",
+	listWorkPool:baseUrl+"app/work.listWorkPool",
+	listWorkEvent:baseUrl+"app/workEvent.listWorkEvent",
+	listWorkPoolFile:baseUrl+"app/work.listWorkPoolFile",
 	
 	
 }

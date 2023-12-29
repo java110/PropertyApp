@@ -5,6 +5,10 @@
 		<view class="margin-top">
 			<index-undo ref="indexUndoRef"></index-undo>
 		</view>
+		<!-- 工作单-->
+		<view class="margin-top">
+			<index-undo-work ref="indexUndoWorkRef"></index-undo-work>
+		</view>
 		<!-- oa待办 -->
 		<view class="margin-top">
 			<index-undo-oa ref="indexUndoOaRef"></index-undo-oa>
@@ -16,6 +20,7 @@
 <script>
 	import indexHeader from '@/components/vc-index/index-header.vue';
 	import indexUndo from '@/components/vc-index/index-undo.vue';
+	import indexUndoWork from '@/components/vc-index/index-undo-work.vue'
 	import indexUndoOa from '@/components/vc-index/index-undo-oa.vue';
 
 	import {
@@ -46,7 +51,8 @@
 		components: {
 			indexHeader,
 			indexUndo,
-			indexUndoOa
+			indexUndoOa,
+			indexUndoWork
 		},
 		onLoad() {
 			this.java110Context.onLoad();
@@ -54,6 +60,8 @@
 			setTimeout(function(){
 				_that.$refs.indexHeaderRef._initData(_that.undo);
 				_that.$refs.indexUndoRef._initData(_that.undo);
+				_that.$refs.indexUndoWorkRef._initData(_that.undo);
+				
 			},1000)
 			
 		},
@@ -76,6 +84,7 @@
 					_that.undo = _data.data;
 					_that.$refs.indexHeaderRef._initData(_that.undo);
 					_that.$refs.indexUndoRef._initData(_that.undo);
+					_that.$refs.indexUndoWorkRef._initData(_that.undo);
 				})
 			}
 		}

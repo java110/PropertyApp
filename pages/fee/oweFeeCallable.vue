@@ -121,7 +121,10 @@
 			},
 			_formateDate:function(_time){
 				let _date = getDate(_time);
-				return formatDate(_date);
+				const year = date.getFullYear();
+				const month = date.getMonth();
+				const day = date.getDate();
+				return [year, month, day].map(formatNumber).join('-');
 			}
 		}
 	}

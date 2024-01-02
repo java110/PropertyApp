@@ -16,21 +16,21 @@
 				<input type="text" class="q-input" placeholder="题目" v-model="workNameLike"></input>
 			</view>
 			<view class="q-item">
-				<input type="text" class="q-input" placeholder="处理人" v-model="staffNameLike"></input>
+				<input type="text" class="q-input" placeholder="发起人" v-model="createUserNameLike"></input>
 			</view>
 			<view class="q-item-btn">
 				<button class="cu-btn  line-blue round q-input" @click="_loadStartWork">搜索</button>
 			</view>
 		</view>
-		<view class="margin-top" v-if="works.length > 0">
-			<view class="bg-white margin-bottom padding-sm margin-sm radius-sm" v-for="(work,index) in works"
+		<view class="margin-top" v-if="copys.length > 0">
+			<view class="bg-white margin-bottom padding-sm margin-sm radius-sm" v-for="(work,index) in copys"
 				:key="index">
 				<view class="apply-title flex justify-between">
 					<view>
 						<text class="text-bold">{{work.workId}}({{work.stateName}})</text>
 					</view>
 					<view class="flex justify-start">
-						<button class="cu-btn round sm line-black margin-left-sm" v-if="work.state == 'W'" @tap="_todoWorkTask(work)">办理</button>
+						<button class="cu-btn round sm line-black margin-left-sm" v-if="work.state == 'D'" @tap="_todoCopyWork(work)">已阅</button>
 						<button class="cu-btn round sm line-black margin-left-sm" @tap="_toWorkDetail(work)">详情</button>
 					</view>
 				</view>
@@ -69,7 +69,7 @@
 <script>
 	import noDataPage from '@/components/no-data-page/no-data-page.vue';
 	import {
-		getTaskWork
+		getCopyWork
 	} from '../../api/oa/workApi.js';
 	import {
 		getStaffId
@@ -78,8 +78,8 @@
 		data() {
 			return {
 				workNameLike: '',
-				staffNameLike: '',
-				works: [],
+				createUserNameLike: '',
+				copys: [],
 				staffId: '',
 				active:0
 			}
@@ -89,28 +89,28 @@
 			
 		},
 		onShow() {
-			this._loadWork();
+			this._loadCopyWork();
 		},
 		methods: {
-			_loadWork: function() {
+			_loadCopyWork: function() {
 				let _that = this;
-				let _state = 'W';
+				let _state = 'D';
 				if(this.active == 1){
 					_state = 'C';
 				}
-				getTaskWork(this, {
+				getCopyWork(this, {
 					page: 1,
 					row: 100,
 					state:_state,
 					workNameLike: this.workNameLike,
-					staffNameLike: this.staffNameLike
+					createUserNameLike: this.createUserNameLike
 				}).then(_data => {
-					_that.works = _data.data;
+					_that.copys = _data.data;
 				});
 			},
 			_toWorkDetail: function(_work) {
 				uni.navigateTo({
-					url: '/pages/work/workDetail?workId=' + _work.workId + "&taskId=" + _work.taskId
+					url: '/pages/work/workTask?workId=' + _work.workId 
 				})
 
 			},
@@ -118,14 +118,14 @@
 				this.active = _active;
 				let _that = this;
 				this.works = [];
-				this._loadWork();
+				this._loadCopyWork();
 			},
 			_loadStartWork:function(){
-				this._loadWork();
+				this._loadCopyWork();
 			},
-			_todoWorkTask:function(_work){
+			_todoCopyWork:function(_work){
 				uni.navigateTo({
-					url:'/pages/work/doWorkAudit?workId='+_work.workId+'&taskId='+_work.taskId
+					url:'/pages/work/doCopyWork?workId='+_work.workId+'&copyId='+_work.copyId
 				})
 			}
 		}

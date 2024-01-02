@@ -40,7 +40,7 @@
 					pri:'502021052762260006'
 				}, {
 					name: '抄',
-					url: '/pages/resource/allocationStorehouseAuditOrders',
+					url: '/pages/work/copyWork',
 					undoCount:_data.allocation,
 					pri:'502021052707250008'
 				}]

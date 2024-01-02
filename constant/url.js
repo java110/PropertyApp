@@ -274,7 +274,9 @@ export default {
 	updateWorkPool:baseUrl+"app/work.updateWorkPool",
 	deleteWorkPool:baseUrl+"app/work.deleteWorkPool",
 	queryTaskWork:baseUrl+"app/work.queryTaskWork",
-	
+	finishWorkTask:baseUrl+"app/work.finishWorkTask",
+	queryCopyWork:baseUrl+"app/work.queryCopyWork",
+	finishWorkCopy:baseUrl+"app/work.finishWorkCopy",
 	
 	
 }

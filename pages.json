@@ -843,6 +843,30 @@
         		"navigationBarTitleText" : "办理工作单",
         		"enablePullDownRefresh" : false
         	}
+        },
+        {
+        	"path" : "pages/work/doWorkAudit",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "办理工作单",
+        		"enablePullDownRefresh" : false
+        	}
+        },
+        {
+        	"path" : "pages/work/copyWork",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "抄送工作单",
+        		"enablePullDownRefresh" : false
+        	}
+        },
+        {
+        	"path" : "pages/work/doCopyWork",
+        	"style" : 
+        	{
+        		"navigationBarTitleText" : "已阅",
+        		"enablePullDownRefresh" : false
+        	}
         }
     ],
 	"globalStyle": {

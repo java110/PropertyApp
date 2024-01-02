@@ -11,9 +11,6 @@
 		<view class="cu-form-group margin-top-sm">
 			<textarea v-model="content" placeholder="必填,请输入内容"></textarea>
 		</view>
-		<view class="margin-top-sm">
-			<vc-upload-file ref="vcUploadFileRel" @uploadFile="uploadFile"></vc-upload-file>
-		</view>
 
 		<view class="flex flex-direction margin-top-lg">
 			<button class="cu-btn bg-blue margin-tb-sm lg" @click="submitWorkOrder">提交</button>

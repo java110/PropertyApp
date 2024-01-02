@@ -44,7 +44,10 @@
 					ownerSettledApplyCount: 0,
 					purchase: "0",
 					repair: "0",
-					visitUndoCount: 0
+					visitUndoCount: 0,
+					workSendCount:0,
+					workUndDoCount:0,
+					workUndoCopyCount:0,
 				}
 			}
 		},

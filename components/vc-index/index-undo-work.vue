@@ -31,17 +31,17 @@
 				this.undoMenus = [{
 					name: '发',
 					url: '/pages/work/startWork',
-					undoCount:_data.purchase,
+					undoCount:_data.workSendCount,
 					pri:'502021052747070004'
 				}, {
 					name: '办',
 					url: '/pages/work/doWork',
-					undoCount:_data.collection,
+					undoCount:_data.workUndDoCount,
 					pri:'502021052762260006'
 				}, {
 					name: '抄',
 					url: '/pages/work/copyWork',
-					undoCount:_data.allocation,
+					undoCount:_data.workUndoCopyCount,
 					pri:'502021052707250008'
 				}]
 			},
